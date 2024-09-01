@@ -41,11 +41,11 @@ TeamMemberItem.propTypes = {
 const Team = () => {
 	return (
     <>
-    <section className="h-screen flex justify-center items-center bg-slate-300">
+    <section className="h-screen flex justify-center items-center ">
       <div>
         <Image 
         alt="team"
-        className="absolute w-[100rem] bg-black z-[-1] opacity-80 "
+        className="absolute bg-cover w-[100rem] bg-black z-[-1] opacity-80 "
         height={800}
         width={800}
         src="/team.jpg"
