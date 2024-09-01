@@ -63,17 +63,7 @@ const Team = () => {
     </section>
 		<section className="ezy__team9 light py-14 md:py-24 bg-white  text-zinc-900 ">
 			<div className="container px-4 mx-auto">
-				<div className="flex justify-center mb-6 md:mb-12">
-					<div className="w-[50rem] text-center">
-						<h2 className="text-3xl leading-none font-bold md:text-[45px]  ">
-            Meet the Visionaries Behind Panaversity
-            						</h2>
-						<p className="w-[30rem] mx-auto mt-9">
-            Driven by Passion, Powered by Innovation – Discover the Experts Shaping the
-            Future of AI Education
-						</p>
-					</div>
-				</div>
+				
 
 				<div className="grid grid-cols-4 gap-6 text-center pt-6 ">
         
