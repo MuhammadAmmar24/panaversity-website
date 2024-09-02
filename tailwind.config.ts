@@ -13,8 +13,11 @@ const config: Config = {
         secondary: '#E0E0E0', // Light blue for secondary sections
         accent: '#1cd98e', // Bright accent color
         textPrimary: '#050316', // White for text on dark background
-        textSecondary: '#4F4F4F', // Light grey for less contrast areas
+        textSecondary: '#4b5563', // Light grey for less contrast areas
       },
+      backgroundImage: {
+        'hero': "url('/hero.jpeg')",
+      }
     },
   },
   plugins: [],
