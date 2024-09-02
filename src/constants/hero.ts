@@ -1,5 +1,6 @@
-export const Hero = [
-    { heading: 'GENAI'},
-    { subHeading: 'Program'},
-   
-  ];
+export const heroData = 
+{ 
+    "heading": ``,
+    "subHeading": "",
+    
+}
