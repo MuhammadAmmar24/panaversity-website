@@ -5,10 +5,13 @@ import ProgramOverview from "@/components/ProgramOverview";
 import Team from "@/components/Team";
 import Faq from "@/components/Faq";
 import CTAsection from "@/components/CTAsection";
+import Video from "@/components/Video";
+
 export default function Home() {
   return (
     <>
       <Hero />
+      <Video />
       <ProgramOverview />
       <Courses />
       <Team />
