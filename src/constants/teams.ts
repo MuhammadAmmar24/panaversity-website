@@ -1,0 +1,166 @@
+import {
+	faFacebookF,
+	faLinkedinIn,
+	faTwitter,
+	faBehance,
+} from "@fortawesome/free-brands-svg-icons";
+
+
+export const teamMembers = [
+	{
+		picture: "https://cdn.easyfrontend.com/pictures/users/user24.jpg",
+		fullName: "Zia Khan",
+		designation: "CEO of Panacloud / COO PIAIC",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user24.jpg",
+		fullName: "Daniyal Nagori",
+		designation: "CEO of PIAIC / CEO GIAIC",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user24.jpg",
+		fullName: "Muhammad Qasim",
+		designation: "Chief Generative AI Officer at PIAIC & GIAIC",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+	{
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Ameen Alam",
+		designation: "Multi-Cloud Solutions Architect",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+	{
+		picture: "https://cdn.easyfrontend.com/pictures/users/user23.jpg",
+		fullName: "Muhammad Khubaib",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+	{
+		picture: "https://cdn.easyfrontend.com/pictures/users/user13.jpg",
+		fullName: "M.Junaid Shaukat",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Wania Kazmi",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Hamza Syed",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Usman Ashraf",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Ibtisam Anwar",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Rehan",
+		designation: "Trainer PIAIC, Freelancer",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Raima Ray",
+		designation: "Business Head",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+  {
+		picture: "https://cdn.easyfrontend.com/pictures/users/user9.jpg",
+		fullName: "Raima Ray",
+		designation: "Business Head",
+		bio: "Subscribe Easy Tutorials Youtube Channel watch more videos",
+		socialLinks: [
+			{ icon: faFacebookF, href: "#" },
+			{ icon: faLinkedinIn, href: "#" },
+			{ icon: faTwitter, href: "#" },
+			{ icon: faBehance, href: "#" },
+		],
+	},
+];

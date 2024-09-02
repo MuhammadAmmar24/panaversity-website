@@ -11,6 +11,9 @@
   "dependencies": {
     "lucide-react": "^0.438.0",
     "next": "14.2.7",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "react": "^18",
     "react-dom": "^18"
   },
