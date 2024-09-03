@@ -10,7 +10,7 @@ export default function ProgramOverview() {
       <div className=" w-full grid gap-6 md:gap-8 px-4 md:px-6 ">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
-            <div className="inline-block bg-[#e7e6e6] mb-1 rounded-[40px] bg-muted px-3 py-1 text-[0.6rem] text-primary ">Program Overview</div>
+            <div className="inline-block bg-[#e7e6e6] mb-1 rounded-[40px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary ">Program Overview</div>
             <h2 className="text-[1.7rem] sm:text-[2rem] md:text-[2.8rem] text-textPrimary font-semibold font-poppins tracking-tighter">
               Become a Certified<br />  Cloud Native Applied Generative AI Engineering
             </h2>
