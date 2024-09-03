@@ -10,10 +10,11 @@ const config: Config = {
     extend: {
       colors: {
         primary: '#002F5C', // Start of the gradient
-        secondary: '#E0E0E0', // Light blue for secondary sections
+        secondary: 'hsl(209, 100%, 18%, 5%)', // Light blue for secondary sections
         accent: '#1cd98e', // Bright accent color
         textPrimary: '#050316', // White for text on dark background
         textSecondary: '#4b5563', // Light grey for less contrast areas
+        background: '#fbfbfe',
       },
       backgroundImage: {
         'hero': "url('/hero.jpeg')",
