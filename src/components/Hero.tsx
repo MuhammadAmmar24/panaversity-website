@@ -28,7 +28,7 @@ export default function Hero() {
             <h1 className="text-[2.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
               Revolutionize Your Learning with <span className="text-accent ">AI-Powered</span> Education
             </h1>
-            <p className="mt-6 text-[1rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
+            <p className="mt-6 text-[0.85rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
             Elevate Your Skills with <span className="underline decoration-accent underline-offset-8 decoration-2">Panaversity's AI-Enhanced</span> Learning Mentor
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">

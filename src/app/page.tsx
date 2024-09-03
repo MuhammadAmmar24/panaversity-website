@@ -6,12 +6,14 @@ import Team from "@/components/Team";
 import Faq from "@/components/Faq";
 import CTAsection from "@/components/CTAsection";
 import Video from "@/components/Video";
+import Partners from "@/components/Partners";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Video />
+      <Partners />
       <ProgramOverview />
       <Courses />
       <Team />
