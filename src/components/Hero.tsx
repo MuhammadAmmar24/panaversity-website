@@ -49,7 +49,10 @@ export default function Hero() {
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-16rem)] -z-10 transform-gpu overflow-hidden  sm:top-[calc(100%-38rem)]"
         >
+          <div className="hidden md:block">
+
         <HeroBg />
+          </div>
         </div>
         
         
