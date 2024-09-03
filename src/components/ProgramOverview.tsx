@@ -1,71 +1,51 @@
-import Image from "next/image";
+// ProgramOverview.tsx
+
+import Image from 'next/image';
+import { programOverviewContent } from '@/constants/programOverview'; // Import the array object
+import React from 'react';
 
 export default function ProgramOverview() {
   return (
-    <section className="w-full bg-[#f2f2f2] px-[4rem] py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-          <div className="space-y-10">
-            <div className="inline-block bg-[#e7e6e6]  rounded-[20px] bg-muted px-3 py-1 text-sm text-primary ">
-              Program Overview
-            </div>
-            <h2 className="text-3xl text-textPrimary font-poppins font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Become a Certified Cloud Native Applied Generative AI Engineering
+    <section className="w-full bg-[#fffbfb] py-12 md:py-24 lg:py-32 bg-muted ">
+      <div className=" w-full grid gap-6 md:gap-8 px-4 md:px-6 ">
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
+          <div className="space-y-2">
+            <div className="inline-block bg-secondary mb-1 rounded-[40px]  px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary ">Program Overview</div>
+            <h2 className="text-[1.7rem] sm:text-[2rem] md:text-[2.8rem] text-textPrimary font-semibold font-poppins tracking-tighter">
+              Become a Certified<br />  Cloud Native Applied Generative AI Engineering
             </h2>
-            <div className="grid grid-cols-2 gap-9 ">
-              <div className="grid gap-2">
-                <h3 className="text-xl text-textPrimary font-bold flex items-center gap-2">
-                  <BookIcon className="w-5 h-5" />
-                  Comprehensive Curriculum
-                </h3>
-                <p className="text-muted-foreground text-textSecondary">
-                  Dive deep into Generative AI, Cloud Native Computing, and
-                  Physical AI, guided by industry experts.
-                </p>
-              </div>
-              <div className="grid gap-2">
-                <h3 className="text-xl text-textPrimary font-bold flex items-center gap-2">
-                  <BriefcaseIcon className="w-5 h-5" />
-                  Real-World Projects
-                </h3>
-                <p className="text-muted-foreground text-textSecondary">
-                  Gain practical experience with projects that mirror the
-                  challenges of today's tech landscape.
-                </p>
-              </div>
-              <div className="grid gap-2">
-                <h3 className="text-xl text-textPrimary font-bold flex items-center gap-2">
-                  <BadgeIcon className="w-5 h-5" />
-                  Global Certifications
-                </h3>
-                <p className="text-muted-foreground text-textSecondary">
-                  Earn recognized certifications that validate your expertise
-                  and open doors to new opportunities.
-                </p>
-              </div>
-              <div className="grid gap-2">
-                <h3 className="text-xl text-textPrimary font-bold flex items-center gap-2">
-                  <ClockIcon className="w-5 h-5" />
-                  Flexible Learning
-                </h3>
-                <p className="text-muted-foreground text-textSecondary">
-                  Learn at your own pace with 24/7 access to AI Mentors and a
-                  supportive community.
-                </p>
-              </div>
-            </div>
           </div>
-          <Image
-            src={"/about1.png"}
-            width="550"
-            height="550"
-            alt="About"
-            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full"
-          />
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center ">
+          {programOverviewContent.map((item:any) => (
+            <div key={item.id} className="flex flex-col text-center items-center h-full gap-4 p-6 rounded-lg bg-secondary border-b-4 border-accent  shadow-sm">
+              <div className={`bg-${item.icon.toLowerCase()} rounded-full p-3 bg-background text-${item.icon.toLowerCase()}-foreground`}>
+                {React.createElement(getIconComponent(item.icon), { className: 'w-6 h-6' })}
+              </div>
+              <h3 className="text-[1.2rem] md:text-[1.3rem] font-semibold font-poppins text-textPrimary">{item.title}</h3>
+              <p className="text-muted-foreground  text-[0.9rem] text-center font-inter text-textSecondary">{item.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
   );
+}
+
+// Function to return the icon component based on the string name
+function getIconComponent(iconName: string) {
+  switch (iconName) {
+    case 'BookIcon':
+      return BookIcon;
+    case 'BriefcaseIcon':
+      return BriefcaseIcon;
+    case 'BadgeIcon':
+      return BadgeIcon;
+    case 'ClockIcon':
+      return ClockIcon;
+    default:
+      return () => null; // Return a default empty component if the icon name doesn't match
+  }
 }
 
 function BadgeIcon(props: any) {
@@ -76,7 +56,7 @@ function BadgeIcon(props: any) {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#1cd98e"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
@@ -95,7 +75,7 @@ function BookIcon(props: any) {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#1cd98e"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
@@ -114,7 +94,7 @@ function BriefcaseIcon(props: any) {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#1cd98e"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
@@ -134,7 +114,7 @@ function ClockIcon(props: any) {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      fill="none"
+      fill="#1cd98e"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
