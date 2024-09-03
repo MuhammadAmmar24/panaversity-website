@@ -97,7 +97,7 @@ const trainers = [
 		picture: "/Hamza_syed.png",
 		fullName: "Hamza Syed",
 		designation: "Trainer PIAIC, Freelancer",
-		bio: "",
+		bio: "Crafting seamless and interactive user experiences.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "#" },
 			{ icon: faGithub, href: "#" },
@@ -181,7 +181,7 @@ const teamLeads = [
 		picture: "/Sajid_khan.png",
 		fullName: "Sajid Khan",
 		designation: "Team Lead",
-		bio: "",
+		bio: "Crafting seamless and interactive user experiences.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "#" },
 			{ icon: faGithub, href: "#" },
@@ -191,7 +191,7 @@ const teamLeads = [
 		picture: "/Girl_avatar.png",
 		fullName: "Humera Aslam",
 		designation: "Team Lead",
-		bio: "",
+		bio: "Building seamless web applications with React and Next.js.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/humera-aslam/" },
 			{ icon: faGithub, href: "#" },
@@ -201,7 +201,7 @@ const teamLeads = [
 		picture: "/Girl_avatar.png",
 		fullName: "Ayesha Nazish",
 		designation: "Team Lead",
-		bio: "",
+		bio: "Building seamless web applications with React and Next.js.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/" },
 			{ icon: faGithub, href: "#" },
@@ -211,7 +211,7 @@ const teamLeads = [
 		picture: "/Girl_avatar.png",
 		fullName: "Bushra Hussain",
 		designation: "Team Lead",
-		bio: "",
+		bio: "Building seamless web applications with React and Next.js.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "#" },
 			{ icon: faGithub, href: "#" },
