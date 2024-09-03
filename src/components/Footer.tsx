@@ -5,7 +5,7 @@ import { Facebook, X, Instagram, Linkedin } from "lucide-react";
 export default function Component() {
   return (
     <footer className="bg-[#000033] text-white py-5 relative overflow-hidden">
-      <div className="container flex flex-col items-center justify-start md:justify-center md:mx-auto  px-4 relative z-10">
+      <div className="container flex flex-col md:mx-auto  px-4 relative z-10">
         <div className="grid gap-8 md:grid-cols-4 mt-5 md:justify-items-center md:item-center items-start">
           {/* Company Info */}
           <div className="space-y-4 sm:-mt-10">
@@ -108,6 +108,14 @@ export default function Component() {
           <p className="text-sm text-gray-400">
             Copyright © Panaversity, All Rights Reserved.
           </p>
+          <div className="space-x-4">
+            <a className="text-sm text-gray-400 hover:text-white" href="#">
+              Privacy Policy
+            </a>
+            <a className="text-sm text-gray-400 hover:text-white" href="#">
+              Terms &amp; Conditions
+            </a>
+          </div>
         </div>
       </div>
     </footer>
