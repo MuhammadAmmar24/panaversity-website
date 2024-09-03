@@ -6,7 +6,7 @@ import React from 'react';
 
 export default function ProgramOverview() {
   return (
-    <section className="w-full bg-[#fffbfb] py-12 md:py-24 lg:py-32 bg-muted ">
+    <section className="w-full bg-background py-12 md:py-24 lg:py-32  ">
       <div className=" w-full grid gap-6 md:gap-8 px-4 md:px-6 ">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -18,8 +18,8 @@ export default function ProgramOverview() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 items-center justify-center ">
           {programOverviewContent.map((item:any) => (
-            <div key={item.id} className="flex flex-col text-center items-center h-full gap-4 p-6 rounded-lg bg-secondary border-b-4 border-accent  shadow-sm">
-              <div className={`bg-${item.icon.toLowerCase()} rounded-full p-3 bg-background text-${item.icon.toLowerCase()}-foreground`}>
+            <div key={item.id} className="flex flex-col text-center items-center h-full gap-4 p-6 rounded-lg bg-secondary border-b-4 border-accent  shadow-md   transition-all duration-400 ease-in-out ">
+              <div className={`bg-${item.icon.toLowerCase()} rounded-full p-3 bg-background  text-${item.icon.toLowerCase()}-foreground`}>
                 {React.createElement(getIconComponent(item.icon), { className: 'w-6 h-6' })}
               </div>
               <h3 className="text-[1.2rem] md:text-[1.3rem] font-semibold font-poppins text-textPrimary">{item.title}</h3>
