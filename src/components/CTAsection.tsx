@@ -24,7 +24,7 @@ const Cta = () => {
 
           <a
             href="#"
-            className="mt-8 w-full inline-flex items-center justify-center px-5 font-semibold py-3 border border-transparent text-white  rounded-md  bg-indigo-700 hover:bg-black
+            className="mt-8 w-full inline-flex items-center justify-center px-5 font-semibold py-3 backdrop-blur-md border border-transparent text-white  rounded-md  bg-indigo-700 hover:bg-black
 
             hover:text-white sm:w-auto "
           >

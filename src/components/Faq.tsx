@@ -28,7 +28,7 @@ const Faq = () => {
 
       <ul>
         {faqdata.map((faq: FaqItem, index: number) => (
-          <li>
+          <li key={index}>
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
