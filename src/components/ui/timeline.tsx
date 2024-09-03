@@ -36,7 +36,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   return (
     <div className="w-full bg-primary font-sans md:px-10" ref={containerRef}>
       <div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h1 className="inline-block bg-[#e7e6e6] mb-5 rounded-[20px] bg-muted px-3 py-1 text-sm text-primary">
+        <h1 className="inline-block mb-5 rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
           {timelineContent.courseLabel} {/* Use the content from the data file */}
         </h1>
         <h1 className="text-3xl text-white font-poppins font-bold tracking-tighter sm:text-4xl md:text-5xl max-w-5xl">
