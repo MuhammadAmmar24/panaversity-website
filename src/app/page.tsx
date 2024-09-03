@@ -6,7 +6,7 @@ import Team from "@/components/Team";
 import Faq from "@/components/Faq";
 import CTAsection from "@/components/CTAsection";
 import Video from "@/components/Video";
-
+import Testimonials from "@/components/Testimonials";
 export default function Home() {
   return (
     <>
@@ -16,6 +16,7 @@ export default function Home() {
       <Courses />
       <Team />
       <Faq />
+      <Testimonials />
       <CTAsection />
       <Footer />
     </>
