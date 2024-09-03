@@ -5,7 +5,7 @@ const Cta = () => {
   return (
     <div>
       <div
-        className=" bg-cover bg-center mb-40 "
+        className=" bg-cover bg-center  "
         style={{
           backgroundImage: `url(${nueral.src})`,
         }}
