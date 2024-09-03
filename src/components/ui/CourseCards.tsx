@@ -26,7 +26,7 @@ export default function CourseCard({ title, image, content }: CourseCardProps) {
             >
               <div className="w-full flex flex-col items-center">
                 <h1
-                  className={`text-2xl uppercase text-center font-anton md:tracking-tighter tracking-normal ${textColor}`}
+                  className={`text-2xl uppercase text-center font-anton md:tracking-tight tracking-normal ${textColor}`}
                 >
                   {item.title}
                 </h1>

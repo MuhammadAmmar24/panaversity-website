@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#002F5C', // Replaced with the new primary color
+          DEFAULT: '#000033', // Replaced with the new primary color
           foreground: '#E0E0E0', // Light blue for secondary sections (used as foreground for primary)
         },
         secondary: {
