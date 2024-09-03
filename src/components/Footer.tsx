@@ -44,10 +44,10 @@ export default function Component() {
             <h3 className="text-lg font-semibold">Blogs</h3>
             <div className="grid grid-cols-2 gap-2 mt-8 pr-4">
               {[
-                { src: "/images (1).jpeg", alt: "Work 1" },
-                { src: "/images (1).jpeg", alt: "Work 2" },
-                { src: "/images (1).jpeg", alt: "Work 3" },
-                { src: "/images (1).jpeg", alt: "Work 4" },
+                { src: "/hero.jpeg", alt: "Work 1" },
+                { src: "/hero.jpeg", alt: "Work 2" },
+                { src: "/hero.jpeg", alt: "Work 3" },
+                { src: "/hero.jpeg", alt: "Work 4" },
               ].map((work, i) => (
                 <div key={i} className="bg-blue-900 rounded-lg overflow-hidden">
                   <Image
