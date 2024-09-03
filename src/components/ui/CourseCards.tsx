@@ -14,7 +14,7 @@ export default function CourseCard({ title, image, content }: CourseCardProps) {
         {content.map((item, index) => {
           // Determine the background and text color based on index
           const isEven = index % 2 === 0;
-          const bgColor = isEven ? "bg-white" : "bg-black";
+          const bgColor = isEven ? "bg-background" : "bg-black";
           const textColor = isEven ? "text-primary" : "text-white";
           const quarterBgColor = isEven ? "bg-primary" : "bg-accent";
           const quarterTextColor = isEven ? "text-white" : "text-black";

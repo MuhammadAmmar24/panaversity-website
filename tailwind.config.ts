@@ -15,7 +15,7 @@ const config: Config = {
           foreground: "#E0E0E0", // Light blue for secondary sections (used as foreground for primary)
         },
         secondary: {
-          DEFAULT: "hsl(209, 100%, 18%, 5%)", // Light blue for secondary sections
+          DEFAULT: "hsl(209, 100%, 18%, 5%) ", // Light blue for secondary sections
           foreground: "#050316", // White for text on dark background (used as foreground for secondary)
         },
         accent: {
@@ -62,9 +62,7 @@ const config: Config = {
         xl: "1280px",
         "2xl": "1536px",
       },
-      backgroundImage: {
-        hero: "url(/hero.jpeg)", // Keeping the background image from the first file
-      },
+   
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

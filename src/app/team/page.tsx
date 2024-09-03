@@ -10,6 +10,9 @@ import {
   teamLeads,
 } from "@/constants/teams";
 
+import Navbar from "@/components/Navbar";
+
+
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
     <div className="relative flex items-center justify-center">
@@ -31,7 +34,7 @@ const TeamMemberItem = ({ member }: any) => (
         className="relative z-10 w-3/4 h-auto mx-auto rounded-lg"
       />
     </div>
-    <div className="bg-white dark:bg-slate-800 shadow-xl rounded-xl p-6 text-center mt-4 ezy__team6-content">
+    <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-6 text-center mt-4 ezy__team6-content">
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
       <p className="text-sm mt-1">{member.bio}</p>
@@ -56,17 +59,18 @@ TeamMemberItem.propTypes = {
 
 const TeamMember6 = () => {
   return (
-    <section className="ezy__team6 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+    <section className="ezy__team6 light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+        <Navbar />
       <div className="container px-4 mx-auto">
-        <div className="flex justify-center items-center mb-6 md:mb-12">
-          <div className="max-w-lg text-center">
-            <h1 className="inline-block mb-5 rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
+        <div className="flex justify-center items-center mb-6 md:mb-12 border-y-2">
+          <div className="max-w-lg text-center mb-[6rem]">
+            {/* <h1 className="inline-block mb-5 rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
               Our Team
-            </h1>
-            <h2 className="ezy__team6-heading text-[1.7rem] sm:text-[2rem] md:text-[2.8rem] text-textPrimary font-semibold font-poppins tracking-tighter">
+            </h1> */}
+            <h2 className="ezy__team6-heading mt-[6rem]  text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter  ">
               Meet the Visionaries Behind Panaversity
             </h2>
-            <p className="ezy__team6-sub-heading">
+            <p className="ezy__team6-sub-heading font-inter">
               Driven by Passion, Powered by Innovation – Discover the Experts
               Shaping the Future of AI Education
             </p>
