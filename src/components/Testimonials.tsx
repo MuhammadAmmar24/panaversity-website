@@ -133,7 +133,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="ezy__testimonial21 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+    <section className="ezy__testimonial21 light py-11 -mt-20 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white">
       <div className="container px-4 mx-auto relative">
         <div className="flex justify-center text-center mb-6 lg:mb-12">
 		<div className="max-w-7xl mx-auto py-20 px-4 md:px-8 lg:px-10">
