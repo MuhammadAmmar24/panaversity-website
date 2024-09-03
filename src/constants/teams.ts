@@ -53,7 +53,7 @@ const professionals = [
 		picture: "/Imran.png",
 		fullName: "Imran Ali",
 		designation: "Management Head PIAIC / GIAIC",
-		bio: "",
+		bio: "Specializing in AI-driven software development and training.",
 		socialLinks: [
 			{ icon: faLinkedinIn, href: "#" },
 			{ icon: faGithub, href: "#" },

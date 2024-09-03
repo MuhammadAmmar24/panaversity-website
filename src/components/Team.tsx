@@ -56,6 +56,9 @@ const TeamMember6 = () => {
       <div className="container px-4 mx-auto">
         <div className="flex justify-center items-center mb-6 md:mb-12">
           <div className="max-w-lg text-center">
+            <h1 className="inline-block mb-5 rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
+              Our Team
+            </h1>
             <h2 className="ezy__team6-heading text-[1.7rem] sm:text-[2rem] md:text-[2.8rem] text-textPrimary font-semibold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
