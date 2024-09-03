@@ -5,14 +5,15 @@ import { Facebook, X, Instagram, Linkedin } from "lucide-react";
 export default function Component() {
   return (
     <footer className="bg-[#000033] text-white py-5 relative overflow-hidden">
-      <div className="container flex flex-col md:mx-auto  px-4 relative z-10">
-        <div className="grid gap-8 md:grid-cols-4 mt-5 md:justify-items-center md:item-center items-start">
+      <div className="container flex flex-col md:mx-auto px-4 relative z-10">
+        <div className="grid gap-8 md:grid-cols-4 mt-5 md:justify-items-center items-start">
+          
           {/* Company Info */}
           <div className="space-y-4 sm:-mt-10">
             <Link href="/" className="flex items-center space-x-2">
               <Image
                 src="/Green Panaverse-03.png"
-                alt=""
+                alt="Panaversity Logo"
                 width={120}
                 height={50}
               />
@@ -25,16 +26,16 @@ export default function Component() {
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-gray-300 hover:text-white">
-                <Facebook size={20} />
+                <Facebook size={20} aria-label="Facebook" />
               </Link>
               <Link href="#" className="text-gray-300 hover:text-white">
-                <X size={20} />
+                <X size={20} aria-label="X (Twitter)" />
               </Link>
               <Link href="#" className="text-gray-300 hover:text-white">
-                <Instagram size={20} />
+                <Instagram size={20} aria-label="Instagram" />
               </Link>
               <Link href="#" className="text-gray-300 hover:text-white">
-                <Linkedin size={20} />
+                <Linkedin size={20} aria-label="LinkedIn" />
               </Link>
             </div>
           </div>
@@ -55,6 +56,8 @@ export default function Component() {
                     alt={work.alt}
                     width={140}
                     height={100}
+                    quality={100}
+                    priority
                   />
                 </div>
               ))}
@@ -109,12 +112,12 @@ export default function Component() {
             Copyright © Panaversity, All Rights Reserved.
           </p>
           <div className="space-x-4">
-            <a className="text-sm text-gray-400 hover:text-white" href="#">
+            <Link className="text-sm text-gray-400 hover:text-white" href="#">
               Privacy Policy
-            </a>
-            <a className="text-sm text-gray-400 hover:text-white" href="#">
+            </Link>
+            <Link className="text-sm text-gray-400 hover:text-white" href="#">
               Terms &amp; Conditions
-            </a>
+            </Link>
           </div>
         </div>
       </div>
