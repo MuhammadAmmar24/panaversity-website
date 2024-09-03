@@ -4,7 +4,7 @@ export default function Video() {
   return (
     <>
       <div>
-        <div className="flex items-center justify-center mt-[-6rem] px-4 md:mt-[5rem] w-auto h-[25rem] mb-[8rem]   ">
+        <div className="flex bg-background items-center justify-center mt-[-6rem] px-4 md:mt-[5rem] w-auto h-[25rem] mb-[8rem]   ">
           <video
             loop
             muted
