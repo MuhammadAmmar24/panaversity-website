@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 import { useState } from "react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -32,13 +33,13 @@ export default function Navbar() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12 mt-[1.2rem]">
             {nav.map((item: any) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
                 className="text-0.9rem hover:text-accent transition-all duration-400 ease-in-out  font-poppins font-semibold leading-6 text-textPrimary"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end mt-[1.2rem]">
