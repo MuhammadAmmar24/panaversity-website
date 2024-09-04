@@ -6,9 +6,14 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "heroAnim": "url('/animation.png')",
+        
+      },
       colors: {
         primary: {
           DEFAULT: "#000033", // Replaced with the new primary color

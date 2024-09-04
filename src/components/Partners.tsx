@@ -18,7 +18,7 @@ const Partners = () => {
            
             className="text-[1.2rem] sm:text-[1.5rem] md:text-[1.5rem] mb-10 text-primary font-semibold font-poppins tracking-tighter"
           >
-            Empowering the Next Generation of Innovators and Leaders
+            Our Programs
           </h1>
         </div>
         <div

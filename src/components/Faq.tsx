@@ -1,50 +1,68 @@
+"use client";
 import React from "react";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { faqdata } from "@/constants/faqs";
+// import { Accordion, AccordionItem } from "@nextui-org/react";
+import {Accordion, AccordionItem} from "@nextui-org/accordion";
 
-interface FaqItem {
-  question: string;
-  answer: string;
-}
+export default function Faqs() {
+  interface FAQItem {
+    question: string;
+    answer: string;
+  }
 
-const Faq = () => {
+  const faqData: FAQItem[] = [
+    {
+      question: "What is Panaversity?",
+      answer: "Panaversity is an innovative online university that uses AI-powered education, including Custom GPTs, to provide personalized, interactive learning experiences tailored to each student’s needs."
+    },
+    {
+      question: "What will I learn in the Generative AI program?",
+      answer: "The program covers foundational to advanced topics in Generative AI, Cloud Native technologies, and Physical AI, including Custom GPT development, AI-powered microservices, and humanoid robotics."
+    },
+    {
+      question: "What are Custom GPTs?",
+      answer: "Custom GPTs are AI-powered mentors designed to guide you through your coursework, providing personalized assistance, instant feedback, and a dynamic learning experience."
+    },
+    {
+      question: "How does the AI Mentor work?",
+      answer: "The AI Mentor adapts to your learning pace, offering real-time interaction, customized quizzes, and assessments to help you master each topic effectively."
+    },
+    {
+      question: "What are the admission requirements?",
+      answer: "Applicants should have a basic understanding of Python and cloud-native tools. Prior experience with AI or data science is advantageous but not required."
+    },
+    {
+      question: "What is the structure of the program?",
+      answer: "The program is divided into 21 months, covering foundational and advanced levels across 8 quarters. Each quarter focuses on specific skills in AI and cloud technologies."
+    },
+    {
+      question: "How much does the program cost?",
+      answer: "The tuition fee is $29.95 per quarter, with payments due every three months."
+    },
+    {
+      question: "Are there any hands-on projects?",
+      answer: "Yes, the program includes real-world projects and a capstone project in the final quarter, allowing you to apply your skills to practical challenges."
+    },
+    {
+      question: "Can I study at my own pace?",
+      answer: "Yes, the program offers flexible learning options, allowing you to progress through the material at a pace that suits your schedule."
+    }
+  ];
+
   return (
-    <div className="container mx-auto py-12 w-full">
-      <div className="max-w-7xl flex flex-col justify-center items-center mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h2 className="inline-block mb-5 text-center rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
-          Frequently Asked Questions
-        </h2>
-        <h1 className="text-3xl text-primary text-center font-poppins font-bold tracking-tighter sm:text-4xl md:text-5xl max-w-5xl">
-          Find Answers to Your Questions About Panaversity
-        </h1>
-        <p className="ezy__team6-sub-heading mt-4 text-center">
-          Get more information about our innovative AI-powered education
-          platform, Generative AI program, and more.
-        </p>
+    <section className="h-screen m-12 mx-auto w-[20rem] sm:w-[35rem] lg:w-[42rem] xl:w-[65rem]">
+      <div className="flex items-center justify-center text-center mb-6 md:mb-12">
+        <div className="max-w-xl">
+          <hr className="w-20 mb-4 border-gray-300 dark:border-gray-600 mx-auto" />
+          <h2 className="text-[32px] font-bold">FAQs</h2>
+        </div>
       </div>
-
-      <div>
-        {faqdata.map((faq: FaqItem, index: number) => (
-          <Accordion key={index} className="mt-4">
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls={`panel${index}-content`}
-              id={`panel${index}-header`}
-              className="font-medium text-xl focus-within:bg-primary focus-within:rounded-t-sm focus-within:text-white"
-            >
-              <h3 className="ml-0 md:ml-20 py-1 md:py-5">{faq.question}</h3>
-            </AccordionSummary>
-            <AccordionDetails className="px-10 text-lg">
-              <p className="ml-0 md:ml-20 font-poppins mt-1">{faq.answer}</p>
-            </AccordionDetails>
-          </Accordion>
+      <Accordion variant="light">
+        {faqData.map((item, index) => (
+          <AccordionItem key={index} aria-label={item.question} title={item.question}>
+            {item.answer}
+          </AccordionItem>
         ))}
-      </div>
-    </div>
+      </Accordion>
+    </section>
   );
-};
-
-export default Faq;
+}
