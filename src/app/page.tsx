@@ -21,12 +21,12 @@ export default function Home() {
       <Partners />
       {/* <ProgramOverview /> */}
       <WhyLearnGenerativeAI />
-      <ProgramsTimeline />
+      {/* <ProgramsTimeline /> */}
       <Courses />
       <Faq />
       <Testimonials />
       <CTAsection />
-      <Footer />
+      {/* <Footer /> */}
       <Footer2 />
     </>
   );

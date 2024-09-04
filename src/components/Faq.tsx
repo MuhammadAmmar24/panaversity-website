@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
-// import { Accordion, AccordionItem } from "@nextui-org/react";
-import {Accordion, AccordionItem} from "@nextui-org/accordion";
+import { Accordion, AccordionItem } from "@nextui-org/react";
 
 export default function Faqs() {
   interface FAQItem {

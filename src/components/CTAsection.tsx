@@ -1,39 +1,43 @@
-import React from "react";
-import nueral from "../../public/nueral2.jpg";
+/**
+ * v0 by Vercel.
+ * @see https://v0.dev/t/GPqLMBBpOv2
+ * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
+ */
+import { Button } from "@/components/ui/button"
 
-const Cta = () => {
+export default function Component() {
   return (
-    <div>
-      <div
-        className=" bg-cover bg-center "
-        style={{
-          backgroundImage: `url(${nueral.src})`,
-        }}
-      >
-        <div className="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-            <span className="block">
-              Unlock Your Potential in Generative AI
-            </span>
-          </h2>
-
-          <p className="mt-4 text-2xl leading-6 text-indigo-200 ">
-            Join a thriving community transforming their careers with AI. Enroll
-            now to master the skills shaping tomorrow.
-          </p>
-
-          <a
-            href="#"
-            className="mt-8 w-full inline-flex items-center justify-center px-5 font-semibold py-3 backdrop-blur-md border border-transparent text-white  rounded-md  bg-indigo-700 hover:bg-black
-
-            hover:text-white sm:w-auto "
-          >
-            Join now
-          </a>
-        </div>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="bg-[#2d8659] text-white rounded-3xl p-10 max-w-3xl text-center">
+        <h2 className="text-3xl font-bold mb-4">Ready To Start Creating Stunning Images With Power AI?</h2>
+        <p className="text-lg mb-6">
+          Sign up today and unlock the full potential of our tool. With a range processing techniques and features at
+          your fingertips, you'll be amazed what you will achieve.
+        </p>
+        <Button variant="outline" className="bg-white text-[#2d8659] px-6 py-2 rounded-full">
+          Get Started <ArrowRightIcon className="ml-2" />
+        </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cta;
+function ArrowRightIcon(props:any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  )
+}

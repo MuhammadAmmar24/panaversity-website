@@ -15,7 +15,7 @@ const Partners = () => {
         >
           <h1
            
-            className="text-[1.2rem] sm:text-[1.5rem] md:text-[1.5rem] mb-10 text-primary font-semibold font-poppins tracking-tighter"
+            className="text-[1.2rem] sm:text-[1.5rem] md:text-[2rem] mb-10 text-primary font-bold font-poppins tracking-tighter"
           >
             Our Programs
           </h1>
