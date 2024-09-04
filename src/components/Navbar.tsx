@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="absolute inset-x-0 top-0 z-50 ">
+      <header className="absolute inset-x-0 top-4 z-50 ">
         <nav
           aria-label="Global"
           className="flex items-center justify-between p-[1rem] mx-4  lg:px-8"

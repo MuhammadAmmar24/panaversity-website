@@ -26,13 +26,13 @@ export default function Hero() {
    
           <div className="text-center">
             <h1 className="text-[2.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
-              Revolutionize Your Learning with <span className="text-accent ">AI-Powered</span> Education
+              Revolutionize Your Learning with <span className="text-accent bg-gradient-to-r from-[#10a76b] to-accent bg-clip-text text-transparent">AI-Powered</span> Education
             </h1>
             <p className="mt-6 text-[0.85rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
-            Elevate Your Skills with <span className="underline decoration-accent underline-offset-8 decoration-2">Panaversity's AI-Enhanced</span> Learning Mentor
+            Elevate Your Skills with <span className="underline  decoration-accent underline-offset-8 decoration-2">Panaversity's AI-Enhanced</span> Learning Mentor
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-            <a href="#_" className="relative inline-flex items-center px-12 py-4 overflow-hidden text-lg  text-textPrimary font-inter border-2 border-accent bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-gray-50">
+            <a href="#_" className="relative inline-flex items-center px-12 py-4 overflow-hidden text-lg  text-textPrimary font-inter border-2 border-accent bg-accent  rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-gray-50">
 <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
 <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>

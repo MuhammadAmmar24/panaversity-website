@@ -11,7 +11,7 @@ const Partners = () => {
         {" "}
         <div
           
-          className=" text-5xl md:text-7xl text-center font-bold md:gap-5 gap-0 md:min-w-[949px] flex items-center  justify-center md:mt-32 mt-28 "
+          className=" text-5xl md:text-7xl text-center font-bold md:gap-5 gap-0 md:min-w-[949px] flex items-center  justify-center md:mt-32 mt-28"
         >
           <h1
            
@@ -28,7 +28,7 @@ const Partners = () => {
               autoFill
               pauseOnHover
               pauseOnClick
-              className="gap-10"
+              className="gap-10 mb-[1.8rem]"
             >
               <Link href="/">
                 <div className="ml-[3rem]">

@@ -16,7 +16,7 @@ export default function About() {
               About Panversity
             </h2>
           </div>
-          <p className="md:text-xl xs:text-lg font-medium">
+          <p className="md:text-xl xs:text-lg font-medium text-textSecondary">
             Panaversity is revolutionizing AI education with cutting-edge
             programs in Generative AI and cloud computing, preparing you for the
             $100 trillion AI industry. Our hands-on programs combine advanced

@@ -19,7 +19,7 @@ export default function Home() {
       <Video />
       <About />
       <Partners />
-      <ProgramOverview />
+      {/* <ProgramOverview /> */}
       <WhyLearnGenerativeAI />
       <ProgramsTimeline />
       <Courses />

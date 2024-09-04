@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 const stats = [
   {
-    number: 21,
+    number: 21000,
     text: "Active Students",
   },
   {
@@ -63,24 +63,24 @@ export default function Counters() {
   return (
     <section>
       <div className="container mx-auto">
-        <motion.div
-          variants={statsContainerVariant}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: true, amount: 0.1 }}
+        <div
+          // variants={statsContainerVariant}
+          // initial="hidden"
+          // whileInView={"show"}
+          // viewport={{ once: true, amount: 0.1 }}
           className="font-sans text-4xl items-center text-center justify-center m-10"
-        ></motion.div>
+        ></div>
 
-        <motion.div
-          variants={statsContainerVariant}
-          initial="hidden"
-          whileInView={"show"}
-          viewport={{ once: false, amount: 0.3 }}
+        <div
+          // variants={statsContainerVariant}
+          // initial="hidden"
+          // whileInView={"show"}
+          // viewport={{ once: false, amount: 0.3 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 justify-center items-center"
         >
           {stats.map((item, index) => (
-            <motion.div
-              variants={statsItem}
+            <div
+              // variants={statsItem}
               className={`flex flex-col justify-center items-center relative ${
                 index < stats.length - 1 ? "px-6" : ""
               }`}
@@ -92,7 +92,7 @@ export default function Counters() {
                 className="font-bold text-2xl text-primary text-center"
               >
                 {isInView && (
-                  <CountUp start={0} end={item.number} duration={6} />
+                  <CountUp start={0} end={item.number} duration={3} />
                 )}
               </div>
 
@@ -105,9 +105,9 @@ export default function Counters() {
               {index < stats.length - 1 && (
                 <div className="absolute lg:flex hidden -right-6 top-1/2 transform -translate-y-1/2 h-12 border-r border-gray-300"></div>
               )}
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
