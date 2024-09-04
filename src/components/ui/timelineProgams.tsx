@@ -90,11 +90,11 @@ const Timeline = ({ data }: { data: TimelineEntry[] }) => {
             {/* Icon and Line */}
             <div className="relative flex items-center justify-center z-10 w-full md:w-1/2 mb-6 md:mb-0">
               <motion.div
-                whileHover={{ scale: 1.25, rotate: 15 }}
+                whileHover={{ scale: 1.05}}
                 className="h-12 w-12 sm:h-14 sm:w-14 md:h-20 md:w-20 rounded-full bg-accent flex items-center justify-center shadow-2xl transform transition-transform duration-300 ease-in-out"
               >
                 <motion.div
-                  whileHover={{ rotate: -15 }}
+                  // whileHover={{ rotate: -15 }}
                   className="text-primary hover:text-accent hover:bg-white w-[90%] rounded-full h-[90%] flex items-center justify-center text-2xl font-semibold sm:text-3xl md:text-4xl"
                 >
                   {item.icon}

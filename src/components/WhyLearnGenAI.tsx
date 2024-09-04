@@ -53,14 +53,16 @@ export default function WhyLearnGenerativeAI() {
             Master Cloud Native Applied Generative AI Engineering
           </h1>
           <p className="mt-6 text-base/[2] sm:text-lg/[2] text-[#031811]/70">
-            Embark on a journey of visual innovation as you delve into the realm
-            of the AI Image Generator. This revolutionary tool harnesses the
-            prowess of advanced algorithms to breathe life into your
-            imagination.
+            Embark on a journey structured across 8 quarters to master AI
+            technologies. The first 3 quarters build a foundation in Generative
+            AI, Python, and cloud-native microservices, followed by advanced
+            topics like PyTorch, large language models, and Kubernetes.
           </p>
           <p className="mt-4 text-base/[2] sm:text-lg/[2] mb-4 text-[#031811]/70">
-            Unleash your creativity and witness the power of AI Image Generator
-            as it transforms ideas into mesmerizing images.
+            The final quarters explore Physical AI, humanoid robotics, and
+            culminate in a comprehensive capstone project. This program prepares
+            you for real-world applications, with regular breaks to reinforce
+            your learning.
           </p>
           <button className="mt-5 sm:mt-8 px-8 py-4 md:mb-20 lg:mb-0 bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-green-500 hover:shadow-2xl transition-all duration-300">
             Countinue With Us →
@@ -73,7 +75,7 @@ export default function WhyLearnGenerativeAI() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="card bg-white px-6 pb-12 pt-12 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px] animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-transform duration-300"
+              className="card bg-white px-6 pb-12 pt-12 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px] animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
               <div
                 className="flex justify-center items-center"
