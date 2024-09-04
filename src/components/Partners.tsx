@@ -4,7 +4,6 @@ import Link from "next/link";
 import Marquee from "react-fast-marquee";
 
 const Partners = () => {
- 
   return (
     // <div className=" max-w-full ">
     <>
@@ -21,14 +20,16 @@ const Partners = () => {
             Our Programs
           </h1>
         </div>
-        <div
-         
-        >
-          <div
-            
-            className=" w-screen md:w-[75%] flex gap-10 text-center md:m-auto mt-4 items-center justify-center"
-          >
-            <Marquee gradient gradientColor="#fbfbfe" autoFill pauseOnHover pauseOnClick className="gap-10">
+        <div>
+          <div className=" w-screen md:w-[75%] flex gap-10 text-center md:m-auto mt-4 items-center justify-center">
+            <Marquee
+              gradient
+              gradientColor="#fbfbfe"
+              autoFill
+              pauseOnHover
+              pauseOnClick
+              className="gap-10"
+            >
               <Link href="/">
                 <div className="ml-[3rem]">
                   <Image
