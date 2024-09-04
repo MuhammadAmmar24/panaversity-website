@@ -2,7 +2,7 @@ import React from "react";
 import FooterColumn from "./FooterColumn2";
 import Newsletter from "./Newsletter2";
 import Image from "next/image";
-import Logo from "../../public/logo.png"; // Assuming the image logo is stored in assets
+import Logo from "../../public/logo2.png"; // Assuming the image logo is stored in assets
 
 const Footer2: React.FC = () => {
   return (
@@ -19,8 +19,7 @@ const Footer2: React.FC = () => {
                 className="h-16 w-auto transition-transform duration-300 ease-in-out hover:scale-105"
               />
               <p className="text-sm text-gray-400 mt-1 ml-1 leading-relaxed">
-                Power AI is an image generator powered by Artificial
-                Intelligence.
+                Master tomorrow’s tech today with Panaversity.
               </p>
             </div>
             <Newsletter /> {/* Call to Newsletter component */}
@@ -76,7 +75,7 @@ const Footer2: React.FC = () => {
 
       {/* Bottom copyright section */}
       <div className="bg-[#041F16] mt-16 h-16 text-center flex items-center justify-center text-sm text-gray-400">
-        © Copyright 2023 PowerAI, Inc.
+        © Copyright 2024 Panaversity, Inc.
       </div>
     </footer>
   );

@@ -42,17 +42,17 @@ export default function WhyLearnGenerativeAI() {
   ];
 
   return (
-    <div className="bg-white py-20 px-5 sm:px-10">
+    <div className="bg-white py-28 px-5 sm:px-24">
       <div className="max-w-[87rem] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up">
-          <h2 className="text-lg sm:text-xl gradient-border font-semibold border-b  w-fit text-[#031811] uppercase tracking-wide">
+          <h2 className="text-md sm:text-lg gradient-border font-semibold border-b w-fit text-[#031811] uppercase tracking-wide">
             Program Overview Section
           </h2>
-          <h1 className="text-3xl sm:text-4xl xl:text-5xl/[3.5rem] font-medium text-[#031811] mt-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl xl:text-4xl/[3.5rem] font-medium text-[#031811] mt-6 leading-tight">
             Master Cloud Native Applied Generative AI Engineering
           </h1>
-          <p className="mt-6 text-base/[2] sm:text-lg/[2] text-[#031811]/70">
+          <p className="mt-6 text-base/[2] sm:text-md/[2] text-[#031811]/70">
             Embark on a journey structured across 8 quarters to master AI
             technologies. The first 3 quarters build a foundation in Generative
             AI, Python, and cloud-native microservices, followed by advanced
@@ -64,7 +64,7 @@ export default function WhyLearnGenerativeAI() {
             you for real-world applications, with regular breaks to reinforce
             your learning.
           </p>
-          <button className="mt-5 sm:mt-8 px-8 py-4 md:mb-20 lg:mb-0 bg-green-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-green-500 hover:shadow-2xl transition-all duration-300">
+          <button className="mt-5 sm:mt-8 px-8 py-4 md:mb-20 lg:mb-0 bg-green-600 text-white text-md font-semibold rounded-full shadow-lg hover:bg-green-500 hover:shadow-2xl transition-all duration-300">
             Countinue With Us →
           </button>
         </div>
@@ -94,10 +94,10 @@ export default function WhyLearnGenerativeAI() {
                   height={feature.iconSize.height}
                 />
               </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
+              <h3 className="text-md sm:text-lg font-semibold text-gray-800">
                 {feature.title}
               </h3>
-              <p className="mt-3 text-[16px]/[2] text-gray-600">
+              <p className="mt-3 text-sm/[2] text-gray-600">
                 {feature.description}
               </p>
             </div>

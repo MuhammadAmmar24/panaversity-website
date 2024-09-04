@@ -110,8 +110,9 @@
 }
 /* styles.css */
 .gradient-border {
+  border-radius: 7px;
   border-bottom: 4px solid transparent; /* Border width and transparent color for the gradient effect */
-  border-image: linear-gradient(to right, #031811, rgba(3, 24, 17, 0)) 1; /* Gradient border image */
+  border-image: linear-gradient(to right, #A0A0A0, rgba(255, 255, 255, 0)) 1; /* Updated lighter gradient border */
 }
 
 @keyframes fadeInUp {
