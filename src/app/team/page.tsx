@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image"; // Importing next/image
 import { allTeamMembers } from "@/constants/teams"; // Merged team members array
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
@@ -52,7 +52,7 @@ TeamMemberItem.propTypes = {
 const TeamMember6 = () => {
   return (
     <section className="ezy__team6 light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
-        <Navbar />
+        {/* <Navbar /> */}
       <div className="container px-4 mx-auto">
         <div className="flex justify-center items-center mb-6 md:mb-12 border-y-2">
           {/* <div className="max-w-lg text-center mb-[6rem]">

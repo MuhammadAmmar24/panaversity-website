@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../../public/logo.png";
+import logo from "../../public/logoIcon.png";
 import Counters from "./Counters";
 
 export default function About() {
   return (
     <div>
-      <div className="w-full md:px-20 py-10 grid lg:grid-cols-[30%,60%] xs:grid-cols-1 justify-center">
+      <div className="w-full md:px-20 py-10 grid lg:grid-cols-[20%,60%] xs:grid-cols-1 justify-center">
         <div className="flex px-16 items-center">
-          <Image src={logo} alt={""} className=" w-68" />
+          <Image src={logo} alt={""} className=" w-auto h-[15rem]" />
         </div>
         <div className="flex flex-col gap-5 p-10">
           <div>

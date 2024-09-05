@@ -1,126 +1,84 @@
+import React from "react";
+import FooterColumn from "./FooterColumn2";
+import Newsletter from "./Newsletter2";
 import Image from "next/image";
-import Link from "next/link";
-import { Facebook, X, Instagram, Linkedin } from "lucide-react";
+import Logo from "../../public/logo2.png"; // Assuming the image logo is stored in assets
 
-export default function Component() {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#000033] text-white py-5 relative overflow-hidden">
-      <div className="container flex flex-col md:mx-auto px-4 relative z-10">
-        <div className="grid gap-8 md:grid-cols-4 mt-5 md:justify-items-center items-start">
-          
-          {/* Company Info */}
-          <div className="space-y-4 sm:-mt-10">
-            <Link href="/" className="flex items-center space-x-2">
+    <footer className="bg-[#031811] text-white pt-12 sm:pt-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
+          {/* Left section: Logo & Newsletter */}
+          <div className="md:col-span-2 col-span-2">
+            <div className="mb-3">
+              {/* Logo */}
               <Image
-                src="/Green Panaverse-03.png"
-                alt="Panaversity Logo"
-                width={120}
-                height={50}
+                src={Logo}
+                alt="Power AI Logo"
+                className="h-16 w-auto transition-transform duration-300 ease-in-out hover:scale-105"
               />
-            </Link>
-            <p className="text-sm text-gray-300">
-              Panaversity is an AI-powered online university offering
-              cutting-edge Generative AI and Cloud Native Computing education.
-              Gain real-world skills and certifications to advance your career.
-              Master tomorrow’s tech today with Panaversity.
-            </p>
-            <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 hover:text-white">
-                <Facebook size={20} aria-label="Facebook" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
-                <X size={20} aria-label="X (Twitter)" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
-                <Instagram size={20} aria-label="Instagram" />
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
-                <Linkedin size={20} aria-label="LinkedIn" />
-              </Link>
-            </div>
-          </div>
-
-          {/* BLOGs */}
-          <div className="flex flex-col items-start">
-            <h3 className="text-lg font-semibold">Blogs</h3>
-            <div className="grid grid-cols-2 gap-2 mt-8 pr-4">
-              {[
-                { src: "/hero.jpeg", alt: "Work 1" },
-                { src: "/hero.jpeg", alt: "Work 2" },
-                { src: "/hero.jpeg", alt: "Work 3" },
-                { src: "/hero.jpeg", alt: "Work 4" },
-              ].map((work, i) => (
-                <div key={i} className="bg-blue-900 rounded-lg overflow-hidden">
-                  <Image
-                    src={work.src}
-                    alt={work.alt}
-                    width={140}
-                    height={100}
-                    quality={100}
-                    priority
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Useful Links */}
-          <div className="flex flex-col items-start">
-            <h3 className="text-lg font-semibold">Useful Links</h3>
-            <ul className="space-y-2 mt-5">
-              {["Home", "About us", "Our Team", "Our Courses", "Career"].map(
-                (link, i) => (
-                  <li key={i}>
-                    <Link
-                      href="#"
-                      className="text-gray-300 hover:text-white text-sm"
-                    >
-                      {link}
-                    </Link>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-
-          {/* Contact Us */}
-          <div className="flex flex-col items-start">
-            <h3 className="text-lg font-semibold">Contact Us</h3>
-            <div className="space-y-2 mt-5">
-              <p className="text-sm">
-                <span className="text-blue-400">Office Location</span>
-                <br />
-                124, Queens walk 2nd cross Denmark
-              </p>
-              <p className="text-sm">
-                <span className="text-blue-400">Phone No.</span>
-                <br />
-                +00-888-27-240
-              </p>
-              <p className="text-sm">
-                <span className="text-blue-400">Email Address</span>
-                <br />
-                support@info.com
+              <p className="text-sm text-gray-400 mt-1 ml-1 leading-relaxed">
+                Master tomorrow’s tech today with Panaversity.
               </p>
             </div>
+            <Newsletter /> {/* Call to Newsletter component */}
           </div>
+
+          {/* Column Sections */}
+          <FooterColumn
+            title="Company"
+            links={[
+              { name: "About Us", href: "#" },
+              { name: "Our Mission", href: "#" },
+              { name: "Company History", href: "#" },
+              { name: "Testimonials", href: "#" },
+              { name: "Careers", href: "#" },
+            ]}
+            className="order-2 md:order-2"
+          />
+          <FooterColumn
+            title="Support"
+            links={[
+              { name: "Contact Us", href: "#" },
+              { name: "Privacy Policy", href: "#" },
+              { name: "Terms Conditions", href: "#" },
+              { name: "Cookies", href: "#" },
+              { name: "FAQ", href: "#" },
+            ]}
+            className="order-3 md:order-3"
+          />
+          <FooterColumn
+            title="Product"
+            links={[
+              { name: "Recent", href: "#" },
+              { name: "Upcoming", href: "#" },
+              { name: "Builder", href: "#" },
+              { name: "On Sale", href: "#" },
+              { name: "Live Demo", href: "#" },
+            ]}
+            className="order-4 md:order-4"
+          />
+          <FooterColumn
+            title="Follow Us"
+            links={[
+              { name: "Instagram", href: "#" },
+              { name: "Telegram", href: "#" },
+              { name: "Facebook", href: "#" },
+              { name: "Dribbble", href: "#" },
+              { name: "LinkedIn", href: "#" },
+            ]}
+            className="order-5 md:order-5"
+          />
         </div>
+      </div>
 
-        {/* Bottom bar */}
-        <div className="mt-12 pt-4 border-t border-gray-700 flex flex-wrap justify-between items-center">
-          <p className="text-sm text-gray-400">
-            Copyright © Panaversity, All Rights Reserved.
-          </p>
-          <div className="space-x-4">
-            <Link className="text-sm text-gray-400 hover:text-white" href="#">
-              Privacy Policy
-            </Link>
-            <Link className="text-sm text-gray-400 hover:text-white" href="#">
-              Terms &amp; Conditions
-            </Link>
-          </div>
-        </div>
+      {/* Bottom copyright section */}
+      <div className="bg-[#041F16] mt-16 h-16 text-center flex items-center justify-center text-sm text-gray-400">
+        © Copyright 2024 Panaversity, Inc.
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

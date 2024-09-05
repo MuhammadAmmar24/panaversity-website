@@ -5,79 +5,10 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay'; // Import autoplay styles
 import { Autoplay, Pagination } from 'swiper/modules';
+import { testimonialList } from "@/constants/testimonials"
 
 import 'swiper/css/navigation';
-const testimonialList = [
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-];
+
 
 const Testimonials = () => {
   return (

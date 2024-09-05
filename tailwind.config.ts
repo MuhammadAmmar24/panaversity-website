@@ -78,6 +78,7 @@ const config: Config = {
       backgroundImage: {
         'custom-bg': "url('/result.svg')", // Custom background image
       },
+	  
     },
   },
   plugins: [require('tailwindcss-animate'), nextui],
