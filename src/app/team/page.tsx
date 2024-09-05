@@ -3,15 +3,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image"; // Importing next/image
-import {
-  executives,
-  professionals,
-  trainers,
-  teamLeads,
-} from "@/constants/teams";
-
+import { allTeamMembers } from "@/constants/teams"; // Merged team members array
 import Navbar from "@/components/Navbar";
-
 
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
@@ -64,10 +57,7 @@ const TeamMember6 = () => {
       <div className="container px-4 mx-auto">
         <div className="flex justify-center items-center mb-6 md:mb-12 border-y-2">
           <div className="max-w-lg text-center mb-[6rem]">
-            {/* <h1 className="inline-block mb-5 rounded-[20px] bg-muted px-3 py-1 text-[0.6rem] md:text-[0.8rem] text-primary">
-              Our Team
-            </h1> */}
-            <h2 className="ezy__team6-heading mt-[6rem]  text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter  ">
+            <h2 className="ezy__team6-heading mt-[6rem] text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
             <p className="ezy__team6-sub-heading font-inter">
@@ -77,60 +67,13 @@ const TeamMember6 = () => {
           </div>
         </div>
 
-        {/* Executives Section */}
-        <div className="mb-12">
-          <h3 className="text-[1.7rem] sm:text-[2rem] md:text-[2.5rem] text-primary font-semibold font-poppins tracking-tighter text-start underline decoration-primary">
-            Executives
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 justify-center md:justify-start">
-            {executives.map((member, i) => (
-              <div className="flex justify-center w-full md:w-auto" key={i}>
-                <TeamMemberItem member={member} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Professionals Section */}
-        <div className="mb-12">
-          <h3 className="text-[1.7rem] sm:text-[2rem] md:text-[2.5rem] text-primary font-semibold font-poppins tracking-tighter text-start underline decoration-primary">
-            Professionals
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 justify-center md:justify-start">
-            {professionals.map((member, i) => (
-              <div className="flex justify-center w-full md:w-auto" key={i}>
-                <TeamMemberItem member={member} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Trainers Section */}
-        <div className="mb-12">
-          <h3 className="text-[1.7rem] sm:text-[2rem] md:text-[2.5rem] text-primary font-semibold font-poppins tracking-tighter text-start underline decoration-primary">
-            Trainers
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 justify-center md:justify-start">
-            {trainers.map((member, i) => (
-              <div className="flex justify-center w-full md:w-auto" key={i}>
-                <TeamMemberItem member={member} />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Team Leads Section */}
-        <div>
-          <h3 className="text-[1.7rem] sm:text-[2rem] md:text-[2.5rem] text-primary font-semibold font-poppins tracking-tighter text-start underline decoration-primary">
-            Team Leads
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 justify-center md:justify-start">
-            {teamLeads.map((member, i) => (
-              <div className="flex justify-center w-full md:w-auto" key={i}>
-                <TeamMemberItem member={member} />
-              </div>
-            ))}
-          </div>
+        {/* Combined Team Members */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 justify-center md:justify-start">
+          {allTeamMembers.map((member, i) => (
+            <div className="flex justify-center w-full md:w-auto" key={i}>
+              <TeamMemberItem member={member} />
+            </div>
+          ))}
         </div>
       </div>
     </section>

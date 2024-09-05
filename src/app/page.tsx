@@ -7,19 +7,27 @@ import CTAsection from "@/components/CTAsection";
 import Video from "@/components/Video";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
+import About from "@/components/About";
+import ProgramsTimeline from "@/components/ProgramsTimeline";
+import WhyLearnGenerativeAI from "@/components/WhyLearnGenAI";
+import Footer2 from "@/components/Footer2";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Video />
+      <About />
       <Partners />
-      <ProgramOverview />
+      {/* <ProgramOverview /> */}
+      <WhyLearnGenerativeAI />
+      {/* <ProgramsTimeline /> */}
       <Courses />
       <Faq />
       <Testimonials />
       <CTAsection />
-      <Footer />
+      {/* <Footer /> */}
+      <Footer2 />
     </>
   );
 }
