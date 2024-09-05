@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button"
 
 export default function Component() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-[#2d8659] text-white rounded-3xl p-10 max-w-3xl text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready To Start Creating Stunning Images With Power AI?</h2>
-        <p className="text-lg mb-6">
+    <div className="flex justify-center items-center min-h-screen -mt-20 bg-gray-100">
+      <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-10 max-w-3xl text-center">
+        <h2 className="text-3xl font-semibold text-white font-poppins mb-4">Ready To Start Creating Stunning Images With Power AI?</h2>
+        <p className="text-lg mb-6 text-white/70">
           Sign up today and unlock the full potential of our tool. With a range processing techniques and features at
           your fingertips, you'll be amazed what you will achieve.
         </p>

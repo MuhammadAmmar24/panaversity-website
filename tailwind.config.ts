@@ -76,7 +76,8 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       backgroundImage: {
-        'custom-bg': "url('/result.svg')", // Custom background image
+        'custom-bg': "url('/result.svg')",
+        'custom-bg1': "url('/result (1).svg')", // Custom background image
       },
 	  
     },

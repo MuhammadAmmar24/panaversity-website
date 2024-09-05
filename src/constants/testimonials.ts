@@ -5,7 +5,7 @@ export const testimonialList = [
       name: "John Doe",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
     {
       img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
@@ -19,7 +19,7 @@ export const testimonialList = [
       name: "John Leo",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
   ],
   [
@@ -28,7 +28,7 @@ export const testimonialList = [
       name: "John Doe",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
     {
       img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
@@ -42,7 +42,7 @@ export const testimonialList = [
       name: "John Leo",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
   ],
   [
@@ -51,7 +51,7 @@ export const testimonialList = [
       name: "John Doe",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
     {
       img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
@@ -65,7 +65,7 @@ export const testimonialList = [
       name: "John Leo",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
     },
   ],
 ];
