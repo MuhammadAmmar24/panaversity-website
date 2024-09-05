@@ -1,8 +1,25 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins, Anton } from "next/font/google"; // Import Anton font
 import "./globals.css";
+import Navbar from "@/components/Navbar"
 
-const inter = Inter({ subsets: ["latin"] });
+
+const inter = Inter({ 
+  subsets: ["latin"], 
+  variable: '--font-inter',
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+});
+
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400", // Anton has only one weight
+  variable: "--font-anton",
+});
 
 export const metadata: Metadata = {
   title: "Panaversity Website",
@@ -16,7 +33,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.variable} ${poppins.variable} ${anton.variable} bg-background`}>
+        <Navbar />
+      
+        {children}
+      </body>
+
     </html>
   );
 }
