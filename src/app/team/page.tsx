@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image"; // Importing next/image
 import { allTeamMembers } from "@/constants/teams"; // Merged team members array
-import Navbar from "@/components/Navbar";
+// import Navbar from "@/components/Navbar";
 
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
@@ -20,9 +20,8 @@ const TeamMemberItem = ({ member }: any) => (
       <Image
         src={member.picture}
         alt={member.fullName}
-        width={240} // Adjust width as necessary
-        height={240} // Adjust height as necessary
-        unoptimized
+        width={500} // Adjust width as necessary
+        height={500} // Adjust height as necessary
         layout="intrinsic"
         className="relative z-10 w-3/4 h-auto mx-auto rounded-lg"
       />
@@ -53,18 +52,18 @@ TeamMemberItem.propTypes = {
 const TeamMember6 = () => {
   return (
     <section className="ezy__team6 light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
-        <Navbar />
+        {/* <Navbar /> */}
       <div className="container px-4 mx-auto">
         <div className="flex justify-center items-center mb-6 md:mb-12 border-y-2">
-          <div className="max-w-lg text-center mb-[6rem]">
-            <h2 className="ezy__team6-heading mt-[6rem] text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter">
+          {/* <div className="max-w-lg text-center mb-[6rem]">
+            <h2 className=" mt-[6rem] text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
-            <p className="ezy__team6-sub-heading font-inter">
+            <p className="text-textSecondary font-inter">
               Driven by Passion, Powered by Innovation – Discover the Experts
               Shaping the Future of AI Education
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* Combined Team Members */}

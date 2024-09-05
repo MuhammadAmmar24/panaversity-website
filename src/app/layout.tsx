@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Anton } from "next/font/google"; // Import Anton font
 import "./globals.css";
+import Navbar from "@/components/Navbar"
 
 
 const inter = Inter({ 
@@ -33,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} ${anton.variable} bg-background`}>
+        <Navbar />
       
         {children}
       </body>

@@ -47,7 +47,7 @@ export default function WhyLearnGenerativeAI() {
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up">
           <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] w-fit text-textPrimary uppercase tracking-wide">
-            Program Overview Section
+            Program Overview 
           </h2>
           <h1 className="text-2xl sm:text-3xl xl:text-4xl/[3.5rem] font-bold font-poppins text-textPrimary mt-6 leading-tight">
             Master Cloud Native Applied Generative AI Engineering

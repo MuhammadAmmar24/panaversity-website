@@ -1,108 +1,43 @@
 "use client";
 import React from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/autoplay'; // Import autoplay styles
-import { Autoplay, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/autoplay"; // Import autoplay styles
+import { Autoplay, Pagination } from "swiper/modules";
+import { testimonialList } from "@/constants/testimonials";
 
-import 'swiper/css/navigation';
-const testimonialList = [
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "Aksay Kumar",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you. It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-];
+import "swiper/css/navigation";
 
 const Testimonials = () => {
   return (
-    <section className="ezy__testimonial24 light py-14 md:py-24 bg-white dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+    <section className="ezy__testimonial24 light py-14 md:py-24 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 ">
       <div className="container px-4 mx-auto">
-        <div className="flex items-center justify-center text-center mb-6 md:mb-12">
-          <div className="max-w-xl">
-            <hr className="w-20 mb-4 border-gray-300 dark:border-gray-600 mx-auto" />
-            <h2 className="text-[32px] font-bold">What They Say</h2>
-          </div>
+        <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
+          <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
+            Testimonials
+          </h2>
+          <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
+          Our User’s Speeches About Panaversity
+          </h2>
         </div>
 
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
           autoplay={{ delay: 3500, disableOnInteraction: false }}
-        //   pagination={{ clickable: true }}
+          //   pagination={{ clickable: true }}
           breakpoints={{
-            240: { // For medium screens and up
-                slidesPerView: 1,
-              },
-            640: { // For medium screens and up
+            240: {
+              // For medium screens and up
+              slidesPerView: 1,
+            },
+            640: {
+              // For medium screens and up
               slidesPerView: 2,
             },
-            1024: { // For large screens and up
+            1024: {
+              // For large screens and up
               slidesPerView: 3,
             },
           }}

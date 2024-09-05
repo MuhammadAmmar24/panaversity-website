@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button"
 
 export default function Component() {
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-[#2d8659] text-white rounded-3xl p-10 max-w-3xl text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready To Start Creating Stunning Images With Power AI?</h2>
-        <p className="text-lg mb-6">
+    <div className="flex justify-center items-center h-[35em] sm:h-[25em]  md:h-[35rem] px-6 sm:px-[4rem] md:px[6rem] -mt-20 bg-background">
+      <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-5  md:p-[3rem] lg:p-[4rem] max-w-3xl text-center">
+        <h2 className="text-[1.4rem] md:text-[1.6rem] font-bold text-white font-poppins mb-4">Read To Start Creating Stunning Images With Power </h2>
+        <p className="text-[0.9rem] md:text-[1rem] mb-6 text-background font-inter">
           Sign up today and unlock the full potential of our tool. With a range processing techniques and features at
           your fingertips, you'll be amazed what you will achieve.
         </p>
-        <Button variant="outline" className="bg-white text-[#2d8659] px-6 py-2 rounded-full">
+        <Button variant="outline" className="bg-background text-[#186449] hover:bg-[#218360] hover:text-background px-6 py-2 rounded-3xl">
           Get Started <ArrowRightIcon className="ml-2" />
         </Button>
       </div>

@@ -11,7 +11,7 @@ const stats = [
   },
   {
     number: 7,
-    text: "Programs Offered",
+    text: "Active Programs ",
   },
   {
     number: 13000,
@@ -92,7 +92,9 @@ export default function Counters() {
                 className="font-bold text-2xl text-primary text-center"
               >
                 {isInView && (
-                  <CountUp start={0} end={item.number} duration={3} />
+                  <div>
+                  <CountUp start={0} end={item.number} duration={3} />+
+                  </div>
                 )}
               </div>
 

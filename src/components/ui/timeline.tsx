@@ -34,14 +34,18 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <div className="w-full bg-custom-bg  font-sans md:px-10" ref={containerRef}>
+    <div
+      className="w-full bg-custom-bg bg-cover font-sans md:px-10"
+      ref={containerRef}
+    >
       <div className="max-w-7xl flex flex-col items-center justify-center mx-auto py-20 px-4 md:px-8 lg:px-10">
-        <h1 className="inline-block mb-5 rounded-[20px] px-3 py-1 text-[0.6rem] md:text-[0.8rem] bg-muted text-textPrimary">
-          {timelineContent.courseLabel} {/* Use the content from the data file */}
-        </h1>
-        <h1 className="text-3xl text-white font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
-          {timelineContent.mainHeading} {/* Use the content from the data file */}
-        </h1>
+        <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5                                                                                                                                                                                                                                                              w-fit text-white uppercase tracking-wide">
+          Courses Offered
+        </h2>
+        <h2 className="text-3xl text-white font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
+          {timelineContent.mainHeading}{" "}
+          {/* Use the content from the data file */}
+        </h2>
       </div>
 
       <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
