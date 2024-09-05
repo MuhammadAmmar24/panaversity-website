@@ -8,7 +8,7 @@ export default function About() {
     <div>
       <div className="w-full md:px-20 py-10 grid lg:grid-cols-[20%,60%] xs:grid-cols-1 justify-center">
         <div className="flex px-16 items-center">
-          <Image src={logo} alt={""} className=" w-auto h-[15rem]" />
+          <Image src={logo} alt={""} className=" w-auto h-[12rem]" />
         </div>
         <div className="flex flex-col gap-5 p-10">
           <div>
@@ -16,7 +16,7 @@ export default function About() {
               About Panversity
             </h2>
           </div>
-          <p className="md:text-xl xs:text-lg font-medium text-textSecondary">
+          <p className="md:text-xl xs:text-lg font-light font-inter text-textSecondary">
             Panaversity is revolutionizing AI education with cutting-edge
             programs in Generative AI and cloud computing, preparing you for the
             $100 trillion AI industry. Our hands-on programs combine advanced
