@@ -86,7 +86,7 @@ const Testimonials = () => {
         <div className="flex items-center justify-center text-center mb-6 md:mb-12">
           <div className="max-w-xl">
             <hr className="w-20 mb-4 border-gray-300 dark:border-gray-600 mx-auto" />
-            <h2 className="text-[32px] font-bold">What They Say</h2>
+            <h2 className="text-[2.5rem] font-bold">What They Say</h2>
           </div>
         </div>
 

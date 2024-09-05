@@ -52,12 +52,12 @@ export default function Faqs() {
       <div className="flex items-center justify-center text-center mb-6 md:mb-12">
         <div className="max-w-xl">
           <hr className="w-20 mb-4 border-gray-300 dark:border-gray-600 mx-auto" />
-          <h2 className="text-[32px] font-bold">FAQs</h2>
+          <h2 className="text-[2.5rem] font-bold">FAQs</h2>
         </div>
       </div>
-      <Accordion variant="light">
+      <Accordion variant="light"   >
         {faqData.map((item, index) => (
-          <AccordionItem key={index} aria-label={item.question} title={item.question}>
+          <AccordionItem key={index} aria-label={item.question} title={item.question} >                                                         
             {item.answer}
           </AccordionItem>
         ))}

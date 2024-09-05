@@ -29,7 +29,7 @@ export default function Hero() {
               Revolutionize Your Learning with <span className="text-accent bg-gradient-to-r from-[#10a76b] to-accent bg-clip-text text-transparent">AI-Powered</span> Education
             </h1>
             <p className="mt-6 text-[0.85rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
-            Elevate Your Skills with <span className="underline  decoration-accent underline-offset-8 decoration-2">Panaversity's AI-Enhanced</span> Learning Mentor
+            Empower Your Learning with <span className="underline  decoration-accent underline-offset-8 decoration-2">Panaversity - Advanced AI </span> Mentor
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
             <a href="#_" className="relative inline-flex items-center px-12 py-4 overflow-hidden text-lg  text-textPrimary font-inter border-2 border-accent bg-accent  rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-gray-50">
