@@ -133,7 +133,7 @@ export default function Navbarr() {
         />
         <NavbarBrand>
         <a href="/" className=" cursor-pointer ">
-              <img alt="" src={"logo.png"} className="h-[5rem] sm:h-[3rem] md:h-[4rem] lg:h-[4.5rem]  w-auto   " />
+              <img alt="" src={"/logos/logo.png"} className="h-[5rem] sm:h-[3rem] md:h-[4rem] lg:h-[4.5rem]  w-auto   " />
              </a>
         </NavbarBrand>
       </NavbarContent>
