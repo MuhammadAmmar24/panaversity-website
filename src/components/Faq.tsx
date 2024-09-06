@@ -5,7 +5,7 @@ import { faqData } from "@/constants/faqs";
 
 export default function Faqs() {
   return (
-    <section className="max-w-3xl mx-auto px-4 py-8">
+    <section className="max-w-5xl mx-auto px-4 py-8">
       <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
         <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
           FAQ
@@ -17,6 +17,7 @@ export default function Faqs() {
       <Accordion variant="light" className="mt-10 ">
         {faqData.map((item, index) => (
           <AccordionItem
+<<<<<<< HEAD
             className="border-b border-gray-200"
             key={index}
             aria-label={item.question}
@@ -28,6 +29,18 @@ export default function Faqs() {
           >
             <div className="text-[#031811B2] text-sm">{item.answer}</div>
           </AccordionItem>
+=======
+          className="border-b border-gray-200"
+          key={index}
+          aria-label={item.question}
+          title={<span className="font-semibold text-md md:text-lg text-textPrimary">{item.question}</span>}
+        >
+          <div className="text-[#031811B2] text-sm md:text-md -mt-3">
+            {item.answer}
+          </div>
+        </AccordionItem>
+        
+>>>>>>> f8930123eb840f2f039b17af0877f47a9d655b84
         ))}
       </Accordion>
     </section>

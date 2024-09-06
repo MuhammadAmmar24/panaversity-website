@@ -125,7 +125,7 @@ export default function Navbarr() {
   const pathname = usePathname(); // Get the current pathname
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className=" py-4    xl:py-4 ">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className=" py-4  xl:py-4 ">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
