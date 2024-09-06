@@ -42,13 +42,13 @@ const Testimonials = () => {
             },
           }}
           modules={[Autoplay, Pagination]}
-          className="mySwiper"
+          className="mySwiper -mb-20"
         >
           {testimonialList.flat().map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <div className="h-[22rem] xl:h-[22rem] p-6 xl:p-10 border  rounded-[20px]">
-                <div className="flex items-center mb-6">
-                  <div className="mr-3">
+              <div className=" p-3 border  rounded-[20px]">
+                <div className="flex items-center mb-2">
+                  <div className="">
                     <img
                       src={testimonial.img}
                       alt={testimonial.name}
@@ -61,7 +61,7 @@ const Testimonials = () => {
                     <p className="text-sm mb-2">{testimonial.position}</p>
                   </div>
                 </div>
-                <p className="opacity-75 mb-2">{testimonial.content}</p>
+                <p className="opacity-75 text-sm sm:text-base">{testimonial.content}</p>
               </div>
             </SwiperSlide>
           ))}
