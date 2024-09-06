@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 
 const Testimonials = () => {
   return (
-    <section className="ezy__testimonial24 light py-14 md:py-24 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 ">
+    <section className="ezy__testimonial24 light py-14 md:py-24 mb-8 md:mb-[10rem] bg-white dark:bg-[#0b1727] text-gray-900 ">
       <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
           <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">

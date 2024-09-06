@@ -5,7 +5,7 @@ export default function Video() {
   return ( 
     <>
       <div>
-        <div className="flex bg-background items-center justify-center h-[45rem] px-4  mt-[-12rem] sm:mt-[-5rem] md:mt-[0rem] lg:mt-[1rem] xl:mt-[2rem] w-auto  ">
+        <div className="flex bg-background items-center justify-center h-[45rem] px-4  mt-[-12rem] sm:mt-[-5rem] md:mt-[0rem] lg:mt-[1rem] xl:mt-[2rem] w-auto ">
           <div className="rounded-[20px] md:rounded-[40px] border-white/40 border bg-white/10 backdrop-blur-sm z-30 ">
 
           <video
@@ -22,6 +22,7 @@ export default function Video() {
             </div>
         </div>
       </div>
+      
     </>
   );
 }
