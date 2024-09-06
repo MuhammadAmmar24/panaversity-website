@@ -58,7 +58,7 @@ const TeamMember6 = () => {
 
 
       <div className="w-full mb-32">
-        <div className="flex justify-center items-center mb-[0rem] bg-teamBg  bg-cover">
+        <div className="flex justify-center items-center bg-teamBg bg-center  bg-cover">
           <div className=" text-center  w-full backdrop-brightness-75  backdrop-opacity-100 bg-blur-[1px]	 py-[7rem] ">
             <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.6rem]  text-background font-bold font-poppins tracking-tighter ">
               Meet the Visionaries Behind Panaversity
