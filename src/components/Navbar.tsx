@@ -1,26 +1,17 @@
 "use client";
 import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { FaRocket } from "react-icons/fa";
 import logo from "../../public/logos/logo.png"; // Correct paths for logos
+import { navItems, NavbarProps } from  "@/constants/nav"; // Import the new component
 
-interface NavbarProps {
-  bg: string;
-  navlinks_color: string;
-  image_url: string;
-}
+
 
 export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [
-    { name: "Home", link: "/" },
-    { name: "Our Team", link: "/team" },
-    { name: "Results", link: "/results" },
-    { name: "Course Content", link: "/about" },
-    { name: "Announcements", link: "/announcements" },
-  ];
 
   // Variants for the hamburger menu lines
   const topLineVariants = {
@@ -57,7 +48,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
   return (
     <div
      
-      className={`max-w-7xl lg:mx-44 px-4 sm:px-6 md:px-8  py-3 bg-${bg} rounded-full flex justify-between items-center  top-0 z-5 sticky z-[9999]`}
+      className={`max-w-7xl lg:mx-44 px-4 sm:px-6 md:px-8  py-3 bg-${bg} rounded-full flex justify-between items-center  top-0 z-50 sticky border-white/40 border bg-white/10 backdrop-blur-sm`}
     >
       {/* Logo */}
       <div className="flex items-center">
@@ -99,7 +90,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle mobile menu"
         >
-          <svg
+          <motion.svg
             className="w-8 h-8"
             fill="none"
             stroke="currentColor"
@@ -107,7 +98,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
             xmlns="http://www.w3.org/2000/svg"
           >
             {/* Top Line */}
-            <line
+            <motion.line
               x1="4"
               y1="6"
               x2="20"
@@ -116,9 +107,11 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
               stroke="currentColor"
+              variants={topLineVariants}
+              animate={menuOpen ? "open" : "closed"}
             />
             {/* Middle Line */}
-            <line
+            <motion.line
               x1="4"
               y1="12"
               x2="20"
@@ -127,9 +120,11 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
               stroke="currentColor"
+              variants={middleLineVariants}
+              animate={menuOpen ? "open" : "closed"}
             />
             {/* Bottom Line */}
-            <line
+            <motion.line
               x1="4"
               y1="18"
               x2="20"
@@ -138,14 +133,15 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
               strokeLinecap="round"
               strokeLinejoin="round"
               stroke="currentColor"
-            
+              variants={bottomLineVariants}
+              animate={menuOpen ? "open" : "closed"}
             />
-          </svg>
+          </motion.svg>
         </button>
       </div>
 
       {/* Mobile Menu (only visible on mobile and small screens) */}
-    
+      <AnimatePresence>
         {menuOpen && (
           <div
            
@@ -175,6 +171,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
             </div>
           </div>
         )}
+      </AnimatePresence>
     </div>
   );
 }

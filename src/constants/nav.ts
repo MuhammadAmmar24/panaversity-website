@@ -1,7 +1,13 @@
-export const nav = [
-    { name: 'Home', href: '/' },
-    { name: 'Our Team', href: '/team' },
-    { name: 'Course Content', href: '#' },
-    { name: 'Result', href: '#' },
-    { name: 'Announcements', href: '#' },
-  ]
+export interface NavbarProps {
+  bg: string;
+  navlinks_color: string;
+  image_url: string;
+}
+
+export const navItems = [
+  { name: "Home", link: "/" },
+  { name: "Our Team", link: "/team" },
+  { name: "Results", link: "/results" },
+  { name: "Course Content", link: "/about" },
+  { name: "Announcements", link: "/announcements" },
+];
