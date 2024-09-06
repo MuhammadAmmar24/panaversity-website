@@ -39,7 +39,7 @@
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "vercel": "^37.2.1"
+    "vercel": "^32.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

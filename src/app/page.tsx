@@ -8,17 +8,19 @@ import Partners from "@/components/Partners";
 import About from "@/components/About";
 import WhyLearnGenerativeAI from "@/components/WhyLearnGenAI";
 import Footer from "@/components/Footer";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <Video />
-      <About />
-      <Partners />
       <WhyLearnGenerativeAI />
       <Courses />
       <Faq />
+      <About />
+      <Projects />
+      <Partners />
       <Testimonials />
       <CTAsection />
       <Footer />
