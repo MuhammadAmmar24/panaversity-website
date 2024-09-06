@@ -54,12 +54,12 @@ TeamMemberItem.propTypes = {
 
 const TeamMember6 = () => {
   return (
-    <section className="ezy__team6 light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+    <section className=" light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
         {/* <Navbar /> */}
       <div className="container px-4 mx-auto">
-        <div className="flex justify-center items-center ">
+        <div className="flex justify-center items-center  mb-[3rem] ">
           <div className=" text-center mb-[2rem]">
-            <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.4rem]  text-textPrimary font-bold font-poppins tracking-tighter">
+            <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.4rem]  text-textPrimary font-bold font-poppins tracking-tighter ">
               Meet the Visionaries Behind Panaversity
             </h2>
             <p className="text-textSecondary font-inter mb-2">
