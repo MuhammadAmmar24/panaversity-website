@@ -2,21 +2,11 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Toggle } from "@/components/ui/toggle";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { FaRocket } from "react-icons/fa";
 import logo from "../../public/logos/logo.png";
 
-interface NavbarProps {
-  bg: string;
-  navlinks_color: string;
-  image_url: string;
-}
-
-export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
+export default function Navbar() {
   const navItems = [
     { name: "Home", link: "/" },
     { name: "Our Team", link: "/team" },
@@ -26,7 +16,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
   ];
 
   return (
-    <header className={`sticky backdrop-blur-xl top-0 z-50 w-full bg-${bg}`}>
+    <header className={`pt-6 sticky  bg-white/50 backdrop-blur-lg  top-0 z-50 w-full`}>
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
@@ -39,9 +29,13 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
         </Link>
 
         {/* Full Navigation Links (for large screens) */}
-        <nav className="hidden items-center gap-6 text-sm font-medium md:flex">
+        <nav className="hidden items-center mt-6 gap-10 text-sm font-medium md:flex">
           {navItems.map((nav) => (
-            <Link key={nav.name} href={nav.link} className={`text-${navlinks_color} hover:text-[#40e477]`}>
+            <Link
+              key={nav.name}
+              href={nav.link}
+              className={`text-textPrimary text-base hover:text-[#40e477]`}
+            >
               {nav.name}
             </Link>
           ))}
@@ -49,7 +43,7 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
 
         <div className="flex items-center gap-4">
           {/* CTA Button */}
-          <div className="hidden lg:flex">
+          <div className="hidden md:flex mt-6">
             <Button className="px-4 py-2 text-black border-2 bg-white border-[#40e477] hover:bg-[#40e477] rounded-full">
               Enroll Now
             </Button>
@@ -59,27 +53,31 @@ export default function Navbar({ bg, navlinks_color, image_url }: NavbarProps) {
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className=" md:hidden">
-              <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="4" x2="20" y1="12" y2="12" />
-      <line x1="4" x2="20" y1="6" y2="6" />
-      <line x1="4" x2="20" y1="18" y2="18" />
-    </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <line x1="4" x2="20" y1="12" y2="12" />
+                  <line x1="4" x2="20" y1="6" y2="6" />
+                  <line x1="4" x2="20" y1="18" y2="18" />
+                </svg>
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="md:hidden">
               <nav className="grid gap-4 p-4">
                 {navItems.map((nav) => (
-                  <Link key={nav.name} href={nav.link} className="text-sm font-medium text-gray-500 hover:text-gray-900">
+                  <Link
+                    key={nav.name}
+                    href={nav.link}
+                    className="text-sm font-medium text-gray-500 hover:text-gray-900"
+                  >
                     {nav.name}
                   </Link>
                 ))}
