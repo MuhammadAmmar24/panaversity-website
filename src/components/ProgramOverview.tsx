@@ -42,7 +42,7 @@ export default function WhyLearnGenerativeAI() {
   ];
 
   return (
-    <div className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] px-5 sm:px-24 md:px-10 lg:px-[14rem]   z-10 pb-[6rem]">
+    <div className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] px-5 sm:px-24 md:px-10 lg:px-[11.5rem]   z-10 pb-[6rem]">
       <div className="max-w-[87rem] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
