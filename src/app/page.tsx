@@ -7,7 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import About from "@/components/About";
 import WhyLearnGenerativeAI from "@/components/WhyLearnGenAI";
-import Footer from "@/components/Footer";
+
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <Faq />
       <Testimonials />
       <CTAsection />
-      <Footer />
+      
     </>
   );
 }
