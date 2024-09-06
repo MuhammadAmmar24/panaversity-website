@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../../public/logoIcon.png";
+import logo from "../../public/logos/logoIcon.png";
 import Counters from "./Counters";
 
 export default function About() {
