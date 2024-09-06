@@ -22,7 +22,7 @@ export default function Home() {
       <Projects />
       <Partners />
       <Testimonials />
-      {/* <CTAsection /> */}
+      <CTAsection />
     </>
   );
 }
