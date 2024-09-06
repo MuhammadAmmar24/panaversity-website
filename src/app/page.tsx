@@ -7,12 +7,8 @@ import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import About from "@/components/About";
 import WhyLearnGenerativeAI from "@/components/WhyLearnGenAI";
-<<<<<<< HEAD
-import Footer from "@/components/Footer";
 import Projects from "@/components/Projects";
-=======
 
->>>>>>> 031a7f7cf0ef7592a56af71b4ead7950fb4ad3e9
 
 export default function Home() {
   return (
@@ -27,7 +23,6 @@ export default function Home() {
       <Partners />
       <Testimonials />
       <CTAsection />
-      
     </>
   );
 }

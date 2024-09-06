@@ -1,101 +1,77 @@
-"use client";import React, { useState } from "react";
-import { Accordion, AccordionItem } from "@nextui-org/react";
+"use client";
+import React, { useState, useRef } from "react";
 import { faqData } from "@/constants/faqs";
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface AccordionItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+}
 
 export default function Faqs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const handleAccordionClick = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index); // Toggle accordion open/close
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section className="max-w-5xl mx-auto px-4 py-8">
-      <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
-<<<<<<< HEAD
-        <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
+    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+      <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
+        <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
           FAQ
         </h2>
-        <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
-          Top Answered Questions
-        </h2>
-      </div>
-      <Accordion variant="light" className="mt-10 ">
-        {faqData.map((item, index) => (
-          <AccordionItem
-<<<<<<< HEAD
-            className="border-b border-gray-200"
-            key={index}
-            aria-label={item.question}
-            title={
-              <span className="font-semibold text-[#031811]">
-                {item.question}
-              </span>
-            }
-          >
-            <div className="text-[#031811B2] text-sm">{item.answer}</div>
-          </AccordionItem>
-=======
-          className="border-b border-gray-200"
-          key={index}
-          aria-label={item.question}
-          title={<span className="font-semibold text-md md:text-lg text-textPrimary">{item.question}</span>}
-        >
-          <div className="text-[#031811B2] text-sm md:text-md -mt-3">
-            {item.answer}
-          </div>
-        </AccordionItem>
-        
->>>>>>> f8930123eb840f2f039b17af0877f47a9d655b84
-=======
-        <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
-          FAQ
-        </h2>
-        <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-textPrimary font-poppins font-semibold tracking-tighter text-center">
           Top Answered Questions
         </h2>
       </div>
 
-      <Accordion variant="light" className="mt-10">
-        {faqData.map((item, index) => (
-          <AccordionItem
-            key={index}
-            aria-label={item.question}
-            indicator={(isOpen) => (
-              <svg
-                className={`w-4 h-4 transform transition-transform duration-300 ${
-                  isOpen ? 'rotate-180' : 'rotate-0'
-                }`} // Rotate arrow based on isOpen state
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Arrow pointing downwards by default */}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M5 15l7-7 7 7"
-                />
-              </svg>
-            )}
-            title={
-              <div className="flex justify-between items-center cursor-pointer">
-                <span className="font-semibold text-md md:text-lg text-[#031811]">
-                  {item.question}
-                </span>
-              </div>
-            }
-            className="border-b border-gray-200"
-          >
-            <div className="text-[#031811B2] text-sm md:text-md -mt-3">
-              {item.answer}
-            </div>
-          </AccordionItem>
->>>>>>> 031a7f7cf0ef7592a56af71b4ead7950fb4ad3e9
+      <div className="mt-6 sm:mt-8 md:mt-10 space-y-4">
+        {faqData.map((item: FaqItem, index: number) => (
+          <AccordionItem 
+            key={index} 
+            question={item.question} 
+            answer={item.answer} 
+            isOpen={openIndex === index}
+            onToggle={() => handleToggle(index)}
+          />
         ))}
-      </Accordion>
+      </div>
     </section>
+  );
+}
+
+function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProps) {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <div className="border-b border-gray-200">
+      <button
+        className="w-full py-4 md:py-5 -mb-2 px-2 md:px-4 flex justify-between items-center focus:outline-none"
+        onClick={onToggle}
+      >
+        <span className="font-semibold text-sm sm:text-md md:text-lg text-[#031811] text-left mr-2">{question}</span>
+        <span className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
+      </button>
+      <div 
+        ref={contentRef}
+        className="overflow-hidden transition-all duration-300 ease-in-out"
+        style={{ maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0' }}
+      >
+        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-[#031811B2] text-xs sm:text-sm md:text-md">
+          {answer}
+        </div>
+      </div>
+    </div>
   );
 }
