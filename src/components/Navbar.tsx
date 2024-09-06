@@ -125,7 +125,7 @@ export default function Navbarr() {
   const pathname = usePathname(); // Get the current pathname
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className=" py-4    xl:py-4 ">
+    <Navbar onMenuOpenChange={setIsMenuOpen} className=" py-4  xl:py-4 ">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -133,7 +133,7 @@ export default function Navbarr() {
         />
         <NavbarBrand>
         <a href="/" className=" cursor-pointer ">
-              <img alt="" src={"logo.png"} className="h-[5rem] sm:h-[3rem] md:h-[4rem] lg:h-[4.5rem]  w-auto   " />
+              <img alt="" src={"/logos/logo.png"} className="h-[5rem] sm:h-[3rem] md:h-[4rem] lg:h-[4.5rem]  w-auto   " />
              </a>
         </NavbarBrand>
       </NavbarContent>

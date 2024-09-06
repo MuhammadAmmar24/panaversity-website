@@ -33,7 +33,7 @@ const Partners = () => {
               <Link href="/">
                 <div className="ml-[3rem]">
                   <Image
-                    src={"/goversindh.png"}
+                    src={"/logos/goversindh.png"}
                     width={90}
                     height={90}
                     alt="Panaverse"
@@ -43,7 +43,7 @@ const Partners = () => {
               <Link href="/">
                 <div className="ml-[3rem]">
                   <Image
-                    src={"/kpk.png"}
+                    src={"/logos/kpk.png"}
                     width={100}
                     height={100}
                     alt="Panaverse"
@@ -53,7 +53,7 @@ const Partners = () => {
               <Link href="/">
                 <div className="ml-[3rem]">
                   <Image
-                    src={"/piaic.png"}
+                    src={"/logos/piaic.png"}
                     width={100}
                     height={200}
                     alt="Panaverse"

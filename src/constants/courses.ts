@@ -5,7 +5,7 @@ export const courseData = [
       content: [
         {
           quarter: "Quarter - 1",
-          title: "Generative AI & Cloud Native Basics",
+          title: "Gen AI & Cloud Basics",
           description: "Foundations of Generative AI, Python, Docker and  GitHub.",
         },
         {

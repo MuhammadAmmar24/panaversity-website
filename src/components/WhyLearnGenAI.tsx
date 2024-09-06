@@ -46,19 +46,19 @@ export default function WhyLearnGenerativeAI() {
       <div className="max-w-[87rem] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up">
-          <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] w-fit text-textPrimary uppercase tracking-wide">
-            Program Overview 
+          <h2 className="text-md sm:text-lg gradient-border font-semibold border-b w-fit text-[#031811] uppercase tracking-wide">
+            Program Overview Section
           </h2>
-          <h1 className="text-2xl sm:text-3xl xl:text-4xl/[3.5rem] font-bold font-poppins text-textPrimary mt-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl xl:text-4xl/[3.5rem] font-medium text-[#031811] mt-6 leading-tight">
             Master Cloud Native Applied Generative AI Engineering
           </h1>
-          <p className="mt-6 text-base/[2] sm:text-md/[2] text-textSecondary font-inter">
+          <p className="mt-6 text-base/[2] sm:text-md/[2] text-[#031811]/70">
             Embark on a journey structured across 8 quarters to master AI
             technologies. The first 3 quarters build a foundation in Generative
             AI, Python, and cloud-native microservices, followed by advanced
             topics like PyTorch, large language models, and Kubernetes.
           </p>
-          <p className="mt-4 text-base/[2] sm:text-md/[2] mb-4 text-textSecondary font-inter">
+          <p className="mt-4 text-base/[2] sm:text-lg/[2] mb-4 text-[#031811]/70">
             The final quarters explore Physical AI, humanoid robotics, and
             culminate in a comprehensive capstone project. This program prepares
             you for real-world applications, with regular breaks to reinforce
@@ -75,7 +75,7 @@ export default function WhyLearnGenerativeAI() {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="card bg-white px-4 pb-10 pt-12 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px] animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-all duration-300"
+              className="card bg-white px-6 pb-12 pt-12 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px] animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-all duration-300"
             >
               <div
                 className="flex justify-center items-center"

@@ -2,7 +2,7 @@ import React from "react";
 import FooterColumn from "./ui/FooterColumn";
 import Newsletter from "./ui/Newsletter";
 import Image from "next/image";
-import Logo from "../../public/logo2.png"; 
+import Logo from "../../public/logos/logo2.png"; 
  
 const Footer: React.FC = () => {
   return (

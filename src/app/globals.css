@@ -16,6 +16,7 @@
   font-family: var(--font-anton);
 }
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,13 +95,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2d8659;
+  background: #13b172;
   border-radius: 100px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #2d8659;
+  background: #13b172;
 }
 
 
@@ -113,6 +114,13 @@
   border-bottom: 4px solid transparent; /* Border width and transparent color for the gradient effect */
   border-image: linear-gradient(to right, #A0A0A0, rgba(255, 255, 255, 0)) 1; /* Updated lighter gradient border */
 }
+
+.gradient-border2 {
+  border-radius: 7px;
+  border-bottom: 4px solid transparent; /* Border width and transparent color for the gradient effect */
+  border-image: linear-gradient(to right, #1cd98e, #ffffff) 1; /* Updated lighter gradient border */
+}
+
 
 @keyframes fadeInUp {
   from {
@@ -144,3 +152,27 @@
   animation: slideInUp 0.5s ease-in-out forwards;
 }
 
+.swiper {
+  width: 80%;
+  height: 17rem;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px solid black;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
