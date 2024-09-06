@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <div className="bg-background">
 
-      <div className="relative isolate px-6 pt-14 lg:px-8 ">
+      <div className="relative isolate px-6  lg:px-8 ">
         {/* <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -20,14 +20,16 @@ export default function Hero() {
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div> */}
-        <div className="mx-auto max-w-5xl py-[20rem] sm:py-48 lg:py-46 " >
+        <div className="mx-auto max-w-5xl py-[6rem] sm:py-48 lg:py-46 " >
    
           <div className="text-center">
-            <h1 className="text-[2.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
+            <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
               Revolutionize Your Learning with <span className="text-accent bg-gradient-to-r from-[#10a76b] to-accent bg-clip-text text-transparent">AI-Powered</span> Education
             </h1>
-            <p className="mt-6 text-[0.85rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
-            Empower Your Learning with <span className="underline  decoration-accent underline-offset-8 decoration-2">Panaversity - Advanced AI </span> Mentor
+            <p className="mt-6 text-[0.8rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
+            Master AI with Live, Expert-Led Courses — Tailored for  Your <span className=" gradient-border2  ">
+             Success!
+             </span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
             <a href="#_" className="relative inline-flex items-center px-12 py-4 overflow-hidden text-lg  text-textPrimary font-inter border-2 border-accent bg-accent  rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-gray-50">
@@ -45,12 +47,12 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 lg:top-[-4rem] xl:top-[-12rem] w-auto -z-10 transform-gpu overflow-hidden  sm:top-[calc(100%-38rem)]"
+          className="absolute inset-x-0  -z-10 overflow-hidden"
         >
-          <div className="mb-4">
+       
 
         <HeroBg />
-          </div>
+         
         </div>
         
         
