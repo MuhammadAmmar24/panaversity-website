@@ -17,7 +17,7 @@ const Testimonials = () => {
           <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
             Testimonials
           </h2>
-          <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
+          <h2 className="text-3xl text-textPrimary mb-10 font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
           Our User’s Speeches About Panaversity
           </h2>
         </div>
