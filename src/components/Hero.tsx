@@ -20,11 +20,11 @@ export default function Hero() {
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div> */}
-        <div className="mx-auto max-w-5xl py-[6rem] sm:py-48 lg:py-46 " >
+        <div className="mx-auto max-w-5xl pt-[5rem] sm:pt-[6rem] md:pt-[7rem  ] lg:pt-[9rem] " >
    
           <div className="text-center">
-            <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
-              Revolutionize Your Learning with <span className="text-accent bg-gradient-to-r from-[#10a76b] to-accent bg-clip-text text-transparent">AI-Powered</span> Education
+            <h1 className="text-[2.6rem] sm:text-[3.4rem] md:text-[3.8rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
+              Revolutionize Your Learning with <span className="text-accent bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-transparent">AI-Powered</span> Education
             </h1>
             <p className="mt-6 text-[0.8rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
             Master AI with Live, Expert-Led Courses — Tailored for  Your <span className=" gradient-border2  ">
