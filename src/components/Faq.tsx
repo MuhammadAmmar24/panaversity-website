@@ -21,7 +21,7 @@ export default function Faqs() {
           aria-label={item.question}
           title={<span className="font-semibold text-md md:text-lg text-textPrimary">{item.question}</span>}
         >
-          <div className="text-textSecondary text-sm md:text-[1rem] font-inter">
+          <div className="text-[#031811B2] text-sm md:text-md -mt-3">
             {item.answer}
           </div>
         </AccordionItem>
