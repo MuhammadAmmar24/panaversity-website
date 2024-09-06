@@ -16,6 +16,7 @@
   font-family: var(--font-anton);
 }
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -94,13 +95,13 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #2d8659;
+  background: #13b172;
   border-radius: 100px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #2d8659;
+  background: #13b172;
 }
 
 
