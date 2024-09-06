@@ -15,43 +15,31 @@ import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
 export default function Projects() {
   // Create a reference for the swiper instance
   const swiperRef: any = useRef();
-          
+
+  // Check if the number of slides is greater than 4
+  const shouldShowButtons = projects.length > 4;
+
   return (
-    <div className="py- px-2 mt-10 flex justify-center">
-      <div className="w-full max-w-5xl">
-        <div className="flex justify-between">
+    <div className="py-16 px-2 mt-10 flex justify-center">
+      <div className="w-full max-w-6xl">
+        <div className="flex justify-center">
           {/* Heading */}
           <div className="mb-5">
             <div className="w-full flex justify-center">
-              <h2 className="text-md w-fit text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-2  uppercase tracking-wide">
+              <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
                 Our Work
               </h2>
             </div>
-            <h1 className="text-primary text-center text-3xl font-bold pl-2">
+            <h1 className="text-3xl px-4  text-textPrimary mb-10 font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
               Projects
             </h1>
-          </div>
-          {/* Custom Forward and Backward Buttons */}
-          <div className="flex justify-between w-20 mb-4">
-            <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold h-fit w-fit py-2 px-[0.6rem] rounded-full"
-              onClick={() => swiperRef.current?.slidePrev()}
-            >
-              <FaArrowLeftLong className="w-3" />
-            </button>
-            <button
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold h-fit w-fit py-2 px-[0.6rem] rounded-full"
-              onClick={() => swiperRef.current?.slideNext()}
-            >
-              <FaArrowRight className="w-3" />
-            </button>
           </div>
         </div>
         {/* Projects Column */}
         <div>
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            slidesPerView={3} // Default value for large screens
+            slidesPerView={4} // Default value for large screens
             spaceBetween={5}
             pagination={{
               clickable: true,
@@ -72,8 +60,8 @@ export default function Projects() {
                 slidesPerView: 3, // For screens 1024px and above (large devices)
               },
             }}
-            modules={[Autoplay, Pagination]}
-            className="mySwiper"
+            modules={[Autoplay]}
+            className="mySwiper2"
           >
             {projects.map((data: any, index: number) => (
               <SwiperSlide key={index} className="flex border rounded-lg p-2">
@@ -106,6 +94,23 @@ export default function Projects() {
             ))}
           </Swiper>
         </div>
+        {/* Conditionally render the custom buttons if slides are more than 4 */}
+        {shouldShowButtons && (
+          <div className="flex justify-between w-full py-6 mb-4">
+            <button
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold h-fit w-fit py-2 px-[0.6rem] rounded-full"
+              onClick={() => swiperRef.current?.slidePrev()}
+            >
+              <FaArrowLeftLong className="w-3" />
+            </button>
+            <button
+              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold h-fit w-fit py-2 px-[0.6rem] rounded-full"
+              onClick={() => swiperRef.current?.slideNext()}
+            >
+              <FaArrowRight className="w-3" />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
