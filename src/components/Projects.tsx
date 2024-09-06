@@ -15,7 +15,7 @@ import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
 export default function Projects() {
   // Create a reference for the swiper instance
   const swiperRef: any = useRef();
-
+          
   return (
     <div className="py- px-2 mt-10 flex justify-center">
       <div className="w-full max-w-5xl">
