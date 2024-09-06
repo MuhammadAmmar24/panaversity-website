@@ -8,6 +8,7 @@ import { allTeamMembers } from "@/constants/teams"; // Merged team members array
 
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
+  
     <div className="relative flex items-center justify-center">
       {/* Background Shape */}
       <img
@@ -26,7 +27,9 @@ const TeamMemberItem = ({ member }: any) => (
         className="relative z-10 w-3/4 h-auto mx-auto rounded-lg"
       />
     </div>
+    
     <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-6 text-center mt-4 ezy__team6-content">
+      
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
       <p className="text-sm mt-1">{member.bio}</p>
@@ -54,20 +57,18 @@ const TeamMember6 = () => {
     <section className="ezy__team6 light py-14 md:py-24 bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
         {/* <Navbar /> */}
       <div className="container px-4 mx-auto">
-        <div className="flex justify-center items-center mb-6 md:mb-12 border-y-2">
-          {/* <div className="max-w-lg text-center mb-[6rem]">
-            <h2 className=" mt-[6rem] text-[1.7rem] sm:text-[2rem] md:text-[3.4rem] text-textPrimary font-bold font-poppins tracking-tighter">
+        <div className="flex justify-center items-center ">
+          <div className=" text-center mb-[2rem]">
+            <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.4rem]  text-textPrimary font-bold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
-            <p className="text-textSecondary font-inter">
+            <p className="text-textSecondary font-inter mb-2">
               Driven by Passion, Powered by Innovation – Discover the Experts
               Shaping the Future of AI Education
             </p>
-          </div> */}
+          </div>
         </div>
-
-        {/* Combined Team Members */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 justify-center md:justify-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-center md:justify-start">
           {allTeamMembers.map((member, i) => (
             <div className="flex justify-center w-full md:w-auto" key={i}>
               <TeamMemberItem member={member} />
