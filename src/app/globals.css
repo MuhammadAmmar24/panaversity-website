@@ -15,6 +15,9 @@
 .font-anton {
   font-family: var(--font-anton);
 }
+.nextui-accordion-item-arrow {
+  display: none !important;
+}
 
 @layer base {
   :root {
