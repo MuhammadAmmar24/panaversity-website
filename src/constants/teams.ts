@@ -7,7 +7,7 @@ import {
   const allTeamMembers = [
 	// Executives
 	{
-	  picture: "/team/Zia khan.png",
+	  picture: "/team/Zia khan.webp",
 	  fullName: "Zia Khan",
 	  designation: "CEO Panacloud / COO PIAIC",
 	  bio: "Driving Pakistan’s tech revolution through PIAIC.",
@@ -17,7 +17,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Daniyal.png",
+	  picture: "/team/Daniyal.webp",
 	  fullName: "Daniyal Nagori",
 	  designation: "CEO of PIAIC / CEO GIAIC",
 	  bio: "Shaping Pakistan’s tech future with AI and Web 3.0 education.",
@@ -27,7 +27,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Qasim.png",
+	  picture: "/team/Qasim.webp",
 	  fullName: "Muhammad Qasim",
 	  designation: "Chief Gen AI Officer at PIAIC & GIAIC",
 	  bio: "Pioneering Generative AI in Pakistan’s tech landscape.",
@@ -38,7 +38,7 @@ import {
 	},
 	// Professionals
 	{
-	  picture: "/team/Azeem.png",
+	  picture: "/team/Azeem.webp",
 	  fullName: "Ameen Alam",
 	  designation: "Multi-Cloud Solutions Architect",
 	  bio: "Designing scalable cloud architectures for PIAIC.",
@@ -48,7 +48,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Imran.png",
+	  picture: "/team/Imran.webp",
 	  fullName: "Imran Ali",
 	  designation: "Management Head PIAIC / GIAIC",
 	  bio: "Specializing in AI-driven software development and training.",
@@ -59,7 +59,7 @@ import {
 	},
 	// Trainers
 	{
-	  picture: "/team/Khubaib.png",
+	  picture: "/team/Khubaib.webp",
 	  fullName: "Muhammad Khubaib",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Specializing in AI-driven software development and training.",
@@ -69,7 +69,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Junaid.png",
+	  picture: "/team/Junaid.webp",
 	  fullName: "M. Junaid Shaukat",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Expert in full-stack development and MERN stack.",
@@ -79,7 +79,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Wania_kazmi.png",
+	  picture: "/team/Wania_kazmi.webp",
 	  fullName: "Wania Kazmi",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Modern web developer specializing in JavaScript and Python.",
@@ -89,7 +89,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Hamza_syed.png",
+	  picture: "/team/Hamza_syed.webp",
 	  fullName: "Hamza Syed",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Crafting seamless and interactive user experiences.",
@@ -99,7 +99,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Usman.png",
+	  picture: "/team/Usman.webp",
 	  fullName: "Usman Ashraf",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Creating clean, scalable applications with modern technologies.",
@@ -109,7 +109,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Ibtisam.png",
+	  picture: "/team/Ibtisam.webp",
 	  fullName: "Ibtisam Anwar",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Full-stack developer with a focus on MERN stack.",
@@ -119,7 +119,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Rehan.png",
+	  picture: "/team/Rehan.webp",
 	  fullName: "Muhammad Rehan ul Haq",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Mentoring aspiring developers in modern web technologies.",
@@ -129,7 +129,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Jahanzeb.png",
+	  picture: "/team/Jahanzeb.webp",
 	  fullName: "Jahanzaib Tayyab",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Specializing in MERN stack and modern web development.",
@@ -139,7 +139,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Girl_avatar.png",
+	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Mubarra Naz",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Building seamless web applications with React and Next.js.",
@@ -149,7 +149,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Hassan_ali_khan.png",
+	  picture: "/team/Hassan_ali_khan.webp",
 	  fullName: "Hassan Ali Khan",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Crafting seamless and interactive user experiences.",
@@ -159,7 +159,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Zeeshan_aziz.png",
+	  picture: "/team/Zeeshan_aziz.webp",
 	  fullName: "Zeeshan Aziz",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Focusing on web development and blockchain technologies.",
@@ -170,7 +170,7 @@ import {
 	},
 	// Team Leads
 	{
-	  picture: "/team/Sajid_khan.png",
+	  picture: "/team/Sajid_khan.webp",
 	  fullName: "Sajid Khan",
 	  designation: "Team Lead",
 	  bio: "Crafting seamless and interactive user experiences.",
@@ -180,7 +180,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Girl_avatar.png",
+	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Humera Aslam",
 	  designation: "Team Lead",
 	  bio: "Building seamless web applications with React and Next.js.",
@@ -190,7 +190,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Girl_avatar.png",
+	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Ayesha Nazish",
 	  designation: "Team Lead",
 	  bio: "Building seamless web applications with React and Next.js.",
@@ -200,7 +200,7 @@ import {
 	  ],
 	},
 	{
-	  picture: "/team/Girl_avatar.png",
+	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Bushra Hussain",
 	  designation: "Team Lead",
 	  bio: "Building seamless web applications with React and Next.js.",

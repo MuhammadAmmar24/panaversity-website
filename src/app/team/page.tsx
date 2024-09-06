@@ -57,7 +57,7 @@ const TeamMember6 = () => {
     <section className=" light  bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
 
 
-      <div className="w-full">
+      <div className="w-full mb-32">
         <div className="flex justify-center items-center mb-[0rem] bg-teamBg  bg-cover">
           <div className=" text-center  w-full backdrop-brightness-75  backdrop-opacity-100 bg-blur-[1px]	 py-[7rem] ">
             <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.6rem]  text-background font-bold font-poppins tracking-tighter ">
