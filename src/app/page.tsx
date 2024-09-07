@@ -17,8 +17,8 @@ export default function Home() {
       <Video />
       <ProgramOverview />
       <Courses />
-      <Faq />
       <About />
+      <Faq />
       <Projects />
       {/* <Partners /> */}
       <Testimonials />
