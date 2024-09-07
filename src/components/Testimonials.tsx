@@ -11,13 +11,13 @@ import "swiper/css/navigation";
 
 const Testimonials = () => {
   return (
-    <section className=" light py-14 md:py-24 mb-8  md:mb-[10rem] bg-white dark:bg-[#0b1727] text-textPrimary ">
-      <div className=" sm:px-[3rem]  mx-auto">
+    <section className=" light py-14 md:py-10 mb-8  md:mb-[1rem] bg-white dark:bg-[#0b1727] text-textPrimary ">
+      <div className=" sm:px-[4.4rem] px-2  mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
           <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
             Testimonials
           </h2>
-          <h2 className="text-3xl px-4 text-textPrimary mb-10 font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
+          <h2 className="text-3xl px-4  text-textPrimary mb-10 font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
           Our User’s Speeches About Panaversity
           </h2>
         </div>
@@ -46,7 +46,7 @@ const Testimonials = () => {
         >
           {testimonialList.flat().map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <div className="p-10 sm:p-8 border-2  rounded-[20px]">
+              <div className="p-10 sm:p-8 border-2  rounded-[20px] ">
                 <div className="flex items-center mb-6 mt-[-1rem]">
                   <div className="">
                     <img

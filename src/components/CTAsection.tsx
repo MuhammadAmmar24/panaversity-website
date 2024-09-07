@@ -8,7 +8,7 @@ import { ctaData } from "@/constants/cta"
 
 export default function Component() {
   return (
-    <div className="flex justify-center items-center h-[35em] sm:h-[25em] md:h-[40em] px-6 sm:px-[4rem] md:px[5rem] mt-2 bg-background  text-center ">
+    <div className="flex justify-center items-center h-[35em] sm:h-[25em] md:h-[40em] px-6 sm:px-[4rem] md:px[5rem]  mt-2 bg-background  text-center ">
       <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-5  md:p-[3rem] lg:p-[5rem] max-w-3xl md:max-w-[72em] text-center border-2 ">
         <h2 className="text-[1.4rem] md:text-[2.6rem] font-bold text-white font-poppins mb-4">{ctaData.heading}</h2>
         <p className="text-[0.9rem] md:text-[1rem] mb-6 text-background/90 font-inter">
