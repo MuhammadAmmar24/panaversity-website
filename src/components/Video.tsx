@@ -15,7 +15,7 @@ export default function Video() {
             playsInline={false}
             controls={false}
             preload="auto"
-            className="w-auto md:h-[32rem] lg:h-[38rem] custom-video-controls z-40 rounded-[20px] md:rounded-[40px] "
+            className="w-auto md:h-[32rem] lg:h-[40rem] custom-video-controls z-40 rounded-[20px] md:rounded-[40px] "
             >
             <source src={"/video/video.mp4"} type="video/mp4" />
           </video>
