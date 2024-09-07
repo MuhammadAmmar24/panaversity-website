@@ -1,14 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image"; // Importing next/image
-import { allTeamMembers } from "@/constants/teams"; // Merged team members array
-// import Navbar from "@/components/Navbar";
+import Image from "next/image";
+import { allTeamMembers } from "@/constants/teams"; // Your team members array
 
 const TeamMemberItem = ({ member }: any) => (
   <div className="relative w-full max-w-xs mt-5">
-  
     <div className="relative flex items-center justify-center">
       {/* Background Shape */}
       <img
@@ -27,9 +25,8 @@ const TeamMemberItem = ({ member }: any) => (
         className="relative z-10 w-4/5 h-auto mx-auto rounded-lg"
       />
     </div>
-    
+
     <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-6 text-center mt-4 ezy__team6-content">
-      
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
       <p className="text-sm mt-1">{member.bio}</p>
@@ -53,14 +50,19 @@ TeamMemberItem.propTypes = {
 };
 
 const TeamMember6 = () => {
+  const [visibleMembers, setVisibleMembers] = useState(9); // Show 9 members initially
+
+  const handleLoadMore = () => {
+    setVisibleMembers((prev) => prev + 9); // Load 9 more members when "Load More" is clicked
+  };
+
   return (
-    <section className=" light  bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
-
-
+    <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
       <div className="w-full mb-32">
+        {/* Header */}
         <div className="flex justify-center items-center bg-teamBg bg-center bg-cover">
-          <div className=" text-center  w-full backdrop-brightness-75  backdrop-opacity-100 bg-blur-[1px]	 py-[7rem] ">
-            <h2 className="  text-[1.7rem] sm:text-[2rem] md:text-[3.6rem]  text-background font-bold font-poppins tracking-tighter ">
+          <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] py-[7rem]">
+            <h2 className="text-[1.7rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
             <p className="text-background font-inter mb-2">
@@ -70,14 +72,29 @@ const TeamMember6 = () => {
           </div>
         </div>
 
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  justify-center md:justify-start ">
-          {allTeamMembers.map((member, i) => (
-            <div className="flex justify-center w-full md:w-auto mt-[4rem]" key={i}>
+        {/* Team members */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center md:justify-start">
+          {allTeamMembers.slice(0, visibleMembers).map((member, i) => (
+            <div
+              className="flex justify-center w-full md:w-auto mt-[4rem]"
+              key={i}
+            >
               <TeamMemberItem member={member} />
             </div>
           ))}
         </div>
+
+        {/* Load More Button */}
+        {visibleMembers < allTeamMembers.length && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={handleLoadMore}
+              className="bg-accent text-white px-6 py-2 rounded hover:bg-accent/90 transition-colors"
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
