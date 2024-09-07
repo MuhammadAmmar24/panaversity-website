@@ -42,10 +42,10 @@ export default function WhyLearnGenerativeAI() {
   ];
 
   return (
-    <div className="relative bg-white mt-[-10rem] pt-[2rem] px-5 sm:px-24 z-10">
+    <div className="relative bg-white mt-[-10rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] px-5 sm:px-24 md:px-10 border-2 z-10 pb-[6rem]">
       <div className="max-w-[87rem] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
-        <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up">
+        <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
             Program Overview
           </h2>
@@ -79,12 +79,12 @@ export default function WhyLearnGenerativeAI() {
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="grid grid-cols-1 -mt-6 xl:-mt-0 sm:grid-cols-2 hover:cursor-default gap-x-8 gap-y-8 max-w-3xl ">
+        <div className="grid grid-cols-1 -mt-6 xl:-mt-0 sm:grid-cols-2 hover:cursor-default gap-x-8 gap-y-8 max-w-3xl px-[1rem] sm:px-[0.5rem]  ">
           {/* Map over features array */}
           {features.map((feature, index) => (
             <div
               key={index}
-              className="card bg-white px-[1rem] pb-12 pt-12 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px]  animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-all duration-300"
+              className="card bg-white px-[1rem] pb-8 pt-8 md:py-4 lg:pb-8 lg:pt-8 rounded-3xl border-[#000000]/5 border-2 custom-shadow shadow-gray-200 w-full sm:max-w-[318px]  animate-slide-in-up hover:scale-105 hover:shadow-2xl transition-all duration-300 "
             >
               <div
                 className="flex justify-center items-center"

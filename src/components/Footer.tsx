@@ -8,7 +8,7 @@ import Logo from "../../public/logos/logo2.png";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-[#031811] text-white pt-[2.1rem]">
-      <div className="min-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="min-w-7xl px-4 sm:px-6 lg:px-10">
         <div className="grid grid-cols-2 min-w-7xl max-w-7xl lg:mx-44 items-center md:grid-cols-6 gap-8">
           {/* Left section: Logo & Newsletter */}
           <div className="md:col-span-2 col-span-2">
