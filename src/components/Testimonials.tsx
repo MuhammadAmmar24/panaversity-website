@@ -61,7 +61,7 @@ const Testimonials = () => {
               onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
               onMouseLeave={handleMouseLeave}
               >
-                <div className="flex items-center mb-6">
+                <div className="flex items-center text-left mb-6">
                   <div className="mr-3">
                     <img
                       src={testimonial.img}
