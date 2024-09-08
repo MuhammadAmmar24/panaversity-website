@@ -1,20 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 import logo from "../../public/logos/logo.png";
+import { navItems } from "@/constants/nav";
 
 export default function Navbar() {
-  const navItems = [
-    { name: "Home", link: "/" },
-    { name: "Our Team", link: "/team" },
-    { name: "Results", link: "/results" },
-    { name: "Course Content", link: "/about" },
-    { name: "Announcements", link: "/announcements" },
-  ];
+
 
   return (
     <header className={`py-4 sticky  bg-white/50 backdrop-blur-lg  top-0 z-50 w-full `}>
