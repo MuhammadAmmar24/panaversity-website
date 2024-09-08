@@ -1,54 +1,68 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import "swiper/css/autoplay"; // Import autoplay styles
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
 import { Autoplay, Pagination } from "swiper/modules";
 import { testimonialList } from "@/constants/testimonials";
 
-import "swiper/css/navigation";
+// Import Swiper types
+import type { Swiper as SwiperType } from "swiper/types";
 
 const Testimonials = () => {
+  const swiperRef = useRef<SwiperType | null>(null);
+
+  const handleMouseEnter = () => {
+    swiperRef.current?.autoplay.stop();
+  };
+
+  const handleMouseLeave = () => {
+    swiperRef.current?.autoplay.start();
+  };
+
   return (
-    <section className=" light py-14 md:py-10 mb-8  md:mb-[1rem] bg-white dark:bg-[#0b1727] text-textPrimary ">
-      <div className=" sm:px-[4.4rem] px-2  mx-auto">
+    <section className="ezy__testimonial24 light py-14 md:py-24 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900">
+      <div className="container px-4 mx-auto">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
-          <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5  uppercase tracking-wide">
+          <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
             Testimonials
           </h2>
-          <h2 className="text-3xl px-4  text-textPrimary mb-10 font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
-          Our User’s Speeches About Panaversity
+          <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
+            Our User’s Speeches About Panaversity
           </h2>
         </div>
 
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
-          //   pagination={{ clickable: true }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }} // Make sure disableOnInteraction is false
           breakpoints={{
             240: {
-              // For medium screens and up
               slidesPerView: 1,
             },
             640: {
-              // For medium screens and up
               slidesPerView: 2,
             },
             1024: {
-              // For large screens and up
               slidesPerView: 3,
             },
           }}
           modules={[Autoplay, Pagination]}
-          className="mySwiper mb-2 sm:mb-0 "
+          className="mySwiper"
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+          onMouseLeave={handleMouseLeave}
         >
           {testimonialList.flat().map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <div className="p-10 sm:p-8 border-2  rounded-[20px] ">
-                <div className="flex items-center mb-6 mt-[-1rem]">
-                  <div className="">
+              <div className="testimonial-card h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border rounded-[20px]"
+              onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+              onMouseLeave={handleMouseLeave}
+              >
+                <div className="flex items-center mb-6">
+                  <div className="mr-3">
                     <img
                       src={testimonial.img}
                       alt={testimonial.name}
@@ -61,8 +75,7 @@ const Testimonials = () => {
                     <p className="text-sm mb-2">{testimonial.position}</p>
                   </div>
                 </div>
-                
-                <p className="opacity-75 text-sm sm:text-base">{testimonial.content}</p>
+                <p className="opacity-75 mb-2">{testimonial.content}</p>
               </div>
             </SwiperSlide>
           ))}
