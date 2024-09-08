@@ -41,7 +41,7 @@ import {
 	  picture: "/team/Azeem.webp",
 	  fullName: "Ameen Alam",
 	  designation: "Multi-Cloud Solutions Architect",
-	  bio: "Designing scalable cloud architectures for PIAIC.",
+	  bio: "Designing scalable cloud native architectures for PIAIC and GIAIC.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/ameen-alam/" },
 		{ icon: faGithub, href: "https://github.com/Ameen-Alam" },
@@ -51,7 +51,7 @@ import {
 	  picture: "/team/Imran.webp",
 	  fullName: "Imran Ali",
 	  designation: "Management Head PIAIC / GIAIC",
-	  bio: "Specializing in AI-driven software development and training.",
+	  bio: "Specializing in AI software development and training.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "#" },
 		{ icon: faGithub, href: "#" },
@@ -92,7 +92,7 @@ import {
 	  picture: "/team/Hamza_syed.webp",
 	  fullName: "Hamza Syed",
 	  designation: "Trainer PIAIC, Freelancer",
-	  bio: "Crafting seamless and interactive user experiences.",
+	  bio: "Crafting seamless and interactive user experiences with Nextjs.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "#" },
 		{ icon: faGithub, href: "#" },
@@ -120,7 +120,7 @@ import {
 	},
 	{
 	  picture: "/team/Rehan.webp",
-	  fullName: "Muhammad Rehan ul Haq",
+	  fullName: "M. Rehan ul Haq",
 	  designation: "Trainer PIAIC, Freelancer",
 	  bio: "Mentoring aspiring developers in modern web technologies.",
 	  socialLinks: [
@@ -142,7 +142,7 @@ import {
 	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Mubarra Naz",
 	  designation: "Trainer PIAIC, Freelancer",
-	  bio: "Building seamless web applications with React and Next.js.",
+	  bio: "Building seamless web applications with React.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/mubarra-naz/" },
 		{ icon: faGithub, href: "https://github.com/Mubarra-naz" },
@@ -183,7 +183,7 @@ import {
 	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Humera Aslam",
 	  designation: "Team Lead",
-	  bio: "Building seamless web applications with React and Next.js.",
+	  bio: "Building seamless web applications with React.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/humera-aslam/" },
 		{ icon: faGithub, href: "#" },
@@ -193,7 +193,7 @@ import {
 	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Ayesha Nazish",
 	  designation: "Team Lead",
-	  bio: "Building seamless web applications with React and Next.js.",
+	  bio: "Building seamless web applications with React.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/" },
 		{ icon: faGithub, href: "#" },
@@ -203,7 +203,7 @@ import {
 	  picture: "/team/Girl_avatar.webp",
 	  fullName: "Bushra Hussain",
 	  designation: "Team Lead",
-	  bio: "Building seamless web applications with React and Next.js.",
+	  bio: "Building seamless web applications with Next.js.",
 	  socialLinks: [
 		{ icon: faLinkedinIn, href: "#" },
 		{ icon: faGithub, href: "#" },
