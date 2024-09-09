@@ -73,7 +73,7 @@ TeamMemberItem.propTypes = {
   }).isRequired,
 };
 
-const TeamMember6 = () => {
+const TeamMember = () => {
   // State to handle visible team members
   const [visibleMembers, setVisibleMembers] = useState(9);
 
@@ -124,4 +124,4 @@ const TeamMember6 = () => {
   );
 };
 
-export default TeamMember6;
+export default TeamMember;
