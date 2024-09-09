@@ -1,17 +1,18 @@
+// components/Newsletter.tsx
 import React from "react";
 
 const Newsletter: React.FC = () => {
   return (
-    <div className="mt-4 max-w-sm mx-auto bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h3 className="font-semibold mb-4 text-white text-lg text-center">
-        Join Our Newsletter
+    <div className="mt-4">
+      <h3 className="font-semibold mb-2 text-white text-lg">
+        Join Our Program
       </h3>
       <div className="flex items-center space-x-2">
         {/* Email Input */}
         <input
           type="email"
           placeholder="Enter email address"
-          className="bg-transparent border-b w-full border-gray-500 text-sm p-2 text-gray-300 focus:outline-none focus:border-white transition-all"
+          className="bg-transparent border-b border-gray-500 text-sm p-2 w-full text-gray-300 focus:outline-none"
         />
         {/* Submit Button */}
         <button

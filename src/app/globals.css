@@ -151,14 +151,35 @@
 .animate-slide-in-up {
   animation: slideInUp 0.5s ease-in-out forwards;
 }
+.testimonial-card {
+  transition: box-shadow 0.3s ease;
+  
+}
 
+.testimonial-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ 
+
+}
 .swiper {
-  width: 80%;
-  height: 17rem;
+  width: 90%;
+  height: 22rem;
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
+/* Medium screens (e.g., tablets) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .swiper {
+    height: 22rem; /* Adjust height for medium screens */
+  }
+}
 
+/* Large screens (e.g., desktops) */
+@media (min-width: 1025px) {
+  .swiper {
+    height: 22rem; /* Default height for larger screens */
+  }
+}
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -173,6 +194,6 @@
 .swiper-slide img {
   display: block;
   width: 100px;
-  height: 100px;
+  height: 1%00px;
   object-fit: cover;
 }

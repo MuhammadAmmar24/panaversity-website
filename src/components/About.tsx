@@ -6,7 +6,7 @@ import Counters from "./Counters";
 export default function About() {
   return (
     <div>
-      <div className="w-full md:px-10 py-10 grid lg:grid-cols-[20%,60%] xs:grid-cols-1 justify-center ">
+      <div className="w-full md:px-0  py-10 grid lg:grid-cols-[20%,60%] xs:grid-cols-1 justify-center ">
         <div className="flex px-16 items-center">
           <Image src={logo} alt={""} className=" w-auto h-[10rem]" />
         </div>

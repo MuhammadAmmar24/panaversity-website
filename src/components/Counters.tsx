@@ -61,7 +61,7 @@ export default function Counters() {
       <div className="mx-auto">
         {/* <div className="font-sans text-4xl items-center text-center justify-center my-10"></div> */}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 px-20 justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 px-[7rem] justify-center items-center">
           {stats.map((item, index) => (
             <div
               // variants={statsItem}

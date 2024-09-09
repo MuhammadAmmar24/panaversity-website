@@ -22,7 +22,7 @@ export default function Faqs() {
   };
 
   return (
-    <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
       <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
         <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
           FAQ
@@ -51,12 +51,12 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="border-b border-gray-200">
+    <div className={`border-b ${isOpen ? 'border-accent' : 'border-gray-200'}`}>
       <button
         className="w-full py-4 md:py-5 -mb-2 px-2 md:px-4 flex justify-between items-center focus:outline-none"
         onClick={onToggle}
       >
-        <span className="font-semibold text-sm sm:text-md md:text-lg text-[#031811] text-left mr-2">{question}</span>
+        <span className="font-semibold text-sm sm:text-md md:text-lg text-textPrimary font-poppins text-left mr-2">{question}</span>
         <span className={`flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -68,7 +68,7 @@ function AccordionItem({ question, answer, isOpen, onToggle }: AccordionItemProp
         className="overflow-hidden transition-all duration-300 ease-in-out"
         style={{ maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0' }}
       >
-        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-[#031811B2] text-xs sm:text-sm md:text-md">
+        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-textSecondary font-inter text-xs sm:text-sm md:text-md">
           {answer}
         </div>
       </div>

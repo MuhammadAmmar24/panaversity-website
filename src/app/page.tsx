@@ -6,7 +6,7 @@ import Video from "@/components/Video";
 import Testimonials from "@/components/Testimonials";
 import Partners from "@/components/Partners";
 import About from "@/components/About";
-import WhyLearnGenerativeAI from "@/components/WhyLearnGenAI";
+import ProgramOverview from "@/components/ProgramOverview";
 import Projects from "@/components/Projects";
 
 
@@ -15,12 +15,12 @@ export default function Home() {
     <>
       <Hero />
       <Video />
-      <WhyLearnGenerativeAI />
+      <ProgramOverview />
       <Courses />
-      <Faq />
       <About />
+      <Faq />
       <Projects />
-      <Partners />
+      {/* <Partners /> */}
       <Testimonials />
       <CTAsection />
     </>
