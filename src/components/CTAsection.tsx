@@ -3,7 +3,7 @@
  * @see https://v0.dev/t/GPqLMBBpOv2
  * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
  */
-import { Button } from "@/components/ui/button"
+
 import { ctaData } from "@/constants/cta"
 
 export default function Component() {

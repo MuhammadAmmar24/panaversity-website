@@ -5,11 +5,10 @@ export default function Video() {
   return ( 
     <>
       <div>
-        <div className="flex bg-background items-center justify-center h-[45rem] px-4  mt-[-12rem] sm:mt-[-5rem] md:mt-[0rem] lg:mt-[1rem] xl:mt-[2rem] w-auto ">
-          <div className="rounded-[20px] md:rounded-[40px] border-white/40 border bg-white/10 backdrop-blur-sm z-30 ">
-
+        <div className="flex bg-background items-center justify-center h-[45rem] px-3  mt-[-12rem] sm:mt-[-5rem] md:mt-[0rem] lg:mt-[1rem] xl:mt-[2rem] w-auto mb-[4rem] pt-[3rem]">
+          <div className="rounded-[20px] md:rounded-[40px] z-30  ">
           <video
-            loop
+            loop  
             muted
             autoPlay
             playsInline={false}
