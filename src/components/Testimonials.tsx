@@ -37,7 +37,7 @@ const Testimonials = () => {
         <Swiper
           slidesPerView={3}
           spaceBetween={30}
-          autoplay={{ delay: 3500, disableOnInteraction: false }} // Make sure disableOnInteraction is false
+          autoplay={{ delay: 3500, disableOnInteraction: false }} 
           breakpoints={{
             240: {
               slidesPerView: 1,
