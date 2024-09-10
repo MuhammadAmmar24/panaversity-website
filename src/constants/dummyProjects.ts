@@ -79,6 +79,26 @@ const projects = [
       },
     ],
   },
+  {
+    title: "Project Milky Way",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem recusandae ut.",
+    image: "/blogs/milky.jpeg",
+    tags: [
+      {
+        color: "green",
+        tag: "#Next.js",
+      },
+      {
+        color: "blue",
+        tag: "#Microservices",
+      },
+      {
+        color: "text-green-500",
+        tag: "#What We Do",
+      },
+    ],
+  },
 ];
 
 export default projects;
