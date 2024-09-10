@@ -24,7 +24,7 @@ const Testimonials = () => {
 
   return (
     <section className="bg-white dark:bg-[#0b1727] text-gray-900">
-      <div className="container mx-auto max-w-6xl px-4 md:px-0 py-14 md:py-24">
+      <div className="container mx-auto max-w-[1250px] px-4 md:px-0 py-14 md:py-18">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
             Testimonials
@@ -58,8 +58,8 @@ const Testimonials = () => {
           >
             {testimonialList.flat().map((testimonial, i) => (
               <SwiperSlide key={i}>
-                <div 
-                  className="testimonial-card h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border rounded-[20px]"
+                <div
+                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow- hover:shadow-accent transition-shadow duration-300"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -73,11 +73,15 @@ const Testimonials = () => {
                       />
                     </div>
                     <div>
-                      <h4 className="text-xl font-medium">{testimonial.name}</h4>
+                      <h4 className="text-xl font-medium">
+                        {testimonial.name}
+                      </h4>
                       <p className="text-sm mb-2">{testimonial.position}</p>
                     </div>
                   </div>
-                  <p className="opacity-75 mb-2">{testimonial.content}</p>
+                  <p className=" mb-2 text-[13px] text-textSecondary font-light font-inter">
+                    {testimonial.content}
+                  </p>
                 </div>
               </SwiperSlide>
             ))}

@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <header className={`py-4 sticky  bg-white/50 backdrop-blur-lg  top-0 z-50 w-full `}>
-      <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:px-0">
+      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between px-4 md:px-0">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
           <Image
