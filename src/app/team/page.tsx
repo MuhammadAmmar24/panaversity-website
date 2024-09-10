@@ -84,12 +84,12 @@ const TeamMember = () => {
   };
 
   return (
-    <section className="text-zinc-900 dark:text-white">
-      {/* Section header */}
-      <div className="mb-32">
-        <div className="flex flex-col justify-center items-center bg-teamBg bg-center bg-cover">
-          <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 py-[7rem]">
-            <h2 className="text-[1.7rem] sm:text-[2rem] text-center md:text-[3.6rem] text-background font-bold">
+    <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+      <div className="w-full mb-32">
+        {/* Header */}
+        <div className="flex justify-center items-center bg-teamBg bg-center ">
+          <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] py-[7rem]">
+            <h2 className="text-[1.7rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter">
               Meet the Visionaries Behind Panaversity
             </h2>
             <p className="text-background mb-2">

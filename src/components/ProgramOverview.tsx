@@ -4,7 +4,7 @@ import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
 import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
 import brainIcon from "@/../../public/images/icons8-brain-100.png";
 
-export default function WhyLearnGenerativeAI() {
+export default function ProgramOverview() {
   // Data for the features section
   const features = [
     {
