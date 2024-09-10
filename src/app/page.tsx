@@ -4,7 +4,7 @@ import Faq from "@/components/Faq";
 import CTAsection from "@/components/CTAsection";
 import Video from "@/components/Video";
 import Testimonials from "@/components/Testimonials";
-import Partners from "@/components/Partners";
+import Programs from "@/components/Programs";
 import About from "@/components/About";
 import ProgramOverview from "@/components/ProgramOverview";
 import Projects from "@/components/Projects";
@@ -18,10 +18,10 @@ export default function Home() {
       <ProgramOverview />
       <Courses />
       <About />
-      <Faq />
       <Projects />
-      {/* <Partners /> */}
+      <Programs />
       <Testimonials />
+      <Faq />
       <CTAsection />
     </>
   );
