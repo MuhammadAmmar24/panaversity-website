@@ -2,7 +2,7 @@
 import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { courseData } from "@/constants/courses";
-import CourseCard from "@/components/ui/CourseCards"; // Import the new component
+import CourseCard from "@/components/ui/CourseCards"; 
 
 export default function Courses() {
   const data = courseData.map((course) => ({
@@ -12,13 +12,12 @@ export default function Courses() {
         title={course.title}
         image={course.image}
         content={course.content}
-        
       />
     ),
   }));
 
   return (
-    <div className="w-full">
+    <div className="w-full flex justify-center items-center mx-auto py-8"> {/* Centering and padding */}
       <Timeline data={data} />
     </div>
   );
