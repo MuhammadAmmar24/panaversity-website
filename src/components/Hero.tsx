@@ -3,7 +3,7 @@ import { HeroBg } from "@/components/ui/heroBg";
 export default function Hero() {
   return (
     <div className="bg-background">
-      <div className="relative isolate px-6  lg:px-8 ">
+      <div className="relative isolate px-6   lg:px-8 ">
         <div className="mx-auto max-w-5xl pt-[5rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem] ">
           <div className="text-center">
             <h1 className="text-[2.2rem] sm:text-[3.4rem] md:text-[4rem]   font-poppins font-bold tracking-tight   text-textPrimary ">
@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 mt-[-55rem] ml-[-10rem] -z-10 overflow-hidden opacity-[0.4] hidden md:block"
+          className="absolute inset-x-0 overflow-hidden  mt-[-35rem] opacity-[0.5] -z-10 rotate-0 "
         >
           <HeroBg />
         </div>
