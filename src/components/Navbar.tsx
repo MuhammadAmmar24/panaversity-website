@@ -7,12 +7,9 @@ import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/s
 import logo from "../../public/logos/logo.png";
 import { navItems } from "@/constants/nav";
 
-// import React, { useState, useEffect } from "react";
 
 export default function Navbar() {
 
-  // const [prevScrollPos, setPrevScrollPos] = useState(0);
-  // const [visible, setVisible] = useState(true);
 
 
   return (
