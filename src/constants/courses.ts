@@ -48,7 +48,7 @@ export const courseData = [
         {
           quarter: "Quarter - 7",
           title: "Physical AI & Robotics",
-          description: "Design and deploy humanoid robots using cutting-edge AI.",
+          description: "Design and deploy humanoid robots powered by advanced AI technology.",
         },
         {
           quarter: "Quarter - 8",
