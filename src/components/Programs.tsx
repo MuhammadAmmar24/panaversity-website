@@ -37,7 +37,7 @@ const Programs = () => {
               <h3 className={` font-poppins sm:pt-6 font-bold md:font-medium text-[20px] sm:text-[24px] text-center text-textPrimary ${program.title === "GIAIC" ? '-mt-4' : ''}`}>
                 {program.title}
               </h3>
-              <p className='pt-1 font-light font-inter text-[13px] text-center text-textSecondary'>
+              <p className='pt-4 font-light font-inter text-[13px] text-center text-textSecondary'>
                 {program.description}
               </p>
             </div>
