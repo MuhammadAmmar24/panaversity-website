@@ -9,21 +9,21 @@ interface CourseCardProps {
 
 export default function CourseCard({ title, image, content }: CourseCardProps) {
   return (
-    <Card className="w-full max-w-5xl mx-auto bg-inherit border-none shadow-none">
-      <CardContent className="p-2 fold:p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14 space-y-4">
+    <Card className="w-full bg-inherit border-none shadow-none">
+      <CardContent className="p-4 md:p-8 lg:p-12 space-y-4 flex flex-col items-center justify-center"> {/* Added flex and justify-center */}
         {content.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-white/40 w-full fold:max-w-[250px] xs:max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] xl:max-w-[500px] mx-auto text-center py-4 fold:py-5 xs:py-6 sm:py-7 md:py-8 lg:py-10 xl:py-12 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-2 fold:p-4 xs:p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14"
+            className="flex flex-col items-center text-white/40 w-full max-w-[450px] text-center py-6 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-8" // Centered, adjusted padding 
           >
             <div className="w-full flex flex-col gap-1 items-center">
-              <h3 className="text-xs fold:text-sm xs:text-lg md:text-2xl xl:text-3xl uppercase font-poppins tracking-tight text-white">
+              <h3 className="text-lg md:text-2xl uppercase font-poppins tracking-tight text-white">
                 {item.title}
               </h3>
-              <div className="font-poppins text-gray-950 bg-accent text-xs sm:text-sm md:text-lg font-bold px-4 fold:px-5 xs:px-6 sm:px-7 md:px-8 lg:px-9 xl:px-10 py-1 my-1 rounded-lg">
+              <div className="font-poppins text-gray-950 bg-accent text-xs sm:text-sm md:text-lg font-bold px-6 py-1 my-1 rounded-lg">
                 {item.quarter}
               </div>
-              <p className="text-xs sm:text-sm md:text-lg xl:text-xl text-white/40 mt-2">
+              <p className="text-sm md:text-lg text-white/40 mt-2">
                 {item.description}
               </p>
             </div>
