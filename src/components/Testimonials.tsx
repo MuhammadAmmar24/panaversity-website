@@ -59,7 +59,7 @@ const Testimonials = () => {
             {testimonialList.flat().map((testimonial, i) => (
               <SwiperSlide key={i}>
                 <div
-                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow- hover:shadow-accent transition-shadow duration-300"
+                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow-md hover:shadow-accent transition-shadow duration-300"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
