@@ -12,7 +12,7 @@ export default function Projects() {
   const swiperRef: any = useRef();
 
   return (
-    <div className="py- px-2 my-10 flex justify-center">
+    <div className="py- px-2 mt-10 flex justify-center">
       <div className="w-full max-w-5xl">
         <div className="flex justify-between">
           <div className="mb-5">
@@ -53,7 +53,7 @@ export default function Projects() {
           )}
         </div>
 
-        <div className="pt-5 pb-10">
+        <div>
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             slidesPerView={4} // Show four slides on large screens
@@ -83,22 +83,24 @@ export default function Projects() {
             className="mySwiper"
           >
             {projects.map((data: any, index: number) => (
-              <SwiperSlide key={index} className="flex border rounded-lg p-2">
-                <div className="w-[100%] h-32">
-                  <div className="min-w-[100%] min-h-[96%]">
-                    <Image
-                      src={data.image}
-                      alt={data.title}
-                      width={300}
-                      height={200}
-                      className="object-cover rounded-lg min-w-[100%] min-h-32"
-                    />
-                  </div>
+              <SwiperSlide
+                key={index}
+                className="flex flex-col border rounded-lg p-2"
+              >
+                {/* Fixed Height and Width for Image */}
+                <div className="w-full h-[180px] relative">
+                  <Image
+                    src={data.image}
+                    alt={data.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="rounded-lg"
+                  />
                 </div>
                 <div className="text-left mt-2">
                   <h1 className="text-lg font-bold">{data.title}</h1>
                   <p className="text-sm">{data.description}</p>
-                  <div className="flex">
+                  <div className="flex flex-wrap">
                     {data.tags.map((tag: any, tagIndex: number) => (
                       <p
                         key={tagIndex}
