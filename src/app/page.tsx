@@ -4,14 +4,25 @@ import Team from "@/components/Team";
 import Faq  from "@/components/Faq";
 import React from "react";
 import Cta from "@/components/cta";
+import Footer1 from "@/components/Footer1"
 
 export default function Home() {
   return (
     <>
-      
-      <Courses/>
-      <Faq />
-      <Cta/>
+     <Footer1/>
+      {/* <Courses/>
+      <Faq /> */}
+      {/* <Cta/> */}
+     
+{/* import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button" */}
+{/* 
+export default function Footer() {
+  return ( */}
+   
+  {/* ) */}
+{/* } */}
     </>
   );
 }
+    
