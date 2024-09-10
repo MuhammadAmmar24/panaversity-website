@@ -39,7 +39,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       ref={containerRef}
     >
       <div className="max-w-6xl flex flex-col justify-center items-center mx-auto px-4 md:px-0">
-        <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] mt-5 mb-5 w-fit text-white uppercase tracking-wide">
+        <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] mt-10 mb-5 w-fit text-white uppercase tracking-wide">
           Courses Offered
         </h2>
         <h2 className="text-3xl text-white font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
