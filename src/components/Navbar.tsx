@@ -75,7 +75,7 @@ export default function Navbar() {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="md:hidden">
+            <SheetContent side="left" className="md:hidden ">
               <nav className="grid gap-4 p-4">
                 {navItems.map((nav) => (
                   <SheetClose asChild key={nav.name}>
