@@ -12,11 +12,11 @@ export default function About() {
         </div>
         <div className="flex flex-col gap-5 p-10">
           <div>
-            <h2 className="text-md sm:text-[1rem] gradient-border font-bold border-b  text-textPrimary uppercase tracking text-center">
+            <h2 className="text-md sm:text-[1rem] gradient-border font-bold border-b  w-fit text-[#031811] uppercase tracking-wide">
               About Panversity
             </h2>
           </div>
-          <p className="md:text-[1.2rem] text-center xs:text-lg font-light font-inter text-textSecondary">
+          <p className="md:text-[1.2rem] xs:text-lg font-light font-inter text-textSecondary">
             Panaversity is revolutionizing AI education with cutting-edge
             programs in Generative AI and cloud computing, preparing you for the
             $100 trillion AI industry. Our hands-on programs combine advanced
