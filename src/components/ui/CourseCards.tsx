@@ -14,7 +14,7 @@ export default function CourseCard({ title, image, content }: CourseCardProps) {
         {content.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-white/40 w-full max-w-[450px] text-center py-6 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-8"
+            className="flex flex-col items-center text-white/40 w-full lg:max-w-[450px] xl:max-w-[550px] text-center py-6 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-8"
           >
             <div className="w-full flex flex-col gap-1 items-center">
               <h3 className="text-lg md:text-2xl uppercase font-poppins tracking-tight text-white">

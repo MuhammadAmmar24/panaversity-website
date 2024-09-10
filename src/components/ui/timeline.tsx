@@ -52,11 +52,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
         {data.map((item, index) => (
           <div
             key={index}
-            className="flex justify-center pt-10 md:pt-40 xl:gap-[320px] lg-gap-40"
+            className="flex justify-center pt-10 md:pt-40 xl:gap-[220px] lg-gap-40"
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <div className="h-5 absolute left-[15px] lg:-left-[6] xl:left-[70px] w-5 rounded-full bg-accent/20 backdrop-blur-md flex justify-center items-center ">
-                <div className="md:h-2 md:w-2 h-2 w-2 rounded-full  dark:bg-neutral-800 p-2" />
+                <div className="md:h-2 md:w-2 h-2 w-2 rounded-full dark:bg-neutral-800 p-2" />
               </div>
               <h2 className="hidden md:block pl-10 lg:pl-12 xl:pl-32 text-start text-white font-bold text-lg md:text-3xl xl:text-4xl md:max-w-xl xl:max-w-full">
                 {item.title}
