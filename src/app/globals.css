@@ -162,8 +162,13 @@
 
 }
 .swiper {
+<<<<<<< HEAD
+  width: 100%;
+  height: 17rem;
+=======
   width: 90%;
   height: 22rem;
+>>>>>>> 75286ec6ed9f58d3550cbeedcecb39c8f96f5556
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
