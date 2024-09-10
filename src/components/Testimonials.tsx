@@ -59,7 +59,7 @@ const Testimonials = () => {
             {testimonialList.flat().map((testimonial, i) => (
               <SwiperSlide key={i}>
                 <div
-                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow-md hover:border-accent transition-shadow duration-300"
+                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow-md hover:shadow-accent transition-shadow duration-300"
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
@@ -79,7 +79,7 @@ const Testimonials = () => {
                       <p className="text-sm mb-2">{testimonial.position}</p>
                     </div>
                   </div>
-                  <p className=" mb-3 text-[15px] text-textSecondary font-light font-inter">
+                  <p className=" mb-2 text-[13px] text-textSecondary font-light font-inter">
                     {testimonial.content}
                   </p>
                 </div>
