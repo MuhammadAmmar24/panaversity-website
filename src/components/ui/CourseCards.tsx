@@ -10,11 +10,11 @@ interface CourseCardProps {
 export default function CourseCard({ title, image, content }: CourseCardProps) {
   return (
     <Card className="w-full bg-inherit border-none shadow-none">
-      <CardContent className="p-4 md:p-8 lg:p-12 space-y-4 flex flex-col items-center justify-center"> {/* Added flex and justify-center */}
+      <CardContent className="space-y-4 flex flex-col items-center justify-center">
         {content.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center text-white/40 w-full max-w-[450px] text-center py-6 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-8" // Centered, adjusted padding 
+            className="flex flex-col items-center text-white/40 w-full max-w-[450px] text-center py-6 border-white/40 border bg-white/10 backdrop-blur-sm rounded-2xl p-8"
           >
             <div className="w-full flex flex-col gap-1 items-center">
               <h3 className="text-lg md:text-2xl uppercase font-poppins tracking-tight text-white">
