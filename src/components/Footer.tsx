@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-[#031811] text-white pt-[2.1rem]">
       <div className="">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-6 md:mx-16 xl:mx-28 items-start gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-6 md:mx-16 xl:mx-36 items-start gap-8">
           {/* Left section: Logo & Newsletter */}
           <div className="">
             <div className="mb-6">
