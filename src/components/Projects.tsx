@@ -1,27 +1,55 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css/navigation";
 import projects from "@/constants/dummyProjects";
 import Image from "next/image";
 import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
+import SwiperCore from "swiper";
 
+// Define the ref type properly
 export default function Projects() {
-  const swiperRef: any = useRef();
+  const swiperRef = useRef<SwiperCore | null>(null);
+
+  useEffect(() => {
+    if (swiperRef.current) {
+      console.log(swiperRef.current);
+    }
+  }, []);
+
+  const swiperParams = useMemo(
+    () => ({
+      slidesPerView: 1,
+      spaceBetween: 30,
+      autoplay: {
+        delay: 2500,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        640: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      },
+      modules: [Autoplay, Navigation],
+    }),
+    []
+  );
 
   return (
     <div className="py-5 md:px-10 px-6 mt-10 flex justify-center">
       <div className="w-full max-w-6xl">
-        <div className="flex justify-center ">
+        <div className="flex justify-center">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
             <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
-            Signature projects
+              Signature projects
             </h2>
             <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-            Explore Our Creative Masterpieces
-
+              Explore Our Creative Masterpieces
             </h2>
           </div>
         </div>
@@ -29,28 +57,20 @@ export default function Projects() {
         <div>
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            slidesPerView={3} // Show 3 slides on large screens
+            slidesPerView={3}
             spaceBetween={30}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
             }}
             breakpoints={{
-              320: {
-                slidesPerView: 1,
-              },
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-              1280: {
-                slidesPerView: 3, // Show 3 slides on large screens
-              },
+              320: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+              1280: { slidesPerView: 3 },
             }}
-            modules={[Autoplay]}
-            className="projectsSwiper" // Add this unique class
+            modules={[Autoplay, Navigation]}
+            className="projectsSwiper"
           >
             {projects.map((data: any, index: number) => (
               <SwiperSlide
@@ -61,9 +81,9 @@ export default function Projects() {
                   <Image
                     src={data.image}
                     alt={data.title}
-                    layout="fill"
-                    loading="lazy"
-                    className="rounded-lg"
+                    fill
+                    loading="lazy" // Lazy load images for better performance
+                    className="rounded-lg object-cover"
                   />
                 </div>
                 <div className="text-left mt-2">
@@ -90,7 +110,7 @@ export default function Projects() {
             <div className="flex gap-10 w-full justify-center my-4 mb-10 md:mb-0">
               {/* Previous Button */}
               <button
-              aria-label="go to previous"
+                aria-label="go to previous"
                 className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
                 onClick={() => swiperRef.current?.slidePrev()}
               >

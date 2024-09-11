@@ -1,50 +1,12 @@
 import Image from "next/image";
-import clockIcon from "@/../../public/images/icons8-clock-100.png";
-import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
-import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
-import brainIcon from "@/../../public/images/icons8-brain-100.png";
+import features from "../constants/programOverview";
 
 export default function ProgramOverview() {
-  const features = [
-    {
-      title: "Comprehensive Curriculum",
-      description:
-        "Explore Generative AI, Cloud Native Computing, and Physical AI with expert guidance.",
-      icon: clockIcon,
-      bgColor: "#FA7F27",
-      iconSize: { width: 24, height: 24 },
-    },
-    {
-      title: "Real-World Projects",
-      description:
-        "Work on projects that mirror real-world tech challenges to build practical skills.",
-      icon: barChartIcon,
-      bgColor: "#4B62E6",
-      iconSize: { width: 24, height: 24 },
-    },
-    {
-      title: "Cutting-Edge Technology",
-      description:
-        "Stay ahead with hands-on experience using the latest AI tools and platforms.",
-      icon: lightBulbIcon,
-      bgColor: "#F786BE",
-      iconSize: { width: 26, height: 26 },
-    },
-    {
-      title: "Flexible Learning",
-      description:
-        "Learn at your own pace with 24/7 access to AI Mentors and community support.",
-      icon: brainIcon,
-      bgColor: "#FFC04C",
-      iconSize: { width: 24, height: 24 },
-    },
-  ];
-
   return (
-    <section className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] z-10 pb-[6rem]">
-      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col lg:flex-row items-center justify-between ">
+    <section className=" xl:px-0 px-4 relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] py-[5rem] md:pt-[6rem] z-10">
+      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
-        <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
+        <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
             Program Overview
           </h2>
@@ -77,38 +39,37 @@ export default function ProgramOverview() {
           </a>
         </div>
 
-          {/* Right Section: Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:w-1/2">
-            {features.map((feature, index) => (
+        {/* Right Section: Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="bg-white custom-shadow p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+            >
               <div
-                key={index}
-                className="bg-white p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+                className="flex justify-center items-center mb-4"
+                style={{
+                  backgroundColor: feature.bgColor,
+                  borderRadius: "50%",
+                  width: "48px",
+                  height: "48px",
+                }}
               >
-                <div
-                  className="flex justify-center items-center mb-4"
-                  style={{
-                    backgroundColor: feature.bgColor,
-                    borderRadius: "50%",
-                    width: "48px",
-                    height: "48px",
-                  }}
-                >
-                  <Image
-                    src={feature.icon}
-                    alt={`${feature.title} Icon`}
-                    width={feature.iconSize.width}
-                    height={feature.iconSize.height}
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-gray-600">{feature.description}</p>
+                <Image
+                  src={feature.icon}
+                  alt={`${feature.title} Icon`}
+                  width={feature.iconSize.width}
+                  height={feature.iconSize.height}
+                />
               </div>
-            ))}
-          </div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
         </div>
-      </section>
- 
+      </div>
+    </section>
   );
 }
