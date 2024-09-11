@@ -156,13 +156,10 @@
 }
 .testimonial-card {
   transition: box-shadow 0.3s ease;
-  
 }
 
 .testimonial-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
- 
-
 }
 
 .swiper {
@@ -171,6 +168,7 @@
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
+
 /* Medium screens (e.g., tablets) */
 @media (min-width: 641px) and (max-width: 1024px) {
   .swiper {
@@ -184,6 +182,7 @@
     height: 22rem; /* Default height for larger screens */
   }
 }
+
 .swiper-slide {
   text-align: center;
   font-size: 18px;
@@ -226,4 +225,21 @@
   border-radius: 50px !important;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) !important;
   cursor: pointer !important;
+}
+
+/* Apply different styling for the second (projects) Swiper */
+.projectsSwiper {
+  height: 20rem; /* Adjust the height of the entire slider */
+}
+
+.projectsSwiper .swiper-slide {
+  height: 100%; /* Ensure each slide fills the available space */
+  margin: auto; /* Center the slide content */
+}
+
+.projectsSwiper .swiper-slide img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px; /* Add some radius to match the card design */
 }
