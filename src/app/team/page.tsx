@@ -38,6 +38,7 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
         alt={member.fullName}
         width={500}
         height={500}
+        priority
         className="relative z-10 w-4/5 h-auto rounded-lg "
       />
     </div>
