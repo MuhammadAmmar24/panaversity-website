@@ -17,6 +17,7 @@ const config: Config = {
       //   "heroAnim": "url('/animation.png')",
         
       // },
+      
       colors: {
         primary: {
           DEFAULT: '#000033', // Replaced with the new primary color
