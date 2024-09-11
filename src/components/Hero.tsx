@@ -13,7 +13,7 @@ export default function Hero() {
               </span>{" "}
               Education
             </h1>
-            <p className="mt-6 text-[0.8rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
+            <p className="mt-6 text-[0.6rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
               Master AI with Live, Expert-Led Courses — Tailored for Your{" "}
               <span className="gradient-border2">Success!</span>
             </p>

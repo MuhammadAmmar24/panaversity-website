@@ -7,7 +7,7 @@ export default function Video() {
       <div>
         <div className="flex bg-background items-center justify-center h-[45rem] px-3  mt-[-12rem] sm:mt-[-5rem] md:mt-[0rem] lg:mt-[1rem] xl:mt-[2rem] w-auto mb-[4rem] pt-[3rem]">
           <div className="rounded-[20px] md:rounded-[40px] z-30  ">
-          {/* <video
+          <video
             loop  
             muted
             autoPlay
@@ -17,7 +17,7 @@ export default function Video() {
             className="w-auto md:h-[32rem]  lg:h-[32rem] xl:h-[40rem] custom-video-controls z-40 rounded-[20px] md:rounded-[40px] "
             >
             <source src={"/video/video.mp4"} type="video/mp4" />
-          </video> */}
+          </video>
             </div>
         </div>
       </div>
