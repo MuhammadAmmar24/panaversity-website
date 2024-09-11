@@ -5,6 +5,7 @@
 .font-inter {
   font-family: var(--font-inter);
 }
+
 .swiper-pagination {
   margin-top: 20px; /* Adjust the value as needed */
 }
@@ -72,6 +73,8 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+
 
 @layer base {
   * {
@@ -161,13 +164,13 @@
  
 
 }
+
 .swiper {
   width: 100%;
-  height: auto;
+  height: 22rem;
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
-
 /* Medium screens (e.g., tablets) */
 @media (min-width: 641px) and (max-width: 1024px) {
   .swiper {
@@ -198,3 +201,30 @@
   height: 1%00px;
   object-fit: cover;
 }
+
+.swiper-pagination {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding-top: 20px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  border-radius: 50px !important;
+  transition: width 0.3s ease, background-color 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.swiper-pagination-bullet-active {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #00cf9b !important;
+  border-radius: 50px !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1) !important;
+  cursor: pointer !important;
+}
+
