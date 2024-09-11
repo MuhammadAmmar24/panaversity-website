@@ -3,6 +3,11 @@ import FooterColumn from "./ui/FooterColumn";
 import Newsletter from "./ui/Newsletter";
 import Image from "next/image";
 import Logo from "../../public/logos/logo2.png";
+import { FaLinkedinIn } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { BiLogoInstagramAlt } from "react-icons/bi";
+import { FaTwitter } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
@@ -18,10 +23,17 @@ const Footer: React.FC = () => {
                 alt="Power AI Logo"
                 className="h-20 w-auto mb-2 transition-transform duration-300 ease-in-out hover:scale-105"
               />
-              <p className="text-sm text-gray-400 mt-1 leading-relaxed">
-                Panaversity is a cloud-native platform offering <br />
-                personalized learning through generative AI.
+              <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+                Panaversity is a cloud-native platform offering personalized
+                learning through generative AI.
               </p>
+              <div className="flex gap-4 py-2">
+                <FaFacebook className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+                <FaDiscord className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+                <FaTwitter className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+                <BiLogoInstagramAlt className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+                <FaLinkedinIn className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+              </div>
             </div>
           </div>
 
