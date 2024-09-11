@@ -14,7 +14,7 @@ export function LandscapeCard() {
           />
         </div>
         <div className="w-1/2 flex flex-col items-center justify-center space-y-4">
-          <h1 className="text-2xl font-bold text-center">Main Heading</h1>
+          <h3 className="text-2xl font-bold text-center">Main Heading</h3>
           <div className="bg-secondary p-4 rounded-lg w-full">
             <h2 className="text-xl font-semibold text-secondary-foreground text-center">Subheading in a Box</h2>
           </div>

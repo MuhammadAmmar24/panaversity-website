@@ -1,10 +1,12 @@
 "use client";
 import React, { useRef } from "react";
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
+
 import { Autoplay, Pagination } from "swiper/modules";
 import { testimonialList } from "@/constants/testimonials";
 
@@ -23,70 +25,83 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="bg-white dark:bg-[#0b1727] text-gray-900">
-      <div className="container mx-auto max-w-[1250px] px-4 md:px-0 py-14 md:py-18">
+    <section className="light py-14 md:py-24 mb-8  md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative">
+      <Image
+        src={"/testimonials/Element1.png"}
+        alt={""}
+        width={500}
+        height={500}
+       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
+      />
+      <Image
+        src={"/testimonials/Element2.png"}
+        alt={""}
+        width={500}
+        height={500}
+       className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem]  md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
+      />
+      <div className="container mx-auto max-w-6xl px-4 xl:px-0">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
-          <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
+          <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
             Testimonials
           </h2>
           <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-            Our User's Speeches About Panaversity
+            Success Stories From Our Graduates
           </h2>
         </div>
 
-        <div className="mt-8 sm:mt-8 md:mt-10">
-          <Swiper
-            slidesPerView={3}
-            spaceBetween={30}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
-            breakpoints={{
-              240: {
-                slidesPerView: 1,
-              },
-              640: {
-                slidesPerView: 2,
-              },
-              1024: {
-                slidesPerView: 3,
-              },
-            }}
-            modules={[Autoplay, Pagination]}
-            className="mySwiper"
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
-            {testimonialList.flat().map((testimonial, i) => (
-              <SwiperSlide key={i}>
-                <div
-                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow-md hover:shadow-accent transition-shadow duration-300"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <div className="flex items-center text-left mb-6">
-                    <div className="mr-3">
-                      <img
-                        src={testimonial.img}
-                        alt={testimonial.name}
-                        className="max-w-full h-auto rounded-full border"
-                        width="85"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-medium">
-                        {testimonial.name}
-                      </h4>
-                      <p className="text-sm mb-2">{testimonial.position}</p>
-                    </div>
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 3500, disableOnInteraction: false }} // Make sure disableOnInteraction is false
+          breakpoints={{
+            640: {
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1280: {
+              slidesPerView: 3,
+              spaceBetween: 40,
+            },
+          }}
+          modules={[Autoplay, Pagination]}
+          className="mySwiper"
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+          onMouseLeave={handleMouseLeave}
+        >
+          {testimonialList.flat().map((testimonial, i) => (
+            <SwiperSlide key={i}>
+              <div className="testimonial-card  p-6 border rounded-[20px] shadow-md "
+                onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+                onMouseLeave={handleMouseLeave}
+              >
+                <div className="flex items-center text-left mb-6">
+                  <div className="mr-3 w-20">
+                    <img
+                      src={testimonial.img}
+                      alt={testimonial.name}
+                      className="rounded-full border"
+                    />
                   </div>
-                  <p className=" mb-3 text-[15px] text-textSecondary font-light font-inter">
-                    {testimonial.content}
-                  </p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+                  <div>
+                    <h3 className="text-xl font-medium">{testimonial.name}</h3>
+                    <p className="text-sm md:text-xs  mb-2">{testimonial.position}</p>
+                  </div>
+<p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </section>
   );
