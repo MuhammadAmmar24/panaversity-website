@@ -17,6 +17,7 @@ const config: Config = {
       //   "heroAnim": "url('/animation.png')",
         
       // },
+      
       colors: {
         primary: {
           DEFAULT: '#000033', // Replaced with the new primary color
@@ -79,7 +80,7 @@ const config: Config = {
         'custom-bg': "url('/background_images/result.svg')",
         'custom-bg1': "url('/background_images/result (1).svg')", // Custom background image
         'teamBg': "url('/background_images/teamBg.svg')",
-        'heroAnim': "url('/heroBg/heroBg.gif')"
+        'heroAnim': "url('/heroBg/video.mp4')"
       },
 	  
     },

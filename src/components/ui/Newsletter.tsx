@@ -16,6 +16,7 @@ const Newsletter: React.FC = () => {
         />
         {/* Submit Button */}
         <button
+       
           className="bg-green-600 absolute right-0 hover:bg-green-500 text-white rounded-full p-2 transition-all"
           aria-label="Submit Email"
         >

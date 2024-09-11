@@ -84,7 +84,7 @@ export default function Counters() {
 
               {/* Text Section */}
               <div className="text-center mt-2">
-                <h4 className="text-sm text-gray-700">{item.text}</h4>
+                <h3 className="text-sm text-gray-700">{item.text}</h3>
               </div>
 
               {/* Vertical Line (except for last item) */}
