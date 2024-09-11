@@ -162,11 +162,12 @@
 
 }
 .swiper {
-  width: 90%;
-  height: 22rem;
+  width: 100%;
+  height: auto;
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
+
 /* Medium screens (e.g., tablets) */
 @media (min-width: 641px) and (max-width: 1024px) {
   .swiper {

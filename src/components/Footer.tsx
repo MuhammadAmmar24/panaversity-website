@@ -2,14 +2,13 @@ import React from "react";
 import FooterColumn from "./ui/FooterColumn";
 import Newsletter from "./ui/Newsletter";
 import Image from "next/image";
-import Logo from "../../public/logos/logo2.png"; 
-
+import Logo from "../../public/logos/logo2.png";
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-[#031811] text-white pt-[2.1rem]">
-      <div className="min-w-7xl px-4 sm:px-6 lg:px-10">
-        <div className="grid grid-cols-2 min-w-7xl max-w-7xl lg:mx-44 items-center md:grid-cols-6 gap-8">
+      <div className="container mx-auto lg:max-w-[950px] xl:max-w-6xl px-4 md:px-0">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           {/* Left section: Logo & Newsletter */}
           <div className="md:col-span-2 col-span-2">
             <div className="mb-6">
@@ -17,17 +16,16 @@ const Footer: React.FC = () => {
               <Image
                 src={Logo}
                 alt="Power AI Logo"
-                className="h-20 w-auto mb-2 l transition-transform duration-300 ease-in-out hover:scale-105"
+                className="h-20 w-auto mb-2 transition-transform duration-300 ease-in-out hover:scale-105"
               />
-              <p className="text-sm text-gray-400 mt-1 ml-1 leading-relaxed">
+              <p className="text-sm text-gray-400 mt-1 leading-relaxed">
                 Panaversity is a cloud-native platform offering <br />
                 personalized learning through generative AI.
               </p>
             </div>
             <div className="max-w-80">
               <Newsletter />
-            </div>{" "}
-            {/* Call to Newsletter component */}
+            </div>
           </div>
 
           {/* Column Sections */}
@@ -40,7 +38,7 @@ const Footer: React.FC = () => {
               { name: "Testimonials", href: "#" },
               { name: "Careers", href: "#" },
             ]}
-            className="order-2 lg:mt-7 md:mt-7 w-full md:order-2 lg:ml-20"
+            className="order-2 lg:mt-7 md:mt-7 w-full md:order-2"
           />
           <FooterColumn
             title="Support"
@@ -51,7 +49,7 @@ const Footer: React.FC = () => {
               { name: "Cookies", href: "#" },
               { name: "FAQ", href: "#" },
             ]}
-            className="order-3 lg:mt-7 md:mt-7 md:order-3 lg:ml-20 w-full "
+            className="order-3 lg:mt-7 md:mt-7 md:order-3 w-full"
           />
           <FooterColumn
             title="Product"
@@ -62,7 +60,7 @@ const Footer: React.FC = () => {
               { name: "On Sale", href: "#" },
               { name: "Live Demo", href: "#" },
             ]}
-            className="order-4 lg:mt-7 md:mt-3 md:order-4 lg:ml-20"
+            className="order-4 lg:mt-7 md:mt-3 md:order-4"
           />
           <FooterColumn
             title="Follow Us"
@@ -73,7 +71,7 @@ const Footer: React.FC = () => {
               { name: "Dribbble", href: "#" },
               { name: "LinkedIn", href: "#" },
             ]}
-            className="order-5 lg:mt-7 md:mt-3 md:order-5 lg:ml-20"
+            className="order-5 lg:mt-7 md:mt-3 md:order-5"
           />
         </div>
       </div>

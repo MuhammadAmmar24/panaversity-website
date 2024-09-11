@@ -15,7 +15,7 @@ export default function Hero() {
             </h1>
             <p className="mt-6 text-[0.8rem] md:text-[1.1rem] font-inter text-lg leading-8 text-textSecondary">
               Master AI with Live, Expert-Led Courses — Tailored for Your{" "}
-              <span className=" gradient-border2  ">Success!</span>
+              <span className="gradient-border2">Success!</span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               {/* Button Component */}
@@ -33,9 +33,9 @@ export default function Hero() {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M14 5l7 7m0 0l-7 7m7-7H3"
                     ></path>
                   </svg>
@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 overflow-hidden  mt-[-35rem] opacity-[0.5] -z-10 rotate-0 "
+          className="absolute inset-x-0 overflow-hidden mt-[-23rem]  md:mt-[-35rem] opacity-[0.5] -z-10 rotate-0 "
         >
           <HeroBg />
         </div>

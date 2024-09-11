@@ -42,15 +42,15 @@ export default function ProgramOverview() {
   ];
 
   return (
-    <div className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] px-5 sm:px-24 md:px-10 lg:px-[11.5rem]   z-10 pb-[6rem]">
-      <div className="max-w-[87rem] mx-auto flex flex-col lg:flex-row items-center justify-between ">
+    <div className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] z-10 pb-[6rem]">
+      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
             Program Overview
           </h2>
           <h1 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
-            Master Cloud Native Applied Generative AI Engineering
+            Cloud Native Applied Generative AI Engineering
           </h1>
           <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70">
             Embark on a journey structured across 8 quarters to master AI

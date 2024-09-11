@@ -23,63 +23,70 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="light py-14 md:py-24 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900">
-      <div className="container px-4 mx-auto">
+    <section className="bg-white dark:bg-[#0b1727] text-gray-900">
+      <div className="container mx-auto lg:max-w-[930px] xl:max-w-[1120px]  px-4 md:px-0 py-14 md:py-18">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
             Testimonials
           </h2>
           <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-            Our User’s Speeches About Panaversity
+            Our User's Speeches About Panaversity
           </h2>
         </div>
 
-        <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          autoplay={{ delay: 3500, disableOnInteraction: false }} // Make sure disableOnInteraction is false
-          breakpoints={{
-            240: {
-              slidesPerView: 1,
-            },
-            640: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-          }}
-          modules={[Autoplay, Pagination]}
-          className="mySwiper"
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
-          onMouseLeave={handleMouseLeave}
-        >
-          {testimonialList.flat().map((testimonial, i) => (
-            <SwiperSlide key={i}>
-              <div className="testimonial-card h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border rounded-[20px]"
-              onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
-              onMouseLeave={handleMouseLeave}
-              >
-                <div className="flex items-center text-left mb-6">
-                  <div className="mr-3">
-                    <img
-                      src={testimonial.img}
-                      alt={testimonial.name}
-                      className="max-w-full h-auto rounded-full border"
-                      width="85"
-                    />
+        <div className="mt-8 sm:mt-8 md:mt-10">
+          <Swiper
+            slidesPerView={3}
+            spaceBetween={30}
+            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            breakpoints={{
+              240: {
+                slidesPerView: 1,
+              },
+              640: {
+                slidesPerView: 2,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
+            modules={[Autoplay, Pagination]}
+            className="mySwiper"
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            {testimonialList.flat().map((testimonial, i) => (
+              <SwiperSlide key={i}>
+                <div
+                  className=" h-[20rem] md:h-[17rem] lg:h-[18rem] p-6 xl:p-10 border border-gray-200 rounded-[20px] hover:shadow-md hover:shadow-accent transition-shadow duration-300"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className="flex items-center text-left mb-6">
+                    <div className="mr-3">
+                      <img
+                        src={testimonial.img}
+                        alt={testimonial.name}
+                        className="max-w-full h-auto rounded-full border"
+                        width="85"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-medium">
+                        {testimonial.name}
+                      </h4>
+                      <p className="text-sm mb-2">{testimonial.position}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xl font-medium">{testimonial.name}</h4>
-                    <p className="text-sm mb-2">{testimonial.position}</p>
-                  </div>
+                  <p className=" mb-2 text-[15px] text-textSecondary font-light font-inter">
+                    {testimonial.content}
+                  </p>
                 </div>
-                <p className="opacity-75 mb-2">{testimonial.content}</p>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );

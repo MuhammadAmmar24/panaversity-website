@@ -22,17 +22,17 @@ export default function Faqs() {
   };
 
   return (
-    <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
+    <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
       <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
         <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
           FAQ
         </h2>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-textPrimary font-poppins font-semibold tracking-tighter text-center">
+        <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
           Top Answered Questions
         </h2>
       </div>
 
-      <div className="mt-6 sm:mt-8 md:mt-10 space-y-4">
+      <div className="mt-8 sm:mt-8 md:mt-10 space-y-4">
         {faqData.map((item: FaqItem, index: number) => (
           <AccordionItem 
             key={index} 
