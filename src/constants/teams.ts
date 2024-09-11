@@ -120,19 +120,6 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Jahanzeb.webp",
-    fullName: "Jahanzaib Tayyab",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Specializing in MERN stack and modern web development.",
-    socialLinks: [
-      {
-        icon: faLinkedinIn,
-        href: "https://www.linkedin.com/in/jahanzaib-tayyab/",
-      },
-      { icon: faGithub, href: "https://github.com/JahanzaibTayyab" },
-    ],
-  },
-  {
     picture: "/team/Ibtisam.webp",
     fullName: "Ibtisam Anwar",
     designation: "Trainer PIAIC, Freelancer",
@@ -172,22 +159,8 @@ const allTeamMembers = [
   {
     picture: "/team/Zeeshan_aziz.webp",
     fullName: "Zeeshan Aziz",
-    picture: "/team/Sajid_khan.webp",
-    fullName: "Sajid Khan",
-    designation: "Team Lead",
-    bio: "Crafting seamless and interactive user experiences.",
-    socialLinks: [
-      { icon: faLinkedinIn, href: "#" },
-      { icon: faGithub, href: "#" },
-    ],
-  },
-
-  {
-    picture: "/team/Zeeshan_aziz.webp",
-    fullName: "Zeeshan Aziz",
     designation: "Trainer PIAIC, Freelancer",
     bio: "Focusing on web development and blockchain technologies.",
-    bio: "Focusing on web development and blockchain technologies.",
     socialLinks: [
       { icon: faLinkedinIn, href: "https://www.linkedin.com/in/zeeshanazizz/" },
       { icon: faGithub, href: "https://github.com/zeeshan080" },
@@ -201,22 +174,8 @@ const allTeamMembers = [
     socialLinks: [
       { icon: faLinkedinIn, href: "#" },
       { icon: faGithub, href: "#" },
-      { icon: faLinkedinIn, href: "https://www.linkedin.com/in/zeeshanazizz/" },
-      { icon: faGithub, href: "https://github.com/zeeshan080" },
     ],
   },
-  {
-    picture: "/team/Girl_avatar.webp",
-    fullName: "Bushra Hussain",
-    designation: "Team Lead",
-    bio: "Building seamless web applications with Next.js.",
-    socialLinks: [
-      { icon: faLinkedinIn, href: "#" },
-      { icon: faGithub, href: "#" },
-    ],
-  },
-
-
 
 
   {
@@ -229,7 +188,6 @@ const allTeamMembers = [
       { icon: faGithub, href: "#" },
     ],
   },
-
 
   {
     picture: "/team/Girl_avatar.webp",
@@ -252,9 +210,7 @@ const allTeamMembers = [
     ],
   },
 
-
   // Team Leads
-
 
   {
     picture: "/team/Girl_avatar.webp",
