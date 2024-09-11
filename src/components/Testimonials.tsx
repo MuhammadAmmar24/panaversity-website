@@ -32,7 +32,7 @@ const Testimonials = () => {
         width={500}
         height={500}
         loading="lazy"
-       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
+       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
       />
       <Image
         src={"/testimonials/Element2.png"}

@@ -1,29 +1,40 @@
-// programOverviewData.ts
+import clockIcon from "@/../../public/images/icons8-clock-100.png";
+import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
+import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
+import brainIcon from "@/../../public/images/icons8-brain-100.png";
 
-export const programOverviewContent = [
+
+ export const features = [
     {
-      id: 1,
-      icon: 'BookIcon', // You can use string references to icons or actual components
-      title: 'Comprehensive Curriculum',
-      description: 'Dive deep into Generative AI, Cloud Native Computing, and Physical AI, guided by industry experts.'
+      title: "Comprehensive Curriculum",
+      description:
+        "Explore Generative AI, Cloud Native Computing, and Physical AI with expert guidance.",
+      icon: clockIcon,
+      bgColor: "#FA7F27",
+      iconSize: { width: 24, height: 24 },
     },
     {
-      id: 2,
-      icon: 'BriefcaseIcon',
-      title: 'Real-World Projects',
-      description: 'Gain practical experience with projects that mirror the challenges of today’s tech landscape.'
+      title: "Real-World Projects",
+      description:
+        "Work on projects that mirror real-world tech challenges to build practical skills.",
+      icon: barChartIcon,
+      bgColor: "#4B62E6",
+      iconSize: { width: 24, height: 24 },
     },
     {
-      id: 3,
-      icon: 'BadgeIcon',
-      title: 'Global Certifications',
-      description: 'Earn recognized certifications that validate your expertise and open doors to new opportunities.'
+      title: "Cutting-Edge Technology",
+      description:
+        "Stay ahead with hands-on experience using the latest AI tools and platforms.",
+      icon: lightBulbIcon,
+      bgColor: "#F786BE",
+      iconSize: { width: 26, height: 26 },
     },
     {
-      id: 4,
-      icon: 'ClockIcon',
-      title: 'Flexible Learning',
-      description: 'Learn at your own pace with 24/7 access to AI Mentors and a supportive community.'
-    }
+      title: "Flexible Learning",
+      description:
+        "Learn at your own pace with 24/7 access to AI Mentors and community support.",
+      icon: brainIcon,
+      bgColor: "#FFC04C",
+      iconSize: { width: 24, height: 24 },
+    },
   ];
-  
