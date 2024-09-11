@@ -84,17 +84,17 @@ const TeamMember = () => {
   };
 
   return (
-    <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white">
+    <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
       <div className="w-full mb-32">
         {/* Header */}
         <div className="flex justify-center items-center bg-teamBg bg-center ">
           <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] py-[7rem]">
-            <h2 className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter">
-              Meet the Visionaries Behind 
+            <h2 className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"style={{ wordSpacing: '0.2em' }}>
+              Meet The Visionaries Behind 
               <br />
               Panaversity
             </h2>
-            <p className="text-background mb-2 px-4 mt-4">
+            <p className="text-background/60 mb-2 px-4 mt-4">
               Discover the Experts Shaping the Future of AI Education
             </p>
           </div>
