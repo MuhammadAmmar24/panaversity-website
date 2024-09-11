@@ -49,7 +49,7 @@ export default function ProgramOverview() {
             Program Overview
           </h2>
           <h3 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
-            Cloud Native Applied Generative AI Engineering
+            Cloud Native Applied Generative AI Engineer
           </h3>
           <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70">
             Embark on a journey structured across 8 quarters to master AI
