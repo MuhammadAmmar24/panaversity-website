@@ -10,7 +10,7 @@ const Programs = () => {
         PROGRAMS
         </h2>
         <h3 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-        Educational Startups
+        AI Educational Programs
         </h3>
       </div>
 

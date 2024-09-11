@@ -98,7 +98,7 @@ export default function Navbar() {
           {/* Mobile Menu Icon */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className=" md:hidden">
+              <Button aria-label="Open Menu" variant="ghost" size="icon" className=" md:hidden">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

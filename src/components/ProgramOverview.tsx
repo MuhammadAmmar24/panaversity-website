@@ -41,7 +41,7 @@ export default function ProgramOverview() {
   ];
 
   return (
-    <div className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] z-10 pb-[6rem]">
+    <section className="relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] pt-[2rem] md:pt-[6rem] z-10 pb-[6rem]">
       <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col lg:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 lg:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
@@ -108,7 +108,7 @@ export default function ProgramOverview() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+ 
   );
 }
