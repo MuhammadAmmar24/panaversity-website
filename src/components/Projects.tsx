@@ -17,10 +17,11 @@ export default function Projects() {
         <div className="flex justify-center ">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
             <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
-              Our Work
+            Signature projects
             </h2>
             <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-              Projects
+            Explore Our Creative Masterpieces
+
             </h2>
           </div>
         </div>
@@ -61,7 +62,7 @@ export default function Projects() {
                     src={data.image}
                     alt={data.title}
                     layout="fill"
-                    objectFit="cover"
+                    loading="lazy"
                     className="rounded-lg"
                   />
                 </div>

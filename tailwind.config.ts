@@ -64,6 +64,7 @@ const config: Config = {
       },
       screens: {
         fold: '280px',
+        mobileM:'375px',
         xs: '400px', // Custom breakpoint for extra small screens
         sm: '768px',
         md: '769px',

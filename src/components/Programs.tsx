@@ -44,7 +44,7 @@ const Programs = () => {
                 <Image
                   src={program.icon}
                   alt={`${program.title} Icon`}
-                  priority
+                  loading="lazy"
                   className={`w-1/5 h-auto`}
                 />
               </div>
