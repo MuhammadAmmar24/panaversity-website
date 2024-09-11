@@ -12,7 +12,7 @@ export default function Projects() {
   const swiperRef: any = useRef();
 
   return (
-    <div className="py-5 px-2 mt-10 flex justify-center">
+    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center">
       <div className="w-full max-w-6xl">
         <div className="flex justify-center ">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
@@ -28,11 +28,8 @@ export default function Projects() {
         <div>
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            slidesPerView={4} // Show four slides on large screens
-            spaceBetween={5}
-            pagination={{
-              clickable: true,
-            }}
+            slidesPerView={3} // Show 3 slides on large screens
+            spaceBetween={30}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
@@ -48,18 +45,17 @@ export default function Projects() {
                 slidesPerView: 3,
               },
               1280: {
-                slidesPerView: 4, // Show four slides on large screens
+                slidesPerView: 3, // Show 3 slides on large screens
               },
             }}
             modules={[Autoplay]}
-            className="mySwiper"
+            className="projectsSwiper" // Add this unique class
           >
             {projects.map((data: any, index: number) => (
               <SwiperSlide
                 key={index}
                 className="flex flex-col border rounded-lg p-2"
               >
-                {/* Fixed Height and Width for Image */}
                 <div className="w-full h-[180px] relative">
                   <Image
                     src={data.image}
@@ -89,8 +85,8 @@ export default function Projects() {
         </div>
 
         <div className="w-full flex justify-center">
-          {projects.length > 4 && (
-            <div className="flex gap-10 w-full justify-center my-4">
+          {projects.length > 3 && (
+            <div className="flex gap-10 w-full justify-center my-4 mb-10 md:mb-0">
               {/* Previous Button */}
               <button
               aria-label="go to previous"

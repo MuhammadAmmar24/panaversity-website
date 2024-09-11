@@ -3,7 +3,7 @@ import { ctaData } from "@/constants/cta"
 export default function Component() {
   return (
     <div className="bg-white text-center">
-      <div className="container mx-auto lg:max-w-[930px] xl:max-w-6xl px-0 sm:px-6 md:px-0 py-14 md:py-24">
+      <div className="container mx-auto lg:max-w-[930px] xl:max-w-6xl px-0 sm:px-6 md:px-0 py-14 md:py-24 mb-10">
         <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-5 md:p-[3rem] lg:p-[5rem] max-w-3xl md:max-w-[72em] text-center border-2">
           <h2 className="text-[1.4rem] md:text-[2.6rem] font-bold text-white font-poppins mb-4">{ctaData.heading}</h2>
           <p className="text-[0.9rem] md:text-[1rem] mb-6 text-background/90 font-inter">
