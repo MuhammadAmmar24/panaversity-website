@@ -273,16 +273,16 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Girl_avatar.webp",
+    picture: "/team/Hasnain.png",
     fullName: "Hasnain Khalid",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",
     socialLinks: [
       {
         icon: faLinkedinIn,
-        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+        href: "https://www.linkedin.com/in/syed-hussnain/",
       },
-      { icon: faGithub, href: "#" },
+      { icon: faGithub, href: "https://github.com/DevHusnainAi" },
     ],
   },
 
