@@ -62,7 +62,7 @@ export default function Projects() {
                     src={data.image}
                     alt={data.title}
                     layout="fill"
-                    objectFit="cover"
+                    loading="lazy"
                     className="rounded-lg"
                   />
                 </div>

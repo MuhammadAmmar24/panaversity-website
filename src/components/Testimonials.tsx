@@ -31,6 +31,7 @@ const Testimonials = () => {
         alt={""}
         width={500}
         height={500}
+        loading="lazy"
        className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
       />
       <Image
@@ -38,6 +39,7 @@ const Testimonials = () => {
         alt={""}
         width={500}
         height={500}
+        loading="lazy"
        className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem]  md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
       />
       <div className="container mx-auto max-w-6xl px-4 xl:px-0">
@@ -87,9 +89,12 @@ const Testimonials = () => {
               >
                 <div className="flex items-center text-left mb-6">
                   <div className="mr-3 w-20">
-                    <img
+                    <Image
                       src={testimonial.img}
                       alt={testimonial.name}
+                      loading="lazy"
+                      width={300}
+                      height={300}
                       className="rounded-full border"
                     />
                   </div>
