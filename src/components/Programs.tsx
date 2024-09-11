@@ -20,7 +20,7 @@ const Programs = () => {
           {programsData.map((program, index) => (
             <div
               key={program.id}
-              className={`relative group shadow-md p-6 transform transition duration-400 hover:shadow-md
+              className={`relative bg-[#f8f8f9] group shadow-md p-6 transform transition duration-400 hover:shadow-md
               ${
                 index === 2
                   ? "sm:col-span-2 sm:w-[calc(50%-0.75rem)] sm:mx-auto lg:col-span-1 lg:w-full"
