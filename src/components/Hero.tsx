@@ -47,7 +47,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 overflow-hidden mt-[-23rem] md:mt-[-40rem] opacity-[0.4] ml-[-6rem] -z-10 rotate-0"
+          className="absolute inset-x-0 overflow-hidden mt-[-40rem] sm:mt-[-35rem]  md:mt-[-32rem] lg:mt-[-32rem] xl:mt-[-35rem] sm:ml-[-8rem]  md:ml-[-2rem]  xl:ml-[-6rem] -z-10 "
         >
           <HeroBg />
         </div>
