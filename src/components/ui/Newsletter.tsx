@@ -7,12 +7,12 @@ const Newsletter: React.FC = () => {
       <h3 className="font-semibold mb-2 text-white text-lg">
         Join Our Program
       </h3>
-      <div className="flex items-center relative space-x-2 border rounded-full">
+      <div className="flex items-center relative space-x-2">
         {/* Email Input */}
         <input
           type="email"
           placeholder="Enter email address"
-          className="bg-transparent  border-gray-500 text-sm p-2 w-full text-gray-300 focus:outline-none"
+          className="bg-transparent border-b border-gray-500 text-sm p-2 w-[85%] text-gray-300 focus:outline-none"
         />
         {/* Submit Button */}
         <button

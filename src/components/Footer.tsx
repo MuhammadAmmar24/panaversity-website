@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                 Panaversity is a cloud-native platform offering personalized
                 learning through generative AI.
               </p>
-              <div className="flex gap-2 py-2">
+              <div className="flex gap-4 py-2">
                 <FaFacebook className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
                 <FaDiscord className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
                 <FaTwitter className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
