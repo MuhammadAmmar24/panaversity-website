@@ -86,7 +86,7 @@ export default function Projects() {
 
         <div className="w-full flex justify-center">
           {projects.length > 3 && (
-            <div className="flex gap-10 w-full justify-center my-4">
+            <div className="flex gap-10 w-full justify-center my-4 mb-10 md:mb-0">
               {/* Previous Button */}
               <button
                 className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
