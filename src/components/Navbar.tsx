@@ -58,7 +58,7 @@ export default function Navbar() {
             src={logo}
             alt="Panaversity Logo"
             className="w-[120px] sm:w-[140px] md:w-[140px] lg:w-[150px]"
-            priority
+            loading="lazy"
           />
         </Link>
 
@@ -98,7 +98,12 @@ export default function Navbar() {
           {/* Mobile Menu Icon */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button aria-label="Open Menu" variant="ghost" size="icon" className=" md:hidden">
+              <Button
+                aria-label="Open Menu"
+                variant="ghost"
+                size="icon"
+                className=" md:hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
