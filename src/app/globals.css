@@ -167,7 +167,11 @@
 
 .swiper {
   width: 100%;
+<<<<<<< Updated upstream
   height: 22rem;
+=======
+  height: 10rem;
+>>>>>>> Stashed changes
   border-radius: 5px;
   box-shadow: 2px 2px 2px solid black;
 }
