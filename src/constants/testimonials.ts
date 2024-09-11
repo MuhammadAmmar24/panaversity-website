@@ -1,71 +1,32 @@
 export const testimonialList = [
   [
     {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "John Doe",
-      position: "CEO & Founder at EasyFrontend",
+      img: "/testimonials/ahmed.jpeg",
+      name: "Ahmed Sheikh",
+      position: "AI Visionary & Tech Entrepreneur",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        '"Panaversity gave me the skills, vision, and confidence to turn my ideas into reality. The hands-on AI experience and expert guidance significantly shaped my journey as a successful tech entrepreneur."',
     },
     {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
+      img: "/testimonials/ammar.webp",
+      name: "Ammar Aamir",
       position: "CEO & Founder at EasyFrontend",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        '"Panaversity’s AI curriculum gave me the tools to start my own business. The deep knowledge in Custom GPT and AI microservices laid the foundation for the products we create today."',
     },
     {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
+      img: "/testimonials/hussnain.webp",
+      name: "Hussnain Chodhary",
+      position: "AI Engineer at TechInnovators Inc.",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Doe",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-  ],
-  [
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_1.jpeg",
-      name: "John Doe",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
-    },
-    {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_2.jpeg",
-      name: "Sara Tailor",
-      position: "CEO & Founder at EasyFrontend",
-      content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        '"Panaversity transformed my career. The hands-on projects and mentorship took me from beginner to AI engineer, enabling me to contribute to innovative solutions in the tech industry."',
     },
     {
       img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
-      name: "John Leo",
-      position: "CEO & Founder at EasyFrontend",
+      name: "Adam Chodhary",
+      position: "Graduate Student, AI Researcher",
       content:
-        "It’s easier to reach your savings goals when you have the right savings account. Take a look and find the right one for you.",
+        '"Panaversity was vital to my research. The flexible program and hands-on AI experience allowed me to significantly advance my studies while gaining real-world skills in cutting-edge technologies."',
     },
-  ],
+  ]
 ];

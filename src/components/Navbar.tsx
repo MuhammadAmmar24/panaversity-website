@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -7,13 +8,42 @@ import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/s
 import logo from "../../public/logos/logo.png";
 import { navItems } from "@/constants/nav";
 
-
 export default function Navbar() {
+  // State to track whether navbar is hidden
+  const [hidden, setHidden] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
 
+      // If scrolling down and past 100px, hide the navbar
+      if (currentScrollPos > scrollPosition && currentScrollPos > 100) {
+        setHidden(true);
+      } else {
+        // If scrolling up, show the navbar
+        setHidden(false);
+      }
+
+      // Update the scroll position
+      setScrollPosition(currentScrollPos);
+    };
+
+    // Attach scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      // Clean up the event listener on unmount
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrollPosition]);
 
   return (
-    <header className={`py-4 sticky  bg-white/50 backdrop-blur-lg  top-0 z-50 w-full `}>
+    <header
+      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-50 w-full transition-transform duration-500 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      }`}
+    >
       <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between px-4 md:px-0">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
@@ -75,13 +105,13 @@ export default function Navbar() {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="md:hidden ">
-              <nav className="grid gap-4 p-4">
+            <SheetContent side="left" className="md:hidden  border-0  bg-white/50 backdrop-blur-lg">
+              <nav className="grid gap-4 p-4 mt-6">
                 {navItems.map((nav) => (
                   <SheetClose asChild key={nav.name}>
                     <Link
                       href={nav.link}
-                      className="text-sm font-medium text-gray-500 hover:text-gray-900"
+                      className="text-md  font-medium text-textPrimary hover:text-accent"
                     >
                       {nav.name}
                     </Link>

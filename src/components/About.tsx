@@ -6,17 +6,23 @@ import Counters from "./Counters";
 export default function About() {
   return (
     <div className="">
-      <div className="w-full md:px-0  py-10 grid lg:grid-cols-[20%,60%] xs:grid-cols-1 justify-center  ">
-        <div className="flex px-16 items-center justify-center md:justify-start">
-          <Image src={logo} alt={""} className=" w-auto h-[10rem]" />
+      <div className="w-full px-[2rem] md:px-[5rem] py-10 flex flex-col md:flex-row items-center justify-center md:gap-[2rem] border-2 border-red-500">
+        <div className=" border-2 border-blue-500">
+          <Image 
+          src={logo} 
+          width={500}
+          height={500} 
+          alt={""} 
+          className="w-auto max-h-[8rem] md:max-h-[55rem] lg:max-h-[22rem] "/>
         </div>
-        <div className="flex flex-col gap-5 p-10">
+        <div className="flex flex-col gap-5  items-center md:items-start border-2 border-green-500
+        ">
           <div>
-            <h2 className="text-md sm:text-[1rem] gradient-border font-bold border-b  w-fit text-[#031811] uppercase tracking-wide">
-              About Panversity
+            <h2 className="text-md sm:text-[1rem] gradient-border font-bold border-b  w-fit text-textPrimary uppercase tracking-wide ">
+              About Panaversity
             </h2>
           </div>
-          <p className="md:text-[1.2rem] xs:text-lg font-light font-inter text-textSecondary">
+          <p className="md:text-[1rem] lg:text-[1.1rem] xs:text-lg font-light font-inter text-textSecondary text-center  md:text-left">
             Panaversity is revolutionizing AI education with cutting-edge
             programs in Generative AI and cloud computing, preparing you for the
             $100 trillion AI industry. Our hands-on programs combine advanced

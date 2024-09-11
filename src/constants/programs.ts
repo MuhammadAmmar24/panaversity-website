@@ -1,6 +1,6 @@
 import Icon1 from "../../public/logos/piaic.png";
-import Icon2 from "../../public/logos/goversindh.png";
-import Icon3 from "../../public/logos/kpk.png";
+import Icon2 from "../../public/logos/kpk.png";
+import Icon3 from "../../public/logos/goversindh.png";
 
 
 export const programsData = [
@@ -14,15 +14,15 @@ export const programsData = [
     {
       id: 2,
       icon: Icon2,
-      title: "GIAIC",
+      title: "CMKP",
       description:
-        "Governor Initiative for Artificial Intelligence & Computing Transforming Sindh into a hub for billion-dollar solopreneurs, GIAIC equips you to master AI, automate businesses, and create revolutionary metaverse experiences.",
+        "Chief Minister Khyber Pakhtunkhwa AI & Cloud Initiative A 100% free program, CMKPK is preparing Khyber Pakhtunkhwa to lead in the $1.8 trillion AI revolution, training top-tier Cloud Native AI Engineers ready to change the world.",
     },
     {
       id: 3,
       icon: Icon3,
-      title: "CMKPK",
+      title: "GIAIC",
       description:
-        "Chief Minister Khyber Pakhtunkhwa AI & Cloud Initiative A 100% free program, CMKPK is preparing Khyber Pakhtunkhwa to lead in the $1.8 trillion AI revolution, training top-tier Cloud Native AI Engineers ready to change the world.",
+        "Governor Initiative for Artificial Intelligence & Computing Transforming Sindh into a hub for billion-dollar solopreneurs, GIAIC equips you to master AI, automate businesses, and create revolutionary metaverse experiences.",
     },
   ];

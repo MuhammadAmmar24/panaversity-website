@@ -8,6 +8,7 @@ import Programs from "@/components/Programs";
 import About from "@/components/About";
 import ProgramOverview from "@/components/ProgramOverview";
 import Projects from "@/components/Projects";
+import ScrollToTopButton from "@/components/ScrollToTopButton";
 
 
 export default function Home() {
@@ -23,6 +24,7 @@ export default function Home() {
       <Testimonials />
       <Faq />
       <CTAsection />
+      <ScrollToTopButton />
     </>
   );
 }
