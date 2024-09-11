@@ -107,6 +107,19 @@ const allTeamMembers = [
     ],
   },
   {
+    picture: "/team/Jahanzeb.webp",
+    fullName: "Jahanzaib Tayyab",
+    designation: "Trainer PIAIC, Freelancer",
+    bio: "Specializing in MERN stack and modern web development.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/jahanzaib-tayyab/",
+      },
+      { icon: faGithub, href: "https://github.com/JahanzaibTayyab" },
+    ],
+  },
+  {
     picture: "/team/Ibtisam.webp",
     fullName: "Ibtisam Anwar",
     designation: "Trainer PIAIC, Freelancer",
@@ -133,18 +146,38 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Jahanzeb.webp",
-    fullName: "Jahanzaib Tayyab",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Specializing in MERN stack and modern web development.",
+    picture: "/team/Sajid_khan.webp",
+    fullName: "Sajid Khan",
+    designation: "Team Lead",
+    bio: "Crafting seamless and interactive user experiences.",
     socialLinks: [
-      {
-        icon: faLinkedinIn,
-        href: "https://www.linkedin.com/in/jahanzaib-tayyab/",
-      },
-      { icon: faGithub, href: "https://github.com/JahanzaibTayyab" },
+      { icon: faLinkedinIn, href: "#" },
+      { icon: faGithub, href: "#" },
     ],
   },
+
+  {
+    picture: "/team/Zeeshan_aziz.webp",
+    fullName: "Zeeshan Aziz",
+    designation: "Trainer PIAIC, Freelancer",
+    bio: "Focusing on web development and blockchain technologies.",
+    socialLinks: [
+      { icon: faLinkedinIn, href: "https://www.linkedin.com/in/zeeshanazizz/" },
+      { icon: faGithub, href: "https://github.com/zeeshan080" },
+    ],
+  },
+  {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Bushra Hussain",
+    designation: "Team Lead",
+    bio: "Building seamless web applications with Next.js.",
+    socialLinks: [
+      { icon: faLinkedinIn, href: "#" },
+      { icon: faGithub, href: "#" },
+    ],
+  },
+
+
   {
     picture: "/team/Hamza_syed.webp",
     fullName: "Hamza Syed",
@@ -155,6 +188,7 @@ const allTeamMembers = [
       { icon: faGithub, href: "#" },
     ],
   },
+
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Mubarra Naz",
@@ -175,27 +209,9 @@ const allTeamMembers = [
       { icon: faGithub, href: "https://github.com/hassan-ak" },
     ],
   },
-  {
-    picture: "/team/Zeeshan_aziz.webp",
-    fullName: "Zeeshan Aziz",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Focusing on web development and blockchain technologies.",
-    socialLinks: [
-      { icon: faLinkedinIn, href: "https://www.linkedin.com/in/zeeshanazizz/" },
-      { icon: faGithub, href: "https://github.com/zeeshan080" },
-    ],
-  },
+
   // Team Leads
-  {
-    picture: "/team/Sajid_khan.webp",
-    fullName: "Sajid Khan",
-    designation: "Team Lead",
-    bio: "Crafting seamless and interactive user experiences.",
-    socialLinks: [
-      { icon: faLinkedinIn, href: "#" },
-      { icon: faGithub, href: "#" },
-    ],
-  },
+
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Humera Aslam",
@@ -221,14 +237,55 @@ const allTeamMembers = [
   },
   {
     picture: "/team/Girl_avatar.webp",
-    fullName: "Bushra Hussain",
-    designation: "Team Lead",
-    bio: "Building seamless web applications with Next.js.",
+    fullName: "Aimen",
+    designation: "UI/UX designer",
+    bio: "Design mobile and web applications with a strong focus on user experience.",
     socialLinks: [
-      { icon: faLinkedinIn, href: "#" },
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/aiman-zaidi999/",
+      },
+      { icon: faGithub, href: "https://github.com/aimanzaidi110" },
+    ],
+  },{
+    picture: "/team/Ammar.png",
+    fullName: "Muhammad Ammar Masood",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+      },
+      { icon: faGithub, href: "https://github.com/MuhammadAmmar24" },
+    ],
+  },{
+    picture: "/team/Shayan.png",
+    fullName: "Muhammad Shayan Khan",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/shayanxkhan/",
+      },
+      { icon: faGithub, href: "https://github.com/dev-shayan" },
+    ],
+  },
+  {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Hasnain Khalid",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+      },
       { icon: faGithub, href: "#" },
     ],
   },
+
 ];
 
 export { allTeamMembers };
