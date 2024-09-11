@@ -227,22 +227,3 @@
   cursor: pointer !important;
 }
 
-<<<<<<< HEAD
-=======
-/* Apply different styling for the second (projects) Swiper */
-.projectsSwiper {
-  height: 20rem; /* Adjust the height of the entire slider */
-}
-
-.projectsSwiper .swiper-slide {
-  height: 100%; /* Ensure each slide fills the available space */
-  margin: auto; /* Center the slide content */
-}
-
-.projectsSwiper .swiper-slide img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 8px; /* Add some radius to match the card design */
-}
->>>>>>> 717b2d052ff943e1d499a3262908184dd82678ac
