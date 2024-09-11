@@ -12,7 +12,7 @@ export default function Projects() {
   const swiperRef: any = useRef();
 
   return (
-    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center">
+    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center bg-white">
       <div className="w-full max-w-6xl">
         <div className="flex justify-center ">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
