@@ -97,7 +97,8 @@ const Testimonials = () => {
                     <h3 className="text-xl font-medium">{testimonial.name}</h3>
                     <p className="text-sm md:text-xs  mb-2">{testimonial.position}</p>
                   </div>
-<p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
+                </div>
+                <p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
               </div>
             </SwiperSlide>
           ))}
