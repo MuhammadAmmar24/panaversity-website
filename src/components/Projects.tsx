@@ -12,7 +12,7 @@ export default function Projects() {
   const swiperRef: any = useRef();
 
   return (
-    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center">
+    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center bg-white">
       <div className="w-full max-w-6xl">
         <div className="flex justify-center ">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
@@ -97,7 +97,7 @@ export default function Projects() {
                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
                 <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
                 <FaArrowLeftLong className="relative w-4 h-4 text-gray-800 group-hover:text-textPrimary" />
-                <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+                <span className="absolute inset-0 border-2 border-gray-400 hover:border-accent rounded-full"></span>
               </button>
 
               {/* Next Button */}
@@ -109,7 +109,7 @@ export default function Projects() {
                 <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
                 <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
                 <FaArrowRight className="relative w-4 h-4 text-gray-800 group-hover:text-textPrimary" />
-                <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+                <span className="absolute inset-0 border-2  border-gray-400 hover:border-accent rounded-full"></span>
               </button>
             </div>
           )}

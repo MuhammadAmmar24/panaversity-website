@@ -82,7 +82,7 @@ export default function ProgramOverview() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-white p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300 custom-shadow"
               >
                 <div
                   className="flex justify-center items-center mb-4"
