@@ -49,9 +49,9 @@ export default function ProgramOverview() {
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
             Program Overview
           </h2>
-          <h1 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
+          <h3 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
             Cloud Native Applied Generative AI Engineering
-          </h1>
+          </h3>
           <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70">
             Embark on a journey structured across 8 quarters to master AI
             technologies. The first 3 quarters build a foundation in Generative
