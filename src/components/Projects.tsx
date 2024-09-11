@@ -70,7 +70,7 @@ export default function Projects() {
                   />
                 </div>
                 <div className="text-left mt-2">
-                  <h1 className="text-lg font-bold">{data.title}</h1>
+                  <h3 className="text-lg font-bold">{data.title}</h3>
                   <p className="text-sm">{data.description}</p>
                   <div className="flex flex-wrap">
                     {data.tags.map((tag: any, tagIndex: number) => (
@@ -93,6 +93,7 @@ export default function Projects() {
             <div className="flex gap-10 w-full justify-center my-4">
               {/* Previous Button */}
               <button
+              aria-label="go to previous"
                 className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
                 onClick={() => swiperRef.current?.slidePrev()}
               >
@@ -104,6 +105,7 @@ export default function Projects() {
 
               {/* Next Button */}
               <button
+                aria-label="go to next"
                 className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
                 onClick={() => swiperRef.current?.slideNext()}
               >

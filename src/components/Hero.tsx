@@ -1,4 +1,5 @@
 import { HeroBg } from "@/components/ui/heroBg";
+import Link from 'next/link'
 
 export default function Hero() {
   return (
@@ -18,7 +19,7 @@ export default function Hero() {
               <span className="gradient-border2">Success!</span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
+              <Link
                 href="#_"
                 className="relative inline-flex items-center px-12 py-4 overflow-hidden text-[0.9rem] text-textPrimary font-inter bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-background border-2 border-accent"
               >
@@ -40,7 +41,7 @@ export default function Hero() {
                   </svg>
                 </span>
                 <span className="relative">Start Your AI Journey</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
