@@ -43,10 +43,6 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
       />
     </div>
 
-<<<<<<< HEAD
-=======
-    {/* Team Member Info */}
->>>>>>> f35953b8816cbadf1fecafe29e8620ccc4ae3ed8
     <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>

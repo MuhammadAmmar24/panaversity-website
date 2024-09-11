@@ -1,18 +1,12 @@
 import Image from "next/image";
-<<<<<<< HEAD
-import features from "../constants/programOverview";
-
-export default function ProgramOverview() {
-=======
 import clockIcon from "@/../../public/images/icons8-clock-100.png";
 import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
 import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
 import brainIcon from "@/../../public/images/icons8-brain-100.png";
-import {features} from "@/constants/programOverview"
+import features from "@/constants/programOverview"
 
 export default function ProgramOverview() {
 
->>>>>>> f35953b8816cbadf1fecafe29e8620ccc4ae3ed8
   return (
     <section className=" xl:px-0 px-4 relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] py-[5rem] md:pt-[6rem] z-10">
       <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between ">
@@ -50,10 +44,9 @@ export default function ProgramOverview() {
           </a>
         </div>
 
-<<<<<<< HEAD
         {/* Right Section: Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
-          {features.map((feature, index) => (
+          {features.map((feature: any, index: any) => (
             <div
               key={index}
               className="bg-white custom-shadow p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
@@ -66,14 +59,6 @@ export default function ProgramOverview() {
                   width: "48px",
                   height: "48px",
                 }}
-=======
-          {/* Right Section: Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
-            {features.map((feature, index) => (
-              <div
-                key={index}
-                className="bg-white  p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
->>>>>>> f35953b8816cbadf1fecafe29e8620ccc4ae3ed8
               >
                 <Image
                   src={feature.icon}
