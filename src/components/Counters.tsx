@@ -25,6 +25,7 @@ export default function Counters() {
               key={index}
             >
               {/* Number Section */}
+<<<<<<< HEAD
               <VisibilitySensor
                 onChange={onVisibilityChange}
                 partialVisibility
@@ -36,6 +37,13 @@ export default function Counters() {
                   <div className="font-bold text-xl text-primary text-center">
                     {hasCounted && isVisible && (
                       <CountUp start={0} end={item.number} duration={3} />
+=======
+              <VisibilitySensor onChange={onVisibilityChange} partialVisibility>
+                {({ isVisible }: { isVisible: boolean }) => (  // Added type definition here
+                  <div className="font-bold text-xl text-primary text-center">
+                    {hasCounted && isVisible && (
+                      <CountUp start={0} end={item.number} duration={3} /> 
+>>>>>>> 8d15cbccde63c96587c45a210d791f976975d970
                     )}
                     +
                   </div>

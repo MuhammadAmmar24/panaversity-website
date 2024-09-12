@@ -3,32 +3,26 @@ import clockIcon from "@/../../public/images/icons8-clock-100.png";
 import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
 import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
 import brainIcon from "@/../../public/images/icons8-brain-100.png";
-import features from "@/constants/programOverview"
+import { programOverviewData, features } from "@/constants/programOverview"
 
 export default function ProgramOverview() {
 
   return (
-    <section className=" xl:px-0 px-4 relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] py-[5rem] md:pt-[6rem] z-10">
-      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between ">
+    <section className=" xl:px-0 px-4 relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[9rem] z-10  mb-[-3rem] pb-[4rem]">
+      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between mb-[1rem]">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
-            Program Overview
+            {programOverviewData.sectionHeading}
           </h2>
           <h3 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
-            Cloud Native Applied Generative AI Engineer
+            {programOverviewData.mainHeading}
           </h3>
           <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70">
-            Embark on a journey structured across 8 quarters to master AI
-            technologies. The first 3 quarters build a foundation in Generative
-            AI, Python, and cloud-native microservices, followed by advanced
-            topics like PyTorch, large language models, and Kubernetes.
+            {programOverviewData.content1}
           </p>
           <p className="mt-4 text-[1rem]/[2] sm:text-md/[2] mb-4 text-[#031811]/70">
-            The final quarters explore Physical AI, humanoid robotics, and
-            culminate in a comprehensive capstone project. This program prepares
-            you for real-world applications, with regular breaks to reinforce
-            your learning.
+            {programOverviewData.content2}
           </p>
           {/* Button Component */}
           <a
@@ -38,14 +32,14 @@ export default function ProgramOverview() {
             <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2  absolute left-0 top-0 bg-accent opacity-[3%]"></span>
             <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
             <span className="relative w-full text-left text-[0.9rem] lg:text-[0.9rem] text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-textPrimary font-poppins font-medium">
-              Continue With Us
+              {programOverviewData.buttonText}
             </span>
             <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
           </a>
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-0 mt-[-3rem] md:mt-[2rem] lg:mt-[0rem]">
           {features.map((feature: any, index: any) => (
             <div
               key={index}

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import projects from "@/constants/dummyProjects";
+import {projectsData, projects} from "@/constants/projects";
 import Image from "next/image";
 import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
 import SwiperCore from "swiper";
@@ -41,15 +41,15 @@ export default function Projects() {
   );
 
   return (
-    <div className="py-5 md:px-10 px-6 mt-10 flex justify-center">
+    <div className="bg-[#fcfcff] py-5 md:px-10 px-6 mt-10 flex justify-center">
       <div className="w-full max-w-6xl">
         <div className="flex justify-center">
           <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
             <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
-              Signature projects
+              {projectsData.sectionHeading}
             </h2>
             <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
-              Explore Our Creative Masterpieces
+              {projectsData.mainHeading}
             </h2>
           </div>
         </div>

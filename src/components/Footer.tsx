@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <div className=" flex w-full justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-6 md:mx-16 lg:max-w-[950px] xl:max-w-6xl items-start gap-8">
           {/* Left section: Logo & Newsletter */}
-          <div className="sm:col-span-2 md:col-span-1 col-span-1">
+          <div className="sm:col-span-2 md:col-span-1 col-span-2">
             <div className="mb-6">
               {/* Logo */}
               <Image
@@ -28,11 +28,11 @@ const Footer: React.FC = () => {
                 learning through generative AI.
               </p>
               <div className="flex gap-4 py-2">
-                <FaFacebook className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
-                <FaDiscord className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
-                <FaTwitter className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
-                <BiLogoInstagramAlt className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
-                <FaLinkedinIn className="w-[1.5rem] h-[1.5rem] cursor-pointer hover:text-green-400 transition-all duration-150" />
+                <FaFacebook className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
+                <FaDiscord className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
+                <FaTwitter className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
+                <BiLogoInstagramAlt className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
+                <FaLinkedinIn className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           />
 
           {/* Newsletter section placed in the rightmost column */}
-          <div className="sm:col-span-2 md:col-span-1 col-span-1 w-full">
+          <div className="sm:col-span-2 md:col-span-1 col-span-2 w-full mt-8 md:mt-0">
             <Newsletter />
           </div>
         </div>

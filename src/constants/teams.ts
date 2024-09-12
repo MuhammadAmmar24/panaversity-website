@@ -237,7 +237,7 @@ const allTeamMembers = [
   },
   {
     picture: "/team/Girl_avatar.webp",
-    fullName: "Aimen",
+    fullName: "Aiman Zaidi",
     designation: "UI/UX designer",
     bio: "Design mobile and web applications with a strong focus on user experience.",
     socialLinks: [
@@ -248,19 +248,19 @@ const allTeamMembers = [
       { icon: faGithub, href: "https://github.com/aimanzaidi110" },
     ],
   },{
-    picture: "/team/Ammar.png",
+    picture: "/team/Ammar.webp",
     fullName: "Muhammad Ammar Masood",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",
     socialLinks: [
       {
         icon: faLinkedinIn,
-        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+        href: "https://www.linkedin.com/in/muhammadammar24/",
       },
       { icon: faGithub, href: "https://github.com/MuhammadAmmar24" },
     ],
   },{
-    picture: "/team/Shayan.png",
+    picture: "/team/Shayan.webp",
     fullName: "Muhammad Shayan Khan",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",

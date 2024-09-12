@@ -1,4 +1,4 @@
-import { nextui } from '@nextui-org/theme';
+// import { nextui } from '@nextui-org/theme';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -13,10 +13,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      // backgroundImage: {
-      //   "heroAnim": "url('/animation.png')",
-        
-      // },
+
       
       colors: {
         primary: {
@@ -28,12 +25,12 @@ const config: Config = {
           foreground: '#050316', // White for text on dark background (used as foreground for secondary)
         },
         accent: {
-          DEFAULT: '#1cd98e', // Bright accent color
+          DEFAULT: '#1cd98e', // Accent color
           foreground: '#050316', // White for text on dark background (used as foreground for accent)
         },
-        textPrimary: '#050316', // Dark text color
-        textSecondary: '#4b5563', // Light grey for less contrast areas
-        background: '#fbfbfe',
+        textPrimary: '#050316', // Heading text color
+        textSecondary: '#4b5563', // Para text color
+        background: '#fbfbfe', // Background Color Default
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
@@ -81,12 +78,11 @@ const config: Config = {
         'custom-bg': "url('/background_images/result.svg')",
         'custom-bg1': "url('/background_images/result (1).svg')", // Custom background image
         'teamBg': "url('/background_images/teamBg.svg')",
-        'heroAnim': "url('/heroBg/video.mp4')"
       },
 	  
     },
   },
-  plugins: [require('tailwindcss-animate'), nextui],
+  plugins: [require('tailwindcss-animate')],
 };
 
 export default config;
