@@ -2,13 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
-
-const stats = [
-  { number: 21000, text: "Active Students" },
-  { number: 7, text: "Active Programs" },
-  { number: 4, text: "Global Reach" },
-  { number: 40, text: "Expert Instructors" },
-];
+import { stats } from '@/constants/counter';
 
 export default function Counters() {
   const [ref, inView] = useInView({

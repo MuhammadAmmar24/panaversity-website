@@ -3,7 +3,7 @@ import clockIcon from "@/../../public/images/icons8-clock-100.png";
 import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
 import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
 import brainIcon from "@/../../public/images/icons8-brain-100.png";
-import features from "@/constants/programOverview"
+import { features } from "@/constants/programOverview"
 
 export default function ProgramOverview() {
 

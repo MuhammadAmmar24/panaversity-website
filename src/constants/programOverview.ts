@@ -1,4 +1,9 @@
-const features = [
+
+
+
+
+
+export const features = [
   {
     title: "Comprehensive Curriculum",
     description:
@@ -33,4 +38,4 @@ const features = [
   },
 ];
 
-export default features;
+
