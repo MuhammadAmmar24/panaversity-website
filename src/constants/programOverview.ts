@@ -1,4 +1,17 @@
 
+export const programOverviewData = {
+  sectionHeading: "Program Overview",
+  mainHeading:"Cloud Native Applied Generative AI Engineer",
+  content1: `Embark on a journey structured across 8 quarters to master AI
+            technologies. The first 3 quarters build a foundation in Generative
+            AI, Python, and cloud-native microservices, followed by advanced
+            topics like PyTorch, large language models, and Kubernetes.`,
+  content2: `The final quarters explore Physical AI, humanoid robotics, and
+            culminate in a comprehensive capstone project. This program prepares
+            you for real-world applications, with regular breaks to reinforce
+            your learning.`,
+  buttonText: "Continue With Us"
+};
 
 
 

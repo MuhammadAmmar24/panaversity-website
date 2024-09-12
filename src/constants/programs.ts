@@ -2,8 +2,13 @@ import Icon1 from "../../public/logos/piaic.png";
 import Icon2 from "../../public/logos/kpk.png";
 import Icon3 from "../../public/logos/goversindh.png";
 
+export const programsData = {
+  sectionHeading: "Programs",
+  mainHeading:"AI Educational Programs",
+};
 
-export const programsData = [
+
+export const programs = [
     {
       id: 1,
       icon: Icon1,

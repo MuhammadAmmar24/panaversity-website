@@ -1,4 +1,11 @@
-const projects = [
+export const projectsData = {
+  sectionHeading: "Signature projects",
+  mainHeading:"Explore Our Creative Masterpieces",
+};
+
+
+
+export const projects = [
   {
     title: "Cancer Clarity",
     description:
@@ -101,4 +108,3 @@ const projects = [
   },
 ];
 
-export default projects;
