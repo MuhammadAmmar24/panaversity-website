@@ -248,7 +248,7 @@ const allTeamMembers = [
       { icon: faGithub, href: "https://github.com/aimanzaidi110" },
     ],
   },{
-    picture: "/team/Ammar.png",
+    picture: "/team/Ammar.webp",
     fullName: "Muhammad Ammar Masood",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",
@@ -260,7 +260,7 @@ const allTeamMembers = [
       { icon: faGithub, href: "https://github.com/MuhammadAmmar24" },
     ],
   },{
-    picture: "/team/Shayan.png",
+    picture: "/team/Shayan.webp",
     fullName: "Muhammad Shayan Khan",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",
