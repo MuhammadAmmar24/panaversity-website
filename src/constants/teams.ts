@@ -235,6 +235,56 @@ const allTeamMembers = [
       { icon: faGithub, href: "#" },
     ],
   },
+  {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Aimen",
+    designation: "UI/UX designer",
+    bio: "Design mobile and web applications with a strong focus on user experience.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/aiman-zaidi999/",
+      },
+      { icon: faGithub, href: "https://github.com/aimanzaidi110" },
+    ],
+  },{
+    picture: "/team/Ammar.png",
+    fullName: "Muhammad Ammar Masood",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+      },
+      { icon: faGithub, href: "https://github.com/MuhammadAmmar24" },
+    ],
+  },{
+    picture: "/team/Shayan.png",
+    fullName: "Muhammad Shayan Khan",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/shayanxkhan/",
+      },
+      { icon: faGithub, href: "https://github.com/dev-shayan" },
+    ],
+  },
+  {
+    picture: "/team/Hasnain.png",
+    fullName: "Syed Husnain Khalid",
+    designation: "AI Web Developer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: faLinkedinIn,
+        href: "https://www.linkedin.com/in/syed-hussnain/",
+      },
+      { icon: faGithub, href: "https://github.com/DevHusnainAi" },
+    ],
+  },
 
 ];
 

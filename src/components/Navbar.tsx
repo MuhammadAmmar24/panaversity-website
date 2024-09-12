@@ -51,14 +51,14 @@ export default function Navbar() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between px-4 md:px-0">
+      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
           <Image
             src={logo}
             alt="Panaversity Logo"
             className="w-[120px] sm:w-[140px] md:w-[140px] lg:w-[150px]"
-            priority
+            loading="lazy"
           />
         </Link>
 
@@ -98,7 +98,12 @@ export default function Navbar() {
           {/* Mobile Menu Icon */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button aria-label="Open Menu" variant="ghost" size="icon" className=" md:hidden">
+              <Button
+                aria-label="Open Menu"
+                variant="ghost"
+                size="icon"
+                className=" md:hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"

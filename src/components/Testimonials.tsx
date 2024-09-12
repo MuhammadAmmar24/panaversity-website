@@ -31,18 +31,20 @@ const Testimonials = () => {
         alt={""}
         width={500}
         height={500}
-       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
+        loading="lazy"
+       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
       />
       <Image
         src={"/testimonials/Element2.png"}
         alt={""}
         width={500}
         height={500}
+        loading="lazy"
        className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem]  md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
       />
       <div className="container mx-auto max-w-6xl px-4 xl:px-0">
         <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
-          <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
+          <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
             Testimonials
           </h2>
           <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
@@ -87,9 +89,12 @@ const Testimonials = () => {
               >
                 <div className="flex items-center text-left mb-6">
                   <div className="mr-3 w-20">
-                    <img
+                    <Image
                       src={testimonial.img}
                       alt={testimonial.name}
+                      loading="lazy"
+                      width={300}
+                      height={300}
                       className="rounded-full border"
                     />
                   </div>
@@ -97,7 +102,8 @@ const Testimonials = () => {
                     <h3 className="text-xl font-medium">{testimonial.name}</h3>
                     <p className="text-sm md:text-xs  mb-2">{testimonial.position}</p>
                   </div>
-<p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
+                </div>
+                <p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
               </div>
             </SwiperSlide>
           ))}
