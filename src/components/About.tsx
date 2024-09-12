@@ -17,7 +17,7 @@ export default function About() {
           />
         </div>
         <div className="flex flex-col gap-5 items-center md:items-start mt-6 md:mt-0">
-          <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide px-3 py-1">
+          <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide ">
             About Panaversity
           </h2>
           <p className="text-sm sm:text-base md:text-lg font-light font-inter text-textSecondary text-center md:text-left">

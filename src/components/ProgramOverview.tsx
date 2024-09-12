@@ -8,8 +8,8 @@ import features from "@/constants/programOverview"
 export default function ProgramOverview() {
 
   return (
-    <section className=" xl:px-0 px-4 relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[9rem] z-10">
-      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between ">
+    <section className=" xl:px-0 px-4 relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[9rem] z-10  mb-[-3rem] pb-[4rem]">
+      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between mb-[1rem]">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
