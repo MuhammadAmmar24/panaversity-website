@@ -8,7 +8,7 @@ import features from "@/constants/programOverview"
 export default function ProgramOverview() {
 
   return (
-    <section className=" xl:px-0 px-4 relative bg-white mt-[-7rem] sm:mt-[-6rem] md:mt-[0rem] py-[5rem] md:pt-[6rem] z-10">
+    <section className=" xl:px-0 px-4 relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[9rem] z-10">
       <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col xl:flex-row items-center justify-between ">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
@@ -45,7 +45,7 @@ export default function ProgramOverview() {
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-0 mt-[-3rem] md:mt-[2rem] lg:mt-[0rem]">
           {features.map((feature: any, index: any) => (
             <div
               key={index}
