@@ -1,70 +1,47 @@
-"use client"
-import React, { useRef, useState, useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import CountUp from 'react-countup';
-import { stats } from '@/constants/counter';
+import { ctaData } from "@/constants/cta"
 
-export default function Counters() {
-  const [ref, inView] = useInView({
-    threshold: 0.5,
-    triggerOnce: true,
-  });
-
-  const [counters, setCounters] = useState(stats.map(() => ({ hasStarted: false, value: 0 })));
-
-  useEffect(() => {
-    if (inView) {
-      setCounters(prevCounters =>
-        prevCounters.map((counter, index) => ({
-          ...counter,
-          hasStarted: true,
-          value: stats[index].number,
-        }))
-      );
-    }
-  }, [inView]);
-
+export default function Component() {
   return (
-    <section ref={ref}>
-      <div className="mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 px-[7rem] justify-center items-center">
-          {stats.map((item, index) => (
-            <div
-              className={`flex flex-col justify-center items-center relative ${
-                index < stats.length - 1 ? "" : ""
-              }`}
-              key={index}
-            >
-              <div className="font-bold text-xl text-primary text-center">
-                <CountUp
-                  start={0}
-                  end={counters[index].value}
-                  duration={3}
-                  useEasing={true}
-                  useGrouping={true}
-                  separator=","
-                  preserveValue={true}
-                >
-                  {({ countUpRef }) => (
-                    <div>
-                      <span ref={countUpRef} />
-                      {counters[index].hasStarted && "+"}
-                    </div>
-                  )}
-                </CountUp>
-              </div>
-
-              <div className="text-center mt-2">
-                <h3 className="text-sm text-gray-700">{item.text}</h3>
-              </div>
-
-              {index < stats.length - 1 && (
-                <div className="absolute lg:flex hidden -right-4 top-1/2 transform -translate-y-1/2 h-12 border-r border-gray-300"></div>
-              )}
-            </div>
-          ))}
+    <div className="bg-white text-center">
+      <div className="container mx-auto max-w-[23rem] sm:max-w-[930px] lg:max-w-[930px] xl:max-w-6xl px-4    sm:px-6 md:px-0 py-14 md:py-24 mb-10">
+        <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-5 md:p-[3rem] lg:p-[5rem] max-w-6xl  md:max-w-[72em] text-center border-2">
+          <h2 className="text-[1.4rem] md:text-[2.6rem] font-bold text-white font-poppins mb-4">{ctaData.heading}</h2>
+          <p className="text-[0.9rem] md:text-[1rem] mb-6 text-background/90 font-inter">
+            {ctaData.subHeading}
+          </p>
+          {/* Button Component */}
+          <a
+            href="#_"
+            className="relative inline-flex items-center px-8 py-2 lg:px-14 lg:py-4 overflow-hidden text-[1rem] text-textPrimary font-inter bg-background rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-accent"
+          >
+            <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
+            <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+              <ArrowRightIcon className="w-5 h-5" />
+            </span>
+            <span className="relative">{ctaData.buttonText}</span>
+          </a>
         </div>
       </div>
-    </section>
-  );
+    </div>
+  )
+}
+
+function ArrowRightIcon(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  )
 }
