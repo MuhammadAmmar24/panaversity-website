@@ -1,3 +1,9 @@
+export const testimonialData = {
+  sectionHeading: "Testimonials",
+  mainHeading:"Success Stories From Our Graduates",
+};
+
+
 export const testimonialList = [
   [
     {
@@ -16,7 +22,7 @@ export const testimonialList = [
     },
     {
       img: "/testimonials/hussnain.webp",
-      name: "Hussnain Chodhary",
+      name: "Syed Husnain Khalid",
       position: "AI Engineer at TechInnovators Inc.",
       content:
         '"Panaversity transformed my career. The hands-on projects and mentorship took me from beginner to AI engineer, enabling me to contribute to innovative solutions in the tech industry."',

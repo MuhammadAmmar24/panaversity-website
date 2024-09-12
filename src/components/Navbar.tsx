@@ -4,14 +4,21 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetClose,
+} from "@/components/ui/sheet";
 import logo from "../../public/logos/logo.png";
 import { navItems } from "@/constants/nav";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   // State to track whether navbar is hidden
   const [hidden, setHidden] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const pathName = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,14 +51,14 @@ export default function Navbar() {
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between px-4 md:px-0">
+      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
           <Image
             src={logo}
             alt="Panaversity Logo"
             className="w-[120px] sm:w-[140px] md:w-[140px] lg:w-[150px]"
-            priority
+            loading="lazy"
           />
         </Link>
 
@@ -61,7 +68,11 @@ export default function Navbar() {
             <Link
               key={nav.name}
               href={nav.link}
-              className={`text-textPrimary text-base hover:text-[#40e477]`}
+              className={` text-base ${
+                pathName === nav.link
+                  ? "text-[#40e477]"
+                  : "text-textPrimary hover:text-[#40e477]"
+              }`}
             >
               {nav.name}
             </Link>
@@ -87,7 +98,12 @@ export default function Navbar() {
           {/* Mobile Menu Icon */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className=" md:hidden">
+              <Button
+                aria-label="Open Menu"
+                variant="ghost"
+                size="icon"
+                className=" md:hidden"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -105,7 +121,10 @@ export default function Navbar() {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="md:hidden  border-0  bg-white/50 backdrop-blur-lg">
+            <SheetContent
+              side="left"
+              className="md:hidden  border-0  bg-white/50 backdrop-blur-lg"
+            >
               <nav className="grid gap-4 p-4 mt-6">
                 {navItems.map((nav) => (
                   <SheetClose asChild key={nav.name}>

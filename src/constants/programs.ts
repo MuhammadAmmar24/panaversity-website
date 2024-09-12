@@ -2,14 +2,19 @@ import Icon1 from "../../public/logos/piaic.png";
 import Icon2 from "../../public/logos/kpk.png";
 import Icon3 from "../../public/logos/goversindh.png";
 
+export const programsData = {
+  sectionHeading: "Programs",
+  mainHeading:"AI Educational Programs",
+};
 
-export const programsData = [
+
+export const programs = [
     {
       id: 1,
       icon: Icon1,
       title: "PIAIC",
       description:
-        "Presidential Initiative for Artificial Intelligence & Computing Leading Pakistan into the 4th industrial revolution, PIAIC is empowering cities like Islamabad, Karachi, Lahore, Faisalabad, and Peshawar with world-class training in AI and cloud computing.",
+        "Presidential Initiative for Artificial Intelligence & Computing is leading Pakistan into the 4th industrial revolution, empowering cities like Islamabad, Karachi, Lahore, Faisalabad, and Peshawar with AI and cloud computing training.",
     },
     {
       id: 2,

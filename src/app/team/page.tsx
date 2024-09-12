@@ -26,22 +26,24 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
     {/* Team Member Picture with Background Shape */}
     <div className="relative flex justify-center items-center">
       {/* Background shape (decorative) */}
-      <img
-        alt=""
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover blur-[1px]"
-        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTI4IiBoZWlnaHQ9IjQzNiIgdmlld0JveD0iMCAwIDUyOCA0MzYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQxIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6IzFjZDk4ZTtzdG9wLW9wYWNpdHk6MSIgLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojM2ZlMGE0O3N0b3Atb3BhY2l0eToxIiAvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZDIiIHgxPSIwJSIgeTE9IjEwMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWNkOThlO3N0b3Atb3BhY2l0eToxIiAvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNmE2NzM7c3RvcC1vcGFjaXR5OjEiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KCiAgPHBhdGggZD0iTTI1MS44ODYgMjMuODQ2NEMyNjMuNzc4IDIuOTc2NDkgMjkzLjg2MyAyLjk3NjUyIDMwNS43NTUgMjMuODQ2NUw1MTQuMzgzIDM4OS45ODFDNTI2LjE1OSA0MTAuNjQ3IDUxMS4yMzUgNDM2LjMyOCA0ODcuNDQ5IDQzNi4zMjhINzAuMTkxNEM0Ni40MDU2IDQzNi4zMjggMzEuNDgxMyA0MTAuNjQ3IDQzLjI1NzIgMzg5Ljk4MUwyNTEuODg2IDIzLjg0NjRaIiBmaWxsPSJ1cmwoI2dyYWQxKSIgLz4KICA8cGF0aCBkPSJNNDI2LjI4IDY4LjUwNDVDNDQ4Ljg2NiA2MC4zMTU0IDQ3MS43OCA3OS44MjA5IDQ2Ny4zMDMgMTAzLjQyNUwzODguODA5IDUxNy4yNThDMzg0LjM3NiA1NDAuNjI1IDM1Ni4zNjggNTUwLjUwMyAzMzguMjU4IDUzNS4wODdMMjAuNzY0NSAyNjQuODI3QzIuNjU0IDI0OS40MSA3LjkzMjc5IDIyMC4xODQgMzAuMjkyIDIxMi4wNzdMNDI2LjI4IDY4LjUwNDVaIiBmaWxsPSJ1cmwoI2dyYWQyKSIgLz4KPC9zdmc+Cg=="
-      />
+      <Image
+        alt="picbg"
+        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
+        src="/team/picbg.svg"
+        width={500}
+        height={500}
+/>
       <Image
         src={member.picture}
         alt={member.fullName}
         width={500}
         height={500}
+        priority
         className="relative z-10 w-4/5 h-auto rounded-lg "
       />
     </div>
 
-    {/* Team Member Info */}
-    <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-auto">
+    <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
       <p className="text-sm mt-1">{member.bio}</p>
@@ -87,7 +89,7 @@ const TeamMember = () => {
     <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
       <div className="w-full mb-32">
         {/* Header */}
-        <div className="flex justify-center items-center bg-teamBg bg-center ">
+        <div className="flex justify-center items-center bg-teamBg bg-cover">
           <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] py-[7rem]">
             <h2 className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"style={{ wordSpacing: '0.2em' }}>
               Meet The Visionaries Behind 
@@ -101,10 +103,10 @@ const TeamMember = () => {
         </div>
 
         {/* Team Members */}
-        <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8">
-          <div className="flex flex-wrap justify-center -mx-4">
+        <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
+          <div className="flex flex-wrap justify-center -mx-4 ">
             {allTeamMembers.slice(0, visibleMembers).map((member: TeamMember, i: number) => (
-              <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center">
+              <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center ">
                 <TeamMemberItem member={member} />
               </div>
             ))}

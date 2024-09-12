@@ -35,14 +35,14 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
 
   return (
     <div
-      className="w-full bg-custom-bg bg-cover bg-center font-sans md:px-10"
+      className="w-full bg-custom-bg bg-cover font-sans md:px-10"
       ref={containerRef}
     >
       <div className="max-w-6xl flex flex-col justify-center items-center mx-auto px-4 md:px-0">
-        <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] mt-10 mb-5 w-fit text-white uppercase tracking-wide">
-          Courses Offered
+        <h2 className="text-md sm:text-lg gradient-border font-medium border-b rounded-[100px] pt-10 mb-5 w-fit text-white uppercase tracking-wide">
+          {timelineContent.sectionHeading}
         </h2>
-        <h2 className="text-3xl text-white font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl ">
+        <h2 className="text-3xl text-white font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl mb-[3rem] md:mb-0 ">
           {timelineContent.mainHeading}{" "}
           {/* Use the content from the data file */}
         </h2>

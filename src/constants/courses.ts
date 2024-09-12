@@ -6,7 +6,7 @@ export const courseData = [
         {
           quarter: "Quarter - 1",
           title: "Gen AI & Cloud Basics",
-          description: "Foundations of Generative AI, Python, Docker and  GitHub.",
+          description: "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
         },
         {
           quarter: "Quarter - 2",
@@ -60,7 +60,7 @@ export const courseData = [
   ];
   
   export const timelineContent = {
-    courseLabel: "Courses",
+    sectionHeading: "Courses Offered",
     mainHeading: "Master the Future of AI with Our Comprehensive Curriculum",
   };
   
