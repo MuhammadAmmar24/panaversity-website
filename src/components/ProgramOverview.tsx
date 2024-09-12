@@ -3,7 +3,7 @@ import clockIcon from "@/../../public/images/icons8-clock-100.png";
 import barChartIcon from "@/../../public/images/bar-chart-3-64.png";
 import lightBulbIcon from "@/../../public/images/icons8-light-bulb-96.png";
 import brainIcon from "@/../../public/images/icons8-brain-100.png";
-import {features} from "@/constants/programOverview"
+import features from "@/constants/programOverview"
 
 export default function ProgramOverview() {
 
@@ -44,38 +44,37 @@ export default function ProgramOverview() {
           </a>
         </div>
 
-          {/* Right Section: Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
-            {features.map((feature, index) => (
+        {/* Right Section: Features Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-5">
+          {features.map((feature: any, index: any) => (
+            <div
+              key={index}
+              className="bg-white custom-shadow p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+            >
               <div
-                key={index}
-                className="bg-white  p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+                className="flex justify-center items-center mb-4"
+                style={{
+                  backgroundColor: feature.bgColor,
+                  borderRadius: "50%",
+                  width: "48px",
+                  height: "48px",
+                }}
               >
-                <div
-                  className="flex justify-center items-center mb-4"
-                  style={{
-                    backgroundColor: feature.bgColor,
-                    borderRadius: "50%",
-                    width: "48px",
-                    height: "48px",
-                  }}
-                >
-                  <Image
-                    src={feature.icon}
-                    alt={`${feature.title} Icon`}
-                    width={feature.iconSize.width}
-                    height={feature.iconSize.height}
-                  />
-                </div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-gray-600">{feature.description}</p>
+                <Image
+                  src={feature.icon}
+                  alt={`${feature.title} Icon`}
+                  width={feature.iconSize.width}
+                  height={feature.iconSize.height}
+                />
               </div>
-            ))}
-          </div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-sm text-gray-600">{feature.description}</p>
+            </div>
+          ))}
         </div>
-      </section>
- 
+      </div>
+    </section>
   );
 }

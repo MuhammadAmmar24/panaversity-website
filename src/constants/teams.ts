@@ -255,7 +255,7 @@ const allTeamMembers = [
     socialLinks: [
       {
         icon: faLinkedinIn,
-        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+        href: "https://www.linkedin.com/in/muhammadammar24/",
       },
       { icon: faGithub, href: "https://github.com/MuhammadAmmar24" },
     ],

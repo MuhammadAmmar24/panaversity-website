@@ -17,7 +17,7 @@ export default function Courses() {
   }));
 
   return (
-    <div className="w-full flex justify-center items-center mx-auto py-8"> {/* Centering and padding */}
+    <div className="w-full flex justify-center items-center mx-auto py-8 "> {/* Centering and padding */}
       <Timeline data={data} />
     </div>
   );
