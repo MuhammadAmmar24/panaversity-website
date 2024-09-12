@@ -5,7 +5,7 @@ const Newsletter: React.FC = () => {
   return (
     <div className="">
       <h3 className="font-semibold mb-2 text-white text-lg">
-        Join Our Program
+        Join Us
       </h3>
       <div className="flex items-center relative space-x-2">
         {/* Email Input */}
@@ -36,7 +36,7 @@ const Newsletter: React.FC = () => {
           </svg>
         </button>
       </div>
-        <p className="mt-4">We will send you daily updates about the tech.</p>
+        <p className="mt-4 text-gray-400">We will send you daily updates about the tech.</p>
     </div>
   );
 };
