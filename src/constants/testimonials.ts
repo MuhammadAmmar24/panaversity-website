@@ -1,3 +1,9 @@
+export const testimonialData = {
+  sectionHeading: "Testimonials",
+  mainHeading:"Success Stories From Our Graduates",
+};
+
+
 export const testimonialList = [
   [
     {

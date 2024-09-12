@@ -18,7 +18,7 @@ export default function Component() {
             <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
               <ArrowRightIcon className="w-5 h-5" />
             </span>
-            <span className="relative">Get Started</span>
+            <span className="relative">{ctaData.buttonText}</span>
           </a>
         </div>
       </div>
