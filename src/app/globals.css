@@ -243,3 +243,9 @@
   object-fit: cover;
   border-radius: 8px; /* Add some radius to match the card design */
 }
+
+
+/* Disable Video Controls  */
+.custom-control {
+  pointer-events: none;
+}
