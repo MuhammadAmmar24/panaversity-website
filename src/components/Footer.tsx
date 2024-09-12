@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <div className=" flex w-full justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-6 md:mx-16 lg:max-w-[950px] xl:max-w-6xl items-start gap-8">
           {/* Left section: Logo & Newsletter */}
-          <div className="sm:col-span-2 md:col-span-1 col-span-1">
+          <div className="sm:col-span-2 md:col-span-1 col-span-2">
             <div className="mb-6">
               {/* Logo */}
               <Image
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           />
 
           {/* Newsletter section placed in the rightmost column */}
-          <div className="sm:col-span-2 md:col-span-1 col-span-1 w-full">
+          <div className="sm:col-span-2 md:col-span-1 col-span-2 w-full mt-8 md:mt-0">
             <Newsletter />
           </div>
         </div>
