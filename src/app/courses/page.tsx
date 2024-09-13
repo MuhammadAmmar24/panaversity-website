@@ -1,16 +1,16 @@
 import Link from "next/link";
 
-export default function NotFound() {
+export default function courses() {
   return (
-    <main className=" min-h-screen mt-[-3rem] md:mt-[-4rem] flex flex-col justify-center items-center gap-4 bg-background px-5 ">
+    <main className="min-h-screen mt-[-3rem] md:mt-[-4rem] flex flex-col justify-center items-center gap-4 bg-background px-5 ">
       <h2 className="text-xl font-medium font-poppins text-center text-accent">
-        404
+        Coming Soon
       </h2>
       <h2 className="text-4xl sm:text-5xl mt-[-0.5rem] font-bold font-poppins text-center text-textPrimary">
-        Page Not Found
+        This Page is Under Construction
       </h2>
       <p className="mt-4 px-3 font-inter text-center text-lg text-textSecondary">
-        Oops! The page you are looking for does not exist.
+      Good things take time! We’re working on this page and will have it ready soon.
       </p>
       <Link
         href="/"
