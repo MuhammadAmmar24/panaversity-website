@@ -16,9 +16,4 @@ export const stats = [
       number: 40,
       text: "Expert Instructors",
     },
-<<<<<<< HEAD
   ];
-=======
-  ];
-  
->>>>>>> 8d15cbccde63c96587c45a210d791f976975d970

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { programOverviewData, features } from "@/constants/programOverview"
+import Link from "next/link";
 
 export default function ProgramOverview() {
 
@@ -21,8 +22,8 @@ export default function ProgramOverview() {
             {programOverviewData.content2}
           </p>
           {/* Button Component */}
-          <a
-            href="#_"
+          <Link
+            href="/"
             className="relative items-center justify-start inline-block px-6 py-3 md:px-4 lg:px-5 lg:py-3  mt-4    overflow-hidden font-bold rounded-full group"
           >
             <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2  absolute left-0 top-0 bg-accent opacity-[3%]"></span>
@@ -31,7 +32,7 @@ export default function ProgramOverview() {
               {programOverviewData.buttonText}
             </span>
             <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
-          </a>
+          </Link>
         </div>
 
         {/* Right Section: Features Grid */}
