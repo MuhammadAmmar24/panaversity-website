@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-"use client";
-import CountUp from "react-countup";
-import { useState } from "react";
-import VisibilitySensor from "react-visibility-sensor";
-import { stats } from "@/constants/counter"; // Adjust the path
-=======
 "use client"
 import React, { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
 import { stats } from '@/constants/counter';
->>>>>>> 522c1384bc82d26895e3269e637c38356c7beb5b
 
 export default function Counters() {
   const [ref, inView] = useInView({
@@ -43,25 +35,6 @@ export default function Counters() {
               }`}
               key={index}
             >
-<<<<<<< HEAD
-              {/* Number Section */}
-              <VisibilitySensor
-                onChange={onVisibilityChange}
-                partialVisibility
-                active={!hasCounted} // Disable VisibilitySensor after counting once
-              >
-                {(
-                  { isVisible }: { isVisible: boolean } // Added type definition here
-                ) => (
-                  <div className="font-bold text-xl text-primary text-center">
-                    {hasCounted && isVisible && (
-                      <CountUp start={0} end={item.number} duration={3} />
-                    )}
-                    +
-                  </div>
-                )}
-              </VisibilitySensor>
-=======
               <div className="font-bold text-xl text-primary text-center">
                 <CountUp
                   start={0}
@@ -80,7 +53,6 @@ export default function Counters() {
                   )}
                 </CountUp>
               </div>
->>>>>>> 522c1384bc82d26895e3269e637c38356c7beb5b
 
               <div className="text-center mt-2">
                 <h3 className="text-sm text-gray-700">{item.text}</h3>
