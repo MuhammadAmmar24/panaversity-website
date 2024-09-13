@@ -41,11 +41,11 @@ const Footer: React.FC = () => {
           <FooterColumn
             title="Company"
             links={[
-              { name: "About Us", href: "#" },
-              { name: "Our Mission", href: "#" },
-              { name: "Company History", href: "#" },
-              { name: "Testimonials", href: "#" },
-              { name: "Careers", href: "#" },
+              { name: "About Us", href: "/" },
+              { name: "Our Mission", href: "/" },
+              { name: "Company History", href: "/" },
+              { name: "Testimonials", href: "/" },
+              { name: "Careers", href: "/" },
             ]}
             className="lg:ml-20"
           />
@@ -53,11 +53,11 @@ const Footer: React.FC = () => {
           <FooterColumn
             title="Support"
             links={[
-              { name: "Contact Us", href: "#" },
-              { name: "Privacy Policy", href: "#" },
-              { name: "Terms Conditions", href: "#" },
-              { name: "Cookies", href: "#" },
-              { name: "FAQ", href: "#" },
+              { name: "Contact Us", href: "/" },
+              { name: "Privacy Policy", href: "/" },
+              { name: "Terms Conditions", href: "/" },
+              { name: "Cookies", href: "/" },
+              { name: "FAQ", href: "/" },
             ]}
             className="lg:ml-20"
           />
