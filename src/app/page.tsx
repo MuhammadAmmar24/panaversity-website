@@ -27,7 +27,6 @@ export default function Home() {
       <Faq />
       <CTAsection />
       <ScrollToTopButton />
-      <CardSkeleton/>
     </>
   );
 }
