@@ -3,6 +3,8 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const inter = Inter({ 
   subsets: ["latin"], 

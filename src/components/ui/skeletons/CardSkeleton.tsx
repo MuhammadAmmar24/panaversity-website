@@ -1,22 +1,17 @@
 
 "use client";
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
 import { allTeamMembers } from "@/constants/teams";
-import Loading from "../loading";
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 // Define types for the social link and team member
-
-
 type SocialLink = {
   href: string;
   icon: any;
 };
-
-
-
 
 type TeamMember = {
   picture: string;
@@ -26,28 +21,13 @@ type TeamMember = {
   socialLinks: SocialLink[];
 };
 
-
 // Component to display individual team member
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
   <div className="w-[280px] mt-5">
     {/* Team Member Picture with Background Shape */}
     <div className="relative flex justify-center items-center">
       {/* Background shape (decorative) */}
-      <Image
-        alt="picbg"
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
-        src="/team/picbg.svg"
-        width={500}
-        height={500}
-/>
-      <Image
-        src={member.picture}
-        alt={member.fullName}
-        width={500}
-        height={500}
-        priority
-        className="relative z-10 w-4/5 h-auto rounded-lg "
-      />
+      <Skeleton className="w-full h-[200px] rounded-xl" />
     </div>
 
     <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
@@ -83,10 +63,7 @@ TeamMemberItem.propTypes = {
   }).isRequired,
 };
 
-
-
-
-const TeamMember = () => {
+const CardSkeleton = () => {
   // State to handle visible team members
   const [visibleMembers, setVisibleMembers] = useState(9);
 
@@ -139,10 +116,4 @@ const TeamMember = () => {
   );
 };
 
-
-
-export default TeamMember;
-
-<Suspense fallback={<Loading/>}>
-   <TeamMember/>
-</Suspense>
+export default CardSkeleton;
