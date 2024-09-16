@@ -24,9 +24,9 @@ export default function Home() {
       <Projects />
       <Programs />
       <Testimonials />
-      <Faq />
+       <Faq />
       <CTAsection />
-      <ScrollToTopButton />
+       <ScrollToTopButton />
     </>
   );
 }
