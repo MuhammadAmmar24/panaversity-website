@@ -11,7 +11,7 @@ type SocialLink = {
   href: string;
   icon: any;
 };
-
+ 
 type TeamMember = {
   picture: string;
   fullName: string;
