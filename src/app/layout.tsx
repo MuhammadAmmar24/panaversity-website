@@ -3,8 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer"
 import Navbar from "@/components/Navbar"
-import { Suspense } from "react";
-import Loading from "./loading";
+
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -19,7 +18,10 @@ const poppins = Poppins({
 
 
 export const metadata: Metadata = {
-  title: "Panaversity",
+  title: {
+    default: 'Panaversity',
+    template: '%s | Panaversity'
+  },
   description: `Panaversity is revolutionizing AI education with cutting-edge
                 programs in Generative AI and cloud computing, preparing you for the
                 $100 trillion AI industry. Our hands-on programs combine advanced

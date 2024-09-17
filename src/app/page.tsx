@@ -9,8 +9,6 @@ import About from "@/components/About";
 import ProgramOverview from "@/components/ProgramOverview";
 import Projects from "@/components/Projects";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
-import { Skeleton } from "@/components/ui/skeleton";
-import CardSkeleton from "@/components/ui/skeletons/CardSkeleton";
 
 
 export default function Home() {
@@ -24,9 +22,9 @@ export default function Home() {
       <Projects />
       <Programs />
       <Testimonials />
-       <Faq />
+      <Faq />
       <CTAsection />
-       <ScrollToTopButton />
+      <ScrollToTopButton />
     </>
   );
 }

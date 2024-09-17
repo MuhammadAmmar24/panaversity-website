@@ -7,16 +7,12 @@ import Image from "next/image";
 import { allTeamMembers } from "@/constants/teams";
 import Loading from "../loading";
 
-// Define types for the social link and team member
 
 
 type SocialLink = {
   href: string;
   icon: any;
 };
-
-
-
 
 type TeamMember = {
   picture: string;
