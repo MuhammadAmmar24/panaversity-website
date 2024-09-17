@@ -19,7 +19,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Panaversity',
+    default: 'Panaversity Website',
     template: '%s | Panaversity'
   },
   description: `Panaversity is revolutionizing AI education with cutting-edge
