@@ -57,11 +57,11 @@ export const EnrollNewStudentRequestSchema = z.object({
 
 const StudentProgramSchema = z.object({
 	is_dropout: z.boolean(),
-	created_at: z.string().datetime(),
+	created_at: z.string(), // Temporarily
 	dropout_reason: z.string().nullable(),
-	updated_at: z.string().datetime(),
+	updated_at: z.string(), // Temporarily
 	dropout_date: z.string().nullable(),
-	registration_date: z.string().datetime(),
+	registration_date: z.string(), // Temporarily
 	is_graduated: z.boolean(),
 	student_id: z.string(),
 	program_id: z.number(),
@@ -75,7 +75,7 @@ const StudentProgramSchema = z.object({
 });
 
 const StudentCourseSchema = z.object({
-	created_at: z.string().datetime(),
+	created_at: z.string(), // Temporarily
 	course_batch_program_id: z.number(),
 	class_time_slot_id: z.number(),
 	lab_time_slot_id: z.number(),
@@ -83,7 +83,7 @@ const StudentCourseSchema = z.object({
 	is_graduated: z.boolean(),
 	created_by: z.string(),
 	id: z.number(),
-	updated_at: z.string().datetime(),
+	updated_at: z.string(), // Temporarily
 	student_program_id: z.number(),
 	student_id: z.string(),
 	is_active: z.boolean(),
