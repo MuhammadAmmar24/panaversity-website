@@ -12,14 +12,14 @@ export const ProgramSchema = z.object({
 	batch_name: z.string(),
 	batch_description: z.string(),
 	is_registration_open: z.boolean(),
-	registration_start_date: z.string().datetime(),
-	registration_end_date: z.string().datetime(),
+	registration_start_date: z.union([z.string(), z.null()]), // Allow null or string (no strict datetime)
+	registration_end_date: z.union([z.string(), z.null()]), // Allow null or string (no strict datetime)
 	batch_id: z.number(),
 });
 
 export const ProgramsResponseSchema = z.object({
 	data: z.array(ProgramSchema),
-	next_last_id: z.number().optional(),
+	next_last_id: z.number().nullable(),
 });
 
 export type ProgramsQuery = z.infer<typeof ProgramsQuerySchema>;

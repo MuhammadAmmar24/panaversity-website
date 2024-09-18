@@ -32,12 +32,6 @@ export default function About() {
       <div className="py-8">
         <Counters />
       </div>
-<<<<<<< HEAD
     </section>
   );
 }
-=======
-    </div>
-  );  
-}
->>>>>>> 0b3d10a993f2d3c22c6f618a4985c74b94f7d5aa

@@ -12,8 +12,8 @@ export const CourseSchema = z.object({
 	course_name: z.string(),
 	course_description: z.string(),
 	is_registration_open: z.boolean(),
-	registration_start_date: z.string().datetime(),
-	registration_end_date: z.string().datetime(),
+	registration_start_date: z.union([z.string(), z.null()]), // Allow null or string (no strict datetime)
+	registration_end_date: z.union([z.string(), z.null()]),   // Allow null
 	batch_id: z.number(),
 	program_id: z.number(),
 	course_batch_program_id: z.number(),
@@ -22,7 +22,7 @@ export const CourseSchema = z.object({
 
 export const ProgramCoursesResponseSchema = z.object({
 	data: z.array(CourseSchema),
-	next_last_id: z.number().optional(),
+	next_last_id: z.number().nullable(),
 });
 
 export type ProgramCoursesQuery = z.infer<typeof ProgramCoursesQuerySchema>;
@@ -46,16 +46,16 @@ export const TimeSlotSchema = z.object({
 	time_slot_name: z.string(),
 	is_time_slot_active: z.boolean(),
 	time_slot_day: z.string(),
-	slot_start_time: z.string().datetime(),
-	slot_end_time: z.string().datetime(),
+	slot_start_time: z.union([z.string(), z.null()]), // Allow null for datetime
+	slot_end_time: z.union([z.string(), z.null()]),   // Allow null for datetime
 	total_seats: z.number(),
 	booked_seats: z.number(),
 	confirmed_seats: z.number(),
-	zoom_link: z.string(),
-	social_links: z.array(z.string()),
+	zoom_link: z.union([z.string(), z.null()]), // Allow null for zoom_link
+	social_links: z.array(z.string()).nullable().default([]), // Allow null or default to an empty array
 	id: z.number(),
 	course_batch_program_id: z.number(),
-	language: LanguageSchema,
+	language: z.string(),
 });
 
 export const TimeSlotsResponseSchema = z.object({
