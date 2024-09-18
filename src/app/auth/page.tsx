@@ -1,6 +1,8 @@
 "use client"
 import { useState } from 'react';
-import { FaGoogle, FaGithub, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaGithub, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FcGoogle } from "react-icons/fc";
+
 import Image from 'next/image';
 import logoIcon from '../../../public/logos/logoIcon.png'
 const AuthForm = () => {
@@ -69,7 +71,7 @@ const AuthForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 border border-gray-300  rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           )}
@@ -85,7 +87,7 @@ const AuthForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="space-y-2">
@@ -101,7 +103,7 @@ const AuthForm = () => {
       value={formData.password}
       onChange={handleChange}
       required
-      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+      className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary pl-3"
     />
     <div
       className="absolute right-3 top-3 cursor-pointer"
@@ -130,7 +132,7 @@ const AuthForm = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+                className="w-full px-3 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary pl-3"
               />
               <div
                 className="absolute right-3 top-3 cursor-pointer"
@@ -151,7 +153,7 @@ const AuthForm = () => {
             <label className="flex items-center">
               <input
                 type="checkbox"
-                className="mr-2"
+                className="mr-2 cursor-pointer"
                 checked={keepMeLoggedIn}
                 onChange={() => setKeepMeLoggedIn(!keepMeLoggedIn)}
               />
@@ -165,7 +167,7 @@ const AuthForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-accent font-bold text-white py-2 rounded-md hover:bg-opacity-90 transition duration-300"
+            className="w-full bg-accent font-bold text-white py-2 rounded-xl hover:bg-opacity-90 transition duration-300"
           >
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>
@@ -178,14 +180,14 @@ const AuthForm = () => {
         <div className="mt-4 space-y-2">
           <button
             onClick={authWithGoogle}
-            className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-300 flex items-center justify-center"
+            className="w-full bg-red-500 text-white py-2 rounded-xl transition duration-300 flex items-center justify-center"
           >
-            <FaGoogle className="mr-2" />
+            <FcGoogle className="mr-2" />
             Continue with Google
           </button>
           <button
             onClick={authWithGithub}
-            className="w-full bg-gray-800 text-white  py-2 rounded-md hover:bg-gray-900 transition duration-300 flex items-center justify-center"
+            className="w-full bg-white  text-black  py-2 rounded-xl hover:bg-gray-900 transition duration-300 flex items-center justify-center"
           >
             <FaGithub className="mr-2" />
             Continue with GitHub
