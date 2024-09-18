@@ -1,6 +1,10 @@
 "use server";
 
 import {
+	GetCoursePriceParams,
+	GetCoursePriceParamsSchema,
+	GetCoursePriceResponse,
+	GetCoursePriceResponseSchema,
 	ProgramCoursesQuery,
 	ProgramCoursesQuerySchema,
 	ProgramCoursesResponse,
@@ -130,6 +134,65 @@ export const getTimeSlotsForCourseBatchProgram = async (
 		return {
 			type: "success",
 			message: "Time slots fetched successfully",
+			data: parsedResponse.data,
+		};
+	} catch (error: any) {
+		return {
+			type: "error",
+			message: error.message,
+		};
+	}
+};
+
+export const getCoursePrice = async (
+	params: GetCoursePriceParams
+): Promise<Result<GetCoursePriceResponse>> => {
+	// Validate the path parameters using zod schema
+	const validationResult = GetCoursePriceParamsSchema.safeParse(params);
+
+	if (!validationResult.success) {
+		return {
+			type: "error",
+			message: validationResult.error.errors
+				.map((err) => err.message)
+				.join(", "),
+		};
+	}
+
+	try {
+		// TODO: Add Authorization header
+		const response = await fetch(
+			`/api/v1/enrollment/price/${validationResult.data.course_batch_program_id}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+			}
+		);
+
+		if (!response.ok) {
+			throw new Error(`Failed to fetch course price: ${response.statusText}`);
+		}
+
+		const responseData = await response.json();
+
+		// Validate the response data using zod schema
+		const parsedResponse = GetCoursePriceResponseSchema.safeParse(responseData);
+
+		if (!parsedResponse.success) {
+			return {
+				type: "error",
+				message: parsedResponse.error.errors
+					.map((err) => err.message)
+					.join(", "),
+			};
+		}
+
+		return {
+			type: "success",
+			message: "Course price fetched successfully",
 			data: parsedResponse.data,
 		};
 	} catch (error: any) {
