@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import Modal from "../../../components/Modal"; // Import the Modal component
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string
@@ -51,23 +52,22 @@ export default function CourseDetails({ params }: any) {
   const program: any = programs.find((p: any) => p.id === id);
 
   const [selectedQuarter, setSelectedQuarter] = useState<string | null>(null);
-  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // State to track form values
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  // State to track whether the Pay Now button should be enabled
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
-  // Function to handle quarter card click
+  // Payment method state (Stripe or Kuickpay)
+  const [paymentMethod, setPaymentMethod] = useState<string>("Stripe");
+
   const handleQuarterClick = (quarter: string) => {
     setSelectedQuarter(quarter);
-    setIsFormVisible(true);
+    setIsModalOpen(true); // Open the modal
   };
 
-  // Function to validate the form fields
   useEffect(() => {
     if (fullName && email && phoneNumber) {
       setIsButtonDisabled(false);
@@ -90,7 +90,8 @@ export default function CourseDetails({ params }: any) {
         email,
         phoneNumber,
         selectedQuarter,
-        programName: program.title, // Include the program name
+        programName: program.title,
+        paymentMethod, // Send the selected payment method
       }),
     });
 
@@ -129,62 +130,20 @@ export default function CourseDetails({ params }: any) {
           ))}
         </div>
 
-        {isFormVisible && (
-          <div className="mt-8 p-6 bg-white rounded-lg shadow-md border border-gray-200">
-            <h2 className="text-xl font-semibold mb-4">
-              Register for {selectedQuarter}
-            </h2>
-            <form className="space-y-4" onSubmit={handleCheckout}>
-              <div>
-                <label className="block font-medium mb-1">Full Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter your full name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block font-medium mb-1">Email Address</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block font-medium mb-1">Phone Number</label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-2 border rounded-md"
-                  placeholder="Enter your phone number"
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className={`w-full py-2 ${
-                  isButtonDisabled ? "bg-gray-400" : "bg-blue-500"
-                } text-white font-semibold rounded-md ${
-                  !isButtonDisabled && "hover:bg-blue-600"
-                }`}
-                disabled={isButtonDisabled}
-              >
-                Pay Now
-              </button>
-            </form>
-          </div>
-        )}
+        {/* Modal Component */}
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedQuarter={selectedQuarter!}
+          fullName={fullName}
+          setFullName={setFullName}
+          email={email}
+          setEmail={setEmail}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          isButtonDisabled={isButtonDisabled}
+          handleCheckout={handleCheckout}
+        />
       </div>
     </div>
   );
