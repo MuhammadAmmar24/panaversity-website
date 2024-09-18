@@ -9,7 +9,7 @@ const AuthForm = () => {
   const [isSignUp, setIsSignUp] = useState(true);
   const [keepMeLoggedIn, setKeepMeLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -103,16 +103,16 @@ const AuthForm = () => {
       value={formData.password}
       onChange={handleChange}
       required
-      className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200 pl-10"
+      className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200"
     />
     <div
       className="absolute right-3 top-3 cursor-pointer"
       onClick={() => setShowPassword(!showPassword)}
     >
       {showPassword ? (
-        <FaEyeSlash className="text-black" />
-      ) : (
         <FaEye className="text-black" />
+      ) : (
+        <FaEyeSlash className="text-black" />
       )}
     </div>
   </div>
@@ -127,21 +127,21 @@ const AuthForm = () => {
             </label>
             <div className="relative">
               <input
-                type={showPassword2 ? "text" : "password"}
+                type={showConfirmPassword ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200 pl-10"
+                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200 "
               />
               <div
                 className="absolute right-3 top-3 cursor-pointer"
-                onClick={() => setShowPassword2(!showPassword2)}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
-                {showPassword2 ? (
-                  <FaEyeSlash className="text-black" />
-                ) : (
+                {showConfirmPassword ? (
                   <FaEye className="text-black" />
+                ) : (
+                  <FaEyeSlash className="text-black" />
                 )}
               </div>
             </div>
