@@ -36,14 +36,14 @@ export const getProgramCoursesWithOpenRegistration = async (
 			params.append(key, String(value));
 		}
 
-		// TODO: Add Authorization header
 		const response = await fetch(
-			`/api/v1/data/open/programs/batches/courses?${params}`,
+			`${process.env.ENROLLMENT_API_URL}/data/open/programs/batches/courses?${params}`,
 			{
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
 					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
 			}
 		);
@@ -101,14 +101,14 @@ export const getTimeSlotsForCourseBatchProgram = async (
 			),
 		});
 
-		// TODO: Add Authorization header
 		const response = await fetch(
-			`/api/v1/data/course_batch/timeslots?${params}`,
+			`${process.env.ENROLLMENT_API_URL}/data/course_batch/timeslots?${params}`,
 			{
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
 					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
 			}
 		);
@@ -160,14 +160,14 @@ export const getCoursePrice = async (
 	}
 
 	try {
-		// TODO: Add Authorization header
 		const response = await fetch(
-			`/api/v1/enrollment/price/${validationResult.data.course_batch_program_id}`,
+			`${process.env.ENROLLMENT_API_URL}/enrollment/price/${validationResult.data.course_batch_program_id}`,
 			{
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
 					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
 			}
 		);

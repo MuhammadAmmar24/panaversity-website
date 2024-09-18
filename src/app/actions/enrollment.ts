@@ -31,15 +31,18 @@ export const enrollStudentInProgram = async (
 	}
 
 	try {
-		// TODO: Add Authorization header
-		const response = await fetch("/api/v1/enrollment/programs/enroll", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify(validationResult.data),
-		});
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/enrollment/programs/enroll`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+				body: JSON.stringify(validationResult.data),
+			}
+		);
 
 		if (response.status !== 201) {
 			throw new Error(`Failed to enroll student: ${response.statusText}`);
@@ -86,15 +89,18 @@ export const enrollStudentInCourse = async (
 	}
 
 	try {
-		// TODO: Add Authorization header
-		const response = await fetch("/api/v1/enrollment/courses/enroll", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify(validationResult.data),
-		});
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/enrollment/courses/enroll`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+				body: JSON.stringify(validationResult.data),
+			}
+		);
 
 		if (response.status !== 201) {
 			throw new Error(
@@ -143,15 +149,18 @@ export const enrollNewStudentInProgramAndCourse = async (
 	}
 
 	try {
-		// TODO: Add Authorization header
-		const response = await fetch("/api/v1/enrollment/new", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-			body: JSON.stringify(validationResult.data),
-		});
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/enrollment/new`,
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+				body: JSON.stringify(validationResult.data),
+			}
+		);
 
 		if (response.status !== 201) {
 			throw new Error(

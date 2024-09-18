@@ -31,14 +31,17 @@ export const getProgramsWithOpenRegistration = async (
 			params.append(key, String(value));
 		}
 
-		// TODO: Add Authorization header
-		const response = await fetch(`/api/v1/data/open/programs?${params}`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-		});
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/data/open/programs?${params}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+			}
+		);
 
 		if (!response.ok) {
 			throw new Error(`Failed to fetch programs: ${response.statusText}`);
@@ -89,14 +92,17 @@ export const getActiveProgramsForStudent = async (
 			student_id: validationResult.data.student_id,
 		});
 
-		// TODO: Add Authorization header
-		const response = await fetch(`/api/v1/status/status?${params}`, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-				Accept: "application/json",
-			},
-		});
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/status/status?${params}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+			}
+		);
 
 		if (!response.ok) {
 			throw new Error(
