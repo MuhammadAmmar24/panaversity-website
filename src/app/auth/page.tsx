@@ -69,7 +69,7 @@ const AuthForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
           )}
@@ -85,7 +85,7 @@ const AuthForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="space-y-2">
@@ -101,7 +101,7 @@ const AuthForm = () => {
       value={formData.password}
       onChange={handleChange}
       required
-      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+      className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary pl-10"
     />
     <div
       className="absolute right-3 top-3 cursor-pointer"
@@ -130,7 +130,7 @@ const AuthForm = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary pl-10"
               />
               <div
                 className="absolute right-3 top-3 cursor-pointer"
@@ -165,7 +165,7 @@ const AuthForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-accent font-bold text-white py-2 rounded-md hover:bg-opacity-90 transition duration-300"
+            className="w-full bg-accent font-bold text-white py-2 rounded-2xl hover:bg-opacity-90 transition duration-300"
           >
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>
@@ -178,18 +178,31 @@ const AuthForm = () => {
         <div className="mt-4 space-y-2">
           <button
             onClick={authWithGoogle}
-            className="w-full bg-red-500 text-white py-2 rounded-md hover:bg-red-600 transition duration-300 flex items-center justify-center"
+            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md  rounded-2xl w-full  mb-5"
+            type="submit"
           >
-            <FaGoogle className="mr-2" />
-            Continue with Google
+            <Image 
+          className="w-6 h-6" 
+          src="https://www.svgrepo.com/show/475656/google-color.svg" 
+          loading="lazy" 
+          alt="google logo"
+          width={100}
+          height={100}
+          />
+          
+          <span className="px-2">
+            Sign up with Google
+          </span>
           </button>
+
           <button
             onClick={authWithGithub}
-            className="w-full bg-gray-800 text-white  py-2 rounded-md hover:bg-gray-900 transition duration-300 flex items-center justify-center"
+            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md  rounded-2xl w-full  mb-5"
           >
             <FaGithub className="mr-2" />
             Continue with GitHub
           </button>
+
         </div>
         <p className="mt-4 text-center text-sm text-textSecondary">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}
