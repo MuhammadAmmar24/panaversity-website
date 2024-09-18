@@ -71,7 +71,7 @@ const AuthForm = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200"
               />
             </div>
           )}
@@ -87,7 +87,7 @@ const AuthForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200"
             />
           </div>
           <div className="space-y-2">
@@ -103,7 +103,7 @@ const AuthForm = () => {
       value={formData.password}
       onChange={handleChange}
       required
-      className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+      className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200 pl-10"
     />
     <div
       className="absolute right-3 top-3 cursor-pointer"
@@ -132,7 +132,7 @@ const AuthForm = () => {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-primary pl-10"
+                className="w-full px-3 py-2 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-gray-200 pl-10"
               />
               <div
                 className="absolute right-3 top-3 cursor-pointer"
@@ -167,7 +167,7 @@ const AuthForm = () => {
 
           <button
             type="submit"
-            className="w-full bg-accent font-bold text-white py-2 rounded-2xl hover:bg-opacity-90 transition duration-300"
+            className="w-full bg-accent hover:bg-[#17c982] font-bold text-white py-2 rounded-2xl hover:bg-opacity-90 transiton transition-all duration-500 ease-in-out "
           >
             {isSignUp ? 'Sign Up' : 'Sign In'}
           </button>
@@ -180,7 +180,7 @@ const AuthForm = () => {
         <div className="mt-4 space-y-2">
           <button
             onClick={authWithGoogle}
-            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md  rounded-2xl w-full  mb-5"
+            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md hover:bg-gray-100 transition-all duration-500 ease-in-out rounded-2xl w-full  mb-5"
             type="submit"
           >
             <Image 
@@ -199,7 +199,7 @@ const AuthForm = () => {
 
           <button
             onClick={authWithGithub}
-            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md  rounded-2xl w-full  mb-5"
+            className="x-4 py-2 border-gray-300 justify-center text-center items-center border flex gap-2  text-black text-md hover:bg-gray-100 transition-all duration-500 ease-in-out rounded-2xl w-full  mb-5"
           >
             <FaGithub className="mr-2" />
             Continue with GitHub
