@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
-import { stats } from '@/constants/counter';
+import { stats } from '@/src/constants/counter';
 
 export default function Counters() {
   const [ref, inView] = useInView({

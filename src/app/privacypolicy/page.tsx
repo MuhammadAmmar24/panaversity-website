@@ -1,5 +1,5 @@
 import react from "react";
-import { privacypolicydata } from "@/constants/privacypolicy";
+import { privacypolicydata } from "@/src/constants/privacypolicy";
 
 
 

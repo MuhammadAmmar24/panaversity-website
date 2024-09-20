@@ -13,8 +13,8 @@ import {
 	EnrollStudentRequestSchema,
 	EnrollStudentResponse,
 	EnrollStudentResponseSchema,
-} from "@/lib/schemas/enrollment";
-import { Result } from "@/lib/types";
+} from "@/src/lib/schemas/enrollment";
+import { Result } from "@/src/lib/types";
 
 export const enrollStudentInProgram = async (
 	payload: EnrollStudentRequest

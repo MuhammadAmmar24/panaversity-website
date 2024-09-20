@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { programOverviewData, features } from "@/constants/programOverview"
+import { programOverviewData, features } from "@/src/constants/programOverview"
 import Link from "next/link";
 
 export default function ProgramOverview() {

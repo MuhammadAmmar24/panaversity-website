@@ -9,8 +9,8 @@ import {
 	ProgramsQuerySchema,
 	ProgramsResponse,
 	ProgramsResponseSchema,
-} from "@/lib/schemas/programs";
-import { Result } from "@/lib/types";
+} from "@/src/lib/schemas/programs";
+import { Result } from "@/src/lib/types";
 
 export const getProgramsWithOpenRegistration = async (
 	query: ProgramsQuery

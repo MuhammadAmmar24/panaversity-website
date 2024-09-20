@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef } from "react";
-import { faqData } from "@/constants/faqs";
+import { faqData } from "@/src/constants/faqs";
 
 interface FaqItem {
   question: string;
