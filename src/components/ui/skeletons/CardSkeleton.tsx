@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { allTeamMembers } from "@/constants/teams";
-import { Skeleton } from "@/components/ui/skeleton"
+import { allTeamMembers } from "@/src/constants/teams";
+import { Skeleton } from "@/src/components/ui/skeleton"
 
 
 // Define types for the social link and team member

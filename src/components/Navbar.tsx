@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 import {
   Sheet,
   SheetTrigger,
   SheetContent,
   SheetClose,
-} from "@/components/ui/sheet";
+} from "@/src/components/ui/sheet";
 import logo from "../../public/logos/logo.png";
-import { navItems } from "@/constants/nav";
+import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {

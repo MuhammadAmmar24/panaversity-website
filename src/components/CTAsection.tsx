@@ -1,4 +1,4 @@
-import { ctaData } from "@/constants/cta"
+import { ctaData } from "@/src/constants/cta"
 import Link from "next/link";
 
 export default function Component() {

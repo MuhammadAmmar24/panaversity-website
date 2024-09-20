@@ -13,8 +13,8 @@ import {
 	TimeSlotsQuerySchema,
 	TimeSlotsResponse,
 	TimeSlotsResponseSchema,
-} from "@/lib/schemas/courses";
-import { Result } from "@/lib/types";
+} from "@/src/lib/schemas/courses";
+import { Result } from "@/src/lib/types";
 
 export const getProgramCoursesWithOpenRegistration = async (
 	query: ProgramCoursesQuery

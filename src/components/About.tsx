@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import logo from "../../public/logos/logoIcon.png";
 import Counters from "./Counters";
-import { aboutData } from "@/constants/about"
+import { aboutData } from "@/src/constants/about"
 
 export default function About() {
   return (
