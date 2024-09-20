@@ -1,14 +1,14 @@
-import Courses from "@/components/Courses";
-import Hero from "@/components/Hero";
-import Faq from "@/components/Faq";
-import CTAsection from "@/components/CTAsection";
-import Video from "@/components/Video";
-import Testimonials from "@/components/Testimonials";
-import Programs from "@/components/Programs";
-import About from "@/components/About";
-import ProgramOverview from "@/components/ProgramOverview";
-import Projects from "@/components/Projects";
-import ScrollToTopButton from "@/components/ScrollToTopButton";
+import Courses from "@/src/components/Courses";
+import Hero from "@/src/components/Hero";
+import Faq from "@/src/components/Faq";
+import CTAsection from "@/src/components/CTAsection";
+import Video from "@/src/components/Video";
+import Testimonials from "@/src/components/Testimonials";
+import Programs from "@/src/components/Programs";
+import About from "@/src/components/About";
+import ProgramOverview from "@/src/components/ProgramOverview";
+import Projects from "@/src/components/Projects";
+import ScrollToTopButton from "@/src/components/ScrollToTopButton";
 
 
 export default function Home() {

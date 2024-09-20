@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { programsData, programs } from "@/constants/programs";
+import { programsData, programs } from "@/src/constants/programs";
 
 const Programs = () => {
   return (

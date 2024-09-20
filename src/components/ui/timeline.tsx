@@ -6,7 +6,7 @@ import {
   motion,
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { timelineContent } from "@/constants/courses";
+import { timelineContent } from "@/src/constants/courses";
 
 interface TimelineEntry {
   title: string;

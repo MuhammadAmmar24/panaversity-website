@@ -4,7 +4,7 @@ import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { allTeamMembers } from "@/constants/teams";
+import { allTeamMembers } from "@/src/constants/teams";
 import Loading from "../loading";
 
 
@@ -13,7 +13,7 @@ type SocialLink = {
   href: string;
   icon: any;
 };
-
+ 
 type TeamMember = {
   picture: string;
   fullName: string;

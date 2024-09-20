@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination } from "swiper/modules";
-import { testimonialData,testimonialList } from "@/constants/testimonials";
+import { testimonialData,testimonialList } from "@/src/constants/testimonials";
 
 // Import Swiper types
 import type { Swiper as SwiperType } from "swiper/types";

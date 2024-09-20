@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import {projectsData, projects} from "@/constants/projects";
+import {projectsData, projects} from "@/src/constants/projects";
 import Image from "next/image";
 import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
 import SwiperCore from "swiper";
