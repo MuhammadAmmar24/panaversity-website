@@ -1,9 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    reactStrictMode: false,
     images: {
-      domains: ['assets.aceternity.com','cdn.easyfrontend.com'], // Add this line to include the external domain
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com',
+            },            
+        ],
     },
-  };
-  
-  export default nextConfig; // Export the configuration for ES modules
-  
+};
+
+export default nextConfig;
+
