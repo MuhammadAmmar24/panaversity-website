@@ -1,4 +1,5 @@
-import { ctaData } from "@/constants/cta"
+import { ctaData } from "@/src/constants/cta"
+import Link from "next/link";
 
 export default function Component() {
   return (
@@ -10,8 +11,8 @@ export default function Component() {
             {ctaData.subHeading}
           </p>
           {/* Button Component */}
-          <a
-            href="#_"
+          <Link
+            href="/auth"
             className="relative inline-flex items-center px-8 py-2 lg:px-14 lg:py-4 overflow-hidden text-[1rem] text-textPrimary font-inter bg-background rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-accent"
           >
             <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
@@ -19,7 +20,7 @@ export default function Component() {
               <ArrowRightIcon className="w-5 h-5" />
             </span>
             <span className="relative">{ctaData.buttonText}</span>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

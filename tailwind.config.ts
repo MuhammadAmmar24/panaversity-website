@@ -72,6 +72,7 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+        large: '1rem'
       },
       backgroundImage: {
         'custom-bg': "url('/background_images/result.svg')",

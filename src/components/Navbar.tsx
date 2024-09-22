@@ -3,15 +3,15 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/src/components/ui/button";
 import {
   Sheet,
   SheetTrigger,
   SheetContent,
   SheetClose,
-} from "@/components/ui/sheet";
+} from "@/src/components/ui/sheet";
 import logo from "../../public/logos/logo.png";
-import { navItems } from "@/constants/nav";
+import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -82,8 +82,8 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="hidden md:flex mt-6">
-            <a
-              href="#_"
+            <Link
+              href="/auth"
               className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
             >
               <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
@@ -92,7 +92,7 @@ export default function Navbar() {
                 Enroll Now
               </span>
               <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Icon */}

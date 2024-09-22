@@ -28,7 +28,7 @@ export const testimonialList = [
         '"Panaversity transformed my career. The hands-on projects and mentorship took me from beginner to AI engineer, enabling me to contribute to innovative solutions in the tech industry."',
     },
     {
-      img: "https://cdn.easyfrontend.com/pictures/testimonial/testimonial_square_3.jpeg",
+      img: "",
       name: "Adam Chodhary",
       position: "Graduate Student, AI Researcher",
       content:

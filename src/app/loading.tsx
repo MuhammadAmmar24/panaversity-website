@@ -1,7 +1,9 @@
-import React from 'react'
+import CardSkeleton from '@/src/components/ui/skeletons/CardSkeleton'
 
 export default function Loading() {
   return (
-    <div>Loading...</div>
+    <>
+        <CardSkeleton/>
+    </>
   )
 }

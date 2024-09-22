@@ -1,17 +1,19 @@
 
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import { allTeamMembers } from "@/constants/teams";
+import { allTeamMembers } from "@/src/constants/teams";
+import Loading from "../loading";
 
-// Define types for the social link and team member
+
+
 type SocialLink = {
   href: string;
   icon: any;
 };
-
+ 
 type TeamMember = {
   picture: string;
   fullName: string;
@@ -19,6 +21,7 @@ type TeamMember = {
   bio: string;
   socialLinks: SocialLink[];
 };
+
 
 // Component to display individual team member
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
@@ -76,6 +79,9 @@ TeamMemberItem.propTypes = {
   }).isRequired,
 };
 
+
+
+
 const TeamMember = () => {
   // State to handle visible team members
   const [visibleMembers, setVisibleMembers] = useState(9);
@@ -129,4 +135,10 @@ const TeamMember = () => {
   );
 };
 
+
+
 export default TeamMember;
+
+<Suspense fallback={<Loading/>}>
+   <TeamMember/>
+</Suspense>

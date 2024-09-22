@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Timeline } from "@/components/ui/timeline";
-import { courseData } from "@/constants/courses";
-import CourseCard from "@/components/ui/CourseCards"; 
+import { Timeline } from "@/src/components/ui/timeline";
+import { courseData } from "@/src/constants/courses";
+import CourseCard from "@/src/components/ui/CourseCards"; 
 
 export default function Courses() {
   const data = courseData.map((course) => ({
