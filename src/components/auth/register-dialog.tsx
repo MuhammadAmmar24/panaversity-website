@@ -1,13 +1,13 @@
 "use client";
-
+import { useEffect } from "react";
 import * as React from "react";
 import * as z from "zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as Dialog from "@radix-ui/react-dialog";
-import ReactPhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import { RegisterSchema } from "@/src/schemas/userschema";
 import { Input } from "@/src/components/ui/input";
 import { useRouter } from "next/navigation";
@@ -32,11 +32,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/src/components/ui/select';
+} from "@/src/components/ui/select";
 import { affiliations } from "@/src/constants/affiliation";
 import Link from "next/link";
 
-export default function RegisterDialog(){
+export default function RegisterDialog() {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -51,6 +51,34 @@ export default function RegisterDialog(){
   const response_type = searchParams.get("response_type");
   const code = searchParams.get("code");
   const state = searchParams.get("state");
+
+  // New Code added for intercepting routes
+  useEffect(() => {
+    const handleScrollLock = () => {
+      if (open) {
+        const scrollY = window.scrollY; // Save the current scroll position
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollY}px`; // Set the body top to prevent page jumping
+        document.body.style.overflow = "hidden"; // Prevent scroll
+        document.body.style.width = "100%"; // Ensure the body width doesn’t shrink
+      } else {
+        const scrollY = document.body.style.top;
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.overflow = "";
+        window.scrollTo(0, parseInt(scrollY || "0") * -1); // Restore the previous scroll position
+      }
+    };
+
+    handleScrollLock();
+
+    return () => {
+      // Cleanup the body styles on unmount
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   const queryParams = `?redirect_uri=${redirect_uri}&state=${state}&response_type=${response_type}&client_id=${client_id}&code=${code}`;
 
@@ -86,8 +114,10 @@ export default function RegisterDialog(){
             description: "Please Login To Continue",
             action: (
               <Link href={redirect_uri ? `/login${queryParams}` : "/login"}>
-                <ToastAction altText="Login to Continue!">Login Now</ToastAction>
-              </Link> 
+                <ToastAction altText="Login to Continue!">
+                  Login Now
+                </ToastAction>
+              </Link>
             ),
           });
           setOpen(false);
@@ -98,14 +128,16 @@ export default function RegisterDialog(){
   };
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger asChild>
+    <Dialog.Root open={true} onOpenChange={() => router.back()}>
+      {/* <Dialog.Trigger asChild>
         <Button variant="outline">Register</Button>
-      </Dialog.Trigger>
+      </Dialog.Trigger> */}
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
         <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
-          <Dialog.Title className="text-lg font-bold mb-4">Create an account</Dialog.Title>
+          <Dialog.Title className="text-lg font-bold mb-4">
+            Create an account
+          </Dialog.Title>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="space-y-4">
@@ -170,13 +202,13 @@ export default function RegisterDialog(){
                       <FormLabel>Phone</FormLabel>
                       <FormControl>
                         <ReactPhoneInput
-                          country={'pk'}
+                          country={"pk"}
                           value={field.value}
                           onChange={(phone: string) => field.onChange(phone)}
                           disabled={isPending}
                           placeholder="+921234567890"
-                          buttonStyle={{ backgroundColor: '#f9fafb' }}
-                          inputStyle={{ width: '100%' }}
+                          buttonStyle={{ backgroundColor: "#f9fafb" }}
+                          inputStyle={{ width: "100%" }}
                           countryCodeEditable={false}
                         />
                       </FormControl>
@@ -198,8 +230,8 @@ export default function RegisterDialog(){
                           <SelectTrigger
                             className={
                               form.formState.errors.affiliation
-                                ? 'border-red-500 focus-visible:ring-red-500'
-                                : 'focus-visible:ring-custom-color focus:ring-custom-color'
+                                ? "border-red-500 focus-visible:ring-red-500"
+                                : "focus-visible:ring-custom-color focus:ring-custom-color"
                             }
                           >
                             <SelectValue placeholder="The Student's affiliation" />
@@ -231,12 +263,11 @@ export default function RegisterDialog(){
           </Form>
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">
-              X
+              x
             </button>
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );
-};
-
+}
