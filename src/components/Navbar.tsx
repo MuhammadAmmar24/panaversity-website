@@ -47,7 +47,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-40 w-full transition-transform duration-500 ${
+      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-30 w-full transition-transform duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
