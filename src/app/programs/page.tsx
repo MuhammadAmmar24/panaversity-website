@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link"
 import rabbit from "@/public/customers/evil-rabbit.png";
 import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
 import { Course } from "@/src/lib/schemas/courses";
@@ -37,7 +38,7 @@ const CourseCard = ({ course }: { course: Course }) => (
         <p className="text-xs mt-1 line-clamp-2">{course.course_description}</p>
       </div>
       <button className="w-full mt-1 rounded-md p-1.5 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600">
-        View Course Detail
+        <Link href="/programs/course">View Course Detail</Link>
       </button>
     </div>
   </div>
