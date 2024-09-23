@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react'
-import ResetPassword from '@/src/components/auth/reset-password'
+// import ResetPassword from '@/src/components/auth/reset-password'
 
 const resetPassword = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Suspense>
-          <ResetPassword />
+          {/* <ResetPassword /> */}
       </Suspense>
     </div>
   )

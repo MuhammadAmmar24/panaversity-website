@@ -1,4 +1,4 @@
-import { LoginForm } from "@/src/components/auth/Login-form";
+import { LoginFormPage } from "@/src/components/auth/login/login-page";
 import { Suspense } from "react";
 
 const LoginPage = () => {
@@ -6,7 +6,7 @@ const LoginPage = () => {
     <> 
     <div className="flex justify-center items-center min-h-screen">
       <Suspense>
-        <LoginForm />
+        <LoginFormPage />
       </Suspense>
     </div>
     </>

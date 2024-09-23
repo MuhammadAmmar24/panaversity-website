@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google"; 
+import { Inter, Poppins,Rubik } from "next/font/google"; 
 import "./globals.css";
 import Footer from "@/src/components/Footer"
 import Navbar from "@/src/components/Navbar"
-
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -16,6 +15,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-rubik",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -28,23 +32,23 @@ export const metadata: Metadata = {
                 technology with essential skills and personalized coaching.
                 Transform your ambition into success and lead in the AI-driven
                 future.`
-  };
+};  
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable}  bg-background`}>
-
+      <body className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}>
         <Navbar />    
         {children}
+        {modal}
         <Footer />
-
       </body>
-
     </html>
   );
 }
