@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
+import { getCoursePrice } from "@/src/actions/courses"; // Import the getCoursePrice function
 
 const learnPoints: string[] = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -64,6 +65,9 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
 
 const CourseDetails: React.FC = () => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
+  const [price, setPrice] = useState<number | null>(null); // State to store course price
+  const [currency, setCurrency] = useState<string>(""); // State to store currency
+  const [loading, setLoading] = useState<boolean>(true); // State for loading
 
   useEffect(() => {
     const handleResize = () => {
@@ -81,6 +85,30 @@ const CourseDetails: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    // Fetch the course price when the component mounts
+    const fetchCoursePrice = async () => {
+      try {
+        const params = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
+        const result = await getCoursePrice(params);
+
+        if (result.type === "success" && result.data) {
+          setPrice(result.data.amount); // Set the price in the state
+          setCurrency(result.data.currency); // Set the currency in the state
+        } else {
+          console.error("Error fetching price:", result.message);
+        }
+      } catch (error) {
+        console.error("Error fetching course price:", error);
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchCoursePrice();
+  }, []);
+
   return (
     <main className="overflow-x-hidden">
       <section className="flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
@@ -132,7 +160,15 @@ const CourseDetails: React.FC = () => {
                     <span className="text-gray-900 font-medium text-lg">
                       Price:
                     </span>
-                    <span className="text-3xl font-bold">$500</span>
+                    <span className="text-3xl font-bold">
+                      {loading ? (
+                        <span className="text-3xl font-bold">Loading...</span>
+                      ) : (
+                        <span className="text-3xl font-bold">
+                          {price !== null ? `${currency} ${price}` : "N/A"}
+                        </span>
+                      )}
+                    </span>
                   </div>
 
                   <Sheet>
@@ -149,7 +185,6 @@ const CourseDetails: React.FC = () => {
             ${sheetSide === "bottom" ? "h-[80vh]" : "h-full"}
             ${sheetSide === "right" ? "lg:max-w-2xl" : ""}
           `}
-                      
                     >
                       <GetEnrolled />
                     </SheetContent>
@@ -208,6 +243,6 @@ const CourseDetails: React.FC = () => {
       </section>
     </main>
   );
-};
+};;
 
 export default CourseDetails;

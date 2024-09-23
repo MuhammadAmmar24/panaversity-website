@@ -1,35 +1,59 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CreditCard } from "lucide-react";
+import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses"; // Import the function
 
 export default function GetEnrolled() {
-  // State for selected options
+  // State for time slots and selected options
+  const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]); // Class time slots fetched from API
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
-  const days = [
-    "Saturday - Sunday",
-    "Monday - Tuesday",
-    "Wednesday - Thursday",
-  ];
-  const timeSlots = ["09:00 am - 01:00 pm", "02:00 pm - 06:00 pm"];
   const paymentMethods = ["Kuickpay", "Stripe"];
+
+  // Fetch time slots when the component mounts
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      try {
+        const query = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
+        const result = await getTimeSlotsForCourseBatchProgram(query);
+
+        if (result.type === "success" && result.data) {
+          setClassTimeSlots(result.data.class_time_slots);
+        } else {
+          console.error(result.message);
+        }
+      } catch (error) {
+        console.error("Error fetching time slots:", error);
+      }
+    };
+
+    fetchTimeSlots();
+  }, []);
+
+  // Get unique days for the day dropdown
+  const uniqueDays = Array.from(
+    new Set(classTimeSlots.map((slot) => slot.time_slot_day))
+  );
+
+  // Get time slots for the selected day
+  const timeSlotsForSelectedDay = classTimeSlots
+    .filter((slot) => slot.time_slot_day === selectedDay)
+    .map((slot) => `${slot.slot_start_time} - ${slot.slot_end_time}`);
 
   // Check if all options are selected
   const isFormComplete =
     selectedDay && selectedTimeSlot && selectedPaymentMethod;
 
   return (
-    <div className=" rounded-3xl container mx-auto max-w-full">
+    <div className="rounded-3xl container mx-auto max-w-full">
       <div className="px-2 ">
         <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
         <p className="text-gray-500 mb-8">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
 
         <div className="space-y-5">
@@ -47,7 +71,7 @@ export default function GetEnrolled() {
               <option value="" disabled hidden>
                 Select Day
               </option>
-              {days.map((day) => (
+              {uniqueDays.map((day) => (
                 <option key={day} value={day}>
                   {day}
                 </option>
@@ -68,11 +92,12 @@ export default function GetEnrolled() {
               className="block w-full max-w-md p-3 border border-neutral-400 rounded-lg text-gray-700 bg-transparent"
               value={selectedTimeSlot}
               onChange={(e) => setSelectedTimeSlot(e.target.value)}
+              disabled={!selectedDay} // Disable until a day is selected
             >
               <option value="" disabled hidden>
                 Select Time
               </option>
-              {timeSlots.map((timeSlot) => (
+              {timeSlotsForSelectedDay.map((timeSlot) => (
                 <option key={timeSlot} value={timeSlot}>
                   {timeSlot}
                 </option>
