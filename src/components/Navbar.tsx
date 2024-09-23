@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/src/components/ui/button";
+import * as Dialog from "@radix-ui/react-dialog";
 import {
   Sheet,
   SheetTrigger,
@@ -14,7 +15,11 @@ import logo from "../../public/logos/logo.png";
 import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
 
+import { RegisterForm } from "@/src/components/auth/register-form";
+
+
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
   // State to track whether navbar is hidden
   const [hidden, setHidden] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -82,7 +87,10 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="hidden md:flex mt-6">
-            <Link
+            
+            <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Trigger asChild>
+      <Link
               href="/register"
               className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
             >
@@ -93,6 +101,19 @@ export default function Navbar() {
               </span>
               <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
             </Link>
+      </Dialog.Trigger>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 bg-black/50" />
+        <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
+        <RegisterForm />
+          <Dialog.Close asChild>
+            <button className="absolute top-4 right-4 p-1" aria-label="Close">
+              X
+            </button>
+          </Dialog.Close>
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
           </div>
 
           {/* Mobile Menu Icon */}
