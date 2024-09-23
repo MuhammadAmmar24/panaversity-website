@@ -4,7 +4,6 @@ import "./globals.css";
 import Footer from "@/src/components/Footer"
 import Navbar from "@/src/components/Navbar"
 
-
 const inter = Inter({ 
   subsets: ["latin"], 
   variable: '--font-inter',
@@ -15,7 +14,6 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
 });
-
 
 export const metadata: Metadata = {
   title: {
@@ -28,23 +26,23 @@ export const metadata: Metadata = {
                 technology with essential skills and personalized coaching.
                 Transform your ambition into success and lead in the AI-driven
                 future.`
-  };
+};  
 
 export default function RootLayout({
   children,
+  modal
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable}  bg-background`}>
-
+      <body className={`${inter.variable} ${poppins.variable} bg-background`}>
         <Navbar />    
         {children}
+        {modal}
         <Footer />
-
       </body>
-
     </html>
   );
 }

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { allTeamMembers } from "@/src/constants/teams";
-import Loading from "../loading";
+
 
 
 
@@ -139,6 +139,3 @@ const TeamMember = () => {
 
 export default TeamMember;
 
-<Suspense fallback={<Loading/>}>
-   <TeamMember/>
-</Suspense>
