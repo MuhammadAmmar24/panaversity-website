@@ -35,12 +35,7 @@ const CourseDetails = () => {
                                 <p className="underline font-semibold">Panaversity</p>
                                 <h1 className="font-bold mb-2 text-[1.8rem] sm:text-[2rem] md:text-[3rem] text-background font-poppins">GEN AI & CLOUD BASICS</h1>
                                 <p className="mb-8 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 </p>
 
                                 {/* Instructor, Learners, and Duration */}
@@ -84,13 +79,16 @@ const CourseDetails = () => {
                                     <Sheet>
                                         <SheetTrigger asChild>
                                             <button className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500">
-                                                Enrol Now
+                                                Enroll Now
                                                 <ChevronRight className="w-5 h-5 ml-2" />
                                             </button>
                                         </SheetTrigger>
 
                                         {/* Sheet Content */}
-                                        <SheetContent side="bottom" className="max-h-[90vh] overflow-y-auto">
+                                        <SheetContent
+                                          side="right"
+                                          className="md:max-w-[700px] w-full overflow-y-auto" 
+                                        >
                                             <GetEnrolled />
                                         </SheetContent>
                                     </Sheet>
