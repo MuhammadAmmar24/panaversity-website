@@ -158,7 +158,7 @@ export const LoginForm = () => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success}  />
-          <Button disabled={isPending} type="submit" className="w-full">
+          <Button disabled={isPending} type="submit" className="w-full  bg-accent text-textPrimary hover:bg-[#18c781] font-medium">
             {"Login"}
           </Button>         
       
@@ -166,9 +166,9 @@ export const LoginForm = () => {
             size="sm"
             variant="link"
             asChild
-            className="w-full"
+            className="w-full "
           >
-            <Link href="/register">Don&apos;t have an account? Register</Link>
+            <Link href="/register" replace>Don&apos;t have an account? Register</Link>
           </Button>
         </form>
       </Form>

@@ -34,6 +34,7 @@ import {
 import { affiliations } from "@/src/constants/affiliation";
 import Link from "next/link";
 
+
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -211,8 +212,16 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button disabled={isPending} type="submit" className="w-full">
-            Create an account
+          <Button disabled={isPending} type="submit" className="w-full py-2 bg-accent text-textPrimary hover:bg-[#18c781] font-medium">
+            Create an account 
+          </Button>
+          <Button
+            size="sm"
+            variant="link"
+            asChild
+            className="w-full text-textPrimary "
+          >
+            <Link href="/login" replace>Already have an account? Login </Link>
           </Button>
         </form>
       </Form>
