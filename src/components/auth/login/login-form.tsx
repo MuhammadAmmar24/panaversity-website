@@ -22,8 +22,8 @@ import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
 import { login } from "@/src/actions/login";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { useToast } from "../ui/use-toast";
-import { ToastAction } from "../ui/toast";
+import { useToast } from "@/src/components/ui/use-toast";
+import { ToastAction } from "@/src/components/ui/toast";
 
 import Link from "next/link";
 
@@ -105,9 +105,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Login"
-    >
+ 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}  className="space-y-6 ">
           <div className="space-y-4">
@@ -176,6 +174,6 @@ export const LoginForm = () => {
       </Form>
 
       
-    </CardWrapper>
+   
   );
 };

@@ -18,7 +18,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
@@ -93,9 +92,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <CardWrapper
-      headerLabel="Create an account"
-    >
+  
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
@@ -219,6 +216,9 @@ export const RegisterForm = () => {
           </Button>
         </form>
       </Form>
-    </CardWrapper>
+   
   );
 };
+
+
+
