@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import {
   ChevronRight,
   Users,
@@ -62,6 +63,24 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
 );
 
 const CourseDetails: React.FC = () => {
+  const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setSheetSide("right");
+      } else {
+        setSheetSide("bottom");
+      }
+    };
+
+    handleResize(); // Call once on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <main className="overflow-x-hidden">
       <section className="flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
@@ -124,8 +143,13 @@ const CourseDetails: React.FC = () => {
                       </button>
                     </SheetTrigger>
                     <SheetContent
-                      side="right"
-                      className="w-full max-w-md overflow-y-auto"
+                      side={sheetSide}
+                      className={`
+            w-full max-w-full overflow-y-auto
+            ${sheetSide === "bottom" ? "h-[80vh]" : "h-full"}
+            ${sheetSide === "right" ? "lg:max-w-2xl" : ""}
+          `}
+                      
                     >
                       <GetEnrolled />
                     </SheetContent>
