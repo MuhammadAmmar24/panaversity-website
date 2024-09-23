@@ -52,34 +52,6 @@ export default function RegisterDialog() {
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
-  // New Code added for intercepting routes
-  useEffect(() => {
-    const handleScrollLock = () => {
-      if (open) {
-        const scrollY = window.scrollY; // Save the current scroll position
-        document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`; // Set the body top to prevent page jumping
-        document.body.style.overflow = "hidden"; // Prevent scroll
-        document.body.style.width = "100%"; // Ensure the body width doesn’t shrink
-      } else {
-        const scrollY = document.body.style.top;
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.overflow = "";
-        window.scrollTo(0, parseInt(scrollY || "0") * -1); // Restore the previous scroll position
-      }
-    };
-
-    handleScrollLock();
-
-    return () => {
-      // Cleanup the body styles on unmount
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.overflow = "";
-    };
-  }, [open]);
-
   const queryParams = `?redirect_uri=${redirect_uri}&state=${state}&response_type=${response_type}&client_id=${client_id}&code=${code}`;
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -133,8 +105,8 @@ export default function RegisterDialog() {
         <Button variant="outline">Register</Button>
       </Dialog.Trigger> */}
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
-        <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
+        <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
+        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white  rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
           <Dialog.Title className="text-lg font-bold mb-4">
             Create an account
           </Dialog.Title>
