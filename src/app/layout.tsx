@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google"; 
+import { Inter, Poppins,Rubik } from "next/font/google"; 
 import "./globals.css";
 import Footer from "@/src/components/Footer"
 import Navbar from "@/src/components/Navbar"
@@ -13,6 +13,12 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
+});
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-rubik",
 });
 
 export const metadata: Metadata = {
@@ -37,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} bg-background`}>
+      <body className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}>
         <Navbar />    
         {children}
         {modal}

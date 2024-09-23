@@ -4,17 +4,22 @@
 
 
 /* Fonts  */
-.font-inter {
-  font-family: var(--font-inter);
+body {
+  font-family: var(--font-rubik); /* Default to Rubik */
 }
+
+/* .font-inter {
+  font-family: var(--font-inter);
+} */
 
 .swiper-pagination {
   margin-top: 20px; /* Adjust the value as needed */
 }
 
-.font-poppins {
+/* .font-poppins {
   font-family: var(--font-poppins);
-}
+} */
+
 
 
 @layer base {
