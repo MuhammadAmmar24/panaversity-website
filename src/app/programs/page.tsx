@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import rabbit from "@/public/customers/evil-rabbit.png";
@@ -8,30 +8,47 @@ import { Course } from "@/src/lib/schemas/courses";
 // Skeleton Component
 const SkeletonCard = () => {
   return (
-    <div className="w-full max-w-sm flex flex-col justify-between overflow-hidden rounded-lg shadow-lg mt-8 h-full animate-pulse bg-gray-200">
-      <div>
-        <div className="relative h-40 w-full bg-gray-300"></div>
-        <div className="p-6">
-          <div className="h-6 bg-gray-300 mb-4 rounded"></div>
-          <div className="h-4 bg-gray-300 mb-2 rounded"></div>
-          <div className="h-4 bg-gray-300 mb-2 rounded"></div>
-          <div className="h-4 bg-gray-300 rounded"></div>
-        </div>
-      </div>
-      <div>
-        <hr className="mx-5 mb-4" />
-        <div className="px-6 pb-6">
-          <div className="w-full h-10 bg-gray-300 rounded"></div>
-        </div>
+    <div className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] h-64 animate-pulse flex flex-col bg-gray-200 rounded-xl shadow-xl overflow-hidden">
+      <div className="h-1/2 bg-gray-300"></div>
+      <div className="h-1/2 p-4">
+        <div className="h-5 bg-gray-300 mb-2 rounded"></div>
+        <div className="h-3 bg-gray-300 mb-2 rounded w-1/2"></div>
+        <div className="h-3 bg-gray-300 mb-2 rounded"></div>
+        <div className="h-8 bg-gray-300 mt-2 rounded"></div>
       </div>
     </div>
   );
 };
 
+const CourseCard = ({ course }: { course: Course }) => (
+  <div className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] h-[18rem] flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden">
+    <div className="h-1/2 relative">
+      <Image
+        src={rabbit}
+        alt={course.course_name}
+        layout="fill"
+        objectFit="cover"
+      />
+    </div>
+    <div className="h-1/2 p-3 flex flex-col justify-between">
+      <div>
+        <h4 className="text-base font-medium mb-1">{course.course_name}</h4>
+        <h6 className="text-xs font-medium opacity-75">Course - {course.course_id}</h6>
+        <p className="text-xs mt-1 line-clamp-2">{course.course_description}</p>
+      </div>
+      <button className="w-full mt-1 rounded-md p-1.5 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600">
+        View Course Detail
+      </button>
+    </div>
+  </div>
+);
+
+
 const Courses = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [visibleCourses, setVisibleCourses] = useState(6);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -54,6 +71,10 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
+  const handleLoadMore = () => {
+    setVisibleCourses((prev) => prev + 6);
+  };
+
   if (error) {
     return <p>Error fetching courses: {error}</p>;
   }
@@ -74,49 +95,32 @@ const Courses = () => {
         </div>
 
         {/* courses */}
-        <div className="container mx-auto lg:max-w-[950px] xl:max-w-6xl">
-          <h2 className="text-black text-2xl mt-8">APPLIED GEN AI COURSES</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-8 xl:px-16 mt-8">
+          <h2 className="text-black text-2xl mt-8 mb-4">APPLIED GEN AI COURSES</h2>
+          <div className="flex flex-wrap justify-center gap-8">
             {loading
-              ? // Show 7 skeletons while loading
-                Array(7)
+              ? Array(6)
                   .fill(0)
-                  .map((_, index) => <SkeletonCard key={index} />)
-              : courses.map((course, index) => (
-                  <div
-                    key={index}
-                    className="w-full max-w-sm flex flex-col justify-between overflow-hidden rounded-lg shadow-lg mt-8 h-full"
-                  >
-                    <div>
-                      <div className="relative h-40 w-full">
-                        <Image
-                          src={rabbit}
-                          alt="AI Prompt Interface"
-                          className="object-cover h-40 w-96 bg-gray-800"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h2 className="mb-5 text-2xl font-semibold text-gray-800">
-                          {course.course_name}
-                        </h2>
-                        <p className="mb-4 font-semibold">
-                          Course - {course.course_id}
-                        </p>
-                        <p>{course.course_description}</p>
-                      </div>
-                    </div>
-                    <div>
-                      <hr className="mx-5 mb-4" />
-                      <div className="px-6 pb-6">
-                        <button className="w-full rounded-md p-2 font-semibold text-white bg-emerald-500 hover:bg-emerald-600">
-                          View Course Detail
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  .map((_, index) => (
+                    <SkeletonCard key={index} />
+                  ))
+              : courses.slice(0, visibleCourses).map((course, index) => (
+                  <CourseCard key={index} course={course} />
                 ))}
           </div>
         </div>
+
+        {/* Load More Button */}
+        {visibleCourses < courses.length && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={handleLoadMore}
+              className="bg-accent text-white px-6 py-2 rounded hover:bg-accent/90 transition-colors"
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
