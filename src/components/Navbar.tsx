@@ -47,7 +47,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-50 w-full transition-transform duration-500 ${
+      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-30 w-full transition-transform duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -83,7 +83,7 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:flex mt-6">
             <Link
-              href="/auth"
+              href="/register"
               className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
             >
               <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
