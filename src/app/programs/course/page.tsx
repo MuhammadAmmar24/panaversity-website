@@ -155,40 +155,46 @@ const CourseDetails: React.FC = () => {
               </div>
 
               <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
-                <div className="bg-background text-black p-6 rounded-lg shadow-md max-w-sm sm:max-w-[380px] lg:max-w-full sm:ml-0 mx-auto lg:mx-0">
-                  <div className="flex items-center justify-between mb-4 ">
-                    <span className="text-gray-900 font-medium text-lg">
-                      Price:
-                    </span>
-                    <span className="text-3xl font-bold">
-                      {loading ? (
-                        <span className="text-3xl font-bold">Loading...</span>
-                      ) : (
+                <div className="bg-background text-black p-6 rounded-lg shadow-lg lg:shadow-xl max-w-sm sm:max-w-[380px] lg:max-w-full sm:ml-0 mx-auto lg:mx-0">
+                  {loading ? (
+                    // Skeleton for loading price and button
+                    <div className="animate-pulse">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-24 h-6 bg-gray-300 rounded"></div>
+                        <div className="w-20 h-8 bg-gray-300 rounded"></div>
+                      </div>
+                      <div className="w-full h-10 bg-gray-300 rounded mb-4"></div>
+                      <div className="w-full h-12 bg-gray-300 rounded"></div>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-gray-900 font-medium text-lg">
+                          Price:
+                        </span>
                         <span className="text-3xl font-bold">
                           {price !== null ? `${currency} ${price}` : "N/A"}
                         </span>
-                      )}
-                    </span>
-                  </div>
+                      </div>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <button className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500 transition duration-300">
-                        Enroll Now
-                        <ChevronRight className="w-5 h-5 ml-2" />
-                      </button>
-                    </SheetTrigger>
-                    <SheetContent
-                      side={sheetSide}
-                      className={`
-            w-full max-w-full overflow-y-auto
-            ${sheetSide === "bottom" ? "h-[80vh]" : "h-full"}
-            ${sheetSide === "right" ? "lg:max-w-2xl" : ""}
-          `}
-                    >
-                      <GetEnrolled />
-                    </SheetContent>
-                  </Sheet>
+                      <Sheet>
+                        <SheetTrigger asChild>
+                          <button className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500 transition duration-300">
+                            Enroll Now
+                            <ChevronRight className="w-5 h-5 ml-2" />
+                          </button>
+                        </SheetTrigger>
+                        <SheetContent
+                          side={sheetSide}
+                          className={`w-full max-w-full overflow-y-auto ${
+                            sheetSide === "bottom" ? "h-[80vh]" : "h-full"
+                          } ${sheetSide === "right" ? "lg:max-w-2xl" : ""}`}
+                        >
+                          <GetEnrolled />
+                        </SheetContent>
+                      </Sheet>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -243,6 +249,6 @@ const CourseDetails: React.FC = () => {
       </section>
     </main>
   );
-};;
+};
 
 export default CourseDetails;
