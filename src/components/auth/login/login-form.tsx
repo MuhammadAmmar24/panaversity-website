@@ -27,7 +27,7 @@ import { ToastAction } from "@/src/components/ui/toast";
 
 import Link from "next/link";
 
-export const LoginForm = ({ onLoginSuccess  }) => {
+export const LoginForm = ({ onLoginSuccess  }:any) => {
   const searchParams = useSearchParams();
 
   // Get all the query params
