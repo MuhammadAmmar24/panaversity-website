@@ -1,9 +1,9 @@
 "use client"
 import { resendVerification } from '@/src/actions/resend-verification';
-import { Button } from '../ui/button';
-import { useToast } from '../ui/use-toast';
+import { Button } from '../../ui/button';
+import { useToast } from '../../ui/use-toast';
 import Link from 'next/link';
-import { ToastAction } from '../ui/toast';
+import { ToastAction } from '../../ui/toast';
 
 const EmailVerificationPending = () => {
     const { toast } = useToast()
@@ -31,8 +31,8 @@ const EmailVerificationPending = () => {
     }
 
   return (
-    <div className="flex items-center justify-center h-screen ">
-      <div className="bg-white p-8 rounded-lg shadow-md text-center w-full max-w-sm">
+    <div className='text-center w-full max-w-sm '>
+
         <div className="flex justify-center mb-4">
           <div className="bg-green-100 p-4 rounded-full">
             <svg
@@ -58,11 +58,11 @@ const EmailVerificationPending = () => {
         </p>
         <Button
           onClick={resendEmail}
-          className=" bg-accent text-textPrimary hover:bg-[#49eaa9] font-medium py-2 px-4 rounded-lg w-full transition"
+         className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium"
         >
           Send Email Again
         </Button>
-      </div>
+      
     </div>
   );
 };
