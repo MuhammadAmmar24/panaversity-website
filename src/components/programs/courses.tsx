@@ -9,7 +9,7 @@ const CourseCard = ({ course }: { course: Course }) => (
   <Link
     href="/programs/course"
   >
-    <div className="h-fit flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full fold:w-[15rem] mobileM:w-[18rem] xs:w-[23rem] sm:w-full">
+    <div className="h-fit flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full fold:w-[15rem] mobileM:w-[18rem] xs:w-[23rem] sm:w-full md:w-full">
       <div className="h-[10rem] relative">
         <Image
           src={rabbit}
@@ -53,8 +53,8 @@ const CoursesClient = ({ initialCourses }: { initialCourses: Course[] }) => {
 
         {/* courses */}
         <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-          <h2 className="text-black text-2xl mt-8 mb-6">APPLIED GEN AI COURSES</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-20 justify-items-center">
+          <h2 className="text-black text-xl md:text-2xl mt-8 mb-6">APPLIED GEN AI COURSES</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-12 md:gap-20 justify-items-center md:justify-items-stretch">
             {initialCourses.slice(0, visibleCourses).map((course, index) => (
               <CourseCard key={index} course={course} />
             ))}
