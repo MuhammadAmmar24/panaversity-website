@@ -58,7 +58,7 @@ const EmailVerificationPending = () => {
         </p>
         <Button
           onClick={resendEmail}
-          className="bg-blue-600 text-white py-2 px-4 rounded-lg w-full hover:bg-blue-700 transition"
+          className=" bg-accent text-textPrimary hover:bg-[#49eaa9] font-medium py-2 px-4 rounded-lg w-full transition"
         >
           Send Email Again
         </Button>

@@ -27,7 +27,7 @@ import { ToastAction } from "@/src/components/ui/toast";
 
 import Link from "next/link";
 
-export const LoginForm = () => {
+export const LoginForm = ({ onLoginSuccess  }) => {
   const searchParams = useSearchParams();
 
   // Get all the query params
@@ -94,6 +94,7 @@ export const LoginForm = () => {
                <ToastAction altText="Close">Close</ToastAction>
               ),
             })
+            onLoginSuccess(); // Call this function to close the dialog
             if (data.redirectTo) {
               router.push(data.redirectTo)
             } else {
@@ -167,6 +168,7 @@ export const LoginForm = () => {
             variant="link"
             asChild
             className="w-full "
+            
           >
             <Link href="/register" replace>Don&apos;t have an account? Register</Link>
           </Button>

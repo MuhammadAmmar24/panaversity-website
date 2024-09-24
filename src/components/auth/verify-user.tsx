@@ -29,10 +29,10 @@ const Verify = () => {
       {verified === null && (
         <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 shadow-md h-[400px]">
           <div className="flex justify-center mb-4">
-            <div className="bg-yellow-100 p-4 rounded-full">
+            <div className="bg-green-100 p-4 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-12 w-12 text-yellow-600 animate-spin"
+                className="h-12 w-12 text-accent animate-spin"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -69,15 +69,8 @@ const Verify = () => {
             <h2 className="text-2xl font-bold">Email Verified</h2>
             <p>Your email was verified. You can continue using the application.</p>
 
-            <Link href="/dashboard">
-              <Button 
-                size="sm"
-                variant="link"
-                asChild
-                className="w-full"
-                >
+            <Link href="/dashboard" className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium">
                   Go to Dashboard
-              </Button>
             </Link>
         </div>
       )}
@@ -88,6 +81,11 @@ const Verify = () => {
             </div>
             <h2 className="text-2xl font-bold">Email Verification Failed</h2>
             <p className="px-5">Invalid or expired verification link</p>
+            
+            <Link href="/verify" className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium">
+                  Re-verify Email
+            </Link>
+             
         </div>
       )}
     </div>
