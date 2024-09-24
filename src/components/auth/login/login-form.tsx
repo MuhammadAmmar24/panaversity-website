@@ -159,7 +159,7 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success}  />
-          <Button disabled={isPending} type="submit" className="w-full  bg-accent text-textPrimary hover:bg-[#18c781] font-medium">
+          <Button disabled={isPending} type="submit" className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium">
             {"Login"}
           </Button>         
       
