@@ -10,8 +10,8 @@ type BreadcrumbProps = {
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ program, courseName }) => {
   return (
     <nav className="mb-8">
-      <ol className="flex flex-wrap items-center space-x-1 text-xs sm:text-sm font-medium text-white">
-        <li className="flex items-center">
+      <ol className="flex flex-wrap items-center space-x-1 text-xs mt-8 sm:text-sm font-medium text-white">
+        <li className="flex items-center ">
           <Link href="/" className="hover:underline">
             Home
           </Link>
@@ -23,7 +23,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ program, courseName }) => {
           </Link>
           <ChevronRight className="w-4 h-4 mx-1" />
         </li>
-        <li className="font-extrabold">{courseName}</li>
+        <li className="">{courseName}</li>
       </ol>
     </nav>
   );

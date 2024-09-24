@@ -68,7 +68,10 @@ interface CourseDetailsClientProps {
   initialCurrency: string;
 }
 
-const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ initialPrice, initialCurrency }) => {
+const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
+  initialPrice,
+  initialCurrency,
+}) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
@@ -91,11 +94,17 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ initialPrice,
       <section className="flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-            <Breadcrumb program="Cloud Native Applied Generative AI Engineer" courseName="GEN AI & CLOUD BASICS" />
-
+          <Breadcrumb
+          
+                  program="Cloud Native Applied Generative AI Engineer"
+                  courseName="Gen AI & Cloud Basics"
+                />
             <div className="flex flex-col lg:flex-row ">
+              
               <div className="w-full lg:w-2/3">
-                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background font-poppins mb-4">
+                
+
+                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background -mt-2 font-poppins mb-4">
                   GEN AI & CLOUD BASICS
                 </h1>
                 <p className="mb-5 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">
@@ -103,7 +112,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ initialPrice,
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 mb-5 font-medium">
-                  <CourseInfo icon={User} text="Instructor: Sarah Jhons" />
+                  <CourseInfo icon={User} text="Instructor: Sarah Johns" />
                   <CourseInfo icon={Users} text="20,000+ Learners" />
                   <CourseInfo icon={Calendar} text="Duration: 3 months" />
                 </div>
@@ -127,7 +136,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ initialPrice,
                       Price:
                     </span>
                     <span className="text-3xl font-bold">
-                      {`${currency} ${price}`}
+                      {`${price} ${currency}`}
                     </span>
                   </div>
 
