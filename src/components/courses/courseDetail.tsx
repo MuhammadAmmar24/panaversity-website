@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
+import Breadcrumb from "../Breadcrumbs";
 
 const learnPoints: string[] = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -90,18 +91,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ initialPrice,
       <section className="flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-            <nav className="mb-8">
-              <ol className="flex flex-wrap items-center space-x-1 text-xs sm:text-sm font-semibold">
-                {["Home", "Programs", "Applied Gen AI Core Level"].map(
-                  (item, index) => (
-                    <React.Fragment key={index}>
-                      {index > 0 && <ChevronRight className="w-4 h-4" />}
-                      <li>{item}</li>
-                    </React.Fragment>
-                  )
-                )}
-              </ol>
-            </nav>
+            <Breadcrumb program="Cloud Native Applied Generative AI Engineer" courseName="GEN AI & CLOUD BASICS" />
 
             <div className="flex flex-col lg:flex-row ">
               <div className="w-full lg:w-2/3">
