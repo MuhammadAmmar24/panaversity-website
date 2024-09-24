@@ -22,7 +22,7 @@ const CourseCard = ({ course }: { course: Course }) => (
         <p className="text-xs mt-1 line-clamp-2">{course.course_description}</p>
       </div>
       <Link
-        href="/programs/course"
+        href="/programs/cloud-native-applied-generative-ai-engineer/course"
         className="w-full mt-1 rounded-md p-1.5 text-sm font-semibold text-white bg-emerald-500 hover:bg-emerald-600 text-center"
       >
         View Course Detail
