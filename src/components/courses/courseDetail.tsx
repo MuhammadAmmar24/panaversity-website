@@ -135,7 +135,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                     <span className="text-gray-900 font-medium text-lg">
                       Price:
                     </span>
-                    <span className="text-3xl font-bold">
+                    <span className="text-3xl font-bold uppercase">
                       {`${price} ${currency}`}
                     </span>
                   </div>

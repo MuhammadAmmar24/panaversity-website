@@ -32,7 +32,7 @@ export const getProgramsWithOpenRegistration = async (
 		}
 
 		const response = await fetch(
-			`${process.env.ENROLLMENT_API_URL}/data/open/programs?${params}`,
+			`${process.env.ENROLLMENT_API_URL}/data/open/programs/?${params}`,
 			{
 				method: "GET",
 				headers: {
