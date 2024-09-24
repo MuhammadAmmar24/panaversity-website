@@ -45,6 +45,7 @@ export const getProgramCoursesWithOpenRegistration = async (
 					Accept: "application/json",
 					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
+				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
 			}
 		);
 
@@ -55,6 +56,7 @@ export const getProgramCoursesWithOpenRegistration = async (
 		}
 
 		const responseData = await response.json();
+		console.log(responseData)
 
 		const parsedResponse = ProgramCoursesResponseSchema.safeParse(responseData);
 
@@ -110,6 +112,7 @@ export const getTimeSlotsForCourseBatchProgram = async (
 					Accept: "application/json",
 					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
+				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
 			}
 		);
 
@@ -169,6 +172,7 @@ export const getCoursePrice = async (
 					Accept: "application/json",
 					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
+				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
 			}
 		);
 
@@ -177,6 +181,7 @@ export const getCoursePrice = async (
 		}
 
 		const responseData = await response.json();
+		console.log(responseData)
 
 		// Validate the response data using zod schema
 		const parsedResponse = GetCoursePriceResponseSchema.safeParse(responseData);

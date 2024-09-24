@@ -106,7 +106,7 @@ export default function GetEnrolled() {
           </div>
 
           {/* Enroll Button */}
-          <button
+          <button 
             className={`w-full py-3 rounded-lg font-semibold ${isFormComplete ? "bg-emerald-500 text-white hover:bg-emerald-600" : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }`}
             disabled={!isFormComplete}  // Disable button when form is incomplete

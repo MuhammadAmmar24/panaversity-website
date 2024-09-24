@@ -1,4 +1,4 @@
-import { LoginForm } from "@/src/components/auth/Login-form";
+import { LoginForm } from "@/src/components/auth/login/login-form";
 import { Suspense } from "react";
 
 const LoginPage = () => {

@@ -1,10 +1,14 @@
-import { RegisterForm } from "@/src/components/auth/register-form";
-import { Suspense } from 'react'
+import { RegisterFormPage } from "@/src/components/auth/register/register-page";
+import { Suspense } from "react";
 
 const RegisterPage = () => {
-  return <div className="flex justify-center items-center min-h-screen">
-  <Suspense><RegisterForm /></Suspense>
-  </div>
+  return (
+    <div className="flex justify-center items-center min-h-screen">
+      <Suspense>
+        <RegisterFormPage />
+      </Suspense>
+    </div>
+  );
 };
 
 export default RegisterPage;
