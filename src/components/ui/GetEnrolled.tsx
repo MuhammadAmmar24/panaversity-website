@@ -9,6 +9,7 @@ export default function GetEnrolled() {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+  const [isEnrolled, setIsEnrolled] = useState(false);
 
   const paymentMethods = ["Kuickpay", "Stripe"];
 
@@ -42,9 +43,15 @@ export default function GetEnrolled() {
     .filter((slot) => slot.time_slot_day === selectedDay)
     .map((slot) => `${slot.slot_start_time} - ${slot.slot_end_time}`);
 
+  // Check if day and time are selected
+  const isDayAndTimeSelected = selectedDay && selectedTimeSlot;
+
   // Check if all options are selected
-  const isFormComplete =
-    selectedDay && selectedTimeSlot && selectedPaymentMethod;
+  const isFormComplete = isDayAndTimeSelected && selectedPaymentMethod && isEnrolled;
+
+  const handleEnroll = () => {
+    setIsEnrolled(true);
+  };
 
   return (
     <div className="rounded-3xl container mx-auto max-w-full">
@@ -105,6 +112,19 @@ export default function GetEnrolled() {
             </select>
           </div>
 
+          {/* Get Enrolled Button */}
+          <button
+            className={`w-full py-3 rounded-lg font-semibold ${
+              isDayAndTimeSelected
+                ? "bg-emerald-500 text-white hover:bg-emerald-600"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }`}
+            disabled={!isDayAndTimeSelected}
+            onClick={handleEnroll}
+          >
+            Get Enrolled
+          </button>
+
           {/* Select Payment Method */}
           <div>
             <h2 className="text-lg font-semibold mb-2">Payment Method</h2>
@@ -151,16 +171,16 @@ export default function GetEnrolled() {
             </div>
           </div>
 
-          {/* Enroll Button */}
+          {/* Pay Now Button */}
           <button
             className={`w-full py-3 rounded-lg font-semibold ${
               isFormComplete
                 ? "bg-emerald-500 text-white hover:bg-emerald-600"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
-            disabled={!isFormComplete} // Disable button when form is incomplete
+            disabled={!isFormComplete}
           >
-            Get Enrolled
+            Pay Now
           </button>
         </div>
       </div>
