@@ -1,22 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
-// import { CreditCard } from "lucide-react";
-import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses"; // Import the function
+import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
+import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 
 export default function GetEnrolled() {
-  // State for time slots and selected options
-  const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]); // Class time slots fetched from API
+  const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [seats, setSeats] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
+  const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
 
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
-  // Fetch time slots when the component mounts
+  // Fetch time slots
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
@@ -26,32 +26,22 @@ export default function GetEnrolled() {
         if (result.type === "success" && result.data) {
           setClassTimeSlots(result.data.class_time_slots);
 
-          // Check if class_time_slots array is not empty
           if (
-            result.data.class_time_slots !== undefined &&
+            result.data.class_time_slots &&
             result.data.class_time_slots.length > 0
           ) {
-            const slot = result.data.class_time_slots[0]; // Using the first slot as an example
+            const slot = result.data.class_time_slots[0];
             const totalSeats = slot.total_seats;
-            const bookedSeats = slot.booked_seats; // Replace with actual field name from your API
-            // const availableSeats = slot.available_seats; // If available
+            const bookedSeats = slot.booked_seats;
 
             setSeats(totalSeats);
-
-            // If 'available_seats' is provided by the API, use it directly
-            // if (availableSeats !== undefined) {
-            //   setRemainingSeats(availableSeats);
-            // } else
             if (bookedSeats !== undefined) {
-              // Calculate remaining seats
               setRemainingSeats(totalSeats - bookedSeats);
             } else {
-              console.error(
-                "Booked seats or available seats information not found in API response."
-              );
+              console.error("Booked seats information not found.");
             }
           } else {
-            console.error("Total seats information not found in API response.");
+            console.error("Total seats information not found.");
           }
         } else {
           console.error(result.message);
@@ -64,12 +54,10 @@ export default function GetEnrolled() {
     fetchTimeSlots();
   }, []);
 
-  // Get unique days for the day dropdown
+  // Get time slots for selected day
   const uniqueDays = Array.from(
     new Set(classTimeSlots.map((slot) => slot.time_slot_day))
   );
-
-  // Function to get the next date for a given day of the week
   const getNextDateForDay = (dayName: any) => {
     const dayOfWeek = [
       "Sunday",
@@ -80,9 +68,7 @@ export default function GetEnrolled() {
       "Friday",
       "Saturday",
     ].indexOf(dayName);
-
     if (dayOfWeek === -1) return null;
-
     const now = new Date();
     const resultDate = new Date(now);
     resultDate.setDate(
@@ -91,25 +77,19 @@ export default function GetEnrolled() {
     return resultDate;
   };
 
-  // Get time slots for the selected day with time zone conversion
   const timeSlotsForSelectedDay = classTimeSlots
     .filter((slot) => slot.time_slot_day === selectedDay)
     .map((slot) => {
-      // Get the next date for the selected day
       const dateForSlot = getNextDateForDay(selectedDay);
-
       if (!dateForSlot) return null;
 
-      // Combine date with start and end times
-      const dateString = dateForSlot.toISOString().split("T")[0]; // YYYY-MM-DD
-      const startTimeString = `${dateString}T${slot.slot_start_time}Z`; // Assume times are in UTC
+      const dateString = dateForSlot.toISOString().split("T")[0];
+      const startTimeString = `${dateString}T${slot.slot_start_time}Z`;
       const endTimeString = `${dateString}T${slot.slot_end_time}Z`;
 
-      // Create Date objects
       const startDate = new Date(startTimeString);
       const endDate = new Date(endTimeString);
 
-      // Format the dates to the user's local timezone
       const formattedStartTime = startDate.toLocaleString(undefined, {
         hour: "2-digit",
         minute: "2-digit",
@@ -126,22 +106,47 @@ export default function GetEnrolled() {
 
       return {
         id: slot.id,
-        timeSlotId: slot.id, // You might need this for further processing
+        timeSlotId: slot.id,
         label: `${formattedStartTime} - ${formattedEndTime}`,
-        originalSlot: slot, // Keep the original slot if needed
+        originalSlot: slot,
       };
     })
-    .filter(Boolean); // Remove null entries
+    .filter(Boolean);
 
-  // Check if day and time are selected
   const isDayAndTimeSelected = selectedDay && selectedTimeSlot;
-
-  // Check if all options are selected
   const isFormComplete =
     isDayAndTimeSelected && selectedPaymentMethod && isEnrolled;
 
-  const handleEnroll = () => {
-    setIsEnrolled(true);
+  const handleEnroll = async () => {
+    if (!isDayAndTimeSelected) return;
+
+    const payload = {
+      student_id: "123", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
+      program_id: 1, // Replace with actual program ID, ensure it's correct
+      batch_id: 1, // Replace with actual batch ID
+      course_batch_program_id: 1, // Replace with actual course_batch_program_id
+      class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
+      // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
+    };
+
+    // Log the payload for debugging
+    console.log("Enrollment Payload:", payload);
+
+    try {
+      const result = await enrollNewStudentInProgramAndCourse(payload);
+
+      if (result.type === "success") {
+        setIsEnrolled(true); // Enrollment success, show message
+        setEnrollmentError(result.message); // Clear any errors
+        console.log(result.message); // Optional: log the success message
+      } else {
+        setEnrollmentError(result.message); // Handle API error
+        console.error("API Error:", result.message);
+      }
+    } catch (error) {
+      setEnrollmentError("Failed to enroll student."); // General error handling
+      console.error("Enrollment failed:", error);
+    }
   };
 
   return (
@@ -174,7 +179,11 @@ export default function GetEnrolled() {
           </p>
         </div>
 
-        {/* Display total seats */}
+        <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
+          {/* Display form instructions */}
+        </div>
+
+        {/* Display remaining seats */}
         <div className="mb-6 text-red-500">
           <span className="text-lg font-semibold">Remaining Seats: </span>
           <span className="text-lg">
@@ -186,8 +195,9 @@ export default function GetEnrolled() {
           </span>
         </div>
 
+        {/* Display enrollment form */}
         <div className="space-y-5 w-full max-w-md ">
-          {/* Select Day Dropdown */}
+          {/* Day and Time Slot Dropdowns */}
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
@@ -219,7 +229,6 @@ export default function GetEnrolled() {
                   </option>
                 ))}
               </select>
-              {/* Custom dropdown arrow */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-400"
@@ -237,7 +246,6 @@ export default function GetEnrolled() {
             </div>
           </div>
 
-          {/* Select Time Slot Dropdown */}
           <div>
             <label
               htmlFor="timeSlot"
@@ -270,7 +278,6 @@ export default function GetEnrolled() {
                   </option>
                 ))}
               </select>
-              {/* Custom dropdown arrow */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                 <svg
                   className="w-5 h-5 text-gray-400"
@@ -280,7 +287,7 @@ export default function GetEnrolled() {
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -288,7 +295,6 @@ export default function GetEnrolled() {
             </div>
           </div>
 
-          {/* Reserve Your Seat Button */}
           <button
             className={`w-full block p-3 rounded-lg font-semibold ${
               isDayAndTimeSelected
@@ -300,6 +306,18 @@ export default function GetEnrolled() {
           >
             Reserve Your Seat
           </button>
+
+          {/* Success Message
+          {isEnrolled && (
+            <div className="mt-4 text-green-500">
+              <p>Enrollment successful! You have reserved your seat.</p>
+            </div>
+          )} */}
+
+          {/* Error Message */}
+          {enrollmentError && (
+            <p className="text-red-500 mt-4">{enrollmentError}</p>
+          )}
         </div>
       </div>
     </div>
