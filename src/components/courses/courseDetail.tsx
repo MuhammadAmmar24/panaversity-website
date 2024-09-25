@@ -12,10 +12,14 @@ import {
 } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
-import Breadcrumb from "../Breadcrumbs";
-// import { CourseData } from "@/src/types/CourseData";
-// import CourseInfo from "./CourseInfo";
-// import StarRating from "./StarRating";
+
+const learnPoints: string[] = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+];
+
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
@@ -83,12 +87,7 @@ interface CourseDetailsClientProps {
   initialCurrency: string;
 }
 
-const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
-  courseData,
-  initialPrice,
-
-  initialCurrency
-}) => {
+const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({ courseData, initialPrice, initialCurrency }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
@@ -135,26 +134,32 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
       >
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-            {/* Breadcrumb Navigation */}
-            <Breadcrumb
-              program="Flagship-Program"
-              courseName={course_name}
-            />
+            <nav className="mb-8">
+              <ol className="flex flex-wrap items-center space-x-1 text-xs sm:text-sm font-semibold">
+                {["Home", "Programs", "Applied Gen AI Core Level"].map(
+                  (item, index) => (
+                    <React.Fragment key={index}>
+                      {index > 0 && <ChevronRight className="w-4 h-4" />}
+                      <li>{item}</li>
+                    </React.Fragment>
+                  )
+                )}
+              </ol>
+            </nav>
 
             <div className="flex flex-col lg:flex-row ">
-              {/* Course Details */}
               <div className="w-full lg:w-2/3">
-                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background -mt-2 font-poppins mb-4">
-                  {course_name}
+                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background font-poppins mb-4">
+                  GEN AI & CLOUD BASICS
                 </h1>
                 <p className="mb-5 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">
                   {course_description}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 mb-5 font-medium">
-                  <CourseInfo icon={User} text={`Instructor: ${instructor}`} />
-                  <CourseInfo icon={Users} text={`${learnersCount} Learners`} />
-                  <CourseInfo icon={Calendar} text={`Duration: ${duration}`} />
+                  <CourseInfo icon={User} text="Instructor: Sarah Jhons" />
+                  <CourseInfo icon={Users} text="20,000+ Learners" />
+                  <CourseInfo icon={Calendar} text="Duration: 3 months" />
                 </div>
 
                 <div className="flex flex-wrap items-center space-x-2 mb-6">
@@ -176,8 +181,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                     <span className="text-gray-900 font-medium text-lg">
                       Price:
                     </span>
-                    <span className="text-3xl font-bold uppercase">
-                      {currency ? `${currency} ${price}` : price}
+                    <span className="text-3xl font-bold">
+                      {`${currency} ${price}`}
                     </span>
                   </div>
 
