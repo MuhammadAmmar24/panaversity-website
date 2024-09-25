@@ -4,6 +4,8 @@ import { Button } from '../../ui/button';
 import { useToast } from '../../ui/use-toast';
 import Link from 'next/link';
 import { ToastAction } from '../../ui/toast';
+import { FaClock } from "react-icons/fa6";
+
 
 const EmailVerificationPending = () => {
     const { toast } = useToast()
@@ -34,19 +36,9 @@ const EmailVerificationPending = () => {
     <div className='text-center w-full max-w-sm '>
 
         <div className="flex justify-center mb-4">
-          <div className="bg-green-100 p-4 rounded-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-12 w-12 text-green-600"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fillRule="evenodd"
-                d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
+          <div className="bg-yellow-100 p-4 rounded-full">
+          <FaClock  className='text-3xl text-yellow-600'/>
+
           </div>
         </div>
         <h2 className="text-2xl font-semibold mb-2 text-gray-800">
