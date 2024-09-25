@@ -12,7 +12,9 @@ async function fetchCourses() {
   const result = await getProgramCoursesWithOpenRegistration(query);
 
   if (result.type === "success" && result.data) {
+    console.log(result.data)
     return result.data.data;
+   
   } else {
     throw new Error(result.message);
   }

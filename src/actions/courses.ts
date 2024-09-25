@@ -45,7 +45,8 @@ export const getProgramCoursesWithOpenRegistration = async (
 					Accept: "application/json",
 					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
-				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
+				// next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
+			      cache:"no-store"
 			}
 		);
 
@@ -81,6 +82,7 @@ export const getProgramCoursesWithOpenRegistration = async (
 		};
 	}
 };
+
 
 export const getTimeSlotsForCourseBatchProgram = async (
 	query: TimeSlotsQuery
@@ -199,6 +201,73 @@ export const getCoursePrice = async (
 		return {
 			type: "success",
 			message: "Course price fetched successfully",
+			data: parsedResponse.data,
+		};
+	} catch (error: any) {
+		return {
+			type: "error",
+			message: error.message,
+		};
+	}
+};
+
+//mai ye chuss maar rha hun
+export const test_dynamic = async (
+	query: ProgramCoursesQuery
+): Promise<Result<ProgramCoursesResponse>> => {
+	const validationResult = ProgramCoursesQuerySchema.safeParse(query);
+
+	if (!validationResult.success) {
+		return {
+			type: "error",
+			message: validationResult.error.errors
+				.map((err) => err.message)
+				.join(", "),
+		};
+	}
+
+	try {
+		const params = new URLSearchParams();
+		for (const [key, value] of Object.entries(validationResult.data)) {
+			params.append(key, String(value));
+		}
+
+		const response = await fetch(
+			`${process.env.ENROLLMENT_API_URL}/data/course-batch-program?${params}`,
+			{
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+				},
+				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
+			}
+		);
+
+		if (!response.ok) {
+			throw new Error(
+				`Failed to fetch program courses: ${response.statusText}`
+			);
+		}
+
+		const responseData = await response.json();
+		console.log(responseData)
+
+		const parsedResponse = ProgramCoursesResponseSchema.safeParse(responseData);
+
+		if (!parsedResponse.success) {
+			return {
+				type: "error",
+				message: parsedResponse.error.errors
+					.map((err) => err.message)
+					.join(", "),
+			};
+		}
+
+		return {
+			type: "success",
+			message: "Program courses fetched successfully",
 			data: parsedResponse.data,
 		};
 	} catch (error: any) {
