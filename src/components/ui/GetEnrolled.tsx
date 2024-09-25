@@ -155,22 +155,16 @@ export default function GetEnrolled() {
         </div>
 
         {/* Display total seats */}
-        {seats !== null && (
-          <>
-            {/* <div className="mb-5">
-              <span className="text-lg font-semibold">
-                Total Seats Available:{" "}
-              </span>
-              <span className="text-lg">{seats}</span>
-            </div> */}
-            <div className="mb-6">
-              <span className="text-lg font-semibold ">Remaining Seats: </span>
-              <span className="text-lg">
-                {remainingSeats !== null ? remainingSeats : "N/A"}
-              </span>
-            </div>
-          </>
-        )}
+        <div className="mb-6 text-red-500">
+          <span className="text-lg font-semibold">Remaining Seats: </span>
+          <span className="text-lg">
+            {remainingSeats === null
+              ? "..."            
+              : remainingSeats === 0
+                ? "N/A"                      
+                : remainingSeats}             
+          </span>
+        </div>
 
         <div className="space-y-5">
           {/* Select Day Dropdown */}
@@ -264,7 +258,7 @@ export default function GetEnrolled() {
             disabled={!isDayAndTimeSelected}
             onClick={handleEnroll}
           >
-            Get Enrolled
+            Reserve Your Seat
           </button>
 
           {/* Select Payment Method */}
