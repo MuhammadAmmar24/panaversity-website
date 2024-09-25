@@ -52,7 +52,7 @@ export const EnrollNewStudentRequestSchema = z.object({
 	batch_id: z.number(),
 	course_batch_program_id: z.number(),
 	class_time_slot_id: z.number(),
-	lab_time_slot_id: z.number(),
+	// lab_time_slot_id: z.number(),
 });
 
 const StudentProgramSchema = z.object({
