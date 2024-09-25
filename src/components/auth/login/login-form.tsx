@@ -24,6 +24,7 @@ import { login } from "@/src/actions/login";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import Link from "next/link";
 
@@ -159,9 +160,20 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
           </div>
           <FormError message={error || urlError} />
           <FormSuccess message={success}  />
-          <Button disabled={isPending} type="submit" className="w-full  bg-accent text-textPrimary hover:bg-[#18c781] font-medium">
-            {"Login"}
-          </Button>         
+          <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+        >
+          {isPending ? (
+            <>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            "Login"
+          )}
+        </Button>       
       
           <Button
             size="sm"

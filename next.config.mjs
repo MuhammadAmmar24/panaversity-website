@@ -9,6 +9,15 @@ const nextConfig = {
             },            
         ],
     },
+    async redirects() {
+        return [
+          {
+            source: '/programs',
+            destination: '/programs/flagship-program',
+            permanent: true, // Use true for 301 (permanent) redirect
+          },
+        ]
+      },
 };
 
 export default nextConfig;

@@ -138,6 +138,7 @@ export const getTimeSlotsForCourseBatchProgram = async (
 			type: "success",
 			message: "Time slots fetched successfully",
 			data: parsedResponse.data,
+			
 		};
 	} catch (error: any) {
 		return {

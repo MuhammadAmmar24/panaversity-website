@@ -7,7 +7,7 @@ import { verify } from "@/src/actions/verify";
 import { resendVerification } from "@/src/actions/resend-verification";
 import { useToast } from "@/src/components/ui/use-toast"
 import Link from 'next/link';
-import { ToastAction } from '../ui/toast';
+import { ToastAction } from '../../ui/toast';
 
 const Verify = () => {
   const { toast } = useToast()
@@ -25,9 +25,9 @@ const Verify = () => {
   }, [token]); 
 
   return (
-    <div className="flex justify-center items-center h-screen">
+   <>
       {verified === null && (
-        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 shadow-md h-[400px]">
+        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5   h-[400px]">
           <div className="flex justify-center mb-4">
             <div className="bg-green-100 p-4 rounded-full">
               <svg
@@ -49,7 +49,7 @@ const Verify = () => {
         </div>
       )}
       {verified === true && (
-        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 shadow-md h-[400px]">
+        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5  h-[400px]">
             <div className="flex justify-center mb-4">
               <div className="bg-green-100 p-4 rounded-full">
                 <svg
@@ -75,7 +75,7 @@ const Verify = () => {
         </div>
       )}
       {verified === false && (
-        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 shadow-md h-[400px]">
+        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5  h-[400px]">
             <div className="flex justify-center mb-4">
             <ImCancelCircle size={50} className="text-red-500" />
             </div>
@@ -88,7 +88,7 @@ const Verify = () => {
              
         </div>
       )}
-    </div>
+    </>
   );
 };
 

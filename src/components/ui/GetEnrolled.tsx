@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { CreditCard } from "lucide-react";
+// import { CreditCard } from "lucide-react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses"; // Import the function
 
 export default function GetEnrolled() {
@@ -14,6 +14,7 @@ export default function GetEnrolled() {
   const [isEnrolled, setIsEnrolled] = useState(false);
 
   const paymentMethods = ["Kuickpay", "Stripe"];
+  const [focusedInput, setFocusedInput] = useState("");
 
   // Fetch time slots when the component mounts
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function GetEnrolled() {
             // if (availableSeats !== undefined) {
             //   setRemainingSeats(availableSeats);
             // } else
-             if (bookedSeats !== undefined) {
+            if (bookedSeats !== undefined) {
               // Calculate remaining seats
               setRemainingSeats(totalSeats - bookedSeats);
             } else {
@@ -148,53 +149,92 @@ export default function GetEnrolled() {
       <div className="px-2 ">
         <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
-        <p className="text-gray-500 mb-8">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+        <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
+          <p>
+            <span className="font-semibold">
+              1- Select Your Preferred Day and Time:
+            </span>{" "}
+            Choose the class schedule that works best for you from the available
+            options.
+            <br />
+          </p>
+          <p>
+            <span className="font-semibold">2- Reserve Your Seat:</span> Once
+            you've selected your preferred day and time, you can reserve a seat,
+            provided there is availability.
+            <br />
+          </p>
+          <p>
+            <span className="font-semibold">
+              3- Confirm Your Reservation by Payment:
+            </span>{" "}
+            After reserving your seat, go to your student dashboard to complete
+            the payment. Your seat will only be officially booked once the
+            payment is made.
+          </p>
+        </div>
 
         {/* Display total seats */}
-        {seats !== null && (
-          <>
-            {/* <div className="mb-5">
-              <span className="text-lg font-semibold">
-                Total Seats Available:{" "}
-              </span>
-              <span className="text-lg">{seats}</span>
-            </div> */}
-            <div className="mb-6">
-              <span className="text-lg font-semibold ">Remaining Seats: </span>
-              <span className="text-lg">
-                {remainingSeats !== null ? remainingSeats : "N/A"}
-              </span>
-            </div>
-          </>
-        )}
+        <div className="mb-6 text-red-500">
+          <span className="text-lg font-semibold">Remaining Seats: </span>
+          <span className="text-lg">
+            {remainingSeats === null
+              ? "..."
+              : remainingSeats === 0
+              ? "N/A"
+              : remainingSeats}
+          </span>
+        </div>
 
-        <div className="space-y-5">
+        <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
             </label>
-            <select
-              id="day"
-              className="block w-full max-w-md p-3 border border-neutral-400 rounded-lg text-gray-700 bg-transparent"
-              value={selectedDay}
-              onChange={(e) => {
-                setSelectedDay(e.target.value);
-                setSelectedTimeSlot(""); // Reset selected time slot when day changes
-              }}
-            >
-              <option value="" disabled hidden>
-                Select Day
-              </option>
-              {uniqueDays.map((day) => (
-                <option key={day} value={day}>
-                  {day}
+            <div className="relative w-full">
+              <select
+                id="day"
+                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  isDayAndTimeSelected
+                    ? "border-accent"
+                    : focusedInput === "day"
+                    ? "border-accent"
+                    : "border-neutral-400"
+                }`}
+                value={selectedDay}
+                onChange={(e) => {
+                  setSelectedDay(e.target.value);
+                  setSelectedTimeSlot("");
+                }}
+                onFocus={() => setFocusedInput("day")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Day
                 </option>
-              ))}
-            </select>
+                {uniqueDays.map((day) => (
+                  <option key={day} value={day}>
+                    {day}
+                  </option>
+                ))}
+              </select>
+              {/* Custom dropdown arrow */}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
 
           {/* Select Time Slot Dropdown */}
@@ -205,27 +245,52 @@ export default function GetEnrolled() {
             >
               Time
             </label>
-            <select
-              id="timeSlot"
-              className="block w-full max-w-md p-3 border border-neutral-400 rounded-lg text-gray-700 bg-transparent"
-              value={selectedTimeSlot}
-              onChange={(e) => setSelectedTimeSlot(e.target.value)}
-              disabled={!selectedDay} // Disable until a day is selected
-            >
-              <option value="" disabled hidden>
-                Select Time
-              </option>
-              {timeSlotsForSelectedDay.map((timeSlot: any) => (
-                <option key={timeSlot.id} value={timeSlot.timeSlotId}>
-                  {timeSlot.label}
+            <div className="relative w-full">
+              <select
+                id="timeSlot"
+                className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  isDayAndTimeSelected
+                    ? "border-accent"
+                    : focusedInput === "timeSlot"
+                    ? "border-accent"
+                    : "border-neutral-400"
+                }`}
+                value={selectedTimeSlot}
+                onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                disabled={!selectedDay}
+                onFocus={() => setFocusedInput("timeSlot")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Time
                 </option>
-              ))}
-            </select>
+                {timeSlotsForSelectedDay.map((timeSlot: any) => (
+                  <option key={timeSlot.id} value={timeSlot.timeSlotId}>
+                    {timeSlot.label}
+                  </option>
+                ))}
+              </select>
+              {/* Custom dropdown arrow */}
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
           </div>
 
-          {/* Get Enrolled Button */}
+          {/* Reserve Your Seat Button */}
           <button
-            className={`w-full py-3 rounded-lg font-semibold ${
+            className={`w-full block p-3 rounded-lg font-semibold ${
               isDayAndTimeSelected
                 ? "bg-emerald-500 text-white hover:bg-emerald-600"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -233,70 +298,8 @@ export default function GetEnrolled() {
             disabled={!isDayAndTimeSelected}
             onClick={handleEnroll}
           >
-            Get Enrolled
+            Reserve Your Seat
           </button>
-
-          {/* Select Payment Method */}
-          {isEnrolled && (
-            <div>
-              <h2 className="text-lg font-semibold mb-2">Payment Method</h2>
-              <div className="space-y-2">
-                {paymentMethods.map((method) => (
-                  <div
-                    key={method}
-                    className={`flex items-center justify-between p-3 rounded-lg cursor-pointer ${
-                      selectedPaymentMethod === method
-                        ? "border border-emerald-500"
-                        : "border border-gray-300"
-                    }`}
-                    onClick={() => setSelectedPaymentMethod(method)}
-                  >
-                    <div className="flex items-center">
-                      <CreditCard className="w-6 h-6 text-gray-400 mr-3" />
-                      <span className="text-gray-700">{method}</span>
-                    </div>
-                    <div
-                      className={`w-6 h-6 rounded-full ${
-                        selectedPaymentMethod === method
-                          ? "bg-emerald-500 flex items-center justify-center"
-                          : "border-2 border-gray-300"
-                      }`}
-                    >
-                      {selectedPaymentMethod === method && (
-                        <svg
-                          className="w-4 h-4 text-white"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Pay Now Button */}
-          {isEnrolled && (
-            <button
-              className={`w-full py-3 rounded-lg font-semibold ${
-                isFormComplete
-                  ? "bg-emerald-500 text-white hover:bg-emerald-600"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
-              disabled={!isFormComplete}
-            >
-              Pay Now
-            </button>
-          )}
         </div>
       </div>
     </div>

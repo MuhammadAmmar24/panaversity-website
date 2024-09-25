@@ -15,5 +15,5 @@ async function fetchCoursePrice() {
 export default async function CourseDetails() {
   const { price, currency } = await fetchCoursePrice();
 
-  return <CourseDetailsClient initialPrice={price} initialCurrency={currency} />;
+  // return <CourseDetailsClient courseData={{ price, currency }} />;
 }
