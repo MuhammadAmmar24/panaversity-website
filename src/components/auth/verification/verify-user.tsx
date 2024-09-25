@@ -17,12 +17,17 @@ const Verify = () => {
 
   useEffect(() => {
     if (token) {
-      // Only call verify if token is present
       verify(token).then((res) => {
         setVerified(res);
+        if (res === true) {
+          // Set a flag in localStorage
+          localStorage.setItem('emailVerified', 'true');
+          // Close the current window
+          window.close();
+        }
       });
     }
-  }, [token]); 
+  }, [token]);
 
   return (
    <>
@@ -67,10 +72,10 @@ const Verify = () => {
               </div>
             </div>
             <h2 className="text-2xl font-bold">Email Verified</h2>
-            <p>Your email was verified. You can continue using the application.</p>
+            <p className='text-center'>Your email was verified. You can continue using the application.</p>
 
-            <Link href="/dashboard" className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium">
-                  Go to Dashboard
+            <Link href="/login" className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium">
+                  Get Started 
             </Link>
         </div>
       )}

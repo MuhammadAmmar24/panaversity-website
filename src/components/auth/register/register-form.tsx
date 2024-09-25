@@ -86,16 +86,19 @@ export const RegisterForm = () => {
         if (data?.success) {
           toast({
             title: "Signup Success",
-            description: "Please Login To Continue",
+            description: "Please Verify Email To Continue",
+            color: "1cd98e",
             action: (
-              <Link href={redirect_uri ? `/login${queryParams}` : "/login"}>
-                <ToastAction altText="Login to Continue!">
-                  Login Now
+              <Link href={redirect_uri ? `/verify${queryParams}` : "/verify"} replace>
+                <ToastAction altText="Verify to Continue!">
+                  Verify Email
                 </ToastAction>
               </Link>
             ),
           });
-          router.push("/login");
+
+          router.replace("/verify");
+
         }
       });
     });
@@ -193,6 +196,7 @@ export const RegisterForm = () => {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={isPending}
                 >
                   <FormControl>
                     <SelectTrigger
