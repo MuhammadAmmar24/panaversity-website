@@ -18,7 +18,7 @@ export const checkUserVerification = async () => {
     });
     if (response.ok) {
       const profile = await response.json();
-      return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/dashboard" : "/verify" };
+      return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/programs/flagship-program" : "/verify" };
     } else {
       return { isVerified: false, redirectTo: "/login" };
     }

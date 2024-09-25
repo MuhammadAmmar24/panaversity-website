@@ -96,11 +96,13 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
               ),
             })
             onLoginSuccess(); // Call this function to close the dialog
-            if (data.redirectTo) {
-              router.push(data.redirectTo)
-            } else {
-              router.push(callbackUrl || DEFAULT_LOGIN_REDIRECT)
-            }
+            // if (data.redirectTo) {
+            //   // router.push(data.redirectTo)
+            //   // router.back()
+            // } else {
+            //   // router.push(callbackUrl || DEFAULT_LOGIN_REDIRECT)
+            //   // router.back()
+            // }
           }
         });
     });

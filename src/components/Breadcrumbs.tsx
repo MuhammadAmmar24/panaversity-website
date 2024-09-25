@@ -17,6 +17,12 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ program, courseName }) => {
           </Link>
           <ChevronRight className="w-4 h-4 mx-1" />
         </li>
+        <li className="flex items-center ">
+          <Link href="/programs" className="hover:underline">
+            Programs
+          </Link>
+          <ChevronRight className="w-4 h-4 mx-1" />
+        </li>
         <li className="flex items-center">
           <Link href={`/programs`} className="hover:underline">
             {program}
