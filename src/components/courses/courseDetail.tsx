@@ -95,8 +95,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
           <Breadcrumb
-          
-                  program="Cloud Native Applied Generative AI Engineer"
+                  program="Flagship-Program"
                   courseName="Gen AI & Cloud Basics"
                 />
             <div className="flex flex-col lg:flex-row ">
