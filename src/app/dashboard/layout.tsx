@@ -1,5 +1,6 @@
 // layout.tsx
 import type { Metadata } from "next";
+import SideNav from "../admin/ui/dashboard/sidenav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <>
+    <div>
+{/* <SideNav /> */}
+    {children}
+    </div>
+  </>;
 }
