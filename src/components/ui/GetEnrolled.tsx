@@ -186,7 +186,7 @@ export default function GetEnrolled() {
           </span>
         </div>
 
-        <div className="space-y-5 w-full max-w-md ">
+        <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
@@ -195,7 +195,7 @@ export default function GetEnrolled() {
             <div className="relative w-full">
               <select
                 id="day"
-                className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
                   isDayAndTimeSelected
                     ? "border-accent"
                     : focusedInput === "day"

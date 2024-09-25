@@ -150,7 +150,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       side={sheetSide}
                       className={`w-full max-w-full overflow-y-auto ${
                         sheetSide === "bottom" ? "h-[80vh]" : "h-full"
-                      } ${sheetSide === "right" ? "lg:max-w-2xl" : ""}`}
+                      } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
                     >
                       <GetEnrolled />
                     </SheetContent>
