@@ -315,7 +315,7 @@ export default function GetEnrolled() {
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className="text-red-500 mt-4">{enrollmentError}</p>
+            <p className={"text-green-500 mt-4"}>{enrollmentError}</p> 
           )}
         </div>
       </div>
