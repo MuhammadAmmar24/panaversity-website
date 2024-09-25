@@ -1,4 +1,4 @@
-import { lusitana } from "@/src/app/admin/ui/fonts";
+import { lusitana } from "@/src/app/(public)/admin/ui/fonts";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
