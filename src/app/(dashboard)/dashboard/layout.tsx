@@ -1,6 +1,6 @@
 // layout.tsx
 import type { Metadata } from "next";
-import SideNav from "../../(public)/admin/ui/dashboard/sidenav";
+import SideNav from "../../admin/ui/dashboard/sidenav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
