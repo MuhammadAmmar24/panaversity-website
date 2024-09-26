@@ -26,7 +26,6 @@ export {
   
   const mockRecentCourses = [
     { title: "Gen AI & Cloud Services", progress: 40, lessons: 10 },
-    { title: "Applied Generative AI", progress: 20, lessons: 20 },
   ];
   
   const mockRecentClasses = [

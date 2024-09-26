@@ -9,6 +9,7 @@ import Image from "next/image"; // Import Next.js Image component
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar open state
 
   // Simulate a loading delay
   useEffect(() => {
@@ -40,9 +41,16 @@ export default function Home() {
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <div className="flex-1 ml-4 mr-4 md:mr-20 md:ml-20 overflow-hidden">
+    <div className="relative flex">
+      <Sidebar setIsSidebarOpen={setIsSidebarOpen} />
+      
+      {/* Overlay: Black background when sidebar is open */}
+      {isSidebarOpen && (
+        <div className="fixed inset-0 bg-black opacity-80 transition-opacity duration-1000 z-30"></div>
+      )}
+
+      {/* Main content */}
+      <div className="flex-1 ml-4 mr-4 md:mr-20 md:ml-20 overflow-hidden transition-all duration-300">
         <TopBar />
         <Welcome />
         <Dashboard />
