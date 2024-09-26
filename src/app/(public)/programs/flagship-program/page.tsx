@@ -1,4 +1,5 @@
 import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
+import { Course } from "@/src/lib/schemas/courses";
 import CoursesClient from '@/src/components/programs/courses';
 
 async function fetchCourses() {
@@ -11,7 +12,9 @@ async function fetchCourses() {
   const result = await getProgramCoursesWithOpenRegistration(query);
 
   if (result.type === "success" && result.data) {
+    console.log(result.data)
     return result.data.data;
+   
   } else {
     throw new Error(result.message);
   }
