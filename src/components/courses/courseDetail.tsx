@@ -132,7 +132,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   } = courseData;
 
   // Assign default values if necessary
-  const instructor = "Sarah Johns"; // Update if dynamic
   const learnersCount = "20,000+";
   const duration = "3 months";
   const rating = 4.8;
@@ -166,7 +165,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 mb-5 font-medium">
-                <CourseInfo icon={User} text={`Instructor: ${instructor}`} />
                   <CourseInfo icon={Users} text={`${learnersCount} Learners`} />
                   <CourseInfo icon={Calendar} text={`Duration: ${duration}`} />
                 </div>

@@ -5,7 +5,7 @@ export const user_verify = async () => {
   const session = await auth(); // Getting JWT From Cookies
   if (!session) {
     console.log("[session] No cookies. Redirecting...");
-    return { isVerified: false, redirectTo: "/login" };
+    return { isVerified: false, redirectTo: "/register" };
   }
   const token = session?.access_token;
   try {
@@ -25,6 +25,6 @@ export const user_verify = async () => {
       return { isVerified: false, redirectTo: "/verify" };
     }
   } catch (error) {
-    return { isVerified: false, redirectTo: "/login" };
+    return { isVerified: false, redirectTo: "/register" };
   }
 };
