@@ -12,13 +12,13 @@ export default function ProgramOverview() {
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
             {programOverviewData.sectionHeading}
           </h2>
-          <h3 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight">
+          <h3 className="text-[2.1rem] sm:text-3xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight font-poppins">
             {programOverviewData.mainHeading}
           </h3>
-          <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70">
+          <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70 font-rubik">
             {programOverviewData.content1}
           </p>
-          <p className="mt-4 text-[1rem]/[2] sm:text-md/[2] mb-4 text-[#031811]/70">
+          <p className="mt-4 text-[1rem]/[2] sm:text-md/[2] mb-4 text-[#031811]/70 font-rubik">
             {programOverviewData.content2}
           </p>
           {/* Button Component */}
@@ -58,7 +58,7 @@ export default function ProgramOverview() {
                   height={feature.iconSize.height}
                 />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">
+              <h3 className="text-lg font-semibold text-gray-800 mb-2 font-poppins">
                 {feature.title}
               </h3>
               <p className="text-sm text-gray-600">{feature.description}</p>

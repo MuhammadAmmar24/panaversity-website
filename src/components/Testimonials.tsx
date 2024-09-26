@@ -99,11 +99,11 @@ const Testimonials = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium">{testimonial.name}</h3>
+                    <h3 className="text-xl font-medium font-poppins">{testimonial.name}</h3>
                     <p className="text-sm md:text-xs  mb-2">{testimonial.position}</p>
                   </div>
                 </div>
-                <p className="opacity-75 mb-2 text-base ">{testimonial.content}</p>
+                <p className="opacity-75 mb-2 text-base">{testimonial.content}</p>
               </div>
             </SwiperSlide>
           ))}
