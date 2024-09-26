@@ -170,22 +170,22 @@ export const enrollNewStudentInProgramAndCourse = async (
 
 		const responseData = await response.json();
 
-		const parsedResponse =
-			EnrollNewStudentResponseSchema.safeParse(responseData);
+		// const parsedResponse =
+		// 	EnrollNewStudentResponseSchema.safeParse(responseData);
 
-		if (!parsedResponse.success) {
-			return {
-				type: "error",
-				message: parsedResponse.error.errors
-					.map((err) => err.message)
-					.join(", "),
-			};
-		}
+		// if (!parsedResponse.success) {
+		// 	return {
+		// 		type: "error",
+		// 		message: parsedResponse.error.errors
+		// 			.map((err) => err.message)
+		// 			.join(", "),
+		// 	};
+		// }
 
 		return {
 			type: "success",
 			message: "Student enrolled in program and course successfully",
-			data: parsedResponse.data,
+			data: responseData,
 		};
 	} catch (error: any) {
 		return {
