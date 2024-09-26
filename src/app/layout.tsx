@@ -45,7 +45,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}>
        
         {children}
-        
+        {modal}
        
       </body>
     </html>

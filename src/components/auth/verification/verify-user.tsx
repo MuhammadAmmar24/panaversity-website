@@ -9,12 +9,19 @@ import Link from "next/link";
 import { auth } from "@/src/auth"; // Import your auth function
 import { ToastAction } from "../../ui/toast";
 
-const Verify = () => {
+const Verify = async () => {
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const [verified, setVerified] = useState<null | boolean>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track authentication
   const token = searchParams.get("token");
+
+   // Call auth function to check for authentication
+  //  const checkAuth = async () => {
+  //   const user = await auth();
+  //   setIsAuthenticated(!!user); // If user is authenticated, set true
+  // };
+
 
   useEffect(() => {
     // Check for token and verify the user
@@ -28,14 +35,13 @@ const Verify = () => {
       });
     }
 
-    // Call auth function to check for authentication
-    const checkAuth = async () => {
-      const user = await auth();
-      setIsAuthenticated(!!user); // If user is authenticated, set true
-    };
-
-    checkAuth();
+    // const user =  auth();
+    // setIsAuthenticated(!!user);
+     
+    
   }, [token]);
+  
+  
 
   return (
     <>

@@ -1,13 +1,13 @@
 import Footer from "@/src/components/Footer";
 import Navbar from "@/src/components/Navbar";
 
-export default function Layout({ children, modal }: { children: React.ReactNode;  modal: React.ReactNode; }) {
+export default function Layout({ children }: { children: React.ReactNode;  }) {
   return (
     <>
       {" "}
       <Navbar />
       {children}
-      {modal}
+  
       <Footer />
     </>
   );
