@@ -1,56 +1,38 @@
-"use client"
+"use client"; // Necessary for Next.js or client-side rendering
 import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import CourseOverview from "./CourseOverview";
 import UpcomingCard from "./UpcomingClassCard";
-
-interface Course {
-  title: string;
-  progress: number;
-  lessons: number;
-}
-
-interface Class {
-  title: string;
-  time: string;
-  assignment?: string;
-  lessons?: string;
-}
+import { Course, Class } from "../utils/types";
+import {
+  mockRecentCourses,
+  mockRecentClasses,
+  mockUpcomingClasses,
+} from "../utils/data";
 
 const Dashboard: React.FC = () => {
   const [recentCourses, setRecentCourses] = useState<Course[]>([]);
   const [recentClasses, setRecentClasses] = useState<Class[]>([]);
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
 
+  // UseEffect to simulate the future use of data fetching (mocking static data)
   useEffect(() => {
-    // Mock data (unchanged)
-    const mockRecentCourses = [
-      { title: "Gen AI & Cloud Services", progress: 40, lessons: 10 },
-      { title: "Applied Generative AI", progress: 20, lessons: 20 },
-    ];
+    // Simulated mock data for now
 
-    const mockRecentClasses = [
-      { title: "Gen AI & Cloud Services", time: "2:00 PM", assignment: "14", lessons: "10" },
-      { title: "Applied Generative AI", time: "3:00 PM", assignment: "15", lessons: "12" },
-    ];
-
-    const mockUpcomingClasses = [
-      { title: "Gen AI & Cloud Services", time: "4:00 PM" },
-      { title: "Applied Generative AI", time: "5:00 PM" },
-    ];
-
+    // Setting state with mock data
     setRecentCourses(mockRecentCourses);
     setRecentClasses(mockRecentClasses);
     setUpcomingClasses(mockUpcomingClasses);
   }, []);
-
   return (
-    <div className="p-6 min-h-screen mb-28 max-w-7xl mx-auto">
+    <div className=" min-h-screen m">
       <CourseOverview />
-
-      <Section title="Recent Enrolled Courses">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="text-center md:text-start">
+        <h1 className="text-xl md:text-2xl mb-6">Recent Enrolled Courses</h1>
+      </div>
+      <div className="">
+        <div className="flex flex-col w-auto items-center gap-6 md:gap-4 md:grid grid-cols-2">
           {recentCourses.map((course, index) => (
             <CourseCard
               key={index}
@@ -60,41 +42,74 @@ const Dashboard: React.FC = () => {
             />
           ))}
         </div>
-      </Section>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-        <Section title="Recent Classes">
-          {recentClasses.map((cls, index) => (
-            <ClassCard
-              key={index}
-              title={cls.title}
-              time={cls.time}
-              assignment={cls.assignment}
-              lessons={cls.lessons}
-            />
-          ))}
-        </Section>
+      <div className="flex flex-col items-center md:flex-row gap-6 mt-20 mb-20">
+        {/* Recent Classes */}
+        <ClassSection
+          // title="Recent Classes"
+          classes={recentClasses}
+          title={""}
+        />
 
-        <Section title="Upcoming Classes">
-          {upcomingClasses.map((cls, index) => (
-            <UpcomingCard key={index} title={cls.title} time={cls.time} />
-          ))}
-        </Section>
+        {/* Upcoming Classes */}
+        <UpcomingClassSection
+          // title="Upcoming Classes "
+          classes={upcomingClasses}
+          title={""}
+        />
       </div>
     </div>
   );
 };
 
-interface SectionProps {
+export default Dashboard;
+
+// Reusable ClassSection for Recent Classes
+interface ClassSectionProps {
   title: string;
-  children: React.ReactNode;
+  classes: Class[];
 }
 
-const Section: React.FC<SectionProps> = ({ title, children }) => (
-  <div className="w-full mb-6">
-    <h2 className="text-xl md:text-2xl mb-4">{title}</h2>
-    <div className="space-y-4">{children}</div>
+const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
+  <div className=" flex-1 flex flex-col gap-10">
+    {/* <h1 className="text-xl md:text-2xl">{title}</h1> */}
+    <div className="flex justify-center md:justify-start">
+      <h1 className="text-xl md:text-2xl">Recent Classes</h1>
+    </div>
+    {classes.map((cls, index) => (
+      <ClassCard
+        key={index}
+        title={cls.title}
+        time={cls.time}
+        assignment={cls.assignment}
+        lessons={cls.lessons}
+      />
+    ))}
   </div>
 );
 
-export default Dashboard;
+// Reusable UpcomingClassSection for Upcoming Classes
+interface UpcomingClassSectionProps {
+  title: string;
+  classes: Class[];
+}
+
+const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
+  title,
+  classes,
+}) => (
+  <div className=" flex-1 flex flex-col gap-10">
+    {/* <h1 className="text-xl md:text-2xl">{title}</h1> */}
+    <div className="flex justify-center md:justify-start">
+      <h1 className="text-xl md:text-2xl mt-10 md:mt-0">Upcoming Classes</h1>
+    </div>
+    {classes.map((cls, index) => (
+      <UpcomingCard
+        key={index}
+        title={cls.title ?? "Untitled"}
+        time={cls.time}
+      />
+    ))}
+  </div>
+);
