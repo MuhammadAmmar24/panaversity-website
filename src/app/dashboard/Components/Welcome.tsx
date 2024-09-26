@@ -16,9 +16,9 @@ const Welcome: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex md:ml-16 justify-center md:justify-start">
-      <div className="h-36 w-72 mt-14 md:ml-10 flex gap-4 px-4 items-center ">
-        <h1 className="text-lg md:text-2xl">
+    <div className="">
+      <div className="h-36 w-full mt-14 flex gap-4 items-center justify-center ">
+        <h1 className="text-xl md:text-3xl flex flex-col justify-center items-center">
           Welcome {userName}
           <br />
           <span className="text-sm md:text-lg">Overview of your courses</span>

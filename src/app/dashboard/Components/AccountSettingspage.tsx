@@ -1,26 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
+import { Metadata } from "next";
+import { initialData } from "../utils/Data";
+
+export const metadata: Metadata = {
+  title: "Account Settings",
+  description: "Update your account information and settings.",
+};
 
 // Sample data structure simulating a backend fetch
-const initialData = {
-  profileInfo: {
-    firstName: "David",
-    lastName: "Jones",
-    email: "davidjoness@gmail.com",
-  },
-  personalInfo: {
-    phone: "+92 0346566543",
-    studentId: "15446565", // Student ID is not editable
-    bio: "AI Student",
-  },
-  addressInfo: {
-    country: "United Kingdom",
-    city: "Leeds, East London",
-    postalCode: "26000",
-    address: "Street 1, F7 Markaz, Islamabad",
-  },
-};
 
 const AccountSettings = () => {
   // State to hold the user data
@@ -79,20 +68,35 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-10 md:mt-0">
-      <div className="w-full max-w-6xl p-6 bg-white rounded-lg shadow-lg">
+    <div className="min-h-screen flex justify-center items-center mt-10 ">
+      <div className="w-full max-w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 className="md:text-2xl text-xl mb-4 text-center">
           Account Settings
         </h1>
 
         {/* Profile Section */}
-        <div className="mb-6 border- border-gray-300 rounded-lg px-1 py-2 ">
-          <div className="flex justify-between items-center mb-4">
+        <div className="mb-6 border-2 border-gray-200 rounded-lg px-6 pb-6 md:pt-2">
+          <div className="text-end">
+            <button
+              className="text-gray-500 hover:text-black p-2 rounded-full"
+              onClick={() => {
+                if (isEditingProfile) submitChanges(); // Save when exiting edit mode
+                setIsEditingProfile(!isEditingProfile);
+              }}
+            >
+              {isEditingProfile ? (
+                <AiOutlineCheck className="text-xl" />
+              ) : (
+                <AiOutlineEdit className="text-xl" />
+              )}
+            </button>
+          </div>
+          <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <img
                 src="/customers/lee-robinson.png"
                 alt="Profile"
-                className="w-16 h-16 rounded-full object-cover"
+                className="md:w-auto md:h-16 h-10 w-auto rounded-full object-cover"
               />
               <div>
                 {isEditingProfile ? (
@@ -121,7 +125,7 @@ const AccountSettings = () => {
                   </>
                 ) : (
                   <>
-                    <p className="">
+                    <p className="font-semibold md:text-2xl">
                       {profileInfo.firstName} {profileInfo.lastName}
                     </p>
                     <p className="text-gray-500">{profileInfo.email}</p>
@@ -129,30 +133,28 @@ const AccountSettings = () => {
                 )}
               </div>
             </div>
-            <button
-              className="border-1 border-black text-2xl rounded-lg"
-              onClick={() => {
-                if (isEditingProfile) submitChanges(); // Save when exiting edit mode
-                setIsEditingProfile(!isEditingProfile);
-              }}
-            >
-              {isEditingProfile ? <AiOutlineCheck /> : <AiOutlineEdit />}
-            </button>
+            <div className="ml-auto"></div>
           </div>
         </div>
 
         {/* Personal Information Section */}
-        <div className="mb-6 border-2 border-gray-300 px-4 py-2">
+        <div className="mb-6 border-2 border-gray-200 px-6 py-6 rounded-lg">
           <div className="flex justify-between">
-            <h2 className="tex mb-2">Personal Information</h2>
+            <h2 className="md:text-2xl font-semibold mb-2">
+              Personal Information
+            </h2>
             <button
-              className="border-2 border-black text-2xl"
+              className="text-gray-500 hover:text-black p-2 rounded-full"
               onClick={() => {
                 if (isEditingPersonal) submitChanges();
                 setIsEditingPersonal(!isEditingPersonal);
               }}
             >
-              {isEditingPersonal ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              {isEditingPersonal ? (
+                <AiOutlineCheck className="text-xl" />
+              ) : (
+                <AiOutlineEdit className="text-xl" />
+              )}
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -192,17 +194,21 @@ const AccountSettings = () => {
         </div>
 
         {/* Address Section */}
-        <div className="mb-6 border-2 border-gray-300 px-4 py-2">
+        <div className="mb-6 border-2 border-gray-300 rounded-lg px-6 py-6">
           <div className="flex justify-between">
-            <h2 className="tex mb-2">Address</h2>
+            <h2 className="md:text-2xl font-semibold mb-2">Address</h2>
             <button
-              className="border-2 border-black text-2xl"
+              className="text-gray-500 hover:text-black p-2 rounded-full"
               onClick={() => {
                 if (isEditingAddress) submitChanges();
                 setIsEditingAddress(!isEditingAddress);
               }}
             >
-              {isEditingAddress ? <AiOutlineCheck /> : <AiOutlineEdit />}
+              {isEditingAddress ? (
+                <AiOutlineCheck className="text-xl" />
+              ) : (
+                <AiOutlineEdit className="text-xl" />
+              )}
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

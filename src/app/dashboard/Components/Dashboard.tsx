@@ -4,19 +4,12 @@ import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import CourseOverview from "./CourseOverview";
 import UpcomingCard from "./UpcomingClassCard";
-
-interface Course {
-  title: string;
-  progress: number;
-  lessons: number;
-}
-
-interface Class {
-  title: string;
-  time: string;
-  assignment?: string;
-  lessons?: string;
-}
+import { Course, Class } from "../utils/types";
+import {
+  mockRecentCourses,
+  mockRecentClasses,
+  mockUpcomingClasses,
+} from "../utils/Data";
 
 const Dashboard: React.FC = () => {
   const [recentCourses, setRecentCourses] = useState<Course[]>([]);
@@ -26,49 +19,20 @@ const Dashboard: React.FC = () => {
   // UseEffect to simulate the future use of data fetching (mocking static data)
   useEffect(() => {
     // Simulated mock data for now
-    const mockRecentCourses = [
-      { title: "Gen AI & Cloud Services", progress: 40, lessons: 10 },
-      { title: "Applied Generative AI", progress: 20, lessons: 20 },
-    ];
-
-    const mockRecentClasses = [
-      {
-        title: "Gen AI & Cloud Services",
-        time: "2:00 PM",
-        assignment: "14",
-        lessons: "10",
-      },
-      {
-        title: "Applied Generative AI",
-        time: "3:00 PM",
-        assignment: "15",
-        lessons: "12",
-      },
-    ];
-
-    const mockUpcomingClasses = [
-      { title: "Gen AI & Cloud Services", time: "4:00 PM" },
-      { title: "Applied Generative AI", time: "5:00 PM" },
-    ];
 
     // Setting state with mock data
     setRecentCourses(mockRecentCourses);
     setRecentClasses(mockRecentClasses);
     setUpcomingClasses(mockUpcomingClasses);
   }, []);
-
   return (
-    <div className="p-6 min-h-screen mb-28">
+    <div className=" min-h-screen m">
       <CourseOverview />
-
-      {/* Recent Enrolled Courses */}
-      <div className="flex justify-center md:justify-start md:ml-32 w-full">
-        <h1 className="text-xl md:text-2xl mb-6 md:ml-16">
-          Recent Enrolled Courses
-        </h1>
+      <div className="text-center md:text-start">
+        <h1 className="text-xl md:text-2xl mb-6">Recent Enrolled Courses</h1>
       </div>
-      <div className="flex justify-center">
-        <div className="flex flex-col w-3/4 justify-center items-center gap-6 md:gap-4 md:grid grid-cols-2">
+      <div className="">
+        <div className="flex flex-col w-auto items-center gap-6 md:gap-4 md:grid grid-cols-2">
           {recentCourses.map((course, index) => (
             <CourseCard
               key={index}
@@ -80,14 +44,19 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center items-center md:flex md:flex-row">
+      <div className="flex flex-col items-center md:flex-row gap-6 mt-20 mb-20">
         {/* Recent Classes */}
-        <ClassSection title="Recent Classes" classes={recentClasses} />
+        <ClassSection
+          // title="Recent Classes"
+          classes={recentClasses}
+          title={""}
+        />
 
         {/* Upcoming Classes */}
         <UpcomingClassSection
-          title="Upcoming Classes"
+          // title="Upcoming Classes "
           classes={upcomingClasses}
+          title={""}
         />
       </div>
     </div>
@@ -103,8 +72,11 @@ interface ClassSectionProps {
 }
 
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
-  <div className="flex flex-col items-center mt-10 gap-6 md:w-full lg:w-1/2 px-4">
-    <h1 className="text-xl md:text-2xl mt-14">{title}</h1>
+  <div className=" flex-1 flex flex-col gap-10">
+    {/* <h1 className="text-xl md:text-2xl">{title}</h1> */}
+    <div className="flex justify-center md:justify-start">
+      <h1 className="text-xl md:text-2xl">Recent Classes</h1>
+    </div>
     {classes.map((cls, index) => (
       <ClassCard
         key={index}
@@ -127,10 +99,17 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
   title,
   classes,
 }) => (
-  <div className="flex flex-col items-center mt-10 gap-6 md:w-full lg:w-1/2 px-4">
-    <h1 className="text-xl md:text-2xl mt-14">{title}</h1>
+  <div className=" flex-1 flex flex-col gap-10">
+    {/* <h1 className="text-xl md:text-2xl">{title}</h1> */}
+    <div className="flex justify-center md:justify-start">
+      <h1 className="text-xl md:text-2xl mt-10 md:mt-0">Upcoming Classes</h1>
+    </div>
     {classes.map((cls, index) => (
-      <UpcomingCard key={index} title={cls.title} time={cls.time} />
+      <UpcomingCard
+        key={index}
+        title={cls.title ?? "Untitled"}
+        time={cls.time}
+      />
     ))}
   </div>
 );
