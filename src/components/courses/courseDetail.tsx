@@ -11,6 +11,9 @@ import {
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
 import Breadcrumb from "../Breadcrumbs";
+import { user_verify } from "@/src/actions/user-verify"
+import { useRouter } from "next/navigation";
+
 
 const learnPoints: string[] = [
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -76,6 +79,21 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
 
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  async function handleClick() {
+    const res = await user_verify()
+    if(res.redirectTo) {
+      router.push(res.redirectTo);
+      console.log(res.redirectTo);
+    }
+    else {
+      console.log("Verified. GO AHEAD")
+      setOpen(true);
+    }
+  }
+
   useEffect(() => {
     const handleResize = () => {
       setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
@@ -87,6 +105,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+
+
   }, []);
 
   return (
@@ -139,13 +159,13 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                     </span>
                   </div>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <button className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500 transition duration-300">
+                  <Sheet open={open}  onOpenChange={(isOpen) => isOpen ? setOpen(true) : setOpen(false)}> 
+                    {/* <SheetTrigger asChild> */}
+                      <button  onClick={handleClick} className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500 transition duration-300">
                         Enroll Now
                         <ChevronRight className="w-5 h-5 ml-2" />
                       </button>
-                    </SheetTrigger>
+                    {/* </SheetTrigger> */}
                     <SheetContent
                       side={sheetSide}
                       className={`w-full max-w-full overflow-y-auto ${

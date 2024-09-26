@@ -96,6 +96,7 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
               ),
             })
             onLoginSuccess(); // Call this function to close the dialog
+            router.back()
             // if (data.redirectTo) {
             //   // router.push(data.redirectTo)
             //   // router.back()
