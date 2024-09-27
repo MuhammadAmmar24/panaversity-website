@@ -89,7 +89,10 @@ export const RegisterForm = () => {
             description: "Please Verify Email To Continue",
             color: "1cd98e",
             action: (
-              <Link href={redirect_uri ? `/verify${queryParams}` : "/verify"} replace>
+              <Link
+                href={redirect_uri ? `/verify${queryParams}` : "/verify"}
+                replace
+              >
                 <ToastAction altText="Verify to Continue!">
                   Verify Email
                 </ToastAction>
@@ -98,7 +101,6 @@ export const RegisterForm = () => {
           });
 
           router.replace("/verify");
-
         }
       });
     });
@@ -247,10 +249,13 @@ export const RegisterForm = () => {
           size="sm"
           variant="link"
           asChild
-          className="w-full text-textPrimary "
+          className="w-full text-textPrimary"
         >
-          <Link href="/login" replace>
-            Already have an account? Login{" "}
+          <Link href="/login" replace className="group">
+            Already have an account?&nbsp;
+            <span className="group-hover:underline group-hover:text-green-500 underline-offset-4 transition-colors duration-200">
+              Login
+            </span>
           </Link>
         </Button>
       </form>
