@@ -32,7 +32,7 @@ const Dashboard: React.FC = () => {
         <h1 className="text-xl md:text-2xl mb-6">Recent Enrolled Courses</h1>
       </div>
       <div className="">
-        <div className="flex flex-col w-auto items-center gap-6 md:gap-4 md:grid grid-cols-2">
+        <div className="flex flex-col w-auto items-center gap-6 md:gap-6 md:grid grid-cols-2">
           {recentCourses.map((course, index) => (
             <CourseCard
               key={index}

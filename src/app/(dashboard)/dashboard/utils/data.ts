@@ -12,7 +12,7 @@ export {
       email: "davidjoness@gmail.com",
     },
     personalInfo: {
-      phone: "+92 0346566543",
+      phone: "+92 346566543",
       studentId: "15446565", // Student ID is not editable
       bio: "AI Student",
     },
@@ -26,7 +26,6 @@ export {
   
   const mockRecentCourses = [
     { title: "Gen AI & Cloud Services", progress: 40, lessons: 10 },
-    { title: "Applied Generative AI", progress: 20, lessons: 20 },
   ];
   
   const mockRecentClasses = [
