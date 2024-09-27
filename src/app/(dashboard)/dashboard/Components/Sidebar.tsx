@@ -73,7 +73,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
           <div
             className={`transition-all duration-300 ease-in-out ${
               isOpen
-                ? "opacity-100 visible delay-200"
+                ? "opacity-100 visible delay-200 transition-all duration-300 ease-in-out"
                 : "opacity-0 invisible delay-0"
             }`}
           >

@@ -36,7 +36,7 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-10">
+    <div className="min-h-screen flex justify-center items-center mt-5">
       <div className="w-full max-w-full p-6 bg-white rounded-lg shadow-lg">
         <h1 className="md:text-2xl text-xl mb-4 text-center">
           Account Settings
@@ -131,7 +131,7 @@ const AccountSettings = () => {
           </div>
 
           {/* Address Section */}
-          <div className="mb-6 mt-4">
+          <div className="mt-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-600">Country</p>
