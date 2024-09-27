@@ -15,13 +15,16 @@ export const user_verify = async () => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
+      cache: "no-cache"
     });
     if (response.ok) {
       const profile = await response.json();
-    return { isVerified: profile.is_verified };
+      console.log("VERIFIED", response)
+       return { isVerified: profile.is_verified };
       
 
     } else {
+      console.log("NOT VERIFIED", response)
       return { isVerified: false, redirectTo: "/verify" };
     }
   } catch (error) {
