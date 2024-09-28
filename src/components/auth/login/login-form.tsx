@@ -178,15 +178,14 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
           )}
         </Button>       
       
-          <Button
-            size="sm"
-            variant="link"
-            asChild
-            className="w-full "
-            
-          >
-            <Link href="/register" replace>Don&apos;t have an account? Register</Link>
-          </Button>
+        <Button size="sm" variant="link" asChild className="w-full text-textPrimary">
+  <Link href="/register" replace className="group">
+    Don't have an account?&nbsp;
+    <span className="group-hover:underline group-hover:text-accent underline-offset-4 transition-colors duration-200">
+      Register
+    </span>
+  </Link>
+</Button>
         </form>
       </Form>
 
