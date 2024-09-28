@@ -254,7 +254,7 @@ export const RegisterForm = () => {
         >
           <Link href="/login" replace className="group">
             Already have an account?&nbsp;
-            <span className="group-hover:underline group-hover:text-green-500 underline-offset-4 transition-colors duration-200">
+            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
               Login
             </span>
           </Link>
