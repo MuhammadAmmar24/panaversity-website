@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
 import { initialData } from "../utils/data";
+import PasswordSettings from "./PasswordSettings";
 
 export const metadata: Metadata = {
   title: "Account Settings",
@@ -195,6 +196,7 @@ const AccountSettings = () => {
             </div>
           </div>
         </div>
+      <PasswordSettings/>
       </div>
     </div>
   );
