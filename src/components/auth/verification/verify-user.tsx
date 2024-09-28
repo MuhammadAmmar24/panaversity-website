@@ -20,8 +20,11 @@ const Verify = async () => {
 
 
   async function handleClick() {
+    console.log("handling Click")
     const res = await user_verify()
+    console.log(res.redirectTo)
     if(res.redirectTo) {
+      console.log(res.redirectTo)
       router.push(res.redirectTo);
     }
     else {
@@ -95,7 +98,6 @@ const Verify = async () => {
             Your email was verified. You can continue using the application.
           </p>
 
-          {/* Conditionally render the link based on authentication */}
           <button
             onClick={handleClick}
             className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"

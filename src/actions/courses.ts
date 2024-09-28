@@ -56,7 +56,7 @@ export const getProgramCoursesWithOpenRegistration = async (
 		}
 
 		const responseData = await response.json();
-		console.log(responseData)
+		
 
 		const parsedResponse = ProgramCoursesResponseSchema.safeParse(responseData);
 
@@ -182,7 +182,7 @@ export const getCoursePrice = async (
 		}
 
 		const responseData = await response.json();
-		console.log(responseData)
+		
 
 		// Validate the response data using zod schema
 		const parsedResponse = GetCoursePriceResponseSchema.safeParse(responseData);
