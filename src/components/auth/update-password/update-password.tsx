@@ -12,10 +12,10 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../
 import { Input } from "../../ui/input";
 import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
-import { CardWrapper } from "../card-wrapper";
 import { updatepassword } from "@/src/actions/update-password";
 import { useRouter } from "next/navigation";
 import { resetpassword } from "@/src/actions/recover-password";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { redirect } from "next/navigation";
 
 function UpdatePassword() {
@@ -87,9 +87,7 @@ function UpdatePassword() {
     }
     
     return (
-        <CardWrapper
-        headerLabel="Update Password"
-        >
+        
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
                     <div className="space-y-4">
@@ -103,14 +101,18 @@ function UpdatePassword() {
                                 <div className="flex  items-center w-full">
                                     <FormControl>
                                         <ReactPhoneInput
-                                        country={'pk'}
-                                        value={field.value}
-                                        onChange={(phone) => {field.onChange(phone); setPhone(phone)}}
-                                        disabled={isPending}
-                                        placeholder="+921234567890"
-                                        buttonStyle={{ backgroundColor: '#f9fafb' }}
-                                        inputStyle={{ width: '100%' }}
-                                        countryCodeEditable={false}
+                                          country={"pk"}
+                                          value={field.value}
+                                          onChange={(phone: string) => field.onChange(phone)}
+                                          disabled={isPending}
+                                          placeholder="+921234567890"
+                                          buttonStyle={{ backgroundColor: "#f9fafb" }}
+                                          inputStyle={{
+                                            width: "100%",
+                                            backgroundColor: "transparent",
+                                            opacity: isPending ? 0.5 : 1,
+                                          }} // Adjust opacity as needed
+                                          countryCodeEditable={false}
                                         />
                                     </FormControl>
                                     <Button
@@ -165,12 +167,22 @@ function UpdatePassword() {
                     </div>
                     <FormError message={error} />
                     <FormSuccess message={success}  />
-                    <Button disabled={isPending} type="submit" className="w-full">
-                        {"Update Password"}
-                    </Button>
+                    <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+        >
+          {isPending ? (
+            <>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            "Update Password"
+          )}
+        </Button> 
                 </form>
             </FormProvider>
-        </CardWrapper>
     );
 }
 

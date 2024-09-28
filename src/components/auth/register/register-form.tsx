@@ -176,6 +176,7 @@ export const RegisterForm = () => {
                     onChange={(phone: string) => field.onChange(phone)}
                     disabled={isPending}
                     placeholder="+921234567890"
+                 
                     buttonStyle={{ backgroundColor: "#f9fafb" }}
                     inputStyle={{
                       width: "100%",

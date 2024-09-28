@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import  Verify  from "./verify-user";
+import  UpdatePassword  from "./update-password";
 import { IoClose } from "react-icons/io5";
 
 
@@ -25,7 +25,7 @@ export default function UpdatePasswordDialog() {
           {/* <Dialog.Title className="text-lg font-bold mb-4">
             Verify your email
           </Dialog.Title> */}
-          <Verify />
+          <UpdatePassword />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">
             <IoClose />

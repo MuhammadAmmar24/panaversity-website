@@ -153,7 +153,7 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
                         asChild
                         className="px-0 font-normal"
                       >
-                        <Link href="/auth/reset-password">Forgot password?</Link>
+                        <Link href="/reset-password" className="hover:underline  underline-offset-4 transition-colors duration-200">Forgot password?</Link>
                       </Button>
                       <FormMessage />
                     </FormItem>

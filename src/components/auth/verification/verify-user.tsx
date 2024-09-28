@@ -18,16 +18,14 @@ const Verify = async () => {
 
   const router = useRouter();
 
-
-  async function handleClick() {
+  const handleClick = async () => {
     console.log("handling Click")
     const res = await user_verify()
     console.log(res.redirectTo)
     if(res.redirectTo) {
       console.log(res.redirectTo)
       router.push(res.redirectTo);
-    }
-    else {
+    } else {
       router.push("/programs/flagship-program")
     }
   }

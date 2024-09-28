@@ -16,6 +16,7 @@ import { FormSuccess } from "../../form-success";
 import ReactPhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { redirect, useRouter } from "next/navigation";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function ResetPassword() {
     const [error, setError] = useState<string | undefined>("");
@@ -51,16 +52,14 @@ function ResetPassword() {
                         title: "OTP sent Successfully",
                         description: "OTP has been sent to your phone number",
                     })
-                    router.replace('/auth/update-password')
+                    router.replace('/update-password')
                   }
             });
         });
     }
     
     return (
-        <CardWrapper 
-        headerLabel="Reset Password"
-        >
+       
             <FormProvider {...form}>
                 <form onSubmit={form.handleSubmit(onsubmit)} className="space-y-6">
                 <FormField
@@ -71,28 +70,43 @@ function ResetPassword() {
                         <FormLabel>Phone</FormLabel>
                         <FormControl>
                             <ReactPhoneInput
-                            country={'pk'}
-                            value={field.value}
-                            onChange={(phone) => field.onChange(phone)}
-                            disabled={isPending}
-                            placeholder="+921234567890"
-                            buttonStyle={{ backgroundColor: '#f9fafb' }}
-                            inputStyle={{ width: '100%' }}
-                            countryCodeEditable={false}
+                             country={"pk"}
+                             value={field.value}
+                             onChange={(phone: string) => field.onChange(phone)}
+                             disabled={isPending}
+                             placeholder="+921234567890"
+                             buttonStyle={{ backgroundColor: "#f9fafb" }}
+                             inputStyle={{
+                               width: "100%",
+                               backgroundColor: "transparent",
+                               opacity: isPending ? 0.5 : 1,
+                             }} // Adjust opacity as needed
+                             countryCodeEditable={false}
                             />
                         </FormControl>
                         </FormItem>
                     )}
                 />
-                    <Button disabled={isPending} type="submit" className="w-full">
-                        Send OTP
-                    </Button>
+                   <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+        >
+          {isPending ? (
+            <>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+              Submitting...
+            </>
+          ) : (
+            "Send OTP"
+          )}
+        </Button> 
                     <FormSuccess message={success} />
                     <FormError message={error} />
                 </form>
              
             </FormProvider>
-        </CardWrapper>
+        
     )
 }
 
