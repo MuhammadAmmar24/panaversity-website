@@ -30,16 +30,16 @@ export {
   
   const mockRecentClasses = [
     {
-      title: "Gen AI & Cloud Services",
+      title: "GenAI for Web3 & Metaverse Quater 3",
       time: "2:00 PM",
       assignment: "14",
       lessons: "10",
     },
     {
-      title: "Applied Generative AI",
-      time: "3:00 PM",
-      assignment: "15",
-      lessons: "12",
+      title: "GenAI for Web3 & Metaverse Quater 3",
+      time: "2:00 PM",
+      assignment: "14",
+      lessons: "10",
     },
   ];
   
