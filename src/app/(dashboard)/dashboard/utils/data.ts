@@ -9,7 +9,7 @@ export {
     profileInfo: {
       firstName: "David",
       lastName: "Jones",
-      email: "davidjoness@gmail.com",
+      email: "davidj@gmail.com",
     },
     personalInfo: {
       phone: "+92 346566543",
@@ -23,9 +23,9 @@ export {
       address: "Street 1, F7 Markaz, Islamabad",
     },
   };
-  
+
   const mockRecentCourses = [
-    { title: "Gen AI & Cloud Services", progress: 40, lessons: 10 },
+    { title: "Gen AI & Cloud Services", progress: 60, lessons: 100 },
   ];
   
   const mockRecentClasses = [
