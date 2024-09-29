@@ -14,15 +14,15 @@ const initialData = {
     email: "rasaf@gmail.com",
   },
   personalInfo: {
-    phone: "+92 346566543",
+    phone: "+92 333 1234567",
     studentId: "15446565", // Student ID is not editable
     bio: "AI Student",
   },
   addressInfo: {
-    country: "United Kingdom",
-    city: "Leeds, East London",
-    postalCode: "26000",
-    address: "Street 1, F7 Markaz, Islamabad",
+    country: "Pakistan",
+    city: "Islamabad",
+    postalCode: "46220",
+    address: "Bahria Town Islamabad",
   },
 };
 
