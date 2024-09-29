@@ -43,9 +43,9 @@ const TopBar: React.FC = () => {
         </div>
       </div>
       <Dropdown
-        userName={"David Jones"}
-        userEmail={"davidj@gmail.com"}
-        userImage={"/customers/lee-robinson.png"}
+        userName={"Rasaf"}
+        userEmail={"rasaf@gmail.com"}
+        userImage={"/team/rasaf.jpg"}
       />
       {/* </div> */}
     </nav>

@@ -9,9 +9,9 @@ export {
 
 const initialData = {
   profileInfo: {
-    firstName: "David",
-    lastName: "Jones",
-    email: "davidj@gmail.com",
+    firstName: "Rasaf",
+    lastName: "Inayat",
+    email: "rasaf@gmail.com",
   },
   personalInfo: {
     phone: "+92 346566543",

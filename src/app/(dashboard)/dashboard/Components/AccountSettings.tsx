@@ -63,7 +63,7 @@ const AccountSettings = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-wrap justify-center  space-x-4">
               <img
-                src="/customers/lee-robinson.png"
+                src="/team/rasaf.jpg"
                 alt="Profile"
                 className="md:w-auto md:h-16 h-10 w-auto rounded-full object-cover"
               />
@@ -196,7 +196,7 @@ const AccountSettings = () => {
             </div>
           </div>
         </div>
-      <PasswordSettings/>
+        <PasswordSettings />
       </div>
     </div>
   );
