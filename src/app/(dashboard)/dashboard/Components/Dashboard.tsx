@@ -18,7 +18,7 @@ interface ClassSectionProps {
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
   <div className="flex-1 flex flex-col gap-4">
     <div className="flex justify-start">
-      <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
+      <h1 className="mt-4 text-lg mobileM:text-xl md:text-2xl font-medium font-poppins">
         {title}
       </h1>
     </div>
@@ -46,7 +46,7 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
 }) => (
   <div className="flex-1 flex flex-col gap-4">
     <div className="flex justify-start">
-      <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
+      <h1 className="mt-4 text-lg mobileM:text-xl md:text-2xl font-medium font-poppins">
         {title}
       </h1>
     </div>
@@ -74,9 +74,9 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen w-full">
       {/* Render recent courses */}
-      <div className="mb-8 mt-8">
+      <div className="mb-8 mt-4 w-full">
         {recentCourses.map((course, index) => (
           <CourseCard
             key={index}
@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       {/* Use grid layout for side-by-side alignment */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10 w-full">
         {/* Render recent classes */}
         <ClassSection title="Recent Classes" classes={recentClasses} />
 
