@@ -25,6 +25,7 @@ export interface ClassCardProps {
   }
   
   export interface Class {
+    date: string;
     title: string;
     time: string;
     assignment?: string;
@@ -41,4 +42,5 @@ export interface ClassCardProps {
     title: string;
     time: string;
     ClassName?: string;
+    date: string;
   }
