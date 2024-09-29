@@ -17,7 +17,7 @@ export default function AccSettings() {
       )}
 
       {/* Main content */}
-      <div className="flex-1 mr-2 ml-3 md:mr-20 md:ml-20">
+      <div className="flex-1 mx-6 sm:mx-20">
         <TopBar />
         <AccountSettings />
       </div>

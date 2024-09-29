@@ -16,7 +16,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="bg-white rounded-lg shadow-xl px-4 mobileM:px-6 lg:px-8 py-5">
           <div className="flex justify-between items-center mb-6">
             <CiMobile1 className="text-4xl bg-gray-200 rounded-full w-auto fold:h-8 mobileM:h-10 sm:h-12 p-2" />
-            <button className="text-[8px] xs:text-[10px] mobileM:text-sm md:text-[15px] font-medium md:font-semibold text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
+            <button className="text-[8px] xs:text-[10px] mobileM:text-[10px] md:text-[15px] font-medium md:font-semibold text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
               Pay to Proceed
             </button>
           </div>

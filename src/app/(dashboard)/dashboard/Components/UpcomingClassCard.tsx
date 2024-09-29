@@ -11,34 +11,35 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
     <div className="w-full h-full">
       <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-4 px-4 sm:px-6 md:px-8 py-5">
         {/* Topic and Class Info */}
-        <div className="flex flex-col">
-          <h2 className="text-md sm:text-lg md:text-xl font-medium font-poppins truncate">
-            Topic Name: {title}
+        <div className="flex flex-col flex-wrap">
+          <h2 className="text-sm  md:text-xl  font-poppins truncate">
+            <span className="font-semibold font-poppins">Topic Name:</span>
+            <br />
+            {title}
           </h2>
-          <span className="text-gray-600 text-sm sm:text-md md:text-lg">
+          <span className="text-gray-600 text-sm sm:text-md md:text-lg mt-2">
             Class 001
           </span>
         </div>
 
         {/* Links */}
-        <div className="flex flex-col gap-3">
-          {/* Zoom link */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <SiZoom className="w-auto h-14 text-blue-600" />
-            <span className="text-gray-600 text-sm sm:text-md md:text-lg">
-                  Get Zoom Class Link
-            </span>
-            <IoIosLink className="text-blue-500 h-5 w-auto sm:h-6" />
-          </div>
-
+        <div className="flex flex-col ">
           {/* GitHub/Topics Link */}
           <div className="flex items-center gap-3 cursor-pointer">
-            <DiGithubFull className="w-auto h-12 sm:h-14 md:h-16" />
+            <DiGithubFull className="w-auto h-14 sm:h-14 md:h-16" />
             <FaGithub className="w-auto h-6 sm:h-8" />
-            <span className="text-gray-600 text-sm sm:text-md md:text-lg">
+            <span className="text-gray-600 text-xs sm:text-md md:text-lg">
               Topics to be covered
             </span>
             <IoIosLink className="text-blue-500 h-5 sm:h-6 w-auto" />
+          </div>
+          {/* Zoom link */}
+          <div className="flex items-center gap-3 cursor-pointer">
+            <SiZoom className="w-auto h-16 text-blue-600" />
+            <span className="text-gray-600 text-xs sm:text-md md:text-lg">
+              Zoom Class Link
+            </span>
+            <IoIosLink className="text-blue-500 h-5 w-auto sm:h-6" />
           </div>
         </div>
 
