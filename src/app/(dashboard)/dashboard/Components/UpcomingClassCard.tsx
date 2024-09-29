@@ -8,7 +8,7 @@ import { IoIosLink } from "react-icons/io";
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
     <div className=" w-full h-full">
-      <div className="bg-white p-12 rounded-lg shadow-xl flex flex-col gap-4">
+      <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col gap-4">
         {/* Topic and Class Info */}
         <div className="flex flex-col">
           <h2 className="text-xl font-semibold">Topic Name: {title}</h2>
