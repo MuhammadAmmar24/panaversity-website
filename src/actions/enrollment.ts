@@ -170,6 +170,8 @@ export const enrollNewStudentInProgramAndCourse = async (
 
 		const responseData = await response.json();
 
+		console.log(responseData)
+
 		// const parsedResponse =
 		// 	EnrollNewStudentResponseSchema.safeParse(responseData);
 
