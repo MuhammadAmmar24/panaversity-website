@@ -47,12 +47,14 @@ export type EnrollCourseRequest = z.infer<typeof EnrollCourseRequestSchema>;
 export type EnrollCourseResponse = z.infer<typeof EnrollCourseResponseSchema>;
 
 export const EnrollNewStudentRequestSchema = z.object({
-	student_id: z.string(),
-	program_id: z.number(),
-	batch_id: z.number(),
-	course_batch_program_id: z.number(),
-	class_time_slot_id: z.number(),
-	// lab_time_slot_id: z.number(),
+  student_id: z.string(),
+  program_id: z.number(),
+  batch_id: z.number(),
+  course_batch_program_id: z.number(),
+  class_time_slot_id: z.number(),
+  vendor_type: z.string(),
+  package_id: z.number()
+  // lab_time_slot_id: z.number(),
 });
 
 const StudentProgramSchema = z.object({
