@@ -136,7 +136,7 @@ const PasswordSettings: React.FC = () => {
               {/* Password Input Fields */}
               <div className="space-y-4">
                 <div>
-                  <label className="text-gray-700">Password</label>
+                  <label className="text-gray-700">Current Password</label>
                   <div className="relative mt-2">
                     <input
                       type={showPassword.currentPassword ? "text" : "password"}
