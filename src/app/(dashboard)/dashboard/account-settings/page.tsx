@@ -5,7 +5,7 @@ import Sidebar from "../Components/Sidebar";
 import TopBar from "../Components/TopBar";
 
 
-export default function page() {
+export default function AccSettings() {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar open state
 

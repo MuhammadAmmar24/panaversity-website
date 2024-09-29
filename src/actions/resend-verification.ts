@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
 
-export const resendVerification = async () => {
+export const    resendVerification = async () => {
     const session = await auth();
     if (!session) {
         console.log("[session] No cookies. Redirecting...");
