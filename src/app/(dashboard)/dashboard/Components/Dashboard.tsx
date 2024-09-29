@@ -17,7 +17,7 @@ interface ClassSectionProps {
 
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
   <div className="flex-1 flex flex-col gap-4">
-    <div className="flex justify-center md:justify-start">
+    <div className="flex justify-start">
       <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
         {title}
       </h1>
@@ -45,7 +45,7 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
   classes,
 }) => (
   <div className="flex-1 flex flex-col gap-4">
-    <div className="flex justify-center md:justify-start">
+    <div className="flex justify-start">
       <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
         {title}
       </h1>

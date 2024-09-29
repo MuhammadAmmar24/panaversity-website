@@ -12,17 +12,17 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
         {/* Main class information */}
         <FaYoutube className="w-auto md:h-24 h-10 text-red-600 items-start" />
         <div className="flex flex-col justify-between gap-1 items-start">
-          <div className="text-center text-lg md:text-xl font-poppins">{title}</div>
-          <div className=" md:gap-6">
-            <p className="text-gray-600 flex items-center gap-2">
+          <div className="text-center font-medium text-lg md:text-xl font-poppins truncate mt-1 md:mt-0">{title}</div>
+          <div className=" md:gap-6 border-t pt-2 w-full">
+            <p className="text-gray-600 flex items-center gap-2 ">
               Panaversity Urdu
             </p>
-            <div className="flex gap-10 lg:gap-10 text-sm">
+            <div className="flex gap-10 lg:gap-10 text-sm lg:text-sm text-gray-500">
               <div className="flex gap-2 items-center">
                 <BiCalendarAlt />
-                <p className="text-gray-700">22 August 2024</p>
+                <p className="">22 August 2024</p>
               </div>
-              <p className="text-gray-700 flex items-center gap-2 md:justify-center md:items-center">
+              <p className=" flex items-center gap-2 md:justify-center md:items-center">
                 <TimerIcon />
                 {time}
               </p>

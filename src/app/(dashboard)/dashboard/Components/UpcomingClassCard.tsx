@@ -8,31 +8,29 @@ import { IoIosLink } from "react-icons/io";
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
     <div className=" w-full h-full">
-      <div className="bg-white p-8 rounded-lg shadow-xl flex flex-col justify-between gap-4">
+      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-1 px-4 sm:px-8 py-5 ">
         {/* Topic and Class Info */}
         <div className="flex flex-col">
-          <h2 className="text-xl font-semibold">Topic Name: {title}</h2>
-          <span className="text-gray-600">Class 001</span>
+          <h2 className="text-lg md:text-xl font-medium font-poppins truncate">Topic Name: {title}</h2>
+          <span className="text-gray-600 md:text-lg">Class 001</span>
         </div>
 
         {/* Links */}
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col">
           {/* Zoom link */}
           <div className="flex fle-col items-center gap-2 cursor-pointer">
-            <SiZoom className="w-auto h-20 text-blue-600" /> {/* Zoom icon */}
-            <span className="text-md font-medium">Get Zoom Class Link</span>
+            <SiZoom className="w-auto h-14 md:h-20 text-blue-600" /> {/* Zoom icon */}
+            <span className="md:text-md text-gray-600">Get Zoom Class Link</span>
             <span>
               <IoIosLink className="text-blue-500 h-6 w-auto" />
             </span>
           </div>
           {/* GitHub/Topics Link */}
           <div className="flex items-center gap-2 cursor-pointer">
-            <FaGithub
-              className="w-auto h-16 p-2
-            "
+            <FaGithub className="w-12 h-16 "
             />
             {/* GitHub icon */}
-            <span className="text-md font-medium">Topics to be covered</span>
+            <span className="md:text-md text-gray-600">Topics to be covered</span>
             <span>
               <IoIosLink className="text-blue-500 h-6 w-auto" />
             </span>
@@ -40,7 +38,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         </div>
 
         {/* Date and Time */}
-        <div className="flex justify-between items-center border-t pt-4 text-gray-500">
+        <div className="flex justify-between items-center border-t pt-4 text-gray-500 text-sm md:text-base">
           <div className="flex items-center gap-2">
             <FiCalendar className="w-5 h-5" /> {/* Calendar icon */}
             <span>{date}</span>
