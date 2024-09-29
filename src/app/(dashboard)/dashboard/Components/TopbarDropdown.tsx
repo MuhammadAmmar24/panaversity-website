@@ -1,12 +1,4 @@
-// components/Dropdown.tsx
-import { useState } from "react";
-import {
-  FiSettings,
-  FiCreditCard,
-  FiHelpCircle,
-  FiLogOut,
-} from "react-icons/fi";
-
+import { useState, useEffect, useRef } from "react";
 import { TfiWallet, TfiHelp } from "react-icons/tfi";
 import { CiLogout } from "react-icons/ci";
 import { LuSettings2 } from "react-icons/lu";
@@ -24,12 +16,34 @@ const Dropdown: React.FC<DropdownProps> = ({
   userImage,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       {/* Button to trigger dropdown */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleDropdown}
         className="flex items-center space-x-2 focus:outline-none"
       >
         <img
@@ -54,45 +68,49 @@ const Dropdown: React.FC<DropdownProps> = ({
       </button>
 
       {/* Dropdown Menu */}
-      {isOpen && (
-        <div className="absolute right-2 md:right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins">
-          <div className="p-4">
-            <div className="flex items-center space-x-3">
-              <img
-                src={userImage}
-                alt="User profile"
-                className="w-10 h-10 rounded-full object-cover"
-              />
-              <div>
-                <h2 className="text-gray-900 font-semibold">{userName}</h2>
-                <p className="text-gray-500 text-sm">{userEmail}</p>
-              </div>
+      <div
+        className={`absolute right-2 md:right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
+          isOpen
+            ? 'opacity-100 scale-100 visible'
+            : 'opacity-0 scale-95 invisible'
+        }`}
+      >
+        <div className="p-4">
+          <div className="flex items-center space-x-3">
+            <img
+              src={userImage}
+              alt="User profile"
+              className="w-10 h-10 rounded-full object-cover"
+            />
+            <div>
+              <h2 className="text-gray-900 font-semibold">{userName}</h2>
+              <p className="text-gray-500 text-sm">{userEmail}</p>
             </div>
           </div>
-          <hr className="border-gray-200" />
-          <ul className="p-2">
-            <Link href="/dashboard/account-settings">
-              <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer">
-                <LuSettings2 className="w-5 h-5 text-gray-700" />
-                <span className="text-gray-700">Profile Settings</span>
-              </li>
-            </Link>
-            <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
-              <TfiWallet className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700">Payments</span>
-            </li>
-            <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
-              <TfiHelp className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700">Help Center</span>
-            </li>
-            <hr className="border-gray-200" />
-            <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
-              <CiLogout className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700">Sign Out</span>
-            </li>
-          </ul>
         </div>
-      )}
+        <hr className="border-gray-200" />
+        <ul className="p-2">
+          <Link href="/dashboard/account-settings">
+            <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer">
+              <LuSettings2 className="w-5 h-5 text-gray-700" />
+              <span className="text-gray-700">Profile Settings</span>
+            </li>
+          </Link>
+          <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+            <TfiWallet className="w-5 h-5 text-gray-700" />
+            <span className="text-gray-700">Payments</span>
+          </li>
+          <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+            <TfiHelp className="w-5 h-5 text-gray-700" />
+            <span className="text-gray-700">Help Center</span>
+          </li>
+          <hr className="border-gray-200" />
+          <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
+            <CiLogout className="w-5 h-5 text-gray-700" />
+            <span className="text-gray-700">Sign Out</span>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
