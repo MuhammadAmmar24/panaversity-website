@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
 import { initialData } from "../utils/data";
+import PasswordSettings from "./PasswordSettings";
 
 export const metadata: Metadata = {
   title: "Account Settings",
@@ -36,9 +37,9 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-5">
+    <div className="min-h-screen flex justify-center items-center mt-5 font-poppins">
       <div className="w-full max-w-full p-6 bg-white rounded-lg shadow-lg">
-        <h1 className="md:text-2xl text-xl mb-4 text-center">
+        <h1 className="font-medium md:text-2xl text-xl mb-4 text-center md:text-start">
           Account Settings
         </h1>
 
@@ -60,7 +61,7 @@ const AccountSettings = () => {
             </button>
           </div>
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center flex-wrap justify-center  space-x-4">
               <img
                 src="/customers/lee-robinson.png"
                 alt="Profile"
@@ -87,7 +88,7 @@ const AccountSettings = () => {
                   </>
                 ) : (
                   <>
-                    <p className="font-semibold md:text-2xl">
+                    <p className=" sm:text-2xl text-center lg:text-start pt-2">
                       {profileInfo.firstName} {profileInfo.lastName}
                     </p>
                     <p className="text-gray-500">{profileInfo.email}</p>
@@ -195,6 +196,7 @@ const AccountSettings = () => {
             </div>
           </div>
         </div>
+      <PasswordSettings/>
       </div>
     </div>
   );
