@@ -15,15 +15,16 @@ const CourseCard = ({ course }: { course: Course }) => (
           src={course.media_link}
           alt={course.course_name}
           layout="fill"
-          objectFit="cover"
+          // objectFit="cover"
+          className="object-top	"
 
         />
       </div>
       <div className="h-[8rem] fold:h-[7rem]  p-3 flex flex-col justify-between">
         <div>
-          <h4 className=" font-bold text-[1rem] mb-1 font-poppins">{course.course_name}</h4>
-          <h6 className="text-xs font-medium opacity-75">Course - {course.course_id}</h6>
-          <p className="text-xs mt-1 line-clamp-2">{course.course_description}</p>
+          <h4 className=" font-medium text-[1rem] mb-1 font-poppins">{course.course_name}</h4>
+          <h6 className="text-sm font-medium opacity-75">Course - {course.course_id}</h6>
+          <p className="text-sm mt-1 line-clamp-2">{course.course_description}</p>
         </div>
       </div>
     </div>
