@@ -96,11 +96,14 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
               ),
             })
             onLoginSuccess(); // Call this function to close the dialog
-            if (data.redirectTo) {
-              router.push(data.redirectTo)
-            } else {
-              router.push(callbackUrl || DEFAULT_LOGIN_REDIRECT)
-            }
+            router.back()
+            // if (data.redirectTo) {
+            //   // router.push(data.redirectTo)
+            //   // router.back()
+            // } else {
+            //   // router.push(callbackUrl || DEFAULT_LOGIN_REDIRECT)
+            //   // router.back()
+            // }
           }
         });
     });
@@ -150,7 +153,7 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
                         asChild
                         className="px-0 font-normal"
                       >
-                        <Link href="/auth/reset-password">Forgot password?</Link>
+                        <Link href="/reset-password" className="hover:underline  underline-offset-4 transition-colors duration-200">Forgot password?</Link>
                       </Button>
                       <FormMessage />
                     </FormItem>
@@ -175,15 +178,14 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
           )}
         </Button>       
       
-          <Button
-            size="sm"
-            variant="link"
-            asChild
-            className="w-full "
-            
-          >
-            <Link href="/register" replace>Don&apos;t have an account? Register</Link>
-          </Button>
+        <Button size="sm" variant="link" asChild className="w-full text-textPrimary">
+  <Link href="/register" replace className="group">
+    Don't have an account?&nbsp;
+    <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
+      Register
+    </span>
+  </Link>
+</Button>
         </form>
       </Form>
 

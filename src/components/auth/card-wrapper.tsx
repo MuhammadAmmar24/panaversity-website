@@ -12,12 +12,12 @@ interface CardWrapperProps {
   headerLabel: string
 };
 
-export const CardWrapper = ({
+export  const CardWrapper = ({
   children,
   headerLabel
 }: CardWrapperProps) => {
   return (
-    <Card className="w-[400px] shadow-md h-fit">
+    <Card className="w-[400px] shadow-md h-fit bg-background">
       <CardHeader>
         <h2 className="text-2xl font-semibold text-center">{headerLabel}</h2>
       </CardHeader>

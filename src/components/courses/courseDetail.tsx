@@ -1,4 +1,7 @@
+// src/components/CourseDetailsClient.tsx
+
 "use client";
+
 import React, { useEffect, useState } from "react";
 import {
   ChevronRight,
@@ -6,21 +9,14 @@ import {
   User,
   Calendar,
   Check,
-  LucideIcon,
 } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
 import Breadcrumb from "../Breadcrumbs";
-
-const learnPoints: string[] = [
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-];
-
+import { user_verify } from "@/src/actions/user-verify"
+import { useRouter } from "next/navigation";
 interface CourseInfoProps {
-  icon: LucideIcon;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
 }
 
@@ -63,18 +59,53 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   </div>
 );
 
+export interface CourseData {
+  course_batch_program_id: number;
+  is_active: boolean;
+  is_registration_open: boolean;
+  registration_start_date: string; // ISO date string
+  registration_end_date: string;   // ISO date string
+  course_id: number;
+  batch_id: number;
+  course_code: string;
+  course_name: string;
+  course_initials: string;
+  course_description: string;
+  course_outcomes: string[];
+  long_description: string;
+  pre_requisite: string;
+  media_link: string;
+}
 interface CourseDetailsClientProps {
+  courseData: CourseData;
   initialPrice: number;
   initialCurrency: string;
 }
 
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
+  courseData,
   initialPrice,
-  initialCurrency,
+
+  initialCurrency
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
+
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  async function handleClick() {
+    const res = await user_verify()
+    if(res.redirectTo) {
+      router.push(res.redirectTo);
+      console.log(res.redirectTo);
+    }
+    else {
+      console.log("Verified. GO AHEAD")
+      setOpen(true);
+    }
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -89,45 +120,68 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     };
   }, []);
 
+  // Destructure the course data
+  const {
+    course_name,
+    course_description,
+    course_outcomes,
+    long_description,
+    pre_requisite,
+    media_link,
+    is_registration_open,
+  } = courseData;
+
+  // Assign default values if necessary
+  const learnersCount = "20,000+";
+  const duration = "3 months";
+  const rating = 4.8;
+  const ratingCount = 1249;
+  // const price = "400"; // Adjust based on actual data
+  // const currency = ""; // Adjust based on actual data
+
   return (
     <main className="overflow-x-hidden">
-      <section className="flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
+      {/* Hero Section */}
+      <section
+        className="flex justify-center bg-teamBg items-center bg-cover bg-center text-white"
+        // style={{ backgroundImage: url(${media_link}) }}
+      >
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
-          <Breadcrumb
-                  program="Flagship-Program"
-                  courseName="Gen AI & Cloud Basics"
-                />
-            <div className="flex flex-col lg:flex-row ">
-              
-              <div className="w-full lg:w-2/3">
-                
+            {/* Breadcrumb Navigation */}
+            <Breadcrumb
+              program="Flagship-Program"
+              courseName={course_name}
+            />
 
+            <div className="flex flex-col lg:flex-row ">
+              {/* Course Details */}
+              <div className="w-full lg:w-2/3">
                 <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background -mt-2 font-poppins mb-4">
-                  GEN AI & CLOUD BASICS
+                  {course_name}
                 </h1>
                 <p className="mb-5 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  {course_description}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4 mb-5 font-medium">
-                  <CourseInfo icon={User} text="Instructor: Sarah Johns" />
-                  <CourseInfo icon={Users} text="20,000+ Learners" />
-                  <CourseInfo icon={Calendar} text="Duration: 3 months" />
+                  <CourseInfo icon={Users} text={`${learnersCount} Learners`} />
+                  <CourseInfo icon={Calendar} text={`Duration: ${duration}`} />
                 </div>
 
                 <div className="flex flex-wrap items-center space-x-2 mb-6">
-                  <span className="text-2xl font-bold">4.8</span>
-                  <StarRating rating={4.8} />
+                  <span className="text-2xl font-bold">{rating}</span>
+                  <StarRating rating={rating} />
                   <span className="text-sm text-gray-400 font-medium">
-                    (1,249 ratings)
+                    ({ratingCount} ratings)
                   </span>
                   <span className="text-sm text-gray-400 font-medium">
-                    2,945 students
+                    {learnersCount} students
                   </span>
                 </div>
               </div>
 
+              {/* Price and Enroll Section */}
               <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
                 <div className="bg-background text-black p-6 rounded-lg shadow-lg lg:shadow-xl max-w-sm sm:max-w-[380px] lg:max-w-full sm:ml-0 mx-auto lg:mx-0">
                   <div className="flex items-center justify-between mb-4">
@@ -135,22 +189,29 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       Price:
                     </span>
                     <span className="text-3xl font-bold uppercase">
-                      {`${price} ${currency}`}
+                    {currency ? `${currency} ${price}` : price}
                     </span>
                   </div>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <button className="w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center hover:bg-emerald-500 transition duration-300">
-                        Enroll Now
+                  <Sheet open={open}  onOpenChange={(isOpen) => isOpen ? setOpen(true) : setOpen(false)}> 
+                    
+                    <button onClick={handleClick}
+                        className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
+                          is_registration_open
+                            ? "hover:bg-emerald-500"
+                            : "bg-gray-400 cursor-not-allowed"
+                        }`}
+                        disabled={!is_registration_open}
+                      >
+                        {is_registration_open ? "Enroll Now" : "Registration Closed"}
                         <ChevronRight className="w-5 h-5 ml-2" />
                       </button>
-                    </SheetTrigger>
+                   
                     <SheetContent
                       side={sheetSide}
                       className={`w-full max-w-full overflow-y-auto ${
                         sheetSide === "bottom" ? "h-[80vh]" : "h-full"
-                      } ${sheetSide === "right" ? "lg:max-w-2xl" : ""}`}
+                      } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
                     >
                       <GetEnrolled />
                     </SheetContent>
@@ -162,33 +223,30 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         </div>
       </section>
 
+      {/* Course Details Section */}
       <section className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
         <div className="flex flex-col justify-start items-start gap-4 mx-auto">
           <h2 className="text-3xl md:text-4xl font-semibold font-poppins text-textPrimary">
             Details
           </h2>
           <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            {long_description}
           </p>
         </div>
 
+        {/* What You Will Learn */}
         <div className="bg-gray-300/40 flex flex-col justify-start items-start gap-5 p-6 sm:p-8 md:p-10 rounded-md mt-12">
           <h3 className="text-xl sm:text-2xl font-semibold leading-loose text-textPrimary">
             What you will learn in this course
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {learnPoints.map((point, index) => (
+            {course_outcomes.map((point:any, index:any) => (
               <LearnPoint key={index} point={point} />
             ))}
           </div>
         </div>
 
+        {/* Prerequisites */}
         <div className="mt-12">
           <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
             Pre Requisite
@@ -197,13 +255,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
             General Requirements
           </h3>
           <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque amet, sequi molestiae at expedita ipsum, ipsa delectus soluta aliquid eligendi, modi recusandae mollitia animi unde non nulla iure totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus corporis culpa quisquam sunt eos totam exercitationem rerum iste, molestiae aut adipisci quo voluptates mollitia quae necessitatibus eum.
           </p>
         </div>
       </section>

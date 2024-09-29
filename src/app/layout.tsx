@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins,Rubik } from "next/font/google"; 
 import "./globals.css";
-import Footer from "@/src/components/Footer"
-import Navbar from "@/src/components/Navbar"
+
 
 const inter = Inter({ 
   subsets: ["latin"], 
@@ -44,10 +43,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}>
-        <Navbar />    
+       
         {children}
         {modal}
-        <Footer />
+       
       </body>
     </html>
   );

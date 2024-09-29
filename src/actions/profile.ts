@@ -2,7 +2,7 @@
 import { auth } from "../auth";
 
 export const checkUserVerification = async () => {
-  const session = await auth();
+  const session = await auth(); // Getting JWT From Cookies
   if (!session) {
     console.log("[session] No cookies. Redirecting...");
     return { isVerified: false, redirectTo: "/login" };
@@ -18,7 +18,7 @@ export const checkUserVerification = async () => {
     });
     if (response.ok) {
       const profile = await response.json();
-      return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/dashboard" : "/verify" };
+      return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/programs/flagship-program" : "/verify" };
     } else {
       return { isVerified: false, redirectTo: "/login" };
     }

@@ -194,10 +194,9 @@ export default function GetEnrolled() {
               : remainingSeats}
           </span>
         </div>
-
-        {/* Display enrollment form */}
-        <div className="space-y-5 w-full max-w-md ">
-          {/* Day and Time Slot Dropdowns */}
+{/* Display enrollment form */}
+        <div className="space-y-5 w-full ">
+          {/* Select Day Dropdown */}
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
@@ -205,7 +204,7 @@ export default function GetEnrolled() {
             <div className="relative w-full">
               <select
                 id="day"
-                className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
                   isDayAndTimeSelected
                     ? "border-accent"
                     : focusedInput === "day"
@@ -316,7 +315,7 @@ export default function GetEnrolled() {
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className="text-red-500 mt-4">{enrollmentError}</p>
+            <p className={"text-green-500 mt-4"}>{enrollmentError}</p> 
           )}
         </div>
       </div>

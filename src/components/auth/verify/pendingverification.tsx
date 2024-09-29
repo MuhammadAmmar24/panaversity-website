@@ -17,7 +17,7 @@ const EmailVerificationPending = () => {
           description: res.error,
           variant: "destructive",
           action: (
-            <Link href={res.redirectTo}> 
+            <Link href={res.redirectTo} replace> 
               <ToastAction altText={res.action}>{res.action}</ToastAction>
             </Link>
           ),

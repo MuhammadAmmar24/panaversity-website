@@ -18,6 +18,7 @@ export const CourseSchema = z.object({
 	program_id: z.number(),
 	course_batch_program_id: z.number(),
 	order: z.number(),
+	media_link: z.string(),
 });
 
 export const ProgramCoursesResponseSchema = z.object({
