@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
+import { useRouter } from "next/navigation";
 
 export default function GetEnrolled() {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
@@ -15,6 +16,8 @@ export default function GetEnrolled() {
 
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
+
+  const router = useRouter();
 
   // Fetch time slots
   useEffect(() => {
@@ -120,12 +123,14 @@ export default function GetEnrolled() {
   const handleEnroll = async () => {
     if (!isDayAndTimeSelected) return;
 
-    const payload = {
-      student_id: "123", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
+    const payload: any = {
+      student_id: "106", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
       program_id: 1, // Replace with actual program ID, ensure it's correct
       batch_id: 1, // Replace with actual batch ID
       course_batch_program_id: 1, // Replace with actual course_batch_program_id
       class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
+      vendor_type: "STRIPE",
+      package_id: 1,
       // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
     };
 
@@ -133,12 +138,20 @@ export default function GetEnrolled() {
     console.log("Enrollment Payload:", payload);
 
     try {
-      const result = await enrollNewStudentInProgramAndCourse(payload);
+      const result: any = await enrollNewStudentInProgramAndCourse(payload);
+
+      const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
       if (result.type === "success") {
         setIsEnrolled(true); // Enrollment success, show message
         setEnrollmentError(result.message); // Clear any errors
         console.log(result.message); // Optional: log the success message
+
+        if (url) {
+          window.location.href = url; // Use window.location.href for external URL
+        } else {
+          console.error("Stripe URL not found.");
+        }
       } else {
         setEnrollmentError(result.message); // Handle API error
         console.error("API Error:", result.message);
@@ -194,7 +207,7 @@ export default function GetEnrolled() {
               : remainingSeats}
           </span>
         </div>
-{/* Display enrollment form */}
+        {/* Display enrollment form */}
         <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
           <div>
@@ -315,7 +328,7 @@ export default function GetEnrolled() {
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-green-500 mt-4"}>{enrollmentError}</p> 
+            <p className={"text-green-500 mt-4"}>{enrollmentError}</p>
           )}
         </div>
       </div>
