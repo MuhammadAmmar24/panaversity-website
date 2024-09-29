@@ -4,6 +4,7 @@ import { FiZoomIn, FiGithub, FiCalendar, FiClock } from "react-icons/fi"; // Imp
 import { SiZoom } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { IoIosLink } from "react-icons/io";
+import { DiGithubFull } from "react-icons/di";
 
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
@@ -11,7 +12,9 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
       <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-1 px-4 sm:px-8 py-5 ">
         {/* Topic and Class Info */}
         <div className="flex flex-col">
-          <h2 className="text-lg md:text-xl font-medium font-poppins truncate">Topic Name: {title}</h2>
+          <h2 className="text-lg md:text-xl font-medium font-poppins truncate">
+            Topic Name: {title}
+          </h2>
           <span className="text-gray-600 md:text-lg">Class 001</span>
         </div>
 
@@ -19,18 +22,27 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         <div className="flex flex-col">
           {/* Zoom link */}
           <div className="flex fle-col items-center gap-2 cursor-pointer">
-            <SiZoom className="w-auto h-14 md:h-20 text-blue-600" /> {/* Zoom icon */}
-            <span className="md:text-md text-gray-600">Get Zoom Class Link</span>
+            <SiZoom className="w-auto h-14 md:h-[80px] text-blue-600" />{" "}
+            {/* Zoom icon */}
+            <span className="md:text-md text-gray-600">
+                  Get Zoom Class Link
+            </span>
             <span>
               <IoIosLink className="text-blue-500 h-6 w-auto" />
             </span>
           </div>
           {/* GitHub/Topics Link */}
           <div className="flex items-center gap-2 cursor-pointer">
-            <FaGithub className="w-12 h-16 "
-            />
+            <span>
+              <DiGithubFull className="w-auto h-16" />
+            </span>
+            <span>
+              <FaGithub className="w-auto h-6 " />
+            </span>
             {/* GitHub icon */}
-            <span className="md:text-md text-gray-600">Topics to be covered</span>
+            <span className="md:text-md text-gray-600">
+              Topics to be covered
+            </span>
             <span>
               <IoIosLink className="text-blue-500 h-6 w-auto" />
             </span>

@@ -18,7 +18,7 @@ export default function Home() {
       )}
 
       {/* Main content */}
-      <div className="flex-1 mx-10 sm:mx-20 overflow-hidden transition-all duration-300">
+      <div className="flex-1 mx-6 sm:mx-20 overflow-hidden transition-all duration-300">
         <TopBar />
         <Welcome />
         <Dashboard />

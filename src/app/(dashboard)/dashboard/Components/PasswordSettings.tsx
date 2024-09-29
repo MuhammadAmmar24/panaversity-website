@@ -121,13 +121,13 @@ const PasswordSettings: React.FC = () => {
       </button>
 
       {isOpen && (
-        <>
+        <div className="flex justify-center items-center">
           <div
             ref={formRef}
             className="mt-4 rounded-lg shadow-md p-6 w-full max-w-xl ml-0"
           >
             <form onSubmit={handleSubmit}>
-              <div className="mb-4">
+              <div className="mb-6">
                 <label className="block text-sm font-medium text-gray-700">
                   Change your password
                 </label>
@@ -137,7 +137,7 @@ const PasswordSettings: React.FC = () => {
               <div className="space-y-4">
                 <div>
                   <label className="text-gray-700">Password</label>
-                  <div className="relative mt-1">
+                  <div className="relative mt-2">
                     <input
                       type={showPassword.currentPassword ? "text" : "password"}
                       name="currentPassword"
@@ -174,7 +174,7 @@ const PasswordSettings: React.FC = () => {
 
                 <div>
                   <label className="text-gray-700">New Password</label>
-                  <div className="relative mt-1">
+                  <div className="relative mt-2">
                     <input
                       type={showPassword.newPassword ? "text" : "password"}
                       name="newPassword"
@@ -203,7 +203,7 @@ const PasswordSettings: React.FC = () => {
 
                 <div>
                   <label className="text-gray-700">Confirm Password</label>
-                  <div className="relative mt-1">
+                  <div className="relative mt-2">
                     <input
                       type={showPassword.confirmPassword ? "text" : "password"}
                       name="confirmPassword"
@@ -238,7 +238,7 @@ const PasswordSettings: React.FC = () => {
             </form>
 
             {/* Delete Account Button */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <button className="w-full flex items-center justify-center border border-red-500 text-red-500 rounded-full py-2 hover:bg-red-100 transition-colors">
                 Delete My Account
               </button>
@@ -246,9 +246,9 @@ const PasswordSettings: React.FC = () => {
                 Remove your account, profile, and content from our platform.
                 This action is irreversible.
               </p>
-            </div>
+            </div> */}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
