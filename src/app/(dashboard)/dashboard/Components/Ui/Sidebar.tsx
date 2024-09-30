@@ -92,9 +92,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
           {/* Sidebar toggle button */}
           <button onClick={toggleSidebar} className="focus:outline-none">
             {isOpen ? (
-              <IoIosArrowRoundBack className="text-black text-2xl hover:text-accent transition-all duration-300" />
+              <IoIosArrowRoundBack className="text-black text-2xl hover:text-accent transition-all duration-300 mr-0" />
             ) : (
-              <IoIosArrowRoundForward className="text-black text-2xl hover:text-accent transition-all duration-300" />
+              <IoIosArrowRoundForward className="text-black text-2xl hover:text-accent transition-all duration-300 mr-1" />
             )}
           </button>
         </div>

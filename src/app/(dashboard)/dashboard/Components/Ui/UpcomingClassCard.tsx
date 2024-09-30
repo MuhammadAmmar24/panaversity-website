@@ -5,6 +5,7 @@ import { SiZoom } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { IoIosLink } from "react-icons/io";
 import { DiGithubFull } from "react-icons/di";
+import Link from "next/link";
 
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
@@ -22,22 +23,22 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         </div>
 
         {/* Useful Links (GitHub/Zoom) */}
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
           {/* GitHub Topics Link */}
-          <a
+          <Link
             href="#"
             className="flex items-center gap-3 hover:underline cursor-pointer"
           >
             <DiGithubFull className="w-auto h-14 sm:h-14 md:h-16" />
-            <FaGithub className="w-auto h-6 sm:h-8" />
+            {/* <FaGithub className="w-auto h-6 sm:h-8" /> */}
             <span className="text-gray-600 text-xs sm:text-md md:text-lg">
               Topics to be covered
             </span>
             <IoIosLink className="text-blue-500 h-5 sm:h-6 w-auto" />
-          </a>
+          </Link>
 
           {/* Zoom Class Link */}
-          <a
+          <Link
             href="#"
             className="flex items-center gap-3 hover:underline cursor-pointer"
           >
@@ -46,7 +47,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
               Zoom Class Link
             </span>
             <IoIosLink className="text-blue-500 h-5 w-auto sm:h-6" />
-          </a>
+          </Link>
         </div>
 
         {/* Date and Time Information */}
