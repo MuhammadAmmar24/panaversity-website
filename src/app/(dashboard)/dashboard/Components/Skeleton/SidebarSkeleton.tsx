@@ -21,19 +21,19 @@ const Sidebar = () => {
   return (
     <aside className="relative h-screen flex animate-pulse">
       <div className="bg-gray-200 shadow-2xl text-gray-700 fixed h-full z-40 flex flex-col w-16">
-        <div className="p-6 mt-2">
-          <IoIosArrowRoundForward className="text-gray-700 text-2xl" />
+        <div className="p-4 mt-5">
+          <IoIosArrowRoundForward className="text-gray-700 text-2xl ml-1" />
         </div>
-        <nav className="mt-10 flex-1">
+        <nav className="mt-14 flex-1 px-5">
           {menuItems.map(({ icon: Icon, href }) => (
-            <div key={href} className="block p-4">
+            <div key={href} className="block py-5">
               <Icon className="text-2xl" />
             </div>
           ))}
         </nav>
-        <div className="mb-4">
+        <div className="mb-4 px-5">
           {menuItemsBottom.map(({ icon: Icon, href }) => (
-            <div key={href} className="block p-4">
+            <div key={href} className="block py-4">
               <Icon className="text-2xl" />
             </div>
           ))}
