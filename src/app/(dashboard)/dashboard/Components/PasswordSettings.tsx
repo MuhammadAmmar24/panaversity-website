@@ -4,10 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import * as z from "zod";
 
-// Mock current password for demonstration
+// Mock current password for demonstration purposes
 const mockCurrentPassword = "123";
 
-// Define Zod schema for form validation
+// Define schema for password validation using Zod
 const passwordSchema = z
   .object({
     currentPassword: z.string().min(1, "Current password is required"),
@@ -18,27 +18,30 @@ const passwordSchema = z
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ["confirmPassword"], // path of error
+    path: ["confirmPassword"], // Path to indicate where the error occurred
   });
 
 const PasswordSettings: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Toggle for the password settings dropdown
   const [showPassword, setShowPassword] = useState({
     currentPassword: false,
     newPassword: false,
     confirmPassword: false,
-  });
+  }); // Toggle for showing/hiding password fields
+
   const [formData, setFormData] = useState({
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
-  });
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({});
+  }); // Form data state
+
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({}); // Form errors state
   const [isCurrentPasswordIncorrect, setIsCurrentPasswordIncorrect] =
-    useState(false);
+    useState(false); // State to track incorrect current password
 
-  const formRef = useRef<HTMLDivElement | null>(null);
+  const formRef = useRef<HTMLDivElement | null>(null); // Ref to scroll into view when dropdown opens
 
+  // Toggle visibility for password fields
   const toggleShowPassword = (
     field: "currentPassword" | "newPassword" | "confirmPassword"
   ) => {
@@ -48,6 +51,7 @@ const PasswordSettings: React.FC = () => {
     }));
   };
 
+  // Scroll into view when the dropdown opens
   useEffect(() => {
     if (isOpen && formRef.current) {
       formRef.current.scrollIntoView({
@@ -57,6 +61,7 @@ const PasswordSettings: React.FC = () => {
     }
   }, [isOpen]);
 
+  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -65,6 +70,7 @@ const PasswordSettings: React.FC = () => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -74,12 +80,12 @@ const PasswordSettings: React.FC = () => {
     } else {
       setIsCurrentPasswordIncorrect(false);
 
-      // Perform Zod validation
+      // Perform Zod validation for the form data
       try {
         passwordSchema.parse(formData);
-        // Handle form submission (e.g., send data to server)
         setFormErrors({});
         console.log("Form submitted successfully", formData);
+        // You can handle the actual password update logic here
       } catch (error) {
         if (error instanceof z.ZodError) {
           const errors: Record<string, string> = {};
@@ -95,7 +101,7 @@ const PasswordSettings: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <section className="relative">
       {/* Button to toggle dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -120,6 +126,7 @@ const PasswordSettings: React.FC = () => {
         </svg>
       </button>
 
+      {/* Password form (shown when isOpen is true) */}
       {isOpen && (
         <div className="flex justify-center items-center">
           <div
@@ -135,6 +142,7 @@ const PasswordSettings: React.FC = () => {
 
               {/* Password Input Fields */}
               <div className="space-y-4">
+                {/* Current Password */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     Current Password
@@ -174,6 +182,7 @@ const PasswordSettings: React.FC = () => {
                   )}
                 </div>
 
+                {/* New Password */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     New Password
@@ -205,6 +214,7 @@ const PasswordSettings: React.FC = () => {
                   )}
                 </div>
 
+                {/* Confirm Password */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     Confirm Password
@@ -236,7 +246,7 @@ const PasswordSettings: React.FC = () => {
                   )}
                 </div>
 
-                {/* Set Password Button */}
+                {/* Submit Button */}
                 <button className="w-full bg-accent text-white rounded-full py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-all duration-300 ease-in-out">
                   Set Password
                 </button>
@@ -245,7 +255,7 @@ const PasswordSettings: React.FC = () => {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
