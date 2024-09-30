@@ -3,7 +3,7 @@ import React from "react";
 const UpcomingCardSkeleton: React.FC = () => {
   return (
     <article className="w-full h-full animate-pulse">
-      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 fold:px-2 mobileM:px-4 sm:px-6 md:px-8 py-5">
+      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-4 px-4 fold:px-2 mobileM:px-4 sm:px-6 md:px-8 py-5">
         {/* Class Topic and Information Skeleton */}
         <div className="flex flex-col flex-wrap">
           <div className="flex gap-x-2 flex-wrap">
