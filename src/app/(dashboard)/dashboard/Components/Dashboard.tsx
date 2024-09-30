@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="">
       {/* Render recent courses */}
       <div className="mb-8 mt-8">
         {recentCourses.map((course, index) => (

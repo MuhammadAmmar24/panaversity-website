@@ -76,7 +76,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         }`}
       >
         <div className="p-4">
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 w-full">
             <img
               src={userImage}
               alt="User profile"
@@ -86,7 +86,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               <h2 className="text-gray-900 font-semibold text-sm sm:text-base">
                 {userName}
               </h2>
-              <p className="text-gray-500 text-xs sm:text-sm">{userEmail}</p>
+              <p className="text-gray-500 text-xs sm:text-sm w-24 md:w-32 truncate">ammaraamir609@gmail.com</p>
             </div>
           </div>
         </div>
