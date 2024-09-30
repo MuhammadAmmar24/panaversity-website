@@ -3,15 +3,14 @@ import { getEnrolledCourses } from "@/src/actions/dashboard";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import UpcomingCard from "./UpcomingClassCard";
-import { Course, Class } from "../utils/types";
+import { Course, Class } from "../types/types";
 import {
   mockRecentCourses,
   mockRecentClasses,
   mockUpcomingClasses,
-} from "../utils/data";
+} from "../types/data";
 import { Result } from "@/src/lib/types";
 import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
-import { useParams } from "next/navigation";
 
 // Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
@@ -72,15 +71,13 @@ const Dashboard: React.FC = () => {
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { studentId } = useParams<{ studentId: string }>();
 
   // Simulated mock data for now
-   useEffect(() => {
+  useEffect(() => {
     const fetchCourses = async () => {
       setLoading(true);
       setError(null);
       try {
-        
         const studentId = 1; // Replace with actual student ID
         const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(studentId);
 
