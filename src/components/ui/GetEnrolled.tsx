@@ -319,16 +319,16 @@ export default function GetEnrolled() {
             Reserve Your Seat
           </button>
 
-          {/* Success Message
+          {/* Success Message */}
           {isEnrolled && (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
             </div>
-          )} */}
+          )}
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-green-500 mt-4"}>{enrollmentError}</p>
+            <p className={"text-red-500 mt-4"}>{enrollmentError}</p>
           )}
         </div>
       </div>
