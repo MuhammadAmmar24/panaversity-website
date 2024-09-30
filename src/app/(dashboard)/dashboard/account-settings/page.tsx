@@ -1,26 +1,27 @@
-"use client"
+"use client";
 import { useState } from "react";
 import AccountSettings from "../Components/AccountSettings";
 import Sidebar from "../Components/Sidebar";
 import TopBar from "../Components/TopBar";
 
-
 export default function AccSettings() {
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar open state
 
   return (
     <div className="relative flex">
+      {/* Sidebar component with control to open/close state */}
       <Sidebar setIsSidebarOpen={setIsSidebarOpen} />
+
+      {/* Overlay for sidebar when it's open */}
       {isSidebarOpen && (
         <div className="fixed inset-0 bg-black opacity-80 transition-opacity duration-1000 z-30"></div>
       )}
 
-      {/* Main content */}
-      <div className="flex-1 mr-6 ml-10 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
+      {/* Main content area */}
+      <main className="flex-1 mr-6 ml-10 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
         <TopBar />
         <AccountSettings />
-      </div>
+      </main>
     </div>
   );
 }

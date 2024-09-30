@@ -1,50 +1,59 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
-import { initialData } from "../utils/data";
+import { initialData } from "../types/data";
 import PasswordSettings from "./PasswordSettings";
 
+// Page metadata for SEO
 export const metadata: Metadata = {
   title: "Account Settings",
   description: "Update your account information and settings.",
 };
 
-const AccountSettings = () => {
+const AccountSettings: React.FC = () => {
+  // State for profile, personal, and address information
   const [profileInfo, setProfileInfo] = useState(initialData.profileInfo);
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
 
+  // State for toggling edit modes
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // Side effects or data fetching can be added here if needed in the future
+  }, []);
 
+  // Handle changes to profile input fields
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
   };
 
+  // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
   };
 
+  // Simulate submitting updated data
   const submitChanges = () => {
     const updatedData = {
       profileInfo,
       addressInfo,
     };
-    // Here you can handle the submission or save process
+    // Handle submission logic here, e.g., API call
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
-      <div className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
+    <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
+      <section className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-medium text-lg sm:text-xl md:text-2xl mb-4 text-center md:text-start">
           Account Settings
         </h1>
 
-        {/* Profile Section */}
-        <div className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2">
+        {/* Profile Information Section */}
+        <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2">
           <div className="text-end">
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
@@ -62,12 +71,14 @@ const AccountSettings = () => {
           </div>
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
+              {/* Profile Picture */}
               <img
                 src="/team/rasaf.jpg"
                 alt="Profile"
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
               <div>
+                {/* Editable profile fields */}
                 {isEditingProfile ? (
                   <>
                     <input
@@ -87,20 +98,22 @@ const AccountSettings = () => {
                   </>
                 ) : (
                   <>
+                    {/* Display profile information */}
                     <p className="text-base sm:text-xl">
                       {profileInfo.firstName} {profileInfo.lastName}
                     </p>
-                    <p className="text-gray-500 text-xs sm:text-sm">{profileInfo.email}</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">
+                      {profileInfo.email}
+                    </p>
                   </>
                 )}
               </div>
             </div>
-            <div className="ml-auto"></div>
           </div>
-        </div>
+        </section>
 
         {/* Personal Information Section (Read-only) */}
-        <div className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
+        <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
           <div className="flex justify-between">
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
               Personal Information
@@ -120,19 +133,21 @@ const AccountSettings = () => {
             </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
+            {/* Static personal information */}
             <div>
-              <p className="text-gray-600 ">Phone</p>
-              <p className="font">{personalInfo.phone}</p>
+              <p className="text-gray-600">Phone</p>
+              <p>{personalInfo.phone}</p>
             </div>
             <div>
               <p className="text-gray-600">Student ID</p>
-              <p className="font">{personalInfo.studentId}</p>
+              <p>{personalInfo.studentId}</p>
             </div>
           </div>
 
-          {/* Address Section */}
+          {/* Address Information Section */}
           <div className="mt-4 text-sm sm:text-base">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Editable address fields */}
               <div>
                 <p className="text-gray-600">Country</p>
                 {isEditingAddress ? (
@@ -144,7 +159,7 @@ const AccountSettings = () => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                   />
                 ) : (
-                  <p className="font">{addressInfo.country}</p>
+                  <p>{addressInfo.country}</p>
                 )}
               </div>
               <div>
@@ -158,7 +173,7 @@ const AccountSettings = () => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                   />
                 ) : (
-                  <p className="font">{addressInfo.city}</p>
+                  <p>{addressInfo.city}</p>
                 )}
               </div>
             </div>
@@ -175,7 +190,7 @@ const AccountSettings = () => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                   />
                 ) : (
-                  <p className="font">{addressInfo.address}</p>
+                  <p>{addressInfo.address}</p>
                 )}
               </div>
               <div>
@@ -189,15 +204,17 @@ const AccountSettings = () => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                   />
                 ) : (
-                  <p className="font">{addressInfo.postalCode}</p>
+                  <p>{addressInfo.postalCode}</p>
                 )}
               </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* Password settings component */}
         <PasswordSettings />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 

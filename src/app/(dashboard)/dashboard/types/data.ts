@@ -49,5 +49,4 @@ const mockRecentClasses = [
 
 const mockUpcomingClasses = [
   { title: "Gen AI & Cloud Services", time: "4:00 PM", date: "22 August 2024" },
-  // { title: "Applied Generative AI", time: "5:00 PM" },
 ];
