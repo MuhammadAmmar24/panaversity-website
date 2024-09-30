@@ -32,7 +32,7 @@ const mockRecentCourses = [
 
 const mockRecentClasses = [
   {
-    title: "GenAI for Quater 3",
+    title: "GenAI for Quarter 3",
     time: "2:00 PM",
     assignment: "14",
     lessons: "10",

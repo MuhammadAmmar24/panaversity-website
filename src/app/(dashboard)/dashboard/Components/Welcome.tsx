@@ -8,7 +8,7 @@ const Welcome: React.FC = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       // Simulated API response
-      const user = { name: "David Johns" };
+      const user = { name: "Rasaf" };
       setUserName(user.name);
     };
 
