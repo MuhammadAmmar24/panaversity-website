@@ -3,22 +3,27 @@ import React, { useState, useEffect } from "react";
 import AccountSettings from "../Components/Ui/AccountSettings";
 import Sidebar from "../Components/Ui/Sidebar";
 import TopBar from "../Components/Ui/TopBar";
+import LoadingProfile from "../Components/Loading/LoadingProfile";
 
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
-  // const [isLoading, setIsLoading] = useState(true); // Loading state
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 2000); // 2 seconds delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds delay
 
-  //   return () => clearTimeout(timer); // Cleanup the timer
-  // }, []);
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
 
-  // if (isLoading) {
-  //   return <div>{/* <Loading /> */}</div>; // You can replace this with a loading spinner or any other loading indicator
-  // }
+  if (isLoading) {
+    return (
+      <div>
+        <LoadingProfile />
+      </div>
+    ); // You can replace this with a loading spinner or any other loading indicator
+  }
 
   return (
     <div className="relative flex">
