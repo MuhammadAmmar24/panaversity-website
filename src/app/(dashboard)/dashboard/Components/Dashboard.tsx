@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getEnrolledCourses } from "@/src/actions/dashboard";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import UpcomingCard from "./UpcomingClassCard";
@@ -8,6 +9,9 @@ import {
   mockRecentClasses,
   mockUpcomingClasses,
 } from "../utils/data";
+import { Result } from "@/src/lib/types";
+import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
+import { useParams } from "next/navigation";
 
 // Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
@@ -62,16 +66,53 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
 );
 
 const Dashboard: React.FC = () => {
+  
   const [recentCourses, setRecentCourses] = useState<Course[]>([]);
   const [recentClasses, setRecentClasses] = useState<Class[]>([]);
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const { studentId } = useParams<{ studentId: string }>();
 
   // Simulated mock data for now
-  useEffect(() => {
-    setRecentCourses(mockRecentCourses);
-    setRecentClasses(mockRecentClasses);
-    setUpcomingClasses(mockUpcomingClasses);
+   useEffect(() => {
+    const fetchCourses = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        
+        const studentId = 1; // Replace with actual student ID
+        const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(studentId);
+
+        if (result.type === "error") {
+          setError(result.message);
+        } else if (result.type === "success" && result.data) {
+          // Map the API response to Course type for rendering
+          const courses: Course[] = result.data.map((courseData) => ({
+            title: courseData.course_name,
+            progress: courseData.is_active ? 100 : 0, // Example progress calculation
+            lessons: 0, // Replace with actual lesson count if available
+          }));
+
+          setRecentCourses(courses);
+        }
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="min-h-screen">

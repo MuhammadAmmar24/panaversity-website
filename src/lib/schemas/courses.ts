@@ -1,5 +1,8 @@
 import { z } from "zod";
 
+// Schema for course_info
+
+
 export const ProgramCoursesQuerySchema = z.object({
 	program_id: z.number(),
 	batch_id: z.number(),
@@ -83,3 +86,30 @@ export type GetCoursePriceParams = z.infer<typeof GetCoursePriceParamsSchema>;
 export type GetCoursePriceResponse = z.infer<
 	typeof GetCoursePriceResponseSchema
 >;
+
+
+
+  export const CourseEnrollmentSchema = z.object({
+	student_course_id: z.number(),
+	course_id: z.number(),
+	course_name: z.string(),
+	course_order: z.number(),
+	is_active: z.boolean(),
+	is_paid: z.boolean(),
+	student_course_status: z.string(),
+	is_graduated: z.boolean(),
+	is_registration_open: z.boolean(),
+	is_class_started: z.boolean(),
+	class_start_date: z.union([z.string(), z.null()]),
+	is_class_completed: z.boolean(),
+	batch_id: z.number(),
+	program_id: z.number(),
+	course_batch_program_id: z.number(),
+  });
+  
+  // Define the schema for the entire response (an array of course enrollments)
+  export const CourseEnrollmentResponseSchema = z.array(CourseEnrollmentSchema);
+  
+  // Type definitions
+  export type CourseEnrollment = z.infer<typeof CourseEnrollmentSchema>;
+  export type CourseEnrollmentResponse = z.infer<typeof CourseEnrollmentResponseSchema>;
