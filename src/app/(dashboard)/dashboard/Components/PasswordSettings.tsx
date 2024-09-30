@@ -99,7 +99,7 @@ const PasswordSettings: React.FC = () => {
       {/* Button to toggle dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-md p-3 sm:p-4 shadow-sm hover:shadow-lg focus:outline-none"
+        className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-md p-3 sm:p-4 shadow-sm hover:shadow-lg focus:outline-none transition-all duration-300 ease-in-out"
       >
         <span className="text-gray-800 font-semibold">Password Settings</span>
         <svg
@@ -124,7 +124,7 @@ const PasswordSettings: React.FC = () => {
         <div className="flex justify-center items-center">
           <div
             ref={formRef}
-            className="mt-4 rounded-lg shadow-md p-4 sm:p-6 w-full max-w-xl"
+            className="mt-8 rounded-lg shadow-md p-4 sm:p-6 w-full max-w-xl"
           >
             <form onSubmit={handleSubmit}>
               <div className="mb-4 sm:mb-6">
@@ -237,7 +237,7 @@ const PasswordSettings: React.FC = () => {
                 </div>
 
                 {/* Set Password Button */}
-                <button className="w-full bg-accent text-white rounded-full py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-colors">
+                <button className="w-full bg-accent text-white rounded-full py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-all duration-300 ease-in-out">
                   Set Password
                 </button>
               </div>

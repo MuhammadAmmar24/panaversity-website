@@ -37,14 +37,14 @@ const AccountSettings = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center mt-5 font-poppins">
+    <div className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
       <div className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-medium text-lg sm:text-xl md:text-2xl mb-4 text-center md:text-start">
           Account Settings
         </h1>
 
         {/* Profile Section */}
-        <div className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 md:pt-2">
+        <div className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2">
           <div className="text-end">
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
@@ -61,7 +61,7 @@ const AccountSettings = () => {
             </button>
           </div>
           <div className="flex justify-between items-center">
-            <div className="flex items-center flex-wrap justify-center space-x-4">
+            <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
               <img
                 src="/team/rasaf.jpg"
                 alt="Profile"
@@ -87,10 +87,10 @@ const AccountSettings = () => {
                   </>
                 ) : (
                   <>
-                    <p className="text-lg sm:text-xl text-center lg:text-start pt-2">
+                    <p className="text-base sm:text-xl">
                       {profileInfo.firstName} {profileInfo.lastName}
                     </p>
-                    <p className="text-gray-500 text-sm">{profileInfo.email}</p>
+                    <p className="text-gray-500 text-xs sm:text-sm">{profileInfo.email}</p>
                   </>
                 )}
               </div>
@@ -119,9 +119,9 @@ const AccountSettings = () => {
               )}
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
-              <p className="text-gray-600">Phone</p>
+              <p className="text-gray-600 ">Phone</p>
               <p className="font">{personalInfo.phone}</p>
             </div>
             <div>
@@ -131,7 +131,7 @@ const AccountSettings = () => {
           </div>
 
           {/* Address Section */}
-          <div className="mt-4">
+          <div className="mt-4 text-sm sm:text-base">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-600">Country</p>
