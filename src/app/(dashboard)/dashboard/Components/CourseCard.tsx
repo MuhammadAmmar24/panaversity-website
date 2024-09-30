@@ -9,7 +9,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   return (
     <div className="w-full h-full">
-      <h1 className="font-medium text-start text-xl xs:text-2xl md:text-3xl font-poppins mb-4">
+      <h1 className="font-medium text-start text-xl md:text-2xl font-poppins mb-4">
         Enrolled Courses
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
