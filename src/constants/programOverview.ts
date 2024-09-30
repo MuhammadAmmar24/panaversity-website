@@ -10,7 +10,7 @@ export const programOverviewData = {
             culminate in a comprehensive capstone project. This program prepares
             you for real-world applications, with regular breaks to reinforce
             your learning.`,
-  buttonText: "Continue "
+  buttonText: "Continue With Us"
 };
 
 
