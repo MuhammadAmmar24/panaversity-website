@@ -49,7 +49,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         <img
           src={userImage}
           alt="User profile"
-          className="w-10 h-10 md:w-auto md:h-14 rounded-full object-cover"
+          className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +69,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 
       {/* Dropdown Menu */}
       <div
-        className={`absolute right-2 md:right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
+        className={`absolute right-2 mt-2 w-48 sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
           isOpen
-            ? 'opacity-100 scale-100 visible'
-            : 'opacity-0 scale-95 invisible'
+            ? "opacity-100 scale-100 visible"
+            : "opacity-0 scale-95 invisible"
         }`}
       >
         <div className="p-4">
@@ -80,11 +80,13 @@ const Dropdown: React.FC<DropdownProps> = ({
             <img
               src={userImage}
               alt="User profile"
-              className="w-10 h-10 rounded-full object-cover"
+              className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
             />
             <div>
-              <h2 className="text-gray-900 font-semibold">{userName}</h2>
-              <p className="text-gray-500 text-sm">{userEmail}</p>
+              <h2 className="text-gray-900 font-semibold text-sm sm:text-base">
+                {userName}
+              </h2>
+              <p className="text-gray-500 text-xs sm:text-sm">{userEmail}</p>
             </div>
           </div>
         </div>
@@ -93,21 +95,25 @@ const Dropdown: React.FC<DropdownProps> = ({
           <Link href="/dashboard/account-settings">
             <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer">
               <LuSettings2 className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700">Profile Settings</span>
+              <span className="text-gray-700 text-xs sm:text-sm">
+                Profile Settings
+              </span>
             </li>
           </Link>
           <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
             <TfiWallet className="w-5 h-5 text-gray-700" />
-            <span className="text-gray-700">Payments</span>
+            <span className="text-gray-700 text-xs sm:text-sm">Payments</span>
           </li>
           <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
             <TfiHelp className="w-5 h-5 text-gray-700" />
-            <span className="text-gray-700">Help Center</span>
+            <span className="text-gray-700 text-xs sm:text-sm">
+              Help Center
+            </span>
           </li>
           <hr className="border-gray-200" />
           <li className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer">
             <CiLogout className="w-5 h-5 text-gray-700" />
-            <span className="text-gray-700">Sign Out</span>
+            <span className="text-gray-700 text-xs sm:text-sm">Sign Out</span>
           </li>
         </ul>
       </div>
