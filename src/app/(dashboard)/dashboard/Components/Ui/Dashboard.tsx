@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import UpcomingCard from "./UpcomingClassCard";
-import { Course, Class } from "../types/types";
+import { Course, Class } from "../../types/types";
 import {
   mockRecentCourses,
   mockRecentClasses,
   mockUpcomingClasses,
-} from "../types/data";
+} from "../../types/data";
 
 // Reusable ClassSection for displaying recent classes
 interface ClassSectionProps {
@@ -23,11 +23,7 @@ const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
       </h1>
     </header>
     {classes.map((cls, index) => (
-      <ClassCard
-        key={index}
-        title={cls.title}
-        time={cls.time}
-      />
+      <ClassCard key={index} title={cls.title} time={cls.time} />
     ))}
   </section>
 );

@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
-import { initialData } from "../types/data";
+import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
 
 // Page metadata for SEO

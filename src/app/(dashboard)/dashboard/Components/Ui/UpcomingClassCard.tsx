@@ -1,5 +1,5 @@
 import React from "react";
-import { UpcomingClassProps } from "../types/types";
+import { UpcomingClassProps } from "../../types/types";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import { SiZoom } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
