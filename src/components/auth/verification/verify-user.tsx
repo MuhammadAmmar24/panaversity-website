@@ -6,15 +6,30 @@ import { verify } from "@/src/actions/verify";
 import { useSearchParams } from "next/navigation";
 import { useToast } from "@/src/components/ui/use-toast";
 import Link from "next/link";
-import { auth } from "@/src/auth"; // Import your auth function
-import { ToastAction } from "../../ui/toast";
+import { user_verify } from "@/src/actions/user-verify"
+import { useRouter } from "next/navigation";
 
-const Verify = () => {
+const Verify = async () => {
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const [verified, setVerified] = useState<null | boolean>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track authentication
   const token = searchParams.get("token");
+
+  const router = useRouter();
+
+  const handleClick = async () => {
+    console.log("handling Click")
+    const res = await user_verify()
+    console.log(res.redirectTo)
+    if(res.redirectTo) {
+      console.log(res.redirectTo)
+      router.push(res.redirectTo);
+      
+    } else {
+      router.push("/programs/flagship-program")
+    }
+  }
 
   useEffect(() => {
     // Check for token and verify the user
@@ -28,14 +43,12 @@ const Verify = () => {
       });
     }
 
-    // Call auth function to check for authentication
-    const checkAuth = async () => {
-      const user = await auth();
-      setIsAuthenticated(!!user); // If user is authenticated, set true
-    };
-
-    checkAuth();
+   
+     
+    
   }, [token]);
+  
+  
 
   return (
     <>
@@ -84,13 +97,12 @@ const Verify = () => {
             Your email was verified. You can continue using the application.
           </p>
 
-          {/* Conditionally render the link based on authentication */}
-          <Link
-            href={isAuthenticated ? "/programs/flagship-program" : "/login"}
+          <button
+            onClick={handleClick}
             className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
           >
             Get Started
-          </Link>
+          </button>
         </div>
       )}
       {verified === false && (

@@ -2,7 +2,7 @@
 import { auth } from "../auth";
 
 export const checkUserVerification = async () => {
-  const session = await auth();
+  const session = await auth(); // Getting JWT From Cookies
   if (!session) {
     console.log("[session] No cookies. Redirecting...");
     return { isVerified: false, redirectTo: "/login" };
