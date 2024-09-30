@@ -53,8 +53,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
     { icon: CiLogout, label: "Logout", href: "#" },
   ];
 
-
-
   return (
     <div ref={sidebarRef} className="relative h-screen flex">
       {/* Sidebar container */}
@@ -100,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         {/* Menu Items */}
         <nav className="mt-10 space-y-2 flex-1">
           {menuItems.map((item) => (
-            <div key={item.label} className="relative">
+            <div key={item.label} className="relative group"> {/* Added group class */}
               <Link
                 href={item.href}
                 className="flex items-center p-4 hover:text-accent transition-all duration-300"
@@ -131,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         {/* Bottom menu items (Help and Logout) */}
         <div className="mt-auto mb-4">
           {menuItemsBottom.map((item) => (
-            <div key={item.label} className="relative">
+            <div key={item.label} className="relative group"> {/* Added group class */}
               <Link
                 href={item.href}
                 className="flex items-center p-4 hover:text-accent transition-all duration-300"
