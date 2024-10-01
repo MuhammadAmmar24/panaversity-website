@@ -29,8 +29,8 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
             href="#"
             className="flex items-center gap-3 hover:underline cursor-pointer"
           >
+            <FaGithub className="w-auto h-6 sm:h-8" />
             <DiGithubFull className="w-auto h-14 sm:h-14 md:h-16" />
-            {/* <FaGithub className="w-auto h-6 sm:h-8" /> */}
             <span className="text-gray-600 text-xs sm:text-md md:text-lg">
               Topics to be covered
             </span>
@@ -42,7 +42,9 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
             href="#"
             className="flex items-center gap-3 hover:underline cursor-pointer"
           >
-            <SiZoom className="w-auto h-16 text-blue-600" />
+            <div className="w-[108px] flex justify-center">
+              <SiZoom className="w-auto h-20 text-blue-600" />
+            </div>
             <span className="text-gray-600 text-xs sm:text-md md:text-lg">
               Zoom Class Link
             </span>
@@ -51,7 +53,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         </div>
 
         {/* Date and Time Information */}
-        <div className="flex justify-between items-center border-t text-gray-500 text-xs sm:text-sm md:text-base pt-4">
+        <div className="flex justify-between items-center border-t text-gray-500 text-xs sm:text-sm md:text-base pt-4 -mt-4">
           {/* Date */}
           <div className="flex items-center gap-2">
             <FiCalendar className="w-4 sm:w-5 h-4 sm:h-5" />
