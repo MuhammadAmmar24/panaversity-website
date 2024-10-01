@@ -247,7 +247,7 @@ const PasswordSettings: React.FC = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button className="w-full bg-accent text-white rounded-full py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-all duration-300 ease-in-out">
+                <button className="w-full bg-accent text-white rounded-md py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-all duration-300 ease-in-out">
                   Set Password
                 </button>
               </div>
