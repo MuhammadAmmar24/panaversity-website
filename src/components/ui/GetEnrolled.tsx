@@ -186,7 +186,7 @@ export default function GetEnrolled() {
             <span className="font-semibold">
               3- Confirm Your Reservation by Payment:
             </span>{" "}
-            After reserving your seat,complete
+            After reserving your seat, go to your student dashboard to complete
             the payment. Your seat will only be officially booked once the
             payment is made.
           </p>
@@ -319,16 +319,16 @@ export default function GetEnrolled() {
             Reserve Your Seat
           </button>
 
-          {/* Success Message
+          {/* Success Message */}
           {isEnrolled && (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
             </div>
-          )} */}
+          )}
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-green-500 mt-4"}>{enrollmentError}</p>
+            <p className={"text-red-500 mt-4"}>Failed to enroll student in course</p>
           )}
         </div>
       </div>
