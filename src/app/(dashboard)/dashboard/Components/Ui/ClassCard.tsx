@@ -1,7 +1,7 @@
 import React from "react";
 import { TimerIcon } from "@radix-ui/react-icons";
 import { FaYoutube } from "react-icons/fa6";
-import { ClassCardProps } from "../types/types";
+import { ClassCardProps } from "../../types/types";
 import { BiCalendarAlt } from "react-icons/bi";
 
 const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {

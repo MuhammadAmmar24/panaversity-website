@@ -1,6 +1,6 @@
 import React from "react";
 import { CiMobile1 } from "react-icons/ci";
-import { CourseCardProps } from "../types/types";
+import { CourseCardProps } from "../../types/types";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
