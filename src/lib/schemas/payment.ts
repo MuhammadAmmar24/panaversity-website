@@ -17,12 +17,12 @@ export type Kuickpay = z.infer<typeof KuickpaySchema>;
 
 // Define the schema for the payment request
 export const PaymentRequestSchema = z.object({
-    batch_no: z.number().min(1),
-    package_id: z.number().min(1),
-    student_course_id: z.number().min(1),
-    student_id: z.number().min(1),
-    vendor_type: z.enum(["KUICKPAY"]), // Assuming "KUICKPAY" is the only valid type for now
-  });
-  
-  // Define the type for the payment request
-  export type PaymentRequest = z.infer<typeof PaymentRequestSchema>;
+  batch_no: z.number().min(1),
+  package_id: z.number().min(1),
+  student_course_id: z.number().min(1),
+  student_id: z.number().min(1),
+  vendor_type: z.enum(["KUICKPAY"]), // Assuming "KUICKPAY" is the only valid type for now
+});
+
+// Define the type for the payment request
+export type PaymentRequest = z.infer<typeof PaymentRequestSchema>;
