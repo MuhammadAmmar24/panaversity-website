@@ -18,14 +18,14 @@ export const processPayment = async (
     }
 
     // Make the POST request to your payment backend
-    const apiUrl = `${process.env.PAYMENT_API_URL}/kuickpay/process-payment`;
+    const apiUrl = `${process.env.PAYMENT_API_URL}/voucher/create_voucher`;
     console.log("API URL:", apiUrl);
 
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.}`, // Use secret from environment
+        Authorization: `Bearer ${process.env.TOKEN_SECRET}`, // Use secret from environment
       },
       body: JSON.stringify(validationResult.data), // Convert validated data to JSON string
     });
