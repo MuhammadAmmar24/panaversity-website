@@ -157,7 +157,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
             <div className="flex flex-col lg:flex-row ">
               {/* Course Details */}
               <div className="w-full lg:w-2/3">
-                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-background -mt-2 font-poppins mb-4">
+                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl  text-background -mt-2 font-poppins mb-4">
                   {course_name}
                 </h1>
                 <p className="mb-5 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">

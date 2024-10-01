@@ -9,7 +9,7 @@ const CourseCard = ({ course }: { course: Course }) => (
   <Link
   href={`/programs/flagship-program/${course.course_id}`}
   >
-    <div className="h-fit  flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full fold:w-[15rem] mobileM:w-[18rem] xs:w-[23rem] sm:w-full md:w-full">
+    <div className="h-fit  flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full fold:w-[15rem] mobileM:w-[18rem] xs:w-[23rem] sm:w-full md:w-full pb-[1rem]">
       <div className="h-[14rem] relative">
         <Image
           src={course.media_link}
@@ -22,9 +22,9 @@ const CourseCard = ({ course }: { course: Course }) => (
       </div>
       <div className="h-[8rem] fold:h-[7rem]  p-3 flex flex-col justify-between">
         <div>
-          <h4 className=" font-medium text-[1rem] mb-1 font-poppins">{course.course_name}</h4>
-          <h6 className="text-xs font-medium opacity-75">Course - {course.course_id}</h6>
-          <p className="text-sm mt-2 line-clamp-2">{course.course_description}</p>
+          <h4 className=" font-medium text-[1rem]  font-poppins">{course.course_name}</h4>
+          <h6 className="text-xs font-medium mt-1 opacity-75">Course - {course.course_id}</h6>
+          <p className="text-sm mt-1 line-clamp-2">{course.course_description}</p>
         </div>
       </div>
     </div>

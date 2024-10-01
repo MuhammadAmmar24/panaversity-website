@@ -124,7 +124,7 @@ export default function GetEnrolled() {
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: "109", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
+      student_id: "209", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
       program_id: 1, // Replace with actual program ID, ensure it's correct
       batch_id: 1, // Replace with actual batch ID
       course_batch_program_id: 1, // Replace with actual course_batch_program_id
@@ -186,7 +186,7 @@ export default function GetEnrolled() {
             <span className="font-semibold">
               3- Confirm Your Reservation by Payment:
             </span>{" "}
-            After reserving your seat, go to your student dashboard to complete
+            After reserving your seat,complete
             the payment. Your seat will only be officially booked once the
             payment is made.
           </p>
@@ -319,16 +319,16 @@ export default function GetEnrolled() {
             Reserve Your Seat
           </button>
 
-          {/* Success Message */}
+          {/* Success Message
           {isEnrolled && (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
             </div>
-          )}
+          )} */}
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-red-500 mt-4"}>{enrollmentError}</p>
+            <p className={"text-green-500 mt-4"}>{enrollmentError}</p>
           )}
         </div>
       </div>
