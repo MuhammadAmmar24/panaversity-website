@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getEnrolledCourses } from "@/src/actions/dashboard";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import UpcomingCard from "./UpcomingClassCard";
@@ -8,27 +9,35 @@ import {
   mockRecentClasses,
   mockUpcomingClasses,
 } from "../../types/data";
+import { Result } from "@/src/lib/types";
+import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 
-// Reusable ClassSection for displaying recent classes
+// Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
   title: string;
   classes: Class[];
 }
 
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
-  <section className="flex-1 flex flex-col gap-4">
-    <header className="flex justify-start">
+  <div className="flex-1 flex flex-col gap-4">
+    <div className="flex justify-start">
       <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
         {title}
       </h1>
-    </header>
+    </div>
     {classes.map((cls, index) => (
-      <ClassCard key={index} title={cls.title} time={cls.time} />
+      <ClassCard
+        key={index}
+        title={cls.title}
+        time={cls.time}
+        assignment={cls.assignment}
+        lessons={cls.lessons}
+      />
     ))}
-  </section>
+  </div>
 );
 
-// Reusable UpcomingClassSection for displaying upcoming classes
+// Reusable UpcomingClassSection for Upcoming Classes
 interface UpcomingClassSectionProps {
   title: string;
   classes: Class[];
@@ -38,40 +47,74 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
   title,
   classes,
 }) => (
-  <section className="flex-1 flex flex-col gap-4">
-    <header className="flex justify-start">
+  <div className="flex-1 flex flex-col gap-4">
+    <div className="flex justify-start">
       <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
         {title}
       </h1>
-    </header>
+    </div>
     {classes.map((cls, index) => (
       <UpcomingCard
         key={index}
-        title={cls.title || "Untitled"} // Default to "Untitled" if title is missing
+        title={cls.title ?? "Untitled"}
         time={cls.time}
         date={cls.date}
       />
     ))}
-  </section>
+  </div>
 );
 
 const Dashboard: React.FC = () => {
-  // State for storing recent courses, recent classes, and upcoming classes
+  
   const [recentCourses, setRecentCourses] = useState<Course[]>([]);
   const [recentClasses, setRecentClasses] = useState<Class[]>([]);
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  // Simulate fetching mock data on component mount
+  // Simulated mock data for now
   useEffect(() => {
-    setRecentCourses(mockRecentCourses);
-    setRecentClasses(mockRecentClasses);
-    setUpcomingClasses(mockUpcomingClasses);
-  }, []); // Empty dependency array ensures it runs only once when the component mounts
+    const fetchCourses = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const studentId = 107; // Replace with actual student ID
+        const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(studentId);
+
+        if (result.type === "error") {
+          setError(result.message);
+        } else if (result.type === "success" && result.data) {
+          // Map the API response to Course type for rendering
+          const courses: Course[] = result.data.map((courseData) => ({
+            title: courseData.course_name,
+            progress: courseData.is_active ? 60 : 0, // Example progress calculation
+            lessons: 0, // Replace with actual lesson count if available
+          }));
+
+          setRecentCourses(courses);
+        }
+      } catch (error: any) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <main className="container mx-auto">
+    <div className="min-h-screen">
       {/* Render recent courses */}
-      <section className="mb-8 mt-8">
+      <div className="mb-8 mt-8">
         {recentCourses.map((course, index) => (
           <CourseCard
             key={index}
@@ -80,20 +123,20 @@ const Dashboard: React.FC = () => {
             lessons={course.lessons}
           />
         ))}
-      </section>
+      </div>
 
-      {/* Grid layout for aligning classes side by side on larger screens */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+      {/* Use grid layout for side-by-side alignment */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         {/* Render recent classes */}
-        <ClassSection title="Recent Classes" classes={recentClasses} />
+        <ClassSection title="Recent Classes" classes={mockRecentClasses} />
 
         {/* Render upcoming classes */}
         <UpcomingClassSection
           title="Upcoming Classes"
-          classes={upcomingClasses}
+          classes={mockUpcomingClasses}
         />
-      </section>
-    </main>
+      </div>
+    </div>
   );
 };
 
