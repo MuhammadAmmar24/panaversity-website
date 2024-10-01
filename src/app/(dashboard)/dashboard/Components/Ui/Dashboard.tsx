@@ -11,6 +11,8 @@ import {
 } from "../../types/data";
 import { Result } from "@/src/lib/types";
 import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
+import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+
 
 // Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
@@ -104,7 +106,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <DashboardSkeleton />;
   }
 
   if (error) {
