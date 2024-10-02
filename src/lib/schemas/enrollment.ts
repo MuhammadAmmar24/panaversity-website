@@ -119,3 +119,31 @@ export const EnrollmentRequestSchema = z.object({
   
   // Type for the request
   export type EnrollmentRequest = z.infer<typeof EnrollmentRequestSchema>;
+
+
+  // Define the schema for the student_course object
+export const Student_Course_Schema = z.object({
+	student_program_id: z.number(),
+	course_batch_program_id: z.number(),
+	student_id: z.string(),
+	class_time_slot_id: z.number(),
+	lab_time_slot_id: z.number(),
+	student_course_status: z.string(),
+	id: z.number(),
+	created_at: z.string().datetime(),
+	updated_at: z.string().datetime(),
+  });
+  
+  // Define the schema for the fee_voucher object (assuming it's an object; you can expand it based on actual structure)
+  export const FeeVoucherSchema = z.record(z.any()); // Adjust based on actual structure
+  
+  // Define the schema for the entire response
+  export const EnrollmentResponseSchema = z.object({
+	status: z.string(),
+	student_course: Student_Course_Schema,
+	fee_voucher: FeeVoucherSchema,
+  });
+  
+  // Type for the response
+  export type EnrollmentResponse = z.infer<typeof EnrollmentResponseSchema>;
+  
