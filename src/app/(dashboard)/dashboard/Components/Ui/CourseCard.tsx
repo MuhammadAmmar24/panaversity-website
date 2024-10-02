@@ -1,12 +1,52 @@
 import React from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
+import { processPayment } from "@/src/actions/payment";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
   progress,
   lessons,
+  status
 }) => {
+
+
+
+  const handleEnroll = async () => {
+    const payload: any = {
+      batch_no: 1,
+      package_id: 1,
+      student_course_id: 1,
+      student_id: "109",
+      vendor_type: "STRIPE",
+      // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
+    };
+
+    // Log the payload for debugging
+    console.log("Enrollment Payload:", payload);
+
+    try {
+      const result: any = await processPayment(payload);
+
+      console.log("Response",result)
+
+      const url = result?.data?.stripe?.stripe_url;
+
+      if (result.type === "success") {
+
+        if (url) {
+          window.location.href = url; // Use window.location.href for external URL
+        } else {
+          console.error("Stripe URL not found.");
+        }
+      } else {
+        console.error("API Error:", result.message);
+      }
+    } catch (error) {
+      console.error("Enrollment failed:", error);
+    }
+  };
+
   return (
     <section className="w-full h-full">
       {/* Section heading */}
@@ -21,11 +61,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
           {/* Icon and action button row */}
           <div className="flex justify-between items-center mb-6">
             <CiMobile1 className="text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px]" />
-
+            
             {/* Pay button */}
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
+            {status ? 
+            <div></div> :
+             <button onClick={handleEnroll} className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
               Pay to Proceed
             </button>
+            }
           </div>
 
           {/* Course title */}
