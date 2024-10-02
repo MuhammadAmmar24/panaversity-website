@@ -5,6 +5,7 @@ import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
+import { getProfile } from "@/src/auth";
 
 // Page metadata for SEO
 export const metadata: Metadata = {
@@ -17,13 +18,20 @@ const AccountSettings: React.FC = () => {
   const [profileInfo, setProfileInfo] = useState(initialData.profileInfo);
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+
 
   // State for toggling edit modes
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
+
+
   useEffect(() => {
-    // Side effects or data fetching can be added here if needed in the future
+    getProfile().then(data => {
+      setProfile(data);
+      console.log(`PROFILE: ${data}`);
+    });
   }, []);
 
   // Handle changes to profile input fields
@@ -73,7 +81,7 @@ const AccountSettings: React.FC = () => {
             <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
               {/* Profile Picture */}
               <img
-                src="/team/rasaf.jpg"
+                src="/profile.png"
                 alt="Profile"
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
@@ -84,26 +92,26 @@ const AccountSettings: React.FC = () => {
                     <input
                       type="text"
                       name="firstName"
-                      value={profileInfo.firstName}
+                      value={profile?.full_name}
                       onChange={handleProfileChange}
                       className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                     />
-                    <input
+                    {/* <input
                       type="text"
                       name="lastName"
                       value={profileInfo.lastName}
                       onChange={handleProfileChange}
                       className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
-                    />
+                    /> */}
                   </>
                 ) : (
                   <>
                     {/* Display profile information */}
                     <p className="text-base sm:text-xl">
-                      {profileInfo.firstName} {profileInfo.lastName}
+                      {profile?.full_name} 
                     </p>
                     <p className="text-gray-500 text-xs sm:text-sm">
-                      {profileInfo.email}
+                      {profile?.email}
                     </p>
                   </>
                 )}
@@ -136,7 +144,7 @@ const AccountSettings: React.FC = () => {
             {/* Static personal information */}
             <div>
               <p className="text-gray-600">Phone</p>
-              <p>{personalInfo.phone}</p>
+              <p>+{profile?.phone}</p>
             </div>
             <div>
               <p className="text-gray-600">Student ID</p>

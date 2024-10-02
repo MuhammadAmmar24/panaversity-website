@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { checkUserVerification } from "@/src/actions/profile";
 
 const Welcome: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
@@ -7,9 +8,16 @@ const Welcome: React.FC = () => {
   // Simulate fetching user data (this should be replaced with an actual API call in production)
   useEffect(() => {
     const fetchUserData = async () => {
+      console.log("in use effect")
+        const res = await checkUserVerification()
+        console.log(res)
+        
+        setUserName(res.full_name)
+          
+                                                                 
       // Simulated API response
-      const user = { name: "Rasaf Inayat" }; // Mock user data
-      setUserName(user.name); // Update state with user name
+      // const user = { name: "Rasaf Inayat" }; // Mock user data
+      // setUserName(user.name); // Update state with user name
     };
 
     fetchUserData();

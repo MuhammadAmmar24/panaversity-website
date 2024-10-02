@@ -89,8 +89,8 @@ const Dashboard: React.FC = () => {
           // Map the API response to Course type for rendering
           const courses: Course[] = result.data.map((courseData) => ({
             title: courseData.course_name,
-            progress: courseData.is_active ? 60 : 0, // Example progress calculation
-            lessons: 0, // Replace with actual lesson count if available
+            progress: courseData.is_active ? 40 : 100, // Example progress calculation
+            lessons: 100, // Replace with actual lesson count if available
           }));
 
           setRecentCourses(courses);

@@ -1,5 +1,6 @@
 "use server";
 import { auth } from "../auth";
+import { cookies } from "next/headers";
 
 export const checkUserVerification = async () => {
   const session = await auth(); // Getting JWT From Cookies
@@ -18,7 +19,16 @@ export const checkUserVerification = async () => {
     });
     if (response.ok) {
       const profile = await response.json();
-      return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/programs/flagship-program" : "/verify" };
+
+      // Setting Cookies for Profile Data
+      cookies().set({
+        name: "profile_data",
+        value: JSON.stringify(profile),
+        httpOnly: true,
+      });
+
+      // return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/programs/flagship-program" : "/verify" };
+      return profile;
     } else {
       return { isVerified: false, redirectTo: "/login" };
     }
