@@ -11,3 +11,13 @@ interface UserData {
     refresh_token: string;
     accessTokenExpires: number;
   }
+
+  interface ProfileData {
+    "full_name": "string",
+    "email": "string",
+    "phone": "string",
+    "affiliation": "string",
+    "user_type": "visitor",
+    "id": "string",
+    "is_verified": boolean
+  }

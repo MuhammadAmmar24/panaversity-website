@@ -11,9 +11,7 @@ export default function LoginDialog() {
   const [open, setOpen] = useState(true);
   const router = useRouter();
 
-  const handleLoginSuccess = () => {
-    setOpen(false);
-  };
+  
 
   return (
     <Dialog.Root open={open} onOpenChange={(isOpen) => isOpen ? setOpen(true) : router.back()}>
@@ -23,7 +21,7 @@ export default function LoginDialog() {
           <Dialog.Title className="text-lg font-bold mb-4">
             Login
           </Dialog.Title>
-          <LoginForm onLoginSuccess={handleLoginSuccess} />
+          <LoginForm  />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">
               <IoClose />

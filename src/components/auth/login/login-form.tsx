@@ -28,7 +28,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import Link from "next/link";
 
-export const LoginForm = ({ onLoginSuccess  }:any) => {
+export const LoginForm = () => {
   const searchParams = useSearchParams();
 
   // Get all the query params
@@ -95,7 +95,7 @@ export const LoginForm = ({ onLoginSuccess  }:any) => {
                <ToastAction altText="Close">Close</ToastAction>
               ),
             })
-            onLoginSuccess(); // Call this function to close the dialog
+            //onLoginSuccess(); // Call this function to close the dialog
             router.back()
             // if (data.redirectTo) {
             //   // router.push(data.redirectTo)
