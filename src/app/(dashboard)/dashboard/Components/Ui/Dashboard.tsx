@@ -13,7 +13,6 @@ import { Result } from "@/src/lib/types";
 import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 
-
 // Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
   title: string;
@@ -91,6 +90,7 @@ const Dashboard: React.FC = () => {
             title: courseData.course_name,
             progress: courseData.is_active ? 60 : 0, // Example progress calculation
             lessons: 0, // Replace with actual lesson count if available
+            status: courseData.student_course_status,
           }));
 
           setRecentCourses(courses);
@@ -123,6 +123,7 @@ const Dashboard: React.FC = () => {
             title={course.title}
             progress={course.progress}
             lessons={course.lessons}
+            status={course.status}
           />
         ))}
       </div>

@@ -20,8 +20,8 @@ export const PaymentRequestSchema = z.object({
   batch_no: z.number().min(1),
   package_id: z.number().min(1),
   student_course_id: z.number().min(1),
-  student_id: z.number().min(1),
-  vendor_type: z.enum(["KUICKPAY"]), // Assuming "KUICKPAY" is the only valid type for now
+  student_id: z.string(),
+  vendor_type: z.enum(["STRIPE"]), // Assuming "KUICKPAY" is the only valid type for now
 });
 
 // Define the type for the payment request

@@ -10,6 +10,7 @@ export interface ClassCardProps {
     title: string;
     progress: number;
     lessons: number;
+    status: string;
   }
   
   export interface CardData {
@@ -22,6 +23,7 @@ export interface ClassCardProps {
     title: string;
     progress: number;
     lessons: number;
+    status: string;
   }
   
   export interface Class {
