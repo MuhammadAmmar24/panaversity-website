@@ -104,3 +104,18 @@ export type EnrollNewStudentRequest = z.infer<
 export type EnrollNewStudentResponse = z.infer<
 	typeof EnrollNewStudentResponseSchema
 >;
+
+
+// Define the schema for the request body
+export const EnrollmentRequestSchema = z.object({
+	student_id: z.string(),
+	student_program_id: z.number(),
+	course_batch_program_id: z.number(),
+	class_time_slot_id: z.number(),
+	lab_time_slot_id: z.number(),
+	vendor_type: z.enum(["STRIPE", "KUICKPAY", "OTHER_VENDOR"]), // Include other vendor types if applicable
+	package_id: z.number(),
+  });
+  
+  // Type for the request
+  export type EnrollmentRequest = z.infer<typeof EnrollmentRequestSchema>;
