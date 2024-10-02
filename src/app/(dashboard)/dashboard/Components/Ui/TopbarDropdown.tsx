@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect, useRef } from "react";
 import { TfiWallet, TfiHelp } from "react-icons/tfi";
 import { CiLogout } from "react-icons/ci";
