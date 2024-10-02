@@ -12,7 +12,7 @@ export default function Component() {
           </p>
           {/* Button Component */}
           <Link
-            href="/auth"
+            href="/programs/flagship-program"
             className="relative inline-flex items-center px-8 py-2 lg:px-14 lg:py-4 overflow-hidden text-[1rem] text-textPrimary font-inter bg-background rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-accent"
           >
             <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>

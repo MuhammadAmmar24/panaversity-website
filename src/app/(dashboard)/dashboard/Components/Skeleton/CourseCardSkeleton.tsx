@@ -3,7 +3,7 @@ import React from "react";
 const CourseCardSkeleton: React.FC = () => {
   return (
     <>
-      <section className="md:w-full h-auto animate-pulse">
+      <section className="md:w-full h-auto   animate-pulse">
         {/* Course card grid container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 fold:gap-2 mobileM:gap-4 sm:gap-6 md:gap-8">
           {/* Individual course card skeleton */}

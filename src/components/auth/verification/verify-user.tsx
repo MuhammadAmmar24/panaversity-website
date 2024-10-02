@@ -24,7 +24,7 @@ const Verify = async () => {
     console.log(res.redirectTo)
     if(res.redirectTo) {
       console.log(res.redirectTo)
-      router.push(res.redirectTo);
+      router.push("/login");
       
     } else {
       router.push("/programs/flagship-program")
@@ -106,7 +106,7 @@ const Verify = async () => {
         </div>
       )}
       {verified === false && (
-        <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+        <div className="flex flex-col justify-center gap-y-5 items-center  w-[400px] px-5 h-[300px]">
           <div className="flex justify-center mb-4">
             <ImCancelCircle size={50} className="text-red-500" />
           </div>

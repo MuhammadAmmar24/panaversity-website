@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   // Menu items
   const menuItems = [
     { icon: GoHome, label: "Dashboard", href: "/dashboard" },
-    { icon: SlBookOpen, label: "Courses", href: "#" },
+    { icon: SlBookOpen, label: "Courses", href: "/programs/flagship-program" },
     { icon: IoLibraryOutline, label: "Lessons", href: "#" },
   ];
 

@@ -20,16 +20,16 @@ export const user_verify = async () => {
       cache: "no-cache"
     });
 
-    console.log("RESPONSE", response)
+    
 
     if (response.ok) {
       const profile = await response.json();
-      console.log("VERIFIED", response)
+     
       return { isVerified: profile.is_verified };
       
 
     } else {
-      console.log("NOT VERIFIED", response)
+   
       return { isVerified: false, redirectTo: "/verify" };
     }
   } catch (error) {

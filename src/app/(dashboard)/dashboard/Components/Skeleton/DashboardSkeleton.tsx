@@ -32,7 +32,7 @@ const UpcomingClassSectionSkeleton: React.FC = () => (
 // Dashboard skeleton
 const DashboardSkeleton: React.FC = () => {
   return (
-    <main className="container mx-auto">
+    <main className=" ">
       {/* Render recent courses skeleton */}
       <section className="mb-8 mt-8">
         {[1].map((index) => (
