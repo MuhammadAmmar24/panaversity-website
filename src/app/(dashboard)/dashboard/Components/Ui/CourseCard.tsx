@@ -57,7 +57,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       {/* Course card grid container */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Individual course card */}
-        <article className="bg-white rounded-lg shadow-xl px-4 sm:px-8 py-5">
+        <article className={`bg-white ${status ? 'bg-white' : 'opacity-50'}   rounded-lg shadow-xl px-4 sm:px-8 py-5`}>
           {/* Icon and action button row */}
           <div className="flex justify-between items-center mb-6">
             <CiMobile1 className="text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px]" />
