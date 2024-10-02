@@ -12,6 +12,8 @@ import {
 import { Result } from "@/src/lib/types";
 import {CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+import results from "@/src/app/(public)/announcements/page";
+import { courseData } from "@/src/constants/courses";
 
 // Reusable ClassSection for Recent Classes
 interface ClassSectionProps {
@@ -67,9 +69,10 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
 
 const Dashboard: React.FC = () => {
   
-  const [recentCourses, setRecentCourses] = useState<Course[]>([]);
+  const [recentCourses, setRecentCourses] = useState<any>([]);
   const [recentClasses, setRecentClasses] = useState<Class[]>([]);
   const [upcomingClasses, setUpcomingClasses] = useState<Class[]>([]);
+const [status, setstatus] = useState(false)
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -81,25 +84,36 @@ const Dashboard: React.FC = () => {
       try {
         const studentId = 107; // Replace with actual student ID
         const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(studentId);
+        console.log("REWSUTSLSETWS",result)
+        
 
         if (result.type === "error") {
           setError(result.message);
         } else if (result.type === "success" && result.data) {
           // Map the API response to Course type for rendering
-          const courses: Course[] = result.data.map((courseData) => ({
+          const courses:any = result.data.map((courseData) => ({
             title: courseData.course_name,
             progress: courseData.is_active ? 40 : 100, // Example progress calculation
             lessons: 100, // Replace with actual lesson count if available
-            status: courseData.student_course_status,
-          }));
+            status: courseData.student_course_status, 
+            is_paid: courseData.is_paid,
+            
+          }
+          
+        ));
+          
+         setstatus(courses[0].is_paid)
 
           setRecentCourses(courses);
+          
         }
       } catch (error: any) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
+
+      
     };
 
     fetchCourses();
@@ -117,19 +131,23 @@ const Dashboard: React.FC = () => {
     <div className="min-h-screen">
       {/* Render recent courses */}
       <div className="mb-8 mt-8">
-        {recentCourses.map((course, index) => (
+        {recentCourses.map((course:any, index:any) => (
           <CourseCard
             key={index}
             title={course.title}
             progress={course.progress}
             lessons={course.lessons}
-            status={course.status}
+            status={course.is_paid}
+      
           />
         ))}
       </div>
 
-      {/* Use grid layout for side-by-side alignment */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+      {/* Use grid layout for side-by-side alignment */}.
+      
+      {
+         status &&
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         {/* Render recent classes */}
         <ClassSection title="Recent Classes" classes={mockRecentClasses} />
 
@@ -137,8 +155,9 @@ const Dashboard: React.FC = () => {
         <UpcomingClassSection
           title="Upcoming Classes"
           classes={mockUpcomingClasses}
-        />
+          />
       </div>
+        }
     </div>
   );
 };

@@ -25,7 +25,6 @@ export const getEnrolledCourses = async (
                 Accept: "application/json",
                 Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
             },
-            cache: "no-store",
         });
 
         // Check if the response is successful

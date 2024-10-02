@@ -10,6 +10,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   status
 }) => {
 
+
+
   const handleEnroll = async () => {
     const payload: any = {
       batch_no: 1,
@@ -61,9 +63,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <CiMobile1 className="text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px]" />
             
             {/* Pay button */}
-            <button onClick={handleEnroll} className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
+            {status ? 
+            <div></div> :
+             <button onClick={handleEnroll} className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
               Pay to Proceed
             </button>
+            }
           </div>
 
           {/* Course title */}
