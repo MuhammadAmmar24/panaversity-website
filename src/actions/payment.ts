@@ -43,10 +43,7 @@ export const processPayment = async (
     return {
       type: "success",
       message: "Payment processed successfully",
-      data: {
-        success: true,
-        transactionId: responseData.transactionId, // Replace with actual key from response
-      },
+      data: responseData, // Replace with actual key from response
     };
   } catch (error: any) {
     console.error("Error processing payment:", error.message);
