@@ -106,6 +106,8 @@ const [status, setstatus] = useState(false)
 
           setRecentCourses(courses);
           
+          console.log("STUDENT ENROLLMENT DATA", recentCourses)
+          
         }
       } catch (error: any) {
         setError(error.message);
@@ -146,7 +148,7 @@ const [status, setstatus] = useState(false)
       {/* Use grid layout for side-by-side alignment */}.
       
       {
-         status &&
+         status ? <div></div> : 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         {/* Render recent classes */}
         <ClassSection title="Recent Classes" classes={mockRecentClasses} />
