@@ -16,7 +16,7 @@ export const checkUserVerification = async () => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
-      cache: "force-cache"
+
     });
     if (response.ok) {
       const profile = await response.json();

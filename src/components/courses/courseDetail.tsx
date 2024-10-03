@@ -97,7 +97,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
 
   async function handleClick() {
     const res = await user_verify()
-    if(res.redirectTo) {
+    if(res?.redirectTo) {
       router.push(res.redirectTo);
       console.log(res.redirectTo);
     }
