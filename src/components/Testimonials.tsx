@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,9 +8,8 @@ import "swiper/css/autoplay";
 import "swiper/css/navigation";
 
 import { Autoplay, Pagination } from "swiper/modules";
-import { testimonialData,testimonialList } from "@/src/constants/testimonials";
+import { testimonialData, testimonialList } from "@/src/constants/testimonials";
 
-// Import Swiper types
 import type { Swiper as SwiperType } from "swiper/types";
 
 const Testimonials = () => {
@@ -25,14 +24,14 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="light py-14 md:py-24 mb-8  md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative">
+    <section className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative">
       <Image
         src={"/testimonials/Element1.png"}
         alt={""}
         width={500}
         height={500}
         loading="lazy"
-       className='absolute pl-[1rem] sm:right-[1rem]  top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
+        className='absolute pl-[1rem] sm:right-[1rem] top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
       />
       <Image
         src={"/testimonials/Element2.png"}
@@ -40,10 +39,10 @@ const Testimonials = () => {
         width={500}
         height={500}
         loading="lazy"
-       className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem]  md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
+        className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
       />
-      <div className="container mx-auto max-w-6xl px-4 lg:px-2 xl:px-8 ">
-        <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12 ">
+      <div className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:-px-1">
+        <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
           <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
             {testimonialData.sectionHeading}
           </h2>
@@ -56,7 +55,7 @@ const Testimonials = () => {
           slidesPerView={1}
           spaceBetween={30}
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }} // Make sure disableOnInteraction is false
+          autoplay={{ delay: 3500, disableOnInteraction: false }}
           breakpoints={{
             640: {
               slidesPerView: 1,
@@ -78,13 +77,13 @@ const Testimonials = () => {
           modules={[Autoplay, Pagination]}
           className="mySwiper"
           onSwiper={(swiper) => (swiperRef.current = swiper)}
-          onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+          onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           {testimonialList.flat().map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <div className="testimonial-card  p-6 border rounded-[20px] shadow-md "
-                onMouseEnter={handleMouseEnter} // Add event handlers to Swiper
+              <div className="testimonial-card p-6 border rounded-[20px] shadow-md"
+                onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
                 <div className="flex items-center text-left mb-6">
@@ -100,7 +99,7 @@ const Testimonials = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-medium font-poppins">{testimonial.name}</h3>
-                    <p className="text-sm md:text-xs  mb-2">{testimonial.position}</p>
+                    <p className="text-sm md:text-xs mb-2">{testimonial.position}</p>
                   </div>
                 </div>
                 <p className="opacity-75 mb-2 text-base">{testimonial.content}</p>
