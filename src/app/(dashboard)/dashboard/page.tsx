@@ -8,23 +8,6 @@ import Welcome from "./Components/Ui/Welcome";
 
 export default function Home() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
-  // const [isLoading, setIsLoading] = useState(true); // Loading state
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setIsLoading(false);
-  //   }, 1000); // 2 seconds delay
-
-  //   return () => clearTimeout(timer); // Cleanup the timer
-  // }, []);
-
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <Loading />
-  //     </div>
-  //   ); // You can replace this with a loading spinner or any other loading indicator
-  // }
 
   return (
     <div className="relative flex">
