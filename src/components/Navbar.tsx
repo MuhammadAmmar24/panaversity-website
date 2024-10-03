@@ -25,13 +25,14 @@ export default function Navbar() {
   const router = useRouter();
 
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     if (IsLoggedIn) {
       router.push("/dashboard");
     } else {
       router.push("/login");
+      
     }
-  }, [IsLoggedIn, router]);
+  }
   
   useEffect(() => {
     async function checkUserStatus() {

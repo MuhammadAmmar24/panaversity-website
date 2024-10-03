@@ -1,9 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { checkUserVerification } from "@/src/actions/profile";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled() {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
@@ -14,6 +15,7 @@ export default function GetEnrolled() {
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   const [profile, setProfile] = useState<ProfileData | null>(null);
 
@@ -148,6 +150,7 @@ export default function GetEnrolled() {
     // Log the payload for debugging
     console.log("Enrollment Payload:", payload);
 
+    startTransition(async() =>  {
     try {
       const result: any = await enrollNewStudentInProgramAndCourse(payload);
       console.log("RESULT", result)
@@ -174,6 +177,7 @@ export default function GetEnrolled() {
       setEnrollmentError("Failed to enroll student."); // General error handling
       // console.error("Enrollment failed:", error);
     }
+  });
   };
 
   return (
@@ -322,15 +326,23 @@ export default function GetEnrolled() {
           </div>
 
           <button
-            className={`w-full block p-3 rounded-lg font-semibold ${
-              isDayAndTimeSelected
-                ? "bg-emerald-500 text-white hover:bg-emerald-600"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-            disabled={!isDayAndTimeSelected}
-            onClick={handleEnroll}
+           
+           className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
+            isDayAndTimeSelected && !isPending
+              ? "bg-accent text-white hover:bg-[#18c781]"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+          disabled={!isDayAndTimeSelected || isPending}
+          onClick={handleEnroll}
           >
-            Reserve Your Seat
+            {isPending ? (
+            <>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+              Enrolling...
+            </>
+          ) : (
+            "Enroll"
+          )}
           </button>
 
           {/* Success Message */}
