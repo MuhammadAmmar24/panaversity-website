@@ -11,7 +11,7 @@ import { IoLibraryOutline } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import LogoutDialog from "../Dialog/LogoutDialog"; // Correct the import path
+import LogoutDialog from "../Dialog/LogoutDialog";
 import { signOut } from "@/src/auth";
 
 interface SidebarProps {
