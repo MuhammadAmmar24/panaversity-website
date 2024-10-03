@@ -1,8 +1,10 @@
 import React from "react";
 import { TimerIcon } from "@radix-ui/react-icons";
-import { FaYoutube } from "react-icons/fa6";
+import { FaGithub, FaYoutube } from "react-icons/fa6";
 import { ClassCardProps } from "../../types/types";
 import { BiCalendarAlt } from "react-icons/bi";
+import { DiGithubFull } from "react-icons/di";
+import { IoIosLink } from "react-icons/io";
 
 const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
   return (
@@ -23,6 +25,14 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
             <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
               Panaversity Urdu {/* Static class category */}
             </p>
+            <div className="flex items-center gap-2 hover:underline">
+              <FaGithub className="" />
+              {/* <DiGithubFull className="" /> */}
+              <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
+                Covered Topics
+              </p>
+              <IoIosLink className="text-blue-500"/>
+            </div>
 
             {/* Date and time details */}
             <div className="flex flex-col sm:flex-row sm:gap-10 text-xs sm:text-sm text-gray-500 pt-1">

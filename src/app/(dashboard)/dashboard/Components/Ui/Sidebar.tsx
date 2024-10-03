@@ -14,20 +14,28 @@ import { IoLibraryOutline } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "@/src/auth";
+import { useRouter } from "next/navigation";
+import LogoutDialog from "./LogoutDailog";
 
 interface SidebarProps {
   setIsSidebarOpen: (open: boolean) => void;
 }
 
-// Sign out function
-const handleSignOut = async () => {
-  await signOut();
-  console.log("Signing out...");
-};
-
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
-  const sidebarRef = useRef<HTMLDivElement>(null); // Sidebar ref to detect outside clicks
+  const sidebarRef = useRef<HTMLDivElement>(null); // Sidebar ref to detect outside
+
+  const router = useRouter(); // Use Next.js router
+
+  // Sign out function
+  const handleSignOut = async () => {
+    await signOut(); // Assuming this clears cookies
+    console.log("Signing out...");
+
+    // Redirect to login page and reload
+    router.push("/login");
+    window.location.reload(); // Reload the page
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -62,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   // Bottom menu items (Help and Logout)
   const menuItemsBottom = [
     { icon: IoIosHelpCircleOutline, label: "Help", href: "#" },
-    { icon: CiLogout, label: "Logout", href: "#" },
+    { icon: CiLogout, label: "Logout", href: "/login" },
   ];
 
   return (
@@ -155,8 +163,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                       : "opacity-0 invisible"
                   }`}
                 >
-                  {item.label === "Logout" ? (
-                    <button onClick={handleSignOut}>{item.label}</button>
+                  {item.label}
+                  {item.href === "/login" ? (
+                    <LogoutDialog onConfirm={handleSignOut}/>
                   ) : (
                     item.label
                   )}
