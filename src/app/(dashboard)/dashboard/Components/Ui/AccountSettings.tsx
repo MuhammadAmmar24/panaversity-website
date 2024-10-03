@@ -61,7 +61,7 @@ const AccountSettings: React.FC = () => {
         </h1>
 
         {/* Profile Information Section */}
-        <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2">
+        <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2 overflow-hidden">
           <div className="text-end">
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"

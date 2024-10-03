@@ -24,6 +24,7 @@ export interface ClassCardProps {
     progress: number;
     lessons: number;
     status: string;
+    is_paid: boolean;
   }
   
   export interface Class {
