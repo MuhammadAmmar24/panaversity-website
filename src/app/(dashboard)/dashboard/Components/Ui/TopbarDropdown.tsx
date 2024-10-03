@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import { useState, useEffect, useRef } from "react";
 import { TfiWallet, TfiHelp } from "react-icons/tfi";
 import { CiLogout } from "react-icons/ci";
 import { LuSettings2 } from "react-icons/lu";
 import Link from "next/link";
 import { signOut } from "@/src/auth";
+import LogoutDialog from "../Dialog/LogoutDialog"; // Ensure correct path
 
 interface DropdownProps {
   userName: string | undefined;
@@ -18,12 +19,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   userImage,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // Logout dialog state
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Sign out function
   const handleSignOut = async () => {
     await signOut();
-    
+    // Redirect after signing out or handle logic
+    window.location.reload();
   };
 
   // Toggle dropdown visibility
@@ -144,8 +147,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 
           <hr className="border-gray-200" />
 
+          {/* Logout */}
           <li
-          onClick={handleSignOut}
+            onClick={() => setIsLogoutDialogOpen(true)} // Open the logout dialog
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
             role="menuitem"
           >
@@ -154,6 +158,13 @@ const Dropdown: React.FC<DropdownProps> = ({
           </li>
         </ul>
       </div>
+
+      {/* Logout Confirmation Dialog */}
+      <LogoutDialog
+        open={isLogoutDialogOpen}
+        onOpenChange={setIsLogoutDialogOpen}
+        onConfirm={handleSignOut}
+      />
     </div>
   );
 };

@@ -1,30 +1,27 @@
 "use client";
 
 import * as React from "react";
-import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { IoClose } from "react-icons/io5";
 
 // Props for LogoutDialog
 interface LogoutDialogProps {
   onConfirm: () => void; // Function to call when the user confirms logout
+  open: boolean; // State to control the dialog visibility
+  onOpenChange: (open: boolean) => void; // Function to change the dialog visibility
 }
 
-export default function LogoutDialog({ onConfirm }: LogoutDialogProps) {
-  const [open, setOpen] = useState(false);
-
+export default function LogoutDialog({
+  onConfirm,
+  open,
+  onOpenChange,
+}: LogoutDialogProps) {
   // Function to handle dialog close
-  const handleClose = () => setOpen(false);
+  const handleClose = () => onOpenChange(false);
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="bg-transparent border-0 text-black">
-
-      </button>
-
-      <Dialog.Root open={open} onOpenChange={setOpen}>
+      <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
           <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
           <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
@@ -46,7 +43,7 @@ export default function LogoutDialog({ onConfirm }: LogoutDialogProps) {
                   handleClose();
                   onConfirm(); // Call the logout action if confirmed
                 }}
-                className="bg-red-500 text-white px-4 py-2 rounded"
+                className="bg-accent text-white px-4 py-2 rounded"
               >
                 Logout
               </button>
