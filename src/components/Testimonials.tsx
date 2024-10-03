@@ -41,7 +41,7 @@ const Testimonials = () => {
         loading="lazy"
         className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem]'
       />
-      <div className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:-px-1">
+      <div className="lg:max-w-[950px] xl:max-w-[1165px] mx-auto px-4 sm:px-6 lg:-px-1">
         <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
           <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
             {testimonialData.sectionHeading}
