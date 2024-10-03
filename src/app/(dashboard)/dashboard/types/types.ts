@@ -46,3 +46,13 @@ export interface ClassCardProps {
     ClassName?: string;
     date: string;
   }
+
+  export interface ClassSectionProps {
+    title: string;
+    classes: Class[];
+  }
+
+  export interface UpcomingClassSectionProps {
+    title: string;
+    classes: Class[];
+  }
