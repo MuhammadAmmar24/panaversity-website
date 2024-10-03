@@ -11,19 +11,19 @@ import { FaDiscord } from "react-icons/fa";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#031811] text-white pt-[2.1rem]">
+    <footer className="bg-[#031811] text-white pt-[4.5rem]">
       <div className=" flex w-full justify-center">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mx-6 md:mx-16 lg:max-w-[950px] xl:max-w-6xl items-start gap-8">
           {/* Left section: Logo & Newsletter */}
           <div className="sm:col-span-2 md:col-span-1 col-span-2">
-            <div className="mb-6">
+            <div className="mb-6 lg:-mt-9 xl:-mt-4">
               {/* Logo */}
               <Image
                 src={Logo}
                 alt="Power AI Logo"
                 className="h-20 w-auto mb-2 transition-transform duration-300 ease-in-out hover:scale-105"
               />
-              <p className="text-xs text-gray-400 mt-1 leading-relaxed">
+              <p className="text-sm mb-1 text-gray-400 mt-1 leading-relaxed">
                 Panaversity is a cloud-native platform offering personalized
                 learning through generative AI.
               </p>
@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
           />
 
           {/* Newsletter section placed in the rightmost column */}
-          <div className="sm:col-span-2 md:col-span-1 col-span-2 w-full mt-8 md:mt-0">
+          <div className="sm:col-span-2 md:col-span-1 text-sm col-span-2 w-full mt-8 md:mt-0">
             <Newsletter />
           </div>
         </div>
