@@ -95,15 +95,7 @@ export const LoginForm = () => {
                <ToastAction altText="Close">Close</ToastAction>
               ),
             })
-            //onLoginSuccess(); // Call this function to close the dialog
-            router.back()
-            // if (data.redirectTo) {
-            //   // router.push(data.redirectTo)
-            //   // router.back()
-            // } else {
-            //   // router.push(callbackUrl || DEFAULT_LOGIN_REDIRECT)
-            //   // router.back()
-            // }
+            router.back();
           }
         });
     });
