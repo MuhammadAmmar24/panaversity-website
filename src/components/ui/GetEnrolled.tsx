@@ -346,16 +346,20 @@ export default function GetEnrolled() {
           </button>
 
           {/* Success Message */}
-          {isEnrolled && (
+          {isEnrolled ? (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
+            </div>
+          ) : (
+            <div className="mt-4 text-red-500">
+              <p>Failed to enroll student in course.</p>
             </div>
           )}
 
           {/* Error Message */}
-          {enrollmentError && (
+          {/* {enrollmentError && (
             <p className={"text-red-500 mt-4"}>Failed to enroll student in course</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>
