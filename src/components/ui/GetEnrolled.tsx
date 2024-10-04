@@ -1,8 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
+import { checkUserVerification } from "@/src/actions/profile";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled() {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
@@ -13,11 +15,17 @@ export default function GetEnrolled() {
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+
+  
 
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
   const router = useRouter();
+
 
   // Fetch time slots
   useEffect(() => {
@@ -55,6 +63,11 @@ export default function GetEnrolled() {
     };
 
     fetchTimeSlots();
+
+    checkUserVerification().then((data:any) => {
+      setProfile(data);
+      console.log(`PROFILE ID: ${data?.id}`);
+    });
   }, []);
 
   // Get time slots for selected day
@@ -124,7 +137,7 @@ export default function GetEnrolled() {
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: "110", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
+      student_id: `${Math.floor(Math.random() * 999) + 1}`, // Replace with actual student ID, ensure it's a valid string or number as per API requirements
       program_id: 1, // Replace with actual program ID, ensure it's correct
       batch_id: 1, // Replace with actual batch ID
       course_batch_program_id: 1, // Replace with actual course_batch_program_id
@@ -137,29 +150,34 @@ export default function GetEnrolled() {
     // Log the payload for debugging
     console.log("Enrollment Payload:", payload);
 
+    startTransition(async() =>  {
     try {
       const result: any = await enrollNewStudentInProgramAndCourse(payload);
-
+      console.log("RESULT", result)
       const url = result.data?.fee_voucher?.stripe?.stripe_url;
+      console.log("URL", url)
+
 
       if (result.type === "success") {
         setIsEnrolled(true); // Enrollment success, show message
-        // setEnrollmentError(result.message); // Clear any errors
-        console.log(result.message); // Optional: log the success message
+        //setEnrollmentError(result.message); // Clear any errors
+        // console.log(result.message); // Optional: log the success message
 
         if (url) {
-          window.location.href = url; // Use window.location.href for external URL
+          console.log("URL",url)
+          router.push(url); // Use window.location.href for external URL
         } else {
-          console.error("Stripe URL not found.");
+          // console.error("Stripe URL not found.");
         }
       } else {
         setEnrollmentError(result.message); // Handle API error
-        console.error("API Error:", result.message);
+        // console.error("API Error:", result.message);
       }
     } catch (error) {
       setEnrollmentError("Failed to enroll student."); // General error handling
-      console.error("Enrollment failed:", error);
+      // console.error("Enrollment failed:", error);
     }
+  });
   };
 
   return (
@@ -308,15 +326,23 @@ export default function GetEnrolled() {
           </div>
 
           <button
-            className={`w-full block p-3 rounded-lg font-semibold ${
-              isDayAndTimeSelected
-                ? "bg-emerald-500 text-white hover:bg-emerald-600"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            }`}
-            disabled={!isDayAndTimeSelected}
-            onClick={handleEnroll}
+           
+           className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
+            isDayAndTimeSelected && !isPending
+              ? "bg-accent text-white hover:bg-[#18c781]"
+              : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          }`}
+          disabled={!isDayAndTimeSelected || isPending}
+          onClick={handleEnroll}
           >
-            Reserve Your Seat
+            {isPending ? (
+            <>
+              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+              Enrolling...
+            </>
+          ) : (
+            "Enroll"
+          )}
           </button>
 
           {/* Success Message */}

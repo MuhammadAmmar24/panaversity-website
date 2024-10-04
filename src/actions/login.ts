@@ -4,6 +4,8 @@ import * as z from "zod";
 import { cookies } from "next/headers";
 import { LoginSchema } from "@/src/schemas/userschema";
 import { checkUserVerification } from "./profile";
+import { revalidateTag } from "next/cache";
+
 
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -28,7 +30,10 @@ export const login = async (
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
+    
     });
+
+
 
     if (!response.ok) {
       const errorData = await response.json();

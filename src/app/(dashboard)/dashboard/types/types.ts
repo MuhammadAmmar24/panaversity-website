@@ -24,6 +24,7 @@ export interface ClassCardProps {
     progress: number;
     lessons: number;
     status: string;
+    is_paid: boolean;
   }
   
   export interface Class {
@@ -45,4 +46,14 @@ export interface ClassCardProps {
     time: string;
     ClassName?: string;
     date: string;
+  }
+
+  export interface ClassSectionProps {
+    title: string;
+    classes: Class[];
+  }
+
+  export interface UpcomingClassSectionProps {
+    title: string;
+    classes: Class[];
   }

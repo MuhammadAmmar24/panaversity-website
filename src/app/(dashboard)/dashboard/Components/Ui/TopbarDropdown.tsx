@@ -4,11 +4,12 @@ import { TfiWallet, TfiHelp } from "react-icons/tfi";
 import { CiLogout } from "react-icons/ci";
 import { LuSettings2 } from "react-icons/lu";
 import Link from "next/link";
+import { signOut } from "@/src/auth";
 
 interface DropdownProps {
-  userName: string;
-  userEmail: string;
-  userImage: string;
+  userName: string | undefined;
+  userEmail: string | undefined;
+  userImage: string | undefined;
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -18,6 +19,12 @@ const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Sign out function
+  const handleSignOut = async () => {
+    await signOut();
+    
+  };
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -138,6 +145,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           <hr className="border-gray-200" />
 
           <li
+          onClick={handleSignOut}
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
             role="menuitem"
           >

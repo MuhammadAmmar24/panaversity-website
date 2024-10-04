@@ -13,10 +13,17 @@ import { CiLogout } from "react-icons/ci";
 import { IoLibraryOutline } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut } from "@/src/auth";
 
 interface SidebarProps {
   setIsSidebarOpen: (open: boolean) => void;
 }
+
+// Sign out function
+const handleSignOut = async () => {
+  await signOut();
+  console.log("Signing out...");
+};
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
@@ -148,7 +155,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                       : "opacity-0 invisible"
                   }`}
                 >
-                  {item.label}
+                  {item.label === "Logout" ? (
+                    <button onClick={handleSignOut}>{item.label}</button>
+                  ) : (
+                    item.label
+                  )}
                 </span>
               </Link>
               {/* Tooltip when sidebar is closed */}
