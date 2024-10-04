@@ -10,7 +10,7 @@ import Link from "next/link";
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
     <article className="w-full h-full">
-      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 md:px-8 py-5">
+      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 md:px-8 py-14">
         {/* Class Topic and Information */}
         <div className="flex flex-col flex-wrap">
           <div className="md:text-xl font-poppins truncate flex gap-x-2 flex-wrap">
