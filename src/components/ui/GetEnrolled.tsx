@@ -124,7 +124,7 @@ export default function GetEnrolled() {
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: "109", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
+      student_id: "110", // Replace with actual student ID, ensure it's a valid string or number as per API requirements
       program_id: 1, // Replace with actual program ID, ensure it's correct
       batch_id: 1, // Replace with actual batch ID
       course_batch_program_id: 1, // Replace with actual course_batch_program_id
@@ -144,7 +144,7 @@ export default function GetEnrolled() {
 
       if (result.type === "success") {
         setIsEnrolled(true); // Enrollment success, show message
-        setEnrollmentError(result.message); // Clear any errors
+        // setEnrollmentError(result.message); // Clear any errors
         console.log(result.message); // Optional: log the success message
 
         if (url) {
@@ -320,16 +320,20 @@ export default function GetEnrolled() {
           </button>
 
           {/* Success Message */}
-          {isEnrolled && (
+          {isEnrolled ? (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
+            </div>
+          ) : (
+            <div className="mt-4 text-red-500">
+              <p>Failed to enroll student in course.</p>
             </div>
           )}
 
           {/* Error Message */}
-          {enrollmentError && (
+          {/* {enrollmentError && (
             <p className={"text-red-500 mt-4"}>Failed to enroll student in course</p>
-          )}
+          )} */}
         </div>
       </div>
     </div>
