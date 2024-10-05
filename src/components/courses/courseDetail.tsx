@@ -3,16 +3,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  ChevronRight,
-  Users,
-  Calendar,
-  Check,
-} from "lucide-react";
+import { ChevronRight, Users, Calendar, Check } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
-import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
+import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import Breadcrumb from "../Breadcrumbs";
-import { user_verify } from "@/src/actions/user-verify"
+import { user_verify } from "@/src/actions/user-verify";
 import { useRouter } from "next/navigation";
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -63,7 +58,7 @@ export interface CourseData {
   is_active: boolean;
   is_registration_open: boolean;
   registration_start_date: string; // ISO date string
-  registration_end_date: string;   // ISO date string
+  registration_end_date: string; // ISO date string
   course_id: number;
   batch_id: number;
   course_code: string;
@@ -85,7 +80,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   courseData,
   initialPrice,
 
-  initialCurrency
+  initialCurrency,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [price] = useState<number>(initialPrice);
@@ -95,13 +90,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const router = useRouter();
 
   async function handleClick() {
-    const res = await user_verify()
-    if(res?.redirectTo) {
+    const res = await user_verify();
+    if (res?.redirectTo) {
       router.push(res.redirectTo);
       console.log(res.redirectTo);
-    }
-    else {
-      console.log("Verified. GO AHEAD")
+    } else {
+      console.log("Verified. GO AHEAD");
       setOpen(true);
     }
   }
@@ -148,10 +142,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
             {/* Breadcrumb Navigation */}
-            <Breadcrumb
-              program="Flagship-Program"
-              courseName={course_name}
-            />
+            <Breadcrumb program="Flagship-Program" courseName={course_name} />
 
             <div className="flex flex-col lg:flex-row ">
               {/* Course Details */}
@@ -188,24 +179,31 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       Price:
                     </span>
                     <span className="text-3xl font-bold uppercase">
-                    {currency ? `${currency} ${price}` : price}
+                      {currency ? `${currency} ${price}` : price}
                     </span>
                   </div>
 
-                  <Sheet open={open}  onOpenChange={(isOpen) => isOpen ? setOpen(true) : setOpen(false)}> 
-                    
-                    <button onClick={handleClick}
-                        className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
-                          is_registration_open
-                            ? "hover:bg-emerald-500"
-                            : "bg-gray-400 cursor-not-allowed"
-                        }`}
-                        disabled={!is_registration_open}
-                      >
-                        {is_registration_open ? "Enroll Now" : "Registration Closed"}
-                        <ChevronRight className="w-5 h-5 ml-2" />
-                      </button>
-                   
+                  <Sheet
+                    open={open}
+                    onOpenChange={(isOpen) =>
+                      isOpen ? setOpen(true) : setOpen(false)
+                    }
+                  >
+                    <button
+                      onClick={handleClick}
+                      className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
+                        is_registration_open
+                          ? "hover:bg-emerald-500"
+                          : "bg-gray-400 cursor-not-allowed"
+                      }`}
+                      disabled={!is_registration_open}
+                    >
+                      {is_registration_open
+                        ? "Enroll Now"
+                        : "Registration Closed"}
+                      <ChevronRight className="w-5 h-5 ml-2" />
+                    </button>
+
                     <SheetContent
                       side={sheetSide}
                       className={`w-full max-w-full overflow-y-auto ${
@@ -239,7 +237,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
             What you will learn in this course
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {course_outcomes.map((point:any, index:any) => (
+            {course_outcomes.map((point: any, index: any) => (
               <LearnPoint key={index} point={point} />
             ))}
           </div>
@@ -248,17 +246,27 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         {/* Prerequisites */}
         <div className="mt-12">
           <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-            Pre Requisite
+            Pre Requisites
           </h2>
-          <h3 className="text-lg font-semibold text-textPrimary mb-2">
+          <h3 className="text-lg font-semibold text-textPrimary mb-4">
             General Requirements
           </h3>
-          <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque amet, sequi molestiae at expedita ipsum, ipsa delectus soluta aliquid eligendi, modi recusandae mollitia animi unde non nulla iure totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus corporis culpa quisquam sunt eos totam exercitationem rerum iste, molestiae aut adipisci quo voluptates mollitia quae necessitatibus eum.
-          </p>
-
-         
-
+          <ul className="list-disc pl-5 space-y-2">
+            {Array.isArray(pre_requisite) ? (
+              pre_requisite.map((requirement, index) => (
+                <li
+                  key={index}
+                  className="text-base font-normal leading-relaxed text-textPrimary/90"
+                >
+                  {requirement}
+                </li>
+              ))
+            ) : (
+              <li className="text-base font-normal leading-relaxed text-textPrimary/90">
+                No prerequisites available
+              </li>
+            )}
+          </ul>
         </div>
       </section>
     </main>
