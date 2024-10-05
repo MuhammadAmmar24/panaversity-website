@@ -6,7 +6,7 @@ import {
 import { Result } from "@/src/lib/types";
 
 export const getEnrolledCourses = async (
-    studentId: string
+    studentId: string | undefined
 ): Promise<Result<CourseEnrollmentResponse>> => {
     try {
         // Construct the query parameters correctly
@@ -15,7 +15,7 @@ export const getEnrolledCourses = async (
 
         // Construct the API URL
         const apiUrl = `${process.env.COURSE_API_URL}/status/student-active-courses?${params}`;
-        console.log("API URL:", apiUrl);
+
         console.log("Authorization Token:", process.env.ENROLLMENT_SECRET ? "Exists" : "Missing");
 
         // Make the request to the API

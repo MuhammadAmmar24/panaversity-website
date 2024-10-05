@@ -16,17 +16,12 @@ export const checkUserVerification = async () => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
+      cache: "force-cache",
 
     });
     if (response.ok) {
       const profile = await response.json();
 
-      // Setting Cookies for Profile Data
-      cookies().set({
-        name: "profile_data",
-        value: JSON.stringify(profile),
-        httpOnly: true,
-      });
 
       // return { isVerified: profile.is_verified, redirectTo: profile.is_verified ? "/programs/flagship-program" : "/verify" };
       return profile;

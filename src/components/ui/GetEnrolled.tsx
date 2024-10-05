@@ -62,12 +62,19 @@ export default function GetEnrolled() {
       }
     };
 
-    fetchTimeSlots();
+    
+    const fetchUserData = async () => {
+    try {
+      const user_data = await checkUserVerification();
 
-    checkUserVerification().then((data:any) => {
-      setProfile(data);
-      console.log(`PROFILE ID: ${data?.id}`);
-    });
+      setProfile(user_data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  }
+
+    fetchTimeSlots();
+    fetchUserData();
   }, []);
 
   // Get time slots for selected day
@@ -346,20 +353,18 @@ export default function GetEnrolled() {
           </button>
 
           {/* Success Message */}
-          {isEnrolled ? (
+          {isEnrolled  &&
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
             </div>
-          ) : (
-            <div className="mt-4 text-red-500">
-              <p>Failed to enroll student in course.</p>
-            </div>
-          )}
+         
+         
+          }
 
           {/* Error Message */}
-          {/* {enrollmentError && (
+          {enrollmentError && (
             <p className={"text-red-500 mt-4"}>Failed to enroll student in course</p>
-          )} */}
+          )}
         </div>
       </div>
     </div>

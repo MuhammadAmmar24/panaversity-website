@@ -1,8 +1,10 @@
 
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
+import { checkUserVerification } from "@/src/actions/profile";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -10,13 +12,28 @@ const CourseCard: React.FC<CourseCardProps> = ({
   lessons,
   status,
 }) => {
+
+  
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+  
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
+
+  
+      try {
+        const user_data = await checkUserVerification();
+  
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+
+
     const payload: any = {
-      batch_no: 1,
+      batch_no: 4,
       package_id: 1,
       student_course_id: 1,
-      student_id: "c1c65013-d0fc-4deb-9d60-592bba0dfa22", // Replace with actual student ID if available
+      student_id: profile?.id, // Replace with actual student ID if available
       vendor_type: "STRIPE", // Payment gateway type
       // Optional lab_time_slot_id, uncomment or remove based on requirements
     };
