@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getEnrolledCourses } from "@/src/actions/dashboard";
+import { checkUserVerification } from "@/src/actions/profile";
 import CourseCard from "./CourseCard";
 import ClassCard from "./ClassCard";
 import UpcomingCard from "./UpcomingClassCard";
@@ -63,16 +64,34 @@ const Dashboard: React.FC = () => {
   const [status, setStatus] = useState(false); // State to track paid course status
   const [loading, setLoading] = useState<boolean>(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
+  const [profile, setProfile] = useState<ProfileData | null>(null);
 
   // Fetch enrolled courses using useEffect hook
   useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const user_data = await checkUserVerification();
+        setProfile(user_data); // Set the profile data
+        console.log("Profile Data:", user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []); // Fetch user data once when component mounts
+
+  // Fetch courses after profile data is fetched (depends on profile state)
+  useEffect(() => {
     const fetchCourses = async () => {
+      if (!profile) return; // Do nothing if profile is not yet fetched
+
       setLoading(true); // Show loading while fetching data
       setError(null); // Reset any previous errors
       try {
-        const studentId = 107; // Replace with actual student ID
-        const result: Result<CourseEnrollmentResponse> =
-          await getEnrolledCourses(studentId);
+        const studentId = profile.id; // Get the student ID from the profile data
+        console.log("Student ID:", studentId);
+        const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(studentId);
 
         if (result.type === "error") {
           setError(result.message); // Handle error response
@@ -87,7 +106,7 @@ const Dashboard: React.FC = () => {
           }));
 
           // Set the status for paid courses
-          setStatus(courses[0].is_paid || false); //  || false is for dev purposes
+          setStatus(courses[0].is_paid || false); // || false is for dev purposes
           setRecentCourses(courses); // Update recent courses state
         }
       } catch (error: any) {
@@ -97,8 +116,12 @@ const Dashboard: React.FC = () => {
       }
     };
 
-    fetchCourses(); // Call the fetchCourses function on component mount
-  }, []);
+    // Fetch courses only after profile is fetched
+    if (profile) {
+      fetchCourses();
+    }
+  }, [profile]); // Dependency on profile to ensure this effect runs after profile data is available
+
 
   if (loading) {
     return <DashboardSkeleton />; // Show loading skeleton while fetching data

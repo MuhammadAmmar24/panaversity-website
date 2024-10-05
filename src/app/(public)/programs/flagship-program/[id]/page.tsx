@@ -28,7 +28,7 @@ export interface CourseData {
   course_description: string;
   course_outcomes: string[];
   long_description: string;
-  pre_requisite: string;
+  pre_requisite: string[];
   media_link: string;
 }
 // Fetch course data function
@@ -73,6 +73,7 @@ const CoursePage = async ({ params }:any) => {
         Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
       },
       next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
+      // cache: 'no-store'
     }
   )
   const { price, currency } = await fetchCoursePrice();

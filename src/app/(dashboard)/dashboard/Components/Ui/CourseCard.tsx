@@ -1,7 +1,10 @@
-import React from "react";
+
+"use client"
+import React, { useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
+import { checkUserVerification } from "@/src/actions/profile";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -9,13 +12,28 @@ const CourseCard: React.FC<CourseCardProps> = ({
   lessons,
   status,
 }) => {
+
+  
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+  
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
+
+  
+      try {
+        const user_data = await checkUserVerification();
+  
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+
+
     const payload: any = {
-      batch_no: 1,
+      batch_no: 4,
       package_id: 1,
       student_course_id: 1,
-      student_id: "109", // Replace with actual student ID if available
+      student_id: profile?.id, // Replace with actual student ID if available
       vendor_type: "STRIPE", // Payment gateway type
       // Optional lab_time_slot_id, uncomment or remove based on requirements
     };
@@ -103,7 +121,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="absolute -right-[0px] top-[28px] xs:-right-[0px] sm:-right-[0px] md:-right-[0px] mobileM:-right-[0px] lg:left-[250px] xl:left-[450px]">
           {/* Payment button: Conditional rendering based on enrollment status */}
           {status ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-accent shadow-lg">
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 text-white bg-accent shadow-lg">
               Payment Completed
             </button>
           ) : (

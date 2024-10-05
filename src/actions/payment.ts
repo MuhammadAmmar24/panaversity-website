@@ -28,6 +28,7 @@ export const processPayment = async (
         Authorization: `Bearer ${process.env.TOKEN_SECRET}`, // Use secret from environment
       },
       body: JSON.stringify(validationResult.data), // Convert validated data to JSON string
+      cache: 'no-store'
     });
 
     if (!response.ok) {

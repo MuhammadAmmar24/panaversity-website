@@ -5,7 +5,7 @@ import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { Metadata } from "next";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
-import { getProfile } from "@/src/auth";
+import { checkUserVerification } from "@/src/actions/profile";
 
 // Page metadata for SEO
 export const metadata: Metadata = {
@@ -28,10 +28,17 @@ const AccountSettings: React.FC = () => {
 
 
   useEffect(() => {
-    getProfile().then(data => {
-      setProfile(data);
-      console.log(`PROFILE: ${data}`);
-    });
+    const fetchUserData = async () => {
+      try {
+        const user_data = await checkUserVerification();
+  
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+  
+      fetchUserData();
   }, []);
 
   // Handle changes to profile input fields

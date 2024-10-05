@@ -73,7 +73,7 @@ export interface CourseData {
   course_description: string;
   course_outcomes: string[];
   long_description: string;
-  pre_requisite: string;
+  pre_requisite: string[];
   media_link: string;
 }
 interface CourseDetailsClientProps {
@@ -257,6 +257,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
           <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque amet, sequi molestiae at expedita ipsum, ipsa delectus soluta aliquid eligendi, modi recusandae mollitia animi unde non nulla iure totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus corporis culpa quisquam sunt eos totam exercitationem rerum iste, molestiae aut adipisci quo voluptates mollitia quae necessitatibus eum.
           </p>
+
+         
+
         </div>
       </section>
     </main>

@@ -3,17 +3,25 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Dropdown from "./TopbarDropdown";
-import { getProfile } from "@/src/auth";
+import { checkUserVerification } from "@/src/actions/profile";
+
 import { useEffect, useState } from "react";
 
 const TopBar: React.FC =  () => {
   const [profile, setProfile] = useState<ProfileData | null>(null);
 
   useEffect(() => {
-    getProfile().then(data => {
-      setProfile(data);
-      console.log(`PROFILE: ${data}`);
-    });
+    const fetchUserData = async () => {
+      try {
+        const user_data = await checkUserVerification();
+  
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    }
+  
+      fetchUserData();
   }, []);
 
   return (
