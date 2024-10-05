@@ -85,7 +85,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
       {/* Dropdown menu */}
       <div
-        className={`absolute right-2 mt-2 w-48 sm:w-56 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
+        className={`absolute right-2 mt-2 w-48 sm:w-64 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
           isOpen
             ? "opacity-100 scale-100 visible"
             : "opacity-0 scale-95 invisible"
@@ -102,10 +102,10 @@ const Dropdown: React.FC<DropdownProps> = ({
               className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
             />
             <div>
-              <h2 className="text-gray-900 font-semibold text-sm sm:text-base">
-                {userName}
+              <h2 className="text-gray-900 font-semibold text-sm sm:text-base w-24 md:w-44 truncate">
+                Muhammad Ammar Aamir
               </h2>
-              <p className="text-gray-500 text-xs sm:text-sm w-24 md:w-32 truncate">
+              <p className="text-gray-500 text-xs sm:text-sm w-24 md:w-44 truncate">
                 {userEmail}
               </p>
             </div>
