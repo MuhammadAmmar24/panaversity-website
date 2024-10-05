@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect, useRef } from "react";
 import { GoHome } from "react-icons/go";
 import {
@@ -8,26 +6,34 @@ import {
   IoIosHelpCircleOutline,
 } from "react-icons/io";
 import { SlBookOpen } from "react-icons/sl";
-import { MdOutlineAnnouncement } from "react-icons/md";
 import { CiLogout } from "react-icons/ci";
 import { IoLibraryOutline } from "react-icons/io5";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import LogoutDialog from "../Dialog/LogoutDialog";
 import { signOut } from "@/src/auth";
 
 interface SidebarProps {
   setIsSidebarOpen: (open: boolean) => void;
 }
 
-// Sign out function
-const handleSignOut = async () => {
-  await signOut();
-  console.log("Signing out...");
-};
-
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
-  const sidebarRef = useRef<HTMLDivElement>(null); // Sidebar ref to detect outside clicks
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // State for controlling logout dialog visibility
+  const sidebarRef = useRef<HTMLDivElement>(null); // Sidebar ref to detect outside
+
+  const router = useRouter(); // Use Next.js router
+
+  // Sign out function
+  const handleSignOut = async () => {
+    await signOut();
+    // Assuming this clears cookies
+    console.log("Signing out...");
+    // Perform your sign-out logic here
+    router.push("/login");
+    window.location.reload(); // Reload the page after sign-out
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -62,7 +68,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   // Bottom menu items (Help and Logout)
   const menuItemsBottom = [
     { icon: IoIosHelpCircleOutline, label: "Help", href: "#" },
-    { icon: CiLogout, label: "Logout", href: "#" },
+    {
+      icon: CiLogout,
+      label: "Logout",
+      onClick: () => setIsLogoutDialogOpen(true),
+    },
   ];
 
   return (
@@ -141,9 +151,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         <div className="mt-auto mb-4">
           {menuItemsBottom.map((item) => (
             <div key={item.label} className="relative group">
-              <Link
-                href={item.href}
-                className="flex items-center p-4 hover:text-accent transition-all duration-300"
+              <button
+                onClick={item.onClick}
+                className="flex items-center p-4 hover:text-accent transition-all duration-300 w-full text-left"
               >
                 {/* Bottom menu icon */}
                 <item.icon className="text-2xl min-w-[2rem]" />
@@ -155,13 +165,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                       : "opacity-0 invisible"
                   }`}
                 >
-                  {item.label === "Logout" ? (
-                    <button onClick={handleSignOut}>{item.label}</button>
-                  ) : (
-                    item.label
-                  )}
+                  {item.label}
                 </span>
-              </Link>
+              </button>
               {/* Tooltip when sidebar is closed */}
               {!isOpen && (
                 <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-accent text-white text-sm py-1 px-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -177,6 +183,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
       <main className="flex-1 p-6 transition-all duration-300">
         {/* Placeholder for main content */}
       </main>
+
+      {/* Logout Confirmation Dialog */}
+      <LogoutDialog
+        onConfirm={handleSignOut}
+        open={isLogoutDialogOpen}
+        onOpenChange={setIsLogoutDialogOpen}
+      />
     </aside>
   );
 };

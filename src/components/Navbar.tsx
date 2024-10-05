@@ -29,7 +29,7 @@ export default function Navbar() {
     if (IsLoggedIn) {
       router.push("/dashboard");
     } else {
-      router.push("/login");
+      router.push("/register");
       
     }
   }

@@ -1,15 +1,19 @@
 import React from "react";
 import { TimerIcon } from "@radix-ui/react-icons";
-import { FaYoutube } from "react-icons/fa6";
+import { FaGithub, FaYoutube } from "react-icons/fa6";
 import { ClassCardProps } from "../../types/types";
 import { BiCalendarAlt } from "react-icons/bi";
+import { DiGithubFull } from "react-icons/di";
+import { IoIosLink } from "react-icons/io";
 
 const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
   return (
     <article className="w-full h-full">
       <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-4 md:py-5">
         {/* YouTube Icon */}
-        <FaYoutube className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600" />
+        <FaYoutube className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
+          title="Click here To watch the video"
+        />
 
         {/* Class details container */}
         <div className="flex flex-col justify-between gap-1 items-start w-full">
@@ -19,10 +23,18 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
           </h2>
 
           {/* Class metadata (border and additional information) */}
-          <div className="w-full border-t pt-2 md:pt-3">
+          <div className="w-full  pt-2 md:pt-3">
             <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
               Panaversity Urdu {/* Static class category */}
             </p>
+            <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-1 cursor-pointer">
+              <FaGithub className="" />
+              {/* <DiGithubFull className="" /> */}
+              <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
+                Covered Topics
+              </p>
+              <IoIosLink className="text-blue-500"/>
+            </div>
 
             {/* Date and time details */}
             <div className="flex flex-col sm:flex-row sm:gap-10 text-xs sm:text-sm text-gray-500 pt-1">
