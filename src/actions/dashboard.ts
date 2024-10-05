@@ -6,7 +6,7 @@ import {
 import { Result } from "@/src/lib/types";
 
 export const getEnrolledCourses = async (
-    studentId: number
+    studentId: string
 ): Promise<Result<CourseEnrollmentResponse>> => {
     try {
         // Construct the query parameters correctly

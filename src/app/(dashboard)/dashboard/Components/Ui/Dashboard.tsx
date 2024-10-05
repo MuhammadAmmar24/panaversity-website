@@ -70,7 +70,7 @@ const Dashboard: React.FC = () => {
       setLoading(true); // Show loading while fetching data
       setError(null); // Reset any previous errors
       try {
-        const studentId = 107; // Replace with actual student ID
+        const studentId = "08bf08e2-354f-4d4b-95fd-225681ad2171"; // Replace with actual student ID
         const result: Result<CourseEnrollmentResponse> =
           await getEnrolledCourses(studentId);
 

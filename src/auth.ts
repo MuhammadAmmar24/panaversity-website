@@ -53,6 +53,7 @@ export async function getProfile() {
   return profile_data;
 }
 
+
 export async function adminAuth() {
   const session = await auth();
   if (!session) {
