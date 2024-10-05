@@ -11,6 +11,8 @@ export interface ClassCardProps {
     progress: number;
     lessons: number;
     status: string;
+    batch_id: number;
+    student_course_id: number;
   }
   
   export interface CardData {
@@ -25,6 +27,8 @@ export interface ClassCardProps {
     lessons: number;
     status: string;
     is_paid: boolean;
+    batch_no: number;
+    student_course_id: number;
   }
   
   export interface Class {
