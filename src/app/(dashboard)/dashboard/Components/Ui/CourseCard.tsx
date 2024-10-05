@@ -121,7 +121,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="absolute -right-[0px] top-[28px] xs:-right-[0px] sm:-right-[0px] md:-right-[0px] mobileM:-right-[0px] lg:left-[250px] xl:left-[450px]">
           {/* Payment button: Conditional rendering based on enrollment status */}
           {status ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 text-white bg-accent shadow-lg">
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 bg-accent shadow-lg">
               Payment Completed
             </button>
           ) : (
