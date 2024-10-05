@@ -31,8 +31,6 @@ export default function Home() {
       <CTAsection />
       <ScrollToTopButton />
       <Footer />
-      <ProgramsSkeleton/>
-      <CoursesSkeleton/>
     </>
   );
 }
