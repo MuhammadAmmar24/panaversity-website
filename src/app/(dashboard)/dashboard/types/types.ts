@@ -25,6 +25,8 @@ export interface ClassCardProps {
     lessons: number;
     status: string;
     is_paid: boolean;
+    batch_no: number;
+    student_course_id: number;
   }
   
   export interface Class {

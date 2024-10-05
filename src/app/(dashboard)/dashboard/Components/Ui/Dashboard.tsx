@@ -103,6 +103,8 @@ const Dashboard: React.FC = () => {
             lessons: 100, // Placeholder for lesson count
             status: courseData.student_course_status,
             is_paid: courseData.is_paid, // Adjust payment status if necessary
+            batch_no: courseData.batch_id,
+            student_course_id: courseData.student_course_id,
           }));
 
           // Set the status for paid courses

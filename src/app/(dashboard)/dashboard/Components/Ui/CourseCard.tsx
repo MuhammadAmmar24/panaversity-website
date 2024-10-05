@@ -30,9 +30,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
 
     const payload: any = {
-      batch_no: 4,
+      batch_no: 1,
       package_id: 1,
-      student_course_id: 1,
+      student_course_id: 7,
       student_id: profile?.id, // Replace with actual student ID if available
       vendor_type: "STRIPE", // Payment gateway type
       // Optional lab_time_slot_id, uncomment or remove based on requirements
