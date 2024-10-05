@@ -144,6 +144,8 @@ const Dashboard: React.FC = () => {
             progress={course.progress}
             lessons={course.lessons}
             status={course.is_paid}
+            batch_id={course.batch_no}
+            student_course_id={course.student_course_id}
           />
         ))}
       </div>
