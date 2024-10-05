@@ -103,7 +103,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             />
             <div>
               <h2 className="text-gray-900 font-semibold text-sm sm:text-base w-24 md:w-44 truncate">
-                Muhammad Ammar Aamir
+                {userName}
               </h2>
               <p className="text-gray-500 text-xs sm:text-sm w-24 md:w-44 truncate">
                 {userEmail}
