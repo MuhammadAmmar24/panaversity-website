@@ -43,7 +43,7 @@ export default function LogoutDialog({
                   handleClose();
                   onConfirm(); // Call the logout action if confirmed
                 }}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:shadow-md hover:shadow-red-400/50 transition-all duration-300 ease-in-out"
+                className="bg-transparent text-red-600 px-4 py-2 rounded border border-red-600 hover:bg-red-600 hover:text-white hover:shadow-mdtransition-all duration-300 ease-in-out"
               >
                 Logout
               </button>
