@@ -11,15 +11,15 @@ const CourseCard: React.FC<CourseCardProps> = ({
   progress,
   lessons,
   status,
+  batch_id,
+  student_course_id,
 }) => {
 
-  
   const [profile, setProfile] = useState<ProfileData | null>(null);
   
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
 
-  
       try {
         const user_data = await checkUserVerification();
   
@@ -30,9 +30,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
 
     const payload: any = {
-      batch_no: 4,
+      batch_no: batch_id,
       package_id: 1,
-      student_course_id: 1,
+      student_course_id: student_course_id,
       student_id: profile?.id, // Replace with actual student ID if available
       vendor_type: "STRIPE", // Payment gateway type
       // Optional lab_time_slot_id, uncomment or remove based on requirements
@@ -121,7 +121,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <div className="absolute -right-[0px] top-[28px] xs:-right-[0px] sm:-right-[0px] md:-right-[0px] mobileM:-right-[0px] lg:left-[250px] xl:left-[450px]">
           {/* Payment button: Conditional rendering based on enrollment status */}
           {status ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 text-white bg-accent shadow-lg">
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 bg-accent shadow-lg">
               Payment Completed
             </button>
           ) : (
