@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import {
   ChevronRight,
   Users,
-  User,
   Calendar,
   Check,
 } from "lucide-react";
