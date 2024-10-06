@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
@@ -12,37 +13,34 @@ const CourseCard: React.FC<CourseCardProps> = ({
   batch_id,
   student_course_id,
 }) => {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
     try {
+      // Fetch user data
       const user_data = await checkUserVerification();
 
-      setProfile(user_data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
+      // Ensure that the profile is loaded before proceeding
+      if (!user_data?.id) {
+        console.error("Profile data not loaded yet.");
+        return;
+      }
 
-    const payload: any = {
-      batch_no: batch_id,
-      package_id: 1,
-      student_course_id: student_course_id,
-      student_id: profile?.id, // Replace with actual student ID if available
-      vendor_type: "STRIPE", // Payment gateway type
-      // Optional lab_time_slot_id, uncomment or remove based on requirements
-    };
+      const payload: any = {
+        batch_no: batch_id,
+        package_id: 1,
+        student_course_id: student_course_id,
+        student_id: user_data.id, // Use the actual student ID now that it's available
+        vendor_type: "STRIPE",
+      };
 
-    // Log the payload for debugging purposes
-    console.log("Enrollment Payload:", payload);
+      console.log("Enrollment Payload:", payload);
 
-    try {
-      const result: any = await processPayment(payload); // Call the payment processing API
+      // Call the payment processing API
+      const result: any = await processPayment(payload);
       console.log("Response", result);
 
-      const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL if available
-
       if (result.type === "success") {
+        const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
         if (url) {
           window.location.href = url; // Redirect to payment URL if successful
         } else {
@@ -55,7 +53,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
       console.error("Enrollment failed:", error); // Catch and log any errors
     }
   };
-
   return (
     <section className="w-full h-full">
       {/* Section heading */}
@@ -120,11 +117,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
               Payment Completed
             </button>
           ) : status === "reserved_seat" ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
+            <button
+              onClick={handleEnroll}
+              className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg"
+            >
               Pay to Proceed
             </button>
           ) : status === "expired_reservation" ? (
-            <button  className="md:text-[15px] font-medium md:font-semibold text-[10px] hover:text-white h-6 md:h-8 border border-accent bg-transparenttext-accent rounded-full px-1 py-1 md:px-2 hover:bg-accent shadow-lg">
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] hover:text-white h-6 md:h-8 border border-accent bg-transparenttext-accent rounded-full px-1 py-1 md:px-2 hover:bg-accent shadow-lg">
               Enroll Again
             </button>
           ) : null}
