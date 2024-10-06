@@ -26,10 +26,10 @@ const CourseCard = ({ course }: { course: Course }) => (
             <h6 className="text-xs font-medium opacity-75">
               Course - {course.course_id}
             </h6>
-            <span className={`text-[11px] font-medium opacity-75 rounded-sm px-2 py-1 inline-block
+            <span className={`text-[11px] font-medium opacity-75 rounded-xl px-2 py-1 inline-block
               ${course.is_registration_open 
                 ? "bg-green-500 text-white" 
-                : "bg-red-700 text-white"}`}
+                : "bg-gray-700 text-white"}`}
             >
               {course.is_registration_open ? "Registration Open" : "Registration Closed"}
             </span>
