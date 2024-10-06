@@ -195,7 +195,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
 
 
         {/* Display enrollment form */}
-        <div className="space-y-5 w-full ">
+        <div className="space-y-7 w-full ">
           {/* Select Day Dropdown */}
 
           <div>
