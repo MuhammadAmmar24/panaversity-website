@@ -207,7 +207,6 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         {/* Display enrollment form */}
         <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
-          
 
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
@@ -216,19 +215,14 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             <div className="relative w-full">
               <select
                 id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedDay ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedDay}
                 onChange={(e) => {
                   setSelectedDay(e.target.value);
                   setSelectedTimeSlot("");
                 }}
-                disabled={!selectedPaymentMethod}
                 onFocus={() => setFocusedInput("day")}
                 onBlur={() => setFocusedInput("")}
               >
@@ -250,7 +244,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -269,11 +263,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
               <select
                 id="timeSlot"
                 className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "timeSlot"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                  selectedTimeSlot ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedTimeSlot}
                 onChange={(e) => setSelectedTimeSlot(e.target.value)}
@@ -308,30 +298,23 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
           </div>
 
           <div>
-            <label htmlFor="day" className="block text-lg font-semibold mb-2">
+            <label htmlFor="vendor" className="block text-lg font-semibold mb-2">
               Vendor
             </label>
             <div className="relative w-full">
               <select
-                id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                id="vendor"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedPaymentMethod ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedPaymentMethod}
-                onChange={(e) => {
-                  setSelectedPaymentMethod(e.target.value);
-                  setSelectedDay("");
-                  setSelectedTimeSlot("");
-                }}
-                onFocus={() => setFocusedInput("day")}
+                onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                disabled={!isDayAndTimeSelected}
+                onFocus={() => setFocusedInput("vendor")}
                 onBlur={() => setFocusedInput("")}
               >
                 <option value="" disabled hidden>
-                  Select Your Vendor
+                  Select Vendor
                 </option>
                 {paymentMethods.map((vendor) => (
                   <option key={vendor} value={vendor}>
@@ -348,7 +331,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
