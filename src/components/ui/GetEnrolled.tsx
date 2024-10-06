@@ -192,19 +192,9 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
           {/* Display form instructions */}
         </div>
 
-        {/* Display remaining seats */}
-        <div className="mb-6 text-red-500">
-          <span className="text-lg font-semibold">Remaining Seats: </span>
-          <span className="text-lg">
-            {remainingSeats === null
-              ? "..."
-              : remainingSeats === 0
-              ? "N/A"
-              : remainingSeats}
-          </span>
-        </div>
+
         {/* Display enrollment form */}
-        <div className="space-y-5 w-full ">
+        <div className="space-y-7 w-full ">
           {/* Select Day Dropdown */}
 
           <div>
@@ -337,6 +327,18 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
               </div>
             </div>
           </div>
+
+                  {/* Display remaining seats */}
+        <div className="mb-6 text-red-500">
+          <span className="text-lg font-semibold">Remaining Seats: </span>
+          <span className="text-lg">
+            {remainingSeats === null
+              ? "..."
+              : remainingSeats === 0
+              ? "N/A"
+              : remainingSeats}
+          </span>
+        </div>
 
           <button
             className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
