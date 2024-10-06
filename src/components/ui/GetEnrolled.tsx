@@ -146,9 +146,8 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
       batch_id: batch_id, // Replace with actual batch ID
       course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
       class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
-      vendor_type: selectedPaymentMethod,
+      vendor_type: selectedPaymentMethod.toUpperCase(),
       package_id: 1,
-      // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
     };
 
     // Log the payload for debugging
@@ -190,31 +189,6 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
         <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
-          <p>
-            <span className="font-semibold">
-              1- Select Your Preferred Day and Time:
-            </span>{" "}
-            Choose the class schedule that works best for you from the available
-            options.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">2- Reserve Your Seat:</span> Once
-            you've selected your preferred day and time, you can reserve a seat,
-            provided there is availability.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">
-              3- Confirm Your Reservation by Payment:
-            </span>{" "}
-            After reserving your seat, go to your student dashboard to complete
-            the payment. Your seat will only be officially booked once the
-            payment is made.
-          </p>
-        </div>
-
-        <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
           {/* Display form instructions */}
         </div>
 
@@ -232,54 +206,6 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         {/* Display enrollment form */}
         <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
-          <div>
-            <label htmlFor="day" className="block text-lg font-semibold mb-2">
-              Vendor
-            </label>
-            <div className="relative w-full">
-              <select
-                id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
-                }`}
-                value={selectedPaymentMethod}
-                onChange={(e) => {
-                  setSelectedPaymentMethod(e.target.value);
-                  setSelectedDay("");
-                  setSelectedTimeSlot("");
-                }}
-                onFocus={() => setFocusedInput("day")}
-                onBlur={() => setFocusedInput("")}
-              >
-                <option value="" disabled hidden>
-                  Select Your Vendor
-                </option>
-                {paymentMethods.map((vendor) => (
-                  <option key={vendor} value={vendor}>
-                    {vendor}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
 
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
@@ -288,19 +214,14 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             <div className="relative w-full">
               <select
                 id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedDay ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedDay}
                 onChange={(e) => {
                   setSelectedDay(e.target.value);
                   setSelectedTimeSlot("");
                 }}
-                disabled={!selectedPaymentMethod}
                 onFocus={() => setFocusedInput("day")}
                 onBlur={() => setFocusedInput("")}
               >
@@ -322,7 +243,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -341,11 +262,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
               <select
                 id="timeSlot"
                 className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "timeSlot"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                  selectedTimeSlot ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedTimeSlot}
                 onChange={(e) => setSelectedTimeSlot(e.target.value)}
@@ -379,9 +296,51 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             </div>
           </div>
 
+          <div>
+            <label htmlFor="payment" className="block text-lg font-semibold mb-2">
+              Payment Method
+            </label>
+            <div className="relative w-full">
+              <select
+                id="payment"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedPaymentMethod ? "border-accent" : "border-neutral-400"
+                }`}
+                value={selectedPaymentMethod}
+                onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                disabled={!isDayAndTimeSelected}
+                onFocus={() => setFocusedInput("payment")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Payment Method
+                </option>
+                {paymentMethods.map((payment) => (
+                  <option key={payment} value={payment}>
+                    {payment}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
           <button
             className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-              isDayAndTimeSelected && !isPending
+              selectedDay && selectedTimeSlot && selectedPaymentMethod && !isPending
                 ? "bg-accent text-white hover:bg-[#18c781]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
