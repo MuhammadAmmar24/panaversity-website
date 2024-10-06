@@ -1,11 +1,7 @@
 // / src/app/programs/flagship-program/[id]/page.tsx
-
 import React from "react";
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
-// import { CourseData } from "@/src/types/CourseData";
-import { notFound } from "next/navigation";
 import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
-import { parse } from "path";
 import { getCoursePrice } from "@/src/actions/courses";
 
 // Define the props interface
@@ -14,6 +10,7 @@ interface CoursePageProps {
     id: string;
   };
 }
+
 export interface CourseData {
   course_batch_program_id: number;
   is_active: boolean;
@@ -31,6 +28,7 @@ export interface CourseData {
   pre_requisite: string[];
   media_link: string;
 }
+
 // Fetch course data function
 async function fetchCourses() {
   const query = {
@@ -47,7 +45,6 @@ async function fetchCourses() {
     throw new Error(result.message);
   }
 }
-
 
 async function fetchCoursePrice() {
   const params = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
@@ -78,10 +75,6 @@ const CoursePage = async ({ params }:any) => {
   )
   const { price, currency } = await fetchCoursePrice();
   const courseData = await data.json();
-  // const courseData = await fetchCourses();
-  // console.log(courseData)
-  // const course = courseData.find((course: { course_id: any; }) => course.course_id === c_id);
-  // console.log(course)
   return <CourseDetailsClient initialPrice={price} initialCurrency={currency} courseData={courseData} />;
 };
 
