@@ -146,9 +146,8 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
       batch_id: batch_id, // Replace with actual batch ID
       course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
       class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
-      vendor_type: selectedPaymentMethod,
+      vendor_type: selectedPaymentMethod.toUpperCase(),
       package_id: 1,
-      // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
     };
 
     // Log the payload for debugging
