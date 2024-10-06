@@ -105,7 +105,7 @@ const Dashboard: React.FC = () => {
               a course to get started.");"
             </pre>
             <a
-              className="underline text-accent font-bold text-xl"
+              className="underline text-black font-bold text-xl"
               href="/programs/flagship-program"
             >
               Programs
