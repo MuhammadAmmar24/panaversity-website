@@ -61,7 +61,7 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
 const Dashboard: React.FC = () => {
   const [recentCourses, setRecentCourses] = useState<Course[]>([]); // State to hold enrolled courses
   const [recentClasses, setRecentClasses] = useState<Class[]>([]); // State for recent classes (not used currently)
-  const [status, setStatus] = useState(false); // State to track paid course status
+  const [status, setStatus] = useState(""); // State to track paid course status
   const [loading, setLoading] = useState<boolean>(true); // Loading state
   const [error, setError] = useState<string | null>(null); // Error state
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -103,10 +103,12 @@ const Dashboard: React.FC = () => {
             lessons: 100, // Placeholder for lesson count
             status: courseData.student_course_status,
             is_paid: courseData.is_paid, // Adjust payment status if necessary
+            batch_no: courseData.batch_id,
+            student_course_id: courseData.student_course_id,
           }));
 
           // Set the status for paid courses
-          setStatus(courses[0].is_paid || false); // || false is for dev purposes
+          setStatus(courses[0].status); // || false is for dev purposes
           setRecentCourses(courses); // Update recent courses state
         }
       } catch (error: any) {
@@ -141,13 +143,15 @@ const Dashboard: React.FC = () => {
             title={course.title}
             progress={course.progress}
             lessons={course.lessons}
-            status={course.is_paid}
+            status={status}
+            batch_id={course.batch_no}
+            student_course_id={course.student_course_id}
           />
         ))}
       </div>
 
       {/* Conditionally render recent and upcoming classes if status is true */}
-      {status ? (
+      {status == "active" ? (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
           <ClassSection title="Recent Classes" classes={mockRecentClasses} />
           <UpcomingClassSection
