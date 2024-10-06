@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
