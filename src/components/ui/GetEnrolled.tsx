@@ -207,54 +207,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         {/* Display enrollment form */}
         <div className="space-y-5 w-full ">
           {/* Select Day Dropdown */}
-          <div>
-            <label htmlFor="day" className="block text-lg font-semibold mb-2">
-              Vendor
-            </label>
-            <div className="relative w-full">
-              <select
-                id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
-                }`}
-                value={selectedPaymentMethod}
-                onChange={(e) => {
-                  setSelectedPaymentMethod(e.target.value);
-                  setSelectedDay("");
-                  setSelectedTimeSlot("");
-                }}
-                onFocus={() => setFocusedInput("day")}
-                onBlur={() => setFocusedInput("")}
-              >
-                <option value="" disabled hidden>
-                  Select Your Vendor
-                </option>
-                {paymentMethods.map((vendor) => (
-                  <option key={vendor} value={vendor}>
-                    {vendor}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
+          
 
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
@@ -347,6 +300,55 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
                   <path
                     fillRule="evenodd"
                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="day" className="block text-lg font-semibold mb-2">
+              Vendor
+            </label>
+            <div className="relative w-full">
+              <select
+                id="day"
+                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  isDayAndTimeSelected
+                    ? "border-accent"
+                    : focusedInput === "day"
+                    ? "border-accent"
+                    : "border-neutral-400"
+                }`}
+                value={selectedPaymentMethod}
+                onChange={(e) => {
+                  setSelectedPaymentMethod(e.target.value);
+                  setSelectedDay("");
+                  setSelectedTimeSlot("");
+                }}
+                onFocus={() => setFocusedInput("day")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Your Vendor
+                </option>
+                {paymentMethods.map((vendor) => (
+                  <option key={vendor} value={vendor}>
+                    {vendor}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
