@@ -86,6 +86,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
 
+  console.log(courseData);
+  
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -122,6 +124,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     pre_requisite,
     media_link,
     is_registration_open,
+    course_id,
+    batch_id,
+    course_batch_program_id,
   } = courseData;
 
   // Assign default values if necessary
@@ -210,7 +215,11 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                         sheetSide === "bottom" ? "h-[80vh]" : "h-full"
                       } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
                     >
-                      <GetEnrolled />
+                      <GetEnrolled
+                        course_id={course_id}
+                        batch_id={batch_id}
+                        course_batch_program_id={course_batch_program_id}
+                      />
                     </SheetContent>
                   </Sheet>
                 </div>
