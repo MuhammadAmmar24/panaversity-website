@@ -34,7 +34,7 @@ export default function LogoutDialog({
             <div className="flex justify-end space-x-4">
               <button
                 onClick={handleClose}
-                className="bg-gray-300 px-4 py-2 rounded text-black"
+                className="bg-transparent border px-4 py-2 rounded-lg text-black hover:bg-gray-50 transition-all duration-300 ease-in-out"
               >
                 Cancel
               </button>
@@ -43,7 +43,7 @@ export default function LogoutDialog({
                   handleClose();
                   onConfirm(); // Call the logout action if confirmed
                 }}
-                className="bg-accent text-white px-4 py-2 rounded"
+                className="bg-transparent text-red-600 px-4 py-2 rounded-lg border border-red-600 hover:bg-red-600 hover:text-white hover:shadow-mdtransition-all duration-300 ease-in-out"
               >
                 Logout
               </button>

@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 import React, { useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
@@ -14,20 +13,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
   batch_id,
   student_course_id,
 }) => {
-
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  
+
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
+    try {
+      const user_data = await checkUserVerification();
 
-      try {
-        const user_data = await checkUserVerification();
-  
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-
+      setProfile(user_data);
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
 
     const payload: any = {
       batch_no: batch_id,
@@ -73,7 +69,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* Individual course card */}
         <article
           className={`bg-white ${
-            status ? "bg-white" : "opacity-40 "
+            status == "active" ? "bg-white" : "opacity-40 "
           } rounded-lg shadow-xl px-4 sm:px-8 py-5`}
         >
           {/* Icon row */}
@@ -87,7 +83,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </h2>
 
           {/* Progress bar and lesson count */}
-          {status ? (
+          {status == "active" ? (
             <div className="flex items-center gap-6">
               {/* Progress bar */}
               <div className="flex-1 bg-gray-200 rounded-full h-2 md:h-4">
@@ -120,18 +116,19 @@ const CourseCard: React.FC<CourseCardProps> = ({
         {/* Payment button container */}
         <div className="absolute -right-[0px] top-[28px] xs:-right-[0px] sm:-right-[0px] md:-right-[0px] mobileM:-right-[0px] lg:left-[250px] xl:left-[450px]">
           {/* Payment button: Conditional rendering based on enrollment status */}
-          {status ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 bg-accent shadow-lg">
+          {status === "active" ? (
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white  h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 bg-accent shadow-lg">
               Payment Completed
             </button>
-          ) : (
-            <button
-              onClick={handleEnroll} // Trigger the enrollment process
-              className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg"
-            >
+          ) : status === "reserved_seat" ? (
+            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
               Pay to Proceed
             </button>
-          )}
+          ) : status === "expired_reservation" ? (
+            <button  className="md:text-[15px] font-medium md:font-semibold text-[10px] hover:text-white h-6 md:h-8 border border-accent bg-transparenttext-accent rounded-full px-1 py-1 md:px-2 hover:bg-accent shadow-lg">
+              Enroll Again
+            </button>
+          ) : null}
         </div>
       </div>
     </section>

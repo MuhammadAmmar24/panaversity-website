@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { allTeamMembers } from "@/src/constants/teams";
+import CardSkeleton from "@/src/components/ui/skeletons/CardSkeleton";
+
 
 
 
@@ -93,6 +95,7 @@ const TeamMember = () => {
 
   return (
     <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
+    <Suspense fallback={<CardSkeleton/>}>
       <div className="w-full mb-32">
         {/* Header */}
         <div className="flex justify-center items-center bg-teamBg bg-cover">
@@ -109,6 +112,7 @@ const TeamMember = () => {
         </div>
 
         {/* Team Members */}
+        
         <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
           <div className="flex flex-wrap justify-center -mx-4 ">
             {allTeamMembers.slice(0, visibleMembers).map((member: TeamMember, i: number) => (
@@ -118,6 +122,7 @@ const TeamMember = () => {
             ))}
           </div>
         </div>
+        
 
         {/* Load More Button */}
         {visibleMembers < allTeamMembers.length && (
@@ -131,6 +136,7 @@ const TeamMember = () => {
           </div>
         )}
       </div>
+      </Suspense>
     </section>
   );
 };

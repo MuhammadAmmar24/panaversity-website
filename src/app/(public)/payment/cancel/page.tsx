@@ -1,9 +1,17 @@
-import React from "react";
+import PaymentFailed from '@/src/components/payment/payment-failed'
+import React, { Suspense } from 'react'
 
-export default function page() {
+const page = () => {
   return (
-    <div className="h-screen w-full flex justify-center items-center">
-      <h3 className=" text-3xl font-bold ">Cancel</h3>
+    <div className='flex justify-center mt-[-4rem] items-center px-[1rem] min-h-screen'>
+            <div className="bg-white p-4  sm:p-8 rounded-xl shadow-md ">
+
+        <Suspense>
+            <PaymentFailed />
+        </Suspense>
+        </div>
     </div>
-  );
+  )
 }
+
+export default page

@@ -3,17 +3,11 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import {
-  ChevronRight,
-  Users,
-  User,
-  Calendar,
-  Check,
-} from "lucide-react";
+import { ChevronRight, Users, Calendar, Check } from "lucide-react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
-import { Sheet, SheetTrigger, SheetContent } from "@/src/components/ui/sheet";
+import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import Breadcrumb from "../Breadcrumbs";
-import { user_verify } from "@/src/actions/user-verify"
+import { user_verify } from "@/src/actions/user-verify";
 import { useRouter } from "next/navigation";
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -64,7 +58,7 @@ export interface CourseData {
   is_active: boolean;
   is_registration_open: boolean;
   registration_start_date: string; // ISO date string
-  registration_end_date: string;   // ISO date string
+  registration_end_date: string; // ISO date string
   course_id: number;
   batch_id: number;
   course_code: string;
@@ -86,7 +80,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   courseData,
   initialPrice,
 
-  initialCurrency
+  initialCurrency,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [price] = useState<number>(initialPrice);
@@ -98,13 +92,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const router = useRouter();
 
   async function handleClick() {
-    const res = await user_verify()
-    if(res?.redirectTo) {
+    const res = await user_verify();
+    if (res?.redirectTo) {
       router.push(res.redirectTo);
       console.log(res.redirectTo);
-    }
-    else {
-      console.log("Verified. GO AHEAD")
+    } else {
+      console.log("Verified. GO AHEAD");
       setOpen(true);
     }
   }
@@ -262,20 +255,27 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         {/* Prerequisites */}
         <div className="mt-12">
           <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-            Pre Requisite
+            Pre Requisites
           </h2>
-          <h3 className="text-lg font-semibold text-textPrimary mb-2">
+          <h3 className="text-lg font-semibold text-textPrimary mb-4">
             General Requirements
           </h3>
-          <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque
-            amet, sequi molestiae at expedita ipsum, ipsa delectus soluta
-            aliquid eligendi, modi recusandae mollitia animi unde non nulla iure
-            totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus
-            corporis culpa quisquam sunt eos totam exercitationem rerum iste,
-            molestiae aut adipisci quo voluptates mollitia quae necessitatibus
-            eum.
-          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            {Array.isArray(pre_requisite) ? (
+              pre_requisite.map((requirement, index) => (
+                <li
+                  key={index}
+                  className="text-base font-normal leading-relaxed text-textPrimary/90"
+                >
+                  {requirement}
+                </li>
+              ))
+            ) : (
+              <li className="text-base font-normal leading-relaxed text-textPrimary/90">
+                No prerequisites available
+              </li>
+            )}
+          </ul>
         </div>
       </section>
     </main>
