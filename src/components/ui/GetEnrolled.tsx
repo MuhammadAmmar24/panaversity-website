@@ -298,27 +298,27 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
           </div>
 
           <div>
-            <label htmlFor="vendor" className="block text-lg font-semibold mb-2">
-              Vendor
+            <label htmlFor="payment" className="block text-lg font-semibold mb-2">
+              Payment Method
             </label>
             <div className="relative w-full">
               <select
-                id="vendor"
+                id="payment"
                 className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
                   selectedPaymentMethod ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedPaymentMethod}
                 onChange={(e) => setSelectedPaymentMethod(e.target.value)}
                 disabled={!isDayAndTimeSelected}
-                onFocus={() => setFocusedInput("vendor")}
+                onFocus={() => setFocusedInput("payment")}
                 onBlur={() => setFocusedInput("")}
               >
                 <option value="" disabled hidden>
-                  Select Vendor
+                  Select Payment Method
                 </option>
-                {paymentMethods.map((vendor) => (
-                  <option key={vendor} value={vendor}>
-                    {vendor}
+                {paymentMethods.map((payment) => (
+                  <option key={payment} value={payment}>
+                    {payment}
                   </option>
                 ))}
               </select>
