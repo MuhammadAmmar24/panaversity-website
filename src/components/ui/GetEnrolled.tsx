@@ -190,31 +190,6 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
         <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
-          <p>
-            <span className="font-semibold">
-              1- Select Your Preferred Day and Time:
-            </span>{" "}
-            Choose the class schedule that works best for you from the available
-            options.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">2- Reserve Your Seat:</span> Once
-            you've selected your preferred day and time, you can reserve a seat,
-            provided there is availability.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">
-              3- Confirm Your Reservation by Payment:
-            </span>{" "}
-            After reserving your seat, go to your student dashboard to complete
-            the payment. Your seat will only be officially booked once the
-            payment is made.
-          </p>
-        </div>
-
-        <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
           {/* Display form instructions */}
         </div>
 
