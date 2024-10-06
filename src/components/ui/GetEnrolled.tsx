@@ -341,7 +341,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
 
           <button
             className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-              isDayAndTimeSelected && !isPending
+              selectedDay && selectedTimeSlot && selectedPaymentMethod && !isPending
                 ? "bg-accent text-white hover:bg-[#18c781]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}
