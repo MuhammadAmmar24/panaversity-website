@@ -1,10 +1,11 @@
 "use client";
 import React, { useState } from "react";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 // import rabbit from "@/";
 import { Course } from "@/src/lib/schemas/courses";
-
+import { CoursesSkeleton } from "@/src/app/(dashboard)/dashboard/Components/Skeleton/CoursesSkeleton";
 const CourseCard = ({ course }: { course: Course }) => (
   <Link href={`/programs/flagship-program/${course.course_id}`}>
     <div className="flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full h-[24rem]">
@@ -66,6 +67,8 @@ const CoursesClient = ({ initialCourses }: { initialCourses: Course[] }) => {
         </div>
 
         {/* courses */}
+
+      
         <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
           <h2 className=" mt-10 mb-10 font-poppins text-md sm:text-lg gradient-border border-black font-medium border-b rounded-[100px]   w-fit  uppercase tracking-wide">
             APPLIED GEN AI COURSES
@@ -76,6 +79,7 @@ const CoursesClient = ({ initialCourses }: { initialCourses: Course[] }) => {
             ))}
           </div>
         </div>
+      
 
         {/* Load More Button */}
         {visibleCourses < initialCourses.length && (
