@@ -13,14 +13,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
   batch_id,
   student_course_id,
 }) => {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-
   // Function to handle enrollment and payment processing
   const handleEnroll = async () => {
     try {
-      // Fetch user data and update profile state
+      // Fetch user data
       const user_data = await checkUserVerification();
-      setProfile(user_data);
 
       // Ensure that the profile is loaded before proceeding
       if (!user_data?.id) {
