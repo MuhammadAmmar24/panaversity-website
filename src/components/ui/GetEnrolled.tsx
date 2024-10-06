@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export default function GetEnrolled() {
+export default function GetEnrolled({course_id, batch_id, course_batch_program_id}: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -19,13 +19,10 @@ export default function GetEnrolled() {
 
   const [profile, setProfile] = useState<ProfileData | null>(null);
 
-  
-
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
   const router = useRouter();
-
 
   // Fetch time slots
   useEffect(() => {
@@ -145,11 +142,11 @@ export default function GetEnrolled() {
 
     const payload: any = {
       student_id: profile?.id, // Replace with actual student ID, ensure it's a valid string or number as per API requirements
-      program_id: 1, // Replace with actual program ID, ensure it's correct
-      batch_id: 1, // Replace with actual batch ID
-      course_batch_program_id: 1, // Replace with actual course_batch_program_id
+      program_id: course_id, // Replace with actual program ID, ensure it's correct
+      batch_id: batch_id, // Replace with actual batch ID
+      course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
       class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
-      vendor_type: "STRIPE",
+      vendor_type: selectedPaymentMethod,
       package_id: 1,
       // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
     };
@@ -237,6 +234,55 @@ export default function GetEnrolled() {
           {/* Select Day Dropdown */}
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
+              Vendor
+            </label>
+            <div className="relative w-full">
+              <select
+                id="day"
+                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  isDayAndTimeSelected
+                    ? "border-accent"
+                    : focusedInput === "day"
+                    ? "border-accent"
+                    : "border-neutral-400"
+                }`}
+                value={selectedPaymentMethod}
+                onChange={(e) => {
+                  setSelectedPaymentMethod(e.target.value);
+                  setSelectedDay("");
+                  setSelectedTimeSlot("");
+                }}
+                onFocus={() => setFocusedInput("day")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Your Vendor
+                </option>
+                {paymentMethods.map((vendor) => (
+                  <option key={vendor} value={vendor}>
+                    {vendor}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
             </label>
             <div className="relative w-full">
@@ -254,6 +300,7 @@ export default function GetEnrolled() {
                   setSelectedDay(e.target.value);
                   setSelectedTimeSlot("");
                 }}
+                disabled={!selectedPaymentMethod}
                 onFocus={() => setFocusedInput("day")}
                 onBlur={() => setFocusedInput("")}
               >
@@ -333,37 +380,36 @@ export default function GetEnrolled() {
           </div>
 
           <button
-           
-           className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-            isDayAndTimeSelected && !isPending
-              ? "bg-accent text-white hover:bg-[#18c781]"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
-          disabled={!isDayAndTimeSelected || isPending}
-          onClick={handleEnroll}
+            className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
+              isDayAndTimeSelected && !isPending
+                ? "bg-accent text-white hover:bg-[#18c781]"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }`}
+            disabled={!isDayAndTimeSelected || isPending}
+            onClick={handleEnroll}
           >
             {isPending ? (
-            <>
-              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Enrolling...
-            </>
-          ) : (
-            "Enroll"
-          )}
+              <>
+                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                Enrolling...
+              </>
+            ) : (
+              "Enroll"
+            )}
           </button>
 
           {/* Success Message */}
-          {isEnrolled  &&
+          {isEnrolled && (
             <div className="mt-4 text-green-500">
               <p>Enrollment successful! You have reserved your seat.</p>
             </div>
-         
-         
-          }
+          )}
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-red-500 mt-4"}>Failed to enroll student in course</p>
+            <p className={"text-red-500 mt-4"}>
+              Failed to enroll student in course
+            </p>
           )}
         </div>
       </div>

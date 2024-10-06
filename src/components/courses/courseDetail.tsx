@@ -92,6 +92,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const [price] = useState<number>(initialPrice);
   const [currency] = useState<string>(initialCurrency);
 
+  console.log(courseData);
+  
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -129,6 +131,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     pre_requisite,
     media_link,
     is_registration_open,
+    course_id,
+    batch_id,
+    course_batch_program_id,
   } = courseData;
 
   // Assign default values if necessary
@@ -149,10 +154,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
             {/* Breadcrumb Navigation */}
-            <Breadcrumb
-              program="Flagship-Program"
-              courseName={course_name}
-            />
+            <Breadcrumb program="Flagship-Program" courseName={course_name} />
 
             <div className="flex flex-col lg:flex-row ">
               {/* Course Details */}
@@ -189,31 +191,42 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       Price:
                     </span>
                     <span className="text-3xl font-bold uppercase">
-                    {currency ? `${currency} ${price}` : price}
+                      {currency ? `${currency} ${price}` : price}
                     </span>
                   </div>
 
-                  <Sheet open={open}  onOpenChange={(isOpen) => isOpen ? setOpen(true) : setOpen(false)}> 
-                    
-                    <button onClick={handleClick}
-                        className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
-                          is_registration_open
-                            ? "hover:bg-emerald-500"
-                            : "bg-gray-400 cursor-not-allowed"
-                        }`}
-                        disabled={!is_registration_open}
-                      >
-                        {is_registration_open ? "Enroll Now" : "Registration Closed"}
-                        <ChevronRight className="w-5 h-5 ml-2" />
-                      </button>
-                   
+                  <Sheet
+                    open={open}
+                    onOpenChange={(isOpen) =>
+                      isOpen ? setOpen(true) : setOpen(false)
+                    }
+                  >
+                    <button
+                      onClick={handleClick}
+                      className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
+                        is_registration_open
+                          ? "hover:bg-emerald-500"
+                          : "bg-gray-400 cursor-not-allowed"
+                      }`}
+                      disabled={!is_registration_open}
+                    >
+                      {is_registration_open
+                        ? "Enroll Now"
+                        : "Registration Closed"}
+                      <ChevronRight className="w-5 h-5 ml-2" />
+                    </button>
+
                     <SheetContent
                       side={sheetSide}
                       className={`w-full max-w-full overflow-y-auto ${
                         sheetSide === "bottom" ? "h-[80vh]" : "h-full"
                       } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
                     >
-                      <GetEnrolled />
+                      <GetEnrolled
+                        course_id={course_id}
+                        batch_id={batch_id}
+                        course_batch_program_id={course_batch_program_id}
+                      />
                     </SheetContent>
                   </Sheet>
                 </div>
@@ -240,7 +253,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
             What you will learn in this course
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {course_outcomes.map((point:any, index:any) => (
+            {course_outcomes.map((point: any, index: any) => (
               <LearnPoint key={index} point={point} />
             ))}
           </div>
@@ -255,11 +268,14 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
             General Requirements
           </h3>
           <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque amet, sequi molestiae at expedita ipsum, ipsa delectus soluta aliquid eligendi, modi recusandae mollitia animi unde non nulla iure totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus corporis culpa quisquam sunt eos totam exercitationem rerum iste, molestiae aut adipisci quo voluptates mollitia quae necessitatibus eum.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque
+            amet, sequi molestiae at expedita ipsum, ipsa delectus soluta
+            aliquid eligendi, modi recusandae mollitia animi unde non nulla iure
+            totam et reiciendis ducimus assumenda nemo tempore? Voluptatem natus
+            corporis culpa quisquam sunt eos totam exercitationem rerum iste,
+            molestiae aut adipisci quo voluptates mollitia quae necessitatibus
+            eum.
           </p>
-
-         
-
         </div>
       </section>
     </main>
