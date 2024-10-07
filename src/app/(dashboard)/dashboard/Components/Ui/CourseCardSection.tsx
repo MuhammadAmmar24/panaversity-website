@@ -31,7 +31,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({
 
   return (
     <div className="mb-8 mt-8">
-      {courses.map((course: Course, index: number) => (
+      {courses?.map((course: Course, index: number) => (
         <CourseCard
           key={index}
           title={course.title}

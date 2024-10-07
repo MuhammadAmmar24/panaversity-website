@@ -6,6 +6,7 @@ import { processPayment } from "@/src/actions/payment";
 import { checkUserVerification } from "@/src/actions/profile";
 import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
+import { revalidatePath } from "next/cache";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -63,6 +64,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
       if (result.type === "success") {
         const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
+        // revalidatePath("/dashboard"); // Revalidate the dashboard page
         if (url) {
           window.location.href = url; // Redirect to payment URL if successful
         } else {

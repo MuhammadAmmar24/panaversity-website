@@ -102,7 +102,7 @@ export default function PaymentDialog({
                 {isLoading ? (
                   <>
                     <AiOutlineLoading3Quarters className="animate-spin mr-2" />
-                    Redirecting...
+                    Processing...
                   </>
                 ) : (
                   "Confirm Payment"

@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { resendVerification } from "@/src/actions/resend-verification";
 import Link from "next/link";
 import { GoCheckCircleFill } from "react-icons/go";
@@ -18,6 +18,7 @@ const PaymentSuccess = () => {
         Your payment is confirmed. You can now access your dashboard.
       </p>
       <Link
+      
         href={"/dashboard"}
         className="w-full text-center py-3   px-8   text-white rounded-xl bg-accent  hover:bg-[#18c781] font-medium"
       >

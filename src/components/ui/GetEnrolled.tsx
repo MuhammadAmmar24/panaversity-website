@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
 import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { revalidatePath } from "next/cache";
 
 export default function GetEnrolled({
   program_id,
@@ -176,6 +177,7 @@ export default function GetEnrolled({
         console.log("URL", url);
 
         if (result.type === "success") {
+          // revalidatePath("/dashboard");
           setIsEnrolled(true); // Enrollment success, show message
           //setEnrollmentError(result.message); // Clear any errors
           // console.log(result.message); // Optional: log the success message
@@ -183,6 +185,7 @@ export default function GetEnrolled({
           if (url) {
             console.log("URL", url);
             router.push(url); // Use window.location.href for external URL
+            
           } else {
             // console.error("Stripe URL not found.");
           }
