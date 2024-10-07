@@ -44,6 +44,8 @@ const DashboardClient: React.FC = () => {
         const studentId = profile.id;
         const result: Result<CourseEnrollmentResponse> =
           await getEnrolledCourses(studentId);
+        
+        console.log(result)
 
         if (result.type === "error") {
           if (result.message.includes("Not Found")) {
@@ -63,6 +65,7 @@ const DashboardClient: React.FC = () => {
               is_paid: courseData.is_paid,
               batch_no: courseData.batch_id,
               student_course_id: courseData.student_course_id,
+              course_batch_program_id: courseData.course_batch_program_id,
             }));
 
             setStatus(courses[0]?.status ?? "inactive");

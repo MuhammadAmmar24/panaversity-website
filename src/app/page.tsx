@@ -11,14 +11,11 @@ import Projects from "@/src/components/Projects";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
 import Footer from "@/src/components/Footer";
 import Navbar from "@/src/components/Navbar";
-import ProgramsSkeleton from "./(dashboard)/dashboard/Components/Skeleton/ProgramsSkeleton";
-import { CoursesSkeleton } from "./(dashboard)/dashboard/Components/Skeleton/CoursesSkeleton";
-
 
 export default function Home() {
   return (
     <>
-         <Navbar />
+      <Navbar />
       <Hero />
       <Video />
       <ProgramOverview />

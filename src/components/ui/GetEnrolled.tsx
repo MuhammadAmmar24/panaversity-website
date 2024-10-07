@@ -3,22 +3,28 @@ import { useState, useEffect, useTransition } from "react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
+import { getCoursePrice } from "@/src/actions/courses";
 import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export default function GetEnrolled({course_id, batch_id, course_batch_program_id}: any) {
+export default function GetEnrolled({
+  program_id,
+  batch_id,
+  course_batch_program_id,
+}: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [seats, setSeats] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
+    null
+  );
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-
   const [profile, setProfile] = useState<ProfileData | null>(null);
-
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
@@ -28,7 +34,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-        const query = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
+        const query = { course_batch_program_id: course_batch_program_id };
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
@@ -59,19 +65,28 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
       }
     };
 
-    
-    const fetchUserData = async () => {
-    try {
-      const user_data = await checkUserVerification();
+    const fetchEnrollmentPrice = async () => {
+      const query = { course_batch_program_id: course_batch_program_id };
+      const price_result = await getCoursePrice(query);
 
-      setProfile(user_data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  }
+      if (price_result.type == "success" && price_result.data) {
+        setEnrollmentPackage(price_result?.data.package_id);
+      }
+    };
+
+    const fetchUserData = async () => {
+      try {
+        const user_data = await checkUserVerification();
+
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
     fetchTimeSlots();
     fetchUserData();
+    fetchEnrollmentPrice();
   }, []);
 
   // Get time slots for selected day
@@ -141,46 +156,45 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id, // Replace with actual student ID, ensure it's a valid string or number as per API requirements
-      program_id: course_id, // Replace with actual program ID, ensure it's correct
-      batch_id: batch_id, // Replace with actual batch ID
-      course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
-      class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
+      student_id: profile?.id,
+      program_id: program_id,
+      batch_id: batch_id,
+      course_batch_program_id: course_batch_program_id,
+      class_time_slot_id: 1,
       vendor_type: selectedPaymentMethod.toUpperCase(),
-      package_id: 1,
+      package_id: enrollmentPackage,
     };
 
     // Log the payload for debugging
     console.log("Enrollment Payload:", payload);
 
-    startTransition(async() =>  {
-    try {
-      const result: any = await enrollNewStudentInProgramAndCourse(payload);
-      console.log("RESULT", result)
-      const url = result.data?.fee_voucher?.stripe?.stripe_url;
-      console.log("URL", url)
+    startTransition(async () => {
+      try {
+        const result: any = await enrollNewStudentInProgramAndCourse(payload);
+        console.log("RESULT", result);
+        const url = result.data?.fee_voucher?.stripe?.stripe_url;
+        console.log("URL", url);
 
+        if (result.type === "success") {
+          setIsEnrolled(true); // Enrollment success, show message
+          //setEnrollmentError(result.message); // Clear any errors
+          // console.log(result.message); // Optional: log the success message
 
-      if (result.type === "success") {
-        setIsEnrolled(true); // Enrollment success, show message
-        //setEnrollmentError(result.message); // Clear any errors
-        // console.log(result.message); // Optional: log the success message
-
-        if (url) {
-          console.log("URL",url)
-          router.push(url); // Use window.location.href for external URL
+          if (url) {
+            console.log("URL", url);
+            router.push(url); // Use window.location.href for external URL
+          } else {
+            // console.error("Stripe URL not found.");
+          }
         } else {
-          // console.error("Stripe URL not found.");
+          setEnrollmentError(result.message); // Handle API error
+          // console.error("API Error:", result.message);
         }
-      } else {
-        setEnrollmentError(result.message); // Handle API error
-        // console.error("API Error:", result.message);
+      } catch (error) {
+        setEnrollmentError("Failed to enroll student."); // General error handling
+        // console.error("Enrollment failed:", error);
       }
-    } catch (error) {
-      setEnrollmentError("Failed to enroll student."); // General error handling
-      // console.error("Enrollment failed:", error);
-    }
-  });
+    });
   };
 
   return (
@@ -191,7 +205,6 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
           {/* Display form instructions */}
         </div>
-
 
         {/* Display enrollment form */}
         <div className="space-y-7 w-full ">
@@ -287,7 +300,10 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
           </div>
 
           <div>
-            <label htmlFor="payment" className="block text-lg font-semibold mb-2">
+            <label
+              htmlFor="payment"
+              className="block text-lg font-semibold mb-2"
+            >
               Payment Method
             </label>
             <div className="relative w-full">
@@ -328,21 +344,24 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             </div>
           </div>
 
-                  {/* Display remaining seats */}
-        <div className="mb-6 text-red-500">
-          <span className="text-lg font-semibold">Remaining Seats: </span>
-          <span className="text-lg">
-            {remainingSeats === null
-              ? "..."
-              : remainingSeats === 0
-              ? "N/A"
-              : remainingSeats}
-          </span>
-        </div>
+          {/* Display remaining seats */}
+          <div className="mb-6 text-red-500">
+            <span className="text-lg font-semibold">Remaining Seats: </span>
+            <span className="text-lg">
+              {remainingSeats === null
+                ? "..."
+                : remainingSeats === 0
+                ? "N/A"
+                : remainingSeats}
+            </span>
+          </div>
 
           <button
             className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-              selectedDay && selectedTimeSlot && selectedPaymentMethod && !isPending
+              selectedDay &&
+              selectedTimeSlot &&
+              selectedPaymentMethod &&
+              !isPending
                 ? "bg-accent text-white hover:bg-[#18c781]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}

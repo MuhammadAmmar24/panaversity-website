@@ -3,12 +3,12 @@ import { Suspense } from "react";
 
 const LoginPage = () => {
   return (
-    <> 
-    <div className="flex justify-center items-center min-h-screen">
-      <Suspense>
-        <LoginForm />
-      </Suspense>
-    </div>
+    <>
+      <div className="flex justify-center items-center min-h-screen">
+        <Suspense>
+          <LoginForm />
+        </Suspense>
+      </div>
     </>
   );
 };
