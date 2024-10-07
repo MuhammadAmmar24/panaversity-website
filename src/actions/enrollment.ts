@@ -155,9 +155,9 @@ export const enrollNewStudentInProgramAndCourse = async (
       {
         method: "POST",
         cache: "no-store",
-        next: {
-          tags: ["data"],
-        },
+        // next: {
+        //   tags: ["data"],
+        // },
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -178,7 +178,7 @@ export const enrollNewStudentInProgramAndCourse = async (
     console.log(responseData);
 
     // Revalidate the 'data' tag after successful enrollment
-    revalidateTag("data");
+    // revalidateTag("data");
     revalidatePath("/dashboard");
     // const parsedResponse =
     // 	EnrollNewStudentResponseSchema.safeParse(responseData);
