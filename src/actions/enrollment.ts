@@ -177,20 +177,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     console.log(responseData);
 
-    // Revalidate the 'data' tag after successful enrollment
     revalidateTag("data");
-
-    // const parsedResponse =
-    // 	EnrollNewStudentResponseSchema.safeParse(responseData);
-
-    // if (!parsedResponse.success) {
-    // 	return {
-    // 		type: "error",
-    // 		message: parsedResponse.error.errors
-    // 			.map((err) => err.message)
-    // 			.join(", "),
-    // 	};
-    // }
 
     return {
       type: "success",

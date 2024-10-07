@@ -182,7 +182,7 @@ export default function GetEnrolled({
 
           if (url) {
             console.log("URL", url);
-            router.push(url); // Use window.location.href for external URL
+            window.open(url , "_blank"); // Use window.location.href for external URL
           } else {
             // console.error("Stripe URL not found.");
           }
