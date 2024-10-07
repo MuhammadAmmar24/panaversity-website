@@ -31,7 +31,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
               <FaGithub className="" />
               {/* <DiGithubFull className="" /> */}
               <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
-                Covered Topics
+                Topics Covered
               </p>
               <IoIosLink className="text-blue-500"/>
             </div>

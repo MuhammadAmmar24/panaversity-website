@@ -82,7 +82,7 @@ export interface SidebarProps {
 }
 
 export interface CourseSectionProps {
-  courses: Course[];
+  courses: Course[] | undefined;
   enrollmentStatus: string | null;
   status: string;
 }

@@ -5,11 +5,11 @@ import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
 import { getCoursePrice } from "@/src/actions/courses";
 
 // Define the props interface
-interface CoursePageProps {
-  params: {
-    id: string;
-  };
-}
+// interface CoursePageProps {
+//   params: {
+//     id: string;
+//   };
+// }
 
 export interface CourseData {
   course_batch_program_id: number;
@@ -30,21 +30,21 @@ export interface CourseData {
 }
 
 // Fetch course data function
-async function fetchCourses() {
-  const query = {
-    program_id: 1,
-    batch_id: 1,
-    limit: 10,
-  };
+// async function fetchCourses() {
+//   const query = {
+//     program_id: 1,
+//     batch_id: 1,
+//     limit: 10,
+//   };
 
-  const result = await getProgramCoursesWithOpenRegistration(query);
+//   const result = await getProgramCoursesWithOpenRegistration(query);
 
-  if (result.type === "success" && result.data) {
-    return result.data.data;
-  } else {
-    throw new Error(result.message);
-  }
-}
+//   if (result.type === "success" && result.data) {
+//     return result.data.data;
+//   } else {
+//     throw new Error(result.message);
+//   }
+// }
 
 async function fetchCoursePrice() {
   const params = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
