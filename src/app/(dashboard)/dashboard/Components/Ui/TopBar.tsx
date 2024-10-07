@@ -2,8 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import TopBarClient from "./TopBarClient"; // The client-side component
+import Dropdown from "./TopbarDropdown";
+import getProfile from "@/src/lib/getProfile";
 
-const TopBar: React.FC = () => {
+const TopBar: React.FC = async () => {
+
+  const profile : ProfileData = await getProfile();
+
   return (
     <header className="h-16 flex items-center justify-between mt-6 sm:mt-10 mb-4">
       {/* Logo link for home navigation */}
@@ -18,7 +23,11 @@ const TopBar: React.FC = () => {
       </Link>
 
       {/* Client-side component to fetch user data and display the dropdown */}
-      <TopBarClient />
+      <Dropdown 
+       userName={profile.full_name}
+       userEmail={profile.email}
+       userImage={"/profile.png"}
+       />
     </header>
   );
 };

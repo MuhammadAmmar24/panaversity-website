@@ -15,7 +15,7 @@ import {
   EnrollStudentResponseSchema,
 } from "@/src/lib/schemas/enrollment";
 import { Result } from "@/src/lib/types";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const enrollStudentInProgram = async (
   payload: EnrollStudentRequest
@@ -179,7 +179,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     // Revalidate the 'data' tag after successful enrollment
     revalidateTag("data");
-
+    revalidatePath("/dashboard");
     // const parsedResponse =
     // 	EnrollNewStudentResponseSchema.safeParse(responseData);
 
