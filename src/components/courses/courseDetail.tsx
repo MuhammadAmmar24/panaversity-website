@@ -70,6 +70,7 @@ export interface CourseData {
   pre_requisite: string[];
   media_link: string;
 }
+
 interface CourseDetailsClientProps {
   courseData: CourseData;
   initialPrice: number;

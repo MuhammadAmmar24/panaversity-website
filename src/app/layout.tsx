@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Poppins,Rubik } from "next/font/google"; 
+import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
-
-const inter = Inter({ 
-  subsets: ["latin"], 
-  variable: '--font-inter',
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 const poppins = Poppins({
@@ -22,31 +21,31 @@ const rubik = Rubik({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Panaversity',
-    template: '%s | Panaversity'
+    default: "Panaversity",
+    template: "%s | Panaversity",
   },
   description: `Panaversity is revolutionizing AI education with cutting-edge
                 programs in Generative AI and cloud computing, preparing you for the
                 $100 trillion AI industry. Our hands-on programs combine advanced
                 technology with essential skills and personalized coaching.
                 Transform your ambition into success and lead in the AI-driven
-                future.`
-};  
+                future.`,
+};
 
 export default function RootLayout({
   children,
-  modal
+  modal,
 }: Readonly<{
   children: React.ReactNode;
   modal: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}>
-       
+      <body
+        className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}
+      >
         {children}
         {modal}
-       
       </body>
     </html>
   );

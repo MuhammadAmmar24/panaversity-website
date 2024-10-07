@@ -142,7 +142,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
 
     const payload: any = {
       student_id: profile?.id, // Replace with actual student ID, ensure it's a valid string or number as per API requirements
-      program_id: course_id, // Replace with actual program ID, ensure it's correct
+      program_id: 1, // Replace with actual program ID, ensure it's correct
       batch_id: batch_id, // Replace with actual batch ID
       course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
       class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
