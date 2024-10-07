@@ -278,4 +278,4 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   );
 };
 
-export default CourseDetailsClient;
+export default CourseDetailsClient
