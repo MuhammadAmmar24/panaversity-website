@@ -38,7 +38,7 @@ const DashboardServer = async ({ profileId }: Props) => {
           title: courseData.course_name,
           progress: courseData.is_active ? 40 : 100,
           lessons: 100,
-          status: courseData.student_course_status,
+          status: z,
           is_paid: courseData.is_paid,
           batch_no: courseData.batch_id,
           student_course_id: courseData.student_course_id,
