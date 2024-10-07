@@ -1,28 +1,13 @@
-"use client"
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import TopBarClient from "./TopBarClient"; // The client-side component
 import Dropdown from "./TopbarDropdown";
-import { checkUserVerification } from "@/src/actions/profile";
+import getProfile from "@/src/lib/getProfile";
 
-import { useEffect, useState } from "react";
+const TopBar: React.FC = async () => {
 
-const TopBar: React.FC =  () => {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-  
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    }
-  
-      fetchUserData();
-  }, []);
+  const profile : ProfileData = await getProfile();
 
   return (
     <header className="h-16 flex items-center justify-between mt-6 sm:mt-10 mb-4">
@@ -37,12 +22,12 @@ const TopBar: React.FC =  () => {
         />
       </Link>
 
-      {/* User dropdown menu */}
-      <Dropdown
-        userName={profile?.full_name}
-        userEmail={profile?.email}
-        userImage="/profile.png"
-      />
+      {/* Client-side component to fetch user data and display the dropdown */}
+      <Dropdown 
+       userName={profile.full_name}
+       userEmail={profile.email}
+       userImage={"/profile.png"}
+       />
     </header>
   );
 };

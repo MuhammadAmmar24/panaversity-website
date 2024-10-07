@@ -3,22 +3,29 @@ import { useState, useEffect, useTransition } from "react";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
+import { getCoursePrice } from "@/src/actions/courses";
 import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { revalidatePath } from "next/cache";
 
-export default function GetEnrolled({course_id, batch_id, course_batch_program_id}: any) {
+export default function GetEnrolled({
+  program_id,
+  batch_id,
+  course_batch_program_id,
+}: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [seats, setSeats] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
+    null
+  );
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-
   const [profile, setProfile] = useState<ProfileData | null>(null);
-
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
@@ -28,7 +35,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-        const query = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
+        const query = { course_batch_program_id: course_batch_program_id };
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
@@ -59,19 +66,28 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
       }
     };
 
-    
-    const fetchUserData = async () => {
-    try {
-      const user_data = await checkUserVerification();
+    const fetchEnrollmentPrice = async () => {
+      const query = { course_batch_program_id: course_batch_program_id };
+      const price_result = await getCoursePrice(query);
 
-      setProfile(user_data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  }
+      if (price_result.type == "success" && price_result.data) {
+        setEnrollmentPackage(price_result?.data.package_id);
+      }
+    };
+
+    const fetchUserData = async () => {
+      try {
+        const user_data = await checkUserVerification();
+
+        setProfile(user_data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
 
     fetchTimeSlots();
     fetchUserData();
+    fetchEnrollmentPrice();
   }, []);
 
   // Get time slots for selected day
@@ -141,47 +157,47 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id, // Replace with actual student ID, ensure it's a valid string or number as per API requirements
-      program_id: course_id, // Replace with actual program ID, ensure it's correct
-      batch_id: batch_id, // Replace with actual batch ID
-      course_batch_program_id: course_batch_program_id, // Replace with actual course_batch_program_id
-      class_time_slot_id: 1, // Ensure this is valid, being parsed as a number
-      vendor_type: selectedPaymentMethod,
-      package_id: 1,
-      // lab_time_slot_id: 1, // Replace with actual lab time slot ID or remove if not needed
+      student_id: profile?.id,
+      program_id: program_id,
+      batch_id: batch_id,
+      course_batch_program_id: course_batch_program_id,
+      class_time_slot_id: 1,
+      vendor_type: selectedPaymentMethod.toUpperCase(),
+      package_id: enrollmentPackage,
     };
 
     // Log the payload for debugging
     console.log("Enrollment Payload:", payload);
 
-    startTransition(async() =>  {
-    try {
-      const result: any = await enrollNewStudentInProgramAndCourse(payload);
-      console.log("RESULT", result)
-      const url = result.data?.fee_voucher?.stripe?.stripe_url;
-      console.log("URL", url)
+    startTransition(async () => {
+      try {
+        const result: any = await enrollNewStudentInProgramAndCourse(payload);
+        console.log("RESULT", result);
+        const url = result.data?.fee_voucher?.stripe?.stripe_url;
+        console.log("URL", url);
 
+        if (result.type === "success") {
+          // revalidatePath("/dashboard");
+          setIsEnrolled(true); // Enrollment success, show message
+          //setEnrollmentError(result.message); // Clear any errors
+          // console.log(result.message); // Optional: log the success message
 
-      if (result.type === "success") {
-        setIsEnrolled(true); // Enrollment success, show message
-        //setEnrollmentError(result.message); // Clear any errors
-        // console.log(result.message); // Optional: log the success message
-
-        if (url) {
-          console.log("URL",url)
-          router.push(url); // Use window.location.href for external URL
+          if (url) {
+            console.log("URL", url);
+            router.push(url); // Use window.location.href for external URL
+            
+          } else {
+            // console.error("Stripe URL not found.");
+          }
         } else {
-          // console.error("Stripe URL not found.");
+          setEnrollmentError(result.message); // Handle API error
+          // console.error("API Error:", result.message);
         }
-      } else {
-        setEnrollmentError(result.message); // Handle API error
-        // console.error("API Error:", result.message);
+      } catch (error) {
+        setEnrollmentError("Failed to enroll student."); // General error handling
+        // console.error("Enrollment failed:", error);
       }
-    } catch (error) {
-      setEnrollmentError("Failed to enroll student."); // General error handling
-      // console.error("Enrollment failed:", error);
-    }
-  });
+    });
   };
 
   return (
@@ -190,96 +206,12 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
         <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
         <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
-          <p>
-            <span className="font-semibold">
-              1- Select Your Preferred Day and Time:
-            </span>{" "}
-            Choose the class schedule that works best for you from the available
-            options.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">2- Reserve Your Seat:</span> Once
-            you've selected your preferred day and time, you can reserve a seat,
-            provided there is availability.
-            <br />
-          </p>
-          <p>
-            <span className="font-semibold">
-              3- Confirm Your Reservation by Payment:
-            </span>{" "}
-            After reserving your seat, go to your student dashboard to complete
-            the payment. Your seat will only be officially booked once the
-            payment is made.
-          </p>
-        </div>
-
-        <div className="text-gray-500 mb-8 text-base flex flex-col gap-2">
           {/* Display form instructions */}
         </div>
 
-        {/* Display remaining seats */}
-        <div className="mb-6 text-red-500">
-          <span className="text-lg font-semibold">Remaining Seats: </span>
-          <span className="text-lg">
-            {remainingSeats === null
-              ? "..."
-              : remainingSeats === 0
-              ? "N/A"
-              : remainingSeats}
-          </span>
-        </div>
         {/* Display enrollment form */}
-        <div className="space-y-5 w-full ">
+        <div className="space-y-7 w-full ">
           {/* Select Day Dropdown */}
-          <div>
-            <label htmlFor="day" className="block text-lg font-semibold mb-2">
-              Vendor
-            </label>
-            <div className="relative w-full">
-              <select
-                id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
-                }`}
-                value={selectedPaymentMethod}
-                onChange={(e) => {
-                  setSelectedPaymentMethod(e.target.value);
-                  setSelectedDay("");
-                  setSelectedTimeSlot("");
-                }}
-                onFocus={() => setFocusedInput("day")}
-                onBlur={() => setFocusedInput("")}
-              >
-                <option value="" disabled hidden>
-                  Select Your Vendor
-                </option>
-                {paymentMethods.map((vendor) => (
-                  <option key={vendor} value={vendor}>
-                    {vendor}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
 
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
@@ -288,19 +220,14 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             <div className="relative w-full">
               <select
                 id="day"
-                className={` w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "day"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedDay ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedDay}
                 onChange={(e) => {
                   setSelectedDay(e.target.value);
                   setSelectedTimeSlot("");
                 }}
-                disabled={!selectedPaymentMethod}
                 onFocus={() => setFocusedInput("day")}
                 onBlur={() => setFocusedInput("")}
               >
@@ -322,7 +249,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -341,11 +268,7 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
               <select
                 id="timeSlot"
                 className={`block w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                  isDayAndTimeSelected
-                    ? "border-accent"
-                    : focusedInput === "timeSlot"
-                    ? "border-accent"
-                    : "border-neutral-400"
+                  selectedTimeSlot ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedTimeSlot}
                 onChange={(e) => setSelectedTimeSlot(e.target.value)}
@@ -379,9 +302,69 @@ export default function GetEnrolled({course_id, batch_id, course_batch_program_i
             </div>
           </div>
 
+          <div>
+            <label
+              htmlFor="payment"
+              className="block text-lg font-semibold mb-2"
+            >
+              Payment Method
+            </label>
+            <div className="relative w-full">
+              <select
+                id="payment"
+                className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                  selectedPaymentMethod ? "border-accent" : "border-neutral-400"
+                }`}
+                value={selectedPaymentMethod}
+                onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                disabled={!isDayAndTimeSelected}
+                onFocus={() => setFocusedInput("payment")}
+                onBlur={() => setFocusedInput("")}
+              >
+                <option value="" disabled hidden>
+                  Select Payment Method
+                </option>
+                {paymentMethods.map((payment) => (
+                  <option key={payment} value={payment}>
+                    {payment}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <svg
+                  className="w-5 h-5 text-gray-400"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Display remaining seats */}
+          <div className="mb-6 text-red-500">
+            <span className="text-lg font-semibold">Remaining Seats: </span>
+            <span className="text-lg">
+              {remainingSeats === null
+                ? "..."
+                : remainingSeats === 0
+                ? "N/A"
+                : remainingSeats}
+            </span>
+          </div>
+
           <button
             className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-              isDayAndTimeSelected && !isPending
+              selectedDay &&
+              selectedTimeSlot &&
+              selectedPaymentMethod &&
+              !isPending
                 ? "bg-accent text-white hover:bg-[#18c781]"
                 : "bg-gray-300 text-gray-500 cursor-not-allowed"
             }`}

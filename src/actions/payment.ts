@@ -1,6 +1,7 @@
 "use server";
 import { PaymentRequestSchema, PaymentRequest } from "@/src/lib/schemas/payment";
 import { Result } from "@/src/lib/types";
+import { revalidatePath } from "next/cache";
 
 // Payment Server Action to process the payment
 export const processPayment = async (
@@ -39,6 +40,8 @@ export const processPayment = async (
     // Parse the JSON response
     const responseData = await response.json();
     console.log("Payment Response:", responseData);
+
+    revalidatePath("/dashboard");
 
     // Assuming the response contains a transaction ID indicating a successful payment
     return {

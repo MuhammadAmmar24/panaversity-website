@@ -1,17 +1,16 @@
-import EmailVerificationPending from '@/src/components/auth/verify/pendingverification'
-import React, { Suspense } from 'react'
+import EmailVerificationPending from "@/src/components/auth/verify/pendingverification";
+import React, { Suspense } from "react";
 
 const page = () => {
   return (
-    <div className='flex justify-center items-center min-h-screen'>
-            <div className="bg-white p-8 rounded-lg shadow-md ">
-
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="bg-white p-8 rounded-lg shadow-md ">
         <Suspense>
-            <EmailVerificationPending />
+          <EmailVerificationPending />
         </Suspense>
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

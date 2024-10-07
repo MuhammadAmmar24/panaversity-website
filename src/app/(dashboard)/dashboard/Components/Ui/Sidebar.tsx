@@ -13,10 +13,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import { signOut } from "@/src/auth";
+import { SidebarProps } from "../../types/types";
 
-interface SidebarProps {
-  setIsSidebarOpen: (open: boolean) => void;
-}
+
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state

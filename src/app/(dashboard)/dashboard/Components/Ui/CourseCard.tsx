@@ -1,9 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
 import { checkUserVerification } from "@/src/actions/profile";
+import { getCoursePrice } from "@/src/actions/courses";
+import PaymentDialog from "../Dialog/PaynowDialog";
+import { revalidatePath } from "next/cache";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -12,38 +15,56 @@ const CourseCard: React.FC<CourseCardProps> = ({
   status,
   batch_id,
   student_course_id,
+  course_batch_program_id
 }) => {
-  const [profile, setProfile] = useState<ProfileData | null>(null);
+  // State to control the payment dialog visibility
+  const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
+    null
+  );
 
-  // Function to handle enrollment and payment processing
-  const handleEnroll = async () => {
-    try {
-      const user_data = await checkUserVerification();
+  useEffect(() => {
+    const fetchEnrollmentPrice = async () => {
+      const query = { course_batch_program_id: course_batch_program_id };
+      const price_result = await getCoursePrice(query);
 
-      setProfile(user_data);
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-
-    const payload: any = {
-      batch_no: batch_id,
-      package_id: 1,
-      student_course_id: student_course_id,
-      student_id: profile?.id, // Replace with actual student ID if available
-      vendor_type: "STRIPE", // Payment gateway type
-      // Optional lab_time_slot_id, uncomment or remove based on requirements
+      if (price_result.type == "success" && price_result.data) {
+        setEnrollmentPackage(price_result?.data.package_id);
+      }
     };
 
-    // Log the payload for debugging purposes
-    console.log("Enrollment Payload:", payload);
+    fetchEnrollmentPrice();
+  })
 
+  // Function to handle enrollment and payment processing
+  const handleEnroll = async (paymentMethod: string) => {
     try {
-      const result: any = await processPayment(payload); // Call the payment processing API
+      // Fetch user data
+      const user_data = await checkUserVerification();
+
+      // Ensure that the profile is loaded before proceeding
+      if (!user_data?.id) {
+        console.error("Profile data not loaded yet.");
+        return;
+      }
+
+      const payload: any = {
+        batch_no: batch_id,
+        package_id: enrollmentPackage,
+        student_course_id: student_course_id,
+        student_id: user_data?.id, // Use the actual student ID now that it's available
+        vendor_type: paymentMethod, // Pass the selected payment method
+      };
+
+      console.log("Enrollment Payload:", payload);
+
+      // Call the payment processing API
+      const result: any = await processPayment(payload);
       console.log("Response", result);
 
-      const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL if available
-
       if (result.type === "success") {
+        const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
+        // revalidatePath("/dashboard"); // Revalidate the dashboard page
         if (url) {
           window.location.href = url; // Redirect to payment URL if successful
         } else {
@@ -59,43 +80,54 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   return (
     <section className="w-full h-full">
-      {/* Section heading */}
       <h1 className="font-medium text-start text-xl md:text-2xl font-poppins mb-4">
         Enrolled Courses
       </h1>
-
-      {/* Course card container */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
-        {/* Individual course card */}
-        <article
-          className={`bg-white ${
+          {/* className={`bg-white ${
             status == "active" ? "bg-white" : "opacity-40 "
           } rounded-lg shadow-xl px-4 sm:px-8 py-5`}
-        >
-          {/* Icon row */}
+        > */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
+        <article className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col gap-4">
           <div className="flex justify-between items-center mb-6">
-            <CiMobile1 className="text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px]" />
+            <CiMobile1 className={`text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px] ${
+              status === "active" ? "" : "opacity-30"
+              }`} />
+            {/* Button Container */}
+            <div className="ml-auto">
+              {status === "active" ? (
+                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white h-6 md:h-8 border border-accent rounded-full px-2 md:px-4 bg-accent shadow-lg">
+                  Payment Completed
+                </button>
+              ) : status === "reserved_seat" ? (
+                <button
+                  onClick={() => setPaymentDialogOpen(true)} // Open dialog on click
+                  className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border-2 border-red-600 rounded-full px-2 md:px-4 hover:text-white hover:bg-red-600 transition duration-300 shadow-xl"
+                >
+                  Pay to Proceed
+                </button>
+              ) : status === "expired_reservation" ? (
+                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border-2 border-accent rounded-full px-2 md:px-4 hover:text-white hover:bg-accent transition duration-300 shadow-xl">
+                  Enroll Again
+                </button>
+              ) : null}
+            </div>
           </div>
 
-          {/* Course title */}
-          <h2 className="font-poppins font-medium text-lg md:text-xl mb-2">
+          <h2 className={`font-poppins font-medium text-lg md:text-xl mb-2 ${
+            status === "active" ? "" : "opacity-30"
+            } `}>
             {title}
           </h2>
 
-          {/* Progress bar and lesson count */}
           {status == "active" ? (
             <div className="flex items-center gap-6">
-              {/* Progress bar */}
               <div className="flex-1 bg-gray-200 rounded-full h-2 md:h-4">
                 <div
                   className="bg-accent h-2 md:h-4 rounded-full"
-                  style={{
-                    width: `${progress}%`, // Dynamic progress width
-                  }}
+                  style={{ width: `${progress}%` }}
                 ></div>
               </div>
-
-              {/* Lesson count */}
               <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
                 <span className="text-black">{progress}/</span>
                 {lessons} Lessons
@@ -103,34 +135,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
             </div>
           ) : (
             <div className="flex items-center gap-6">
-              {/* Empty progress bar for non-enrolled courses */}
               <div className="flex-1 bg-gray-200 rounded-full h-2 md:h-4"></div>
               <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
-                <span className="text-black">0/</span>
+                  <span className={`text-black ${
+                  status === "active" ? "" : "opacity-30"
+                  }`}>0/</span>
                 {lessons} Lessons
               </p>
             </div>
           )}
         </article>
-
-        {/* Payment button container */}
-        <div className="absolute -right-[0px] top-[28px] xs:-right-[0px] sm:-right-[0px] md:-right-[0px] mobileM:-right-[0px] lg:left-[250px] xl:left-[450px]">
-          {/* Payment button: Conditional rendering based on enrollment status */}
-          {status === "active" ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white  h-6 md:h-8 border border-accent rounded-full px-1 py-1 md:px-2 bg-accent shadow-lg">
-              Payment Completed
-            </button>
-          ) : status === "reserved_seat" ? (
-            <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-red-600 h-6 md:h-8 border border-red-600 rounded-full px-1 py-1 md:px-2 hover:text-white hover:bg-red-600 shadow-lg">
-              Pay to Proceed
-            </button>
-          ) : status === "expired_reservation" ? (
-            <button  className="md:text-[15px] font-medium md:font-semibold text-[10px] hover:text-white h-6 md:h-8 border border-accent bg-transparenttext-accent rounded-full px-1 py-1 md:px-2 hover:bg-accent shadow-lg">
-              Enroll Again
-            </button>
-          ) : null}
-        </div>
       </div>
+
+      {/* Payment Dialog Component */}
+      <PaymentDialog
+        open={isPaymentDialogOpen}
+        onOpenChange={setPaymentDialogOpen}
+        onConfirm={(paymentMethod) => handleEnroll(paymentMethod)} // Pass payment method to handleEnroll
+      />
     </section>
   );
 };

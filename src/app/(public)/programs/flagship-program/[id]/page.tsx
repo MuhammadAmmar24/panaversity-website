@@ -1,19 +1,16 @@
 // / src/app/programs/flagship-program/[id]/page.tsx
-
 import React from "react";
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
-// import { CourseData } from "@/src/types/CourseData";
-import { notFound } from "next/navigation";
 import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
-import { parse } from "path";
 import { getCoursePrice } from "@/src/actions/courses";
 
 // Define the props interface
-interface CoursePageProps {
-  params: {
-    id: string;
-  };
-}
+// interface CoursePageProps {
+//   params: {
+//     id: string;
+//   };
+// }
+
 export interface CourseData {
   course_batch_program_id: number;
   is_active: boolean;
@@ -31,23 +28,23 @@ export interface CourseData {
   pre_requisite: string[];
   media_link: string;
 }
+
 // Fetch course data function
-async function fetchCourses() {
-  const query = {
-    program_id: 1,
-    batch_id: 1,
-    limit: 10,
-  };
+// async function fetchCourses() {
+//   const query = {
+//     program_id: 1,
+//     batch_id: 1,
+//     limit: 10,
+//   };
 
-  const result = await getProgramCoursesWithOpenRegistration(query);
+//   const result = await getProgramCoursesWithOpenRegistration(query);
 
-  if (result.type === "success" && result.data) {
-    return result.data.data;
-  } else {
-    throw new Error(result.message);
-  }
-}
-
+//   if (result.type === "success" && result.data) {
+//     return result.data.data;
+//   } else {
+//     throw new Error(result.message);
+//   }
+// }
 
 async function fetchCoursePrice() {
   const params = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
@@ -72,16 +69,11 @@ const CoursePage = async ({ params }:any) => {
         Accept: "application/json",
         Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
       },
-      next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
       cache: 'no-store'
     }
   )
   const { price, currency } = await fetchCoursePrice();
   const courseData = await data.json();
-  // const courseData = await fetchCourses();
-  // console.log(courseData)
-  // const course = courseData.find((course: { course_id: any; }) => course.course_id === c_id);
-  // console.log(course)
   return <CourseDetailsClient initialPrice={price} initialCurrency={currency} courseData={courseData} />;
 };
 
