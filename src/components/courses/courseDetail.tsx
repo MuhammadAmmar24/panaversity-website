@@ -69,6 +69,7 @@ export interface CourseData {
   long_description: string;
   pre_requisite: string[];
   media_link: string;
+  program_id: string;
 }
 
 interface CourseDetailsClientProps {
@@ -125,9 +126,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     pre_requisite,
     media_link,
     is_registration_open,
-    course_id,
     batch_id,
     course_batch_program_id,
+    program_id
   } = courseData;
 
   // Assign default values if necessary
@@ -217,7 +218,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
                     >
                       <GetEnrolled
-                        course_id={course_id}
+                        program_id={program_id}
                         batch_id={batch_id}
                         course_batch_program_id={course_batch_program_id}
                       />
