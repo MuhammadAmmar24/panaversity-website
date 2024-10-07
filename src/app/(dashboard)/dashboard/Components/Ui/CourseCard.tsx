@@ -33,7 +33,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         batch_no: batch_id,
         package_id: 1,
         student_course_id: student_course_id,
-        student_id: user_data.id, // Use the actual student ID now that it's available
+        student_id: user_data?.id, // Use the actual student ID now that it's available
         vendor_type: paymentMethod, // Pass the selected payment method
       };
 
