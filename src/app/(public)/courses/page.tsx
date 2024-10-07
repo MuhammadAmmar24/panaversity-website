@@ -11,7 +11,7 @@ export default function results() {
   return (
     <main className="min-h-screen mt-[-3rem] md:mt-[-4rem] flex flex-col justify-center items-center gap-4 bg-background px-5 ">
       <h2 className="text-xl font-medium font-poppins text-center text-accent">
-        Coming Soon!
+        Coming Soon!    
       </h2>
       <h2 className="text-4xl sm:text-5xl mt-[-0.5rem] font-bold font-poppins text-center text-textPrimary">
         This Page is Under Construction
