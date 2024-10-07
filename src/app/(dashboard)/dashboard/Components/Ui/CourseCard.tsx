@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
 import { checkUserVerification } from "@/src/actions/profile";
+import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -13,9 +14,26 @@ const CourseCard: React.FC<CourseCardProps> = ({
   status,
   batch_id,
   student_course_id,
+  course_batch_program_id
 }) => {
   // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
+    null
+  );
+
+  useEffect(() => {
+    const fetchEnrollmentPrice = async () => {
+      const query = { course_batch_program_id: course_batch_program_id };
+      const price_result = await getCoursePrice(query);
+
+      if (price_result.type == "success" && price_result.data) {
+        setEnrollmentPackage(price_result?.data.package_id);
+      }
+    };
+
+    fetchEnrollmentPrice();
+  })
 
   // Function to handle enrollment and payment processing
   const handleEnroll = async (paymentMethod: string) => {
@@ -31,7 +49,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
       const payload: any = {
         batch_no: batch_id,
-        package_id: 1,
+        package_id: enrollmentPackage,
         student_course_id: student_course_id,
         student_id: user_data?.id, // Use the actual student ID now that it's available
         vendor_type: paymentMethod, // Pass the selected payment method

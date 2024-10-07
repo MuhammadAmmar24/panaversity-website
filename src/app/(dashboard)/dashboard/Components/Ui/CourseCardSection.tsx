@@ -40,6 +40,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({
           status={status}
           batch_id={course.batch_no}
           student_course_id={course.student_course_id}
+          course_batch_program_id={course.course_batch_program_id}
         />
       ))}
     </div>
