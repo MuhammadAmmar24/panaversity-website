@@ -1,5 +1,3 @@
-import { date } from "zod";
-
 export {
   initialData,
   mockRecentCourses,

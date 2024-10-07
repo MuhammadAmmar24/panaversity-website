@@ -29,7 +29,7 @@ export interface ClassCardProps {
     is_paid: boolean;
     batch_no: number;
     student_course_id: number;
-  }
+}
   
   export interface Class {
     date: string;
@@ -60,4 +60,27 @@ export interface ClassCardProps {
   export interface UpcomingClassSectionProps {
     title: string;
     classes: Class[];
-  }
+}
+  
+export interface ClientDropdownProps {
+  userName: string | undefined;
+  userEmail: string | undefined;
+  userImage: string | undefined;
+  onSignOut: () => Promise<void>;
+}
+
+export interface DropdownProps {
+  userName: string | undefined;
+  userEmail: string | undefined;
+  userImage: string | undefined;
+}
+
+export interface SidebarProps {
+  setIsSidebarOpen: (open: boolean) => void;
+}
+
+export interface CourseSectionProps {
+  courses: Course[];
+  enrollmentStatus: string | null;
+  status: string;
+}

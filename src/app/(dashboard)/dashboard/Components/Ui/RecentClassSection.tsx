@@ -1,5 +1,5 @@
 import { ClassSectionProps } from "../../types/types";
-import ClassCard from "./ClassCard";
+import ClassCard from "./RecentClassCard";
 
 // Section component to render a list of recent classes
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => (
