@@ -6,6 +6,7 @@ import { Metadata } from "next";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
 import { checkUserVerification } from "@/src/actions/profile";
+import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 
 // Page metadata for SEO
 export const metadata: Metadata = {
@@ -19,26 +20,25 @@ const AccountSettings: React.FC = () => {
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
   const [profile, setProfile] = useState<ProfileData | null>(null);
-
+  const [loading, setLoading] = useState<boolean>(true); // Corrected state to `loading` (lowercase)
 
   // State for toggling edit modes
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
-
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const user_data = await checkUserVerification();
-  
         setProfile(user_data);
       } catch (error) {
         console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching data
       }
-    }
-  
-      fetchUserData();
+    };
+
+    fetchUserData();
   }, []);
 
   // Handle changes to profile input fields
@@ -59,6 +59,14 @@ const AccountSettings: React.FC = () => {
     };
     // Handle submission logic here, e.g., API call
   };
+
+  if (loading) {
+    return (
+      <div>
+        <AccountSettingsSkeleton />
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
@@ -95,28 +103,17 @@ const AccountSettings: React.FC = () => {
               <div>
                 {/* Editable profile fields */}
                 {isEditingProfile ? (
-                  <>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={profile?.full_name}
-                      onChange={handleProfileChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
-                    />
-                    {/* <input
-                      type="text"
-                      name="lastName"
-                      value={profileInfo.lastName}
-                      onChange={handleProfileChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
-                    /> */}
-                  </>
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={profile?.full_name}
+                    onChange={handleProfileChange}
+                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
+                  />
                 ) : (
                   <>
                     {/* Display profile information */}
-                    <p className="text-base sm:text-xl">
-                      {profile?.full_name} 
-                    </p>
+                    <p className="text-base sm:text-xl">{profile?.full_name}</p>
                     <p className="text-gray-500 text-xs sm:text-sm">
                       {profile?.email}
                     </p>
