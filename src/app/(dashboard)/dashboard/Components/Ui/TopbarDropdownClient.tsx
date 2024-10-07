@@ -13,9 +13,9 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
   userImage,
   onSignOut,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false); // State to track dropdown visibility
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // State to track logout dialog visibility
+  const dropdownRef = useRef<HTMLDivElement>(null); // Ref for the dropdown element
 
   // Toggle dropdown visibility
   const toggleDropdown = () => {
@@ -37,21 +37,24 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [dropdownRef]);
+  }, []);
 
   return (
     <div className="relative" ref={dropdownRef}>
+      {/* Button to toggle dropdown */}
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-2 focus:outline-none"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
+        {/* User profile image */}
         <img
           src={userImage}
           alt={`${userName} profile`}
           className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
         />
+        {/* Dropdown arrow icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-4 w-4"
@@ -68,6 +71,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
         </svg>
       </button>
 
+      {/* Dropdown content */}
       <div
         className={`absolute right-2 mt-2 w-48 sm:w-64 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
           isOpen
@@ -77,13 +81,16 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
         role="menu"
         aria-hidden={!isOpen}
       >
+        {/* User info */}
         <div className="p-4">
           <div className="flex items-center space-x-3 w-full">
+            {/* User profile image */}
             <img
               src={userImage}
               alt={`${userName} profile`}
               className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
             />
+            {/* Display username and email */}
             <div>
               <h2 className="text-gray-900 font-semibold text-sm sm:text-base w-24 md:w-44 truncate">
                 {userName}
@@ -94,9 +101,12 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
             </div>
           </div>
         </div>
+
         <hr className="border-gray-200" />
 
+        {/* Links to different sections */}
         <ul className="p-2" role="menu">
+          {/* Profile settings */}
           <Link href="/dashboard/account-settings">
             <li
               className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer"
@@ -109,6 +119,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
             </li>
           </Link>
 
+          {/* Payments section */}
           <li
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
             role="menuitem"
@@ -117,6 +128,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
             <span className="text-gray-700 text-xs sm:text-sm">Payments</span>
           </li>
 
+          {/* Help center */}
           <li
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
             role="menuitem"
@@ -129,6 +141,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
 
           <hr className="border-gray-200" />
 
+          {/* Sign out */}
           <li
             onClick={() => setIsLogoutDialogOpen(true)}
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
@@ -140,6 +153,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
         </ul>
       </div>
 
+      {/* Logout confirmation dialog */}
       <LogoutDialog
         open={isLogoutDialogOpen}
         onOpenChange={setIsLogoutDialogOpen}

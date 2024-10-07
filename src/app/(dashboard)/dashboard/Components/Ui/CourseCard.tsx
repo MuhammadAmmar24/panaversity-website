@@ -89,10 +89,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <h1 className="font-medium text-start text-xl md:text-2xl font-poppins mb-4">
         Enrolled Courses
       </h1>
-      {/* className={`bg-white ${
-            status == "active" ? "bg-white" : "opacity-40 "
-          } rounded-lg shadow-xl px-4 sm:px-8 py-5`}
-        > */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
         <article className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col gap-4">
           <div className="flex justify-between items-center mb-6">
@@ -104,8 +100,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
             {/* Button Container */}
             <div className="ml-auto">
               {status === "active" ? (
-                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white h-6 md:h-8 border border-accent rounded-full px-2 md:px-4 bg-accent shadow-lg">
-                  Payment Completed
+                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white h-6 md:h-8 border border-accent rounded-full px-6 md:px-8 bg-accent shadow-lg cursor-default">
+                  Paid
                 </button>
               ) : status === "reserved_seat" ? (
                 <button
