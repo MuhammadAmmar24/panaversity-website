@@ -1,13 +1,13 @@
-import '@/src/app/admin/ui/global.css';
-import { inter } from '@/src/app/admin/ui/fonts';
-import { Metadata } from 'next';
+import "@/src/app/admin/ui/global.css";
+import { inter } from "@/src/app/admin/ui/fonts";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | Admin Dashboard',
-    default: 'Admin Dashboard',
+    template: "%s | Admin Dashboard",
+    default: "Admin Dashboard",
   },
-  metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
+  metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
 };
 
 export default function RootLayout({

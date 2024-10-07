@@ -13,6 +13,7 @@ export interface ClassCardProps {
     status: string;
     batch_id: number;
     student_course_id: number;
+    course_batch_program_id: number;
   }
   
   export interface CardData {
@@ -29,7 +30,8 @@ export interface ClassCardProps {
     is_paid: boolean;
     batch_no: number;
     student_course_id: number;
-}
+    course_batch_program_id: number;
+  }
   
   export interface Class {
     date: string;
