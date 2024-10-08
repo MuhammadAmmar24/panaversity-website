@@ -4,6 +4,12 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Error",
+  description: `Oops! Something went wrong. Please check the page you are trying to access or return to Panaversity's homepage to continue exploring our AI-powered courses.`
+};
 
 export default function ErrorPage() {
   const searchParams = useSearchParams();
