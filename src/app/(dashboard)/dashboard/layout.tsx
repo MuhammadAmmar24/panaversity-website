@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: `Discover the team driving Panaversity, an AI-powered online university. Our experts in Generative AI, cloud-native technologies, and custom GPTs are reshaping the future of education with cutting-edge solutions for global learners.`,
+  title: "Dashboard - Panaversity",
+  description: `Navigate through your personalized Panaversity dashboard. Access courses, track learning progress, and manage your account settings, all in one place.`
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
