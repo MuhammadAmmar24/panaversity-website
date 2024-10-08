@@ -1,4 +1,4 @@
-import { getEnrolledCourses } from "@/src/actions/dashboard";
+import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
@@ -16,7 +16,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   try {
     // Fetch enrolled courses based on profileId
-    const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(
+    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profileId
     );
 

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import GetEnrolled from "@/src/components/ui/GetEnrolled";
 import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import { ChevronRight } from "lucide-react";
-import { user_verify } from "@/src/actions/user-verify";
+import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
 
 interface CourseSheetProps {
