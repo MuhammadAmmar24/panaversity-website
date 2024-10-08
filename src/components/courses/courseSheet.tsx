@@ -12,6 +12,7 @@ interface CourseSheetProps {
     program_id: string;
     batch_id: number;
     course_batch_program_id: number;
+    profile_id: string;
   }
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
@@ -19,6 +20,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     program_id,
     batch_id,
     course_batch_program_id,
+    profile_id,
   }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
@@ -77,6 +79,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           program_id={program_id}
           batch_id={batch_id}
           course_batch_program_id={course_batch_program_id}
+          profile_id={profile_id}
         />
       </SheetContent>
     </Sheet>
