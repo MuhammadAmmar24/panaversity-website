@@ -13,10 +13,7 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get("user_data")?.value || "";
   const parsedToken = token ? JSON.parse(decodeURIComponent(token)) : {};
   const access_token = parsedToken?.access_token;
-
-  const refreshTokenCookie = req.cookies.get("refresh_data")?.value || "";
-  const parsedRefreshToken = refreshTokenCookie ? JSON.parse(decodeURIComponent(refreshTokenCookie)) : {};
-  const old_refresh_token = parsedRefreshToken?.refresh_token;
+  const old_refresh_token = parsedToken?.refresh_token;
 
   // Check if the current route matches any defined routes
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -31,55 +28,41 @@ export async function middleware(req: NextRequest) {
 
   if (isProtectedRoute) {
     const session = await auth();
-    console.log("Protected")
 
     if (!session) {
-      console.log("Session")
       // If no session, redirect to login
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (is_token_expired) {
-      console.log("Token Expiry")
       // If the token is expired, attempt to refresh it using the refresh token
       const newTokens = await refreshAccessToken(old_refresh_token);
 
       if (newTokens.success) {
-        console.log("After new tokens")
-        // Successfully refreshed the token, allow access to the protected route
-        const response = NextResponse.next();
+        const { access_token, refresh_token } = newTokens;
 
-        // Update the access token and refresh token in the response cookies
-        // response.cookies.set({
-        //   name: "user_data",
-        //   value: JSON.stringify(newTokens.access_token),
-        //   httpOnly: true,
-        //   path: "/",
-        //   secure: process.env.NODE_ENV === "production",
-        // });
+        // Set new cookies for access_token and refresh_token
+        const response = NextResponse.redirect(new URL("/dashboard", req.url));
 
-        // response.cookies.set({
-        //   name: "refresh_data",
-        //   value: JSON.stringify(newTokens.refresh_token),
-        //   httpOnly: true,
-        //   path: "/",
-        //   secure: process.env.NODE_ENV === "production",
-        // });
+        response.cookies.set({
+          name: "user_data",
+          value: JSON.stringify({ access_token, refresh_token }),
+          httpOnly: true,
+          path: "/",
+          secure: process.env.NODE_ENV === "production",
+        });
 
         return response; // Allow access
-      } else {
-        // Refresh failed, redirect to login
-        return NextResponse.redirect(new URL("/login", req.url));
       }
     }
-  }
 
-  if (isAuthRoute) {
-    const session = await auth();
-    if (session && !is_token_expired) {
-      // If already logged in and token is valid, redirect to dashboard
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (isAuthRoute) {
+      const session = await auth();
+      if (session && !is_token_expired) {
+        // If already logged in and token is valid, redirect to dashboard
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
     }
-  }
 
-  // Allow access to all other routes
-  return NextResponse.next();
+    // Allow access to all other routes
+    return NextResponse.next();
+  }
 }
