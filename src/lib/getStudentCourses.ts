@@ -4,7 +4,7 @@ import {
 } from "@/src/lib/schemas/courses";
 import { Result } from "@/src/lib/types";
 
-export const getEnrolledCourses = async (
+export const getStudentCourses = async (
     studentId: string | undefined
 ): Promise<Result<CourseEnrollmentResponse>> => {
     try {
@@ -23,7 +23,7 @@ export const getEnrolledCourses = async (
                 Accept: "application/json",
                 Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
             },
-            cache:'force-cache'
+            cache:'no-store'
         });
 
         // Check if the response is successful
