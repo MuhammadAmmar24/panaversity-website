@@ -33,9 +33,11 @@ async function fetchCoursePrice() {
 }
 
 // The main server component
-const CoursePage = async ({ params }:any) => {
+const CoursePage = async ({ params }: any) => {
+  
   const { id } = params;
   const c_id = parseInt(id);
+
   const data = await fetch(`https://enrollment.graybush-f94f1a24.eastus.azurecontainerapps.io/api/v1/data/course-batch-program/${c_id}`,
     {
       method: "GET",
@@ -47,9 +49,11 @@ const CoursePage = async ({ params }:any) => {
       cache: 'force-cache'
     }
   )
+
   const { price, currency } = await fetchCoursePrice();
   const courseData = await data.json();
   return <CourseDetailsClient initialPrice={price} initialCurrency={currency} courseData={courseData} />;
+  
 };
 
 export default CoursePage;

@@ -177,6 +177,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     console.log(responseData);
 
+<<<<<<< HEAD
     // Revalidate the 'data' tag after successful enrollment
     // revalidateTag("data");
     revalidatePath("/dashboard");
@@ -191,6 +192,9 @@ export const enrollNewStudentInProgramAndCourse = async (
     // 			.join(", "),
     // 	};
     // }
+=======
+    revalidateTag("data");
+>>>>>>> b4ea553ace7962743eeca0b55b63948805f2a9c8
 
     return {
       type: "success",
