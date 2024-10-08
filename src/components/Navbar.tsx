@@ -13,7 +13,7 @@ import {
 import logo from "../../public/logos/logo.png";
 import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
-import { user_verify } from "@/src/actions/user-verify"
+import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {

@@ -5,18 +5,18 @@ export const courseData = [
       content: [
         {
           quarter: "Course - 1",
-          title: "Gen AI & Cloud Basics",
+          title: "Intro to Prompt Engineering, Docker, and Python",
           description: "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
         },
         {
           quarter: "Course - 2",
-          title: "Applied Generative AI",
-          description: "Develop Custom GPTs and AI Agents using Langchain & CrewAI.",
+          title: "Applied Generative AI Fundamentals",
+          description: "Develop custom GPTs, and implement multi-AI agent systems.",
         },
         {
           quarter: "Course - 3",
-          title: "AI-Powered Microservices",
-          description: "Design and deploy AI microservices using FastAPI and Kubernetes.",
+          title: "CNAI Microservices Architect",
+          description: "Design and deploy cloud-native AI-powered microservices leveraging FastAPI, Kafka, and Generative AI APIs.",
         },
       ],
     },
@@ -31,12 +31,12 @@ export const courseData = [
         },
         {
           quarter: "Course - 5",
-          title: "Fine-Tuning LLMs",
+          title: "Advanced LLM Fine-Tuning",
           description: "Specialize in fine-tuning and deploying LLMs like Meta LLaMA 3.",
         },
         {
           quarter: "Course - 6",
-          title: "Kubernetes & Cloud AI",
+          title: "Kubernetes & Cloud AI Mastery",
           description: "Master Kubernetes & Terraform for scalable and secure AI deployments.",
         },
       ],

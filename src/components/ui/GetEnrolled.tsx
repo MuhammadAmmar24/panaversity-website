@@ -166,6 +166,7 @@ export default function GetEnrolled({
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
+        console.log(result)
 
         const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
