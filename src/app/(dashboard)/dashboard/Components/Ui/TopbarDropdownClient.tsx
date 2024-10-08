@@ -69,6 +69,7 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
       </button>
 
       <div
+      
         className={`absolute right-2 mt-2 w-48 sm:w-64 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
           isOpen
             ? "opacity-100 scale-100 visible"
