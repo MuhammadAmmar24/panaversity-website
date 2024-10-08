@@ -4,7 +4,7 @@ export default async function fetchProfile() {
     
     const session = await auth(); // Getting JWT From Cookies
     if (!session) {
-      console.log("[session] No cookies. Redirecting...");
+
       return { isVerified: false, redirectTo: "/login" };
     }
 
@@ -20,7 +20,7 @@ export default async function fetchProfile() {
   
       });
       const profile = await response.json();
-      console.log("profile", profile);
+
       return profile;
     } catch (error: any) {
       console.error(error.message);

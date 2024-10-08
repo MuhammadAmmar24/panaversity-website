@@ -83,7 +83,6 @@ const PasswordSettings: React.FC = () => {
       try {
         passwordSchema.parse(formData); // Validate with Zod
         setFormErrors({}); // Clear errors if validation passes
-        console.log("Form submitted successfully", formData);
         // Here you can handle the actual password update logic
       } catch (error) {
         if (error instanceof z.ZodError) {

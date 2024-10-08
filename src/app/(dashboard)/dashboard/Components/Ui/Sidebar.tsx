@@ -26,7 +26,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const handleSignOut = async () => {
     try {
       await signOut(); // Execute sign-out logic
-      console.log("Signing out...");
       router.push("/login"); // Redirect to login page
       window.location.reload(); // Reload the page to ensure a clean session
     } catch (error) {

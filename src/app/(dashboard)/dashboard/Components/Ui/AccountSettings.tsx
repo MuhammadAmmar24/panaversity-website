@@ -59,7 +59,7 @@ const AccountSettings: React.FC = () => {
       profileInfo,
       addressInfo,
     };
-    console.log("Updated Data:", updatedData); // Log updated data (replace with API call)
+
   };
 
   // Show loading skeleton while profile data is being fetched

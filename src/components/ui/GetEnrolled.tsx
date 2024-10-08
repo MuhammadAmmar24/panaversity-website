@@ -167,24 +167,21 @@ export default function GetEnrolled({
     };
 
     // Log the payload for debugging
-    console.log("Enrollment Payload:", payload);
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("RESULT", result);
+
         const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        console.log("URL", url);
+
 
         if (result.type === "success") {
           // revalidatePath("/dashboard");
           setIsEnrolled(true); // Enrollment success, show message
           //setEnrollmentError(result.message); // Clear any errors
-          // console.log(result.message); // Optional: log the success message
 
           if (url) {
-            console.log("URL", url);
-            window.open(url , "_blank"); // Use window.location.href for external URL
+            router.push(url); // Use window.location.href for external URL
           } else {
             // console.error("Stripe URL not found.");
           }

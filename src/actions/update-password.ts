@@ -20,7 +20,6 @@ export const updatepassword = async (values: z.infer<typeof UpdatePasswordSchema
     cache: "no-store",
   });
 
-  console.log('update_password', update_password.status, update_password.statusText);
 
   if (update_password.status !== 200) {
     const error = await update_password.json();
