@@ -8,6 +8,7 @@ import { CiLogout } from "react-icons/ci";
 import { signOut } from "@/src/auth";
 import Error from "../Error/error_message";
 import { DropdownProps } from "../../types/types";
+import Image from "next/image";
 
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -62,7 +63,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         aria-haspopup="true"
       >
         {/* User profile image */}
-        <img
+        <Image
+          width={100}
+          height={100}
           src={userImage}
           alt={`${userName} profile`}
           className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
@@ -98,7 +101,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         <div className="p-4">
           <div className="flex items-center space-x-3 w-full">
             {/* User profile image */}
-            <img
+            <Image
+              width={100}
+              height={100}
               src={userImage}
               alt={`${userName} profile`}
               className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
