@@ -9,6 +9,7 @@ import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import Breadcrumb from "../Breadcrumbs";
 import { user_verify } from "@/src/actions/user-verify";
 import { useRouter } from "next/navigation";
+import RatingStars from "../ui/Ratingstar";
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
@@ -168,7 +169,11 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
 
                 <div className="flex flex-wrap items-center space-x-2 mb-6">
                   <span className="text-2xl font-bold">{rating}</span>
-                  <StarRating rating={rating} />
+                  <RatingStars
+                    rating={4.9}
+                    color="text-yellow-500"
+                    size="w-5 h-5"
+                  />
                   <span className="text-sm text-gray-400 font-medium">
                     ({ratingCount} ratings)
                   </span>
