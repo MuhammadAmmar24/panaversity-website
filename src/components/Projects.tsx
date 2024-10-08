@@ -15,7 +15,6 @@ export default function Projects() {
 
   useEffect(() => {
     if (swiperRef.current) {
-      console.log(swiperRef.current);
     }
   }, []);
 

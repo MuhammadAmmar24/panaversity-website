@@ -31,9 +31,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     const res = await user_verify();
     if (res?.redirectTo) {
       router.push(res.redirectTo);
-      console.log(res.redirectTo);
+
     } else {
-      console.log("Verified. GO AHEAD");
+
       setOpen(true);
     }
   }
