@@ -3,8 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Team",
-  description: `Discover the team driving Panaversity, an AI-powered online university. Our experts in Generative AI, cloud-native technologies, and custom GPTs are reshaping the future of education with cutting-edge solutions for global learners.`
+  title: "Announcements",
+  description: `Stay updated with the latest news and updates from Panaversity. Explore our announcements on new courses, Generative AI advancements, and important information for our learners.`
 };
 
 export default function results() {
