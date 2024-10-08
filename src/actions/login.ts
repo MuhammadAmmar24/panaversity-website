@@ -48,19 +48,28 @@ export const login = async (
       throw new Error(errorData.message || "An error occurred during login");
     }
 
-    const userData = await response.json();
-    
+    // const userData = await response.json();
+    // const updatedUserData = {
+    //   ...userData,
+    //   accessTokenExpires: Date.now() + expiresInMilliseconds,
+    // };
     // Include the token expiration time in seconds and milliseconds
-    const expiresInMilliseconds = userData.expires_in * 1000;
-
-    const updatedUserData = {
-      ...userData,
-      accessTokenExpires: Date.now() + expiresInMilliseconds,
-    };
+    // const expiresInMilliseconds = userData.expires_in * 1000;
+    
+    const {access_token, refresh_token} = await response.json()
+    console.log("Access Token", access_token)
+    console.log("Refresh Token", refresh_token)
 
     cookies().set({
       name: "user_data",
-      value: JSON.stringify(updatedUserData),
+      value: JSON.stringify(access_token),
+      httpOnly: true,
+    },
+  );
+
+    cookies().set({
+      name: "refresh_data",
+      value: JSON.stringify(refresh_token),
       httpOnly: true,
     });
 

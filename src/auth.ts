@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 export async function auth() {
   // Check if cookies exist
   const isCookies = cookies().has("user_data");
+  console.log("iscookie", isCookies)
 
   if (!isCookies) {
 
@@ -12,6 +13,7 @@ export async function auth() {
   }
 
   const cookies_user_data = cookies().get("user_data")?.value;
+  console.log("user data", cookies_user_data)
 
   if (!cookies_user_data) {
 
@@ -21,10 +23,10 @@ export async function auth() {
   let user_data: UserData = JSON.parse(cookies_user_data);
 
 
-  if (!user_data.access_token) {
+  // if (!user_data.access_token) {
 
-    return null;
-  }
+  //   return null;
+  // }
 
   return user_data;
 }
