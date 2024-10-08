@@ -1,5 +1,11 @@
 import EmailVerificationPending from "@/src/components/auth/verify/pendingverification";
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Verify Email",
+  description: `Verify your email address to activate your Panaversity account and unlock access to cutting-edge Generative AI and cloud-native courses`
+};
 
 const page = () => {
   return (

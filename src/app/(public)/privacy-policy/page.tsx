@@ -1,4 +1,10 @@
 import { privacypolicydata } from "@/src/constants/privacypolicy";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Panaversity’s Privacy Policy",
+  description: `Learn how Panaversity, an AI-powered online university, safeguards your privacy. Our comprehensive privacy policy outlines how we collect, use, and protect your personal information as you engage with our Generative AI courses and services.`
+};
 
 export default function PrivacyPolicy() {
   return (
