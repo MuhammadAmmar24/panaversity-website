@@ -2,6 +2,8 @@ import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
 import Breadcrumb from "../Breadcrumbs";
 import RatingStars from "../ui/Ratingstar";
+import getProfile from "@/src/lib/getProfile";
+
 
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -53,12 +55,16 @@ interface CourseDetailsClientProps {
   initialCurrency: string;
 }
 
-const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
+const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
   initialPrice,
 
   initialCurrency,
 }) => {
+
+  const profile: ProfileData = await getProfile();
+
+
   // Destructure the course data
   const {
     course_name,
@@ -141,6 +147,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                     program_id={program_id}
                     batch_id={batch_id}
                     course_batch_program_id={course_batch_program_id}
+                    profile_id={profile?.id}
                   />
                 </div>
               </div>
