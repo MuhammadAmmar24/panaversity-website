@@ -1,18 +1,29 @@
-import React from "react";
 import { TimerIcon } from "@radix-ui/react-icons";
 import { FaGithub, FaYoutube } from "react-icons/fa6";
 import { ClassCardProps } from "../../types/types";
 import { BiCalendarAlt } from "react-icons/bi";
-import { DiGithubFull } from "react-icons/di";
 import { IoIosLink } from "react-icons/io";
+import Error from "../Error/error_message";
 
+// ClassCard component to display class information
 const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
+
+  // Error handling: Ensure title and time are provided
+  if (!title || !time) {
+    return (
+      <div className="text-center">
+        <Error message="Error loading classes" />
+      </div>
+    );
+  }
   return (
     <article className="w-full h-full">
+      {/* Card container with shadow and rounded corners */}
       <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-4 md:py-5">
-        {/* YouTube Icon */}
-        <FaYoutube className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
-          title="Click here To watch the video"
+        {/* YouTube Icon with link to class video */}
+        <FaYoutube
+          className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
+          title="Click here to watch the video"
         />
 
         {/* Class details container */}
@@ -22,18 +33,20 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
             {title}
           </h2>
 
-          {/* Class metadata (border and additional information) */}
-          <div className="w-full  pt-2 md:pt-3">
+          {/* Class metadata container */}
+          <div className="w-full pt-2 md:pt-3">
+            {/* Static class category */}
             <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
-              Panaversity Urdu {/* Static class category */}
+              Panaversity Urdu
             </p>
+
+            {/* GitHub and Topics covered section */}
             <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-1 cursor-pointer">
-              <FaGithub className="" />
-              {/* <DiGithubFull className="" /> */}
+              <FaGithub />
               <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
                 Topics Covered
               </p>
-              <IoIosLink className="text-blue-500"/>
+              <IoIosLink className="text-blue-500" />
             </div>
 
             {/* Date and time details */}
@@ -41,7 +54,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
               {/* Class date */}
               <div className="flex items-center gap-2">
                 <BiCalendarAlt className="text-sm md:text-base" />
-                <time dateTime="2024-08-22">22 August 2024</time>{" "}
+                <time dateTime="2024-08-22">22 August 2024</time>
                 {/* SEO optimized time element */}
               </div>
 

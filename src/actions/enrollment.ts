@@ -191,6 +191,7 @@ export const enrollNewStudentInProgramAndCourse = async (
     // 			.join(", "),
     // 	};
     // }
+    revalidateTag("data");
 
     return {
       type: "success",
