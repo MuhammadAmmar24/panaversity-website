@@ -36,7 +36,7 @@ const PasswordSettings: React.FC = () => {
 
   const [formErrors, setFormErrors] = useState<Record<string, string>>({}); // Form errors state
   const [isCurrentPasswordIncorrect, setIsCurrentPasswordIncorrect] =
-    useState(false); // State to track incorrect current password
+    useState(false); // State for tracking incorrect current password
 
   const formRef = useRef<HTMLDivElement | null>(null); // Ref to scroll into view when dropdown opens
 
@@ -60,7 +60,7 @@ const PasswordSettings: React.FC = () => {
     }
   }, [isOpen]);
 
-  // Handle input changes
+  // Handle input changes and update formData state
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -69,24 +69,25 @@ const PasswordSettings: React.FC = () => {
     }));
   };
 
-  // Handle form submission
+  // Handle form submission with validation
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check if the current password is correct
+    // Check if the current password matches mock data
     if (formData.currentPassword !== mockCurrentPassword) {
-      setIsCurrentPasswordIncorrect(true);
+      setIsCurrentPasswordIncorrect(true); // Show error if password is incorrect
     } else {
       setIsCurrentPasswordIncorrect(false);
 
-      // Perform Zod validation for the form data
+      // Validate form data using Zod
       try {
-        passwordSchema.parse(formData);
-        setFormErrors({});
+        passwordSchema.parse(formData); // Validate with Zod
+        setFormErrors({}); // Clear errors if validation passes
         console.log("Form submitted successfully", formData);
-        // You can handle the actual password update logic here
+        // Here you can handle the actual password update logic
       } catch (error) {
         if (error instanceof z.ZodError) {
+          // Capture and display validation errors
           const errors: Record<string, string> = {};
           error.errors.forEach((err) => {
             if (err.path[0]) {
@@ -139,9 +140,8 @@ const PasswordSettings: React.FC = () => {
                 </label>
               </div>
 
-              {/* Password Input Fields */}
+              {/* Current Password Field */}
               <div className="space-y-4">
-                {/* Current Password */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     Current Password
@@ -181,7 +181,7 @@ const PasswordSettings: React.FC = () => {
                   )}
                 </div>
 
-                {/* New Password */}
+                {/* New Password Field */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     New Password
@@ -213,7 +213,7 @@ const PasswordSettings: React.FC = () => {
                   )}
                 </div>
 
-                {/* Confirm Password */}
+                {/* Confirm Password Field */}
                 <div>
                   <label className="text-gray-700 text-sm sm:text-base">
                     Confirm Password
