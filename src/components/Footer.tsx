@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
             title="Support"
             links={[
               { name: "Contact Us", href: "/" },
-              { name: "Privacy Policy", href: "/" },
+              { name: "Privacy Policy", href: "/privacy-policy" },
               { name: "Terms Conditions", href: "/" },
               { name: "Cookies", href: "/" },
               { name: "FAQ", href: "/" },

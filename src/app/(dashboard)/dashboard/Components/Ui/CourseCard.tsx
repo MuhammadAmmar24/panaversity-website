@@ -62,11 +62,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
         vendor_type: paymentMethod, // Pass the selected payment method
       };
 
-      console.log("Enrollment Payload:", payload);
+
 
       // Call the payment processing API
       const result: any = await processPayment(payload);
-      console.log("Response", result);
+
 
       if (result.type === "success") {
         const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL

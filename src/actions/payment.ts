@@ -20,7 +20,7 @@ export const processPayment = async (
 
     // Make the POST request to your payment backend
     const apiUrl = `${process.env.PAYMENT_API_URL}/voucher/create_voucher`;
-    console.log("API URL:", apiUrl);
+
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -33,13 +33,13 @@ export const processPayment = async (
     });
 
     if (!response.ok) {
-      console.log(`Failed to process payment. Status: ${response.status}, StatusText: ${response.statusText}`);
+
       throw new Error(`Failed to process payment: ${response.statusText}`);
     }
 
     // Parse the JSON response
     const responseData = await response.json();
-    console.log("Payment Response:", responseData);
+
 
     revalidatePath("/dashboard");
 

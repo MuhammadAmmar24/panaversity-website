@@ -15,7 +15,6 @@ export const getEnrolledCourses = async (
         // Construct the API URL
         const apiUrl = `${process.env.COURSE_API_URL}/status/student-active-courses?${params}`;
 
-        console.log("Authorization Token:", process.env.ENROLLMENT_SECRET ? "Exists" : "Missing");
 
         // Make the request to the API
         const response = await fetch(apiUrl, {
@@ -29,19 +28,18 @@ export const getEnrolledCourses = async (
 
         // Check if the response is successful
         if (!response.ok) {
-            console.log(`Failed to fetch. Status: ${response.status}, StatusText: ${response.statusText}`);
+
             throw new Error(`Failed to fetch enrolled courses: ${response.statusText}`);
         }
 
         // Parse the JSON response
         const responseData = await response.json();
-        console.log("API Response:", responseData);
 
         // Validate the response against the schema
         const parsedResponse = CourseEnrollmentResponseSchema.safeParse(responseData);
 
         if (!parsedResponse.success) {
-            console.log("Schema validation failed:", parsedResponse.error.errors);
+
             return {
                 type: "error",
                 message: parsedResponse.error.errors.map((err) => err.message).join(", "),

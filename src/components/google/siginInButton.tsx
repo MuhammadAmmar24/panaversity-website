@@ -2,7 +2,7 @@
 
 // export default async function SignInButton() {
 //     const session = await auth();
-//     console.log(session);   
+
 
 //     const user = session?.user;
 

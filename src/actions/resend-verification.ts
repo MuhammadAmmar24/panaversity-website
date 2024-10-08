@@ -5,7 +5,7 @@ import { auth } from "../auth";
 export const    resendVerification = async () => {
     const session = await auth();
     if (!session) {
-        console.log("[session] No cookies. Redirecting...");
+
         redirect("/login");
     }
     const token = session.access_token;
@@ -29,7 +29,7 @@ export const    resendVerification = async () => {
             return { success: false, error: "Error during verification", redirectTo: "/login", action: "Please Login" };
         }
     } catch (error) {
-        console.log('Error during verification:', error);
+
         return { success: false, error: "Error during verification", redirectTo: "/login", action: "Please Login" };
     }
     return { success: "Email Sent" };

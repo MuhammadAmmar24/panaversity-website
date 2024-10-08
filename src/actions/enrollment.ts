@@ -175,7 +175,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     const responseData = await response.json();
 
-    console.log(responseData);
+
 
     // Revalidate the 'data' tag after successful enrollment
     // revalidateTag("data");
