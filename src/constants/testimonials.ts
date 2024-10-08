@@ -21,14 +21,14 @@ export const testimonialList = [
         '"Panaversity’s AI curriculum gave me tools to build my business. The deep dive into Custom GPT and AI microservices laid the groundwork for the products we create today."',
     },
     {
-      img: "/testimonials/hussnain.webp",
-      name: "Husnain Khalid",
+      img: "/testimonials/rasaf.jpg",
+      name: "Resheph Inayat",
       position: "AI Engineer at TechInnovators Inc.",
       content:
         '"Panaversity transformed my career. The hands-on projects and mentorship advanced me from a novice to an AI engineer, allowing me to drive innovative tech solutions."',
     },
     {
-      img: "",
+      img: "/testimonials/adam.jpeg",
       name: "Adam Chodhary",
       position: "Graduate Student, AI Researcher",
       content:
