@@ -20,7 +20,7 @@ const Welcome: React.FC = async () => {
 
   // Main UI with profile data
   return (
-    <section className="mx-auto">
+    <section className="mx-auto ml-4">
       {/* Container for the welcome message */}
       <div className="h-32 w-full mt-10 mobileM:mt-12 xs:mt-14 flex gap-4 items-center justify-start">
         {/* Heading with user's first name */}

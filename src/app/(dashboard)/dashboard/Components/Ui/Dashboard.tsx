@@ -1,4 +1,4 @@
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import { getEnrolledCourses } from "@/src/actions/dashboard";
 import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
@@ -7,6 +7,12 @@ import { Result } from "@/src/lib/types";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
+import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+import { Suspense } from "react"; // Import Suspense
+import CoursesClient from "@/src/components/programs/courses";
+import CoursePage from "@/src/app/(public)/programs/flagship-program/[id]/page";
+import Courses from "@/src/app/(public)/programs/flagship-program/page";
+import NotEnrolledCourses from "./NotEnrolled";
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -16,7 +22,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   try {
     // Fetch enrolled courses based on profileId
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+    const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(
       profileId
     );
 
@@ -56,7 +62,13 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   // Handle case where the user has no enrolled courses
   if (!recentCourses.length && enrollmentStatus === "not_enrolled") {
-    return <div>No courses enrolled.</div>;
+    return (
+      <div>
+        {/* <CoursePage /> */}
+        <NotEnrolledCourses />
+       
+      </div>
+    );
   }
 
   return (
@@ -82,4 +94,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   );
 };
 
-export default Dashboard;
+// Exporting Dashboard wrapped in Suspense
+const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+  <Suspense fallback={<DashboardSkeleton />}>
+    <Dashboard profileId={profileId} />
+  </Suspense>
+);
+
+export default DashboardWithSuspense;
