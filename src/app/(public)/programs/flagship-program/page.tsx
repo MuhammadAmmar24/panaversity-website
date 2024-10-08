@@ -1,4 +1,4 @@
-import { getProgramCoursesWithOpenRegistration } from "@/src/actions/courses";
+import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import CoursesClient from '@/src/components/programs/courses';
 
 async function fetchCourses() {

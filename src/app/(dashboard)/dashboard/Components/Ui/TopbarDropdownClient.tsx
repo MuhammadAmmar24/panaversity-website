@@ -6,6 +6,7 @@ import Link from "next/link";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import { CiLogout } from "react-icons/ci";
 import { ClientDropdownProps } from "../../types/types";
+import Image from "next/image";
 
 const ClientDropdown: React.FC<ClientDropdownProps> = ({
   userName,
@@ -47,8 +48,10 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        <img
+        <Image
           src={userImage}
+          width={100}
+          height={100}
           alt={`${userName} profile`}
           className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
         />
@@ -80,8 +83,10 @@ const ClientDropdown: React.FC<ClientDropdownProps> = ({
       >
         <div className="p-4">
           <div className="flex items-center space-x-3 w-full">
-            <img
+            <Image
               src={userImage}
+              width={100}
+              height={100}
               alt={`${userName} profile`}
               className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
             />
