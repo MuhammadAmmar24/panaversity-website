@@ -7,6 +7,7 @@ import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
 import { checkUserVerification } from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
+import Image from "next/image";
 
 // Page metadata for SEO
 export const metadata: Metadata = {
@@ -95,7 +96,7 @@ const AccountSettings: React.FC = () => {
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
               {/* Profile Picture */}
-              <img
+              <Image
                 src="/profile.png"
                 alt="Profile"
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"

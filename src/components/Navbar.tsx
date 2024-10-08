@@ -25,23 +25,32 @@ export default function Navbar() {
   const router = useRouter();
 
 
-  const handleClick = () => {
-    if (IsLoggedIn) {
-      router.push("/dashboard");
-    } else {
-      router.push("/register");
+  // const handleClick = () => {
+  //   if (IsLoggedIn) {
+  //     router.push("/dashboard");
+  //   } else {
+  //     router.push("/register");
       
+  //   }
+  // }
+
+
+  async function checkUserStatus() {
+    const res = await user_verify();
+    if (res?.isVerified) {
+      setIsLoggedIn(res.isVerified);
     }
   }
+  checkUserStatus()
   
   useEffect(() => {
-    async function checkUserStatus() {
-      const res = await user_verify();
-      if (res?.isVerified) {
-        setIsLoggedIn(res.isVerified);
-      }
-    }
-    checkUserStatus()
+    // async function checkUserStatus() {
+    //   const res = await user_verify();
+    //   if (res?.isVerified) {
+    //     setIsLoggedIn(res.isVerified);
+    //   }
+    // }
+    // checkUserStatus()
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
@@ -64,7 +73,7 @@ export default function Navbar() {
       // Clean up the event listener on unmount
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollPosition, IsLoggedIn, handleClick]);
+  }, [scrollPosition]);
 
   return (
     <header
@@ -103,8 +112,9 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="hidden md:flex mt-6">
-            <button
-             onClick={handleClick}
+            <Link
+            href={IsLoggedIn?'/dashboard':'/register'}
+            //  onClick={handleClick}
               className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
             >
 
@@ -115,7 +125,7 @@ export default function Navbar() {
               </span>
               <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
         
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Icon */}

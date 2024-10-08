@@ -374,7 +374,7 @@ export default function GetEnrolled({
             {isPending ? (
               <>
                 <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                Enrolling...
+                Processing...
               </>
             ) : (
               "Enroll"
