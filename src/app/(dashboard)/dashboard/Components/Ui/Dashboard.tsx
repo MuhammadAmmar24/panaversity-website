@@ -9,10 +9,7 @@ import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react"; // Import Suspense
-import CoursesClient from "@/src/components/programs/courses";
-import CoursePage from "@/src/app/(public)/programs/flagship-program/[id]/page";
-import Courses from "@/src/app/(public)/programs/flagship-program/page";
-import NotEnrolledCourses from "./NotEnrolled";
+import Link from "next/link";
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -63,10 +60,25 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   // Handle case where the user has no enrolled courses
   if (!recentCourses.length && enrollmentStatus === "not_enrolled") {
     return (
-      <div>
-        {/* <CoursePage /> */}
-        <NotEnrolledCourses />
-       
+      <div className="flex flex-col justify-center">
+        <h1 className="md:text-2xl font-bold text-center mt-10">
+          You are not enrolled in any courses.
+        </h1>
+        {/* CTA Button */}
+        <div className="flex justify-center mt-4">
+          <Link
+            href=""
+            //  onClick={handleClick}
+            className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
+          >
+            <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
+            <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
+            <span className="relative w-full text-left text-[0.8rem] lg:text-[0.9rem] text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white font-poppins font-semibold">
+              Programs
+            </span>
+            <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+          </Link>
+        </div>
       </div>
     );
   }
