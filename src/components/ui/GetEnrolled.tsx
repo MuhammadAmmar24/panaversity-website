@@ -4,15 +4,22 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { revalidatePath } from "next/cache";
+
+interface CourseSheetProps {
+  program_id: string;
+  batch_id: number;
+  course_batch_program_id: number;
+  profile_id: string;
+}
+
 
 export default function GetEnrolled({
   program_id,
   batch_id,
   course_batch_program_id,
-}: any) {
+  profile_id,
+}: CourseSheetProps) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -25,8 +32,7 @@ export default function GetEnrolled({
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-  const paymentMethods = ["Kuickpay", "Stripe"];
+  const paymentMethods = ["Stripe", "Kuickpay"];
   const [focusedInput, setFocusedInput] = useState("");
 
   const router = useRouter();
@@ -75,18 +81,7 @@ export default function GetEnrolled({
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchTimeSlots();
-    fetchUserData();
     fetchEnrollmentPrice();
   }, []);
 
@@ -157,7 +152,7 @@ export default function GetEnrolled({
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id,
+      student_id: profile_id,
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
