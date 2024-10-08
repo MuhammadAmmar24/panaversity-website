@@ -9,11 +9,7 @@ import { checkUserVerification } from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
 
-// Page metadata for SEO
-export const metadata: Metadata = {
-  title: "Account Settings",
-  description: "Update your account information and settings.",
-};
+
 
 const AccountSettings: React.FC = () => {
   // State for profile, personal, and address information
