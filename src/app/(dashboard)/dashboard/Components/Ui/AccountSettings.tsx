@@ -147,7 +147,7 @@ const AccountSettings: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
-           Personal information fields 
+           {/* Personal information fields  */}
          <div>
               <p className="text-gray-600">Phone</p>
               <p>+{profile?.phone}</p>
@@ -158,7 +158,7 @@ const AccountSettings: React.FC = () => {
             </div>
           </div>
 
-          Address Information Section 
+          {/* Address Information Section  */}
           <div className="mt-4 text-sm sm:text-base">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> 
               {/* Editable address fields */}
