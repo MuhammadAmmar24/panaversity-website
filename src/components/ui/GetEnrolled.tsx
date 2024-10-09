@@ -14,7 +14,10 @@ export default function GetEnrolled({
 }: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(""); // Storing label of time slot
+  const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
+    null
+  ); // Storing ID of time slot
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [seats, setSeats] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
@@ -27,8 +30,6 @@ export default function GetEnrolled({
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
-
-  const router = useRouter();
 
   // Fetch time slots
   useEffect(() => {
@@ -160,7 +161,7 @@ export default function GetEnrolled({
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
-      class_time_slot_id: 1,
+      class_time_slot_id: selectedTimeSlotId, // Using the selected time slot ID here
       vendor_type: selectedPaymentMethod.toUpperCase(),
       package_id: enrollmentPackage,
     };
@@ -177,22 +178,15 @@ export default function GetEnrolled({
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
-          //setEnrollmentError(result.message); // Clear any errors
-          // console.log(result.message); // Optional: log the success message
-
           if (url) {
             console.log("URL", url);
-            window.open(url , "_blank"); // Use window.location.href for external URL
-          } else {
-            // console.error("Stripe URL not found.");
+            window.open(url, "_blank"); // Use window.location.href for external URL
           }
         } else {
           setEnrollmentError(result.message); // Handle API error
-          // console.error("API Error:", result.message);
         }
       } catch (error) {
         setEnrollmentError("Failed to enroll student."); // General error handling
-        // console.error("Enrollment failed:", error);
       }
     });
   };
@@ -209,7 +203,6 @@ export default function GetEnrolled({
         {/* Display enrollment form */}
         <div className="space-y-7 w-full ">
           {/* Select Day Dropdown */}
-
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
@@ -268,7 +261,20 @@ export default function GetEnrolled({
                   selectedTimeSlot ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedTimeSlot}
-                onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                onChange={(e) => {
+                  setSelectedTimeSlot(e.target.value);
+                  const selectedId = parseInt(
+                    e.target.selectedOptions[0].value,
+                    10
+                  );
+                  setSelectedTimeSlotId(selectedId); // Store the time slot ID
+
+                  // Console log the selected time slot
+                  const selectedSlot = timeSlotsForSelectedDay.find(
+                    (slot: any) => slot.timeSlotId === selectedId
+                  );
+                  console.log("Selected Time Slot:", selectedSlot);
+                }}
                 disabled={!selectedDay}
                 onFocus={() => setFocusedInput("timeSlot")}
                 onBlur={() => setFocusedInput("")}
