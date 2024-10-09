@@ -104,11 +104,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   );
 };
 
-// Exporting Dashboard wrapped in Suspense
-const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
-  <Suspense fallback={<DashboardSkeleton />}>
-    <Dashboard profileId={profileId} />
-  </Suspense>
-);
+// // Exporting Dashboard wrapped in Suspense
+// const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+//   <Suspense fallback={<DashboardSkeleton />}>
+//     <Dashboard profileId={profileId} />
+//   </Suspense>
+// );
 
-export default DashboardWithSuspense;
+// export default DashboardWithSuspense;
