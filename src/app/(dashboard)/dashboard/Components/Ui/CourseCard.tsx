@@ -6,6 +6,7 @@ import { processPayment } from "@/src/actions/payment";
 import { checkUserVerification } from "@/src/actions/profile";
 import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
+import { useRouter } from "next/navigation";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -14,13 +15,15 @@ const CourseCard: React.FC<CourseCardProps> = ({
   status,
   batch_id,
   student_course_id,
-  course_batch_program_id
+  course_batch_program_id,
 }) => {
   // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
     null
   );
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchEnrollmentPrice = async () => {
@@ -33,7 +36,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
     };
 
     fetchEnrollmentPrice();
-  })
+  });
+
+  const ReEnroll = () => {
+    router.push("programs/flagship-program");
+  };
 
   // Function to handle enrollment and payment processing
   const handleEnroll = async (paymentMethod: string) => {
@@ -55,14 +62,15 @@ const CourseCard: React.FC<CourseCardProps> = ({
         vendor_type: paymentMethod, // Pass the selected payment method
       };
 
-      console.log("Enrollment Payload:", payload);
+
 
       // Call the payment processing API
       const result: any = await processPayment(payload);
-      console.log("Response", result);
+
 
       if (result.type === "success") {
         const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
+        // revalidatePath("/dashboard"); // Revalidate the dashboard page
         if (url) {
           window.location.href = url; // Redirect to payment URL if successful
         } else {
@@ -81,21 +89,19 @@ const CourseCard: React.FC<CourseCardProps> = ({
       <h1 className="font-medium text-start text-xl md:text-2xl font-poppins mb-4">
         Enrolled Courses
       </h1>
-          {/* className={`bg-white ${
-            status == "active" ? "bg-white" : "opacity-40 "
-          } rounded-lg shadow-xl px-4 sm:px-8 py-5`}
-        > */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
         <article className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col gap-4">
           <div className="flex justify-between items-center mb-6">
-            <CiMobile1 className={`text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px] ${
-              status === "active" ? "" : "opacity-30"
-              }`} />
+            <CiMobile1
+              className={`text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px] ${
+                status === "active" ? "" : "opacity-30"
+              }`}
+            />
             {/* Button Container */}
             <div className="ml-auto">
               {status === "active" ? (
-                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white h-6 md:h-8 border border-accent rounded-full px-2 md:px-4 bg-accent shadow-lg">
-                  Payment Completed
+                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-white h-6 md:h-8 border border-accent rounded-full px-6 md:px-8 bg-accent shadow-lg cursor-default">
+                  Paid
                 </button>
               ) : status === "reserved_seat" ? (
                 <button
@@ -105,16 +111,21 @@ const CourseCard: React.FC<CourseCardProps> = ({
                   Pay to Proceed
                 </button>
               ) : status === "expired_reservation" ? (
-                <button className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border-2 border-accent rounded-full px-2 md:px-4 hover:text-white hover:bg-accent transition duration-300 shadow-xl">
+                <button
+                  onClick={ReEnroll}
+                  className="md:text-[15px] font-medium md:font-semibold text-[10px] text-accent h-6 md:h-8 border-2 border-accent rounded-full px-2 md:px-4 hover:text-white hover:bg-accent transition duration-300 shadow-xl"
+                >
                   Enroll Again
                 </button>
               ) : null}
             </div>
           </div>
 
-          <h2 className={`font-poppins font-medium text-lg md:text-xl mb-2 ${
-            status === "active" ? "" : "opacity-30"
-            } `}>
+          <h2
+            className={`font-poppins font-medium text-lg md:text-xl mb-2 ${
+              status === "active" ? "" : "opacity-30"
+            } `}
+          >
             {title}
           </h2>
 
@@ -135,9 +146,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
             <div className="flex items-center gap-6">
               <div className="flex-1 bg-gray-200 rounded-full h-2 md:h-4"></div>
               <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
-                  <span className={`text-black ${
-                  status === "active" ? "" : "opacity-30"
-                  }`}>0/</span>
+                <span
+                  className={`text-black ${
+                    status === "active" ? "" : "opacity-30"
+                  }`}
+                >
+                  0/
+                </span>
                 {lessons} Lessons
               </p>
             </div>

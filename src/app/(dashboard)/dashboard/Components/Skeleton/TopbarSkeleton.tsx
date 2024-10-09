@@ -1,4 +1,3 @@
-"use client";
 import { Link } from "lucide-react";
 import React from "react";
 import Image from "next/image";

@@ -15,7 +15,7 @@ import {
   EnrollStudentResponseSchema,
 } from "@/src/lib/schemas/enrollment";
 import { Result } from "@/src/lib/types";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export const enrollStudentInProgram = async (
   payload: EnrollStudentRequest
@@ -155,9 +155,9 @@ export const enrollNewStudentInProgramAndCourse = async (
       {
         method: "POST",
         cache: "no-store",
-        next: {
-          tags: ["data"],
-        },
+        // next: {
+        //   tags: ["data"],
+        // },
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -175,9 +175,23 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     const responseData = await response.json();
 
-    console.log(responseData);
 
-    revalidateTag("data");
+
+    // Revalidate the 'data' tag after successful enrollment
+    // revalidateTag("data");
+    revalidatePath("/dashboard");
+    // const parsedResponse =
+    // 	EnrollNewStudentResponseSchema.safeParse(responseData);
+
+    // if (!parsedResponse.success) {
+    // 	return {
+    // 		type: "error",
+    // 		message: parsedResponse.error.errors
+    // 			.map((err) => err.message)
+    // 			.join(", "),
+    // 	};
+    // }
+    // revalidateTag("data");
 
     return {
       type: "success",

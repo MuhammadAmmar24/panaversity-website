@@ -13,35 +13,42 @@ import {
 import logo from "../../public/logos/logo.png";
 import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
-import { user_verify } from "@/src/actions/user-verify"
+import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   // State to track whether navbar is hidden
   const [hidden, setHidden] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [IsLoggedIn, setIsLoggedIn] = useState(false)
+  const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const pathName = usePathname();
   const router = useRouter();
 
+  // const handleClick = () => {
+  //   if (IsLoggedIn) {
+  //     router.push("/dashboard");
+  //   } else {
+  //     router.push("/register");
 
-  const handleClick = () => {
-    if (IsLoggedIn) {
-      router.push("/dashboard");
-    } else {
-      router.push("/register");
-      
-    }
-  }
-  
+  //   }
+  // }
+
   useEffect(() => {
+    // async function checkUserStatus() {
+    //   const res = await user_verify();
+    //   if (res?.isVerified) {
+    //     setIsLoggedIn(res.isVerified);
+    //   }
+    // }
+    // checkUserStatus()
+
     async function checkUserStatus() {
       const res = await user_verify();
       if (res?.isVerified) {
         setIsLoggedIn(res.isVerified);
       }
     }
-    checkUserStatus()
+    checkUserStatus();
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
@@ -64,7 +71,7 @@ export default function Navbar() {
       // Clean up the event listener on unmount
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [scrollPosition, IsLoggedIn, handleClick]);
+  }, [scrollPosition]);
 
   return (
     <header
@@ -103,19 +110,18 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="hidden md:flex mt-6">
-            <button
-             onClick={handleClick}
+            <Link
+              href={IsLoggedIn ? "/dashboard" : "/register"}
+              //  onClick={handleClick}
               className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
             >
-
               <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
               <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
               <span className="relative w-full text-left text-[0.8rem] lg:text-[0.9rem] text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white font-poppins font-semibold">
-              {IsLoggedIn ? "Dashboard" : "Get Started"}
+                {IsLoggedIn ? "Dashboard" : "Get Started"}
               </span>
               <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
-        
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Icon */}

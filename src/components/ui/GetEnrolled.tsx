@@ -4,14 +4,22 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+interface CourseSheetProps {
+  program_id: string;
+  batch_id: number;
+  course_batch_program_id: number;
+  profile_id: string;
+}
+
 
 export default function GetEnrolled({
   program_id,
   batch_id,
   course_batch_program_id,
-}: any) {
+  profile_id,
+}: CourseSheetProps) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(""); // Storing label of time slot
@@ -27,8 +35,7 @@ export default function GetEnrolled({
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-  const paymentMethods = ["Kuickpay", "Stripe"];
+  const paymentMethods = ["Stripe", "Kuickpay"];
   const [focusedInput, setFocusedInput] = useState("");
 
   // Fetch time slots
@@ -75,18 +82,7 @@ export default function GetEnrolled({
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
     fetchTimeSlots();
-    fetchUserData();
     fetchEnrollmentPrice();
   }, []);
 
@@ -157,7 +153,7 @@ export default function GetEnrolled({
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id,
+      student_id: profile_id,
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
@@ -167,16 +163,17 @@ export default function GetEnrolled({
     };
 
     // Log the payload for debugging
-    console.log("Enrollment Payload:", payload);
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("RESULT", result);
+        console.log(result)
+
         const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        console.log("URL", url);
+
 
         if (result.type === "success") {
+          // revalidatePath("/dashboard");
           setIsEnrolled(true); // Enrollment success, show message
           if (url) {
             console.log("URL", url);
@@ -377,7 +374,7 @@ export default function GetEnrolled({
             {isPending ? (
               <>
                 <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                Enrolling...
+                Processing...
               </>
             ) : (
               "Enroll"

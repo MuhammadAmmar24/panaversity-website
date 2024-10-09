@@ -16,8 +16,8 @@ const CourseSection: React.FC<CourseSectionProps> = ({
           Not Enrolled
         </h1>
         <pre className="text-gray-600">
-          console.log("You are not enrolled in any courses. Please enroll in a
-          course to get started.");
+          You are not enrolled in any courses. Please enroll in a
+          course to get started.
         </pre>
         <a
           className="underline text-accent font-bold text-xl"
@@ -31,7 +31,7 @@ const CourseSection: React.FC<CourseSectionProps> = ({
 
   return (
     <div className="mb-8 mt-8">
-      {courses.map((course: Course, index: number) => (
+      {courses?.map((course: Course, index: number) => (
         <CourseCard
           key={index}
           title={course.title}

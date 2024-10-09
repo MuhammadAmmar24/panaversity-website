@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/update-password"
-  ],
+, "src/app/(dashboard)/dashboard/Components/Ui/Dashboard.tsx"  ],
   "exclude": ["node_modules"]
 }

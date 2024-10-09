@@ -1,4 +1,3 @@
-
 "use client";
 import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
@@ -6,10 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { allTeamMembers } from "@/src/constants/teams";
 import CardSkeleton from "@/src/components/ui/skeletons/CardSkeleton";
-
-
-
-
 
 type SocialLink = {
   href: string;
