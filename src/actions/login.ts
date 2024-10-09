@@ -3,10 +3,9 @@
 import * as z from "zod";
 import { cookies } from "next/headers";
 import { LoginSchema } from "@/src/schemas/userschema";
-import { checkUserVerification } from "./profile";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import fetchProfile from "../lib/getProfile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -76,7 +75,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       httpOnly: true,
     });
 
-    const verificationStatus = await fetchProfile();
+    const verificationStatus = await checkUserVerification();
     return {
       success: "Authenticated!",
       message: "Welcome!",

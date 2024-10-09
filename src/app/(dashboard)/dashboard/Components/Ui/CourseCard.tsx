@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
-import  fetchProfile  from "@/src/lib/getProfile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { useRouter } from "next/navigation";
@@ -46,7 +46,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleEnroll = async (paymentMethod: string) => {
     try {
       // Fetch user data
-      const user_data = await fetchProfile();
+      const user_data = await checkUserVerification();
 
       // Ensure that the profile is loaded before proceeding
       if (!user_data?.id) {

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
-import  fetchProfile  from "@/src/lib/getProfile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
 
@@ -24,7 +24,7 @@ const AccountSettings: React.FC = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const user_data = await fetchProfile();
+        const user_data = await checkUserVerification();
         if (user_data) {
           setProfile(user_data); // Set profile data
           // (user_data)
