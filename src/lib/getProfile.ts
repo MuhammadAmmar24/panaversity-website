@@ -21,6 +21,7 @@ export default async function fetchProfile() {
       });
       const profile = await response.json();
 
+
       return profile;
     } catch (error: any) {
       console.error(error.message);

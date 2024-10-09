@@ -10,6 +10,7 @@ import { ProfileIdProps } from "../../types/types";
 import Link from "next/link";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";
+import {getStudentCourses} from '@/src/lib/getStudentCourses'
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -19,7 +20,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   try {
     // Fetch enrolled courses based on profileId
-    const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(
+    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profileId
     );
 
