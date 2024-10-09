@@ -6,6 +6,7 @@ export const getCoursePrice = async (
 ): Promise<Result<GetCoursePriceResponse>> => {
 	// Validate the path parameters using zod schema
 	const validationResult = GetCoursePriceParamsSchema.safeParse(params);
+	
 
 	if (!validationResult.success) {
 		return {
@@ -18,7 +19,7 @@ export const getCoursePrice = async (
 
 	try {
 		const response = await fetch(
-			`${process.env.ENROLLMENT_API_URL}/enrollment/price/${validationResult.data.course_batch_program_id}`,
+			`${process.env.ENROLLMENT_API_URL}/enrollment/price/${params.course_batch_program_id}`,
 			{
 				method: "GET",
 				headers: {

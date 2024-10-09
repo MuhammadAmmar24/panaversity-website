@@ -61,7 +61,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
 
     const userData = await response.json();
-    console.log(userData);
+
 
     const expiresInMilliseconds = userData.expires_in * 1000;
 

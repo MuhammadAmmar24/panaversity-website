@@ -107,7 +107,7 @@ export const enrollNewStudentInProgramAndCourse = async (
     if (!response.ok) {
       // Log the backend error response for debugging
       const errorResponse = await response.json();
-      console.log("Backend Error Response:", errorResponse);
+     
 
       // Extract the backend error message (detail) if available
       let errorMessage = `Failed to enroll student in program and course: ${response.statusText}`;

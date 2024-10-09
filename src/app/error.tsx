@@ -25,7 +25,7 @@ export default function ErrorPage() {
         </p>
       )}
       <Link href="/">
-        <a>Go back to Home</a>
+        Go back to Home
       </Link>
     </div>
   );
