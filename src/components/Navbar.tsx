@@ -86,7 +86,7 @@ export default function Navbar() {
             src={logo}
             alt="Panaversity Logo"
             className="w-[120px] sm:w-[140px] md:w-[140px] lg:w-[150px]"
-            loading="lazy"
+           
           />
         </Link>
 

@@ -4,7 +4,7 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import { checkUserVerification } from "@/src/actions/profile";
+import  fetchProfile  from "@/src/lib/getProfile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
@@ -82,7 +82,7 @@ export default function GetEnrolled({
 
     const fetchUserData = async () => {
       try {
-        const user_data = await checkUserVerification();
+        const user_data = await fetchProfile();
 
         setProfile(user_data);
       } catch (error) {
@@ -205,6 +205,7 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
+            router.push("/dashboard");
           }
         }
       } catch (error: any) {
