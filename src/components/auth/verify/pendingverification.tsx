@@ -8,29 +8,7 @@ import { FaClock } from "react-icons/fa6";
 
 
 const EmailVerificationPending = () => {
-    const { toast } = useToast()
-  const resendEmail = () => {
-    resendVerification().then((res) => {
-      if (res?.error) {
-        toast({
-          title: "Error",
-          description: res.error,
-          variant: "destructive",
-          action: (
-            <Link href={res.redirectTo} replace> 
-              <ToastAction altText={res.action}>{res.action}</ToastAction>
-            </Link>
-          ),
-        });
-      }
-      if (res?.success) {
-        toast({
-          title: "Email Sent",
-          description: "Email has been sent to your inbox",
-        });
-      }
-      })
-    }
+
 
   return (
     <div className='text-center w-full max-w-sm '>
@@ -48,12 +26,13 @@ const EmailVerificationPending = () => {
           We have sent an email for verification. Follow the instructions in the
           email for logging into your account.
         </p>
-        <Button
-          onClick={resendEmail}
-         className="w-full text-center py-2 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium"
-        >
+        <Link 
+          href="/resend-link"
+          
+         className="w-full text-center py-3 px-9 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium"
+        replace>
           Send Email Again
-        </Button>
+        </Link>
       
     </div>
   );

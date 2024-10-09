@@ -11,9 +11,9 @@ export const resetpassword = async (values: z.infer<typeof VerifyNumberSchema>) 
   }
 
   const { phone } = validatedFields.data;
-  console.log(phone.toString())
+
   // Send Data in JSON Format
-  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/auth/request-otp?phone=${phone}`, {
+  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/auth/request-otp?phone=${phone}`, {
     method: "POST",
     headers: {
       "accept": "application/json"
@@ -21,9 +21,6 @@ export const resetpassword = async (values: z.infer<typeof VerifyNumberSchema>) 
     cache: "no-store",
   });
 
-  console.log(reset_request)
-
-  console.log('reset_request', reset_request.status, reset_request.statusText);
 
   if (reset_request.status !== 200) {
     const error = await reset_request.json();

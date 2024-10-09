@@ -1,14 +1,10 @@
-// src/components/CourseDetailsClient.tsx
-
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { ChevronRight, Users, Calendar, Check } from "lucide-react";
-import GetEnrolled from "@/src/components/ui/GetEnrolled";
-import { Sheet, SheetContent } from "@/src/components/ui/sheet";
+import CourseSheet from "./courseSheet";
+import { Users, Calendar, Check } from "lucide-react";
 import Breadcrumb from "../Breadcrumbs";
-import { user_verify } from "@/src/actions/user-verify";
-import { useRouter } from "next/navigation";
+import RatingStars from "../ui/Ratingstar";
+import getProfile from "@/src/lib/getProfile";
+
+
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
@@ -18,25 +14,6 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
     <Icon className="w-5 h-5" />
     <span>{text}</span>
-  </div>
-);
-
-interface StarRatingProps {
-  rating: number;
-}
-
-const StarRating: React.FC<StarRatingProps> = ({ rating }) => (
-  <div className="flex">
-    {[...Array(5)].map((_, i) => (
-      <svg
-        key={i}
-        className="w-5 h-5 text-yellow-400"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-      </svg>
-    ))}
   </div>
 );
 
@@ -78,44 +55,15 @@ interface CourseDetailsClientProps {
   initialCurrency: string;
 }
 
-const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
+const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
   initialPrice,
 
   initialCurrency,
 }) => {
-  const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
-  const [price] = useState<number>(initialPrice);
-  const [currency] = useState<string>(initialCurrency);
 
-  console.log(courseData);
-  
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const profile: ProfileData = await getProfile();
 
-  async function handleClick() {
-    const res = await user_verify();
-    if (res?.redirectTo) {
-      router.push(res.redirectTo);
-      console.log(res.redirectTo);
-    } else {
-      console.log("Verified. GO AHEAD");
-      setOpen(true);
-    }
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
-    };
-
-    handleResize(); // Call once on mount
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   // Destructure the course data
   const {
@@ -128,7 +76,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
     is_registration_open,
     batch_id,
     course_batch_program_id,
-    program_id
+    program_id,
   } = courseData;
 
   // Assign default values if necessary
@@ -136,8 +84,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
   const duration = "3 months";
   const rating = 4.8;
   const ratingCount = 1249;
-  // const price = "400"; // Adjust based on actual data
-  // const currency = ""; // Adjust based on actual data
 
   return (
     <main className="overflow-x-hidden">
@@ -168,7 +114,11 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
 
                 <div className="flex flex-wrap items-center space-x-2 mb-6">
                   <span className="text-2xl font-bold">{rating}</span>
-                  <StarRating rating={rating} />
+                  <RatingStars
+                    rating={4.9}
+                    color="text-yellow-500"
+                    size="w-5 h-5"
+                  />
                   <span className="text-sm text-gray-400 font-medium">
                     ({ratingCount} ratings)
                   </span>
@@ -186,44 +136,19 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = ({
                       Price:
                     </span>
                     <span className="text-3xl font-bold uppercase">
-                      {currency ? `${currency} ${price}` : price}
+                      {initialCurrency
+                        ? `${initialCurrency} ${initialPrice}`
+                        : initialPrice}
                     </span>
                   </div>
 
-                  <Sheet
-                    open={open}
-                    onOpenChange={(isOpen) =>
-                      isOpen ? setOpen(true) : setOpen(false)
-                    }
-                  >
-                    <button
-                      onClick={handleClick}
-                      className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
-                        is_registration_open
-                          ? "hover:bg-emerald-500"
-                          : "bg-gray-400 cursor-not-allowed"
-                      }`}
-                      disabled={!is_registration_open}
-                    >
-                      {is_registration_open
-                        ? "Enroll Now"
-                        : "Registration Closed"}
-                      <ChevronRight className="w-5 h-5 ml-2" />
-                    </button>
-
-                    <SheetContent
-                      side={sheetSide}
-                      className={`w-full max-w-full overflow-y-auto ${
-                        sheetSide === "bottom" ? "h-[80vh]" : "h-full"
-                      } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
-                    >
-                      <GetEnrolled
-                        program_id={program_id}
-                        batch_id={batch_id}
-                        course_batch_program_id={course_batch_program_id}
-                      />
-                    </SheetContent>
-                  </Sheet>
+                  <CourseSheet
+                    is_registration_open={is_registration_open}
+                    program_id={program_id}
+                    batch_id={batch_id}
+                    course_batch_program_id={course_batch_program_id}
+                    profile_id={profile?.id}
+                  />
                 </div>
               </div>
             </div>

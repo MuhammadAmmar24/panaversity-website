@@ -14,7 +14,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   // Send Data in JSON Format
   try {
     // Send Data in JSON Format
-    const signup_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/user/register`, {
+    const signup_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/user/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

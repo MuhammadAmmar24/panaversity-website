@@ -71,12 +71,6 @@ export interface ClientDropdownProps {
   onSignOut: () => Promise<void>;
 }
 
-export interface DropdownProps {
-  userName: string | undefined;
-  userEmail: string | undefined;
-  userImage: string | undefined;
-}
-
 export interface SidebarProps {
   setIsSidebarOpen: (open: boolean) => void;
 }
@@ -85,4 +79,14 @@ export interface CourseSectionProps {
   courses: Course[] | undefined;
   enrollmentStatus: string | null;
   status: string;
+}
+
+export interface DropdownProps {
+  userName: string;
+  userEmail: string;
+  userImage: string;
+}
+
+export interface ProfileIdProps {
+  profileId: string;
 }

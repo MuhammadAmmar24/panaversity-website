@@ -5,7 +5,7 @@ import { verify } from "@/src/actions/verify";
 import { useSearchParams } from "next/navigation";
 import { useToast } from "@/src/components/ui/use-toast";
 import Link from "next/link";
-import { user_verify } from "@/src/actions/user-verify"
+import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
 
 const Verify = () => {

@@ -2,17 +2,13 @@
 
 import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import { Metadata } from "next";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
 import { checkUserVerification } from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
+import Image from "next/image";
 
-// Page metadata for SEO
-export const metadata: Metadata = {
-  title: "Account Settings",
-  description: "Update your account information and settings.",
-};
+
 
 const AccountSettings: React.FC = () => {
   // State for profile, personal, and address information
@@ -20,25 +16,31 @@ const AccountSettings: React.FC = () => {
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); // Corrected state to `loading` (lowercase)
+  const [loading, setLoading] = useState<boolean>(true); // State for loading spinner
 
   // State for toggling edit modes
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
+  // Fetch user data when component mounts
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const user_data = await checkUserVerification();
-        setProfile(user_data);
+        if (user_data) {
+          setProfile(user_data); // Set profile data
+          console.log(user_data)
+        } else {
+          console.error("Failed to load user data.");
+        }
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetching data
+        setLoading(false); // Hide loading state
       }
     };
 
-    fetchUserData();
+    fetchUserData(); // Fetch user data when component loads
   }, []);
 
   // Handle changes to profile input fields
@@ -51,21 +53,18 @@ const AccountSettings: React.FC = () => {
     setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
   };
 
-  // Simulate submitting updated data
+  // Simulate submitting updated data (This can be replaced with an actual API call)
   const submitChanges = () => {
     const updatedData = {
       profileInfo,
       addressInfo,
     };
-    // Handle submission logic here, e.g., API call
+
   };
 
+  // Show loading skeleton while profile data is being fetched
   if (loading) {
-    return (
-      <div>
-        <AccountSettingsSkeleton />
-      </div>
-    );
+    return <AccountSettingsSkeleton />;
   }
 
   return (
@@ -75,14 +74,14 @@ const AccountSettings: React.FC = () => {
           Account Settings
         </h1>
 
-        {/* Profile Information Section */}
+
         <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2 overflow-hidden">
           <div className="text-end">
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
               onClick={() => {
                 if (isEditingProfile) submitChanges();
-                setIsEditingProfile(!isEditingProfile);
+                setIsEditingProfile(!isEditingProfile); 
               }}
             >
               {isEditingProfile ? (
@@ -93,39 +92,41 @@ const AccountSettings: React.FC = () => {
             </button>
           </div>
           <div className="flex justify-between items-center">
-            <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
-              {/* Profile Picture */}
-              <img
+            <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4"> 
+  
+               <Image
                 src="/profile.png"
                 alt="Profile"
+                width={100}
+                height={100}
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
-              <div>
-                {/* Editable profile fields */}
-                {isEditingProfile ? (
+              <div> 
+          
+                 {isEditingProfile ? (
                   <input
                     type="text"
                     name="firstName"
-                    value={profile?.full_name}
+                    value={profile?.full_name || ""}
                     onChange={handleProfileChange}
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
                   />
                 ) : (
                   <>
-                    {/* Display profile information */}
-                    <p className="text-base sm:text-xl">{profile?.full_name}</p>
+       
+                     <p className="text-base sm:text-xl">{profile?.full_name}</p>
                     <p className="text-gray-500 text-xs sm:text-sm">
                       {profile?.email}
                     </p>
-                  </>
+                  </> 
                 )}
               </div>
-            </div>
-          </div>
-        </section>
+             </div>
+           </div>
+         </section>  
 
         {/* Personal Information Section (Read-only) */}
-        <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
+       <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
           <div className="flex justify-between">
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
               Personal Information
@@ -133,8 +134,8 @@ const AccountSettings: React.FC = () => {
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
               onClick={() => {
-                if (isEditingAddress) submitChanges();
-                setIsEditingAddress(!isEditingAddress);
+                if (isEditingAddress) submitChanges(); // Submit changes if editing is active
+                setIsEditingAddress(!isEditingAddress); // Toggle edit mode
               }}
             >
               {isEditingAddress ? (
@@ -144,9 +145,10 @@ const AccountSettings: React.FC = () => {
               )}
             </button>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
-            {/* Static personal information */}
-            <div>
+           Personal information fields 
+         <div>
               <p className="text-gray-600">Phone</p>
               <p>+{profile?.phone}</p>
             </div>
@@ -156,9 +158,9 @@ const AccountSettings: React.FC = () => {
             </div>
           </div>
 
-          {/* Address Information Section */}
+          Address Information Section 
           <div className="mt-4 text-sm sm:text-base">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> 
               {/* Editable address fields */}
               <div>
                 <p className="text-gray-600">Country</p>
@@ -221,7 +223,7 @@ const AccountSettings: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
+         </section> 
 
         {/* Password settings component */}
         <PasswordSettings />

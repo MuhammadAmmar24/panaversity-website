@@ -2,12 +2,22 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
-function Is_sidebar_open() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar state
+const IsSidebarOpen: React.FC = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar visibility state
+
+  // Error handling: Ensure setIsSidebarOpen is properly passed to Sidebar
+  const handleSidebarState = (state: boolean) => {
+    if (typeof state === "boolean") {
+      setIsSidebarOpen(state);
+    } else {
+      console.error("Invalid sidebar state, expected a boolean value");
+    }
+  };
+
   return (
     <div>
       {/* Sidebar component with the ability to control open/close state */}
-      <Sidebar setIsSidebarOpen={setIsSidebarOpen} />
+      <Sidebar setIsSidebarOpen={handleSidebarState} />
 
       {/* Overlay that appears when sidebar is open */}
       {isSidebarOpen && (
@@ -15,6 +25,6 @@ function Is_sidebar_open() {
       )}
     </div>
   );
-}
+};
 
-export default Is_sidebar_open;
+export default IsSidebarOpen;

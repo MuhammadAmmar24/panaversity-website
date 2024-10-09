@@ -15,28 +15,28 @@ import LogoutDialog from "../Dialog/LogoutDialog";
 import { signOut } from "@/src/auth";
 import { SidebarProps } from "../../types/types";
 
-
-
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
-  const [isOpen, setIsOpen] = useState(false); // Sidebar toggle state
-  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // State for controlling logout dialog visibility
-  const sidebarRef = useRef<HTMLDivElement>(null); // Sidebar ref to detect outside
+  const [isOpen, setIsOpen] = useState(false); // Sidebar visibility state
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // Logout dialog visibility state
+  const sidebarRef = useRef<HTMLDivElement>(null); // Reference for sidebar DOM element
 
-  const router = useRouter(); // Use Next.js router
+  const router = useRouter(); // Next.js router for navigation
 
-  // Sign out function
+  // Handle user sign-out and redirect to login page
   const handleSignOut = async () => {
-    await signOut();
-    // Assuming this clears cookies
-    console.log("Signing out...");
-    // Perform your sign-out logic here
-    router.push("/login");
-    window.location.reload(); // Reload the page after sign-out
+    try {
+      await signOut(); // Execute sign-out logic
+      router.push("/login"); // Redirect to login page
+      window.location.reload(); // Reload the page to ensure a clean session
+    } catch (error) {
+      console.error("Error during sign-out:", error); // Error handling for sign-out
+    }
   };
 
+  // Toggle sidebar open/close state
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    setIsSidebarOpen(!isOpen); // Update the sidebar state in the parent component
+    setIsSidebarOpen(!isOpen); // Update parent component's state if necessary
   };
 
   // Detect clicks outside the sidebar to close it
@@ -46,18 +46,18 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         sidebarRef.current &&
         !sidebarRef.current.contains(event.target as Node)
       ) {
-        setIsOpen(false);
-        setIsSidebarOpen(false); // Close the sidebar when clicked outside
+        setIsOpen(false); // Close the sidebar if clicked outside
+        setIsSidebarOpen(false); // Inform parent component to close sidebar
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside); // Attach event listener for outside clicks
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside); // Clean up listener on component unmount
     };
   }, [sidebarRef]);
 
-  // Menu items
+  // Menu items for sidebar navigation
   const menuItems = [
     { icon: GoHome, label: "Dashboard", href: "/dashboard" },
     { icon: SlBookOpen, label: "Courses", href: "/programs/flagship-program" },
@@ -70,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
     {
       icon: CiLogout,
       label: "Logout",
-      onClick: () => setIsLogoutDialogOpen(true),
+      onClick: () => setIsLogoutDialogOpen(true), // Open the logout confirmation dialog
     },
   ];
 

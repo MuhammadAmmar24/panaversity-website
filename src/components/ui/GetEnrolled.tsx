@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
 import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { revalidatePath } from "next/cache";
 
 export default function GetEnrolled({
   program_id,
@@ -15,7 +14,10 @@ export default function GetEnrolled({
 }: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(""); // Storing label of time slot
+  const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
+    null
+  ); // Storing ID of time slot
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
   const [seats, setSeats] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
@@ -35,10 +37,13 @@ export default function GetEnrolled({
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
+        console.log(course_batch_program_id);
         const query = { course_batch_program_id: course_batch_program_id };
+
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
+          console.log(result.data);
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -152,16 +157,16 @@ export default function GetEnrolled({
   const isDayAndTimeSelected = selectedDay && selectedTimeSlot;
   const isFormComplete =
     isDayAndTimeSelected && selectedPaymentMethod && isEnrolled;
-
+  
   const handleEnroll = async () => {
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id,
+      student_id: profile?.id, // Assuming this is just a placeholder; replace it with the actual student_id
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
-      class_time_slot_id: 1,
+      class_time_slot_id: selectedTimeSlotId, // Using the selected time slot ID here
       vendor_type: selectedPaymentMethod.toUpperCase(),
       package_id: enrollmentPackage,
     };
@@ -172,30 +177,39 @@ export default function GetEnrolled({
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("RESULT", result);
-        const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        console.log("URL", url);
+        console.log("Enrollment Result:", result); // Log the result for debugging
 
         if (result.type === "success") {
-          // revalidatePath("/dashboard");
           setIsEnrolled(true); // Enrollment success, show message
-          //setEnrollmentError(result.message); // Clear any errors
-          // console.log(result.message); // Optional: log the success message
+
+          const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
           if (url) {
-            console.log("URL", url);
-            router.push(url); // Use window.location.href for external URL
-            
+            console.log("Redirecting to Stripe URL:", url);
+            window.open(url, "_blank"); // Open the Stripe payment URL
           } else {
-            // console.error("Stripe URL not found.");
+            console.error("Stripe URL not found in the response.");
           }
         } else {
-          setEnrollmentError(result.message); // Handle API error
-          // console.error("API Error:", result.message);
+          // If result.type is "error", show the error message from the backend
+          console.error("Enrollment Error:", result.message);
+          if (
+            result.message &&
+            result.message.includes(
+              "Seat is already reserved. Please complete payment."
+            )
+          ) {
+            // Automatically route to the dashboard
+            router.push("/dashboard");
+          } else {
+            setEnrollmentError(
+              result.message || "An error occurred during enrollment."
+            );
+          }
         }
-      } catch (error) {
-        setEnrollmentError("Failed to enroll student."); // General error handling
-        // console.error("Enrollment failed:", error);
+      } catch (error: any) {
+        console.error("Unexpected error during enrollment:", error);
+        setEnrollmentError("Failed to enroll student. Please try again later."); // General error message for unexpected failures
       }
     });
   };
@@ -212,7 +226,6 @@ export default function GetEnrolled({
         {/* Display enrollment form */}
         <div className="space-y-7 w-full ">
           {/* Select Day Dropdown */}
-
           <div>
             <label htmlFor="day" className="block text-lg font-semibold mb-2">
               Day
@@ -271,7 +284,20 @@ export default function GetEnrolled({
                   selectedTimeSlot ? "border-accent" : "border-neutral-400"
                 }`}
                 value={selectedTimeSlot}
-                onChange={(e) => setSelectedTimeSlot(e.target.value)}
+                onChange={(e) => {
+                  setSelectedTimeSlot(e.target.value);
+                  const selectedId = parseInt(
+                    e.target.selectedOptions[0].value,
+                    10
+                  );
+                  setSelectedTimeSlotId(selectedId); // Store the time slot ID
+
+                  // Console log the selected time slot
+                  const selectedSlot = timeSlotsForSelectedDay.find(
+                    (slot: any) => slot.timeSlotId === selectedId
+                  );
+                  console.log("Selected Time Slot:", selectedSlot);
+                }}
                 disabled={!selectedDay}
                 onFocus={() => setFocusedInput("timeSlot")}
                 onBlur={() => setFocusedInput("")}
@@ -391,7 +417,7 @@ export default function GetEnrolled({
           {/* Error Message */}
           {enrollmentError && (
             <p className={"text-red-500 mt-4"}>
-              Failed to enroll student in course
+              {enrollmentError}
             </p>
           )}
         </div>
