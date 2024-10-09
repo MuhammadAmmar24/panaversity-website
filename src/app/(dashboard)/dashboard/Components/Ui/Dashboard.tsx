@@ -1,4 +1,4 @@
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import { getEnrolledCourses } from "@/src/actions/dashboard";
 import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
@@ -8,6 +8,8 @@ import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
 import Link from "next/link";
+import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+import { Suspense } from "react";
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -17,7 +19,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   try {
     // Fetch enrolled courses based on profileId
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+    const result: Result<CourseEnrollmentResponse> = await getEnrolledCourses(
       profileId
     );
 
@@ -104,4 +106,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   );
 };
 
-export default Dashboard;
+// Exporting Dashboard wrapped in Suspense
+const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+  <Suspense fallback={<DashboardSkeleton />}>
+    <Dashboard profileId={profileId} />
+  </Suspense>
+);
+
+export default DashboardWithSuspense;

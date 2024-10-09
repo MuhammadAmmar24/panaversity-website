@@ -38,12 +38,17 @@ export const LoginForm = () => {
   const code = searchParams.get("code");
   const state = searchParams.get("state");
 
-  const queryParams = `?redirect_uri=${redirect_uri}` + `&state=${state}` + `&response_type=${response_type}` + `&client_id=${client_id}` + `&code=${code}`
+  const queryParams =
+    `?redirect_uri=${redirect_uri}` +
+    `&state=${state}` +
+    `&response_type=${response_type}` +
+    `&client_id=${client_id}` +
+    `&code=${code}`;
 
-  let callbackUrl: string | null = null
+  let callbackUrl: string | null = null;
 
   if (redirect_uri) {
-    callbackUrl = `/admin/dashboard${queryParams}`
+    callbackUrl = `/admin/dashboard${queryParams}`;
   }
 
   const urlError =
@@ -54,108 +59,111 @@ export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-  const router = useRouter()
-  const { toast } = useToast()
-
+  const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
       username: "",
       password: "",
-    },    
+    },
   });
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
-    setSuccess("");    
+    setSuccess("");
 
     startTransition(() => {
-      login(values)
-        .then((data) => {
-          if (data?.error) {
-            setError(data.error);
-            toast({
-              title: "Login Failed",
-              description: data.message ? data.message : "Request Failed, Try Again",
-              action: (
-                <ToastAction altText="Dismiss">Dismiss</ToastAction>
-               )
-            })
-            form.setValue('password', '');
+      login(values).then((data) => {
+        if (data?.error) {
+          setError(data.error);
+          toast({
+            title: "Login Failed",
+            description: data.message
+              ? data.message
+              : "Request Failed, Try Again",
+            action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
+          });
+          if (data?.error === "Email not verified") {
+            router.push("/resend-link");
           }
+          form.setValue("password", "");
+        }
 
-          if (data?.success) {
-            form.reset();
-            setSuccess(data.success);
-            toast({
-              title: "Login Success",
-              description: data.message ? data.message : "Welcome to Panaversity",
-              action: (
-               <ToastAction altText="Close">Close</ToastAction>
-              ),
-            })
-            router.back();
-          }
-        });
+        if (data?.success) {
+          form.reset();
+          setSuccess(data.success);
+          toast({
+            title: "Login Success",
+            description: data.message ? data.message : "Welcome to Panaversity",
+            action: <ToastAction altText="Close">Close</ToastAction>,
+          });
+          router.back();
+        }
+      });
     });
-  };  
+  };
 
   return (
- 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}  className="space-y-6 ">
-          <div className="space-y-4">
-              <>
-                <FormField
-                  control={form.control}
-                  name="username"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Email</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="example@gmail.com"
-                          type="email"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Password</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          disabled={isPending}
-                          placeholder="******"
-                          type="password"
-                        />
-                      </FormControl>
-                      <Button
-                        size="sm"
-                        variant="link"
-                        asChild
-                        className="px-0 font-normal"
-                      >
-                        <Link href="/reset-password" className="hover:underline  underline-offset-4 transition-colors duration-200">Forgot password?</Link>
-                      </Button>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </>
-          </div>
-          <FormError message={error || urlError} />
-          <FormSuccess message={success}  />
-          <Button
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
+        <div className="space-y-4">
+          <>
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="example@gmail.com"
+                      type="email"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type="password"
+                    />
+                  </FormControl>
+                  <Button
+                    size="sm"
+                    variant="link"
+                    asChild
+                    className="px-0 font-normal"
+                  >
+                    <Link
+                      href="/reset-password"
+                      className="hover:underline  underline-offset-4 transition-colors duration-200"
+                    >
+                      Forgot password?
+                    </Link>
+                  </Button>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </>
+        </div>
+        <FormError message={error || urlError} />
+        <FormSuccess message={success} />
+        <Button
           disabled={isPending}
           type="submit"
           className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
@@ -168,20 +176,22 @@ export const LoginForm = () => {
           ) : (
             "Login"
           )}
-        </Button>       
-      
-        <Button size="sm" variant="link" asChild className="w-full text-textPrimary">
-  <Link href="/register" replace className="group">
-    Don't have an account?&nbsp;
-    <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
-      Register
-    </span>
-  </Link>
-</Button>
-        </form>
-      </Form>
+        </Button>
 
-      
-   
+        <Button
+          size="sm"
+          variant="link"
+          asChild
+          className="w-full text-textPrimary"
+        >
+          <Link href="/register" replace className="group">
+            Don't have an account?&nbsp;
+            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
+              Register
+            </span>
+          </Link>
+        </Button>
+      </form>
+    </Form>
   );
 };
