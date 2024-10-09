@@ -3,17 +3,17 @@ import * as z from "zod";
 import { VerifyNumberSchema } from "@/src/schemas/userschema";
 import { RecoverPasswordSchema } from "@/src/schemas/userschema";
 
-export const resetpassword = async (values: z.infer<typeof VerifyNumberSchema>) => {
-  const validatedFields = VerifyNumberSchema.safeParse(values);
+export const resetpassword = async (values: z.infer<typeof RecoverPasswordSchema>) => {
+  const validatedFields = RecoverPasswordSchema.safeParse(values);
 
   if (!validatedFields.success) {
     return { error: "Invalid fields!" };
   }
 
-  const { phone } = validatedFields.data;
+  const { email } = validatedFields.data;
 
   // Send Data in JSON Format
-  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/auth/request-otp?phone=${phone}`, {
+  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/auth/reset-password/request${email}`, {
     method: "POST",
     headers: {
       "accept": "application/json"

@@ -211,7 +211,7 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
-            router.push("/dashboard");
+            // router.push("/dashboard");
           }
         }
       } catch (error: any) {
