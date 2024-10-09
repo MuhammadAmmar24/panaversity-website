@@ -36,11 +36,11 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
 
 const CardSkeleton = () => {
   // State to handle visible team members
-  const [visibleMembers, setVisibleMembers] = useState(9);
+  const [visibleMembers, setVisibleMembers] = useState(24);
 
   // Function to load more team members
   const handleLoadMore = () => {
-    setVisibleMembers((prev) => prev + 24);
+    setVisibleMembers((prev) => prev + 9);
   };
 
   return (
@@ -54,19 +54,7 @@ const CardSkeleton = () => {
               </div>
             ))}
           </div>
-
-
-          {visibleMembers < allTeamMembers.length && (
-          <div className="flex justify-center mt-8 mb-8">
-            <button
-              onClick={handleLoadMore}
-              className="bg-accent text-white px-6 py-2 rounded hover:bg-accent/90 transition-colors"
-            >
-              Load More
-            </button>
-          </div>
-        )}
-
+         
         </div>
     </section>
   );
