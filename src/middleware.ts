@@ -23,12 +23,19 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(route)
   );
 
-  // Check if the access token is expired
+  // Check if the access token is expired or invalid
   const is_token_expired = await check_token_expiry(access_token);
 
-  if (isProtectedRoute) {
-    const session = await auth();
+  // Check session for both protected and auth routes
+  const session = await auth();
 
+  // Redirect to dashboard if user is logged in and tries to access login/register routes
+  if (isAuthRoute && session && !is_token_expired) {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
+  // For protected routes, ensure user is authenticated and token is valid
+  if (isProtectedRoute) {
     if (!session) {
       // If no session, redirect to login
       return NextResponse.redirect(new URL("/login", req.url));
@@ -51,18 +58,13 @@ export async function middleware(req: NextRequest) {
         });
 
         return response; // Allow access
+      } else {
+        // If token refresh fails, redirect to login
+        return NextResponse.redirect(new URL("/login", req.url));
       }
     }
-
-    if (isAuthRoute) {
-      const session = await auth();
-      if (session && !is_token_expired) {
-        // If already logged in and token is valid, redirect to dashboard
-        return NextResponse.redirect(new URL("/dashboard", req.url));
-      }
-    }
-
-    // Allow access to all other routes
-    return NextResponse.next();
   }
+
+  // If no special conditions match, proceed with the request
+  return NextResponse.next();
 }
