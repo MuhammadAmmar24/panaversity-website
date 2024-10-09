@@ -3,6 +3,7 @@ import { auth } from "../auth";
 import { cookies } from "next/headers";
 import { update_profile_schema, update_profile_resp_schema } from '@/src/lib/schemas/user';
 import { RequestBody, ResponseBody } from '@/src/lib/schemas/user';
+import { get_profile, GetProfileResponse } from '@/src/lib/schemas/student';
 export const checkUserVerification = async () => {
   const session = await auth(); // Getting JWT From Cookies
   if (!session) {
@@ -92,4 +93,64 @@ export const updateProfile = async (
       message: error.message,
     };
   }
+};
+
+
+
+export const getProfile = async (
+    userId: string | undefined // Assuming user ID is a parameter to identify the profile
+): Promise<{ type: "success" | "error"; message: string; data?: GetProfileResponse }> => {
+    try {
+        // Construct the query parameters
+        const params = new URLSearchParams();
+        if (userId) {
+            params.append('user_id', String(userId)); // Adding the user_id as a query param
+        }
+
+        // Construct the API URL
+        const apiUrl = `${process.env.API_URL}/profile?${params}`;
+
+        // Make the GET request to fetch the profile details
+        const response = await fetch(apiUrl, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Authorization": `Bearer ${process.env.API_SECRET}`,
+            },
+            cache: 'no-store' // Optional cache control
+        });
+
+        // Check if the response is successful
+        if (!response.ok) {
+            throw new Error(`Failed to fetch profile: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const responseData = await response.json();
+
+        // Validate the response using the Zod schema
+        const parsedResponse = get_profile.safeParse(responseData);
+
+        // Check if the parsed response is valid
+        if (!parsedResponse.success) {
+            return {
+                type: "error",
+                message: parsedResponse.error.errors.map((err) => err.message).join(", "),
+            };
+        }
+
+        // Return the success result with data
+        return {
+            type: "success",
+            message: "Profile fetched successfully",
+            data: parsedResponse.data,
+        };
+
+    } catch (error: any) {
+        // Return the error result
+        return {
+            type: "error",
+            message: error.message,
+        };
+    }
 };
