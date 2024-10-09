@@ -37,13 +37,13 @@ export default function GetEnrolled({
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-        console.log(course_batch_program_id);
+
         const query = { course_batch_program_id: course_batch_program_id };
 
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
-          console.log(result.data);
+
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -172,12 +172,12 @@ export default function GetEnrolled({
     };
 
     // Log the payload for debugging
-    console.log("Enrollment Payload:", payload);
+    
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("Enrollment Result:", result); // Log the result for debugging
+        
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
@@ -185,7 +185,7 @@ export default function GetEnrolled({
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
           if (url) {
-            console.log("Redirecting to Stripe URL:", url);
+           
             router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
@@ -296,7 +296,7 @@ export default function GetEnrolled({
                   const selectedSlot = timeSlotsForSelectedDay.find(
                     (slot: any) => slot.timeSlotId === selectedId
                   );
-                  console.log("Selected Time Slot:", selectedSlot);
+      
                 }}
                 disabled={!selectedDay}
                 onFocus={() => setFocusedInput("timeSlot")}

@@ -29,7 +29,7 @@ export const resendVerification = async (values: z.infer<typeof ResendLinkSchema
 
 
     const data = await response.json();
-    console.log(data)
+  
 
     if (response.ok) {
       if (data.message === "No account associated with this email address.") {
