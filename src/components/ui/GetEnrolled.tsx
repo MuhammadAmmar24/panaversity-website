@@ -31,14 +31,19 @@ export default function GetEnrolled({
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
+  const router = useRouter();
+
   // Fetch time slots
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
+        console.log(course_batch_program_id);
         const query = { course_batch_program_id: course_batch_program_id };
+
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
+          console.log(result.data);
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -152,12 +157,12 @@ export default function GetEnrolled({
   const isDayAndTimeSelected = selectedDay && selectedTimeSlot;
   const isFormComplete =
     isDayAndTimeSelected && selectedPaymentMethod && isEnrolled;
-
+  
   const handleEnroll = async () => {
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id,
+      student_id: profile?.id, // Assuming this is just a placeholder; replace it with the actual student_id
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
@@ -172,21 +177,39 @@ export default function GetEnrolled({
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("RESULT", result);
-        const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        console.log("URL", url);
+        console.log("Enrollment Result:", result); // Log the result for debugging
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
+
+          const url = result.data?.fee_voucher?.stripe?.stripe_url;
+
           if (url) {
-            console.log("URL", url);
-            window.open(url, "_blank"); // Use window.location.href for external URL
+            console.log("Redirecting to Stripe URL:", url);
+            window.open(url, "_blank"); // Open the Stripe payment URL
+          } else {
+            console.error("Stripe URL not found in the response.");
           }
         } else {
-          setEnrollmentError(result.message); // Handle API error
+          // If result.type is "error", show the error message from the backend
+          console.error("Enrollment Error:", result.message);
+          if (
+            result.message &&
+            result.message.includes(
+              "Seat is already reserved. Please complete payment."
+            )
+          ) {
+            // Automatically route to the dashboard
+            router.push("/dashboard");
+          } else {
+            setEnrollmentError(
+              result.message || "An error occurred during enrollment."
+            );
+          }
         }
-      } catch (error) {
-        setEnrollmentError("Failed to enroll student."); // General error handling
+      } catch (error: any) {
+        console.error("Unexpected error during enrollment:", error);
+        setEnrollmentError("Failed to enroll student. Please try again later."); // General error message for unexpected failures
       }
     });
   };
@@ -394,7 +417,7 @@ export default function GetEnrolled({
           {/* Error Message */}
           {enrollmentError && (
             <p className={"text-red-500 mt-4"}>
-              Failed to enroll student in course
+              {enrollmentError}
             </p>
           )}
         </div>
