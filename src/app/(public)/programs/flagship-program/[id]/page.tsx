@@ -20,8 +20,8 @@ export interface CourseData {
   media_link: string;
 }
 
-async function fetchCoursePrice() {
-  const params = { course_batch_program_id: 1 }; // Replace with actual course_batch_program_id
+async function fetchCoursePrice(course_batch_program_id: number) {
+  const params = { course_batch_program_id: course_batch_program_id }; // Replace with actual course_batch_program_id
   const result = await getCoursePrice(params);
 
   if (result.type === "success" && result.data) {
@@ -37,9 +37,8 @@ const CoursePage = async ({ params }: any) => {
   const c_id = parseInt(id);
 
   const data = await getCourseData(c_id);
-  // console.log(data);
 
-  const { price, currency } = await fetchCoursePrice();
+  const { price, currency } = await fetchCoursePrice(data?.data?.course_batch_program_id);
   // const courseData = await data.json();
   return (
     <CourseDetailsClient
