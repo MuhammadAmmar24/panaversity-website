@@ -21,7 +21,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     formData.append("password", password);
 
     const response = await fetch(
-      `${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/user/login`,
+      `${process.env.BACKEND_AUTH_SERVER_URL}/user/login`,
       {
         method: "POST",
         body: formData,

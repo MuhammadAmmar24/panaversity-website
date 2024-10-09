@@ -15,6 +15,7 @@ export default function Home() {
       {/* Main content area */}
       <main className="flex-1 mr-6 ml-10 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
         <TopBar />
+    
         <AccountSettings />
       </main>
     </div>
