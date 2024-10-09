@@ -1,5 +1,11 @@
 import PaymentSuccess from "@/src/components/payment/payment-success";
 import React, { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Payment Success",
+  description: `Your payment was successful. Thank you for enrolling in Panaversity's Generative AI courses. We look forward to helping you master AI-powered technologies and advance your skills.`
+};
 
 const page = () => {
   return (

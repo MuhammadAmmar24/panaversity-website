@@ -1,6 +1,12 @@
 import AccountSettings from "../Components/Ui/AccountSettings";
 import TopBar from "../Components/Ui/TopBar";
 import Is_sidebar_open from "../Components/Ui/Sidebar_open";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Account Settings",
+  description: `Manage your Panaversity account settings. Update your profile, change your password, and customize your preferences for a personalized learning experience.`
+};
 
 export default function Home() {
   return (
