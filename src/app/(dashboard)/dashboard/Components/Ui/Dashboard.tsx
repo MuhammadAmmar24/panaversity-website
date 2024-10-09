@@ -1,4 +1,3 @@
-import { getEnrolledCourses } from "@/src/actions/dashboard";
 import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
