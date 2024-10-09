@@ -3,7 +3,7 @@
 export const refreshAccessToken = async (old_refresh_token: string) => {
   try {
     const response = await fetch(
-      `${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/auth/refresh?old_refresh_token=${old_refresh_token}`,
+      `${process.env.BACKEND_AUTH_SERVER_URL}/auth/refresh?old_refresh_token=${old_refresh_token}`,
       {
         method: "POST",
         cache: "no-store",

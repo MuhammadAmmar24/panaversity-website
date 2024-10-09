@@ -1,5 +1,4 @@
 "use client";
-import { resendVerification } from "@/src/actions/resend-verification";
 import Link from "next/link";
 import { ImCancelCircle } from "react-icons/im";
 

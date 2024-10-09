@@ -42,6 +42,12 @@ export const VerifyNumberSchema = z.object({
   }),
 });
 
+export const ResendLinkSchema = z.object({
+  email: z.string().email({
+    message: "Email is required",
+  }),
+});
+
 export const UpdatePasswordSchema = z.object({
   otp: z.string().length(6, {
     message: "OTP is required",
