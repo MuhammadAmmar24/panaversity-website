@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import { Metadata } from "next";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
 import { checkUserVerification } from "@/src/actions/profile";
@@ -30,6 +29,7 @@ const AccountSettings: React.FC = () => {
         const user_data = await checkUserVerification();
         if (user_data) {
           setProfile(user_data); // Set profile data
+          console.log(user_data)
         } else {
           console.error("Failed to load user data.");
         }
@@ -74,14 +74,14 @@ const AccountSettings: React.FC = () => {
           Account Settings
         </h1>
 
-        {/* Profile Information Section */}
+
         <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2 overflow-hidden">
           <div className="text-end">
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
               onClick={() => {
-                if (isEditingProfile) submitChanges(); // Submit changes if editing is active
-                setIsEditingProfile(!isEditingProfile); // Toggle edit mode
+                if (isEditingProfile) submitChanges();
+                setIsEditingProfile(!isEditingProfile); 
               }}
             >
               {isEditingProfile ? (
@@ -92,16 +92,18 @@ const AccountSettings: React.FC = () => {
             </button>
           </div>
           <div className="flex justify-between items-center">
-            <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
-              {/* Profile Picture */}
-              <Image
+            <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4"> 
+  
+               <Image
                 src="/profile.png"
                 alt="Profile"
+                width={100}
+                height={100}
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
-              <div>
-                {/* Editable profile fields */}
-                {isEditingProfile ? (
+              <div> 
+          
+                 {isEditingProfile ? (
                   <input
                     type="text"
                     name="firstName"
@@ -111,20 +113,20 @@ const AccountSettings: React.FC = () => {
                   />
                 ) : (
                   <>
-                    {/* Display profile information */}
-                    <p className="text-base sm:text-xl">{profile?.full_name}</p>
+       
+                     <p className="text-base sm:text-xl">{profile?.full_name}</p>
                     <p className="text-gray-500 text-xs sm:text-sm">
                       {profile?.email}
                     </p>
-                  </>
+                  </> 
                 )}
               </div>
-            </div>
-          </div>
-        </section>
+             </div>
+           </div>
+         </section>  
 
         {/* Personal Information Section (Read-only) */}
-        <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
+       <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
           <div className="flex justify-between">
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
               Personal Information
@@ -145,8 +147,8 @@ const AccountSettings: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
-            {/* Personal information fields */}
-            <div>
+           Personal information fields 
+         <div>
               <p className="text-gray-600">Phone</p>
               <p>+{profile?.phone}</p>
             </div>
@@ -156,9 +158,9 @@ const AccountSettings: React.FC = () => {
             </div>
           </div>
 
-          {/* Address Information Section */}
+          Address Information Section 
           <div className="mt-4 text-sm sm:text-base">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> 
               {/* Editable address fields */}
               <div>
                 <p className="text-gray-600">Country</p>
@@ -221,7 +223,7 @@ const AccountSettings: React.FC = () => {
               </div>
             </div>
           </div>
-        </section>
+         </section> 
 
         {/* Password settings component */}
         <PasswordSettings />

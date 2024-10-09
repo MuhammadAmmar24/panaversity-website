@@ -13,7 +13,7 @@ export const resetpassword = async (values: z.infer<typeof VerifyNumberSchema>) 
   const { phone } = validatedFields.data;
 
   // Send Data in JSON Format
-  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/auth/request-otp?phone=${phone}`, {
+  const reset_request = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/auth/request-otp?phone=${phone}`, {
     method: "POST",
     headers: {
       "accept": "application/json"

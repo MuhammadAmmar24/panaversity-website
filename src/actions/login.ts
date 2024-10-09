@@ -5,11 +5,9 @@ import { cookies } from "next/headers";
 import { LoginSchema } from "@/src/schemas/userschema";
 import { checkUserVerification } from "./profile";
 import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
-
-export const login = async (
-  values: z.infer<typeof LoginSchema>,
-) => {
+export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
@@ -23,34 +21,51 @@ export const login = async (
     formData.append("username", username);
     formData.append("password", password);
 
-    const response = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/user/login`, {
-      method: "POST",
-      body: formData,
-      cache: "no-store",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-    
-    });
-
-
+    const response = await fetch(
+      `${process.env.BACKEND_AUTH_SERVER_URL}/user/login`,
+      {
+        method: "POST",
+        body: formData,
+        cache: "no-store",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
+      console.log(errorData)
+      console.log(response.status)
 
       if (response.status === 401) {
-        if (errorData.detail === "User with this email is not verified") {
-          return { error: "Email not verified", message: "User with this email is not verified" };
-        } else if (errorData.detail === "Incorrect email or password") {
-          return { error: "Incorrect email or password", message: "Incorrect email or password" };
+        // if (errorData.detail === "User with this email is not verified") {
+        //   return {
+        //     error: "Email not verified",
+        //     message: "User with this email is not verified",
+        //   };
+        // } 
+        if (errorData.detail === "Incorrect email or password") {
+          return {
+            error: "Incorrect email or password",
+            message: "Incorrect email or password",
+          };
         }
+      } else if (response.status === 403){
+
+        console.log("marzi hy.")
+
+          return {
+            error: "Email not verified",
+            message: "User is not verified",
+          };
       }
       throw new Error(errorData.message || "An error occurred during login");
     }
 
     const userData = await response.json();
-    
-    // Include the token expiration time in seconds and milliseconds
+    console.log(userData);
+
     const expiresInMilliseconds = userData.expires_in * 1000;
 
     const updatedUserData = {
@@ -65,7 +80,11 @@ export const login = async (
     });
 
     const verificationStatus = await checkUserVerification();
-    return { success: "Authenticated!", message: "Welcome!", redirectTo: verificationStatus.redirectTo };
+    return {
+      success: "Authenticated!",
+      message: "Welcome!",
+      redirectTo: verificationStatus.redirectTo,
+    };
   } catch (error) {
     if (error instanceof Error) {
       return { error: "Login failed!", message: error.message };

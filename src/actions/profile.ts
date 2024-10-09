@@ -10,7 +10,7 @@ export const checkUserVerification = async () => {
   }
   const token = session.access_token;
   try {
-    const response = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/user/profile`, {
+    const response = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/user/profile`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
