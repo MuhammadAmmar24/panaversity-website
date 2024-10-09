@@ -4,6 +4,9 @@ import { cookies } from "next/headers";
 import { update_profile_schema, update_profile_resp_schema } from '@/src/lib/schemas/user';
 import { RequestBody, ResponseBody } from '@/src/lib/schemas/user';
 import { get_profile, GetProfileResponse } from '@/src/lib/schemas/student';
+import { updateProfileSchema, updateProfileResponseSchema,update_st_profile_Request,update_st_profile_Response } from '@/src/lib/schemas/student';
+
+
 export const checkUserVerification = async () => {
   const session = await auth(); // Getting JWT From Cookies
   if (!session) {
@@ -35,7 +38,7 @@ export const checkUserVerification = async () => {
   }
 };
 
-export const updateProfile = async (
+export const update_user_Profile = async (
   payload: RequestBody
 ): Promise<{ type: "success" | "error"; message: string; data?: ResponseBody }> => {
   
@@ -95,9 +98,7 @@ export const updateProfile = async (
   }
 };
 
-
-
-export const getProfile = async (
+export const get_student_Profile = async (
     userId: string | undefined // Assuming user ID is a parameter to identify the profile
 ): Promise<{ type: "success" | "error"; message: string; data?: GetProfileResponse }> => {
     try {
@@ -153,4 +154,64 @@ export const getProfile = async (
             message: error.message,
         };
     }
+};
+
+export const update_student_Profile = async (
+  payload: update_st_profile_Request
+): Promise<{ type: "success" | "error"; message: string; data?: update_st_profile_Response }> => {
+  
+  // Validate the incoming payload using the Zod schema
+  const validationResult = updateProfileSchema.safeParse(payload);
+
+  if (!validationResult.success) {
+    return {
+      type: "error",
+      message: validationResult.error.errors
+        .map((err) => err.message)
+        .join(", "),
+    };
+  }
+
+  try {
+    // Make the PATCH request to update the profile
+    const response = await fetch(`${process.env.API_URL}/profile/update`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${process.env.API_SECRET}`,
+      },
+      body: JSON.stringify(validationResult.data),
+    });
+
+    // Check if the status code indicates success
+    if (!response.ok) {
+      throw new Error(`Failed to update profile: ${response.statusText}`);
+    }
+
+    const responseData = await response.json();
+
+    // Validate the response using the Zod schema
+    const parsedResponse = updateProfileResponseSchema.safeParse(responseData);
+
+    if (!parsedResponse.success) {
+      return {
+        type: "error",
+        message: parsedResponse.error.errors
+          .map((err) => err.message)
+          .join(", "),
+      };
+    }
+
+    return {
+      type: "success",
+      message: "Profile updated successfully",
+      data: parsedResponse.data,
+    };
+  } catch (error: any) {
+    return {
+      type: "error",
+      message: error.message,
+    };
+  }
 };

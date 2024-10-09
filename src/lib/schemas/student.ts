@@ -23,7 +23,7 @@ export const updateProfileSchema = z.object({
 });
 
 // Type inferred from the request schema
-export type RequestBody = z.infer<typeof updateProfileSchema>;
+export type update_st_profile_Request = z.infer<typeof updateProfileSchema>;
 
 // Schema for the response body after updating student profile
 export const updateProfileResponseSchema = z.object({
@@ -31,4 +31,4 @@ export const updateProfileResponseSchema = z.object({
 });
 
 // Type inferred from the response schema
-export type ResponseBody = z.infer<typeof updateProfileResponseSchema>;
+export type update_st_profile_Response = z.infer<typeof updateProfileResponseSchema>;
