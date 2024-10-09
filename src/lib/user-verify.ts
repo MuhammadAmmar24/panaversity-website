@@ -12,7 +12,7 @@ export const user_verify = async () => {
 
     const token = session?.access_token;
     const is_token_expired = await check_token_expiry(token)
-    if(is_token_expired){
+    if(is_token_expired || is_token_expired === null){
       return { isVerified: false, redirectTo: "/login" }
     }
     else {
