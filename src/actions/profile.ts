@@ -1,6 +1,5 @@
 "use server";
 import { auth } from "../auth";
-import { cookies } from "next/headers";
 
 export const checkUserVerification = async () => {
   const session = await auth(); // Getting JWT From Cookies

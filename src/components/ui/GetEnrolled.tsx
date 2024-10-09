@@ -186,7 +186,7 @@ export default function GetEnrolled({
 
           if (url) {
             console.log("Redirecting to Stripe URL:", url);
-            window.open(url, "_blank"); // Open the Stripe payment URL
+            router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
           }

@@ -1,4 +1,3 @@
-"use client";
 import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -81,12 +80,12 @@ TeamMemberItem.propTypes = {
 
 const TeamMember = () => {
   // State to handle visible team members
-  const [visibleMembers, setVisibleMembers] = useState(9);
+  // const [visibleMembers, setVisibleMembers] = useState(9);
 
   // Function to load more team members
-  const handleLoadMore = () => {
-    setVisibleMembers((prev) => prev + 9);
-  };
+  // const handleLoadMore = () => {
+  //   setVisibleMembers((prev) => prev + 9);
+  // };
 
   return (
     <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
@@ -110,7 +109,7 @@ const TeamMember = () => {
         
         <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
           <div className="flex flex-wrap justify-center -mx-4 ">
-            {allTeamMembers.slice(0, visibleMembers).map((member: TeamMember, i: number) => (
+            {allTeamMembers.map((member: TeamMember, i: number) => (
               <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center ">
                 <TeamMemberItem member={member} />
               </div>
@@ -120,7 +119,7 @@ const TeamMember = () => {
         
 
         {/* Load More Button */}
-        {visibleMembers < allTeamMembers.length && (
+        {/* {visibleMembers < allTeamMembers.length && (
           <div className="flex justify-center mt-8">
             <button
               onClick={handleLoadMore}
@@ -129,7 +128,7 @@ const TeamMember = () => {
               Load More
             </button>
           </div>
-        )}
+        )} */}
       </div>
       </Suspense>
     </section>
