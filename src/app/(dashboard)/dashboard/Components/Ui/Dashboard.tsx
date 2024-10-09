@@ -8,6 +8,8 @@ import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
 import Link from "next/link";
+import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+import { Suspense } from "react";
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -104,11 +106,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   );
 };
 
-// // Exporting Dashboard wrapped in Suspense
-// const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
-//   <Suspense fallback={<DashboardSkeleton />}>
-//     <Dashboard profileId={profileId} />
-//   </Suspense>
-// );
+// Exporting Dashboard wrapped in Suspense
+const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+  <Suspense fallback={<DashboardSkeleton />}>
+    <Dashboard profileId={profileId} />
+  </Suspense>
+);
 
-// export default DashboardWithSuspense;
+export default DashboardWithSuspense;
