@@ -130,12 +130,12 @@ const VerifiedComponent = ({ onGetStarted }: { onGetStarted: () => void }) => (
     <p className="text-center">
       Your email was verified. You can continue using the application.
     </p>
-    <button
-      onClick={onGetStarted}
+    <Link
+      href={'/programs'}
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Get Started
-    </button>
+    </Link>
   </div>
 );
 
