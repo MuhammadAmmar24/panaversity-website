@@ -14,7 +14,7 @@ import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
 import { updatepassword } from "@/src/actions/update-password";
 import { useRouter } from "next/navigation";
-import { resetpassword } from "@/src/actions/recover-password";
+import { resetPassword } from "@/src/actions/recover-password";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { redirect } from "next/navigation";
 
@@ -38,9 +38,9 @@ function UpdatePassword() {
         setError("");
         setSuccess("");
         startTransition(() => {
-            resetpassword(values).then((data) => {
-                setError(data.error);
-                setSuccess(data.success);
+            resetPassword(values).then((data:any) => {
+                setError(data?.error);
+                setSuccess(data?.success);
                 if (data?.error) {
                     form.reset();
                     toast({
