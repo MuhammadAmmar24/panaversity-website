@@ -5,7 +5,7 @@ export const user_verify = async () => {
 
   const session = await auth(); // Getting JWT From Cookies
   if (!session) {
-
+    
     return { isVerified: false, redirectTo: "/register" };
   }
   else if (session) {
@@ -16,7 +16,7 @@ export const user_verify = async () => {
       return { isVerified: false, redirectTo: "/login" }
     }
     else {
-      return {isVerified: true, redirectTo: "" }
+      return {isVerified: true }
     }
   }
 };

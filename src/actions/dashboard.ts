@@ -60,3 +60,4 @@ export const getEnrolledCourses = async (
         };
     }
 };
+
