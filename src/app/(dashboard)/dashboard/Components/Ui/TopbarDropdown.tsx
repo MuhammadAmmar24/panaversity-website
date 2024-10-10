@@ -125,14 +125,14 @@ const Dropdown: React.FC<DropdownProps> = ({
         {/* Links to different sections */}
         <ul className="p-2" role="menu">
           {/* Profile settings */}
-          <Link href="/dashboard/account-settings">
+          <Link href="/dashboard/profile">
             <li
               className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer"
               role="menuitem"
             >
               <LuSettings2 className="w-5 h-5 text-gray-700" />
               <span className="text-gray-700 text-xs sm:text-sm">
-                Profile Settings
+                Account Settings
               </span>
             </li>
           </Link>

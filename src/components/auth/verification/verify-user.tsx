@@ -15,13 +15,17 @@ const Verify = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = searchParams.get("token");
+  // const type = searchParams.get("type");
+  // console.log("This is type", type)
 
   const router = useRouter();
 
   const handleClick = async () => {
     try {
       setIsLoading(true);
-      const res = await user_verify();
+
+      const res = await user_verify(); 
+
       if (res?.redirectTo) {
         router.push("/login");
       } else {
@@ -39,7 +43,7 @@ const Verify = () => {
     const verifyToken = async () => {
       if (token) {
         try {
-          const result = await verify(token);
+          const result = await verify(token); // verify email server action.
           setVerified(result);
           if (result === true) {
             localStorage.setItem("emailVerified", "true");
