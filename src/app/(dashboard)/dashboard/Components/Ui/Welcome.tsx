@@ -1,4 +1,4 @@
-import getProfile from "@/src/lib/getProfile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 import Error from "../Error/error_message";
 
 const Welcome: React.FC = async () => {
@@ -6,7 +6,7 @@ const Welcome: React.FC = async () => {
 
   try {
     // Attempt to fetch the profile data
-    profile = await getProfile();
+    profile = await checkUserVerification();
   } catch (err) {
     console.error("Error fetching profile data:", err); // Log error for debugging
   }

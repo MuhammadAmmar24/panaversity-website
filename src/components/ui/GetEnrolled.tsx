@@ -4,7 +4,7 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import { checkUserVerification } from "@/src/actions/profile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
@@ -33,17 +33,32 @@ export default function GetEnrolled({
 
   const router = useRouter();
 
+  const fetchUserData = async () => {
+    try {
+      
+      const user_data = await checkUserVerification();
+
+      console.log("user_data", user_data?.id);
+
+      setProfile(user_data);
+
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
+
+
   // Fetch time slots
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-        console.log(course_batch_program_id);
+
         const query = { course_batch_program_id: course_batch_program_id };
 
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
-          console.log(result.data);
+
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -80,16 +95,7 @@ export default function GetEnrolled({
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
+   
     fetchTimeSlots();
     fetchUserData();
     fetchEnrollmentPrice();
@@ -172,12 +178,12 @@ export default function GetEnrolled({
     };
 
     // Log the payload for debugging
-    console.log("Enrollment Payload:", payload);
+    
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("Enrollment Result:", result); // Log the result for debugging
+        
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
@@ -185,7 +191,7 @@ export default function GetEnrolled({
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
           if (url) {
-            console.log("Redirecting to Stripe URL:", url);
+           
             router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
@@ -205,6 +211,7 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
+            // router.push("/dashboard");
           }
         }
       } catch (error: any) {
@@ -296,7 +303,7 @@ export default function GetEnrolled({
                   const selectedSlot = timeSlotsForSelectedDay.find(
                     (slot: any) => slot.timeSlotId === selectedId
                   );
-                  console.log("Selected Time Slot:", selectedSlot);
+      
                 }}
                 disabled={!selectedDay}
                 onFocus={() => setFocusedInput("timeSlot")}

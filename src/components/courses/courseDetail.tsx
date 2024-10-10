@@ -2,7 +2,7 @@ import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
 import Breadcrumb from "../Breadcrumbs";
 import RatingStars from "../ui/Ratingstar";
-import getProfile from "@/src/lib/getProfile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 
 
 interface CourseInfoProps {
@@ -62,7 +62,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   initialCurrency,
 }) => {
 
-  const profile: ProfileData = await getProfile();
+  const profile: ProfileData = await checkUserVerification();
 
 
   // Destructure the course data

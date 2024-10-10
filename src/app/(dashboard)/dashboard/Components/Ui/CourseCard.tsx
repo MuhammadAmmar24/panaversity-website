@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
-import { checkUserVerification } from "@/src/actions/profile";
+import  {checkUserVerification}  from "@/src/actions/profile";
 import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { useRouter } from "next/navigation";
