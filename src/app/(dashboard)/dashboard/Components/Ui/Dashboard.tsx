@@ -62,7 +62,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
     return (
       <div className="flex flex-col justify-center">
         <h1 className="md:text-4xl font-bold text-center mt-20">
-          You are not enrolled in any courses.
+          You are not enrolled in any course.
         </h1>
         {/* CTA Button */}
         <div className="flex justify-center mt-8">

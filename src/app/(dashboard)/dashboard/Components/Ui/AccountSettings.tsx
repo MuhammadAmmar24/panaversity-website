@@ -7,39 +7,43 @@ import PasswordSettings from "./PasswordSettings";
 import  {checkUserVerification}  from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
+import fetchProfile from "@/src/lib/getProfile";
 
-const AccountSettings: React.FC = () => {
+const AccountSettings: React.FC<any> = ({profile}) => {
+  console.log(profile)
+  
   // State for profile, personal, and address information
   const [profileInfo, setProfileInfo] = useState(initialData.profileInfo);
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
-  const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true); // State for loading spinner
+  // const [profile, setProfile] = useState<ProfileData | null>(profile_r);
+  // const [loading, setLoading] = useState<boolean>(true); // State for loading spinner
 
   // State for toggling edit modes
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
   // Fetch user data when component mounts
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-        if (user_data) {
-          setProfile(user_data); // Set profile data
-          // (user_data)
-        } else {
-          console.error("Failed to load user data.");
-        }
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      } finally {
-        setLoading(false); // Hide loading state
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       // const user_data = await checkUserVerification();
+  //       const user_data = await fetchProfile();
+  //       if (user_data) {
+  //         setProfile(user_data); // Set profile data
+  //         // (user_data)
+  //       } else {
+  //         console.error("Failed to load user data.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     } finally {
+  //       setLoading(false); // Hide loading state
+  //     }
+  //   };
 
-    fetchUserData(); // Fetch user data when component loads
-  }, []);
+  //   // fetchUserData(); // Fetch user data when component loads
+  // }, []);
 
   // Handle changes to profile input fields
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,9 +64,9 @@ const AccountSettings: React.FC = () => {
   };
 
   // Show loading skeleton while profile data is being fetched
-  if (loading) {
-    return <AccountSettingsSkeleton />;
-  }
+  // if (loading) {
+  //   return <AccountSettingsSkeleton />;
+  // }
 
   return (
     <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">

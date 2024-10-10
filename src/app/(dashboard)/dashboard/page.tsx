@@ -4,6 +4,7 @@ import Is_sidebar_open from "./Components/Ui/Sidebar_open";
 import Dashboard from "./Components/Ui/Dashboard";
 import  {checkUserVerification}  from "@/src/actions/profile";
 import type { Metadata } from "next";
+import fetchProfile from "@/src/lib/getProfile";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -11,7 +12,9 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const profile: ProfileData = await checkUserVerification();
+  // const profile: ProfileData = await checkUserVerification();
+  const profile: ProfileData = await fetchProfile();
+  // console.log(profileData)
 
   return (
     <div className="relative flex">

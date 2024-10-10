@@ -195,6 +195,7 @@ export default function GetEnrolled({
             router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
+            router.push('/dashboard')
           }
         } else {
           // If result.type is "error", show the error message from the backend
@@ -211,12 +212,13 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
-            // router.push("/dashboard");
+    
           }
         }
       } catch (error: any) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later."); // General error message for unexpected failures
+   
       }
     });
   };
