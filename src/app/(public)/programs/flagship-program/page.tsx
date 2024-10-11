@@ -45,13 +45,17 @@ export default async function Courses() {
                 ]}
               />
             </div>
-
-            <h2
-              className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"
-              style={{ wordSpacing: "0.2em" }}
-            >
-              Our Flagship Program
-            </h2>
+            <div>
+              <h2
+                className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"
+                style={{ wordSpacing: "0.2em" }}
+              >
+                Our Flagship Program <br /> in Generative AI
+              </h2>
+              <p className="text-background/60 mb-2 p-4 mt-2 max-w-[28rem] mx-auto">
+                Our GenAI Program for Innovators and Creators
+              </p>
+            </div>
           </div>
         </div>
 
