@@ -24,7 +24,7 @@ import { login } from "@/src/actions/login";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import Link from "next/link";
 
@@ -59,6 +59,7 @@ export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
 
@@ -73,7 +74,7 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-  
+
     startTransition(() => {
       login(values).then((data) => {
         if (data?.error) {
@@ -90,7 +91,7 @@ export const LoginForm = () => {
           }
           form.setValue("password", "");
         }
-  
+
         if (data?.success) {
           setSuccess(data.success);
           toast({
@@ -98,14 +99,14 @@ export const LoginForm = () => {
             description: data.message ? data.message : "Welcome to Panaversity",
             action: <ToastAction altText="Close">Close</ToastAction>,
           });
-  
+
           // Retrieve the previous path from localStorage
           const previousPath = localStorage.getItem("previousPath");
           console.log("Previous path: ", previousPath);
           if (previousPath) {
             // Redirect to the previous path after login
             console.log("Redirecting to previous path");
-            window.location.href = previousPath;  // Replaces window.location.href
+            window.location.href = previousPath; // Replaces window.location.href
             // Clear the previous path from localStorage
             localStorage.removeItem("previousPath");
             console.log("Previous path cleared");
@@ -113,7 +114,7 @@ export const LoginForm = () => {
             console.log("No previous path stored");
 
             // If no previous path is stored, fallback to default redirect
-            window.location.href = "/dashboard";  // Replaces window.location.href
+            window.location.href = "/dashboard"; // Replaces window.location.href
 
             console.log("Redirecting to dashboard");
           }
@@ -121,10 +122,6 @@ export const LoginForm = () => {
       });
     });
   };
-  
-
-
- 
 
   return (
     <Form {...form}>
@@ -156,12 +153,25 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        disabled={isPending}
+                        placeholder="******"
+                        type={showPassword ? "text" : "password"} // Toggle between text and password types
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                      >
+                        {showPassword ? (
+                          <AiOutlineEyeInvisible className="h-5 w-5 text-gray-500" />
+                        ) : (
+                          <AiOutlineEye className="h-5 w-5 text-gray-500" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <Button
                     size="sm"
