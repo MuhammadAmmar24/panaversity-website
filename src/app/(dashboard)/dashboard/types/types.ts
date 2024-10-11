@@ -14,6 +14,7 @@ export interface ClassCardProps {
     batch_id: number;
     student_course_id: number;
     course_batch_program_id: number;
+    profile: ProfileData
   }
   
   export interface CardData {

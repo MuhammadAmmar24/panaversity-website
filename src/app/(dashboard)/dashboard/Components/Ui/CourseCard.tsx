@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
 import { processPayment } from "@/src/actions/payment";
-import  {checkUserVerification}  from "@/src/actions/profile";
 import { getCoursePrice } from "@/src/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { useRouter } from "next/navigation";
@@ -16,6 +15,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   batch_id,
   student_course_id,
   course_batch_program_id,
+  profile,
 }) => {
   // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
@@ -45,20 +45,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
   // Function to handle enrollment and payment processing
   const handleEnroll = async (paymentMethod: string) => {
     try {
-      // Fetch user data
-      const user_data = await checkUserVerification();
-
-      // Ensure that the profile is loaded before proceeding
-      if (!user_data?.id) {
-        console.error("Profile data not loaded yet.");
-        return;
-      }
+ 
 
       const payload: any = {
         batch_no: batch_id,
         package_id: enrollmentPackage,
         student_course_id: student_course_id,
-        student_id: user_data?.id, // Use the actual student ID now that it's available
+        student_id: profile?.id, // Use the actual student ID now that it's available
         vendor_type: paymentMethod, // Pass the selected payment method
       };
 

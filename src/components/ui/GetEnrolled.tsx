@@ -4,13 +4,13 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import  {checkUserVerification}  from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
   batch_id,
   course_batch_program_id,
+  profile_id
 }: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
@@ -27,26 +27,10 @@ export default function GetEnrolled({
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [profile, setProfile] = useState<ProfileData | null>(null);
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
   const router = useRouter();
-
-  const fetchUserData = async () => {
-    try {
-      
-      const user_data = await checkUserVerification();
-
-      console.log("user_data", user_data?.id);
-
-      setProfile(user_data);
-
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
 
   // Fetch time slots
   useEffect(() => {
@@ -97,7 +81,6 @@ export default function GetEnrolled({
 
    
     fetchTimeSlots();
-    fetchUserData();
     fetchEnrollmentPrice();
   }, []);
 
@@ -168,7 +151,7 @@ export default function GetEnrolled({
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id, // Assuming this is just a placeholder; replace it with the actual student_id
+      student_id: profile_id, // Assuming this is just a placeholder; replace it with the actual student_id
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
@@ -177,6 +160,7 @@ export default function GetEnrolled({
       package_id: enrollmentPackage,
     };
 
+    console.log("Enrollment Payload:", payload);
     // Log the payload for debugging
     
 
