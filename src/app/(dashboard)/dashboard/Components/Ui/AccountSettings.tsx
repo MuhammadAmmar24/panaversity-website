@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
-import  {checkUserVerification}  from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
 import fetchProfile from "@/src/lib/getProfile";
@@ -23,7 +22,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
-  // Fetch user data when component mounts
+
   // useEffect(() => {
   //   const fetchUserData = async () => {
   //     try {

@@ -1,17 +1,15 @@
-import  {checkUserVerification}  from "@/src/actions/profile";
 import Error from "../Error/error_message";
 
-const Welcome: React.FC = async () => {
-  let profile: ProfileData | null = null;
+interface WelcomeProps {
+  profile: {
+    full_name: string;
+  } | null;
+}
 
-  try {
-    // Attempt to fetch the profile data
-    profile = await checkUserVerification();
-  } catch (err) {
-    console.error("Error fetching profile data:", err); // Log error for debugging
-  }
+const Welcome: React.FC<WelcomeProps> = ({ profile }) => {
 
-  // If no profile is returned (due to an error), display an error message
+
+
   if (!profile) {
     return (
       <Error message="Failed to load profile data. Please try again later." />

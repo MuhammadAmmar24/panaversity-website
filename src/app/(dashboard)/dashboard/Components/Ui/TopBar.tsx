@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import Dropdown from "./TopbarDropdown";
-import  {checkUserVerification}  from "@/src/actions/profile";
+import  fetchProfile  from "@/src/lib/getProfile";
 import Error from "../Error/error_message";
 
 const TopBar: React.FC = async () => {
@@ -10,7 +10,7 @@ const TopBar: React.FC = async () => {
 
   // Fetch the profile data with error handling
   try {
-    profile = await checkUserVerification();  
+    profile = await fetchProfile();  
   } catch (error) {
     console.error("Error fetching profile data:", error);
     // In case of an error, you could return default data or handle it appropriately
