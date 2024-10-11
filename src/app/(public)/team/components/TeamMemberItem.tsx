@@ -29,7 +29,7 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
       <p className="text-sm mt-1">{member.bio}</p>
       <div className="flex justify-center items-center space-x-3 mt-3">
         {member.socialLinks.map((link: SocialLink, index: number) => (
-          <Link key={index} href={link.href} className="text-gray-500 hover:text-gray-900">
+          <Link key={index} href={link.href} target="_blank" className="text-gray-500 hover:text-gray-900">
             <FontAwesomeIcon icon={link.icon} />
           </Link>
         ))}
