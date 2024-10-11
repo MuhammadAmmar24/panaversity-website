@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
             links={[
               { name: "About Us", href: "/" },
               { name: "Our Mission", href: "/" },
-              { name: "Company History", href: "/" },
+              { name: "Programs", href: "/programs/flagship-programs" },
               { name: "Testimonials", href: "/" },
               { name: "Careers", href: "/" },
             ]}
