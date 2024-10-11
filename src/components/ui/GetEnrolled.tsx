@@ -187,7 +187,7 @@ export default function GetEnrolled({
           if (
             result.message &&
             result.message.includes(
-              "Seat is already reserved. Please complete payment."
+              "Student is already fully enrolled in the course."
             )
           ) {
             // Automatically route to the dashboard
@@ -196,7 +196,6 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
-    
           }
         }
       } catch (error: any) {
