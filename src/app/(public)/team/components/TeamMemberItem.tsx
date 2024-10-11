@@ -1,21 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-
-type SocialLink = {
-  href: string;
-  icon: any;
-};
-
-type TeamMember = {
-  picture: string;
-  fullName: string;
-  designation: string;
-  bio: string;
-  socialLinks: SocialLink[];
-};
+import { TeamMember, SocialLink } from "../../../../types/team";
 
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
   <div className="w-[280px] mt-5">
@@ -50,21 +37,5 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
     </div>
   </div>
 );
-
-// PropTypes validation
-TeamMemberItem.propTypes = {
-  member: PropTypes.shape({
-    picture: PropTypes.string.isRequired,
-    fullName: PropTypes.string.isRequired,
-    designation: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
-    socialLinks: PropTypes.arrayOf(
-      PropTypes.shape({
-        href: PropTypes.string.isRequired,
-        icon: PropTypes.object.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-};
 
 export default TeamMemberItem;

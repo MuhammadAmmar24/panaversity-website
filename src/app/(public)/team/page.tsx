@@ -1,7 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import TeamHeader from "@/src/app/(public)/team/components/TeamHeader";
 import TeamGrid from "@/src/app/(public)/team/components/TeamGrid";
-import CardSkeleton from "@/src/components/ui/skeletons/CardSkeleton";
 
 const TeamPage = () => {
   return (
