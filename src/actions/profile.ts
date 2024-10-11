@@ -55,12 +55,12 @@ export const update_user_Profile = async (
 
   try {
     // Make the PATCH request to update the profile
-    const response = await fetch(`${process.env.API_URL}/profile/update`, {
+    const response = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/user/profile`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_SECRET}`,
+        Authorization: `Bearer ${process.env.USER_MANAGEMENT_API_SECRET}`,
       },
       body: JSON.stringify(validationResult.data),
     });
