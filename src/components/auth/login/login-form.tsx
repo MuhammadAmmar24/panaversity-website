@@ -32,29 +32,29 @@ export const LoginForm = () => {
   const searchParams = useSearchParams();
 
   // Get all the query params
-  // const redirect_uri = searchParams.get("redirect_uri");
-  // const client_id = searchParams.get("client_id");
-  // const response_type = searchParams.get("response_type");
-  // const code = searchParams.get("code");
-  // const state = searchParams.get("state");
+  const redirect_uri = searchParams.get("redirect_uri");
+  const client_id = searchParams.get("client_id");
+  const response_type = searchParams.get("response_type");
+  const code = searchParams.get("code");
+  const state = searchParams.get("state");
 
-  // const queryParams =
-  //   `?redirect_uri=${redirect_uri}` +
-  //   `&state=${state}` +
-  //   `&response_type=${response_type}` +
-  //   `&client_id=${client_id}` +
-  //   `&code=${code}`;
+  const queryParams =
+    `?redirect_uri=${redirect_uri}` +
+    `&state=${state}` +
+    `&response_type=${response_type}` +
+    `&client_id=${client_id}` +
+    `&code=${code}`;
 
-  // let callbackUrl: string | null = null;
+  let callbackUrl: string | null = null;
 
-  // if (redirect_uri) {
-  //   callbackUrl = `/admin/dashboard${queryParams}`;
-  // }
+  if (redirect_uri) {
+    callbackUrl = `/admin/dashboard${queryParams}`;
+  }
 
-  // const urlError =
-  //   searchParams.get("error") === "OAuthAccountNotLinked"
-  //     ? "Email already in use with different provider!"
-  //     : "";
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider!"
+      : "";
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -101,16 +101,21 @@ export const LoginForm = () => {
   
           // Retrieve the previous path from localStorage
           const previousPath = localStorage.getItem("previousPath");
-  
+          console.log("Previous path: ", previousPath);
           if (previousPath) {
             // Redirect to the previous path after login
-            router.push(previousPath);
+            console.log("Redirecting to previous path");
+            window.location.href = previousPath;  // Replaces window.location.href
             // Clear the previous path from localStorage
             localStorage.removeItem("previousPath");
+            console.log("Previous path cleared");
           } else {
             console.log("No previous path stored");
+
             // If no previous path is stored, fallback to default redirect
-            router.push("/dashboard");  // Replaces window.location.href
+            window.location.href = "/dashboard";  // Replaces window.location.href
+
+            console.log("Redirecting to dashboard");
           }
         }
       });
@@ -177,7 +182,7 @@ export const LoginForm = () => {
             />
           </>
         </div>
-        <FormError message={error} />
+        <FormError message={error || urlError} />
         <FormSuccess message={success} />
         <Button
           disabled={isPending}
