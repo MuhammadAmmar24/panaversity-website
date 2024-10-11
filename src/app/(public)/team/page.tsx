@@ -1,3 +1,4 @@
+"use client"
 import React, { Suspense, useState } from "react";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -80,12 +81,12 @@ TeamMemberItem.propTypes = {
 
 const TeamMember = () => {
   // State to handle visible team members
-  // const [visibleMembers, setVisibleMembers] = useState(9);
+  const [visibleMembers, setVisibleMembers] = useState(9);
 
   // Function to load more team members
-  // const handleLoadMore = () => {
-  //   setVisibleMembers((prev) => prev + 9);
-  // };
+  const handleLoadMore = () => {
+    setVisibleMembers((prev) => prev + 9);
+  };
 
   return (
     <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
@@ -119,7 +120,7 @@ const TeamMember = () => {
         
 
         {/* Load More Button */}
-        {/* {visibleMembers < allTeamMembers.length && (
+        {visibleMembers < allTeamMembers.length && (
           <div className="flex justify-center mt-8">
             <button
               onClick={handleLoadMore}
@@ -128,7 +129,7 @@ const TeamMember = () => {
               Load More
             </button>
           </div>
-        )} */}
+        )}
       </div>
       </Suspense>
     </section>
