@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { TeamMember, SocialLink } from "../types/team";
+import { TeamMember, SocialLink } from "../../../../types/team";
 
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
   <div className="w-[280px] mt-5">

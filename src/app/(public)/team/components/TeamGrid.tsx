@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { allTeamMembers } from "@/src/constants/teams";
 import TeamMemberItem from "./TeamMemberItem";
-import { TeamMember } from "../types/team";
+import { TeamMember } from "../../../../types/team";
 
 const TeamGrid = () => {
   const [visibleMembers, setVisibleMembers] = useState(9);
