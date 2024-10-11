@@ -2,30 +2,38 @@
 import * as z from "zod";
 import { UpdatePasswordSchema } from "@/src/schemas/userschema";
 
-export const updatepassword = async (values: z.infer<typeof UpdatePasswordSchema>) => {
+export const updatePassword = async (values: z.infer<typeof UpdatePasswordSchema>) => {
+  // Validate the input fields
   const validatedFields = UpdatePasswordSchema.safeParse(values);
 
+  // Return error if validation fails
   if (!validatedFields.success) {
     return { error: "Invalid fields!" };
   }
 
-  const { otp, new_password } = validatedFields.data;
+  const { token, new_password } = validatedFields.data;
 
-  // Send Data in JSON Format
-  const update_password = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/api/v1/auth/verify-otp-update-password?otp=${otp}&new_password=${new_password}`, {
+
+  const updatePassword = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/auth/reset-password/update?token=${token}&new_password=${new_password}`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Accept": "application/json",
     },
     cache: "no-store",
   });
 
-  console.log('update_password', update_password.status, update_password.statusText);
+  console.log(updatePassword.status, updatePassword.statusText);
 
-  if (update_password.status !== 200) {
-    const error = await update_password.json();
-    return { error: error.detail };
+  // Handle response and status codes
+  if (updatePassword.status === 404) {
+    return { error: updatePassword.statusText };
+
+  } else if (updatePassword.status === 400) {
+    return { error: "Invalid or expired password update link" };
+  }  else if (updatePassword.status === 403) {
+    return { error: "User is not verified" };
+  } else if (updatePassword.status === 200) {
+    return { message: "Password updated successfully" };
   }
-  
-  return { success: "Password Updated successfully" };
+
 };

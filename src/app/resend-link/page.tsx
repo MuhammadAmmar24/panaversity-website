@@ -13,7 +13,7 @@ const page = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
     <Suspense>
-      <CardWrapper headerLabel="Resend Link">
+      <CardWrapper headerLabel="Verify Your Email">
         <ResendLink />
       </CardWrapper>
     </Suspense>

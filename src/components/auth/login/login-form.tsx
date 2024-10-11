@@ -92,33 +92,36 @@ export const LoginForm = () => {
         }
   
         if (data?.success) {
-          // form.reset();
           setSuccess(data.success);
           toast({
             title: "Login Success",
             description: data.message ? data.message : "Welcome to Panaversity",
             action: <ToastAction altText="Close">Close</ToastAction>,
           });
+  
+          // Retrieve the previous path from localStorage
+          const previousPath = localStorage.getItem("previousPath");
+          console.log("Previous path: ", previousPath);
+          if (previousPath) {
+            // Redirect to the previous path after login
+            console.log("Redirecting to previous path");
+            window.location.href = previousPath;  // Replaces window.location.href
+            // Clear the previous path from localStorage
+            localStorage.removeItem("previousPath");
+            console.log("Previous path cleared");
+          } else {
+            console.log("No previous path stored");
 
-                 // Retrieve the previous path from localStorage
-                 const previousPath = localStorage.getItem("previousPath");
+            // If no previous path is stored, fallback to default redirect
+            window.location.href = "/dashboard";  // Replaces window.location.href
 
-                 if (previousPath) {
-                   // Redirect to the previous path after login
-                  //  router.push(previousPath);
-                   // Clear the previous path from localStorage
-                   localStorage.removeItem("previousPath");
-                   router.back();
-                 } else {
-                  console.log("No previous path stored");
-                   // If no previous path is stored, fallback to default redirect
-                   window.location.href = "/dashboard";
-                 }
-
+            console.log("Redirecting to dashboard");
+          }
         }
       });
     });
   };
+  
 
 
  
