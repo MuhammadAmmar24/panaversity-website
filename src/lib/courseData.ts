@@ -20,7 +20,7 @@ export async function getCourseData(c_id: number) {
     }
 
     const responseData = await response.json();
-    // console.log(responseData);
+
 
     return {
       type: "success",

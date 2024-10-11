@@ -3,7 +3,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { useState, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoginSchema } from "@/src/schemas/userschema";
@@ -73,7 +73,7 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-
+  
     startTransition(() => {
       login(values).then((data) => {
         if (data?.error) {
@@ -90,20 +90,41 @@ export const LoginForm = () => {
           }
           form.setValue("password", "");
         }
-
+  
         if (data?.success) {
-          form.reset();
           setSuccess(data.success);
           toast({
             title: "Login Success",
             description: data.message ? data.message : "Welcome to Panaversity",
             action: <ToastAction altText="Close">Close</ToastAction>,
           });
-          router.back();
+  
+          // Retrieve the previous path from localStorage
+          const previousPath = localStorage.getItem("previousPath");
+          console.log("Previous path: ", previousPath);
+          if (previousPath) {
+            // Redirect to the previous path after login
+            console.log("Redirecting to previous path");
+            window.location.href = previousPath;  // Replaces window.location.href
+            // Clear the previous path from localStorage
+            localStorage.removeItem("previousPath");
+            console.log("Previous path cleared");
+          } else {
+            console.log("No previous path stored");
+
+            // If no previous path is stored, fallback to default redirect
+            window.location.href = "/dashboard";  // Replaces window.location.href
+
+            console.log("Redirecting to dashboard");
+          }
         }
       });
     });
   };
+  
+
+
+ 
 
   return (
     <Form {...form}>

@@ -4,13 +4,13 @@ import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
 import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
 import { getCoursePrice } from "@/src/actions/courses";
-import { checkUserVerification } from "@/src/actions/profile";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
   batch_id,
   course_batch_program_id,
+  profile_id
 }: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
@@ -27,7 +27,6 @@ export default function GetEnrolled({
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const [profile, setProfile] = useState<ProfileData | null>(null);
   const paymentMethods = ["Kuickpay", "Stripe"];
   const [focusedInput, setFocusedInput] = useState("");
 
@@ -37,13 +36,13 @@ export default function GetEnrolled({
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-        console.log(course_batch_program_id);
+
         const query = { course_batch_program_id: course_batch_program_id };
 
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
-          console.log(result.data);
+
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -80,18 +79,8 @@ export default function GetEnrolled({
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const user_data = await checkUserVerification();
-
-        setProfile(user_data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-
+   
     fetchTimeSlots();
-    fetchUserData();
     fetchEnrollmentPrice();
   }, []);
 
@@ -162,7 +151,7 @@ export default function GetEnrolled({
     if (!isDayAndTimeSelected) return;
 
     const payload: any = {
-      student_id: profile?.id, // Assuming this is just a placeholder; replace it with the actual student_id
+      student_id: profile_id, // Assuming this is just a placeholder; replace it with the actual student_id
       program_id: program_id,
       batch_id: batch_id,
       course_batch_program_id: course_batch_program_id,
@@ -171,13 +160,14 @@ export default function GetEnrolled({
       package_id: enrollmentPackage,
     };
 
-    // Log the payload for debugging
     console.log("Enrollment Payload:", payload);
+    // Log the payload for debugging
+    
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        console.log("Enrollment Result:", result); // Log the result for debugging
+        
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
@@ -185,10 +175,11 @@ export default function GetEnrolled({
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
           if (url) {
-            console.log("Redirecting to Stripe URL:", url);
-            window.open(url, "_blank"); // Open the Stripe payment URL
+           
+            router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
+            router.push('/dashboard')
           }
         } else {
           // If result.type is "error", show the error message from the backend
@@ -205,11 +196,13 @@ export default function GetEnrolled({
             setEnrollmentError(
               result.message || "An error occurred during enrollment."
             );
+    
           }
         }
       } catch (error: any) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later."); // General error message for unexpected failures
+   
       }
     });
   };
@@ -296,7 +289,7 @@ export default function GetEnrolled({
                   const selectedSlot = timeSlotsForSelectedDay.find(
                     (slot: any) => slot.timeSlotId === selectedId
                   );
-                  console.log("Selected Time Slot:", selectedSlot);
+      
                 }}
                 disabled={!selectedDay}
                 onFocus={() => setFocusedInput("timeSlot")}

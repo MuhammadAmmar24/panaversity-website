@@ -7,7 +7,7 @@ import { refreshAccessToken } from "./actions/refresh_token";
 export async function middleware(req: NextRequest) {
   // Define routes
   const protectedRoutes = ["/auth/verification", "/dashboard"];
-  const authRoutes = ["/login", "/register", "/verify", "/verification", "/resend-link"]; // Routes inaccessible when logged in
+  const authRoutes = ["/login", "/register", "/verify", "/verification", "/resend-link", "update-password"]; // Routes inaccessible when logged in
 
   // Retrieve tokens from cookies
   const token = req.cookies.get("user_data")?.value || "";

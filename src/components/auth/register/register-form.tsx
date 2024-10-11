@@ -99,8 +99,8 @@ export const RegisterForm = () => {
               </Link>
             ),
           });
-
           router.replace("/verify");
+
         }
       });
     });
@@ -120,7 +120,7 @@ export const RegisterForm = () => {
                   <Input
                     {...field}
                     disabled={isPending}
-                    placeholder="John Doe"
+                    placeholder="Enter your full name"
                   />
                 </FormControl>
                 <FormMessage />
@@ -137,7 +137,7 @@ export const RegisterForm = () => {
                   <Input
                     {...field}
                     disabled={isPending}
-                    placeholder="user@example.com"
+                    placeholder="user@email.com"
                     type="email"
                   />
                 </FormControl>

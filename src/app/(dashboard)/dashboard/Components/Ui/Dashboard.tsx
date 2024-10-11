@@ -1,4 +1,3 @@
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
@@ -8,6 +7,9 @@ import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
 import Link from "next/link";
+import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
+import { Suspense } from "react";
+import {getStudentCourses} from '@/src/lib/getStudentCourses'
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -60,7 +62,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
     return (
       <div className="flex flex-col justify-center">
         <h1 className="md:text-4xl font-bold text-center mt-20">
-          You are not enrolled in any courses.
+          You are not enrolled in any course.
         </h1>
         {/* CTA Button */}
         <div className="flex justify-center mt-8">
@@ -104,4 +106,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   );
 };
 
-export default Dashboard;
+// Exporting Dashboard wrapped in Suspense
+const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+  <Suspense fallback={<DashboardSkeleton />}>
+    <Dashboard profileId={profileId} />
+  </Suspense>
+);
+
+export default DashboardWithSuspense;

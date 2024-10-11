@@ -3,9 +3,9 @@
 import * as z from "zod";
 import { cookies } from "next/headers";
 import { LoginSchema } from "@/src/schemas/userschema";
-import { checkUserVerification } from "./profile";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import  {checkUserVerification}  from "@/src/actions/profile";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -35,36 +35,33 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.log(errorData)
-      console.log(response.status)
-
+  
       if (response.status === 401) {
         // if (errorData.detail === "User with this email is not verified") {
         //   return {
         //     error: "Email not verified",
         //     message: "User with this email is not verified",
         //   };
-        // } 
+        // }
         if (errorData.detail === "Incorrect email or password") {
           return {
             error: "Incorrect email or password",
             message: "Incorrect email or password",
           };
         }
-      } else if (response.status === 403){
-
-        console.log("marzi hy.")
-
-          return {
-            error: "Email not verified",
-            message: "User is not verified",
-          };
+      } else if (response.status === 403) {
+        
+        return {
+          error: "Email not verified",
+          message: "User is not verified",
+        };
       }
       throw new Error(errorData.message || "An error occurred during login");
     }
 
     const userData = await response.json();
-    console.log(userData);
+
+
 
     const expiresInMilliseconds = userData.expires_in * 1000;
 

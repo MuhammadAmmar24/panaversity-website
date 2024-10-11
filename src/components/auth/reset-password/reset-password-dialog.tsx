@@ -1,7 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import  ResetPassword  from "./reset-password";
@@ -12,6 +11,27 @@ import { IoClose } from "react-icons/io5";
 export default function ResetPasswordDialog() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'updatePassword' && event.newValue === 'true') {
+        // Close the dialog
+        setOpen(false);
+        // Optionally, redirect the user or update the state
+        router.replace('/login'); // Redirect to dashboard or any desired page
+        // Clear the flag
+        localStorage.removeItem('updatePassword');
+      }
+    };
+
+    // Add the event listener
+    window.addEventListener('storage', handleStorageChange);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [router]);
 
 
   return (
