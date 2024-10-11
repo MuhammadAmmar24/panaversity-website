@@ -32,29 +32,29 @@ export const LoginForm = () => {
   const searchParams = useSearchParams();
 
   // Get all the query params
-  const redirect_uri = searchParams.get("redirect_uri");
-  const client_id = searchParams.get("client_id");
-  const response_type = searchParams.get("response_type");
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
+  // const redirect_uri = searchParams.get("redirect_uri");
+  // const client_id = searchParams.get("client_id");
+  // const response_type = searchParams.get("response_type");
+  // const code = searchParams.get("code");
+  // const state = searchParams.get("state");
 
-  const queryParams =
-    `?redirect_uri=${redirect_uri}` +
-    `&state=${state}` +
-    `&response_type=${response_type}` +
-    `&client_id=${client_id}` +
-    `&code=${code}`;
+  // const queryParams =
+  //   `?redirect_uri=${redirect_uri}` +
+  //   `&state=${state}` +
+  //   `&response_type=${response_type}` +
+  //   `&client_id=${client_id}` +
+  //   `&code=${code}`;
 
-  let callbackUrl: string | null = null;
+  // let callbackUrl: string | null = null;
 
-  if (redirect_uri) {
-    callbackUrl = `/admin/dashboard${queryParams}`;
-  }
+  // if (redirect_uri) {
+  //   callbackUrl = `/admin/dashboard${queryParams}`;
+  // }
 
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email already in use with different provider!"
-      : "";
+  // const urlError =
+  //   searchParams.get("error") === "OAuthAccountNotLinked"
+  //     ? "Email already in use with different provider!"
+  //     : "";
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -177,7 +177,7 @@ export const LoginForm = () => {
             />
           </>
         </div>
-        <FormError message={error || urlError} />
+        <FormError message={error} />
         <FormSuccess message={success} />
         <Button
           disabled={isPending}
