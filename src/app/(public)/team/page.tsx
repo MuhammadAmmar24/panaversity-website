@@ -6,12 +6,12 @@ import CardSkeleton from "@/src/components/ui/skeletons/CardSkeleton";
 const TeamPage = () => {
   return (
     <section className="light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
-      <Suspense fallback={<CardSkeleton />}>
+      <div>
         <div className="w-full mb-32">
           <TeamHeader />
           <TeamGrid />
         </div>
-      </Suspense>
+      </div>
     </section>
   );
 };
