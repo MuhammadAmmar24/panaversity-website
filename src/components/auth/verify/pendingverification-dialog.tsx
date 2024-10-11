@@ -35,7 +35,7 @@ export default function EmailVerificationPendingDialog() {
 
 
   return (
-    <Dialog.Root open={open} onOpenChange={setOpen}>
+    <Dialog.Root open={open} onOpenChange={() => router.back()}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
         <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-8 w-full max-w-md max-h-[85vh] overflow-y-auto">
