@@ -1,28 +1,30 @@
 import { auth } from "@/src/auth";
 
-export default async function fetchProfile() { 
-    
-    const session = await auth(); // Getting JWT From Cookies
-    if (!session) {
+export default async function fetchProfile() {
+  const session = await auth(); // Getting JWT From Cookies
 
-      return { isVerified: false, redirectTo: "/login" };
-    }
+  if (!session) {
+    return { isVerified: false, redirectTo: "/login" };
+  }
 
-    const token = session.access_token;
-    try {
-      const response = await fetch(`${process.env.BACKEND_AUTH_SERVER_URL}/user/profile`, {
+  const token = session.access_token;
+
+  try {
+    const response = await fetch(
+      `${process.env.BACKEND_AUTH_SERVER_URL}/user/profile`,
+      {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         cache: "force-cache",
-  
-      });
-      const profile = await response.json();
+      }
+    );
+    const profile = await response.json();
 
-      return profile;
-    } catch (error: any) {
-      console.error(error.message);
-    }
+    return profile;
+  } catch (error: any) {
+    console.error(error.message);
   }
+}
