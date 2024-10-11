@@ -35,22 +35,20 @@ function ResetPassword() {
   const onSubmit = (values: z.infer<typeof RecoverPasswordSchema>) => {
     setError("");
     setSuccess("");
-
+  
     startTransition(() => {
       resetPassword(values).then((data) => {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          // form.reset();
           toast({
             title: "Request Failed",
             description: data.error,
             variant: "destructive",
           });
-          if (error === "User is not verified") {
+          if (data.error === "User is not verified") {
             router.replace('/verify');
           }
-
         } else if (data?.message) {
           setError("");
           setSuccess(data.message);
@@ -58,17 +56,15 @@ function ResetPassword() {
             title: "Email sent Successfully",
             description: "An email has been sent to reset your password.",
           });
-          
-          console.log(success);
-          if (success === "Password reset link sent successfully") {
-            window.location.replace('/login');
+  
+          if (data.message === "Password reset link sent successfully") {
+            // router.replace('/login');
           }
-          
         }
       });
     });
   };
-
+  
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

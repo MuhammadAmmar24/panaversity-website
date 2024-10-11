@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
-import  {checkUserVerification}  from "@/src/actions/profile";
 import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
 import fetchProfile from "@/src/lib/getProfile";
@@ -13,17 +12,15 @@ const AccountSettings: React.FC<any> = ({profile}) => {
   console.log(profile)
   
   // State for profile, personal, and address information
-  const [profileInfo, setProfileInfo] = useState(initialData.profileInfo);
   const [personalInfo] = useState(initialData.personalInfo);
   const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
   // const [profile, setProfile] = useState<ProfileData | null>(profile_r);
   // const [loading, setLoading] = useState<boolean>(true); // State for loading spinner
 
-  // State for toggling edit modes
-  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  // State for toggling edit modes for the address section only
   const [isEditingAddress, setIsEditingAddress] = useState(false);
 
-  // Fetch user data when component mounts
+
   // useEffect(() => {
   //   const fetchUserData = async () => {
   //     try {
@@ -45,11 +42,6 @@ const AccountSettings: React.FC<any> = ({profile}) => {
   //   // fetchUserData(); // Fetch user data when component loads
   // }, []);
 
-  // Handle changes to profile input fields
-  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
-  };
-
   // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
@@ -57,10 +49,8 @@ const AccountSettings: React.FC<any> = ({profile}) => {
 
   // Simulate submitting updated data (This can be replaced with an actual API call)
   const submitChanges = () => {
-    const updatedData = {
-      profileInfo,
-      addressInfo,
-    };
+    // You can implement the API call here
+    setIsEditingAddress(false);
   };
 
   // Show loading skeleton while profile data is being fetched
@@ -75,22 +65,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
           Account Settings
         </h1>
 
-        <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-6 pt-2 overflow-hidden">
-          <div className="text-end">
-            <button
-              className="text-gray-500 hover:text-black p-2 rounded-full"
-              onClick={() => {
-                if (isEditingProfile) submitChanges();
-                setIsEditingProfile(!isEditingProfile);
-              }}
-            >
-              {isEditingProfile ? (
-                <AiOutlineCheck className="text-xl" />
-              ) : (
-                <AiOutlineEdit className="text-xl" />
-              )}
-            </button>
-          </div>
+        <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-4 pt-2 md:pt-4 overflow-hidden">
           <div className="flex justify-between items-center">
             <div className="flex items-center flex-wrap justify-center gap-2 md:gap-4">
               <Image
@@ -101,28 +76,16 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
               <div>
-                {isEditingProfile ? (
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={profile?.full_name || ""}
-                    onChange={handleProfileChange}
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full mb-2 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
-                  />
-                ) : (
-                  <>
-                    <p className="text-base sm:text-xl">{profile?.full_name}</p>
-                    <p className="text-gray-500 text-xs sm:text-sm">
-                      {profile?.email}
-                    </p>
-                  </>
-                )}
+                {/* Username and email displayed without editing functionality */}
+                <p className="text-base sm:text-xl">{profile?.full_name}</p>
+                <p className="text-gray-500 text-xs sm:text-sm">
+                  {profile?.email}
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Personal Information Section (Read-only) */}
         <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
           <div className="flex justify-between">
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
@@ -130,10 +93,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
             </h2>
             <button
               className="text-gray-500 hover:text-black p-2 rounded-full"
-              onClick={() => {
-                if (isEditingAddress) submitChanges(); // Submit changes if editing is active
-                setIsEditingAddress(!isEditingAddress); // Toggle edit mode
-              }}
+              onClick={() => setIsEditingAddress(!isEditingAddress)}
             >
               {isEditingAddress ? (
                 <AiOutlineCheck className="text-xl" />
@@ -144,7 +104,6 @@ const AccountSettings: React.FC<any> = ({profile}) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
-            {/* Personal information fields  */}
             <div>
               <p className="text-gray-600">Phone</p>
               <p>+{profile?.phone}</p>
@@ -155,10 +114,8 @@ const AccountSettings: React.FC<any> = ({profile}) => {
             </div>
           </div>
 
-          {/* Address Information Section  */}
           <div className="mt-4 text-sm sm:text-base">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Editable address fields */}
               <div>
                 <p className="text-gray-600">Country</p>
                 {isEditingAddress ? (
@@ -167,7 +124,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     name="country"
                     value={addressInfo.country}
                     onChange={handleAddressChange}
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
+                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
                   <p>{addressInfo.country}</p>
@@ -181,7 +138,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     name="city"
                     value={addressInfo.city}
                     onChange={handleAddressChange}
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
+                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
                   <p>{addressInfo.city}</p>
@@ -198,7 +155,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     name="address"
                     value={addressInfo.address}
                     onChange={handleAddressChange}
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
+                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
                   <p>{addressInfo.address}</p>
@@ -212,17 +169,27 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     name="postalCode"
                     value={addressInfo.postalCode}
                     onChange={handleAddressChange}
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-full focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100"
+                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
                   <p>{addressInfo.postalCode}</p>
                 )}
               </div>
             </div>
+
+            {isEditingAddress && (
+              <div className="flex justify-center md:justify-end mt-5">
+                <button
+                  className="bg-accent text-white px-8 py-3 rounded-full hover:text-accent hover:bg-white border-2 border-accent "
+                  onClick={submitChanges}
+                >
+                  Save
+                </button>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* Password settings component */}
         <PasswordSettings />
       </section>
     </main>

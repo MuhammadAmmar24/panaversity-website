@@ -1,9 +1,6 @@
 "use client"
-import { resendVerification } from '@/src/actions/resend-verification';
-import { Button } from '../../ui/button';
-import { useToast } from '../../ui/use-toast';
 import Link from 'next/link';
-import { ToastAction } from '../../ui/toast';
+
 import { FaClock } from "react-icons/fa6";
 
 
