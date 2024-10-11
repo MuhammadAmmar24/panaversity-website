@@ -27,8 +27,7 @@ export default function GetEnrolled({
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
-  const paymentMethods = ["Kuickpay", "Stripe"];
-  const [focusedInput, setFocusedInput] = useState("");
+  const paymentMethods = ["Stripe"];
 
   const router = useRouter();
 
@@ -234,8 +233,6 @@ export default function GetEnrolled({
                   setSelectedDay(e.target.value);
                   setSelectedTimeSlot("");
                 }}
-                onFocus={() => setFocusedInput("day")}
-                onBlur={() => setFocusedInput("")}
               >
                 <option value="" disabled hidden>
                   Select Day
@@ -292,8 +289,6 @@ export default function GetEnrolled({
       
                 }}
                 disabled={!selectedDay}
-                onFocus={() => setFocusedInput("timeSlot")}
-                onBlur={() => setFocusedInput("")}
               >
                 <option value="" disabled hidden>
                   Select Time
@@ -337,8 +332,6 @@ export default function GetEnrolled({
                 value={selectedPaymentMethod}
                 onChange={(e) => setSelectedPaymentMethod(e.target.value)}
                 disabled={!isDayAndTimeSelected}
-                onFocus={() => setFocusedInput("payment")}
-                onBlur={() => setFocusedInput("")}
               >
                 <option value="" disabled hidden>
                   Select Payment Method
