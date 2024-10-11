@@ -21,24 +21,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
 
   const router = useRouter();
 
-  const handleClick = async () => {
-    try {
-      setIsLoading(true);
 
-      const res = await user_verify(); 
-
-      if (res?.redirectTo) {
-        router.push("/login");
-      } else {
-        router.push("/programs/flagship-program");
-      }
-    } catch (error) {
-      console.error("Verification failed", error);
-      setError("Verification failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  }
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -76,7 +59,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
   }
 
   if (verified === true) {
-    return <VerifiedComponent onGetStarted={handleClick} />;
+    return <VerifiedComponent  />;
   }
 
   return <VerificationFailedComponent />;
@@ -121,7 +104,7 @@ const VerifyingComponent = () => (
   </div>
 );
 
-const VerifiedComponent = ({ onGetStarted }: { onGetStarted: () => void }) => (
+const VerifiedComponent = () => (
   <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
@@ -135,7 +118,7 @@ const VerifiedComponent = ({ onGetStarted }: { onGetStarted: () => void }) => (
       Your email was verified. You can continue using the application.
     </p>
     <Link
-      href={'/programs'}
+      href={'/login'}
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Get Started
