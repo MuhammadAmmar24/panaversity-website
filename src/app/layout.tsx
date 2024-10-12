@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -19,7 +20,19 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
+  openGraph:{
+    title: 'Panaversity',
+    description: 'Learn Generative AI with AI-powered Panaversity.',
+    images:[
+      {
+        url:`${siteUrl}/logoicon.png`
+      }
+    ]
+
+  },
   title: {
     default: "Panaversity",
     template: "%s | Panaversity",
