@@ -19,17 +19,20 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
 export const metadata: Metadata = {
   openGraph: {
     title: "Panaversity",
     description: "Learn Generative AI with AI-powered Panaversity.",
+    url:siteUrl,
     images: [
       {
         url: `${siteUrl}/logoicon.png`,
+        alt: "Panaversity Logo"
       },
     ],
+    siteName: "Panaversity: AI-Powered Online University"
   },
   twitter: {
     card: "summary",
@@ -40,6 +43,8 @@ export const metadata: Metadata = {
         url: `${siteUrl}/logoicon.png`,
       },
     ],
+    site:"Panaversity: AI-Powered Online University"
+  
   },
   title: {
     default: "Panaversity",
