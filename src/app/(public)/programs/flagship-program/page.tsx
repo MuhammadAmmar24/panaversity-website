@@ -1,10 +1,11 @@
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
-import CoursesClient from '@/src/components/programs/courses';
+import CoursesClient from "@/src/components/programs/courses";
 import type { Metadata } from "next";
+import Breadcrumbs from "@/src/components/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Flagship Program",
-  description: `Discover Panaversity's Flagship Program featuring advanced courses on Generative AI, cloud-native technologies, custom GPTs. and AI Agents, Designed for learners aiming to master the future of AI and technology.`
+  description: `Discover Panaversity's Flagship Program featuring advanced courses on Generative AI, cloud-native technologies, custom GPTs. and AI Agents, Designed for learners aiming to master the future of AI and technology.`,
 };
 
 async function fetchCourses() {
@@ -17,9 +18,7 @@ async function fetchCourses() {
   const result = await getProgramCoursesWithOpenRegistration(query);
 
   if (result.type === "success" && result.data) {
-
     return result.data.data;
-   
   } else {
     throw new Error(result.message);
   }
@@ -29,26 +28,39 @@ export default async function Courses() {
   const courses = await fetchCourses();
 
   return (
-
     <section className="light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
-    <div className="w-full mb-32">
-      {/* program header */}
-      <div className="flex justify-center items-center bg-teamBg bg-cover">
-        <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] py-[7rem]">
-          <h2
-            className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"
-            style={{ wordSpacing: "0.2em" }}
-          >
-            Our Flagship Program
-          </h2>
+      <div className="w-full mb-32">
+        {/* program header */}
+        <div className="flex justify-center items-center bg-teamBg bg-cover">
+          <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-52 md:min-h-72 lg:min-h-[28rem]">
+            <div className="px-4">
+              <Breadcrumbs
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Programs", href: "/programs" },
+                  {
+                    label: "Flagship-Program",
+                    href: "/programs/flagship-program",
+                  },
+                ]}
+              />
+            </div>
+            <div>
+              <h2
+                className="text-[1.8rem] sm:text-[2rem] md:text-[3.6rem] text-background font-bold font-poppins tracking-tighter"
+                style={{ wordSpacing: "0.2em" }}
+              >
+                Our Flagship Program <br /> in Generative AI
+              </h2>
+              <p className="text-background/60 mb-2 p-4 mt-2 max-w-[28rem] mx-auto">
+                Our GenAI Program for Innovators and Creators
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <CoursesClient initialCourses={courses} />
-    </div>
-  </section>
-  
-  
+        <CoursesClient initialCourses={courses} />
+      </div>
+    </section>
   );
-    
-};
+}

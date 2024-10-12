@@ -2,37 +2,36 @@ import Link from 'next/link';
 import React from 'react';
 import { ChevronRight } from 'lucide-react'; // Assuming this is your ChevronRight component
 
-type BreadcrumbProps = {
-  program: string;
-  courseName: string;
+type BreadcrumbItem = {
+  label: string;
+  href?: string; // href is optional for the last item (current page)
 };
 
-const Breadcrumb: React.FC<BreadcrumbProps> = ({ program, courseName }) => {
+type BreadcrumbProps = {
+  items: BreadcrumbItem[]; // Array of breadcrumb items
+  separator?: React.ReactNode; // Optional custom separator (default: ChevronRight)
+};
+
+const Breadcrumbs: React.FC<BreadcrumbProps> = ({ items, separator = <ChevronRight className="w-4 h-4 mx-1" /> }) => {
   return (
     <nav className="mb-8">
-      <ol className="flex flex-wrap items-center space-x-1 text-xs mt-8 sm:text-sm font-medium text-white">
-        <li className="flex items-center ">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          <ChevronRight className="w-4 h-4 mx-1" />
-        </li>
-        <li className="flex items-center ">
-          <Link href="/programs" className="hover:underline">
-            Programs
-          </Link>
-          <ChevronRight className="w-4 h-4 mx-1" />
-        </li>
-        <li className="flex items-center">
-          <Link href={`/programs`} className="hover:underline">
-            {program}
-          </Link>
-          <ChevronRight className="w-4 h-4 mx-1" />
-        </li>
-        <li className="">{courseName}</li>
+      <ol className="flex flex-wrap items-center space-x-[1px] text-xs mt-8 sm:text-sm font-medium text-white">
+        {items.map((item, index) => (
+          <li key={index} className="flex items-center">
+            {item.href ? (
+              <Link href={item.href} className="hover:underline">
+                {item.label}
+              </Link>
+            ) : (
+              <span>{item.label}</span>
+            )}
+            {/* Render separator only if it's not the last item */}
+            {index < items.length - 1 && separator}
+          </li>
+        ))}
       </ol>
     </nav>
   );
 };
 
-export default Breadcrumb;
+export default Breadcrumbs;

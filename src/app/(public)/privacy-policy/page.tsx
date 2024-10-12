@@ -37,7 +37,7 @@ export default function PrivacyPolicy() {
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
               {privacypolicydata.headpolicy1}
             </h3>
-            <p className="text-sm sm:text-base font-medium text-gray-800">
+            <p className="  text-gray-900">
               {privacypolicydata.policy1subhead}
             </p>
             <ul className="list-disc pl-5 space-y-2 sm:space-y-3">
