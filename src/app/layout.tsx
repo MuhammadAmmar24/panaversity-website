@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -72,6 +75,8 @@ export default function RootLayout({
       >
         {children}
         {modal}
+        <SpeedInsights />
+
       </body>
     </html>
   );
