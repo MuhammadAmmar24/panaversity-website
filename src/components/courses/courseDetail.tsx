@@ -85,9 +85,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className="bg-teamBg bg-cover bg-center text-white">
-        <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
-          <div className="max-w-[1200px] mx-auto  px-4 sm:px-6 lg:px-8 py-4 md:py-12">
+      <section className=" flex justify-center items-center bg-teamBg bg-cover bg-center text-white">
+        <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-52 md:min-h-72 lg:min-h-[26rem]">
+          <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-3">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs 
               items={[
@@ -133,7 +133,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Price and Enroll Section */}
-              <div className="w-full md:w-1/3 mt-5 mb-9 md:mt-0">
+              <div className="w-full md:w-1/3 mt-5 mb-12 md:mt-0">
                 <div className="bg-background text-black p-6 rounded-lg shadow-lg w-full sm:w-auto sm:max-w-sm">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-gray-900 font-medium text-lg">
