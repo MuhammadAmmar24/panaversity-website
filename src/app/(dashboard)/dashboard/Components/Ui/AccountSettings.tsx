@@ -190,7 +190,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
           </div>
         </section>
 
-        <PasswordSettings />
+        <PasswordSettings profile_email={profile?.email}/>
       </section>
     </main>
   );
