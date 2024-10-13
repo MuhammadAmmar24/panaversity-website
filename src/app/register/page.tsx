@@ -1,6 +1,8 @@
 import { RegisterFormPage } from "@/src/components/auth/register/register-page";
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata : Metadata = {
@@ -34,11 +36,17 @@ export const metadata : Metadata = {
 
 const RegisterPage = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Suspense>
-        <RegisterFormPage />
-      </Suspense>
-    </div>
+    <main>
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <Suspense>
+          <Navbar/>
+          <div className="mt-10 mb-20">
+            <RegisterFormPage />
+          </div>
+        </Suspense>
+      </div>
+      <Footer/>
+    </main>
   );
 };
 
