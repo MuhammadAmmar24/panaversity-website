@@ -1,9 +1,10 @@
 import { UpcomingClassProps } from "../../types/types";
-import { FiCalendar, FiClock } from "react-icons/fi";
 import { SiZoom } from "react-icons/si";
 import { FaGithub } from "react-icons/fa";
 import { IoIosLink } from "react-icons/io";
 import { DiGithubFull } from "react-icons/di";
+import { HiMiniCalendar } from "react-icons/hi2";
+import { TbClockHour3 } from "react-icons/tb";
 import Link from "next/link";
 import Error from "../Error/error_message";
 
@@ -67,13 +68,13 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         <div className="flex justify-between items-center border-t text-gray-500 text-xs sm:text-sm md:text-base pt-4 -mt-4">
           {/* Date section */}
           <div className="flex items-center gap-2">
-            <FiCalendar className="w-4 sm:w-5 h-4 sm:h-5" />
+            <HiMiniCalendar className="w-4 sm:w-5 h-4 sm:h-5" />
             <time dateTime={date}>{date}</time> {/* Display class date */}
           </div>
 
           {/* Time section */}
           <div className="flex items-center gap-2">
-            <FiClock className="w-4 sm:w-5 h-4 sm:h-5" />
+            <TbClockHour3 className="w-4 sm:w-5 h-4 sm:h-5" />
             <time>{time}</time> {/* Display class time */}
           </div>
         </div>

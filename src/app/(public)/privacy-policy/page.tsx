@@ -1,9 +1,11 @@
 import { privacypolicydata } from "@/src/constants/privacypolicy";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Panaversity’s Privacy Policy",
-  description: `Learn how Panaversity, an AI-powered online university, safeguards your privacy. Our comprehensive privacy policy outlines how we collect, use, and protect your personal information as you engage with our Generative AI courses and services.`
+  description:
+    " Learn how Panaversity, an AI-powered online university, safeguards your privacy. Our comprehensive privacy policy outlines how we collect, use, and protect your personal information as you engage with our Generative AI courses and services.",
 };
 
 export default function PrivacyPolicy() {
@@ -28,7 +30,7 @@ export default function PrivacyPolicy() {
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
             {privacypolicydata.head2}
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed">
+          <p className="text-sm sm:text-base leading-relaxed">
             {privacypolicydata.paraline1}
           </p>
 
@@ -37,10 +39,10 @@ export default function PrivacyPolicy() {
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
               {privacypolicydata.headpolicy1}
             </h3>
-            <p className="  text-gray-900">
+            <p className="text-sm sm:text-base font-medium text-gray-800">
               {privacypolicydata.policy1subhead}
             </p>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3">
+            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
               <li>{privacypolicydata.policy1description1}</li>
               <li>{privacypolicydata.policy1description2}</li>
               <li>{privacypolicydata.policy1description3}</li>
@@ -55,7 +57,7 @@ export default function PrivacyPolicy() {
             <p className="text-sm sm:text-base font-medium text-gray-800">
               {privacypolicydata.policy2subhead}
             </p>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3">
+            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
               <li>{privacypolicydata.policy2description1}</li>
               <li>{privacypolicydata.policy2description2}</li>
               <li>{privacypolicydata.policy2description3}</li>
@@ -99,7 +101,7 @@ export default function PrivacyPolicy() {
             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
               {privacypolicydata.headpolicy6}
             </h3>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3">
+            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
               <li>{privacypolicydata.policy6description1}</li>
               <li>{privacypolicydata.policy6description2}</li>
             </ul>
@@ -134,12 +136,12 @@ export default function PrivacyPolicy() {
               <p className="text-sm sm:text-base">
                 {privacypolicydata.policy9description1}
               </p>
-              <a
-                href={`${privacypolicydata.contactlink}`}
-                className="text-green-500 hover:underline"
+              <Link
+                href={privacypolicydata.contactlink}
+                className="text-green-500 hover:underline text-sm sm:text-base"
               >
-                {privacypolicydata.contactlink}.{" "}
-              </a>
+                {privacypolicydata.contactlink}.
+              </Link>
             </div>
           </div>
         </div>
