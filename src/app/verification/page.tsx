@@ -1,6 +1,9 @@
 import Verify from "@/src/components/auth/verification/verify-user";
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/Footer";
+
 
 export const metadata: Metadata = {
   title: "Verify Account",
@@ -9,6 +12,8 @@ export const metadata: Metadata = {
 
 const verification = () => {
   return (
+    <>
+    <Navbar />
     <div className="flex justify-center items-center min-h-screen">
       <div className="bg-white  rounded-lg shadow-md ">
         <Suspense>
@@ -16,6 +21,8 @@ const verification = () => {
         </Suspense>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

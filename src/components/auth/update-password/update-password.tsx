@@ -19,7 +19,11 @@ import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
 import { updatePassword } from "@/src/app/actions/update-password";
 import { useRouter } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 type VerifyEmailProps = {
   token: string;
@@ -29,6 +33,9 @@ function UpdatePassword({ token }: VerifyEmailProps) {
   const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
@@ -59,6 +66,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
+          form.reset();
           setError("");
           setSuccess(data.message);
           toast({
@@ -86,12 +94,26 @@ function UpdatePassword({ token }: VerifyEmailProps) {
               <FormItem>
                 <FormLabel>New Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showNewPassword ? "text" : "password"}
+                      className="pl-3 pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showNewPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -104,12 +126,26 @@ function UpdatePassword({ token }: VerifyEmailProps) {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showConfirmPassword ? "text" : "password"}
+                      className="pl-3 pr-10 "
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showConfirmPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -126,7 +162,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
           {isPending ? (
             <>
               <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Submitting...
+              Updating...
             </>
           ) : (
             "Update Password"
