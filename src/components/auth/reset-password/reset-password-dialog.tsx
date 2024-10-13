@@ -18,7 +18,7 @@ export default function ResetPasswordDialog() {
         // Close the dialog
         setOpen(false);
         // Optionally, redirect the user or update the state
-        router.replace('/login'); // Redirect to dashboard or any desired page
+        window.location.href = '/login'; // Redirect to dashboard or any desired page
         // Clear the flag
         localStorage.removeItem('updatePassword');
       }

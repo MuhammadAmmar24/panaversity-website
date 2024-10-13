@@ -57,7 +57,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
             variant: "destructive",
           });
           if (data.error === "User is not verified") {
-            router.replace("/verify");
+            window.location.href = "/verify";
           }
         } else if (data?.message) {
           setError("");
@@ -69,7 +69,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
   
           if (data.message === "Password updated successfully") {
             localStorage.setItem("updatePassword", "true");
-            router.replace("/login");
+            window.location.href = "/login";
           }
         }
       });
