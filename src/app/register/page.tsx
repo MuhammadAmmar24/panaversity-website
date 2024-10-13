@@ -38,14 +38,14 @@ const RegisterPage = () => {
   return (
     <main>
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <Suspense>
-          <Navbar/>
-          <div className="mt-10 mb-20">
+        <Navbar />
+        <div className="mt-10 mb-20">
+          <Suspense>
             <RegisterFormPage />
-          </div>
-        </Suspense>
+          </Suspense>
+        </div>
       </div>
-      <Footer/>
+      <Footer />
     </main>
   );
 };
