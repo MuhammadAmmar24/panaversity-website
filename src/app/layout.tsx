@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import NextTopLoader from 'nextjs-toploader'
 
 
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
     url:siteUrl,
     images: [
       {
-        url: `${siteUrl}/logoicon.png`,
+        url: `${siteUrl}/logos/logoIcon.png`,
         alt: "Panaversity Logo"
       },
     ],
@@ -44,12 +43,13 @@ export const metadata: Metadata = {
     description: "Learn Generative AI with AI-powered Panaversity.",
     images: [
       {
-        url: `${siteUrl}/logoicon.png`,
+        url: `${siteUrl}/logos/logoIcon.png`,
       },
     ],
     site:"Panaversity: AI-Powered Online University"
   
   },
+
   title: {
     default: "Panaversity",
     template: "%s | Panaversity",
@@ -77,7 +77,7 @@ export default function RootLayout({
         <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD" showSpinner={false}/>
         {children}
         {modal}
-        <SpeedInsights />
+     
 
       </body>
     </html>

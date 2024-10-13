@@ -11,17 +11,19 @@ export const metadata: Metadata = {
 
 const LoginPage = () => {
   return (
+    <>
+        <Navbar />
     <main>
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <Navbar />
         <div className="mt-10 mb-20">
           <Suspense>
             <LoginFormPage />
           </Suspense>
         </div>
       </div>
-      <Footer />
     </main>
+      <Footer /> 
+    </>
   );
 };
 
