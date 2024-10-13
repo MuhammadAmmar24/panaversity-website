@@ -19,6 +19,7 @@ export const updateProfileSchema = z.object({
   address: z.string(),
   city: z.string(),
   country: z.string(),
+  postal_code: z.string(),
   is_active: z.boolean(),
 });
 

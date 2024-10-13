@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import PasswordSettings from "./PasswordSettings";
 import Image from "next/image";
+import { update_student_Profile } from "@/src/actions/profile"; // Import the API action
 
 const AccountSettings: React.FC<any> = ({ profile }) => {
   // Initialize state with the profile data
-  const [personalInfo, setPersonalInfo] = useState({
+  const [personalInfo] = useState({
     phone: profile?.phone || "",
     studentId: profile?.id || "",
   });
@@ -19,19 +20,34 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     postalCode: profile?.student?.postal_code || "",
   });
 
-  // State for toggling edit modes for address fields
   const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null); // State to store success/error message
 
   // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
   };
 
-  // Simulate submitting updated data (This can be replaced with an actual API call)
-  const submitChanges = () => {
-    // You can implement the API call here to submit the address info
+  // Submit changes to update student profile
+  const submitChanges = async () => {
+    const payload = {
+      address: addressInfo.address,
+      city: addressInfo.city,
+      country: addressInfo.country,
+      postal_code: addressInfo.postalCode,
+      is_active: profile?.student?.is_active || false, // Assuming you want to keep the original "is_active" status
+    };
+
+    // Call the update function
+    const result = await update_student_Profile(payload);
+
+    if (result.type === "success") {
+      setStatusMessage("Profile updated successfully.");
+    } else {
+      setStatusMessage(`Error updating profile: ${result.message}`);
+    }
+
     setIsEditingAddress(false);
-    console.log("Address Info: ", addressInfo);
   };
 
   return (
@@ -52,7 +68,6 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                 className="w-10 h-10 mobileM:w-12 mobileM:h-12 md:w-16 md:h-16 rounded-full object-cover"
               />
               <div>
-                {/* Username and email displayed without editing functionality */}
                 <p className="text-base sm:text-xl">{profile?.full_name}</p>
                 <p className="text-gray-500 text-xs sm:text-sm">
                   {profile?.email}
@@ -173,6 +188,11 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
             )}
           </div>
         </section>
+
+        {/* Display Success/Error Message */}
+        {statusMessage && (
+          <div className="text-center mt-4 text-red-500">{statusMessage}</div>
+        )}
 
         <PasswordSettings profile_email={profile?.email} />
       </section>

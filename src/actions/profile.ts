@@ -1,9 +1,9 @@
 "use server";
-import { auth } from "../auth";
 import { update_profile_schema, update_profile_resp_schema } from '@/src/lib/schemas/user';
 import { RequestBody, ResponseBody } from '@/src/lib/schemas/user';
 import { get_profile, GetProfileResponse } from '@/src/lib/schemas/student';
 import { updateProfileSchema, updateProfileResponseSchema,update_st_profile_Request,update_st_profile_Response } from '@/src/lib/schemas/student';
+import { auth } from "@/src/auth";
 
 
 export const checkUserVerification = async () => {
@@ -157,8 +157,22 @@ export const get_student_Profile = async (
 
 export const update_student_Profile = async (
   payload: update_st_profile_Request
-): Promise<{ type: "success" | "error"; message: string; data?: update_st_profile_Response }> => {
-  
+): Promise<{
+  type: "success" | "error";
+  message: string;
+  data?: update_st_profile_Response;
+}> => {
+  const session: any = await auth(); // Getting JWT From Cookies
+
+  if (!session) {
+    return {
+      type: "error",
+      message: "User not authenticated. Redirecting to login.",
+    };
+  }
+
+  const token = session.access_token;
+
   // Validate the incoming payload using the Zod schema
   const validationResult = updateProfileSchema.safeParse(payload);
 
@@ -173,19 +187,27 @@ export const update_student_Profile = async (
 
   try {
     // Make the PATCH request to update the profile
-    const response = await fetch(`${process.env.API_URL}/profile/update`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${process.env.API_SECRET}`,
-      },
-      body: JSON.stringify(validationResult.data),
-    });
+    const response = await fetch(
+      `${process.env.BACKEND_AUTH_SERVER_URL}/student/profile`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(validationResult.data),
+      }
+    );
 
     // Check if the status code indicates success
     if (!response.ok) {
-      throw new Error(`Failed to update profile: ${response.statusText}`);
+      const errorResponse = await response.text(); // Use text() instead of json() for non-JSON responses
+      console.error("Failed to update profile:", errorResponse);
+      return {
+        type: "error",
+        message: `Failed to update profile: ${response.statusText} (${response.status})`,
+      };
     }
 
     const responseData = await response.json();
@@ -208,6 +230,7 @@ export const update_student_Profile = async (
       data: parsedResponse.data,
     };
   } catch (error: any) {
+    console.error("Error in updating profile:", error);
     return {
       type: "error",
       message: error.message,
