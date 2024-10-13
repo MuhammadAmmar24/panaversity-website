@@ -79,7 +79,7 @@ function ResetPassword() {
                 <Input
                   {...field}
                   disabled={isPending}
-                  placeholder="example@gmail.com"
+                  placeholder="Enter registered email"
                   type="email"
                 />
               </FormControl>
