@@ -74,7 +74,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}
       >
-        <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD"/>
+        <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD" showSpinner={false}/>
         {children}
         {modal}
         <SpeedInsights />
