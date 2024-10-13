@@ -123,7 +123,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 import { useToast } from "../../ui/use-toast";
+<<<<<<< HEAD
+import { useState, useTransition } from "react";
+=======
 import { useState } from "react";
+>>>>>>> a66ab4e4897ca16f63cbf7a801263afba9511234
 import { resetPassword } from "@/src/app/actions/recover-password"; // Adjust the path as needed
 import { Button } from "../../ui/button";
 import {
@@ -159,10 +163,16 @@ function ResetPassword() {
   const onSubmit = (values: z.infer<typeof RecoverPasswordSchema>) => {
     setError("");
     setSuccess("");
+<<<<<<< HEAD
+
+    startTransition(() => {
+      resetPassword(values).then((data) => {
+=======
     setIsPending(true);  // Set isPending to true at the start
 
     resetPassword(values)
       .then((data) => {
+>>>>>>> a66ab4e4897ca16f63cbf7a801263afba9511234
         if (data?.error) {
           setError(data.error);
           setSuccess("");
