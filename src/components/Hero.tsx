@@ -7,7 +7,7 @@ export default function Hero() {
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-5xl pt-[5rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem]">
           <div className="text-center">
-            <h1 className="text-[2.4rem] sm:text-[3.4rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
+            <h1 className="text-[2rem] sm:text-[3.4rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
               Revolutionize Your Learning with{" "}
               <span className="text-accent bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-transparent">
                 AI-Powered
