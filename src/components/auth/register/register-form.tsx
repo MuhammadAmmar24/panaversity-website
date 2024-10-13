@@ -21,7 +21,7 @@ import {
 import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
-import { register } from "@/src/actions/register";
+import { register } from "@/src/app/actions/register";
 import { useToast } from "@/src/components/ui/use-toast";
 import { useSearchParams } from "next/navigation";
 import {
@@ -33,8 +33,11 @@ import {
 } from "@/src/components/ui/select";
 import { affiliations } from "@/src/constants/affiliation";
 import Link from "next/link";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
-
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -153,28 +156,29 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                <div className="relative">
-            <Input
-              {...field}
-              disabled={isPending}
-              placeholder="******"
-              type={showPassword ? "text" : "password"} // Toggle between text and password
-              className="pl-3 pr-10" // Add padding for the icon space
-            />
-            {/* Eye Icon to toggle password visibility */}
-            <button
-              type="button"
-              onClick={() => {
-                setShowPassword((prev) => !prev)}}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-            >
-              {showPassword ? (
-                <AiOutlineEyeInvisible className="w-5 h-5" />
-              ) : (
-                <AiOutlineEye className="w-5 h-5" />
-              )}
-            </button>
-          </div>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showPassword ? "text" : "password"} // Toggle between text and password
+                      className="pl-3 pr-10" // Add padding for the icon space
+                    />
+                    {/* Eye Icon to toggle password visibility */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowPassword((prev) => !prev);
+                      }}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

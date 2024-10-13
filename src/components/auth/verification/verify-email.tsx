@@ -1,27 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import { verify } from "@/src/actions/verify";
+import { verify } from "@/src/app/actions/verify";
 import Link from "next/link";
 import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
 
 type VerifyEmailProps = {
   token: string;
-
 };
 
 const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
-
-
   const [verified, setVerified] = useState<null | boolean>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
   const router = useRouter();
-
-
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -59,7 +53,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
   }
 
   if (verified === true) {
-    return <VerifiedComponent  />;
+    return <VerifiedComponent />;
   }
 
   return <VerificationFailedComponent />;
@@ -70,8 +64,17 @@ const LoadingComponent = () => (
   <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-accent animate-spin" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 001 1h4a1 1 0 100-2h-3V5z" clipRule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-accent animate-spin"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 001 1h4a1 1 0 100-2h-3V5z"
+            clipRule="evenodd"
+          />
         </svg>
       </div>
     </div>
@@ -94,8 +97,17 @@ const VerifyingComponent = () => (
   <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-accent animate-spin" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 001 1h4a1 1 0 100-2h-3V5z" clipRule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-accent animate-spin"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v4a1 1 0 001 1h4a1 1 0 100-2h-3V5z"
+            clipRule="evenodd"
+          />
         </svg>
       </div>
     </div>
@@ -108,8 +120,17 @@ const VerifiedComponent = () => (
   <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z" clipRule="evenodd" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-12 w-12 text-green-600"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fillRule="evenodd"
+            d="M16.707 5.293a1 1 0 00-1.414 0L9 11.586 6.707 9.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l7-7a1 1 0 000-1.414z"
+            clipRule="evenodd"
+          />
         </svg>
       </div>
     </div>
@@ -118,7 +139,7 @@ const VerifiedComponent = () => (
       Your email was verified. You can continue using the application.
     </p>
     <Link
-      href={'/login'}
+      href={"/login"}
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Get Started

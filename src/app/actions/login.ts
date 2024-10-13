@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 import { LoginSchema } from "@/src/schemas/userschema";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
-import  {checkUserVerification}  from "@/src/actions/profile";
+import { checkUserVerification } from "@/src/app/actions/profile";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -35,7 +35,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     if (!response.ok) {
       const errorData = await response.json();
-  
+
       if (response.status === 401) {
         // if (errorData.detail === "User with this email is not verified") {
         //   return {
@@ -50,7 +50,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
           };
         }
       } else if (response.status === 403) {
-        
         return {
           error: "Email not verified",
           message: "User is not verified",
@@ -60,8 +59,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
 
     const userData = await response.json();
-
-
 
     const expiresInMilliseconds = userData.expires_in * 1000;
 

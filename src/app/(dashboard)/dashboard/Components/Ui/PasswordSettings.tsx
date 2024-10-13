@@ -17,12 +17,9 @@ import {
 import { Input } from "@/src/components/ui/input";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
-import { changePassword } from "@/src/actions/change-password";
+import { changePassword } from "@/src/app/actions/change-password";
 import { signOut } from "@/src/auth";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
-
-
 
 type VerifyEmailProps = {
   profile_email: string;
@@ -50,7 +47,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
 
   // Toggle visibility for password fields
 
-
   // Scroll into view when the dropdown opens
   useEffect(() => {
     if (isOpen && formRef.current) {
@@ -61,10 +57,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
     }
   }, [isOpen]);
 
-
   // Handle form submission with validation
   const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
-
     console.log("values", values);
 
     setError("");
@@ -85,7 +79,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
-          console.log(data.message);  
+          console.log(data.message);
           setError("");
           setSuccess(data.message);
           toast({
@@ -223,7 +217,9 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                     "Update Password"
                   )}
                 </Button>
-                <p className="text-[0.8rem] text-red-600">You need to login after changing your password</p>
+                <p className="text-[0.8rem] text-red-600">
+                  You need to login after changing your password
+                </p>
               </form>
             </FormProvider>
           </div>

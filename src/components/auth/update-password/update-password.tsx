@@ -17,16 +17,15 @@ import {
 import { Input } from "../../ui/input";
 import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
-import { updatePassword } from "@/src/actions/update-password";
+import { updatePassword } from "@/src/app/actions/update-password";
 import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 type VerifyEmailProps = {
-    token: string;
-  
-  }
+  token: string;
+};
 
-function UpdatePassword({token}: VerifyEmailProps) {
+function UpdatePassword({ token }: VerifyEmailProps) {
   const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -45,7 +44,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
   const onSubmit = (values: z.infer<typeof UpdatePasswordSchema>) => {
     setError("");
     setSuccess("");
-  
+
     startTransition(() => {
       updatePassword(values).then((data) => {
         if (data?.error) {
@@ -66,7 +65,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
             title: "Password updated successfully",
             description: "Your password has been updated.",
           });
-  
+
           if (data.message === "Password updated successfully") {
             localStorage.setItem("updatePassword", "true");
             window.location.href = "/login";
@@ -75,7 +74,6 @@ function UpdatePassword({token}: VerifyEmailProps) {
       });
     });
   };
-  
 
   return (
     <FormProvider {...form}>

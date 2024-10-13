@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import PasswordSettings from "./PasswordSettings";
 import Image from "next/image";
-import { update_student_Profile } from "@/src/actions/profile"; // Import the API action
+import { update_student_Profile } from "@/src/app/actions/profile"; // Import the API action
 
 const AccountSettings: React.FC<any> = ({ profile }) => {
   // Initialize state with the profile data

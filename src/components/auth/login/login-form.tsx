@@ -20,11 +20,15 @@ import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
-import { login } from "@/src/actions/login";
+import { login } from "@/src/app/actions/login";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 import Link from "next/link";
 

@@ -6,9 +6,15 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";
 import { useToast } from "../../ui/use-toast";
 import { useState, useTransition } from "react";
-import { resetPassword } from "@/src/actions/recover-password"; // Adjust the path as needed
+import { resetPassword } from "@/src/app/actions/recover-password"; // Adjust the path as needed
 import { Button } from "../../ui/button";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../../ui/form";
 import { Input } from "../../ui/input";
 import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
@@ -35,7 +41,7 @@ function ResetPassword() {
   const onSubmit = (values: z.infer<typeof RecoverPasswordSchema>) => {
     setError("");
     setSuccess("");
-  
+
     startTransition(() => {
       resetPassword(values).then((data) => {
         if (data?.error) {
@@ -47,7 +53,7 @@ function ResetPassword() {
             variant: "destructive",
           });
           if (data.error === "User is not verified") {
-            router.replace('/verify');
+            router.replace("/verify");
           }
         } else if (data?.message) {
           setError("");
@@ -56,7 +62,7 @@ function ResetPassword() {
             title: "Email sent Successfully",
             description: "An email has been sent to reset your password.",
           });
-  
+
           if (data.message === "Password reset link sent successfully") {
             // router.replace('/login');
           }
@@ -64,7 +70,7 @@ function ResetPassword() {
       });
     });
   };
-  
+
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
