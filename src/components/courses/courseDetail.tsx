@@ -1,10 +1,8 @@
 import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
 import RatingStars from "../ui/Ratingstar";
-import  fetchProfile  from "@/src/lib/getProfile";
+import fetchProfile from "@/src/lib/getProfile";
 import Breadcrumbs from "../Breadcrumbs";
-
-
 
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -62,9 +60,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   initialCurrency,
 }) => {
-
   const profile: ProfileData = await fetchProfile();
-
 
   // Destructure the course data
   const {
@@ -89,29 +85,29 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-      <section
-        className="flex justify-center bg-teamBg items-center bg-cover bg-center text-white"
-        // style={{ backgroundImage: url(${media_link}) }}
-      >
+      <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
-          <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
+          <div className="max-w-[1200px] mx-auto  px-4 sm:px-6 lg:px-8 py-4 md:py-12">
             {/* Breadcrumb Navigation */}
-            <Breadcrumbs
+            <Breadcrumbs 
               items={[
-                { label: 'Home', href: '/' },
-                { label: 'Programs', href: '/programs' },
-                { label: 'Flagship-Program', href: '/programs/flagship-program' },
-                { label: course_name }
+                { label: "Home", href: "/" },
+                { label: "Programs", href: "/programs" },
+                {
+                  label: "Flagship-Program",
+                  href: "/programs/flagship-program",
+                },
+                { label: course_name },
               ]}
-             />
+            />
 
-            <div className="flex flex-col lg:flex-row ">
+            <div className="flex flex-col md:flex-row md:space-x-8 mt-6">
               {/* Course Details */}
-              <div className="w-full lg:w-2/3">
-                <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl  text-background -mt-2 font-poppins mb-4">
+              <div className="w-full md:w-2/3">
+                <h1 className="font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl text-background font-poppins mb-4">
                   {course_name}
                 </h1>
-                <p className="mb-5 text-gray-100 text-base font-medium leading-relaxed max-w-[600px]">
+                <p className="mb-5 text-gray-100 text-sm sm:text-base font-medium leading-relaxed max-w-[600px]">
                   {course_description}
                 </p>
 
@@ -137,8 +133,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Price and Enroll Section */}
-              <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
-                <div className="bg-background text-black p-6 rounded-lg shadow-lg lg:shadow-xl max-w-sm sm:max-w-[380px] lg:max-w-full sm:ml-0 mx-auto lg:mx-0">
+              <div className="w-full md:w-1/3 mt-5 mb-9 md:mt-0">
+                <div className="bg-background text-black p-6 rounded-lg shadow-lg w-full sm:w-auto sm:max-w-sm">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-gray-900 font-medium text-lg">
                       Price:
