@@ -11,7 +11,7 @@ export default async function fetchProfile() {
 
   try {
     const response = await fetch(
-      `${process.env.BACKEND_AUTH_SERVER_URL}/user/profile`,
+      `${process.env.BACKEND_AUTH_SERVER_URL}/student/profile`,
       {
         method: "GET",
         headers: {
