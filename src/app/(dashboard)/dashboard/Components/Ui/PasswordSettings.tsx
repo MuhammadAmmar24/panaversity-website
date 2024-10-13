@@ -1,54 +1,55 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { useState, useEffect, useRef, useTransition } from "react";
+import { PasswordUpdateSchema } from "@/src/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
+import { useToast } from "@/src/components/ui/use-toast";
+import { Button } from "@/src/components/ui/button";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/src/components/ui/form";
+import { Input } from "@/src/components/ui/input";
+import { FormError } from "@/src/components/form-error";
+import { FormSuccess } from "@/src/components/form-success";
+import { changePassword } from "@/src/actions/change-password";
+import { signOut } from "@/src/auth";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-// Mock current password for demonstration purposes
-const mockCurrentPassword = "123";
 
-// Define schema for password validation using Zod
-const passwordSchema = z
-  .object({
-    currentPassword: z.string().min(1, "Current password is required"),
-    newPassword: z
-      .string()
-      .min(6, "New password must be at least 6 characters"),
-    confirmPassword: z.string().min(1, "Please confirm your password"),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"], // Path to indicate where the error occurred
-  });
 
-const PasswordSettings: React.FC = () => {
+
+type VerifyEmailProps = {
+  profile_email: string;
+};
+
+function PasswordSettings({ profile_email }: VerifyEmailProps) {
   const [isOpen, setIsOpen] = useState(false); // Toggle for the password settings dropdown
-  const [showPassword, setShowPassword] = useState({
-    currentPassword: false,
-    newPassword: false,
-    confirmPassword: false,
-  }); // Toggle for showing/hiding password fields
 
-  const [formData, setFormData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  }); // Form data state
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
-  const [formErrors, setFormErrors] = useState<Record<string, string>>({}); // Form errors state
-  const [isCurrentPasswordIncorrect, setIsCurrentPasswordIncorrect] =
-    useState(false); // State for tracking incorrect current password
+  const form = useForm<z.infer<typeof PasswordUpdateSchema>>({
+    resolver: zodResolver(PasswordUpdateSchema),
+    defaultValues: {
+      email: profile_email,
+      current_password: "",
+      new_password: "",
+      confirm_password: "",
+    },
+  });
 
   const formRef = useRef<HTMLDivElement | null>(null); // Ref to scroll into view when dropdown opens
 
   // Toggle visibility for password fields
-  const toggleShowPassword = (
-    field: "currentPassword" | "newPassword" | "confirmPassword"
-  ) => {
-    setShowPassword((prevState) => ({
-      ...prevState,
-      [field]: !prevState[field],
-    }));
-  };
+
 
   // Scroll into view when the dropdown opens
   useEffect(() => {
@@ -60,43 +61,45 @@ const PasswordSettings: React.FC = () => {
     }
   }, [isOpen]);
 
-  // Handle input changes and update formData state
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
 
   // Handle form submission with validation
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
 
-    // Check if the current password matches mock data
-    if (formData.currentPassword !== mockCurrentPassword) {
-      setIsCurrentPasswordIncorrect(true); // Show error if password is incorrect
-    } else {
-      setIsCurrentPasswordIncorrect(false);
+    console.log("values", values);
 
-      // Validate form data using Zod
-      try {
-        passwordSchema.parse(formData); // Validate with Zod
-        setFormErrors({}); // Clear errors if validation passes
-        // Here you can handle the actual password update logic
-      } catch (error) {
-        if (error instanceof z.ZodError) {
-          // Capture and display validation errors
-          const errors: Record<string, string> = {};
-          error.errors.forEach((err) => {
-            if (err.path[0]) {
-              errors[err.path[0]] = err.message;
-            }
+    setError("");
+    setSuccess("");
+    startTransition(() => {
+      changePassword(values).then((data: any) => {
+        console.log("data", data);
+        if (data?.error) {
+          setError(data.error);
+          setSuccess("");
+          toast({
+            title: "Request Failed",
+            description: data.error,
+            variant: "destructive",
           });
-          setFormErrors(errors);
+
+          if (data.error === "User is not verified") {
+            window.location.href = "/verify";
+          }
+        } else if (data?.message) {
+          console.log(data.message);  
+          setError("");
+          setSuccess(data.message);
+          toast({
+            title: "Password updated successfully",
+            description: "Your password has been updated.",
+          });
+          if (data.message === "Password updated successfully") {
+            console.log("Password updated successfully");
+            signOut();
+            // window.location.href = "/login";
+          }
         }
-      }
-    }
+      });
+    });
   };
 
   return (
@@ -132,129 +135,102 @@ const PasswordSettings: React.FC = () => {
             ref={formRef}
             className="mt-8 rounded-lg shadow-md p-4 sm:p-6 w-full max-w-xl"
           >
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4 sm:mb-6">
-                <label className="block text-sm sm:text-base font-medium text-gray-700">
-                  Change your password
-                </label>
-              </div>
+            <FormProvider {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                <div className="space-y-4">
+                  <FormField
+                    control={form.control}
+                    name="current_password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Current Password</FormLabel>
 
-              {/* Current Password Field */}
-              <div className="space-y-4">
-                <div>
-                  <label className="text-gray-700 text-sm sm:text-base">
-                    Current Password
-                  </label>
-                  <div className="relative mt-2">
-                    <input
-                      type={showPassword.currentPassword ? "text" : "password"}
-                      name="currentPassword"
-                      value={formData.currentPassword}
-                      onChange={handleChange}
-                      className="focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent w-full border border-gray-300 rounded-md p-2 pr-10 text-sm sm:text-base"
-                      placeholder="Enter current password"
-                    />
-                    <span
-                      onClick={() => toggleShowPassword("currentPassword")}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                    >
-                      {showPassword.currentPassword ? (
-                        <FiEye className="h-5 w-5 text-gray-500" />
-                      ) : (
-                        <FiEyeOff className="h-5 w-5 text-gray-500" />
-                      )}
-                    </span>
-                  </div>
-                  {isCurrentPasswordIncorrect && (
-                    <p className="text-sm text-red-500">
-                      Current password is incorrect
-                    </p>
-                  )}
-                  {isCurrentPasswordIncorrect && (
-                    <a
-                      href="#"
-                      className="text-sm text-red-500 mt-1 inline-block"
-                    >
-                      Forgot Password?
-                    </a>
-                  )}
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="******"
+                            type="password"
+                          />
+                        </FormControl>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="new_password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>New Password</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="******"
+                            type="password"
+                          />
+                        </FormControl>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="confirm_password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Confirm Password</FormLabel>
+
+                        <FormControl>
+                          <Input
+                            {...field}
+                            disabled={isPending}
+                            placeholder="******"
+                            type="password"
+                          />
+                        </FormControl>
+
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
-                {/* New Password Field */}
-                <div>
-                  <label className="text-gray-700 text-sm sm:text-base">
-                    New Password
-                  </label>
-                  <div className="relative mt-2">
-                    <input
-                      type={showPassword.newPassword ? "text" : "password"}
-                      name="newPassword"
-                      value={formData.newPassword}
-                      onChange={handleChange}
-                      className="focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent w-full border border-gray-300 rounded-md p-2 pr-10 text-sm sm:text-base"
-                      placeholder="Enter new password"
-                    />
-                    <span
-                      onClick={() => toggleShowPassword("newPassword")}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                    >
-                      {showPassword.newPassword ? (
-                        <FiEye className="h-5 w-5 text-gray-500" />
-                      ) : (
-                        <FiEyeOff className="h-5 w-5 text-gray-500" />
-                      )}
-                    </span>
-                  </div>
-                  {formErrors.newPassword && (
-                    <p className="text-sm text-red-500">
-                      {formErrors.newPassword}
-                    </p>
-                  )}
-                </div>
+                <FormError message={error} />
 
-                {/* Confirm Password Field */}
-                <div>
-                  <label className="text-gray-700 text-sm sm:text-base">
-                    Confirm Password
-                  </label>
-                  <div className="relative mt-2">
-                    <input
-                      type={showPassword.confirmPassword ? "text" : "password"}
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                      className="focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent w-full border border-gray-300 rounded-md p-2 pr-10 text-sm sm:text-base"
-                      placeholder="Confirm new password"
-                    />
-                    <span
-                      onClick={() => toggleShowPassword("confirmPassword")}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer"
-                    >
-                      {showPassword.confirmPassword ? (
-                        <FiEye className="h-5 w-5 text-gray-500" />
-                      ) : (
-                        <FiEyeOff className="h-5 w-5 text-gray-500" />
-                      )}
-                    </span>
-                  </div>
-                  {formErrors.confirmPassword && (
-                    <p className="text-sm text-red-500">
-                      {formErrors.confirmPassword}
-                    </p>
-                  )}
-                </div>
+                <FormSuccess message={success} />
 
-                {/* Submit Button */}
-                <button className="w-full bg-accent text-white rounded-md py-2 text-sm sm:text-base hover:bg-white hover:text-accent border-2 border-accent transition-all duration-300 ease-in-out">
-                  Set Password
-                </button>
-              </div>
-            </form>
+                <Button
+                  disabled={isPending}
+                  type="submit"
+                  className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+                >
+                  {isPending ? (
+                    <>
+                      <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    "Update Password"
+                  )}
+                </Button>
+                <p className="text-[0.8rem] text-red-600">You need to login after changing your password</p>
+              </form>
+            </FormProvider>
           </div>
         </div>
       )}
     </section>
   );
-};
+}
 
 export default PasswordSettings;

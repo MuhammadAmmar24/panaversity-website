@@ -11,7 +11,7 @@ export const LoginSchema = z.object({
 
   // password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
   //   message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
-  // }) also change in UpdatePasswordSchema
+  // }) also change in UpdatePasswordSchema and PasswordUpdateSchema
 });
 
 export const RegisterSchema = z.object({
@@ -64,4 +64,25 @@ export const UpdatePasswordSchema = z
   .refine((data) => data.new_password === data.confirm_password, {
     message: "Passwords do not match",
     path: ["confirm_password"], // Error will show for the confirm_password field
+  });
+
+
+
+  export const PasswordUpdateSchema = z.object({
+    email: z.string().email({
+      message: "Email is required",
+    }),
+    current_password:  z.string().min(6, {
+    message: "Minimum 6 characters required",
+  }),
+  new_password: z.string().min(6, {
+    message: "New Password must be at least 6 characters long",
+  }),
+  confirm_password: z.string().min(6, {
+    message: "Confirm Password must be at least 6 characters long",
+  }),
+})
+.refine((data) => data.new_password === data.confirm_password, {
+  message: "Passwords do not match",
+  path: ["confirm_password"], // Error will show for the confirm_password field
   });
