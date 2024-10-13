@@ -42,10 +42,10 @@ const Footer: React.FC = () => {
             title="Company"
             links={[
               { name: "About Us", href: "#about" },
-              { name: "Our Mission", href: "/" },
+              // { name: "Our Mission", href: "/" },
               { name: "Programs", href: "/programs/flagship-program" },
               { name: "Testimonials", href: "#testimonials" },
-              { name: "Careers", href: "/" },
+              // { name: "Careers", href: "/" },
             ]}
             className="lg:ml-20"
           />
@@ -55,8 +55,8 @@ const Footer: React.FC = () => {
             links={[
               { name: "Contact Us", href: "/" },
               { name: "Privacy Policy", href: "/privacy-policy" },
-              { name: "Terms Conditions", href: "/" },
-              { name: "Cookies", href: "/" },
+              // { name: "Terms Conditions", href: "/" },
+              // { name: "Cookies", href: "/" },
               { name: "FAQ", href: "#faqs" },
             ]}
             className="lg:ml-20"
