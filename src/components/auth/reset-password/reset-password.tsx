@@ -58,7 +58,7 @@ function ResetPassword() {
           });
   
           if (data.message === "Password reset link sent successfully") {
-            // router.replace('/login');
+            router.replace('/login');
           }
         }
       });
@@ -66,6 +66,7 @@ function ResetPassword() {
   };
   
   return (
+    
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField

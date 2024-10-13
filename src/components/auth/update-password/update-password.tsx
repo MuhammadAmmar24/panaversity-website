@@ -21,6 +21,7 @@ import { updatePassword } from "@/src/actions/update-password";
 import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+
 type VerifyEmailProps = {
     token: string;
   
@@ -128,7 +129,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
           {isPending ? (
             <>
               <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Submitting...
+              Updating...
             </>
           ) : (
             "Update Password"

@@ -19,7 +19,7 @@ import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
 import { changePassword } from "@/src/actions/change-password";
 import { signOut } from "@/src/auth";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
 
 
 
@@ -34,7 +34,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const { toast } = useToast();
+  const [showPasswordCurrent, setShowPasswordCurrent] = useState<boolean>(false);
+  const [showPasswordNew, setShowPasswordNew] = useState<boolean>(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
+
 
   const form = useForm<z.infer<typeof PasswordUpdateSchema>>({
     resolver: zodResolver(PasswordUpdateSchema),
@@ -135,74 +139,115 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             ref={formRef}
             className="mt-8 rounded-lg shadow-md p-4 sm:p-6 w-full max-w-xl"
           >
+            <h4 className="text-textPrimary mb-5 font-semibold text-xl">Change Your Password</h4>
             <FormProvider {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6"
               >
                 <div className="space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="current_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Current Password</FormLabel>
-
-                        <FormControl>
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder="******"
-                            type="password"
-                          />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="new_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>New Password</FormLabel>
-
-                        <FormControl>
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder="******"
-                            type="password"
-                          />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="confirm_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
-
-                        <FormControl>
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder="******"
-                            type="password"
-                          />
-                        </FormControl>
-
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+            control={form.control}
+            name="current_password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Current Password</FormLabel>
+                <FormControl>
+                <div className="relative">
+            <Input
+              {...field}
+              disabled={isPending}
+              placeholder="******"
+              type={showPasswordCurrent ? "text" : "password"} // Toggle between text and password
+              className="pl-3 pr-10" // Add padding for the icon space
+            />
+            {/* Eye Icon to toggle password visibility */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowPasswordCurrent((prev) => !prev)}}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            >
+              {showPasswordCurrent ? (
+                <AiOutlineEyeInvisible className="w-5 h-5" />
+              ) : (
+                <AiOutlineEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+<FormField
+            control={form.control}
+            name="new_password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>New Password</FormLabel>
+                <FormControl>
+                <div className="relative">
+            <Input
+              {...field}
+              disabled={isPending}
+              placeholder="******"
+              type={showPasswordNew ? "text" : "password"} // Toggle between text and password
+              className="pl-3 pr-10" // Add padding for the icon space
+            />
+            {/* Eye Icon to toggle password visibility */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowPasswordNew((prev) => !prev)}}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            >
+              {showPasswordNew ? (
+                <AiOutlineEyeInvisible className="w-5 h-5" />
+              ) : (
+                <AiOutlineEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+                   <FormField
+            control={form.control}
+            name="confirm_password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
+                <FormControl>
+                <div className="relative">
+            <Input
+              {...field}
+              disabled={isPending}
+              placeholder="******"
+              type={showPasswordConfirm ? "text" : "password"} // Toggle between text and password
+              className="pl-3 pr-10" // Add padding for the icon space
+            />
+            {/* Eye Icon to toggle password visibility */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowPasswordConfirm((prev) => !prev)}}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"         
+            >
+              {showPasswordConfirm ? (
+                <AiOutlineEyeInvisible className="w-5 h-5" />
+              ) : (
+                <AiOutlineEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
                 </div>
 
                 <FormError message={error} />

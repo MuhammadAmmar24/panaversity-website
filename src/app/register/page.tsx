@@ -5,29 +5,32 @@ import Navbar from "@/src/components/Navbar";
 import Footer from "@/src/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
-export const metadata : Metadata = {
+export const metadata: Metadata = {
   title: "Register | Panaversity",
-  description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+  description:
+    "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
   openGraph: {
     title: "Register | Panaversity",
-    description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
-    url: siteUrl, 
+    description:
+      "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+    url: siteUrl,
     images: [
       {
-        url:`${siteUrl}/logoicon.png`, 
-        alt: "Panaversity Logo",  
+        url: `${siteUrl}/logos/logoIcon.png`,
+        alt: "Panaversity Logo",
       },
     ],
     siteName: "Panaversity: AI-Powered Online University",
   },
   twitter: {
-    card: "summary_large_image", 
+    card: "summary_large_image",
     title: "Register | Panaversity",
-    description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+    description:
+      "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
     images: [
       {
-        url: `${siteUrl}/logoicon.png`,
-        alt: "Panaversity Logo"  
+        url: `${siteUrl}/logos/logoIcon.png`,
+        alt: "Panaversity Logo",
       },
     ],
     site: "Panaversity: AI-Powered Online University",
@@ -36,17 +39,19 @@ export const metadata : Metadata = {
 
 const RegisterPage = () => {
   return (
-    <main>
-      <div className="flex flex-col justify-center items-center min-h-screen">
-        <Navbar />
-        <div className="mt-10 mb-20">
-          <Suspense>
-            <RegisterFormPage />
-          </Suspense>
+    <>
+      <Navbar />
+      <main>
+        <div className="flex flex-col justify-center items-center min-h-screen">
+          <div className="mt-10 mb-20">
+            <Suspense>
+              <RegisterFormPage />
+            </Suspense>
+          </div>
         </div>
-      </div>
+      </main>
       <Footer />
-    </main>
+    </>
   );
 };
 
