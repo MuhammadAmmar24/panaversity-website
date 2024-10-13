@@ -1,46 +1,26 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import { initialData } from "../../types/data";
 import PasswordSettings from "./PasswordSettings";
-import AccountSettingsSkeleton from "../Skeleton/AccountSettingsSkeleton";
 import Image from "next/image";
-import fetchProfile from "@/src/lib/getProfile";
 
-const AccountSettings: React.FC<any> = ({profile}) => {
-  console.log(profile)
-  
-  // State for profile, personal, and address information
-  const [personalInfo] = useState(initialData.personalInfo);
-  const [addressInfo, setAddressInfo] = useState(initialData.addressInfo);
-  // const [profile, setProfile] = useState<ProfileData | null>(profile_r);
-  // const [loading, setLoading] = useState<boolean>(true); // State for loading spinner
+const AccountSettings: React.FC<any> = ({ profile }) => {
+  // Initialize state with the profile data
+  const [personalInfo, setPersonalInfo] = useState({
+    phone: profile?.phone || "",
+    studentId: profile?.id || "",
+  });
 
-  // State for toggling edit modes for the address section only
+  const [addressInfo, setAddressInfo] = useState({
+    address: profile?.student?.address || "",
+    city: profile?.student?.city || "",
+    country: profile?.student?.country || "",
+    postalCode: profile?.student?.postal_code || "",
+  });
+
+  // State for toggling edit modes for address fields
   const [isEditingAddress, setIsEditingAddress] = useState(false);
-
-
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       // const user_data = await checkUserVerification();
-  //       const user_data = await fetchProfile();
-  //       if (user_data) {
-  //         setProfile(user_data); // Set profile data
-  //         // (user_data)
-  //       } else {
-  //         console.error("Failed to load user data.");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false); // Hide loading state
-  //     }
-  //   };
-
-  //   // fetchUserData(); // Fetch user data when component loads
-  // }, []);
 
   // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,14 +29,10 @@ const AccountSettings: React.FC<any> = ({profile}) => {
 
   // Simulate submitting updated data (This can be replaced with an actual API call)
   const submitChanges = () => {
-    // You can implement the API call here
+    // You can implement the API call here to submit the address info
     setIsEditingAddress(false);
+    console.log("Address Info: ", addressInfo);
   };
-
-  // Show loading skeleton while profile data is being fetched
-  // if (loading) {
-  //   return <AccountSettingsSkeleton />;
-  // }
 
   return (
     <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
@@ -86,36 +62,44 @@ const AccountSettings: React.FC<any> = ({profile}) => {
           </div>
         </section>
 
+        {/* Personal Information */}
         <section className="mb-6 border-2 border-gray-200 px-4 sm:px-6 py-4 sm:py-6 rounded-lg">
           <div className="flex justify-between">
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
               Personal Information
             </h2>
-            <button
-              className="text-gray-500 hover:text-black p-2 rounded-full"
-              onClick={() => setIsEditingAddress(!isEditingAddress)}
-            >
-              {isEditingAddress ? (
-                <AiOutlineCheck className="text-xl" />
-              ) : (
-                <AiOutlineEdit className="text-xl" />
-              )}
-            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
               <p className="text-gray-600">Phone</p>
-              <p>+{profile?.phone}</p>
+              <p>+{personalInfo.phone}</p> {/* Not editable */}
             </div>
             <div>
               <p className="text-gray-600">Student ID</p>
-              <p>{personalInfo.studentId}</p>
+              <p>{personalInfo.studentId || "-"}</p> {/* Not editable */}
             </div>
           </div>
 
+          {/* Address Information */}
           <div className="mt-4 text-sm sm:text-base">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex justify-between">
+              <h2 className="text-lg sm:text-xl font-semibold">
+                Address Information
+              </h2>
+              <button
+                className="text-gray-500 hover:text-black p-2 rounded-full"
+                onClick={() => setIsEditingAddress(!isEditingAddress)}
+              >
+                {isEditingAddress ? (
+                  <AiOutlineCheck className="text-xl" />
+                ) : (
+                  <AiOutlineEdit className="text-xl" />
+                )}
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
                 <p className="text-gray-600">Country</p>
                 {isEditingAddress ? (
@@ -127,7 +111,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
-                  <p>{addressInfo.country}</p>
+                  <p>{addressInfo.country || "-"}</p>
                 )}
               </div>
               <div>
@@ -141,7 +125,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
-                  <p>{addressInfo.city}</p>
+                  <p>{addressInfo.city || "-"}</p>
                 )}
               </div>
             </div>
@@ -158,7 +142,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
-                  <p>{addressInfo.address}</p>
+                  <p>{addressInfo.address || "-"}</p>
                 )}
               </div>
               <div>
@@ -172,7 +156,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
-                  <p>{addressInfo.postalCode}</p>
+                  <p>{addressInfo.postalCode || "-"}</p>
                 )}
               </div>
             </div>
@@ -190,7 +174,7 @@ const AccountSettings: React.FC<any> = ({profile}) => {
           </div>
         </section>
 
-        <PasswordSettings profile_email={profile?.email}/>
+        <PasswordSettings profile_email={profile?.email} />
       </section>
     </main>
   );

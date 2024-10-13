@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const user_data = await fetchProfile();
+  console.log(user_data)
   return (
     <main className="flex-1 mr-6 ml-10 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
       <TopBar />
