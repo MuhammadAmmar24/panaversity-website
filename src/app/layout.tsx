@@ -3,6 +3,7 @@ import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import NextTopLoader from 'nextjs-toploader'
 
 
 const inter = Inter({
@@ -73,6 +74,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}
       >
+        <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD"/>
         {children}
         {modal}
         <SpeedInsights />
