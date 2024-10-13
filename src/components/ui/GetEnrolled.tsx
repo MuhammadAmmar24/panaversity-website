@@ -43,13 +43,11 @@ export default function GetEnrolled({
   useEffect(() => {
     const fetchTimeSlots = async () => {
       try {
-
         const query = { course_batch_program_id: course_batch_program_id };
 
         const result = await getTimeSlotsForCourseBatchProgram(query);
 
         if (result.type === "success" && result.data) {
-
           setClassTimeSlots(result.data.class_time_slots);
 
           if (
@@ -86,10 +84,9 @@ export default function GetEnrolled({
       }
     };
 
-   
     fetchTimeSlots();
     fetchEnrollmentPrice();
-  }, []);
+  }, [course_batch_program_id]);
 
   // Get time slots for selected day
   const uniqueDays = Array.from(
@@ -194,7 +191,7 @@ export default function GetEnrolled({
           if (
             result.message &&
             result.message.includes(
-              "Student is already fully enrolled in the course."
+              "Student is already fully enrolled in the course."
             )
           ) {
             // Automatically route to the dashboard

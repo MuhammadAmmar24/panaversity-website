@@ -55,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside); // Clean up listener on component unmount
     };
-  }, [sidebarRef]);
+  }, [sidebarRef, setIsSidebarOpen]);
 
   // Menu items for sidebar navigation
   const menuItems = [
