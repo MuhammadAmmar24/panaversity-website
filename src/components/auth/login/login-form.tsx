@@ -20,18 +20,21 @@ import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
-import { login } from "@/src/actions/login";
+import { login } from "@/src/app/actions/login";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";
-import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 import Link from "next/link";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
 
-  // Get all the query params
   const redirect_uri = searchParams.get("redirect_uri");
   const client_id = searchParams.get("client_id");
   const response_type = searchParams.get("response_type");
@@ -46,7 +49,6 @@ export const LoginForm = () => {
     `&code=${code}`;
 
   let callbackUrl: string | null = null;
-
   if (redirect_uri) {
     callbackUrl = `/admin/dashboard${queryParams}`;
   }
@@ -58,7 +60,7 @@ export const LoginForm = () => {
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
   const { toast } = useToast();
@@ -74,9 +76,10 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
+    startTransition(true);  // Set isPending to true when starting the login process
 
-    startTransition(() => {
-      login(values).then((data) => {
+    login(values)
+      .then((data) => {
         if (data?.error) {
           setError(data.error);
           toast({
@@ -86,6 +89,7 @@ export const LoginForm = () => {
               : "Request Failed, Try Again",
             action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
           });
+
           if (data?.error === "Email not verified") {
             router.push("/resend-link");
           }
@@ -93,104 +97,100 @@ export const LoginForm = () => {
         }
 
         if (data?.success) {
+          form.reset()
           setSuccess(data.success);
           toast({
             title: "Login Success",
-            description: data.message ? data.message : "Welcome to Panaversity",
+            description: data.message
+              ? data.message
+              : "Welcome to Panaversity",
             action: <ToastAction altText="Close">Close</ToastAction>,
           });
 
-          // Retrieve the previous path from localStorage
+          // Handle redirection logic
           const previousPath = localStorage.getItem("previousPath");
-          console.log("Previous path: ", previousPath);
           if (previousPath) {
-            // Redirect to the previous path after login
-            console.log("Redirecting to previous path");
-            window.location.href = previousPath; // Replaces window.location.href
-            // Clear the previous path from localStorage
-            localStorage.removeItem("previousPath");
-            console.log("Previous path cleared");
+            window.location.href = previousPath;  // Redirect to previous path
+            localStorage.removeItem("previousPath");  // Clear previous path
           } else {
-            console.log("No previous path stored");
-
-            // If no previous path is stored, fallback to default redirect
-            window.location.href = "/dashboard"; // Replaces window.location.href
-
-            console.log("Redirecting to dashboard");
+            window.location.href = callbackUrl ?? "/dashboard";  // Default redirect
           }
         }
+      })
+      .catch(() => {
+        setError("Login failed. Please try again.");
+      })
+      .finally(() => {
+        startTransition(false);  // Ensure isPending is set to false after completion
       });
-    });
   };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
         <div className="space-y-4">
-          <>
-            <FormField
-              control={form.control}
-              name="username"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
+          <FormField
+            control={form.control}
+            name="username"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="example@gmail.com"
+                    type="email"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <div className="relative">
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="example@gmail.com"
-                      type="email"
+                      placeholder="******"
+                      type={showPassword ? "text" : "password"}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input
-                        {...field}
-                        disabled={isPending}
-                        placeholder="******"
-                        type={showPassword ? "text" : "password"} // Toggle between text and password types
-                      />
-                      <button
-                        type="button"
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                        onClick={() => setShowPassword((prev) => !prev)}
-                      >
-                        {showPassword ? (
-                          <AiOutlineEyeInvisible className="h-5 w-5 text-gray-500" />
-                        ) : (
-                          <AiOutlineEye className="h-5 w-5 text-gray-500" />
-                        )}
-                      </button>
-                    </div>
-                  </FormControl>
-                  <Button
-                    size="sm"
-                    variant="link"
-                    asChild
-                    className="px-0 font-normal"
-                  >
-                    <Link
-                      href="/reset-password"
-                      className="hover:underline  underline-offset-4 transition-colors duration-200"
+                    <button
+                      type="button"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                      onClick={() => setShowPassword((prev) => !prev)}
                     >
-                      Forgot password?
-                    </Link>
-                  </Button>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </>
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible className="h-5 w-5 text-gray-500" />
+                      ) : (
+                        <AiOutlineEye className="h-5 w-5 text-gray-500" />
+                      )}
+                    </button>
+                  </div>
+                </FormControl>
+                <Button
+                  size="sm"
+                  variant="link"
+                  asChild
+                  className="px-0 font-normal"
+                >
+                  <Link
+                    href="/reset-password"
+                    className="hover:underline underline-offset-4 transition-colors duration-200"
+                  >
+                    Forgot password?
+                  </Link>
+                </Button>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <FormError message={error || urlError} />
         <FormSuccess message={success} />

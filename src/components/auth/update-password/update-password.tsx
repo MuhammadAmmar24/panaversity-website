@@ -17,20 +17,25 @@ import {
 import { Input } from "../../ui/input";
 import { FormError } from "../../form-error";
 import { FormSuccess } from "../../form-success";
-import { updatePassword } from "@/src/actions/update-password";
+import { updatePassword } from "@/src/app/actions/update-password";
 import { useRouter } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
 
 type VerifyEmailProps = {
-    token: string;
-  
-  }
+  token: string;
+};
 
-function UpdatePassword({token}: VerifyEmailProps) {
+function UpdatePassword({ token }: VerifyEmailProps) {
   const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] =
+    useState<boolean>(false);
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
@@ -46,7 +51,7 @@ function UpdatePassword({token}: VerifyEmailProps) {
   const onSubmit = (values: z.infer<typeof UpdatePasswordSchema>) => {
     setError("");
     setSuccess("");
-  
+
     startTransition(() => {
       updatePassword(values).then((data) => {
         if (data?.error) {
@@ -61,13 +66,14 @@ function UpdatePassword({token}: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
+          form.reset();
           setError("");
           setSuccess(data.message);
           toast({
             title: "Password updated successfully",
             description: "Your password has been updated.",
           });
-  
+
           if (data.message === "Password updated successfully") {
             localStorage.setItem("updatePassword", "true");
             window.location.href = "/login";
@@ -76,7 +82,6 @@ function UpdatePassword({token}: VerifyEmailProps) {
       });
     });
   };
-  
 
   return (
     <FormProvider {...form}>
@@ -89,12 +94,26 @@ function UpdatePassword({token}: VerifyEmailProps) {
               <FormItem>
                 <FormLabel>New Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showNewPassword ? "text" : "password"}
+                      className="pl-3 pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowNewPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showNewPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -107,12 +126,26 @@ function UpdatePassword({token}: VerifyEmailProps) {
               <FormItem>
                 <FormLabel>Confirm Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showConfirmPassword ? "text" : "password"}
+                      className="pl-3 pr-10 "
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showConfirmPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>

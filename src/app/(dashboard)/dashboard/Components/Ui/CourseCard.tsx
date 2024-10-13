@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
-import { processPayment } from "@/src/actions/payment";
-import { getCoursePrice } from "@/src/actions/courses";
+import { processPayment } from "@/src/app/actions/payment";
+import { getCoursePrice } from "@/src/app/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { useRouter } from "next/navigation";
 
@@ -45,8 +45,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
   // Function to handle enrollment and payment processing
   const handleEnroll = async (paymentMethod: string) => {
     try {
- 
-
       const payload: any = {
         batch_no: batch_id,
         package_id: enrollmentPackage,
@@ -55,11 +53,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
         vendor_type: paymentMethod, // Pass the selected payment method
       };
 
-
-
       // Call the payment processing API
       const result: any = await processPayment(payload);
-
 
       if (result.type === "success") {
         const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL

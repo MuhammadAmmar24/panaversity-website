@@ -1,16 +1,16 @@
 "use client";
 import { useState, useEffect, useTransition } from "react";
-import { getTimeSlotsForCourseBatchProgram } from "@/src/actions/courses";
-import { enrollNewStudentInProgramAndCourse } from "@/src/actions/enrollment"; // Import the action
+import { getTimeSlotsForCourseBatchProgram } from "@/src/app/actions/courses";
+import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment"; // Import the action
 import { useRouter } from "next/navigation";
-import { getCoursePrice } from "@/src/actions/courses";
+import { getCoursePrice } from "@/src/app/actions/courses";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
   batch_id,
   course_batch_program_id,
-  profile_id
+  profile_id,
 }: any) {
   const [classTimeSlots, setClassTimeSlots] = useState<any[]>([]);
   const [selectedDay, setSelectedDay] = useState("");
@@ -150,7 +150,7 @@ export default function GetEnrolled({
   const isDayAndTimeSelected = selectedDay && selectedTimeSlot;
   const isFormComplete =
     isDayAndTimeSelected && selectedPaymentMethod && isEnrolled;
-  
+
   const handleEnroll = async () => {
     if (!isDayAndTimeSelected) return;
 
@@ -166,12 +166,10 @@ export default function GetEnrolled({
 
     console.log("Enrollment Payload:", payload);
     // Log the payload for debugging
-    
 
     startTransition(async () => {
       try {
         const result: any = await enrollNewStudentInProgramAndCourse(payload);
-        
 
         if (result.type === "success") {
           setIsEnrolled(true); // Enrollment success, show message
@@ -179,11 +177,10 @@ export default function GetEnrolled({
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
 
           if (url) {
-           
             router.push(url); // Open the Stripe payment URL
           } else {
             console.error("Stripe URL not found in the response.");
-            router.push('/dashboard')
+            router.push("/dashboard");
           }
         } else {
           // If result.type is "error", show the error message from the backend
@@ -205,7 +202,6 @@ export default function GetEnrolled({
       } catch (error: any) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later."); // General error message for unexpected failures
-   
       }
     });
   };
@@ -290,7 +286,6 @@ export default function GetEnrolled({
                   const selectedSlot = timeSlotsForSelectedDay.find(
                     (slot: any) => slot.timeSlotId === selectedId
                   );
-      
                 }}
                 disabled={!selectedDay}
               >
@@ -334,7 +329,9 @@ export default function GetEnrolled({
                 <select
                   id="payment"
                   className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
-                    selectedPaymentMethod ? "border-accent" : "border-neutral-400"
+                    selectedPaymentMethod
+                      ? "border-accent"
+                      : "border-neutral-400"
                   }`}
                   value={selectedPaymentMethod}
                   onChange={(e) => setSelectedPaymentMethod(e.target.value)}
@@ -365,7 +362,9 @@ export default function GetEnrolled({
                 </div>
               </div>
             ) : (
-              <p className="w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none border-accent">{paymentMethods[0]}</p> // Display Stripe directly when only one method is available
+              <p className="w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none border-accent">
+                {paymentMethods[0]}
+              </p> // Display Stripe directly when only one method is available
             )}
           </div>
 
@@ -412,9 +411,7 @@ export default function GetEnrolled({
 
           {/* Error Message */}
           {enrollmentError && (
-            <p className={"text-red-500 mt-4"}>
-              {enrollmentError}
-            </p>
+            <p className={"text-red-500 mt-4"}>{enrollmentError}</p>
           )}
         </div>
       </div>
