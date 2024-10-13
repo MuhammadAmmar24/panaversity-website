@@ -33,11 +33,13 @@ import {
 } from "@/src/components/ui/select";
 import { affiliations } from "@/src/constants/affiliation";
 import Link from "next/link";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineEye, AiOutlineEyeInvisible, AiOutlineLoading3Quarters } from "react-icons/ai";
+
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
   const searchParams = useSearchParams();
@@ -70,7 +72,7 @@ export const RegisterForm = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
-
+    console.log(values);
     startTransition(() => {
       register(values).then((data) => {
         setError(data.error);
@@ -100,7 +102,6 @@ export const RegisterForm = () => {
             ),
           });
           router.replace("/verify");
-
         }
       });
     });
@@ -152,12 +153,28 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
-                    disabled={isPending}
-                    placeholder="******"
-                    type="password"
-                  />
+                <div className="relative">
+            <Input
+              {...field}
+              disabled={isPending}
+              placeholder="******"
+              type={showPassword ? "text" : "password"} // Toggle between text and password
+              className="pl-3 pr-10" // Add padding for the icon space
+            />
+            {/* Eye Icon to toggle password visibility */}
+            <button
+              type="button"
+              onClick={() => {
+                setShowPassword((prev) => !prev)}}
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible className="w-5 h-5" />
+              ) : (
+                <AiOutlineEye className="w-5 h-5" />
+              )}
+            </button>
+          </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -176,7 +193,6 @@ export const RegisterForm = () => {
                     onChange={(phone: string) => field.onChange(phone)}
                     disabled={isPending}
                     placeholder="+921234567890"
-                 
                     buttonStyle={{ backgroundColor: "#f9fafb" }}
                     inputStyle={{
                       width: "100%",

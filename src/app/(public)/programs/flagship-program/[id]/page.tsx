@@ -1,6 +1,27 @@
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getCourseData } from "@/src/lib/courseData";
+import type { Metadata } from "next";
+
+// Function to generate metadata dynamically
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const courseId = parseInt(params.id);  // Parse the id as a number
+  const data = await getCourseData(courseId);  // Fetch course data using the course id
+
+  if (!data || !data.data) {
+    return {
+      title: "Course Not Found",
+      description: "The course you are looking for does not exist.",
+    };
+  }
+
+  const courseName = data.data.course_name;
+
+  return {
+    title: `Learn ${courseName} | Panaversity Flagship Program`,
+    description: `Explore the course ${courseName}, part of Panaversity's Flagship Program, focusing on cutting-edge topics like Generative AI and cloud-native technologies.`,
+  };
+}
 
 export interface CourseData {
   course_batch_program_id: number;

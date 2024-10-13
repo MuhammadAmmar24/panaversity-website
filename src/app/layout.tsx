@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
+import NextTopLoader from 'nextjs-toploader'
+
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -19,7 +22,34 @@ const rubik = Rubik({
   variable: "--font-rubik",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
+  openGraph: {
+    title: "Panaversity",
+    description: "Learn Generative AI with AI-powered Panaversity.",
+    url:siteUrl,
+    images: [
+      {
+        url: `${siteUrl}/logos/logoIcon.png`,
+        alt: "Panaversity Logo"
+      },
+    ],
+    siteName: "Panaversity: AI-Powered Online University"
+  },
+  twitter: {
+    card: "summary",
+    title: "Panaversity",
+    description: "Learn Generative AI with AI-powered Panaversity.",
+    images: [
+      {
+        url: `${siteUrl}/logos/logoIcon.png`,
+      },
+    ],
+    site:"Panaversity: AI-Powered Online University"
+  
+  },
+
   title: {
     default: "Panaversity",
     template: "%s | Panaversity",
@@ -44,8 +74,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}
       >
+        <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD" showSpinner={false}/>
         {children}
         {modal}
+     
+
       </body>
     </html>
   );

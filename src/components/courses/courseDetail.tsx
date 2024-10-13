@@ -1,8 +1,9 @@
 import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
-import Breadcrumb from "../Breadcrumbs";
 import RatingStars from "../ui/Ratingstar";
 import  fetchProfile  from "@/src/lib/getProfile";
+import Breadcrumbs from "../Breadcrumbs";
+
 
 
 interface CourseInfoProps {
@@ -95,7 +96,14 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-8">
             {/* Breadcrumb Navigation */}
-            <Breadcrumb program="Flagship-Program" courseName={course_name} />
+            <Breadcrumbs
+              items={[
+                { label: 'Home', href: '/' },
+                { label: 'Programs', href: '/programs' },
+                { label: 'Flagship-Program', href: '/programs/flagship-program' },
+                { label: course_name }
+              ]}
+             />
 
             <div className="flex flex-col lg:flex-row ">
               {/* Course Details */}

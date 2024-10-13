@@ -1,19 +1,52 @@
 import { RegisterFormPage } from "@/src/components/auth/register/register-page";
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/Footer";
 
-export const metadata: Metadata = {
-  title: "Register",
-  description: `Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.`
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+export const metadata : Metadata = {
+  title: "Register | Panaversity",
+  description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+  openGraph: {
+    title: "Register | Panaversity",
+    description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+    url: siteUrl, 
+    images: [
+      {
+        url:`${siteUrl}/logoicon.png`, 
+        alt: "Panaversity Logo",  
+      },
+    ],
+    siteName: "Panaversity: AI-Powered Online University",
+  },
+  twitter: {
+    card: "summary_large_image", 
+    title: "Register | Panaversity",
+    description: "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+    images: [
+      {
+        url: `${siteUrl}/logoicon.png`,
+        alt: "Panaversity Logo"  
+      },
+    ],
+    site: "Panaversity: AI-Powered Online University",
+  },
 };
 
 const RegisterPage = () => {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <Suspense>
-        <RegisterFormPage />
-      </Suspense>
-    </div>
+    <main>
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <Navbar />
+        <div className="mt-10 mb-20">
+          <Suspense>
+            <RegisterFormPage />
+          </Suspense>
+        </div>
+      </div>
+      <Footer />
+    </main>
   );
 };
 

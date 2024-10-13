@@ -22,7 +22,7 @@ export default function Faqs() {
   };
 
   return (
-    <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
+    <section id="faqs" className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
       <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
         <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 tracking-wide">
           FAQs
