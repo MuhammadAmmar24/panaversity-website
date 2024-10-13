@@ -52,7 +52,7 @@ export default async function Courses() {
               >
                 Our Flagship Program <br /> in Generative AI
               </h2>
-              <p className="text-background/60 mb-10 pt-2 px-4 mt-0 max-w-[28rem] mx-auto">
+              <p className="text-background/60 mb-12 pt-2 px-4 mt-0 max-w-[28rem] mx-auto">
                 Our GenAI Program for Innovators and Creators
               </p>
             </div>
