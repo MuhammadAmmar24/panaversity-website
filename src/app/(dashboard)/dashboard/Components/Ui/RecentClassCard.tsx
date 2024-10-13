@@ -1,13 +1,12 @@
-import { TimerIcon } from "@radix-ui/react-icons";
 import { FaGithub, FaYoutube } from "react-icons/fa6";
 import { ClassCardProps } from "../../types/types";
-import { BiCalendarAlt } from "react-icons/bi";
 import { IoIosLink } from "react-icons/io";
+import { HiMiniCalendar } from "react-icons/hi2";
+import { TbClockHour3 } from "react-icons/tb";
 import Error from "../Error/error_message";
 
 // ClassCard component to display class information
 const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
-
   // Error handling: Ensure title and time are provided
   if (!title || !time) {
     return (
@@ -53,14 +52,14 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
             <div className="flex flex-col sm:flex-row sm:gap-10 text-xs sm:text-sm text-gray-500 pt-1">
               {/* Class date */}
               <div className="flex items-center gap-2">
-                <BiCalendarAlt className="text-sm md:text-base" />
+                <HiMiniCalendar className="text-sm md:text-base" />
                 <time dateTime="2024-08-22">22 August 2024</time>
                 {/* SEO optimized time element */}
               </div>
 
               {/* Class duration or time */}
               <div className="flex items-center gap-2">
-                <TimerIcon className="text-sm md:text-base" />
+                <TbClockHour3 className="text-sm md:text-base" />
                 <span>{time}</span>
               </div>
             </div>
