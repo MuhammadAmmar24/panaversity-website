@@ -20,9 +20,9 @@ export interface CourseData {
   media_link: string;
 }
 
-async function fetchCoursePrice(course_batch_program_idd: number) {
+async function fetchCoursePrice(course_batch_program_id: number) {
 
-  const params = {course_batch_program_id: 1}; // Replace with actual course_batch_program_id
+  const params = {course_batch_program_id: course_batch_program_id}; // Replace with actual course_batch_program_id
 
   const result = await getCoursePrice(params);
 
