@@ -58,7 +58,7 @@ function ResetPassword() {
           });
   
           if (data.message === "Password reset link sent successfully") {
-            // router.replace('/login');
+            router.replace('/login');
           }
         }
       });

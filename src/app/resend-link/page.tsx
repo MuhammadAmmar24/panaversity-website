@@ -2,6 +2,9 @@ import ResendLink from "@/src/components/auth/resend-link/resendLink";
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
+import Navbar from "@/src/components/Navbar";
+import Footer from "@/src/components/Footer";
+
 
 
 export const metadata: Metadata = {
@@ -11,6 +14,8 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
+    <>
+    <Navbar />
     <div className="flex justify-center items-center min-h-screen">
     <Suspense>
       <CardWrapper headerLabel="Verify Your Email">
@@ -18,6 +23,8 @@ const page = () => {
       </CardWrapper>
     </Suspense>
   </div>
+  <Footer />
+  </>
   );
 };
 
