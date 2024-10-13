@@ -41,7 +41,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     }
   } catch (error) {
     console.error('Fetch error:', error);
-    return { error: "Failed to register user!" };
+    return { error: "Failed to register user. Try again!" };
   }
   return { success: "Signup Success - Please Login!" };
 };

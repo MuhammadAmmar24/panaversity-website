@@ -82,20 +82,26 @@ export const RegisterForm = () => {
             variant: "destructive",
           });
         } else if (data?.success) {
-          form.reset()
+          form.reset();
           setError("");
           setSuccess(data.success);
           toast({
             title: "Signup Success",
             description: "Please Verify Email To Continue",
             action: (
-              <Link href={redirect_uri ? `/verify${queryParams}` : "/verify"} replace>
-                <ToastAction altText="Verify to Continue">Verify Email</ToastAction>
+              <Link
+                href={redirect_uri ? `/verify${queryParams}` : "/verify"}
+                replace
+              >
+                <ToastAction altText="Verify to Continue">
+                  Verify Email
+                </ToastAction>
               </Link>
             ),
           });
           router.replace("/verify");
         }
+        startTransition(() => {});
       });
     });
   };
@@ -111,7 +117,11 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Full Name</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} placeholder="Enter your full name" />
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="Enter your full name"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -124,7 +134,12 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input {...field} disabled={isPending} placeholder="user@email.com" type="email" />
+                  <Input
+                    {...field}
+                    disabled={isPending}
+                    placeholder="user@email.com"
+                    type="email"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -150,7 +165,11 @@ export const RegisterForm = () => {
                       onClick={() => setShowPassword((prev) => !prev)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                     >
-                      {showPassword ? <AiOutlineEyeInvisible className="w-5 h-5" /> : <AiOutlineEye className="w-5 h-5" />}
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
                     </button>
                   </div>
                 </FormControl>
@@ -172,7 +191,11 @@ export const RegisterForm = () => {
                     disabled={isPending}
                     placeholder="+921234567890"
                     buttonStyle={{ backgroundColor: "#f9fafb" }}
-                    inputStyle={{ width: "100%", backgroundColor: "transparent", opacity: isPending ? 0.5 : 1 }}
+                    inputStyle={{
+                      width: "100%",
+                      backgroundColor: "transparent",
+                      opacity: isPending ? 0.5 : 1,
+                    }}
                     countryCodeEditable={false}
                   />
                 </FormControl>
@@ -186,15 +209,29 @@ export const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Affiliation</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value} disabled={isPending}>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                  disabled={isPending}
+                >
                   <FormControl>
-                    <SelectTrigger className={form.formState.errors.affiliation ? "border-red-500 focus-visible:ring-red-500" : ""}>
+                    <SelectTrigger
+                      className={
+                        form.formState.errors.affiliation
+                          ? "border-red-500 focus-visible:ring-red-500"
+                          : ""
+                      }
+                    >
                       <SelectValue placeholder="The Student’s affiliation" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
                     {affiliations.map((affiliation, index) => (
-                      <SelectItem key={index} value={affiliation} disabled={isPending}>
+                      <SelectItem
+                        key={index}
+                        value={affiliation}
+                        disabled={isPending}
+                      >
                         {affiliation}
                       </SelectItem>
                     ))}
@@ -207,24 +244,33 @@ export const RegisterForm = () => {
         </div>
         <FormError message={error} />
         <FormSuccess message={success} />
+        {!success && (
+          <Button
+            disabled={isPending || !!success}
+            type="submit"
+            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+          >
+            {isPending ? (
+              <>
+                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              "Create an account"
+            )}
+          </Button>
+        )}
         <Button
-          disabled={isPending}
-          type="submit"
-          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+          size="sm"
+          variant="link"
+          asChild
+          className="w-full text-textPrimary"
         >
-          {isPending ? (
-            <>
-              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Submitting...
-            </>
-          ) : (
-            "Create an account"
-          )}
-        </Button>
-        <Button size="sm" variant="link" asChild className="w-full text-textPrimary">
           <Link href="/login" replace className="group">
             Already have an account?&nbsp;
-            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">Login</span>
+            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
+              Login
+            </span>
           </Link>
         </Button>
       </form>
