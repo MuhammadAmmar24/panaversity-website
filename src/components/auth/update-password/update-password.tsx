@@ -30,7 +30,6 @@ type VerifyEmailProps = {
 };
 
 function UpdatePassword({ token }: VerifyEmailProps) {
-  const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
@@ -51,9 +50,8 @@ function UpdatePassword({ token }: VerifyEmailProps) {
   const onSubmit = (values: z.infer<typeof UpdatePasswordSchema>) => {
     setError("");
     setSuccess("");
-
     startTransition(() => {
-      updatePassword(values).then((data) => {
+      updatePassword(values).then((data: any) => {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
@@ -79,6 +77,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
             window.location.href = "/login";
           }
         }
+        startTransition(() => {});
       });
     });
   };
@@ -154,20 +153,22 @@ function UpdatePassword({ token }: VerifyEmailProps) {
         </div>
         <FormError message={error} />
         <FormSuccess message={success} />
-        <Button
-          disabled={isPending}
-          type="submit"
-          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
-        >
-          {isPending ? (
-            <>
-              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Updating...
-            </>
-          ) : (
-            "Update Password"
-          )}
-        </Button>
+        {!success && (
+          <Button
+            disabled={isPending || !!success}
+            type="submit"
+            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+          >
+            {isPending ? (
+              <>
+                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                Updating...
+              </>
+            ) : (
+              "Update Password"
+            )}
+          </Button>
+        )}
       </form>
     </FormProvider>
   );

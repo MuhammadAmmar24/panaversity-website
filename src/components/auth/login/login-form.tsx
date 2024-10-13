@@ -76,7 +76,7 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-    startTransition(true);  // Set isPending to true when starting the login process
+    startTransition(true); // Set isPending to true when starting the login process
 
     login(values)
       .then((data) => {
@@ -91,29 +91,27 @@ export const LoginForm = () => {
           });
 
           if (data?.error === "Email not verified") {
-            router.push("/resend-link");
+            window.location.href = "/resend-link";
           }
           form.setValue("password", "");
         }
 
         if (data?.success) {
-          form.reset()
+          form.reset();
           setSuccess(data.success);
           toast({
             title: "Login Success",
-            description: data.message
-              ? data.message
-              : "Welcome to Panaversity",
+            description: data.message ? data.message : "Welcome to Panaversity",
             action: <ToastAction altText="Close">Close</ToastAction>,
           });
 
           // Handle redirection logic
           const previousPath = localStorage.getItem("previousPath");
           if (previousPath) {
-            window.location.href = previousPath;  // Redirect to previous path
-            localStorage.removeItem("previousPath");  // Clear previous path
+            window.location.href = previousPath; // Redirect to previous path
+            localStorage.removeItem("previousPath"); // Clear previous path
           } else {
-            window.location.href = callbackUrl ?? "/dashboard";  // Default redirect
+            window.location.href = callbackUrl ?? "/dashboard"; // Default redirect
           }
         }
       })
@@ -121,7 +119,7 @@ export const LoginForm = () => {
         setError("Login failed. Please try again.");
       })
       .finally(() => {
-        startTransition(false);  // Ensure isPending is set to false after completion
+        startTransition(false); // Ensure isPending is set to false after completion
       });
   };
 
@@ -174,6 +172,7 @@ export const LoginForm = () => {
                     </button>
                   </div>
                 </FormControl>
+
                 <Button
                   size="sm"
                   variant="link"
@@ -194,20 +193,22 @@ export const LoginForm = () => {
         </div>
         <FormError message={error || urlError} />
         <FormSuccess message={success} />
-        <Button
-          disabled={isPending}
-          type="submit"
-          className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
-        >
-          {isPending ? (
-            <>
-              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Submitting...
-            </>
-          ) : (
-            "Login"
-          )}
-        </Button>
+        {!success && (
+          <Button
+            disabled={isPending || !!success}
+            type="submit"
+            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+          >
+            {isPending ? (
+              <>
+                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                Submitting...
+              </>
+            ) : (
+              "Login"
+            )}
+          </Button>
+        )}
 
         <Button
           size="sm"
