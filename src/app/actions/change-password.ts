@@ -1,5 +1,3 @@
-// /app/api/auth/update-password/route.ts
-
 "use server";
 
 import * as z from "zod";
