@@ -87,17 +87,17 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
-              <p className="text-gray-600">Phone</p>
+              <p className="text-gray-600 font-semibold">Phone</p>
               <p>+{personalInfo.phone}</p> {/* Not editable */}
             </div>
             <div>
-              <p className="text-gray-600">Student ID</p>
+              <p className="text-gray-600 font-semibold">Student ID</p>
               <p>{personalInfo.studentId || "-"}</p> {/* Not editable */}
             </div>
           </div>
 
           {/* Address Information */}
-          <div className="mt-4 text-sm sm:text-base">
+          <div className="mt-8 text-sm sm:text-base">
             <div className="flex justify-between">
               <h2 className="text-lg sm:text-xl font-semibold">
                 Address Information
@@ -114,9 +114,9 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-600">Country</p>
+                <p className="text-gray-600 font-semibold">Country</p>
                 {isEditingAddress ? (
                   <input
                     type="text"
@@ -130,7 +130,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                 )}
               </div>
               <div>
-                <p className="text-gray-600">City</p>
+                <p className="text-gray-600 font-semibold">City</p>
                 {isEditingAddress ? (
                   <input
                     type="text"
@@ -147,7 +147,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
-                <p className="text-gray-600">Address</p>
+                <p className="text-gray-600 font-semibold">Address</p>
                 {isEditingAddress ? (
                   <input
                     type="text"
@@ -161,7 +161,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                 )}
               </div>
               <div>
-                <p className="text-gray-600">Postal Code</p>
+                <p className="text-gray-600 font-semibold">Postal Code</p>
                 {isEditingAddress ? (
                   <input
                     type="text"
