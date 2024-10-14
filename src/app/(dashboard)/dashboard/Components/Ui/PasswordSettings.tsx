@@ -68,13 +68,13 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
 
   // Handle form submission with validation
   const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
-    console.log("values", values);
+ 
 
     setError("");
     setSuccess("");
     startTransition(() => {
       changePassword(values).then((data: any) => {
-        console.log("data", data);
+     
         if (data?.error) {
           setError(data.error);
           setSuccess("");
@@ -88,7 +88,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
-          console.log(data.message);
+         
           setError("");
           setSuccess(data.message);
           toast({
@@ -96,7 +96,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             description: "Your password has been updated.",
           });
           if (data.message === "Password updated successfully") {
-            console.log("Password updated successfully");
             signOut();
             // window.location.href = "/login";
           }
