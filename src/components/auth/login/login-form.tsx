@@ -91,7 +91,8 @@ export const LoginForm = () => {
           });
 
           if (data?.error === "Email not verified") {
-            window.location.href = "/resend-link";
+            // window.location.href = "/resend-link";
+            router.push("/resend-link");
           }
           form.setValue("password", "");
         }
@@ -162,8 +163,9 @@ export const LoginForm = () => {
                     <button
                       type="button"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2"
-    
-                      onClick={() => !isPending && setShowPassword((prev) => !prev)}
+                      onClick={() =>
+                        !isPending && setShowPassword((prev) => !prev)
+                      }
                       disabled={isPending}
                     >
                       {showPassword ? (
