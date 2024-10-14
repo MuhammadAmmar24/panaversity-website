@@ -15,6 +15,8 @@ import { navItems } from "@/src/constants/nav";
 import { usePathname } from "next/navigation";
 import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
+import { FaHome, FaSignInAlt } from "react-icons/fa";
+
 
 export default function Navbar() {
   // State to track whether navbar is hidden
@@ -75,8 +77,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-40 w-full transition-transform duration-500 ${hidden ? "-translate-y-full" : "translate-y-0"
-        }`}
+      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-40 w-full transition-transform duration-500 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      }`}
     >
       <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
         {/* Logo */}
@@ -95,10 +98,11 @@ export default function Navbar() {
             <Link
               key={nav.name}
               href={nav.link}
-              className={` text-base ${pathName === nav.link
+              className={` text-base ${
+                pathName === nav.link
                   ? "text-[#40e477]"
                   : "text-textPrimary hover:text-[#40e477]"
-                }`}
+              }`}
             >
               {nav.name}
             </Link>
@@ -150,31 +154,50 @@ export default function Navbar() {
             </SheetTrigger>
             <SheetContent
               side="left"
-              className="md:hidden  border-0  bg-white/80 backdrop-blur-lg"
+              className="max-w-64 md:hidden  border-0  bg-white/80 backdrop-blur-lg"
             >
-              <nav className="grid gap-4 p-4 mt-6">
-                {navItems.map((nav) => (
-                  <SheetClose asChild key={nav.name}>
-                    <Link
-                      href={nav.link}
-                      className="text-md  font-medium text-textPrimary hover:text-accent"
+              <nav className="flex flex-col justify-between items-center px-4 py-8 mt-6 h-full">
+                <div className="flex flex-col gap-y-4">
+                  {navItems.map((nav) => (
+                    <SheetClose asChild key={nav.name}>
+                      <Link
+                        href={nav.link}
+                        className="text-md  font-medium text-textPrimary hover:text-accent flex items-center gap-3"
+                      >
+                        {<nav.icon/>}
+                        {nav.name}
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </div>
+                <div className="">
+                  <SheetClose asChild>
+                      <Link
+                      href={IsLoggedIn ? "/dashboard" : "/register"}
+                      className="relative flex items-center justify-center text-center px-4 py-2 gap-x-2  overflow-hidden font-medium rounded-3xl group bg-accent "
                     >
-                      {nav.name}
+                      {/* <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
+                      <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
+
+                     
+                      <span className="relative flex items-center gap-2 w-full text-center text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white font-medium"> */}
+                        {IsLoggedIn ? (
+                          <>
+                            <FaHome size={18} /> {/* Home icon */}
+                            Dashboard
+                          </>
+                        ) : (
+                          <>
+                            <FaSignInAlt size={18} /> {/* Login icon */}
+                            Get Started
+                          </>
+                        )}
+                      {/* </span> */}
+
+                      {/* <span className="absolute inset-0 border-2 border-accent rounded-3xl"></span> */}
                     </Link>
                   </SheetClose>
-                ))}
-                <Link
-                  href={IsLoggedIn ? "/dashboard" : "/register"}
-                  //  onClick={handleClick}
-                  className="relative items-center justify-start text-center inline-block px-3 py-2  overflow-hidden font-medium rounded-3xl group bg-accent"
-                >
-                  <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
-                  <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
-                  <span className="relative w-full text-center text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white font-medium">
-                    {IsLoggedIn ? "Dashboard" : "Get Started"}
-                  </span>
-                  <span className="absolute inset-0 border-2 border-accent rounded-3xl"></span>
-                </Link>
+                </div>
               </nav>
             </SheetContent>
           </Sheet>
