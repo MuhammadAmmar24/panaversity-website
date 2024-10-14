@@ -2,11 +2,41 @@ import { privacypolicydata } from "@/src/constants/privacypolicy";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+// Metadata for the page
 export const metadata: Metadata = {
   title: "Panaversity’s Privacy Policy",
   description:
-    " Learn how Panaversity, an AI-powered online university, safeguards your privacy. Our comprehensive privacy policy outlines how we collect, use, and protect your personal information as you engage with our Generative AI courses and services.",
+    "Learn how Panaversity, an AI-powered online university, safeguards your privacy. Our comprehensive privacy policy outlines how we collect, use, and protect your personal information as you engage with our Generative AI courses and services.",
 };
+
+// Reusable section component for headings and paragraphs
+const Section = ({ title, content }: { title: string; content: string }) => (
+  <div className="space-y-6"> {/* Increased spacing */}
+    <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">{title}</h3> {/* Increased font size */}
+    <p className="text-base sm:text-lg">{content}</p> {/* Increased font size */}
+  </div>
+);
+
+// Reusable section with list items
+const SectionWithList = ({
+  title,
+  subtitle,
+  items,
+}: {
+  title: string;
+  subtitle: string;
+  items: (string | JSX.Element)[];
+}) => (
+  <div className="space-y-6"> {/* Increased spacing */}
+    <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">{title}</h3> {/* Increased font size */}
+    <p className="text-base sm:text-lg font-medium text-gray-800">{subtitle}</p> {/* Increased font size */}
+    <ul className="list-disc pl-5 space-y-3 sm:space-y-4 text-base sm:text-lg"> {/* Increased font size */}
+      {items.map((item, idx) => (
+        <li key={idx}>{item}</li>
+      ))}
+    </ul>
+  </div>
+);
 
 export default function PrivacyPolicy() {
   return (
@@ -14,131 +44,95 @@ export default function PrivacyPolicy() {
       {/* Header */}
       <div className="flex justify-center items-center bg-teamBg bg-cover">
         <div className="text-center w-full py-12 sm:py-16">
-          <h2 className="text-[1.8rem] sm:text-[2.5rem] md:text-[3.5rem] text-white font-bold tracking-wide">
+          <h2 className="text-[2rem] sm:text-[2.8rem] md:text-[3.8rem] text-white font-bold tracking-wide"> {/* Increased font size */}
             {privacypolicydata.headline1}
           </h2>
-          <p className="text-white opacity-80 text-base sm:text-lg mt-4">
+          <p className="text-white opacity-80 text-lg sm:text-xl mt-6"> {/* Increased font size */}
             {privacypolicydata.headline3}
           </p>
         </div>
       </div>
 
       {/* Privacy Policy Section */}
-      <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 py-8 sm:py-12 lg:py-16">
-        <div className="text-black space-y-8">
+      <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 py-10 sm:py-14 lg:py-18"> {/* Increased padding */}
+        <div className="text-black space-y-10"> {/* Increased spacing */}
           {/* Effective Date */}
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4 sm:mb-6">
+          <h2 className="text-4xl sm:text-5xl font-bold text-gray-800 mb-6 sm:mb-8"> {/* Increased font size */}
             {privacypolicydata.head2}
           </h2>
-          <p className="text-sm sm:text-base leading-relaxed">
+          <p className="text-base sm:text-lg leading-relaxed"> {/* Increased font size */}
             {privacypolicydata.paraline1}
           </p>
 
-          {/* Section 1: Information We Collect */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy1}
-            </h3>
-            <p className="text-sm sm:text-base font-medium text-gray-800">
-              {privacypolicydata.policy1subhead}
-            </p>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
-              <li>{privacypolicydata.policy1description1}</li>
-              <li>{privacypolicydata.policy1description2}</li>
-              <li>{privacypolicydata.policy1description3}</li>
-            </ul>
-          </div>
+          {/* Sections */}
+          <SectionWithList
+            title={privacypolicydata.headpolicy1}
+            subtitle={privacypolicydata.policy1subhead}
+            items={[
+              <><strong>Personal Information:</strong> {privacypolicydata.policy1description1}</>,
+              <><strong>Personalized Learning:</strong> {privacypolicydata.policy1description2}</>,
+              <><strong>Performance Tracking:</strong> {privacypolicydata.policy1description3}</>,
+            ]}
+          />
 
-          {/* Section 2: How We Use Your Information */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy2}
-            </h3>
-            <p className="text-sm sm:text-base font-medium text-gray-800">
-              {privacypolicydata.policy2subhead}
-            </p>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
-              <li>{privacypolicydata.policy2description1}</li>
-              <li>{privacypolicydata.policy2description2}</li>
-              <li>{privacypolicydata.policy2description3}</li>
-              <li>{privacypolicydata.policy2description4}</li>
-              <li>{privacypolicydata.policy2description5}</li>
-            </ul>
-          </div>
+          <SectionWithList
+            title={privacypolicydata.headpolicy2}
+            subtitle={privacypolicydata.policy2subhead}
+            items={[
+              <><strong>Account Management:</strong> {privacypolicydata.policy2description1}</>,
+              <><strong>Personalized Learning:</strong> {privacypolicydata.policy2description2}</>,
+              <><strong>Performance Tracking:</strong> {privacypolicydata.policy2description3}</>,
+              <><strong>Service Improvement:</strong> {privacypolicydata.policy2description4}</>,
+              <><strong>Security and Compliance:</strong> {privacypolicydata.policy2description5}</>,
+            ]}
+          />
 
-          {/* Section 3: Data Sharing and Third-Party Services */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy3}
-            </h3>
-            <p className="text-sm sm:text-base">
-              {privacypolicydata.policy3description1}
-            </p>
-          </div>
+          <Section
+            title={privacypolicydata.headpolicy3}
+            content={privacypolicydata.policy3description1}
+          />
 
-          {/* Section 4: Data Protection and Security */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy4}
-            </h3>
-            <p className="text-sm sm:text-base">
-              {privacypolicydata.policy4description1}
-            </p>
-          </div>
+          <Section
+            title={privacypolicydata.headpolicy4}
+            content={privacypolicydata.policy4description1}
+          />
 
-          {/* Section 5: Data Retention */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy5}
-            </h3>
-            <p className="text-sm sm:text-base">
-              {privacypolicydata.policy5description1}
-            </p>
-          </div>
+          <Section
+            title={privacypolicydata.headpolicy5}
+            content={privacypolicydata.policy5description1}
+          />
 
-          {/* Section 6: Your Rights */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy6}
-            </h3>
-            <ul className="list-disc pl-5 space-y-2 sm:space-y-3 text-sm sm:text-base">
-              <li>{privacypolicydata.policy6description1}</li>
-              <li>{privacypolicydata.policy6description2}</li>
-            </ul>
-          </div>
+          <SectionWithList
+            title={privacypolicydata.headpolicy6}
+            subtitle=""
+            items={[
+              <>{privacypolicydata.policy6description1}</>,
+              <>{privacypolicydata.policy6description2}</>,
+            ]}
+          />
 
-          {/* Section 7: Cookies */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy7}
-            </h3>
-            <p className="text-sm sm:text-base">
-              {privacypolicydata.policy7description1}
-            </p>
-          </div>
+          <Section
+            title={privacypolicydata.headpolicy7}
+            content={privacypolicydata.policy7description1}
+          />
 
-          {/* Section 8: Changes to This Policy */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
-              {privacypolicydata.headpolicy8}
-            </h3>
-            <p className="text-sm sm:text-base">
-              {privacypolicydata.policy8description1}
-            </p>
-          </div>
+          <Section
+            title={privacypolicydata.headpolicy8}
+            content={privacypolicydata.policy8description1}
+          />
 
-          {/* Section 9: Contact Us */}
-          <div className="space-y-4">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+          {/* Contact Us */}
+          <div className="space-y-6"> {/* Increased spacing */}
+            <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">
               {privacypolicydata.headpolicy9}
             </h3>
             <div className="flex flex-wrap gap-1">
-              <p className="text-sm sm:text-base">
+              <p className="text-base sm:text-lg"> {/* Increased font size */}
                 {privacypolicydata.policy9description1}
               </p>
               <Link
                 href={privacypolicydata.contactlink}
-                className="text-green-500 hover:underline text-sm sm:text-base"
+                className="text-green-500 hover:underline text-base sm:text-lg"
               >
                 {privacypolicydata.contactlink}.
               </Link>
