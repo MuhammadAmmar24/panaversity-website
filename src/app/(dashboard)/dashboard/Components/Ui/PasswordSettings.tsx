@@ -110,7 +110,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
       {/* Button to toggle dropdown */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-md p-3 sm:p-4 shadow-sm hover:shadow-lg focus:outline-none transition-all duration-300 ease-in-out"
+        className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-md p-3 sm:p-4 px-4 sm:px-6 shadow-sm hover:shadow-lg focus:outline-none transition-all duration-300 ease-in-out"
       >
         <span className="text-gray-800 font-semibold">Password Settings</span>
         <svg
