@@ -42,7 +42,7 @@ const RegisterPage = () => {
     <>
       <Navbar />
       <main>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center min-h-screen">
           <div className="mt-10 mb-20">
             <Suspense >
               <RegisterFormPage  />
