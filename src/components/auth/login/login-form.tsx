@@ -162,7 +162,9 @@ export const LoginForm = () => {
                     <button
                       type="button"
                       className="absolute right-2 top-1/2 transform -translate-y-1/2"
-                      onClick={() => setShowPassword((prev) => !prev)}
+    
+                      onClick={() => !isPending && setShowPassword((prev) => !prev)}
+                      disabled={isPending}
                     >
                       {showPassword ? (
                         <AiOutlineEyeInvisible className="h-5 w-5 text-gray-500" />

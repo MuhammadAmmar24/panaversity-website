@@ -4,6 +4,7 @@ import { RequestBody, ResponseBody } from '@/src/lib/schemas/user';
 import { get_profile, GetProfileResponse } from '@/src/lib/schemas/student';
 import { updateProfileSchema, updateProfileResponseSchema,update_st_profile_Request,update_st_profile_Response } from '@/src/lib/schemas/student';
 import { auth } from "@/src/auth";
+import { revalidatePath } from 'next/cache';
 
 
 export const checkUserVerification = async () => {
@@ -211,6 +212,8 @@ export const update_student_Profile = async (
     }
 
     const responseData = await response.json();
+
+    revalidatePath("/dashboard/profile");
 
     // Validate the response using the Zod schema
     const parsedResponse = updateProfileResponseSchema.safeParse(responseData);

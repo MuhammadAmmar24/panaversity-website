@@ -103,7 +103,8 @@ function UpdatePassword({ token }: VerifyEmailProps) {
                     />
                     <button
                       type="button"
-                      onClick={() => setShowNewPassword((prev) => !prev)}
+                      onClick={() => !isPending && setShowNewPassword((prev) => !prev)}
+                      disabled={isPending}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                     >
                       {showNewPassword ? (
@@ -135,7 +136,8 @@ function UpdatePassword({ token }: VerifyEmailProps) {
                     />
                     <button
                       type="button"
-                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      onClick={() => !isPending && setShowConfirmPassword((prev) => !prev)}
+                      disabled={isPending}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                     >
                       {showConfirmPassword ? (
