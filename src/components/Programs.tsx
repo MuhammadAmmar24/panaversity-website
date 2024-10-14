@@ -23,7 +23,7 @@ const Programs = () => {
               <div
                 className={`relative bg-[#f8f8f9] group shadow-md p-6 transform transition duration-400 hover:shadow-md
               ${index === 2
-                    ? "sm:col-span-2 sm:w-[calc(50%-0.75rem)] sm:mx-auto lg:col-span-1 lg:w-full"
+                    ? "sm:col-span-2 sm:mx-auto lg:col-span-1 lg:w-full"
                     : ""
                   }`}
               >
