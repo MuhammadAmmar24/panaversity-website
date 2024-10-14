@@ -99,9 +99,9 @@ export const RegisterForm = () => {
               </Link>
             ),
           });
-          // router.replace("/verify");
-          window.location.replace("/verify");
-          console.log(data.success);
+          router.replace("/verify");
+          // window.location.replace("/verify");
+
         }
         startTransition(() => {});
       });
