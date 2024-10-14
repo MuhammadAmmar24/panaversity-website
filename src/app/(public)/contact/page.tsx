@@ -34,7 +34,7 @@ export default async function Courses() {
               >
                 Contact Us
               </h2>
-              <p className="text-background/60 mb-12 pt-2 px-4 mt-0 max-w-[28rem] mx-auto">
+              <p className="text-background/60 mb-12 pt-2 px-4 mt-0 max-w-[38rem] mx-auto">
               We’re here to assist you on your journey to becoming a certified Cloud Native Applied Generative AI Engineer. 
               </p>
             </div>

@@ -106,13 +106,13 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #13b172;
+  background: #1cd98e;
   border-radius: 100px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #13b172;
+  background: #1cd98e;
 }
 
 
