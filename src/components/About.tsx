@@ -22,7 +22,7 @@ export default function About() {
           <h2 className="text-sm sm:text-md md:text-lg text-textPrimary text-center gradient-border font-medium border-b rounded-[100px] mb-3 sm:mb-4 md:mb-5 uppercase tracking-wide ">
             {aboutData.sectionHeading}
           </h2>
-          <p className="text-sm sm:text-base md:text-lg font-light font-inter text-textSecondary text-center md:text-left">
+          <p className="text-sm sm:text-base md:text-lg font-light font-inter text-textSecondary text-left md:text-left">
             {aboutData.content}
           </p>
         </div>
