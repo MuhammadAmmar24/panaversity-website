@@ -138,13 +138,13 @@ const Dropdown: React.FC<DropdownProps> = ({
           </Link>
 
           {/* Payments section */}
-          <li
+          {/* <li
             className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
             role="menuitem"
           >
             <TfiWallet className="w-5 h-5 text-gray-700" />
             <span className="text-gray-700 text-xs sm:text-sm">Payments</span>
-          </li>
+          </li> */}
 
           {/* Help center */}
           <li
