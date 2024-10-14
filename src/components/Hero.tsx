@@ -5,9 +5,9 @@ export default function Hero() {
   return (
     <div className="bg-background relative">
       <div className="relative isolate px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl pt-[5rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem]">
+        <div className="mx-auto max-w-5xl pt-[4rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem]">
           <div className="text-center">
-            <h1 className="text-[2rem] sm:text-[3.4rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
+            <h1 className="text-[2rem] xs:text-[2.5rem] sm:text-[3rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
               Revolutionize Your Learning with{" "}
               <span className="text-accent bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-transparent">
                 AI-Powered
@@ -21,7 +21,7 @@ export default function Hero() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href="/programs"
-                className="relative inline-flex items-center px-12 py-4 overflow-hidden text-[0.9rem] text-textPrimary font-inter bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-background border-2 border-accent"
+                className="relative inline-flex items-center px-6 py-2.5 sm:px-12 sm:py-4  overflow-hidden text-sm sm:text-[0.9rem] text-textPrimary font-inter bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-background border-2 border-accent"
               >
                 <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
                 <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
