@@ -162,8 +162,9 @@ export default function Navbar() {
                     <SheetClose asChild key={nav.name}>
                       <Link
                         href={nav.link}
-                        className="text-md  font-medium text-textPrimary hover:text-accent"
+                        className="text-md  font-medium text-textPrimary hover:text-accent flex items-center gap-2"
                       >
+                        {<nav.icon/>}
                         {nav.name}
                       </Link>
                     </SheetClose>
