@@ -165,9 +165,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => {
-                                setShowPasswordCurrent((prev) => !prev);
-                              }}
+                              onClick={() => !isPending && setShowPasswordCurrent((prev) => !prev)}
+                      disabled={isPending}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordCurrent ? (
@@ -200,9 +199,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => {
-                                setShowPasswordNew((prev) => !prev);
-                              }}
+                              onClick={() => !isPending && setShowPasswordNew((prev) => !prev)}
+                              disabled={isPending} 
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordNew ? (
@@ -235,9 +233,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => {
-                                setShowPasswordConfirm((prev) => !prev);
-                              }}
+                              onClick={() => !isPending && setShowPasswordConfirm((prev) => !prev)}
+                      disabled={isPending}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordConfirm ? (
