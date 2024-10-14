@@ -50,6 +50,18 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     setIsEditingAddress(false);
   };
 
+  const [initialAddressInfo] = useState({
+    address: profile?.student?.address || "",
+    city: profile?.student?.city || "",
+    country: profile?.student?.country || "",
+    postalCode: profile?.student?.postal_code || "",
+  });
+
+  const handleCancel = () => {
+    setAddressInfo(initialAddressInfo);  // Reset address fields to initial state
+    setIsEditingAddress(false);          // Exit editing mode
+  };
+
   return (
     <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
       <section className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
@@ -177,7 +189,13 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
             </div>
 
             {isEditingAddress && (
-              <div className="flex justify-center md:justify-end mt-5">
+              <div className="flex justify-center md:justify-end mt-5 gap-4">
+                <button
+                  onClick={handleCancel}
+                  className="bg-transparent border px-4 py-2 rounded-lg text-black hover:bg-gray-50 transition-all duration-300 ease-in-out"
+                >
+                  Cancel
+                </button>
                 <button
                   className="text-center py-2 px-5 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium transition-all ease-in-out duration-200"
                   onClick={submitChanges}
