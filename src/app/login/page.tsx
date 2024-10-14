@@ -14,7 +14,7 @@ const LoginPage = () => {
     <>
         <Navbar />
     <main>
-      <div className="flex flex-col justify-center items-center min-h-screen">
+      <div className="flex flex-col justify-center items-center min-h-[85vh]">
         <div className="mt-10 mb-20">
           <Suspense>
             <LoginFormPage />
