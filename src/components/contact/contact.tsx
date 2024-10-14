@@ -19,7 +19,7 @@ export default function ContactUs() {
     <div className="min-h-screen  bg-background">
  
      
-      <div className="max-w-4xl mx-auto  mt-[10rem] px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto  mt-[5rem] px-4 sm:px-6 lg:px-8">
         <div className="bg-card shadow-lg rounded-xl overflow-hidden">
           <div className="p-6 sm:p-10">
             <h2 className="text-3xl font-semibold mb-6 ">Get in Touch</h2>
