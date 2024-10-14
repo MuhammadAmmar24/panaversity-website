@@ -41,7 +41,7 @@ export default function ResetPasswordDialog() {
       </Dialog.Trigger> */}
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
+        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-3 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] overflow-y-auto">
           {/* <Dialog.Title className="text-lg font-bold mb-4">
             Reset Your Password
           </Dialog.Title> */}
