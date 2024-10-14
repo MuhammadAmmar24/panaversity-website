@@ -8,7 +8,7 @@ const EmailVerificationPending = () => {
 
 
   return (
-    <div className='text-center w-full max-w-sm '>
+    <div className='text-center w-full  max-w-sm '>
 
         <div className="flex justify-center mb-4">
           <div className="bg-yellow-100 p-4 rounded-full">

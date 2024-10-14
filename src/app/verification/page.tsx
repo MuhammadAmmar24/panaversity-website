@@ -14,8 +14,8 @@ const verification = () => {
   return (
     <>
     <Navbar />
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="bg-white  rounded-lg shadow-md ">
+    <div className="flex justify-center items-center min-h-[85vh] ">
+      <div className="bg-white  rounded-lg shadow-md w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] ">
         <Suspense>
           <Verify />
         </Suspense>

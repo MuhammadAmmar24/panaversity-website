@@ -14,7 +14,7 @@ const resetPassword = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-[85vh]">
         <Suspense>
           <CardWrapper headerLabel="Reset Password">
             <ResetPassword />
