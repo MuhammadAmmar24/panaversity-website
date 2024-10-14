@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
           <FooterColumn
             title="Support"
             links={[
-              { name: "Contact Us", href: "/" },
+              { name: "Contact Us", href: "/contact" },
               { name: "Privacy Policy", href: "/privacy-policy" },
               // { name: "Terms Conditions", href: "/" },
               // { name: "Cookies", href: "/" },
