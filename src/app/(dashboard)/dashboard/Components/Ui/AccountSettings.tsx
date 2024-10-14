@@ -107,9 +107,9 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                 onClick={() => setIsEditingAddress(!isEditingAddress)}
               >
                 {isEditingAddress ? (
-                  <AiOutlineCheck className="text-xl" />
+                  <AiOutlineCheck className="text-xl -mr-2" />
                 ) : (
-                  <AiOutlineEdit className="text-xl" />
+                  <AiOutlineEdit className="text-xl -mr-2" />
                 )}
               </button>
             </div>
