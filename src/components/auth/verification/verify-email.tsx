@@ -61,7 +61,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
 
 // Separate components for different states
 const LoadingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -79,7 +79,7 @@ const LoadingComponent = () => (
       </div>
     </div>
     <h2 className="text-2xl font-bold">Loading...</h2>
-    <p>Please wait while we process your request.</p>
+    <p className="pb-5">Please wait while we process your request.</p>
   </div>
 );
 
@@ -117,7 +117,7 @@ const VerifyingComponent = () => (
 );
 
 const VerifiedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -148,15 +148,15 @@ const VerifiedComponent = () => (
 );
 
 const VerificationFailedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[300px]">
-    <div className="flex justify-center mb-4">
+  <div className="flex flex-col justify-center gap-y-3 py-8 items-center px-3 text-center  ">
+    <div className="flex justify-center mb-2">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
-    <h2 className="text-2xl font-bold">Email Verification Failed</h2>
-    <p className="px-5">Invalid or expired verification link</p>
+    <h2 className="text-2xl font-bold px-0">Email Verification Failed</h2>
+    <p className="px-3">Invalid or expired verification link</p>
     <Link
       href="/verify"
-      className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+      className="w-full text-center py-2 max-w-[18.5rem] text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Re-verify Email
     </Link>

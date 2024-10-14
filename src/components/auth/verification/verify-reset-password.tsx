@@ -82,7 +82,7 @@ const VerifyResetPassword: React.FC<VerifyEmailProps> = ({ token }) => {
 
 // Separate components for different states
 const LoadingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -105,7 +105,7 @@ const LoadingComponent = () => (
 );
 
 const ErrorComponent = ({ message }: { message: string }) => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
@@ -115,7 +115,7 @@ const ErrorComponent = ({ message }: { message: string }) => (
 );
 
 const VerifyingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -138,7 +138,7 @@ const VerifyingComponent = () => (
 );
 
 const VerificationFailedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[300px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[300px]">
     <div className="flex justify-center mb-4">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
