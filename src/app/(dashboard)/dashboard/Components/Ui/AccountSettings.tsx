@@ -179,7 +179,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
             {isEditingAddress && (
               <div className="flex justify-center md:justify-end mt-5">
                 <button
-                  className="bg-accent text-white px-8 py-3 rounded-full hover:text-accent hover:bg-white border-2 border-accent "
+                  className="text-center py-2 px-5 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium transition-all ease-in-out duration-200"
                   onClick={submitChanges}
                 >
                   Save
