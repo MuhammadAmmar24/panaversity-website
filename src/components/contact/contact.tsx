@@ -7,7 +7,7 @@ import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Textarea } from "@/src/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { ContactSchema } from "@/src/schemas/userschema";
+import { ContactSchema } from "@/src/lib/schemas/userschema";
 import * as z from "zod";
 
 // Infer form types from ContactSchema

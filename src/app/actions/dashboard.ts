@@ -3,7 +3,7 @@ import {
     CourseEnrollmentResponseSchema,
     CourseEnrollmentResponse,
 } from "@/src/lib/schemas/courses";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 
 export const getEnrolledCourses = async (
     studentId: string | undefined

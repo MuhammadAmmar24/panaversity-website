@@ -1,6 +1,6 @@
 "use server";
 import * as z from "zod";
-import { RecoverPasswordSchema } from "@/src/schemas/userschema";
+import { RecoverPasswordSchema } from "@/src/lib/schemas/userschema";
 
 export const resetPassword = async (values: z.infer<typeof RecoverPasswordSchema>) => {
   // Validate the input fields

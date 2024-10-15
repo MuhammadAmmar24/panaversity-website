@@ -1,5 +1,5 @@
 import { GetCoursePriceParams, GetCoursePriceParamsSchema, GetCoursePriceResponse, GetCoursePriceResponseSchema } from "./schemas/courses";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 
 export const getCoursePrice = async (
 	params: GetCoursePriceParams

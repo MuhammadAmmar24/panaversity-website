@@ -12,25 +12,25 @@ export const privacypolicydata = {
   headpolicy1: "Information We Collect",
   policy1subhead: "We collect the following types of information: ",
   policy1description1:
-    "Personal Information: When you create an account, enroll in courses, or interact with Panaversity’s platforms, we may collect personal information such as your name, email address, contact details, and payment information.",
+    "When you create an account, enroll in courses, or interact with Panaversity’s platforms, we may collect personal information such as your name, email address, contact details, and payment information.",
   policy1description2:
-    "Usage Data: Information on how you interact with our website, courses, and AI-driven learning tools, including browser type, device information, and IP addresses.",
+    "Information on how you interact with our website, courses, and AI-driven learning tools, including browser type, device information, and IP addresses.",
   policy1description3:
-    "Educational Data: Course progress, assessment results, and interactions with AI models, such as the GPT-driven learning assistants.",
+    "Course progress, assessment results, and interactions with AI models, such as the GPT-driven learning assistants.",
 
   headpolicy2: "How We Use Your Information",
   policy2subhead:
     "We use your personal information for the following purposes: ",
   policy2description1:
-    "Account Management: To create and manage your account, provide access to courses, and enable participation in learning activities.",
+    "To create and manage your account, provide access to courses, and enable participation in learning activities.",
   policy2description2:
-    "Personalized Learning: To deliver customized learning experiences using AI models that adapt based on your progress and preferences.",
+    "To deliver customized learning experiences using AI models that adapt based on your progress and preferences.",
   policy2description3:
-    "Performance Tracking: To monitor your course progress and provide performance feedback through assessments and quizzes.",
+    "To monitor your course progress and provide performance feedback through assessments and quizzes.",
   policy2description4:
-    "Service Improvement: To enhance the functionality and user experience of our platforms based on aggregated usage data. ",
+    "To enhance the functionality and user experience of our platforms based on aggregated usage data. ",
   policy2description5:
-    "Security and Compliance: To protect the integrity of our systems and comply with legal obligations such as GDPR and other data privacy laws.",
+    "To protect the integrity of our systems and comply with legal obligations such as GDPR and other data privacy laws.",
 
   headpolicy3: "Data Sharing and Third-Party Services",
   policy3description1:
@@ -61,5 +61,5 @@ export const privacypolicydata = {
   headpolicy9: "Contact Us ",
   policy9description1:
     "For any questions or concerns regarding this Privacy Policy, please contact us at ",
-  contactlink: "privacy@panaversity.com",
+  contactlink: "info@panaversity.com",
 };

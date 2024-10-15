@@ -6,7 +6,7 @@ import { useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { LoginSchema } from "@/src/schemas/userschema";
+import { LoginSchema } from "@/src/lib/schemas/userschema";
 import { Input } from "@/src/components/ui/input";
 import {
   Form,
@@ -16,12 +16,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
 import { login } from "@/src/app/actions/login";
-import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";
 import {
@@ -35,28 +33,6 @@ import Link from "next/link";
 export const LoginForm = () => {
   const searchParams = useSearchParams();
 
-  const redirect_uri = searchParams.get("redirect_uri");
-  const client_id = searchParams.get("client_id");
-  const response_type = searchParams.get("response_type");
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
-
-  const queryParams =
-    `?redirect_uri=${redirect_uri}` +
-    `&state=${state}` +
-    `&response_type=${response_type}` +
-    `&client_id=${client_id}` +
-    `&code=${code}`;
-
-  let callbackUrl: string | null = null;
-  if (redirect_uri) {
-    callbackUrl = `/admin/dashboard${queryParams}`;
-  }
-
-  const urlError =
-    searchParams.get("error") === "OAuthAccountNotLinked"
-      ? "Email already in use with different provider!"
-      : "";
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -112,7 +88,7 @@ export const LoginForm = () => {
             window.location.href = previousPath; // Redirect to previous path
             localStorage.removeItem("previousPath"); // Clear previous path
           } else {
-            window.location.href = callbackUrl ?? "/dashboard"; // Default redirect
+            window.location.href = "/dashboard"; // Default redirect
           }
         }
       })
@@ -195,7 +171,7 @@ export const LoginForm = () => {
             )}
           />
         </div>
-        <FormError message={error || urlError} />
+        <FormError message={error} />
         <FormSuccess message={success} />
         {!success && (
           <Button

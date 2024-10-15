@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { RegisterSchema } from "@/src/schemas/userschema";
+import { RegisterSchema } from "@/src/lib/schemas/userschema";
 import { Input } from "@/src/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ToastAction } from "@/src/components/ui/toast";
@@ -47,14 +47,8 @@ export const RegisterForm = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  // Get all the query params for redirect
-  const redirect_uri = searchParams.get("redirect_uri");
-  const client_id = searchParams.get("client_id");
-  const response_type = searchParams.get("response_type");
-  const code = searchParams.get("code");
-  const state = searchParams.get("state");
 
-  const queryParams = `?redirect_uri=${redirect_uri}&state=${state}&response_type=${response_type}&client_id=${client_id}&code=${code}`;
+
 
   // Initialize form with react-hook-form and zod schema
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -90,7 +84,7 @@ export const RegisterForm = () => {
             description: "Please Verify Email To Continue",
             action: (
               <Link
-                href={redirect_uri ? `/verify${queryParams}` : "/verify"}
+                href={"/verify"}
                 replace
               >
                 <ToastAction altText="Verify to Continue">

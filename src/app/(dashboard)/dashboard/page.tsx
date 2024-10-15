@@ -15,7 +15,7 @@ export default async function Home() {
 
 
   return (
-    <main className="flex-1 mr-6 ml-10 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
+    <main className="flex-1 mx-3 mobileM:mx-4 xs:mx-6 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
       <TopBar />
       <Welcome profile={profile} />
       <Dashboard profileId={profile?.id} />

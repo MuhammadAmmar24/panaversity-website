@@ -42,7 +42,7 @@ export const courseData = [
       ],
     },
     {
-      title: "Building the Future: Physical AI and Humanoids",
+      title: "Physical AI and Humanoids",
       image: "https://assets.aceternity.com/features-section.png",
       content: [
         {

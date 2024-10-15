@@ -3,7 +3,7 @@ import { update_profile_schema, update_profile_resp_schema } from '@/src/lib/sch
 import { RequestBody, ResponseBody } from '@/src/lib/schemas/user';
 import { get_profile, GetProfileResponse } from '@/src/lib/schemas/student';
 import { updateProfileSchema, updateProfileResponseSchema,update_st_profile_Request,update_st_profile_Response } from '@/src/lib/schemas/student';
-import { auth } from "@/src/auth";
+import { auth } from "@/src/lib/auth";
 import { revalidatePath } from 'next/cache';
 
 

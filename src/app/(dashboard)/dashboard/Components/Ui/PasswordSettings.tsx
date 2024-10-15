@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useTransition } from "react";
-import { PasswordUpdateSchema } from "@/src/schemas/userschema";
+import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";
@@ -18,7 +18,7 @@ import { Input } from "@/src/components/ui/input";
 import { FormError } from "@/src/components/form-error";
 import { FormSuccess } from "@/src/components/form-success";
 import { changePassword } from "@/src/app/actions/change-password";
-import { signOut } from "@/src/auth";
+import { signOut } from "@/src/lib/auth";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
@@ -68,13 +68,13 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
 
   // Handle form submission with validation
   const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
-    console.log("values", values);
+ 
 
     setError("");
     setSuccess("");
     startTransition(() => {
       changePassword(values).then((data: any) => {
-        console.log("data", data);
+     
         if (data?.error) {
           setError(data.error);
           setSuccess("");
@@ -88,7 +88,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
-          console.log(data.message);
+         
           setError("");
           setSuccess(data.message);
           toast({
@@ -96,7 +96,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             description: "Your password has been updated.",
           });
           if (data.message === "Password updated successfully") {
-            console.log("Password updated successfully");
             signOut();
             // window.location.href = "/login";
           }

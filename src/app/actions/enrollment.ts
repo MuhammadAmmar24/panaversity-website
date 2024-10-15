@@ -14,7 +14,7 @@ import {
   EnrollStudentResponse,
   EnrollStudentResponseSchema,
 } from "@/src/lib/schemas/enrollment";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 import { revalidatePath, revalidateTag } from "next/cache";
 
 export const enrollStudentInProgram = async (

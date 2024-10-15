@@ -1,7 +1,7 @@
 "use server";
 import { redirect } from "next/navigation";
 import * as z from "zod";
-import {ResendLinkSchema} from "@/src/schemas/userschema";
+import {ResendLinkSchema} from "@/src/lib/schemas/userschema";
 
 
 export const resendVerification = async (values: z.infer<typeof ResendLinkSchema>) => {

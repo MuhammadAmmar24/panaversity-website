@@ -1,6 +1,6 @@
 "use server";
 import { PaymentRequestSchema, PaymentRequest } from "@/src/lib/schemas/payment";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 import { revalidatePath } from "next/cache";
 
 // Payment Server Action to process the payment
