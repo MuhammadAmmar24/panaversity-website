@@ -215,7 +215,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
         {/* Display Success/Error Message */}
         {statusMessage && (
-          <div className="text-center mt-4 text-accent">{statusMessage}</div>
+          <div className="text-center mt-[-0.5rem] mb-5  text-accent">{statusMessage}</div>
         )}
 
         <PasswordSettings profile_email={profile?.email} />

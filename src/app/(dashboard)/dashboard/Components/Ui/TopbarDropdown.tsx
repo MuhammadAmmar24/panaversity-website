@@ -5,7 +5,7 @@ import { LuSettings2 } from "react-icons/lu";
 import Link from "next/link";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import { CiLogout } from "react-icons/ci";
-import { signOut } from "@/src/auth";
+import { signOut } from "@/src/lib/auth";
 import Error from "../Error/error_message";
 import { DropdownProps } from "../../types/types";
 import Image from "next/image";

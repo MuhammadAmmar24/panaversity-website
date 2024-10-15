@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "./auth";
+import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 import { refreshAccessToken } from "./app/actions/refresh_token";
 
 export async function middleware(req: NextRequest) {
   // Define routes
-  const protectedRoutes = ["/auth/verification", "/dashboard"];
+  const protectedRoutes = ["/dashboard"];
   const authRoutes = [
     "/login",
     "/register",
