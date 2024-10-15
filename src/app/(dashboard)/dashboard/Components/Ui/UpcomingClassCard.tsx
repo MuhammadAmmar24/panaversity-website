@@ -20,7 +20,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
     <article className="w-full h-full">
       {/* Card container */}
-      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 lg:px-8 py-4 lg:py-12">
+      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
         {/* Class Topic and Information */}
         <div className="flex flex-col flex-wrap">
           <div className="md:text-xl font-poppins truncate flex flex-col gap-1 flex-wrap ">

@@ -18,7 +18,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
   return (
     <article className="w-full h-full">
       {/* Card container with shadow and rounded corners */}
-      <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-4">
+      <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-6 md:py-4">
         {/* YouTube Icon with link to class video */}
         <FaYoutube
           className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
