@@ -12,7 +12,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import LogoutDialog from "../Dialog/LogoutDialog";
-import { signOut } from "@/src/auth";
+import { signOut } from "@/src/lib/auth";
 import { SidebarProps } from "../../types/types";
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
