@@ -6,7 +6,7 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 
 export async function middleware(req: NextRequest) {
   // Define routes
-  const protectedRoutes = ["/auth/verification", "/dashboard"];
+  const protectedRoutes = ["/dashboard"];
   const authRoutes = [
     "/login",
     "/register",
