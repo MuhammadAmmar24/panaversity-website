@@ -1,7 +1,7 @@
 "use server";
 
 import * as z from "zod";
-import { PasswordUpdateSchema } from "@/src/schemas/userschema";
+import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
 
 export const changePassword = async (values: z.infer<typeof PasswordUpdateSchema>) => {
   const validatedFields = PasswordUpdateSchema.safeParse(values);

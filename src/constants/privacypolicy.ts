@@ -61,5 +61,5 @@ export const privacypolicydata = {
   headpolicy9: "Contact Us ",
   policy9description1:
     "For any questions or concerns regarding this Privacy Policy, please contact us at ",
-  contactlink: "privacy@panaversity.com",
+  contactlink: "info@panaversity.com",
 };

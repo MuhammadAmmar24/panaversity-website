@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useTransition } from "react";
-import { PasswordUpdateSchema } from "@/src/schemas/userschema";
+import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";

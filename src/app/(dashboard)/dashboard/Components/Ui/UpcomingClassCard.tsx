@@ -23,19 +23,19 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
       <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 md:px-8 py-14">
         {/* Class Topic and Information */}
         <div className="flex flex-col flex-wrap">
-          <div className="md:text-xl font-poppins truncate flex gap-x-2 flex-wrap">
+          <div className="md:text-xl font-poppins truncate flex gap-x-2 flex-wrap ">
             {/* Topic name */}
             <div className="font-medium ">Topic Name:</div>
             <div className="truncate">{title}</div>
           </div>
           {/* Static class ID */}
-          <span className="text-gray-600 text-sm sm:text-md md:text-lg mt-2">
+          <span className="text-gray-600 text-sm sm:text-md md:text-lg mt-2 ">
             Class 001
           </span>
         </div>
 
         {/* Links section (GitHub/Zoom) */}
-        <div className="flex flex-col">
+        <div className="flex flex-col  ">
           {/* GitHub link */}
           <Link
             href="#"

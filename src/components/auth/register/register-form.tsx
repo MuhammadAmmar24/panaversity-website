@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { RegisterSchema } from "@/src/schemas/userschema";
+import { RegisterSchema } from "@/src/lib/schemas/userschema";
 import { Input } from "@/src/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ToastAction } from "@/src/components/ui/toast";
