@@ -80,6 +80,13 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     }
   };
 
+  // Handle toggle edit mode and submit changes when closing the edit mode
+  const handleEditToggle = () => {
+    if (!isEditingAddress) {
+      setIsEditingAddress(true); // Open the edit mode
+    }
+  };
+
   const handleCancel = () => {
     setAddressInfo({
       address: profile?.student?.address || "",
@@ -92,7 +99,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
   };
 
   return (
-    <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">
+    <main className="min-h-screen flex justify-center items-center mt-8 mb-8 font-poppins">
       <section className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-medium text-lg sm:text-xl md:text-2xl mb-4 text-center md:text-start">
           Account Settings
@@ -128,36 +135,36 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
-              <p className="text-gray-600 font-semibold">Phone</p>
-              <p>+{personalInfo.phone}</p> {/* Not editable */}
+              <p className="text-gray-800 font-semibold">Phone</p>
+              <p className="text-gray-600">+{personalInfo.phone}</p> {/* Not editable */}
             </div>
             <div>
-              <p className="text-gray-600 font-semibold">Student ID</p>
-              <p>{personalInfo.studentId || "-"}</p> {/* Not editable */}
+              <p className="text-gray-800 font-semibold">Student ID</p>
+              <p className="text-gray-600">{personalInfo.studentId || "-"}</p> {/* Not editable */}
             </div>
           </div>
 
           {/* Address Information */}
           <div className="mt-8 text-sm sm:text-base">
             <div className="flex justify-between">
-              <h2 className="text-lg sm:text-xl font-semibold">
+              <h2 className="text-lg sm:text-xl font-semibold mb-2">
                 Address Information
               </h2>
               <button
                 className="text-gray-500 hover:text-black p-2 rounded-full"
-                onClick={() => setIsEditingAddress(!isEditingAddress)}
+                onClick={handleEditToggle}
               >
                 {isEditingAddress ? (
-                  <AiOutlineCheck className="text-xl -mr-2" />
+                  <AiOutlineCheck className="text-xl -mr-2 -mt-1" />
                 ) : (
-                  <AiOutlineEdit className="text-xl -mr-2" />
+                  <AiOutlineEdit className="text-xl -mr-2 -mt-1" />
                 )}
               </button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <p className="text-gray-600 font-semibold">Country</p>
+                <p className="text-gray-800 font-semibold">Country</p>
                 {isEditingAddress ? (
                   <>
                     <input
@@ -165,7 +172,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="country"
                       value={addressInfo.country}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.country && (
                       <p className="text-red-500 text-sm mt-1">
@@ -174,11 +181,11 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     )}
                   </>
                 ) : (
-                  <p>{addressInfo.country || "-"}</p>
+                  <p className="text-gray-600">{addressInfo.country || "-"}</p>
                 )}
               </div>
               <div>
-                <p className="text-gray-600 font-semibold">City</p>
+                <p className="text-gray-800 font-semibold">City</p>
                 {isEditingAddress ? (
                   <>
                     <input
@@ -186,21 +193,21 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="city"
                       value={addressInfo.city}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.city && (
                       <p className="text-red-500 text-sm mt-1">{errors.city}</p>
                     )}
                   </>
                 ) : (
-                  <p>{addressInfo.city || "-"}</p>
+                  <p className="text-gray-600">{addressInfo.city || "-"}</p>
                 )}
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
               <div>
-                <p className="text-gray-600 font-semibold">Address</p>
+                <p className="text-gray-800 font-semibold">Address</p>
                 {isEditingAddress ? (
                   <>
                     <input
@@ -208,7 +215,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="address"
                       value={addressInfo.address}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.address && (
                       <p className="text-red-500 text-sm mt-1">
@@ -217,11 +224,11 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     )}
                   </>
                 ) : (
-                  <p>{addressInfo.address || "-"}</p>
+                  <p className="text-gray-600">{addressInfo.address || "-"}</p>
                 )}
               </div>
               <div>
-                <p className="text-gray-600 font-semibold">Postal Code</p>
+                <p className="text-gray-800 font-semibold">Postal Code</p>
                 {isEditingAddress ? (
                   <>
                     <input
@@ -229,7 +236,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="postalCode"
                       value={addressInfo.postalCode}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.postalCode && (
                       <p className="text-red-500 text-sm mt-1">
@@ -238,7 +245,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     )}
                   </>
                 ) : (
-                  <p>{addressInfo.postalCode || "-"}</p>
+                  <p className="text-gray-600">{addressInfo.postalCode || "-"}</p>
                 )}
               </div>
             </div>

@@ -78,8 +78,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
         Enrolled Courses
       </h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
-        <article className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col gap-4">
-          <div className="flex justify-between items-center mb-6">
+        <article className="bg-white shadow-lg rounded-lg px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-4">
+          <div className="flex justify-between items-center mb-4">
             <CiMobile1
               className={`text-4xl bg-gray-200 rounded-full w-auto md:h-12 p-[8px] ${
                 status === "active" ? "" : "opacity-30"

@@ -18,7 +18,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
   return (
     <article className="w-full h-full">
       {/* Card container with shadow and rounded corners */}
-      <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-4 md:py-5">
+      <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-6 md:py-4">
         {/* YouTube Icon with link to class video */}
         <FaYoutube
           className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
@@ -33,15 +33,15 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
           </h2>
 
           {/* Class metadata container */}
-          <div className="w-full pt-2 md:pt-3">
+          <div className="w-full pt-2">
             {/* Static class category */}
             <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
-              Panaversity Urdu
+              Panaversity Urdu Gen AI & Cloud Services
             </p>
 
             {/* GitHub and Topics covered section */}
-            <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-1 cursor-pointer">
-              <FaGithub />
+            <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-4 cursor-pointer">
+              <FaGithub className="w-auto h-6"/>
               <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
                 Topics Covered
               </p>
@@ -49,7 +49,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
             </div>
 
             {/* Date and time details */}
-            <div className="flex flex-col sm:flex-row sm:gap-10 text-xs sm:text-sm text-gray-500 pt-1">
+            <div className="flex justify-between text-xs sm:text-sm text-gray-500 pt-4">
               {/* Class date */}
               <div className="flex items-center gap-2">
                 <HiMiniCalendar className="text-sm md:text-base" />

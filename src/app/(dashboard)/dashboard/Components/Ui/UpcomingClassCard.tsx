@@ -20,12 +20,12 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   return (
     <article className="w-full h-full">
       {/* Card container */}
-      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 md:px-8 py-14">
+      <div className="bg-white rounded-lg shadow-xl flex flex-col justify-between gap-2 px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
         {/* Class Topic and Information */}
         <div className="flex flex-col flex-wrap">
-          <div className="md:text-xl font-poppins truncate flex gap-x-2 flex-wrap ">
+          <div className="md:text-xl font-poppins truncate flex flex-col gap-1 flex-wrap ">
             {/* Topic name */}
-            <div className="font-medium ">Topic Name:</div>
+            <div className="font-medium">Topic Name:</div>
             <div className="truncate">{title}</div>
           </div>
           {/* Static class ID */}
@@ -54,7 +54,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
             href="#"
             className="flex items-center gap-3 hover:underline cursor-pointer"
           >
-            <div className="w-[108px] flex justify-center">
+            <div className="w-[92px] sm:w-[108px] flex justify-center">
               <SiZoom className="w-auto h-14 sm:h-14 md:h-20 text-blue-600" />
             </div>
             <span className="text-gray-600 text-xs sm:text-md md:text-lg">
@@ -65,7 +65,7 @@ const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
         </div>
 
         {/* Date and Time Information */}
-        <div className="flex justify-between items-center border-t text-gray-500 text-xs sm:text-sm md:text-base pt-4 -mt-4">
+        <div className="flex justify-between items-center border-t text-gray-500 text-xs sm:text-base lg:text-base pt-4 -mt-4">
           {/* Date section */}
           <div className="flex items-center gap-2">
             <HiMiniCalendar className="w-4 sm:w-5 h-4 sm:h-5" />
