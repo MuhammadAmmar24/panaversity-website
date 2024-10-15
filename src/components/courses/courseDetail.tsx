@@ -1,13 +1,14 @@
 import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
 import RatingStars from "../ui/Ratingstar";
-import fetchProfile from "@/src/lib/getProfile";
 import Breadcrumbs from "../Breadcrumbs";
+import enrollmentStatus from "@/src/lib/enrollmentStatus";
 
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   text: string;
 }
+
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -57,10 +58,9 @@ interface CourseDetailsClientProps {
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
   initialPrice,
-
   initialCurrency,
 }) => {
-  const profile: ProfileData = await fetchProfile();
+
 
   // Destructure the course data
   const {
@@ -82,6 +82,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
+  const result = await enrollmentStatus(course_batch_program_id);
+
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
@@ -89,7 +91,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
         <div className="w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-52 md:min-h-72 lg:min-h-[26rem]">
           <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-3">
             {/* Breadcrumb Navigation */}
-            <Breadcrumbs 
+            <Breadcrumbs
               items={[
                 { label: "Home", href: "/" },
                 { label: "Programs", href: "/programs" },
@@ -151,7 +153,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     program_id={program_id}
                     batch_id={batch_id}
                     course_batch_program_id={course_batch_program_id}
-                    profile_id={profile?.id}
+                    profile_id={result.profileData.id}
+                    isEnrolled={result.isEnrolled}
                   />
                 </div>
               </div>

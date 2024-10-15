@@ -13,6 +13,7 @@ interface CourseSheetProps {
     batch_id: number;
     course_batch_program_id: number;
     profile_id: string;
+    isEnrolled: boolean
   }
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
@@ -21,11 +22,13 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     batch_id,
     course_batch_program_id,
     profile_id,
+    isEnrolled
   }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
 
   async function handleClick() {
     const res = await user_verify();
@@ -59,7 +62,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
       <button
-        onClick={handleClick}
+        onClick={isEnrolled ? ()=>router.push('/dashboard') : handleClick}
         className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
           is_registration_open
             ? "hover:bg-emerald-500"
@@ -67,7 +70,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         }`}
         disabled={!is_registration_open}
       >
-        {is_registration_open ? "Enroll Now" : "Registration Closed"}
+        {isEnrolled ? "Dashboard" : is_registration_open ? "Enroll Now" : "Registration Closed"}  
         <ChevronRight className="w-5 h-5 ml-2" />
       </button>
 
