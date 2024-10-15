@@ -14,7 +14,7 @@ import {
 	TimeSlotsResponse,
 	TimeSlotsResponseSchema,
 } from "@/src/lib/schemas/courses";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 
 export const getProgramCoursesWithOpenRegistration = async (
 	query: ProgramCoursesQuery

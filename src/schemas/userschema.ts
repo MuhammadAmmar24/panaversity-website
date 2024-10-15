@@ -5,13 +5,9 @@ export const LoginSchema = z.object({
     message: "Email is required",
   }),
 
-  password: z.string().min(6, {
-    message: "Minimum 6 characters required",
-  }),
-
-  // password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
-  //   message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
-  // }) // also change in UpdatePasswordSchema and PasswordUpdateSchema
+  password: z.string().min(8, { message: "Invalid Password or Email" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
+    message: "Invalid Password or Email",
+  }) // also change in UpdatePasswordSchema and PasswordUpdateSchema
 });
 
 export const RegisterSchema = z.object({
@@ -59,11 +55,11 @@ export const UpdatePasswordSchema = z
     token: z.string().min(1, {
       message: "Token is required",
     }),
-    new_password: z.string().min(6, {
-      message: "New Password must be at least 6 characters long",
+    new_password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
+      message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
     }),
-    confirm_password: z.string().min(6, {
-      message: "Confirm Password must be at least 6 characters long",
+    confirm_password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
+      message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
     }),
   })
   .refine((data) => data.new_password === data.confirm_password, {
@@ -89,11 +85,11 @@ export const UpdatePasswordSchema = z
     current_password:  z.string().min(6, {
     message: "Minimum 6 characters required",
   }),
-  new_password: z.string().min(6, {
-    message: "New Password must be at least 6 characters long",
+  new_password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
+    message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
   }),
-  confirm_password: z.string().min(6, {
-    message: "Confirm Password must be at least 6 characters long",
+  confirm_password: z.string().min(8, { message: "Minimum 8 characters required" }).regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
+    message: "Password must contain at least 1 alphabet, 1 number, and 1 special character",
   }),
 })
 .refine((data) => data.new_password === data.confirm_password, {

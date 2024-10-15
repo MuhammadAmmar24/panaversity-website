@@ -61,7 +61,7 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
 
 // Separate components for different states
 const LoadingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center  px-5">
+  <div className="flex flex-col justify-center gap-y-5 items-center py-[5rem]  px-5">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -94,7 +94,7 @@ const ErrorComponent = ({ message }: { message: string }) => (
 );
 
 const VerifyingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
+  <div className="flex flex-col justify-center gap-y-5 items-center py-7 w-[400px] px-5 h-[400px]">
     <div className="flex justify-center mb-4">
       <div className="bg-green-100 p-4 rounded-full">
         <svg
@@ -148,7 +148,7 @@ const VerifiedComponent = () => (
 );
 
 const VerificationFailedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-3 py-8 items-center px-3 text-center  ">
+  <div className="flex flex-col justify-center gap-y-[1rem] py-[3rem] items-center px-3 text-center  ">
     <div className="flex justify-center mb-2">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
@@ -156,7 +156,7 @@ const VerificationFailedComponent = () => (
     <p className="px-3">Invalid or expired verification link</p>
     <Link
       href="/verify"
-      className="w-full text-center py-2 max-w-[18.5rem] text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+      className="w-full text-center py-2 mt-4 max-w-[18.5rem] text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Re-verify Email
     </Link>

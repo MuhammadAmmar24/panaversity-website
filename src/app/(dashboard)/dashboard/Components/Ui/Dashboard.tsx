@@ -2,7 +2,7 @@ import ClassSection from "./RecentClassSection";
 import UpcomingClassSection from "./UpcomingClassSection";
 import CourseSection from "./CourseCardSection";
 import { Course } from "../../types/types";
-import { Result } from "@/src/lib/types";
+import { Result } from "@/src/types/types";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { mockRecentClasses, mockUpcomingClasses } from "../../types/data";
 import { ProfileIdProps } from "../../types/types";
