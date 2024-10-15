@@ -175,7 +175,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="country"
                       value={addressInfo.country}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.country && (
                       <p className="text-red-500 text-sm mt-1">
@@ -196,7 +196,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="city"
                       value={addressInfo.city}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.city && (
                       <p className="text-red-500 text-sm mt-1">{errors.city}</p>
@@ -218,7 +218,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="address"
                       value={addressInfo.address}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.address && (
                       <p className="text-red-500 text-sm mt-1">
@@ -239,7 +239,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                       name="postalCode"
                       value={addressInfo.postalCode}
                       onChange={handleAddressChange}
-                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-accent transition-all duration-100 pl-4"
                     />
                     {errors.postalCode && (
                       <p className="text-red-500 text-sm mt-1">
