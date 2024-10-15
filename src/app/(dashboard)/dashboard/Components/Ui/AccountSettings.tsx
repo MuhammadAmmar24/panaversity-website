@@ -80,6 +80,16 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     }
   };
 
+  // Handle toggle edit mode and submit changes when closing the edit mode
+  const handleEditToggle = () => {
+    if (isEditingAddress) {
+      // User is closing the edit mode, so submit changes
+      submitChanges();
+    } else {
+      setIsEditingAddress(true); // Open the edit mode
+    }
+  };
+
   const handleCancel = () => {
     setAddressInfo({
       address: profile?.student?.address || "",
@@ -145,7 +155,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               </h2>
               <button
                 className="text-gray-500 hover:text-black p-2 rounded-full"
-                onClick={() => setIsEditingAddress(!isEditingAddress)}
+                onClick={handleEditToggle}
               >
                 {isEditingAddress ? (
                   <AiOutlineCheck className="text-xl -mr-2" />
