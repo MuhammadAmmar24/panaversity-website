@@ -9,7 +9,7 @@ export const CourseCard = ({ course }: { course: Course }) => (
           <Image
             src={course.media_link}
             alt={course.course_name}
-            layout="fill"
+            fill
             className="object-top object-cover"
           />
         </div>
