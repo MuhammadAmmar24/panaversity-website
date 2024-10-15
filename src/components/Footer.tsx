@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
               <Image
                 src={Logo}
                 alt="Panaversity logo"
-                className="h-20 w-auto mb-2 transition-transform duration-300 ease-in-out hover:scale-105"
+                className="h-20 w-auto mb-2"
               />
               <p className="text-sm mb-1 text-gray-400 mt-1 leading-relaxed">
                 Panaversity is a cloud-native platform offering personalized
