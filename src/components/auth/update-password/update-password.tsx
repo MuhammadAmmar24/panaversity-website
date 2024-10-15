@@ -1,5 +1,5 @@
 "use client";
-import { UpdatePasswordSchema } from "@/src/schemas/userschema";
+import { UpdatePasswordSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import "react-phone-input-2/lib/style.css";

@@ -1,5 +1,5 @@
 "use client";
-import { ResendLinkSchema } from "@/src/schemas/userschema";
+import { ResendLinkSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import * as z from "zod";

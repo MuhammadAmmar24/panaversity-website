@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import { cookies } from "next/headers";
-import { LoginSchema } from "@/src/schemas/userschema";
+import { LoginSchema } from "@/src/lib/schemas/userschema";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { checkUserVerification } from "@/src/app/actions/profile";

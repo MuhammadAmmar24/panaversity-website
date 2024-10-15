@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import PasswordSettings from "./PasswordSettings";
 import Image from "next/image";
-import { update_student_Profile } from "@/src/app/actions/profile"; // Import the API action
+import { update_student_Profile } from "@/src/app/actions/profile";
+import { addressSchema } from "@/src/lib/schemas/addressInfo"; // Import the zod schema
+import { ZodError } from "zod";
 
 const AccountSettings: React.FC<any> = ({ profile }) => {
-  // Initialize state with the profile data
   const [personalInfo] = useState({
     phone: profile?.phone || "",
     studentId: profile?.id || "",
@@ -21,33 +22,62 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
   });
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [errors, setErrors] = useState({
+    address: "",
+    city: "",
+    country: "",
+    postalCode: "",
+  });
+
   const [statusMessage, setStatusMessage] = useState<string | null>(null); // State to store success/error message
+
 
   // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddressInfo({ ...addressInfo, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" }); // Clear error when typing
+  };
+
+  // Validate address using zod schema
+  const validateAddress = () => {
+    try {
+      addressSchema.parse(addressInfo);
+      return true; // Address is valid
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const fieldErrors = error.errors.reduce((acc: any, currError) => {
+          acc[currError.path[0]] = currError.message;
+          return acc;
+        }, {});
+
+        setErrors(fieldErrors); // Set specific field errors
+      }
+      return false; // Address is invalid
+    }
   };
 
   // Submit changes to update student profile
   const submitChanges = async () => {
+    if (!validateAddress()) return;
+
     const payload = {
       address: addressInfo.address,
       city: addressInfo.city,
       country: addressInfo.country,
       postal_code: addressInfo.postalCode,
-      is_active: profile?.student?.is_active || false, // Assuming you want to keep the original "is_active" status
+      is_active: profile?.student?.is_active || false,
     };
 
-    // Call the update function
     const result = await update_student_Profile(payload);
 
     if (result.type === "success") {
+      setErrors({ address: "", city: "", country: "", postalCode: "" });
       setStatusMessage("Profile updated successfully.");
+      setIsEditingAddress(false);
     } else {
+      // Handle server errors here
       setStatusMessage(`Error updating profile: ${result.message}`);
     }
-
-    setIsEditingAddress(false);
   };
 
   const handleCancel = () => {
@@ -57,7 +87,8 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
       country: profile?.student?.country || "",
       postalCode: profile?.student?.postal_code || "",
     });
-    setIsEditingAddress(false); // Exit editing mode
+    setIsEditingAddress(false);
+    setErrors({ address: "", city: "", country: "", postalCode: "" });
   };
 
   return (
@@ -128,15 +159,20 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               <div>
                 <p className="text-gray-600 font-semibold">Country</p>
                 {isEditingAddress ? (
-                  <input
-                    type="text"
-                    name="country"
-                    value={addressInfo.country}
-                    onChange={handleAddressChange}
-                    pattern="[A-Za-z\s]+"
-                    title="Country name should only contain letters and spaces"
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
-                  />
+                  <>
+                    <input
+                      type="text"
+                      name="country"
+                      value={addressInfo.country}
+                      onChange={handleAddressChange}
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                    />
+                    {errors.country && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.country}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   <p>{addressInfo.country || "-"}</p>
                 )}
@@ -144,15 +180,18 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               <div>
                 <p className="text-gray-600 font-semibold">City</p>
                 {isEditingAddress ? (
-                  <input
-                    type="text"
-                    name="city"
-                    value={addressInfo.city}
-                    onChange={handleAddressChange}
-                    pattern="[A-Za-z\s]+"
-                    title="City name should only contain letters and spaces"
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
-                  />
+                  <>
+                    <input
+                      type="text"
+                      name="city"
+                      value={addressInfo.city}
+                      onChange={handleAddressChange}
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                    />
+                    {errors.city && (
+                      <p className="text-red-500 text-sm mt-1">{errors.city}</p>
+                    )}
+                  </>
                 ) : (
                   <p>{addressInfo.city || "-"}</p>
                 )}
@@ -163,15 +202,20 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               <div>
                 <p className="text-gray-600 font-semibold">Address</p>
                 {isEditingAddress ? (
-                  <input
-                    type="text"
-                    name="address"
-                    value={addressInfo.address}
-                    onChange={handleAddressChange}
-                    pattern="[A-Za-z\s]+"
-                    title="Address name should only contain letters and spaces"
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
-                  />
+                  <>
+                    <input
+                      type="text"
+                      name="address"
+                      value={addressInfo.address}
+                      onChange={handleAddressChange}
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                    />
+                    {errors.address && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.address}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   <p>{addressInfo.address || "-"}</p>
                 )}
@@ -179,15 +223,20 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
               <div>
                 <p className="text-gray-600 font-semibold">Postal Code</p>
                 {isEditingAddress ? (
-                  <input
-                    type="text"
-                    name="postalCode"
-                    value={addressInfo.postalCode}
-                    onChange={handleAddressChange}
-                    pattern="^\d{5}(-\d{4})?$"
-                    title="Postal code should be a 5-digit number, or a 5+4 digit format"
-                    className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
-                  />
+                  <>
+                    <input
+                      type="text"
+                      name="postalCode"
+                      value={addressInfo.postalCode}
+                      onChange={handleAddressChange}
+                      className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
+                    />
+                    {errors.postalCode && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.postalCode}
+                      </p>
+                    )}
+                  </>
                 ) : (
                   <p>{addressInfo.postalCode || "-"}</p>
                 )}
@@ -217,6 +266,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
         {statusMessage && (
           <div className="text-center mt-[-0.5rem] mb-5  text-accent">{statusMessage}</div>
         )}
+
 
         <PasswordSettings profile_email={profile?.email} />
       </section>
