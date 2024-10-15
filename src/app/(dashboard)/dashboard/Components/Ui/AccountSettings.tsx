@@ -82,10 +82,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
   // Handle toggle edit mode and submit changes when closing the edit mode
   const handleEditToggle = () => {
-    if (isEditingAddress) {
-      // User is closing the edit mode, so submit changes
-      submitChanges();
-    } else {
+    if (!isEditingAddress) {
       setIsEditingAddress(true); // Open the edit mode
     }
   };
@@ -150,7 +147,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
           {/* Address Information */}
           <div className="mt-8 text-sm sm:text-base">
             <div className="flex justify-between">
-              <h2 className="text-lg sm:text-xl font-semibold">
+              <h2 className="text-lg sm:text-xl font-semibold mb-2">
                 Address Information
               </h2>
               <button
