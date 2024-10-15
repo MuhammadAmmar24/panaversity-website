@@ -24,7 +24,7 @@ const TopBar: React.FC = async () => {
   }
 
   return (
-    <header className="h-16 flex items-center justify-between mt-6 sm:mt-10 mb-4 ml-2">
+    <header className="h-16 flex items-center justify-between mt-6 sm:mt-10 mb-4">
       {/* Logo link for home navigation */}
       <Link href="/" aria-label="Home">
         <Image
