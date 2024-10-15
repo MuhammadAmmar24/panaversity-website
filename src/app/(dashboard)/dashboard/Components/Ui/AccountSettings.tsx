@@ -50,16 +50,14 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     setIsEditingAddress(false);
   };
 
-  const [initialAddressInfo] = useState({
-    address: profile?.student?.address || "",
-    city: profile?.student?.city || "",
-    country: profile?.student?.country || "",
-    postalCode: profile?.student?.postal_code || "",
-  });
-
   const handleCancel = () => {
-    setAddressInfo(initialAddressInfo);  // Reset address fields to initial state
-    setIsEditingAddress(false);          // Exit editing mode
+    setAddressInfo({
+      address: profile?.student?.address || "",
+      city: profile?.student?.city || "",
+      country: profile?.student?.country || "",
+      postalCode: profile?.student?.postal_code || "",
+    });
+    setIsEditingAddress(false); // Exit editing mode
   };
 
   return (
@@ -135,6 +133,8 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     name="country"
                     value={addressInfo.country}
                     onChange={handleAddressChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Country name should only contain letters and spaces"
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
@@ -149,6 +149,8 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     name="city"
                     value={addressInfo.city}
                     onChange={handleAddressChange}
+                    pattern="[A-Za-z\s]+"
+                    title="City name should only contain letters and spaces"
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
@@ -166,6 +168,8 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     name="address"
                     value={addressInfo.address}
                     onChange={handleAddressChange}
+                    pattern="[A-Za-z\s]+"
+                    title="Address name should only contain letters and spaces"
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (
@@ -180,6 +184,8 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     name="postalCode"
                     value={addressInfo.postalCode}
                     onChange={handleAddressChange}
+                    pattern="^\d{5}(-\d{4})?$"
+                    title="Postal code should be a 5-digit number, or a 5+4 digit format"
                     className="border-2 border-gray-300 rounded-md p-1 py-2 w-[80%] focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all duration-100 pl-4"
                   />
                 ) : (

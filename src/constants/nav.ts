@@ -1,4 +1,5 @@
 import { FaHome, FaUsers, FaBookOpen, FaBullhorn } from "react-icons/fa";
+import { GrContact } from "react-icons/gr";
 import { IconType } from "react-icons/lib";
 
 
@@ -12,6 +13,6 @@ export const navItems: NavItem[] = [
   { name: "Home", link: "/", icon: FaHome},
   { name: "Our Team", link: "/team", icon: FaUsers },
   { name: "Programs", link: "/programs/flagship-program", icon: FaBookOpen },
-  { name: "Announcements", link: "/announcements", icon: FaBullhorn },
+  { name: "Contact Us", link: "/contact", icon: GrContact },
 ];
 
