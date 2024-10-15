@@ -79,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
       {/* Sidebar container */}
       <div
         className={`bg-white shadow-2xl text-black fixed h-full transition-all duration-500 z-40 flex flex-col ${
-          isOpen ? "w-60" : "w-16"
+          isOpen ? "w-60" : "w-12 sm:w-16"
         }`}
         onClick={(e) => {
           const target = e.target as Element;
@@ -110,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             {isOpen ? (
               <IoIosArrowRoundBack className="text-black text-2xl hover:text-accent transition-all duration-300 mr-0" />
             ) : (
-              <IoIosArrowRoundForward className="text-black text-2xl hover:text-accent transition-all duration-300 mr-1" />
+              <IoIosArrowRoundForward className="text-black text-2xl hover:text-accent transition-all duration-300 mr-1 -ml-1" />
             )}
           </button>
         </div>
@@ -121,7 +121,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             <div key={item.label} className="relative group">
               <Link
                 href={item.href}
-                className="flex items-center p-4 hover:text-accent transition-all duration-300"
+                className="flex items-center px-2 sm:px-4 py-4 hover:text-accent transition-all duration-300"
               >
                 {/* Menu icon */}
                 <item.icon className="text-2xl min-w-[2rem]" />
@@ -152,7 +152,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             <div key={item.label} className="relative group">
               <button
                 onClick={item.onClick}
-                className="flex items-center p-4 hover:text-accent transition-all duration-300 w-full text-left"
+                className="flex items-center px-2 sm:px-4 py-4 hover:text-accent transition-all duration-300 w-full text-left"
               >
                 {/* Bottom menu icon */}
                 <item.icon className="text-2xl min-w-[2rem]" />
