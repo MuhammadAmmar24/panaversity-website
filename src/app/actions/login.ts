@@ -1,11 +1,9 @@
 "use server";
 
-import * as z from "zod";
-import { cookies } from "next/headers";
-import { LoginSchema } from "@/src/lib/schemas/userschema";
-import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
 import { checkUserVerification } from "@/src/app/actions/profile";
+import { LoginSchema } from "@/src/lib/schemas/userschema";
+import { cookies } from "next/headers";
+import * as z from "zod";
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
@@ -37,12 +35,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       const errorData = await response.json();
 
       if (response.status === 401) {
-        // if (errorData.detail === "User with this email is not verified") {
-        //   return {
-        //     error: "Email not verified",
-        //     message: "User with this email is not verified",
-        //   };
-        // }
+
         if (errorData.detail === "Incorrect email or password") {
           return {
             error: "Incorrect email or password",
