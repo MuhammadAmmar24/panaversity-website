@@ -1,9 +1,7 @@
-"use client";
-import { useState, useEffect, useRef, useTransition } from "react";
+import React, { useState, useEffect, useRef, useTransition } from "react";
 import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
 import { useToast } from "@/src/components/ui/use-toast";
 import { Button } from "@/src/components/ui/button";
@@ -23,6 +21,9 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
+  AiOutlineEdit,
+  AiOutlineCheck,
+  AiOutlineClose,
 } from "react-icons/ai";
 
 type VerifyEmailProps = {
@@ -30,8 +31,7 @@ type VerifyEmailProps = {
 };
 
 function PasswordSettings({ profile_email }: VerifyEmailProps) {
-  const [isOpen, setIsOpen] = useState(false); // Toggle for the password settings dropdown
-
+  const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const { toast } = useToast();
@@ -52,11 +52,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
     },
   });
 
-  const formRef = useRef<HTMLDivElement | null>(null); // Ref to scroll into view when dropdown opens
+  const formRef = useRef<HTMLDivElement | null>(null);
 
-  // Toggle visibility for password fields
-
-  // Scroll into view when the dropdown opens
   useEffect(() => {
     if (isOpen && formRef.current) {
       formRef.current.scrollIntoView({
@@ -66,15 +63,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
     }
   }, [isOpen]);
 
-  // Handle form submission with validation
   const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
- 
-
     setError("");
     setSuccess("");
     startTransition(() => {
       changePassword(values).then((data: any) => {
-     
         if (data?.error) {
           setError(data.error);
           setSuccess("");
@@ -88,7 +81,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
-         
           setError("");
           setSuccess(data.message);
           toast({
@@ -97,7 +89,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
           });
           if (data.message === "Password updated successfully") {
             signOut();
-            // window.location.href = "/login";
           }
         }
       });
@@ -105,175 +96,122 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   };
 
   return (
-    <section className="relative">
-      {/* Button to toggle dropdown */}
-      <button
+    <section className="mt-8 rounded-lg overflow-hidden">
+      <div
+        className="py-2 flex justify-between items-center  cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center justify-between w-full bg-white border border-gray-300 rounded-md p-3 sm:p-4 px-4 sm:px-6 shadow-sm hover:shadow-lg focus:outline-none transition-all duration-300 ease-in-out"
       >
-        <span className="text-gray-800 font-semibold">Password Settings</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className={`h-5 w-5 transform transition-transform ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
-      </button>
+        <h2 className="text-xl font-semibold text-black">Password Settings</h2>
+        <button className="text-accent hover:text-[#1a8e5c]">
+          {isOpen ? (
+            <AiOutlineClose className="text-xl text-red-500" />
+          ) : (
+            <AiOutlineEdit className="text-xl" />
+          )}
+        </button>
+      </div>
 
-      {/* Password form (shown when isOpen is true) */}
       {isOpen && (
-        <div className="flex justify-center items-center">
-          <div
-            ref={formRef}
-            className="mt-8 rounded-lg shadow-md p-4 sm:p-6 w-full max-w-xl"
-          >
-            <h4 className="text-textPrimary mb-5 font-semibold text-xl">
-              Change Your Password
-            </h4>
-            <FormProvider {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
+        <div ref={formRef} className="py-2 md:px-24 md:py-6">
+          <FormProvider {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {["current_password", "new_password", "confirm_password"].map(
+                (fieldName) => (
+                  <FormField
+                    key={fieldName}
+                    control={form.control}
+                    name={
+                      fieldName as
+                        | "current_password"
+                        | "new_password"
+                        | "confirm_password"
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 font-medium">
+                          {fieldName
+                            .split("_")
+                            .map(
+                              (word) =>
+                                word.charAt(0).toUpperCase() + word.slice(1)
+                            )
+                            .join(" ")}
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              {...field}
+                              disabled={isPending}
+                              placeholder="******"
+                              type={
+                                fieldName === "current_password"
+                                  ? showPasswordCurrent
+                                    ? "text"
+                                    : "password"
+                                  : fieldName === "new_password"
+                                  ? showPasswordNew
+                                    ? "text"
+                                    : "password"
+                                  : showPasswordConfirm
+                                  ? "text"
+                                  : "password"
+                              }
+                              className="pl-3 pr-10 border-gray-300 focus:border-accent "
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (fieldName === "current_password")
+                                  setShowPasswordCurrent((prev) => !prev);
+                                else if (fieldName === "new_password")
+                                  setShowPasswordNew((prev) => !prev);
+                                else setShowPasswordConfirm((prev) => !prev);
+                              }}
+                              disabled={isPending}
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            >
+                              {(fieldName === "current_password" &&
+                                showPasswordCurrent) ||
+                              (fieldName === "new_password" &&
+                                showPasswordNew) ||
+                              (fieldName === "confirm_password" &&
+                                showPasswordConfirm) ? (
+                                <AiOutlineEyeInvisible className="w-5 h-5" />
+                              ) : (
+                                <AiOutlineEye className="w-5 h-5" />
+                              )}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-red-500 text-sm" />
+                      </FormItem>
+                    )}
+                  />
+                )
+              )}
+
+              <FormError message={error} />
+              <FormSuccess message={success} />
+
+              <Button
+                disabled={isPending}
+                type="submit"
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c]"
               >
-                <div className="space-y-4">
-                  <FormField
-                    control={form.control}
-                    name="current_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Current Password</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              {...field}
-                              disabled={isPending}
-                              placeholder="******"
-                              type={showPasswordCurrent ? "text" : "password"} // Toggle between text and password
-                              className="pl-3 pr-10" // Add padding for the icon space
-                            />
-                            {/* Eye Icon to toggle password visibility */}
-                            <button
-                              type="button"
-                              onClick={() => !isPending && setShowPasswordCurrent((prev) => !prev)}
-                      disabled={isPending}
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                              {showPasswordCurrent ? (
-                                <AiOutlineEyeInvisible className="w-5 h-5" />
-                              ) : (
-                                <AiOutlineEye className="w-5 h-5" />
-                              )}
-                            </button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="new_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>New Password</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              {...field}
-                              disabled={isPending}
-                              placeholder="******"
-                              type={showPasswordNew ? "text" : "password"} // Toggle between text and password
-                              className="pl-3 pr-10" // Add padding for the icon space
-                            />
-                            {/* Eye Icon to toggle password visibility */}
-                            <button
-                              type="button"
-                              onClick={() => !isPending && setShowPasswordNew((prev) => !prev)}
-                              disabled={isPending} 
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                              {showPasswordNew ? (
-                                <AiOutlineEyeInvisible className="w-5 h-5" />
-                              ) : (
-                                <AiOutlineEye className="w-5 h-5" />
-                              )}
-                            </button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="confirm_password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Confirm Password</FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              {...field}
-                              disabled={isPending}
-                              placeholder="******"
-                              type={showPasswordConfirm ? "text" : "password"} // Toggle between text and password
-                              className="pl-3 pr-10" // Add padding for the icon space
-                            />
-                            {/* Eye Icon to toggle password visibility */}
-                            <button
-                              type="button"
-                              onClick={() => !isPending && setShowPasswordConfirm((prev) => !prev)}
-                      disabled={isPending}
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                              {showPasswordConfirm ? (
-                                <AiOutlineEyeInvisible className="w-5 h-5" />
-                              ) : (
-                                <AiOutlineEye className="w-5 h-5" />
-                              )}
-                            </button>
-                          </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
-                <FormError message={error} />
-
-                <FormSuccess message={success} />
-
-                <Button
-                  disabled={isPending}
-                  type="submit"
-                  className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
-                >
-                  {isPending ? (
-                    <>
-                      <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    "Update Password"
-                  )}
-                </Button>
-                <p className="text-[0.8rem] text-red-600">
-                  You need to login after changing your password
-                </p>
-              </form>
-            </FormProvider>
-          </div>
+                {isPending ? (
+                  <>
+                    <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                    Updating...
+                  </>
+                ) : (
+                  "Update Password"
+                )}
+              </Button>
+              <p className="text-sm text-yellow-500 text-center">
+                You will need to log in again after changing your password
+              </p>
+            </form>
+          </FormProvider>
         </div>
       )}
     </section>
