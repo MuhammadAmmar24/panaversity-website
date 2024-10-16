@@ -1,9 +1,8 @@
-import React from "react";
+import { CiLogout } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
 import { IoIosArrowRoundForward, IoIosHelpCircleOutline } from "react-icons/io";
-import { SlBookOpen } from "react-icons/sl";
-import { CiLogout } from "react-icons/ci";
 import { IoLibraryOutline } from "react-icons/io5";
+import { SlBookOpen } from "react-icons/sl";
 
 const Sidebar = () => {
   const menuItems = [

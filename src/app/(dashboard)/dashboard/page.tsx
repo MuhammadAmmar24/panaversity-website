@@ -1,8 +1,8 @@
+import fetchProfile from "@/src/lib/getProfile";
+import type { Metadata } from "next";
+import Dashboard from "./Components/Ui/Dashboard";
 import TopBar from "./Components/Ui/TopBar";
 import Welcome from "./Components/Ui/Welcome";
-import Dashboard from "./Components/Ui/Dashboard";
-import type { Metadata } from "next";
-import fetchProfile from "@/src/lib/getProfile";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -10,9 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-
   const profile: ProfileData = await fetchProfile();
-
 
   return (
     <main className="flex-1 mx-3 mobileM:mx-4 xs:mx-6 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">

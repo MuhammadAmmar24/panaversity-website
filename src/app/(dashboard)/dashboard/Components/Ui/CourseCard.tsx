@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { getCoursePrice } from "@/src/app/actions/courses";
+import { processPayment } from "@/src/app/actions/payment";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { CiMobile1 } from "react-icons/ci";
 import { CourseCardProps } from "../../types/types";
-import { processPayment } from "@/src/app/actions/payment";
-import { getCoursePrice } from "@/src/app/actions/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
-import { useRouter } from "next/navigation";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -58,7 +58,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
       if (result.type === "success") {
         const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
-        // revalidatePath("/dashboard"); // Revalidate the dashboard page
         if (url) {
           window.location.href = url; // Redirect to payment URL if successful
         } else {

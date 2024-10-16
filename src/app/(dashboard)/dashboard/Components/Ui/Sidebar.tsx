@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import { signOut } from "@/src/lib/auth";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import { CiLogout } from "react-icons/ci";
 import { GoHome } from "react-icons/go";
 import {
   IoIosArrowRoundBack,
   IoIosArrowRoundForward,
   IoIosHelpCircleOutline,
 } from "react-icons/io";
-import { SlBookOpen } from "react-icons/sl";
-import { CiLogout } from "react-icons/ci";
 import { IoLibraryOutline } from "react-icons/io5";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import LogoutDialog from "../Dialog/LogoutDialog";
-import { signOut } from "@/src/lib/auth";
+import { SlBookOpen } from "react-icons/sl";
 import { SidebarProps } from "../../types/types";
+import LogoutDialog from "../Dialog/LogoutDialog";
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false); // Sidebar visibility state

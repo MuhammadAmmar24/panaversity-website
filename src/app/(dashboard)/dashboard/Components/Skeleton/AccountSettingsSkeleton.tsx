@@ -1,5 +1,3 @@
-import React from "react";
-
 const AccountSettingsSkeleton: React.FC = () => {
   return (
     <main className="min-h-screen flex justify-center items-center mt-5 mb-8 font-poppins">

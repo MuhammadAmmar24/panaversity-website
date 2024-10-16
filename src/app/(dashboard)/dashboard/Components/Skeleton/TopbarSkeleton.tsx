@@ -1,7 +1,4 @@
-import { Link } from "lucide-react";
-import React from "react";
 import Image from "next/image";
-import Dropdown from "../Ui/TopbarDropdown";
 
 export default function TopbarSkeleton() {
   return (

@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
+import { HiChevronDown } from "react-icons/hi";
 import { TfiHelp } from "react-icons/tfi";
 import { DropdownProps } from "../../types/types";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import Error from "../Error/error_message";
-import { HiChevronDown } from "react-icons/hi";
 
 const Dropdown: React.FC<DropdownProps> = ({
   userName,

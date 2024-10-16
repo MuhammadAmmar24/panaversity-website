@@ -1,16 +1,16 @@
+import fetchProfile from "@/src/lib/getProfile";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import Dropdown from "./TopbarDropdown";
-import  fetchProfile  from "@/src/lib/getProfile";
 import Error from "../Error/error_message";
+import Dropdown from "./TopbarDropdown";
 
 const TopBar: React.FC = async () => {
   let profile: ProfileData | null = null;
 
   // Fetch the profile data with error handling
   try {
-    profile = await fetchProfile();  
+    profile = await fetchProfile();
   } catch (error) {
     console.error("Error fetching profile data:", error);
     // In case of an error, you could return default data or handle it appropriately
@@ -18,9 +18,7 @@ const TopBar: React.FC = async () => {
 
   // Fallback UI if profile data is not available
   if (!profile) {
-    return (
-<Error message="Error loading profile" />
-    );
+    return <Error message="Error loading profile" />;
   }
 
   return (

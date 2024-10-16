@@ -1,8 +1,8 @@
 import { FaGithub, FaYoutube } from "react-icons/fa6";
-import { ClassCardProps } from "../../types/types";
-import { IoIosLink } from "react-icons/io";
 import { HiMiniCalendar } from "react-icons/hi2";
+import { IoIosLink } from "react-icons/io";
 import { TbClockHour3 } from "react-icons/tb";
+import { ClassCardProps } from "../../types/types";
 import Error from "../Error/error_message";
 
 // ClassCard component to display class information
@@ -41,7 +41,7 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
 
             {/* GitHub and Topics covered section */}
             <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-4 cursor-pointer">
-              <FaGithub className="w-auto h-6"/>
+              <FaGithub className="w-auto h-6" />
               <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
                 Topics Covered
               </p>

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import PasswordSettings from "./PasswordSettings";
-import Image from "next/image";
 import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo"; // Import the zod schema
+import Image from "next/image";
+import React, { useState } from "react";
+import { AiOutlineCheck, AiOutlineEdit } from "react-icons/ai";
 import { ZodError } from "zod";
+import PasswordSettings from "./PasswordSettings";
 
 const ProfileSettings: React.FC<any> = ({ profile }) => {
   const [personalInfo] = useState({

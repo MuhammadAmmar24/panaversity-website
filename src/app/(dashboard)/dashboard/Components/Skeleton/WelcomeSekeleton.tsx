@@ -1,5 +1,3 @@
-import React from "react";
-
 const WelcomeSkeleton: React.FC = () => {
   return (
     <section className="w-full animate-pulse">

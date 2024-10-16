@@ -1,11 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useTransition } from "react";
-import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import "react-phone-input-2/lib/style.css";
-import * as z from "zod";
-import { useToast } from "@/src/components/ui/use-toast";
+import { changePassword } from "@/src/app/actions/change-password";
 import { Button } from "@/src/components/ui/button";
 import {
   FormControl,
@@ -14,16 +8,22 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
-import { changePassword } from "@/src/app/actions/change-password";
+import { Input } from "@/src/components/ui/input";
+import { useToast } from "@/src/components/ui/use-toast";
 import { signOut } from "@/src/lib/auth";
+import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import "react-phone-input-2/lib/style.css";
+import * as z from "zod";
 
 type VerifyEmailProps = {
   profile_email: string;
@@ -31,7 +31,6 @@ type VerifyEmailProps = {
 
 function PasswordSettings({ profile_email }: VerifyEmailProps) {
   const [isOpen, setIsOpen] = useState(false); // Toggle for the password settings dropdown
-
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const { toast } = useToast();
@@ -68,13 +67,10 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
 
   // Handle form submission with validation
   const onSubmit = (values: z.infer<typeof PasswordUpdateSchema>) => {
- 
-
     setError("");
     setSuccess("");
     startTransition(() => {
       changePassword(values).then((data: any) => {
-     
         if (data?.error) {
           setError(data.error);
           setSuccess("");
@@ -88,7 +84,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
             window.location.href = "/verify";
           }
         } else if (data?.message) {
-         
           setError("");
           setSuccess(data.message);
           toast({
@@ -97,7 +92,6 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
           });
           if (data.message === "Password updated successfully") {
             signOut();
-            // window.location.href = "/login";
           }
         }
       });
@@ -164,8 +158,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => !isPending && setShowPasswordCurrent((prev) => !prev)}
-                      disabled={isPending}
+                              onClick={() =>
+                                !isPending &&
+                                setShowPasswordCurrent((prev) => !prev)
+                              }
+                              disabled={isPending}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordCurrent ? (
@@ -198,8 +195,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => !isPending && setShowPasswordNew((prev) => !prev)}
-                              disabled={isPending} 
+                              onClick={() =>
+                                !isPending &&
+                                setShowPasswordNew((prev) => !prev)
+                              }
+                              disabled={isPending}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordNew ? (
@@ -232,8 +232,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                             {/* Eye Icon to toggle password visibility */}
                             <button
                               type="button"
-                              onClick={() => !isPending && setShowPasswordConfirm((prev) => !prev)}
-                      disabled={isPending}
+                              onClick={() =>
+                                !isPending &&
+                                setShowPasswordConfirm((prev) => !prev)
+                              }
+                              disabled={isPending}
                               className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                             >
                               {showPasswordConfirm ? (
