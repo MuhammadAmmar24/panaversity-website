@@ -1,9 +1,4 @@
-import React, { useState, useEffect, useRef, useTransition } from "react";
-import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import * as z from "zod";
-import { useToast } from "@/src/components/ui/use-toast";
+import { changePassword } from "@/src/app/actions/change-password";
 import { Button } from "@/src/components/ui/button";
 import {
   FormControl,
@@ -22,12 +17,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
+  AiOutlineClose,
+  AiOutlineEdit,
   AiOutlineEye,
   AiOutlineEyeInvisible,
-  AiOutlineLoading3Quarters,
-  AiOutlineEdit,
-  AiOutlineCheck,
-  AiOutlineClose,
+  AiOutlineLoading3Quarters
 } from "react-icons/ai";
 import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
@@ -110,7 +104,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
         <h2 className="text-xl font-semibold text-black">Password Settings</h2>
         <button className="text-accent hover:text-[#1a8e5c]">
           {isOpen ? (
-            <AiOutlineClose className="text-xl text-red-500" />
+            <AiOutlineClose className="text-xl text-gray-800 " />
           ) : (
             <AiOutlineEdit className="text-xl" />
           )}
@@ -118,7 +112,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="py-2 md:px-24 md:py-6">
+        <div ref={formRef} className="py-2 md:px-24 md:py-6 ">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {["current_password", "new_password", "confirm_password"].map(
