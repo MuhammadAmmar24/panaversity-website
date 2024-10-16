@@ -1,14 +1,14 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { TfiWallet, TfiHelp } from "react-icons/tfi";
-import { LuSettings2 } from "react-icons/lu";
-import Link from "next/link";
-import LogoutDialog from "../Dialog/LogoutDialog";
-import { CiLogout } from "react-icons/ci";
 import { signOut } from "@/src/lib/auth";
-import Error from "../Error/error_message";
-import { DropdownProps } from "../../types/types";
 import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { CgProfile } from "react-icons/cg";
+import { CiLogout } from "react-icons/ci";
+import { TfiHelp } from "react-icons/tfi";
+import { DropdownProps } from "../../types/types";
+import LogoutDialog from "../Dialog/LogoutDialog";
+import Error from "../Error/error_message";
 
 
 const Dropdown: React.FC<DropdownProps> = ({
@@ -130,9 +130,9 @@ const Dropdown: React.FC<DropdownProps> = ({
               className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer"
               role="menuitem"
             >
-              <LuSettings2 className="w-5 h-5 text-gray-700" />
+              <CgProfile className="w-5 h-5 text-gray-700" />
               <span className="text-gray-700 text-xs sm:text-sm">
-                Account Settings
+                Profile
               </span>
             </li>
           </Link>

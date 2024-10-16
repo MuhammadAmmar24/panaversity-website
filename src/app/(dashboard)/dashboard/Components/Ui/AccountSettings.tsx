@@ -102,7 +102,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     <main className="min-h-screen flex justify-center items-center mt-8 mb-8 font-poppins">
       <section className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-medium text-lg sm:text-xl md:text-2xl mb-4 text-center md:text-start">
-          Account Settings
+          Profile
         </h1>
 
         <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-4 pt-2 md:pt-4 overflow-hidden">
