@@ -212,7 +212,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="mt-1 p-1 sm:p-[6px] pl-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-transparent sm:text-sm"
+                          className="mt-1 p-1 sm:p-[6px] pl-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-700 focus:border-transparent sm:text-sm"
                         />
                         {errors[field] && (
                           <p className="mt-1 text-sm text-red-600">
