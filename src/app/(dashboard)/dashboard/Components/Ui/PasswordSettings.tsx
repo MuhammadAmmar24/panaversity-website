@@ -96,122 +96,115 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   };
 
   return (
-    <section className=" px-16 mt-8 rounded-lg overflow-hidden">
-      <div
-        className="py-2 flex justify-between items-center  cursor-pointer"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <h2 className="text-xl  font-semibold text-black">Password Settings</h2>
-        <button className="text-gray-500 hover:text-gray-800 transition-colors duration-200">
+<section className="mt-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-xl font-semibold text-gray-900">Password Settings</h2>
+        <button
+          className="text-accent hover:text-accent-dark transition-colors duration-200"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? (
-            <AiOutlineClose className="text-xl text-gray-800 " />
+            <AiOutlineClose className="text-2xl" />
           ) : (
-            <AiOutlineEdit className="text-xl" />
+            <AiOutlineEdit className="text-2xl" />
           )}
         </button>
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="flex  py-2  md:py-6 ">
+        <div ref={formRef} className="mt-4">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {["current_password", "new_password", "confirm_password"].map(
-                (fieldName) => (
-                  <FormField
-                    key={fieldName}
-                    control={form.control}
-                    name={
-                      fieldName as
-                        | "current_password"
-                        | "new_password"
-                        | "confirm_password"
-                    }
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-700 font-medium">
-                          {fieldName
-                            .split("_")
-                            .map(
-                              (word) =>
-                                word.charAt(0).toUpperCase() + word.slice(1)
-                            )
-                            .join(" ")}
-                        </FormLabel>
-                        <FormControl>
-                          <div className="relative">
-                            <Input
-                              {...field}
-                              disabled={isPending}
-                              placeholder="******"
-                              type={
-                                fieldName === "current_password"
-                                  ? showPasswordCurrent
+              <div className="grid grid-cols-1  gap-6">
+                {["current_password", "new_password", "confirm_password"].map(
+                  (fieldName) => (
+                    <FormField
+                      key={fieldName}
+                      control={form.control}
+                      name={fieldName as "current_password" | "new_password" | "confirm_password"}
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="block text-sm font-medium text-gray-700 mb-1">
+                            {fieldName
+                              .split("_")
+                              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                              .join(" ")}
+                          </FormLabel>
+                          <FormControl>
+                            <div className="relative">
+                              <Input
+                                {...field}
+                                disabled={isPending}
+                                placeholder="******"
+                                type={
+                                  fieldName === "current_password"
+                                    ? showPasswordCurrent
+                                      ? "text"
+                                      : "password"
+                                    : fieldName === "new_password"
+                                    ? showPasswordNew
+                                      ? "text"
+                                      : "password"
+                                    : showPasswordConfirm
                                     ? "text"
                                     : "password"
-                                  : fieldName === "new_password"
-                                  ? showPasswordNew
-                                    ? "text"
-                                    : "password"
-                                  : showPasswordConfirm
-                                  ? "text"
-                                  : "password"
-                              }
-                              className="pl-3 pr-10 border-gray-300 focus:border-0 focus:border-gray-500 "
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (fieldName === "current_password")
-                                  setShowPasswordCurrent((prev) => !prev);
-                                else if (fieldName === "new_password")
-                                  setShowPasswordNew((prev) => !prev);
-                                else setShowPasswordConfirm((prev) => !prev);
-                              }}
-                              disabled={isPending}
-                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                            >
-                              {(fieldName === "current_password" &&
-                                showPasswordCurrent) ||
-                              (fieldName === "new_password" &&
-                                showPasswordNew) ||
-                              (fieldName === "confirm_password" &&
-                                showPasswordConfirm) ? (
-                                <AiOutlineEyeInvisible className="w-5 h-5" />
-                              ) : (
-                                <AiOutlineEye className="w-5 h-5" />
-                              )}
-                            </button>
-                          </div>
-                        </FormControl>
-                        <FormMessage className="text-red-500 text-sm" />
-                      </FormItem>
-                    )}
-                  />
-                )
-              )}
+                                }
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  if (fieldName === "current_password")
+                                    setShowPasswordCurrent((prev) => !prev);
+                                  else if (fieldName === "new_password")
+                                    setShowPasswordNew((prev) => !prev);
+                                  else setShowPasswordConfirm((prev) => !prev);
+                                }}
+                                disabled={isPending}
+                                className="absolute inset-y-0 right-0 flex items-center pr-3"
+                              >
+                                {(fieldName === "current_password" && showPasswordCurrent) ||
+                                (fieldName === "new_password" && showPasswordNew) ||
+                                (fieldName === "confirm_password" && showPasswordConfirm) ? (
+                                  <AiOutlineEyeInvisible className="h-5 w-5 text-gray-400" />
+                                ) : (
+                                  <AiOutlineEye className="h-5 w-5 text-gray-400" />
+                                )}
+                              </button>
+                            </div>
+                          </FormControl>
+                          <FormMessage className="mt-1 text-sm text-red-600" />
+                        </FormItem>
+                      )}
+                    />
+                  )
+                )}
+              </div>
 
               <FormError message={error} />
               <FormSuccess message={success} />
 
-              <Button
-                disabled={isPending}
-                type="submit"
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c]"
-              >
-                {isPending ? (
-                  <>
-                    <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                    Updating...
-                  </>
-                ) : (
-                  "Update Password"
-                )}
-              </Button>
-              <p className="text-sm text-yellow-500 text-center">
-                Log in again after changing your password
-              </p>
+              <div className="mt-6 flex justify-start">
+                <Button
+                  disabled={isPending}
+                  type="submit"
+                  className="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150 ease-in-out"
+                >
+                  {isPending ? (
+                    <>
+                      <AiOutlineLoading3Quarters className="inline-block mr-2 h-4 w-4 animate-spin" />
+                      Saving Changes...
+                    </>
+                  ) : (
+                    "Save Changes"
+                  )}
+                </Button>
+              </div>
             </form>
           </FormProvider>
+          <p className="mt-4 text-sm text-yellow-600">
+            You will need to log in again after changing your password
+          </p>
         </div>
       )}
     </section>
