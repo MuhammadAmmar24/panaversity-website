@@ -1,13 +1,13 @@
 "use client";
-import React, { useRef, useEffect, useMemo } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import {projectsData, projects} from "@/src/constants/projects";
+import { projects, projectsData } from "@/src/constants/projects";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { FaArrowLeftLong, FaArrowRight } from "react-icons/fa6";
 import SwiperCore from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Define the ref type properly
 export default function Projects() {
@@ -17,27 +17,6 @@ export default function Projects() {
     if (swiperRef.current) {
     }
   }, []);
-
-  const swiperParams = useMemo(
-    () => ({
-      slidesPerView: 1,
-      spaceBetween: 30,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        640: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      },
-      modules: [Autoplay, Navigation],
-    }),
-    []
-  );
 
   return (
     <div className="bg-[#fcfcff] py-5 md:px-10 px-6 mt-10 flex justify-center">

@@ -1,20 +1,18 @@
-import { UpcomingClassProps } from "../../types/types";
-import { SiZoom } from "react-icons/si";
-import { FaGithub } from "react-icons/fa";
-import { IoIosLink } from "react-icons/io";
-import { DiGithubFull } from "react-icons/di";
-import { HiMiniCalendar } from "react-icons/hi2";
-import { TbClockHour3 } from "react-icons/tb";
 import Link from "next/link";
+import { DiGithubFull } from "react-icons/di";
+import { FaGithub } from "react-icons/fa";
+import { HiMiniCalendar } from "react-icons/hi2";
+import { IoIosLink } from "react-icons/io";
+import { SiZoom } from "react-icons/si";
+import { TbClockHour3 } from "react-icons/tb";
+import { UpcomingClassProps } from "../../types/types";
 import Error from "../Error/error_message";
 
 // UpcomingCard component to display upcoming class information
 const UpcomingCard: React.FC<UpcomingClassProps> = ({ title, time, date }) => {
   // Basic validation to handle missing props
   if (!title || !time || !date) {
-    return (
-      <Error message="can't load the title time & date"/>
-    );
+    return <Error message="can't load the title time & date" />;
   }
 
   return (

@@ -1,10 +1,9 @@
-import Link from "next/link";
-
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Announcements",
-  description: `Stay updated with the latest news and updates from Panaversity. Explore our announcements on new courses, Generative AI advancements, and important information for our learners.`
+  description: `Stay updated with the latest news and updates from Panaversity. Explore our announcements on new courses, Generative AI advancements, and important information for our learners.`,
 };
 
 export default function results() {
@@ -17,20 +16,17 @@ export default function results() {
         This Page is Under Construction
       </h2>
       <p className="mt-4 px-3 font-inter text-center text-lg text-textSecondary">
-      Good things take time! We’re working on this page and will have it ready soon.
+        Good things take time! We’re working on this page and will have it ready
+        soon.
       </p>
       <Link
         href="/announcements"
-        className="relative inline-block px-8 py-4 mt-6 overflow-hidden font-bold rounded-full group cursor-pointer" 
+        className="relative inline-block px-8 py-4 mt-6 overflow-hidden font-bold rounded-full group cursor-pointer"
       >
         {/* Background Shape */}
-        <span
-          className="absolute top-1/2 left-1/2 w-[200%] h-[200%] bg-accent opacity-[3%] rotate-45 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out"
-        ></span>
+        <span className="absolute top-1/2 left-1/2 w-[200%] h-[200%] bg-accent opacity-[3%] rotate-45 -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out"></span>
         {/* Hover Effect */}
-        <span
-          className="absolute top-1/2 left-1/2 w-[300%] h-[300%] bg-accent opacity-100 rotate-45 transform translate-x-[100%]  -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-[-50%]"
-        ></span>
+        <span className="absolute top-1/2 left-1/2 w-[300%] h-[300%] bg-accent opacity-100 rotate-45 transform translate-x-[100%]  -translate-y-1/2 transition-transform duration-500 ease-in-out group-hover:translate-x-[-50%]"></span>
         {/* Button Text */}
         <span className="relative text-[1rem] font-bold text-textPrimary transition-colors duration-400 ease-in-out font-poppins lg:text-[0.9rem]">
           Go back to Home
@@ -38,7 +34,6 @@ export default function results() {
         {/* Border */}
         <span className="absolute inset-0 rounded-full border-2 border-accent"></span>
       </Link>
-
     </main>
   );
 }

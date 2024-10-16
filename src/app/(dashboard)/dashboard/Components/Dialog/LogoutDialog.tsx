@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { IoClose } from "react-icons/io5";
 

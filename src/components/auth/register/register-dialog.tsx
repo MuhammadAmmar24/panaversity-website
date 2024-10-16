@@ -1,24 +1,16 @@
 "use client";
 
-import * as React from "react";
-import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import { RegisterForm } from "./register-form";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-
-
+import { RegisterForm } from "./register-form";
 
 export default function RegisterDialog() {
-  const [open, setOpen] = useState(false);
   const router = useRouter();
-
 
   return (
     <Dialog.Root open={true} onOpenChange={() => router.back()}>
-      {/* <Dialog.Trigger asChild>
-        <Button variant="outline">Register</Button>
-      </Dialog.Trigger> */}
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
         <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-5 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] overflow-y-auto ">
@@ -28,7 +20,7 @@ export default function RegisterDialog() {
           <RegisterForm />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">
-            <IoClose />
+              <IoClose />
             </button>
           </Dialog.Close>
         </Dialog.Content>

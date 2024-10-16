@@ -1,8 +1,8 @@
-import { useState, useEffect, useTransition } from "react";
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
-import { useRouter } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import { useRouter } from "next/navigation";
+import { useEffect, useState, useTransition } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
@@ -14,7 +14,9 @@ export default function GetEnrolled({
 }: GetEnrolledProps) {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
-  const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(null);
+  const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
+    null
+  );
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState("STRIPE"); // Add payment method state
@@ -27,26 +29,39 @@ export default function GetEnrolled({
 
   useEffect(() => {
     if (selectedDay) {
-      const selectedSlot = classTimeSlots.find(slot => slot.time_slot_day === selectedDay);
+      const selectedSlot = classTimeSlots.find(
+        (slot) => slot.time_slot_day === selectedDay
+      );
       if (selectedSlot) {
         setRemainingSeats(selectedSlot.total_seats - selectedSlot.booked_seats);
       }
     }
   }, [selectedDay, classTimeSlots]);
 
-  const uniqueDays = Array.from(new Set(classTimeSlots.map((slot) => slot.time_slot_day)));
+  const uniqueDays = Array.from(
+    new Set(classTimeSlots.map((slot) => slot.time_slot_day))
+  );
 
   const timeSlotsForSelectedDay = classTimeSlots
     .filter((slot) => slot.time_slot_day === selectedDay)
     .map((slot) => ({
       id: slot.id,
       timeSlotId: slot.id,
-      label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(slot.slot_end_time ?? "")}`,
+      label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(
+        slot.slot_end_time ?? ""
+      )}`,
     }));
 
   const handleEnroll = async () => {
-    if (!selectedDay || !selectedTimeSlot || selectedTimeSlotId === null || enrollmentPackage === null) {
-      setEnrollmentError("Please select a valid time slot and ensure the package is available.");
+    if (
+      !selectedDay ||
+      !selectedTimeSlot ||
+      selectedTimeSlotId === null ||
+      enrollmentPackage === null
+    ) {
+      setEnrollmentError(
+        "Please select a valid time slot and ensure the package is available."
+      );
       return;
     }
 
@@ -72,7 +87,9 @@ export default function GetEnrolled({
             router.push("/dashboard");
           }
         } else {
-          setEnrollmentError(result.message || "An error occurred during enrollment.");
+          setEnrollmentError(
+            result.message || "An error occurred during enrollment."
+          );
         }
       } catch (error) {
         console.error("Unexpected error during enrollment:", error);
@@ -104,11 +121,14 @@ export default function GetEnrolled({
             setSelectedTimeSlot(e.target.value);
             setSelectedTimeSlotId(parseInt(e.target.value, 10));
           }}
-          options={timeSlotsForSelectedDay.map(slot => ({ value: slot.timeSlotId.toString(), label: slot.label }))}
+          options={timeSlotsForSelectedDay.map((slot) => ({
+            value: slot.timeSlotId.toString(),
+            label: slot.label,
+          }))}
           placeholder="Select Time"
           disabled={!selectedDay}
         />
-        
+
         <SelectField
           label="Payment Method"
           value={paymentMethod}
@@ -120,7 +140,11 @@ export default function GetEnrolled({
         <div className="mb-6 text-red-500">
           <span className="text-lg font-semibold">Remaining Seats: </span>
           <span className="text-lg">
-            {remainingSeats === null ? "..." : remainingSeats === 0 ? "N/A" : remainingSeats}
+            {remainingSeats === null
+              ? "..."
+              : remainingSeats === 0
+              ? "N/A"
+              : remainingSeats}
           </span>
         </div>
 
@@ -153,7 +177,14 @@ export default function GetEnrolled({
   );
 }
 
-function SelectField({ label, value, onChange, options, placeholder, disabled = false }: any) {
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+  disabled = false,
+}: any) {
   return (
     <div>
       <label htmlFor={label} className="block text-lg font-semibold mb-2">

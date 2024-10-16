@@ -1,4 +1,4 @@
-import { ctaData } from "@/src/constants/cta"
+import { ctaData } from "@/src/constants/cta";
 import Link from "next/link";
 
 export default function Component() {
@@ -6,7 +6,9 @@ export default function Component() {
     <div className="bg-white text-center">
       <div className="container mx-auto max-w-[25rem] sm:max-w-[930px] lg:max-w-[930px] xl:max-w-6xl px-4    sm:px-6 md:px-0 py-14 md:py-24 mb-10">
         <div className="bg-custom-bg1 flex flex-col justify-center items-center gap-1 bg-center bg-cover rounded-3xl p-10 md:p-[3rem] lg:p-[5rem] max-w-6xl  md:max-w-[72em] text-center border-2">
-          <h2 className="text-[1.4rem] md:text-[2.6rem] font-bold text-white font-poppins mb-4">{ctaData.heading}</h2>
+          <h2 className="text-[1.4rem] md:text-[2.6rem] font-bold text-white font-poppins mb-4">
+            {ctaData.heading}
+          </h2>
           <p className="text-[0.9rem] md:text-[1rem] mb-6 text-background/90 font-inter">
             {ctaData.subHeading}
           </p>
@@ -24,7 +26,7 @@ export default function Component() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ArrowRightIcon(props: any) {
@@ -44,5 +46,5 @@ function ArrowRightIcon(props: any) {
       <path d="M5 12h14" />
       <path d="m12 5 7 7-7 7" />
     </svg>
-  )
+  );
 }

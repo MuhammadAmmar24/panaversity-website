@@ -1,10 +1,15 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { TeamMember, SocialLink } from "../../types/team";
-import {  FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { SocialLink, TeamMember } from "../../types/team";
 
-const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: boolean }) => (
+const TeamMemberItem = ({
+  member,
+  priority,
+}: {
+  member: TeamMember;
+  priority?: boolean;
+}) => (
   <div className="w-[280px] mt-5">
     <div className="relative flex justify-center items-center">
       <Image
@@ -30,9 +35,14 @@ const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: b
       <p className="text-sm mt-1">{member.bio}</p>
       <div className="flex justify-center items-center space-x-3 mt-3">
         {member.socialLinks.map((link: SocialLink, index: number) => (
-          <Link key={index} href={link.href} target="_blank" className="text-gray-500 hover:text-gray-900">
-           {link.icon === "linkedin" && <FaLinkedin />}
-           {link.icon === "github" && <FaGithub />}
+          <Link
+            key={index}
+            href={link.href}
+            target="_blank"
+            className="text-gray-500 hover:text-gray-900"
+          >
+            {link.icon === "linkedin" && <FaLinkedin />}
+            {link.icon === "github" && <FaGithub />}
           </Link>
         ))}
       </div>

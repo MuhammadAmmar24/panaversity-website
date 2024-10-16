@@ -2,7 +2,6 @@ import { Course } from "@/src/lib/schemas/courses";
 import { CourseCard } from "./CourseCard";
 
 const CoursesClient = ({ initialCourses }: { initialCourses: Course[] }) => {
-
   return (
     <>
       <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mt-8">
@@ -15,7 +14,6 @@ const CoursesClient = ({ initialCourses }: { initialCourses: Course[] }) => {
           ))}
         </div>
       </div>
-
     </>
   );
 };

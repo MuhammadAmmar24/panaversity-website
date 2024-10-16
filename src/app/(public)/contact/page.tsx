@@ -1,18 +1,13 @@
-
-import type { Metadata } from "next";
-import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import ContactUs from "@/src/components/contact/contact";
+import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description: `Get in touch with Panaversity University for inquiries about our Generative AI and Cloud Native programs. Reach out for admissions, technical support, or general questions.`,
 };
 
-
-
 export default async function Courses() {
- 
-
   return (
     <section className="light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
       <div className="w-full ">
@@ -35,12 +30,12 @@ export default async function Courses() {
                 Contact Us
               </h2>
               <p className="text-background/60 mb-12 pt-2 px-4 mt-0 max-w-[38rem] mx-auto">
-              We’re here to assist you on your journey to becoming a certified Cloud Native Applied Generative AI Engineer. 
+                We’re here to assist you on your journey to becoming a certified
+                Cloud Native Applied Generative AI Engineer.
               </p>
             </div>
           </div>
         </div>
-
 
         <ContactUs />
       </div>

@@ -1,10 +1,9 @@
 import { ClassSectionProps } from "../../types/types";
-import ClassCard from "./RecentClassCard";
 import Error from "../Error/error_message";
+import ClassCard from "./RecentClassCard";
 
 // ClassSection component to render a list of recent classes
 const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => {
-
   // Error handling: Ensure title and classes are provided
   if (!title || !classes || !Array.isArray(classes)) {
     console.error(
@@ -12,7 +11,7 @@ const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => {
     );
     return (
       <div className="text-center">
-     <Error message="Error loading classes" />
+        <Error message="Error loading classes" />
       </div>
     );
   }

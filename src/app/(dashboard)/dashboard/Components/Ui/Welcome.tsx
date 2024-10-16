@@ -7,9 +7,6 @@ interface WelcomeProps {
 }
 
 const Welcome: React.FC<WelcomeProps> = ({ profile }) => {
-
-
-
   if (!profile) {
     return (
       <Error message="Failed to load profile data. Please try again later." />

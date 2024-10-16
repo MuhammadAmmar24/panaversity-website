@@ -1,9 +1,4 @@
-import React, { useState, useEffect, useRef, useTransition } from "react";
-import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import * as z from "zod";
-import { useToast } from "@/src/components/ui/use-toast";
+import { changePassword } from "@/src/app/actions/change-password";
 import { Button } from "@/src/components/ui/button";
 import {
   FormControl,
@@ -12,25 +7,27 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { Input } from "@/src/components/ui/input";
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
-import { changePassword } from "@/src/app/actions/change-password";
+import { Input } from "@/src/components/ui/input";
+import { useToast } from "@/src/components/ui/use-toast";
 import { signOut } from "@/src/lib/auth";
+import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useRef, useState, useTransition } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import {
+  AiOutlineClose,
+  AiOutlineEdit,
   AiOutlineEye,
   AiOutlineEyeInvisible,
-  AiOutlineLoading3Quarters,
-  AiOutlineEdit,
-  AiOutlineCheck,
-  AiOutlineClose,
+  AiOutlineLoading3Quarters
 } from "react-icons/ai";
+import "react-phone-input-2/lib/style.css";
+import * as z from "zod";
 
-type VerifyEmailProps = {
-  profile_email: string;
-};
 
-function PasswordSettings({ profile_email }: VerifyEmailProps) {
+function PasswordSettings({ profile_email }: {profile_email: string}) {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -104,7 +101,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
         <h2 className="text-xl font-semibold text-black">Password Settings</h2>
         <button className="text-accent hover:text-[#1a8e5c]">
           {isOpen ? (
-            <AiOutlineClose className="text-xl text-red-500" />
+            <AiOutlineClose className="text-xl text-gray-800 " />
           ) : (
             <AiOutlineEdit className="text-xl" />
           )}
@@ -112,7 +109,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="py-2 md:px-24 md:py-6">
+        <div ref={formRef} className="py-2 md:px-24 md:py-6 ">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {["current_password", "new_password", "confirm_password"].map(
@@ -208,7 +205,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                 )}
               </Button>
               <p className="text-sm text-yellow-500 text-center">
-                You will need to log in again after changing your password
+                Login again after changing your password
               </p>
             </form>
           </FormProvider>

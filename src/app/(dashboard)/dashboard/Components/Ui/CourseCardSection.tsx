@@ -1,16 +1,13 @@
-import React from "react";
-import CourseCard from "./CourseCard";
-import { Course } from "../../types/types";
-import {CourseSectionProps} from "../../types/types";
 import fetchProfile from "@/src/lib/getProfile";
+import React from "react";
+import { Course, CourseSectionProps } from "../../types/types";
+import CourseCard from "./CourseCard";
 
 const CourseSection: React.FC<CourseSectionProps> = async ({
   courses,
   status,
 }) => {
-
   const profile: ProfileData = await fetchProfile();
-
 
   return (
     <div className="mb-8 mt-8">

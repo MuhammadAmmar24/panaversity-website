@@ -1,5 +1,3 @@
-import React from "react";
-
 const UpcomingCardSkeleton: React.FC = () => {
   return (
     <article className="w-full h-full animate-pulse">

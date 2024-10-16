@@ -1,8 +1,8 @@
-"use client"
-import React, { useRef, useState, useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-import CountUp from 'react-countup';
-import { stats } from '@/src/constants/counter';
+"use client";
+import { stats } from "@/src/constants/counter";
+import { useEffect, useState } from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
 export default function Counters() {
   const [ref, inView] = useInView({
@@ -10,11 +10,13 @@ export default function Counters() {
     triggerOnce: true,
   });
 
-  const [counters, setCounters] = useState(stats.map(() => ({ hasStarted: false, value: 0 })));
+  const [counters, setCounters] = useState(
+    stats.map(() => ({ hasStarted: false, value: 0 }))
+  );
 
   useEffect(() => {
     if (inView) {
-      setCounters(prevCounters =>
+      setCounters((prevCounters) =>
         prevCounters.map((counter, index) => ({
           ...counter,
           hasStarted: true,

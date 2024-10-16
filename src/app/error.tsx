@@ -1,9 +1,9 @@
 // /app/error.tsx
 "use client"; // Enable client-side rendering
 
-import { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ErrorPage() {
   const searchParams = useSearchParams();

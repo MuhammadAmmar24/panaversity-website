@@ -1,5 +1,3 @@
-import React from "react";
-
 const CourseCardSkeleton: React.FC = () => {
   return (
     <>

@@ -1,9 +1,8 @@
+import { features, programOverviewData } from "@/src/constants/programOverview";
 import Image from "next/image";
-import { programOverviewData, features } from "@/src/constants/programOverview"
 import Link from "next/link";
 
 export default function ProgramOverview() {
-
   return (
     <section className=" px-2 sm:px-6 xl:px-0  relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[9rem] z-10  mb-[-3rem] pb-[4rem]">
       <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col gap-y-0 xs:gap-y-0 lg:gap-y-12 xl:flex-row items-center justify-between mb-[1rem]">

@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import Image from "next/image";
 import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo";
+import Image from "next/image";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { AiOutlineEdit } from "react-icons/ai";
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
 
@@ -36,11 +36,6 @@ interface Errors {
 }
 
 const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
-  const [personalInfo] = useState({
-    phone: profile?.phone || "",
-    studentId: profile?.id || "",
-  });
-
   const [addressInfo, setAddressInfo] = useState<AddressInfo>({
     address: profile?.student?.address || "",
     city: profile?.student?.city || "",
@@ -166,22 +161,22 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="max-w-5xl border mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         {/* Profile header */}
-        <div className="bg-gradient-to-r from-accent to-[#1a8e5c] p-6 sm:p-8">
+        <div className=" bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col md:flex-row items-center space-x-4">
             <Image
               src="/profile.png"
               alt="Profile"
               width={80}
               height={80}
-              className="rounded-full border-4 border-white"
+              className="rounded-full border-gray-400"
             />
             <div>
-              <h1 className="text-2xl font-bold text-white">
+              <h1 className="text-2xl font-bold text-gray-950">
                 {profile?.full_name}
               </h1>
-              <p className="text-blue-100">{profile?.email}</p>
+              <p className="text-gray-700">{profile?.email}</p>
             </div>
           </div>
         </div>
@@ -194,7 +189,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               <h2 className="text-xl font-semibold">Address Information</h2>
               {!isEditingAddress && (
                 <button
-                  className="text-accent transition-colors duration-200"
+                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
                   onClick={handleAddressEdit}
                 >
                   <AiOutlineEdit className="text-xl" />
@@ -238,19 +233,19 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             {/* Address edit buttons */}
             {isEditingAddress && (
               <div className="mt-6 flex items-center justify-end space-x-3">
-              <button
-                onClick={handleCancel}
-                className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={submitChanges}
-                className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
-              >
-                Save
-              </button>
-            </div>            
+                <button
+                  onClick={handleCancel}
+                  className="h-9 w-full py-1 px-4 flex justify-center items-center border border-gray-400 rounded-md shadow-sm text-gray-950 bg-gray-100 hover:bg-gray-200"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={submitChanges}
+                  className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
+                >
+                  Save
+                </button>
+              </div>
             )}
           </section>
 

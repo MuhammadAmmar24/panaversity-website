@@ -1,5 +1,4 @@
 import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
-import React from "react";
 
 const TeamHeader = () => (
   <div className="flex justify-center items-center bg-teamBg bg-cover bg-center">
@@ -18,8 +17,7 @@ const TeamHeader = () => (
           className="text-[1.8rem] xs:text-[2rem] sm:text-[2.7rem] md:text-[3rem] lg:text-[3.6rem] -mt-4 text-background font-bold font-poppins tracking-tighter mx-auto"
           style={{ wordSpacing: "0.2em" }}
         >
-          Meet The Visionaries Behind
-          Panaversity
+          Meet The Visionaries Behind Panaversity
         </h2>
         <p className="text-background/60 mb-14 md:mb-0 pt-2 px-4 mt-0 max-w-[28rem] mx-auto">
           Discover the Experts Shaping the Future of AI Education

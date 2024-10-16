@@ -1,15 +1,11 @@
-import React from "react";
-import CourseCardSkeleton from "./CourseCardSkeleton";
 import ClassCardSkeleton from "./ClassCardSkeleton";
+import CourseCardSkeleton from "./CourseCardSkeleton";
 import UpcomingCardSkeleton from "./UpcomingClassCardSkeleton";
 
 // Class section skeleton
 const ClassSectionSkeleton: React.FC = () => (
   <section className="flex-1 flex flex-col gap-4 mb-10">
-    <header className="flex justify-start">
-      {/* Header skeleton */}
-      {/* <div className="h-6 w-1/3 bg-gray-200 rounded-full mt-10"></div> */}
-    </header>
+    <header className="flex justify-start">{/* Header skeleton */}</header>
     {[1, 2].map((index) => (
       <ClassCardSkeleton key={index} />
     ))}
@@ -19,10 +15,7 @@ const ClassSectionSkeleton: React.FC = () => (
 // Upcoming class section skeleton
 const UpcomingClassSectionSkeleton: React.FC = () => (
   <section className="flex-1 flex flex-col gap-4 mb-10">
-    <header className="flex justify-start">
-      {/* Header skeleton */}
-      {/* <div className="h-6 w-1/3 bg-gray-200 rounded-full mt-10"></div> */}
-    </header>
+    <header className="flex justify-start">{/* Header skeleton */}</header>
     {[1].map((index) => (
       <UpcomingCardSkeleton key={index} />
     ))}

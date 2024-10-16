@@ -1,9 +1,9 @@
-import React, { Suspense } from "react";
-import ResetPassword from "@/src/components/auth/reset-password/reset-password";
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
-import type { Metadata } from "next";
-import Navbar from "@/src/components/Navbar";
+import ResetPassword from "@/src/components/auth/reset-password/reset-password";
 import Footer from "@/src/components/Footer/Footer";
+import Navbar from "@/src/components/Navbar";
+import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Reset Password",

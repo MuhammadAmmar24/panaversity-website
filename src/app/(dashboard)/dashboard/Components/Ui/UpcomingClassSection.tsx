@@ -1,6 +1,6 @@
 import { UpcomingClassSectionProps } from "../../types/types";
-import UpcomingCard from "./UpcomingClassCard";
 import Error from "../Error/error_message";
+import UpcomingCard from "./UpcomingClassCard";
 
 // UpcomingClassSection component to render a section with multiple upcoming classes
 const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
@@ -9,9 +9,7 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
 }) => {
   // Handle the case where `classes` prop is missing or empty
   if (!classes || classes.length === 0) {
-    return (
-      <Error message="No upcoming classes available" />
-    );
+    return <Error message="No upcoming classes available" />;
   }
 
   return (

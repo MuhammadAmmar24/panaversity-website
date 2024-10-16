@@ -1,5 +1,5 @@
-import RegisterDialog from "../../../components/auth/register/register-dialog";
 import { Suspense } from "react";
+import RegisterDialog from "../../../components/auth/register/register-dialog";
 
 export default function RegisterModal() {
   return (

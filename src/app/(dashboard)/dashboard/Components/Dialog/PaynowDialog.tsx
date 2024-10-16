@@ -1,25 +1,18 @@
 "use client";
 
-import * as React from "react";
-import { useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { IoClose } from "react-icons/io5";
+import { useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // For the loading spinner
-
-// Props for PaymentDialog
-interface PaymentDialogProps {
-  onConfirm: (paymentMethod: string) => void; // Function to call when the user confirms payment
-  open: boolean; // State to control the dialog visibility
-  onOpenChange: (open: boolean) => void; // Function to change the dialog visibility
-}
+import { IoClose } from "react-icons/io5";
+import { PaymentDialogProps } from "../../types/types";
 
 export default function PaymentDialog({
   onConfirm,
   open,
   onOpenChange,
 }: PaymentDialogProps) {
-  const [selectedMethod, setSelectedMethod] = React.useState(""); // No default method selected
-  const [isLoading, setIsLoading] = React.useState(false); // Loading state
+  const [selectedMethod, setSelectedMethod] = useState(""); // No default method selected
+  const [isLoading, setIsLoading] = useState(false); // Loading state
 
   // Function to handle dialog close
   const handleClose = () => {
@@ -32,7 +25,6 @@ export default function PaymentDialog({
     setIsLoading(true); // Start loading state
     onConfirm(selectedMethod); // Proceed with payment confirmation
   };
-
 
   const paymentMethods = ["STRIPE"];
 
@@ -69,8 +61,9 @@ export default function PaymentDialog({
                 <div className="relative w-full">
                   <select
                     id="payment"
-                    className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${selectedMethod ? "border-accent" : "border-neutral-400"
-                      }`}
+                    className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                      selectedMethod ? "border-accent" : "border-neutral-400"
+                    }`}
                     value={selectedMethod}
                     onChange={(e) => setSelectedMethod(e.target.value)}
                     disabled={isLoading}
@@ -100,7 +93,9 @@ export default function PaymentDialog({
                   </div>
                 </div>
               ) : (
-                <p className="w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none border-accent">{paymentMethods[0]}</p> // Display Stripe directly when only one method is available
+                <p className="w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none border-accent">
+                  {paymentMethods[0]}
+                </p> // Display Stripe directly when only one method is available
               )}
             </div>
 
@@ -114,10 +109,11 @@ export default function PaymentDialog({
               <button
                 onClick={handleConfirmClick}
                 disabled={!selectedMethod || isLoading} // Disable if no payment method is selected or during loading
-                className={`bg-accent text-white px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center ${!selectedMethod && !isLoading
+                className={`bg-accent text-white px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center ${
+                  !selectedMethod && !isLoading
                     ? "cursor-not-allowed opacity-70 bg-gray-600"
                     : "bg-accent"
-                  }`}
+                }`}
               >
                 {isLoading ? (
                   <>

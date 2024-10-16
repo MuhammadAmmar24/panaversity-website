@@ -1,18 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import { Skeleton } from "@/src/components/ui/skeleton";
 import { allTeamMembers } from "@/src/constants/teams";
-import { Skeleton } from "@/src/components/ui/skeleton"
-
-
-// Define types for the social link and team member
-
-
-type TeamMember = {
-  picture: string;
-  fullName: string;
-  designation: string;
-  bio: string;
-};
+import { TeamMember } from "@/src/types/team";
+import { useState } from "react";
 
 // Component to display individual team member
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
@@ -45,18 +35,22 @@ const CardSkeleton = () => {
 
   return (
     <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
-        {/* Team Members */}
-        <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
-          <div className="flex flex-wrap justify-center -mx-4 ">
-            {allTeamMembers.slice(0, visibleMembers).map((member: TeamMember, i: number) => (
-              <div key={i} className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center ">
+      {/* Team Members */}
+      <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
+        <div className="flex flex-wrap justify-center -mx-4 ">
+          {allTeamMembers
+            .slice(0, visibleMembers)
+            .map((member: TeamMember, i: number) => (
+              <div
+                key={i}
+                className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center "
+              >
                 <TeamMemberItem member={member} />
               </div>
             ))}
-          </div>
+        </div>
 
-
-          {visibleMembers < allTeamMembers.length && (
+        {visibleMembers < allTeamMembers.length && (
           <div className="flex justify-center mt-8 mb-8">
             <button
               onClick={handleLoadMore}
@@ -66,8 +60,7 @@ const CardSkeleton = () => {
             </button>
           </div>
         )}
-
-        </div>
+      </div>
     </section>
   );
 };

@@ -1,7 +1,7 @@
+import fetchProfile from "@/src/lib/getProfile";
+import type { Metadata } from "next";
 import ProfileSettings from "../Components/Ui/ProfileSettings";
 import TopBar from "../Components/Ui/TopBar";
-import type { Metadata } from "next";
-import fetchProfile from "@/src/lib/getProfile";
 
 export const metadata: Metadata = {
   title: "Account Settings",
