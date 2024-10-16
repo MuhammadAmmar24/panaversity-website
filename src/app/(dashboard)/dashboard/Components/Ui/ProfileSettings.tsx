@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import Image from "next/image";
 import { update_student_Profile } from "@/src/app/actions/profile";
@@ -58,6 +58,18 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   });
 
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (statusMessage && !statusMessage.includes("Error")) {
+      timer = setTimeout(() => {
+        setStatusMessage(null);
+      }, 3000);
+    }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [statusMessage]);
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
