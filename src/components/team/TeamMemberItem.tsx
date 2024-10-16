@@ -10,7 +10,7 @@ const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: b
       <Image
         alt="picbg"
         className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
-        src="/team/picbg.webp"
+        src="/team/picbg.svg"
         width={500}
         height={500}
         priority={priority}
