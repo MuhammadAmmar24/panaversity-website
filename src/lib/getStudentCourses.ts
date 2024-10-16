@@ -1,6 +1,6 @@
 import {
-    CourseEnrollmentResponseSchema,
     CourseEnrollmentResponse,
+    CourseEnrollmentResponseSchema,
 } from "@/src/lib/schemas/courses";
 import { Result } from "@/src/types/types";
 
