@@ -1,13 +1,9 @@
-import React from "react";
-import FooterColumn from "./FooterColumn";
-import Newsletter from "../ui/Newsletter";
 import Image from "next/image";
-import Logo from "../../../public/logos/logo2.webp";
-import { FaLinkedinIn } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
 import { BiLogoInstagramAlt } from "react-icons/bi";
-import { FaTwitter } from "react-icons/fa";
-import { FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import Logo from "../../../public/logos/logo2.webp";
+import Newsletter from "../ui/Newsletter";
+import FooterColumn from "./FooterColumn";
 
 const Footer: React.FC = () => {
   return (
@@ -42,10 +38,8 @@ const Footer: React.FC = () => {
             title="Company"
             links={[
               { name: "About Us", href: "#about" },
-              // { name: "Our Mission", href: "/" },
               { name: "Programs", href: "/programs/flagship-program" },
               { name: "Testimonials", href: "#testimonials" },
-              // { name: "Careers", href: "/" },
             ]}
             className="lg:ml-20"
           />
@@ -55,8 +49,6 @@ const Footer: React.FC = () => {
             links={[
               { name: "Contact Us", href: "/contact" },
               { name: "Privacy Policy", href: "/privacy-policy" },
-              // { name: "Terms Conditions", href: "/" },
-              // { name: "Cookies", href: "/" },
               { name: "FAQ", href: "#faqs" },
             ]}
             className="lg:ml-20"

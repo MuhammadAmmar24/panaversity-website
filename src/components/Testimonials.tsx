@@ -1,14 +1,14 @@
-"use client"
-import React, { useRef } from "react";
+"use client";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useRef } from "react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Autoplay, Pagination } from "swiper/modules";
 import { testimonialData, testimonialList } from "@/src/constants/testimonials";
+import { Autoplay, Pagination } from "swiper/modules";
 
 import type { Swiper as SwiperType } from "swiper/types";
 
@@ -24,14 +24,17 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative">
+    <section
+      id="testimonials"
+      className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative"
+    >
       <Image
         src={"/testimonials/Element1.webp"}
         alt={""}
         width={500}
         height={500}
         loading="lazy"
-        className='absolute pl-[1rem] sm:right-[1rem] top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
+        className="absolute pl-[1rem] sm:right-[1rem] top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]"
       />
       <Image
         src={"/testimonials/Element2.webp"}
@@ -39,7 +42,7 @@ const Testimonials = () => {
         width={500}
         height={500}
         loading="lazy"
-        className='absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem] z-50'
+        className="absolute left-[0.5rem] sm:left-[1rem] lg:left-[2rem] bottom-[1rem] md:bottom-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[8rem] xl:w-[9rem] z-50"
       />
       <div className="lg:max-w-[950px] xl:max-w-[1165px] mx-auto px-4 sm:px-6 lg:-px-1">
         <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
@@ -82,7 +85,8 @@ const Testimonials = () => {
         >
           {testimonialList.flat().map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <div className="testimonial-card p-6 border rounded-[20px] shadow-md"
+              <div
+                className="testimonial-card p-6 border rounded-[20px] shadow-md"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
@@ -98,11 +102,17 @@ const Testimonials = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl font-medium font-poppins">{testimonial.name}</h3>
-                    <p className="text-sm md:text-xs mb-2">{testimonial.position}</p>
+                    <h3 className="text-xl font-medium font-poppins">
+                      {testimonial.name}
+                    </h3>
+                    <p className="text-sm md:text-xs mb-2">
+                      {testimonial.position}
+                    </p>
                   </div>
                 </div>
-                <p className="opacity-75 mb-2 text-base">{testimonial.content}</p>
+                <p className="opacity-75 mb-2 text-base">
+                  {testimonial.content}
+                </p>
               </div>
             </SwiperSlide>
           ))}

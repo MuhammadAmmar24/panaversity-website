@@ -1,12 +1,11 @@
 "use client";
+import { timelineContent } from "@/src/constants/courses";
 import {
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
   motion,
+  useScroll,
+  useTransform
 } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import { timelineContent } from "@/src/constants/courses";
 
 interface TimelineEntry {
   title: string;

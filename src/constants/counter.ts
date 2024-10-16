@@ -1,4 +1,3 @@
-// statsData.ts
 export const stats = [
   {
     number: 21000,

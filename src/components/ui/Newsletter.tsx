@@ -16,7 +16,6 @@ const Newsletter: React.FC = () => {
         />
         {/* Submit Button */}
         <button
-       
           className="bg-green-600 absolute right-0 hover:bg-green-500 text-white rounded-full p-2 transition-all"
           aria-label="Submit Email"
         >
@@ -36,7 +35,9 @@ const Newsletter: React.FC = () => {
           </svg>
         </button>
       </div>
-        <p className="mt-4 text-gray-400">We will send you daily updates about the tech.</p>
+      <p className="mt-4 text-gray-400">
+        We will send you daily updates about the tech.
+      </p>
     </div>
   );
 };

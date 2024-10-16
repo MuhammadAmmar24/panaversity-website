@@ -1,14 +1,12 @@
-import React from "react";
+import { aboutData } from "@/src/constants/about";
 import Image from "next/image";
 import logo from "../../public/logos/logoIcon.webp";
 import Counters from "./Counters";
-import { aboutData } from "@/src/constants/about"
 
 export default function About() {
   return (
     <section id="about" className="bg-white">
-      <div
-        className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
+      <div className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16">
         <div className="flex flex-col md:flex-row items-center justify-center md:gap-[2rem]">
           <div>
             <Image

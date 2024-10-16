@@ -1,13 +1,13 @@
 "use client";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Textarea } from "@/src/components/ui/textarea";
-import { Mail, MapPin, Phone } from "lucide-react";
 import { ContactSchema } from "@/src/lib/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 // Infer form types from ContactSchema
@@ -28,7 +28,6 @@ export default function ContactUs() {
 
   const onSubmit = (data: ContactFormValues) => {
     setFormStatus("Thank you for your message. We'll get back to you soon!");
-
   };
 
   return (
@@ -130,9 +129,7 @@ export default function ContactUs() {
                 Send Message
               </Button>
             </form>
-            {formStatus && (
-              <p className="mt-4 text-green-600">{formStatus}</p>
-            )}
+            {formStatus && <p className="mt-4 text-green-600">{formStatus}</p>}
           </div>
 
           <div className="bg-muted p-6 sm:p-10">

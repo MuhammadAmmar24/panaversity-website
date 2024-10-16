@@ -1,19 +1,19 @@
-import CourseSheet from "./courseSheet";
-import { Users, Calendar, Check } from "lucide-react";
-import RatingStars from "./Ratingstar";
-import Breadcrumbs from "../ui/Breadcrumbs";
+import { getCoursePrice } from "@/src/lib/coursePrice";
 import enrollmentStatus from "@/src/lib/enrollmentStatus";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
-import { getCoursePrice } from "@/src/lib/coursePrice";
 import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
-import { CourseDetailsClientProps, CourseInfoProps, LearnPointProps } from "@/src/types/courseEnrollment";
-
-
-
-
+import {
+  CourseDetailsClientProps,
+  CourseInfoProps,
+  LearnPointProps,
+} from "@/src/types/courseEnrollment";
+import { Calendar, Check, Users } from "lucide-react";
+import Breadcrumbs from "../ui/Breadcrumbs";
+import CourseSheet from "./courseSheet";
+import RatingStars from "./Ratingstar";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -21,8 +21,6 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
     <span>{text}</span>
   </div>
 );
-
-
 
 const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   <div className="flex gap-3 items-start">
@@ -33,16 +31,11 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   </div>
 );
 
-
-
-
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
   initialPrice,
   initialCurrency,
 }) => {
-
-
   // Destructure the course data
   const {
     course_name,
@@ -64,15 +57,20 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const ratingCount = 1249;
 
   const courseStatus = await enrollmentStatus(course_batch_program_id);
-  const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({ course_batch_program_id });
-  const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? { class_time_slots: [], lab_time_slots: [] };
-  const coursePriceResult = await getCoursePrice({course_batch_program_id});
-  const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? { course_batch_program_id: 0, package_id: 0, amount: 0, currency: '' };
-
-
-
-
-
+  const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
+    course_batch_program_id,
+  });
+  const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? {
+    class_time_slots: [],
+    lab_time_slots: [],
+  };
+  const coursePriceResult = await getCoursePrice({ course_batch_program_id });
+  const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? {
+    course_batch_program_id: 0,
+    package_id: 0,
+    amount: 0,
+    currency: "",
+  };
 
   return (
     <main className="overflow-x-hidden">

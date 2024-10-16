@@ -1,15 +1,7 @@
 "use client";
 
-import * as z from "zod";
-import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import ReactPhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
-import { RegisterSchema } from "@/src/lib/schemas/userschema";
-import { Input } from "@/src/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ToastAction } from "@/src/components/ui/toast";
+import { register } from "@/src/app/actions/register";
+import { Button } from "@/src/components/ui/button";
 import {
   Form,
   FormControl,
@@ -18,11 +10,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
-import { register } from "@/src/app/actions/register";
-import { useToast } from "@/src/components/ui/use-toast";
+import { Input } from "@/src/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -30,13 +20,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
+import { ToastAction } from "@/src/components/ui/toast";
+import { useToast } from "@/src/components/ui/use-toast";
 import { affiliations } from "@/src/constants/affiliation";
+import { RegisterSchema } from "@/src/lib/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import ReactPhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import * as z from "zod";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -44,11 +44,7 @@ export const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-
-
 
   // Initialize form with react-hook-form and zod schema
   const form = useForm<z.infer<typeof RegisterSchema>>({
@@ -83,10 +79,7 @@ export const RegisterForm = () => {
             title: "Signup Success",
             description: "Please Verify Email To Continue",
             action: (
-              <Link
-                href={"/verify"}
-                replace
-              >
+              <Link href={"/verify"} replace>
                 <ToastAction altText="Verify to Continue">
                   Verify Email
                 </ToastAction>
@@ -94,7 +87,6 @@ export const RegisterForm = () => {
             ),
           });
           router.replace("/verify");
-          // window.location.replace("/verify");
 
         }
         startTransition(() => {});
@@ -158,7 +150,9 @@ export const RegisterForm = () => {
                     />
                     <button
                       type="button"
-                      onClick={() => !isPending && setShowPassword((prev) => !prev)}
+                      onClick={() =>
+                        !isPending && setShowPassword((prev) => !prev)
+                      }
                       disabled={isPending}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                     >

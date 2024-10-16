@@ -1,13 +1,7 @@
 "use client";
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { useState, useTransition } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { LoginSchema } from "@/src/lib/schemas/userschema";
-import { Input } from "@/src/components/ui/input";
+import { login } from "@/src/app/actions/login";
+import { Button } from "@/src/components/ui/button";
 import {
   Form,
   FormControl,
@@ -16,24 +10,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/src/components/ui/form";
-import { Button } from "@/src/components/ui/button";
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
-import { login } from "@/src/app/actions/login";
-import { useToast } from "@/src/components/ui/use-toast";
+import { Input } from "@/src/components/ui/input";
 import { ToastAction } from "@/src/components/ui/toast";
+import { useToast } from "@/src/components/ui/use-toast";
+import { LoginSchema } from "@/src/lib/schemas/userschema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
-
-import Link from "next/link";
+import * as z from "zod";
 
 export const LoginForm = () => {
-  const searchParams = useSearchParams();
-
-
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useState(false);
@@ -67,7 +62,6 @@ export const LoginForm = () => {
           });
 
           if (data?.error === "Email not verified") {
-            // window.location.href = "/resend-link";
             router.push("/resend-link");
           }
           form.setValue("password", "");

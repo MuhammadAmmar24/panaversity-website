@@ -1,7 +1,4 @@
 import { RatingStarsProps } from "@/src/types/courseEnrollment";
-import React from "react";
-
-
 
 const RatingStars: React.FC<RatingStarsProps> = ({
   rating,

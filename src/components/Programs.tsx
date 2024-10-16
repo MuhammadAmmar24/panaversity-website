@@ -1,11 +1,10 @@
-import React from "react";
+import { programs, programsData } from "@/src/constants/programs";
 import Image from "next/image";
 import Link from "next/link";
-import { programsData, programs } from "@/src/constants/programs";
 
 const Programs = () => {
   return (
-    <section className=" lg:max-w-[930px] xl:max-w-[1120px] mx-auto px-6 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16 md:mt-5 " >
+    <section className=" lg:max-w-[930px] xl:max-w-[1120px] mx-auto px-6 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16 md:mt-5 ">
       <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
         <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
           {programsData.sectionHeading}
@@ -22,10 +21,11 @@ const Programs = () => {
             <Link href={program.link} key={program.id} passHref target="_blank">
               <div
                 className={`relative bg-[#f8f8f9] group shadow-md p-6 transform transition duration-400 hover:shadow-md
-              ${index === 2
-                    ? "sm:col-span-2 sm:mx-auto lg:col-span-1 lg:w-full"
-                    : ""
-                  }`}
+              ${
+                index === 2
+                  ? "sm:col-span-2 sm:mx-auto lg:col-span-1 lg:w-full"
+                  : ""
+              }`}
               >
                 {/* Top Border */}
                 <div className="absolute  top-0 left-0 w-full h-0.5 bg-accent transform scale-x-0 origin-center transition-transform duration-500 group-hover:scale-x-100"></div>
@@ -49,8 +49,9 @@ const Programs = () => {
                   />
                 </div>
                 <h3
-                  className={`font-poppins sm:pt-6 font-bold md:font-medium text-[20px] sm:text-[24px] text-center text-textPrimary ${program.title === "GIAIC" ? "md:-mt-4" : ""
-                    }`}
+                  className={`font-poppins sm:pt-6 font-bold md:font-medium text-[20px] sm:text-[24px] text-center text-textPrimary ${
+                    program.title === "GIAIC" ? "md:-mt-4" : ""
+                  }`}
                 >
                   {program.title}
                 </h3>

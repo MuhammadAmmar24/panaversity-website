@@ -5,8 +5,7 @@ import { user_verify } from "@/src/lib/user-verify";
 import { CourseSheetProps } from "@/src/types/courseEnrollment";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
   is_registration_open,
@@ -26,7 +25,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   async function handleClick() {
     const res = await user_verify();
     if (res?.redirectTo) {
-
       localStorage.setItem("previousPath", window.location.pathname);
       router.push(res.redirectTo);
     } else {

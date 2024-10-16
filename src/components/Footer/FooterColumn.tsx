@@ -1,5 +1,3 @@
-import React from "react";
-
 interface FooterColumnProps {
   title: string;
   links: { name: string; href: string }[];
