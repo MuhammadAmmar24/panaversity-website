@@ -1,4 +1,4 @@
-import { HeroBg } from "@/src/components/ui/heroBg";
+import { HeroBg } from "@/src/components/Hero/heroBg";
 import Link from 'next/link'
 
 export default function Hero() {
