@@ -36,6 +36,10 @@ interface Errors {
 }
 
 const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
+  const [personalInfo] = useState({
+    phone: profile?.phone || "",
+    studentId: profile?.id || "",
+  });
   const [addressInfo, setAddressInfo] = useState<AddressInfo>({
     address: profile?.student?.address || "",
     city: profile?.student?.city || "",
@@ -182,6 +186,20 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       </div>
 
       <div className="p-6 sm:p-8">
+        {/* Personal Information */}
+      <section className="mb-8">
+            <h2 className="text-xl font-semibold mb-6 text-gray-900">Personal Information</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <p className="text-gray-700 capitalize font-medium">Phone</p>
+                <p className="text-gray-800 pt-2 text-sm">+{personalInfo.phone}</p>
+              </div>
+              <div>
+                <p className="text-gray-700 capitalize font-medium">Student ID</p>
+                <p className="text-gray-800 pt-2 text-sm">{personalInfo.studentId || "-"}</p>
+              </div>
+            </div>
+          </section>
         {/* Address Information section */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-6">
@@ -199,11 +217,11 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           </div>
 
           {/* Address fields */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
               (field) => (
                 <div key={field} className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                  <label className="block text-md font-medium text-gray-700 capitalize">
                     {field}
                   </label>
                   {isEditingAddress ? (
@@ -216,13 +234,13 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
                       />
                       {errors[field] && (
-                        <p className="mt-1 text-sm text-red-600">
+                        <p className="mt-1 text-md text-red-600">
                           {errors[field]}
                         </p>
                       )}
                     </div>
                   ) : (
-                    <p className="text-gray-800">
+                    <p className="text-gray-800 text-sm">
                       {addressInfo[field] || "-"}
                     </p>
                   )}
@@ -236,7 +254,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             <div className="mt-6 flex justify-start">
               <button
                 onClick={submitChanges}
-                className="px-14 py-2 bg-accent text-white rounded-md hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150 ease-in-out"
+                className="px-14 py-2 text-sm font-medium bg-accent text-white rounded-md transition duration-150 ease-in-out"
               >
                 Save
               </button>

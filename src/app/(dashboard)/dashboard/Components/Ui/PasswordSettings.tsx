@@ -21,7 +21,7 @@ import {
   AiOutlineEdit,
   AiOutlineEye,
   AiOutlineEyeInvisible,
-  AiOutlineLoading3Quarters
+  AiOutlineLoading3Quarters,
 } from "react-icons/ai";
 import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
@@ -96,9 +96,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   };
 
   return (
-<section className="mt-8">
+    <section className="mt-8">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">Password Settings</h2>
+        <h2 className="text-xl font-semibold text-gray-900">
+          Password Settings
+        </h2>
         <button
           className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
           onClick={() => setIsOpen(!isOpen)}
@@ -121,13 +123,21 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                     <FormField
                       key={fieldName}
                       control={form.control}
-                      name={fieldName as "current_password" | "new_password" | "confirm_password"}
+                      name={
+                        fieldName as
+                          | "current_password"
+                          | "new_password"
+                          | "confirm_password"
+                      }
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="block text-sm font-medium text-gray-700 mb-1">
+                          <FormLabel className="block text-md font-medium text-gray-700 mb-1">
                             {fieldName
                               .split("_")
-                              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                              .map(
+                                (word) =>
+                                  word.charAt(0).toUpperCase() + word.slice(1)
+                              )
                               .join(" ")}
                           </FormLabel>
                           <FormControl>
@@ -149,7 +159,8 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                                     ? "text"
                                     : "password"
                                 }
-                                className="  px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"                              />
+                                className="  px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                              />
                               <button
                                 type="button"
                                 onClick={() => {
@@ -162,9 +173,12 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                                 disabled={isPending}
                                 className="absolute inset-y-0 right-0 flex items-center pr-3"
                               >
-                                {(fieldName === "current_password" && showPasswordCurrent) ||
-                                (fieldName === "new_password" && showPasswordNew) ||
-                                (fieldName === "confirm_password" && showPasswordConfirm) ? (
+                                {(fieldName === "current_password" &&
+                                  showPasswordCurrent) ||
+                                (fieldName === "new_password" &&
+                                  showPasswordNew) ||
+                                (fieldName === "confirm_password" &&
+                                  showPasswordConfirm) ? (
                                   <AiOutlineEyeInvisible className="h-5 w-5 text-gray-400" />
                                 ) : (
                                   <AiOutlineEye className="h-5 w-5 text-gray-400" />
@@ -187,7 +201,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                 <Button
                   disabled={isPending}
                   type="submit"
-                  className="px-14 py-2 bg-accent text-white rounded-md hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150 ease-in-out"
+                  className="px-12 py-2 bg-accent text-white rounded-md  transition duration-150 ease-in-out"
                 >
                   {isPending ? (
                     <>
