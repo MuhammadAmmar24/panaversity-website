@@ -44,9 +44,11 @@ export async function middleware(req: NextRequest) {
   // For protected routes, ensure user is authenticated and token is valid
   if (isProtectedRoute) {
     if (!session) {
+      
       // If no session, redirect to login
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (is_token_expired) {
+   
       // If the token is expired, attempt to refresh it using the refresh token
       const newTokens = await refreshAccessToken(old_refresh_token);
 
@@ -64,7 +66,7 @@ export async function middleware(req: NextRequest) {
           secure: process.env.NODE_ENV === "production",
         });
 
-        return response; // Allow access
+        return response;
       } else {
         // If token refresh fails, redirect to login
         return NextResponse.redirect(new URL("/login", req.url));
