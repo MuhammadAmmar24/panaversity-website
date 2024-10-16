@@ -104,9 +104,9 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <AiOutlineClose className="text-2xl" />
+            <AiOutlineClose className="text-xl" />
           ) : (
-            <AiOutlineEdit className="text-2xl" />
+            <AiOutlineEdit className="text-xl" />
           )}
         </button>
       </div>
@@ -188,15 +188,15 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                 <Button
                   disabled={isPending}
                   type="submit"
-                  className="px-4 py-2 bg-accent text-white rounded-md hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150 ease-in-out"
+                  className="px-14 py-2 bg-accent text-white rounded-md hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition duration-150 ease-in-out"
                 >
                   {isPending ? (
                     <>
                       <AiOutlineLoading3Quarters className="inline-block mr-2 h-4 w-4 animate-spin" />
-                      Saving Changes...
+                      Updating...
                     </>
                   ) : (
-                    "Save Changes"
+                    "Update "
                   )}
                 </Button>
               </div>
