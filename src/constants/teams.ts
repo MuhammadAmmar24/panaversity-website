@@ -273,7 +273,7 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Hasnain.png",
+    picture: "/team/Hasnain.webp",
     fullName: "Syed Husnain Khalid",
     designation: "AI Web Developer",
     bio: "Building seamless web applications with React.",
