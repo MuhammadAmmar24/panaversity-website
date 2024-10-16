@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import Navbar from "@/src/components/Navbar";
-import Footer from "@/src/components/Footer";
+import Footer from "@/src/components/Footer/Footer";
 
 
 

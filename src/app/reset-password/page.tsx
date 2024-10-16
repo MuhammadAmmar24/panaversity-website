@@ -3,7 +3,7 @@ import ResetPassword from "@/src/components/auth/reset-password/reset-password";
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import type { Metadata } from "next";
 import Navbar from "@/src/components/Navbar";
-import Footer from "@/src/components/Footer";
+import Footer from "@/src/components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Reset Password",

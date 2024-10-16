@@ -2,7 +2,7 @@ import Verify from "@/src/components/auth/verification/verify-user";
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Navbar from "@/src/components/Navbar";
-import Footer from "@/src/components/Footer";
+import Footer from "@/src/components/Footer/Footer";
 
 
 export const metadata: Metadata = {
