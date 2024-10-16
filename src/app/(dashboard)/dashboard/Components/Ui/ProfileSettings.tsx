@@ -187,7 +187,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-gray-900">Address Information</h2>
             <button
-              className="text-accent hover:text-accent-dark transition-colors duration-200"
+              className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
               onClick={handleAddressEdit}
             >
               {isEditingAddress ? (
