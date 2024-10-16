@@ -9,7 +9,7 @@ const Verify = () => {
   const searchParams = useSearchParams();
   const token : any = searchParams.get("token");
   const type = searchParams.get("type");
-  console.log("This is type", type);
+
 
   if (type === "email") {
     return <VerifyEmail token={token} />;

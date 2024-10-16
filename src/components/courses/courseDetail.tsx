@@ -69,7 +69,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const coursePriceResult = await getCoursePrice({course_batch_program_id});
   const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? { course_batch_program_id: 0, package_id: 0, amount: 0, currency: '' };
 
-console.log(timeSlots, "timeSlots");
+
 
 
 

@@ -4,7 +4,7 @@ import { getStudentCourses } from "./getStudentCourses";
 
 export default async function enrollmentStatus(course_batch_program_id: number,) {
     const profile: ProfileData = await fetchProfile();
-    console.log(profile, "profile");
+ 
 
     let isEnrolled = false
 

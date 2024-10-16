@@ -25,8 +25,7 @@ export const resetPassword = async (values: z.infer<typeof RecoverPasswordSchema
     });
     const res = await resetRequest.json()
   
-    console.log(resetRequest.status, resetRequest.statusText);
-    console.log(res)
+  
   
     // Handle response and status codes
     if (resetRequest.status === 404) {

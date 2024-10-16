@@ -122,6 +122,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     // Successful response parsing
     const responseData = await response.json();
+    console.log(responseData)
     revalidatePath("/dashboard");
 
     return {

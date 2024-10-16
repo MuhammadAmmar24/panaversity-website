@@ -28,7 +28,7 @@ export default function ContactUs() {
 
   const onSubmit = (data: ContactFormValues) => {
     setFormStatus("Thank you for your message. We'll get back to you soon!");
-    console.log(data); // Log the validated data
+
   };
 
   return (

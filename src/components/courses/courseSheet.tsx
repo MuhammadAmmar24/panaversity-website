@@ -27,11 +27,10 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   async function handleClick() {
     const res = await user_verify();
     if (res?.redirectTo) {
-      console.log(res.redirectTo);
+
       localStorage.setItem("previousPath", window.location.pathname);
       router.push(res.redirectTo);
     } else {
-      console.log("Opening Sheet");
       setOpen(true);
     }
   }

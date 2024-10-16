@@ -32,7 +32,7 @@ export const changePassword = async (values: z.infer<typeof PasswordUpdateSchema
       cache: "no-store",
     });
 
-    console.log(password_update_request.status)
+   
     // Handle different response statuses
     if (password_update_request.status === 403) {
       return { error: "User is not verified" };
@@ -45,7 +45,7 @@ export const changePassword = async (values: z.infer<typeof PasswordUpdateSchema
     }
 
     const data = await password_update_request.json();
-    console.log(data);
+
     return { message: data.message };
   } catch (error) {
     console.error("Fetch error:", error);
