@@ -9,7 +9,7 @@ import { TfiHelp } from "react-icons/tfi";
 import { DropdownProps } from "../../types/types";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import Error from "../Error/error_message";
-
+import { HiChevronDown } from "react-icons/hi";
 
 const Dropdown: React.FC<DropdownProps> = ({
   userName,
@@ -71,20 +71,12 @@ const Dropdown: React.FC<DropdownProps> = ({
           className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
         />
         {/* Dropdown arrow icon */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+
+        <HiChevronDown
+          className={`h-4 w-4 transform transition-transform duration-300 ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        />
       </button>
 
       {/* Dropdown content */}
@@ -131,9 +123,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               role="menuitem"
             >
               <CgProfile className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700 text-xs sm:text-sm">
-                Profile
-              </span>
+              <span className="text-gray-700 text-xs sm:text-sm">Profile</span>
             </li>
           </Link>
 
