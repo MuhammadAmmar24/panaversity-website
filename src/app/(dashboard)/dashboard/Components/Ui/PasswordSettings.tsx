@@ -99,7 +99,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
         onClick={() => setIsOpen(!isOpen)}
       >
         <h2 className="text-xl font-semibold text-black">Password Settings</h2>
-        <button className="text-accent">
+        <button className="text-accent hover:text-[#1a8e5c]">
           {isOpen ? (
             <AiOutlineCheck className="text-2xl" />
           ) : (
