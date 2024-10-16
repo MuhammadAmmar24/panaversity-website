@@ -15,7 +15,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import logo from "../../public/logos/logo.png";
+import logo from "../../public/logos/logo.webp";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -125,7 +125,7 @@ export default function Navbar() {
                 <div className="flex flex-col gap-y-4">
                   <Link href="/">
                     <Image
-                      src="/logos/logo.png"
+                      src="/logos/logo.webp"
                       alt="Logo"
                       width={500}
                       height={500}

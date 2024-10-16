@@ -2,7 +2,7 @@ import React from "react";
 import FooterColumn from "./FooterColumn";
 import Newsletter from "../ui/Newsletter";
 import Image from "next/image";
-import Logo from "../../../public/logos/logo2.png";
+import Logo from "../../../public/logos/logo2.webp";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { BiLogoInstagramAlt } from "react-icons/bi";

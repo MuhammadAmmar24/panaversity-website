@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import logo from "../../public/logos/logoIcon.png";
+import logo from "../../public/logos/logoIcon.webp";
 import Counters from "./Counters";
 import { aboutData } from "@/src/constants/about"
 
