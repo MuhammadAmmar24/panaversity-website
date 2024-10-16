@@ -1,12 +1,12 @@
-import VerificationDialog from '@/src/components/auth/verification/verify-dialog'
-import React, { Suspense } from 'react'
+import VerificationDialog from "@/src/components/auth/verification/verify-dialog";
+import { Suspense } from "react";
 
 const verification = () => {
   return (
-        <Suspense>
-            <VerificationDialog />
-        </Suspense>
-  )
-}
+    <Suspense>
+      <VerificationDialog />
+    </Suspense>
+  );
+};
 
-export default verification
+export default verification;
