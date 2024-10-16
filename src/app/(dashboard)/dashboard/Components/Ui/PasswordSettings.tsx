@@ -133,7 +133,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                               fieldName === "new_password" ? (showPasswordNew ? "text" : "password") :
                               (showPasswordConfirm ? "text" : "password")
                             }
-                            className="pl-3 pr-10 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                            className="pl-3 pr-10 border-gray-300 focus:border-accent "
                           />
                           <button
                             type="button"

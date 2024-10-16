@@ -188,7 +188,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field}>
-                    <p className="text-gray-600 font-medium capitalize">
+                    <p className="text-gray-600  font-medium capitalize">
                       {field}
                     </p>
                     {isEditingAddress ? (
@@ -198,7 +198,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-accent focus:border-accent sm:text-sm"
+                          className="mt-1 p-1 sm:p-[6px] pl-2 block w-full border border-gray-300 rounded-md shadow-sm focus:border-accent sm:text-sm"
                         />
                         {errors[field] && (
                           <p className="mt-1 text-sm text-red-600">
@@ -221,13 +221,13 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               <div className="mt-6 flex items-center justify-end space-x-3">
                 <button
                   onClick={handleCancel}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a8e5c]"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={submitChanges}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a8e5c]"
                 >
                   Save Changes
                 </button>
