@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
-import { refreshAccessToken } from "./app/actions/refresh_token";
 
 export async function middleware(req: NextRequest) {
   // Define routes
