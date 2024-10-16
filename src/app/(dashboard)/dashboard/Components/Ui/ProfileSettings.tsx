@@ -188,7 +188,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       <div className="p-6 sm:p-8">
         {/* Personal Information */}
       <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-6 text-gray-900">Personal Information</h2>
+            <h2 className="text-lg md:text-xl font-semibold mb-6 text-gray-900">Personal Information</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-700 capitalize font-medium">Phone</p>
@@ -203,7 +203,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
         {/* Address Information section */}
         <section className="mb-8">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-900">Address Information</h2>
+            <h2 className="text-lg md:text-xl font-semibold text-gray-900">Address Information</h2>
             <button
               className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
               onClick={handleAddressEdit}

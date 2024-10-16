@@ -98,7 +98,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   return (
     <section className="mt-8">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 className="text-lg md:text-xl font-semibold text-gray-900">
           Password Settings
         </h2>
         <button
