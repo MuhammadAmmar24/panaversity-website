@@ -2,9 +2,9 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { TeamMember, SocialLink } from "../../../../types/team";
+import { TeamMember, SocialLink } from "../../types/team";
 
-const TeamMemberItem = ({ member }: { member: TeamMember }) => (
+const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: boolean }) => (
   <div className="w-[280px] mt-5">
     <div className="relative flex justify-center items-center">
       <Image
@@ -13,13 +13,14 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
         src="/team/picbg.svg"
         width={500}
         height={500}
+        priority={priority}
       />
       <Image
         src={member.picture}
         alt={member.fullName}
         width={500}
         height={500}
-        priority
+        priority={priority}
         className="relative z-10 w-4/5 h-auto rounded-lg "
       />
     </div>

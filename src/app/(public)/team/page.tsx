@@ -1,6 +1,6 @@
 import React from "react";
-import TeamHeader from "@/src/app/(public)/team/components/TeamHeader";
-import TeamGrid from "@/src/app/(public)/team/components/TeamGrid";
+import TeamHeader from "@/src/components/team/TeamHeader";
+import TeamGrid from "@/src/components/team/TeamGrid";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
