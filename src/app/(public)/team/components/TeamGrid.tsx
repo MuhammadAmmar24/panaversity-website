@@ -19,7 +19,7 @@ const TeamGrid = () => {
             key={i}
             className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center"
           >
-            <TeamMemberItem member={member} />
+            <TeamMemberItem member={member} priority={i < 3}/>
           </div>
         ))}
       </div>
