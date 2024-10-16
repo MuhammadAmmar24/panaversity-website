@@ -48,7 +48,7 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Azeem.webp",
+    picture: "/team/Ameen.webp",
     fullName: "Ameen Alam",
     designation: "Multi-Cloud Solutions Architect",
     bio: "Designing scalable cloud native architectures for PIAIC and GIAIC.",
