@@ -2,19 +2,8 @@ import { useState, useEffect, useTransition } from "react";
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import {
-  GetCoursePriceResponse,
-  TimeSlotsResponse,
-} from "@/src/lib/schemas/courses";
+import { GetEnrolledProps } from "@/src/types/courseEnrollment";
 
-interface CourseSheetProps {
-  program_id: number;
-  batch_id: number;
-  course_batch_program_id: number;
-  profile_id: string;
-  timeSlots: TimeSlotsResponse;
-  coursePrice: GetCoursePriceResponse;
-}
 
 export default function GetEnrolled({
   program_id,
@@ -23,7 +12,7 @@ export default function GetEnrolled({
   profile_id,
   timeSlots,
   coursePrice,
-}: CourseSheetProps) {
+}: GetEnrolledProps) {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(null);
@@ -52,7 +41,7 @@ export default function GetEnrolled({
     .map((slot) => ({
       id: slot.id,
       timeSlotId: slot.id,
-      label: `${formatTime(slot.slot_start_time)} - ${formatTime(slot.slot_end_time)}`,
+      label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(slot.slot_end_time ?? "")}`,
     }));
 
   const handleEnroll = async () => {
@@ -76,11 +65,12 @@ export default function GetEnrolled({
         const result = await enrollNewStudentInProgramAndCourse(payload);
 
         if (result.type === "success") {
+          console.log("Enrollment successful. Redirecting to:", result.data);
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
           if (url) {
-            router.push(url);
+            // router.push(url);
           } else {
-            router.push("/dashboard");
+            // router.push("/dashboard");
           }
         } else {
           setEnrollmentError(result.message || "An error occurred during enrollment.");

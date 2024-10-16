@@ -1,26 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import GetEnrolled from "@/src/components/ui/GetEnrolled";
+import GetEnrolled from "@/src/components/courses/GetEnrolled";
 import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import { ChevronRight } from "lucide-react";
 import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
-import {
-  GetCoursePriceResponse,
-  TimeSlotsResponse,
-} from "@/src/lib/schemas/courses";
+import { CourseSheetProps } from "@/src/types/courseEnrollment";
 
-interface CourseSheetProps {
-  is_registration_open: boolean;
-  program_id: number;
-  batch_id: number;
-  course_batch_program_id: number;
-  profile_id: string;
-  isEnrolled: boolean;
-  timeSlots: TimeSlotsResponse;
-  coursePrice: GetCoursePriceResponse;
-}
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
   is_registration_open,

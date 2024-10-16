@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/src/components/Breadcrumbs";
+import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import React from "react";
 
 const TeamHeader = () => (
