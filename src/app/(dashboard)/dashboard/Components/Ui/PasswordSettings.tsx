@@ -208,7 +208,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                 )}
               </Button>
               <p className="text-sm text-yellow-500 text-center">
-                You will need to log in again after changing your password
+                Log in again after changing your password
               </p>
             </form>
           </FormProvider>
