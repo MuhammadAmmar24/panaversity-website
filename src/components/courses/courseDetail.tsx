@@ -9,13 +9,10 @@ import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
+import { CourseDetailsClientProps, CourseInfoProps, LearnPointProps } from "@/src/types/courseEnrollment";
 
 
 
-interface CourseInfoProps {
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  text: string;
-}
 
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
@@ -25,9 +22,7 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-interface LearnPointProps {
-  point: string;
-}
+
 
 const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   <div className="flex gap-3 items-start">
@@ -38,30 +33,8 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   </div>
 );
 
-export interface CourseData {
-  course_batch_program_id: number;
-  is_active: boolean;
-  is_registration_open: boolean;
-  registration_start_date: string; // ISO date string
-  registration_end_date: string; // ISO date string
-  course_id: number;
-  batch_id: number;
-  course_code: string;
-  course_name: string;
-  course_initials: string;
-  course_description: string;
-  course_outcomes: string[];
-  long_description: string;
-  pre_requisite: string[];
-  media_link: string;
-  program_id: number;
-}
 
-interface CourseDetailsClientProps {
-  courseData: CourseData;
-  initialPrice: number;
-  initialCurrency: string;
-}
+
 
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,

@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
 
-
 export default function GetEnrolled({
   program_id,
   batch_id,
@@ -18,6 +17,7 @@ export default function GetEnrolled({
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(null);
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState("STRIPE"); // Add payment method state
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -56,7 +56,7 @@ export default function GetEnrolled({
       batch_id,
       course_batch_program_id,
       class_time_slot_id: selectedTimeSlotId,
-      vendor_type: "STRIPE",
+      vendor_type: paymentMethod, // Pass the selected payment method
       package_id: enrollmentPackage,
     };
 
@@ -65,12 +65,11 @@ export default function GetEnrolled({
         const result = await enrollNewStudentInProgramAndCourse(payload);
 
         if (result.type === "success") {
-          console.log("Enrollment successful. Redirecting to:", result.data);
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
           if (url) {
-            // router.push(url);
+            router.push(url);
           } else {
-            // router.push("/dashboard");
+            router.push("/dashboard");
           }
         } else {
           setEnrollmentError(result.message || "An error occurred during enrollment.");
@@ -109,6 +108,14 @@ export default function GetEnrolled({
           placeholder="Select Time"
           disabled={!selectedDay}
         />
+        
+        <SelectField
+          label="Payment Method"
+          value={paymentMethod}
+          onChange={(e: any) => setPaymentMethod(e.target.value)}
+          options={[{ value: "STRIPE", label: "Stripe" }]} // Currently only Stripe
+          placeholder="Select Payment Method"
+        />
 
         <div className="mb-6 text-red-500">
           <span className="text-lg font-semibold">Remaining Seats: </span>
@@ -116,6 +123,8 @@ export default function GetEnrolled({
             {remainingSeats === null ? "..." : remainingSeats === 0 ? "N/A" : remainingSeats}
           </span>
         </div>
+
+        {/* Payment Method Dropdown */}
 
         <button
           className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
@@ -178,7 +187,7 @@ function SelectField({ label, value, onChange, options, placeholder, disabled = 
           >
             <path
               fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 0 010-1.414z"
               clipRule="evenodd"
             />
           </svg>
@@ -188,14 +197,8 @@ function SelectField({ label, value, onChange, options, placeholder, disabled = 
   );
 }
 
-// function formatTime(timeString: any) {
-//   const [hours, minutes] = timeString.split(":");
-//   const date = new Date(2000, 0, 1, hours, minutes);
-//   return date.toLocaleString("en-US", { hour: "numeric", minute: "numeric", hour12: true });
-// }
-
-export function formatTime(time: string): string {    
-  const date = new Date(`1970-01-01T${time}Z`);  
+export function formatTime(time: string): string {
+  const date = new Date(`1970-01-01T${time}Z`);
   const formattedTime = date.toLocaleString(undefined, {
     hour: "2-digit",
     minute: "2-digit",

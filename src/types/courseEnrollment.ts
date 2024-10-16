@@ -3,6 +3,47 @@ import {
     TimeSlotsResponse,
   } from "@/src/lib/schemas/courses";
 
+
+
+  export interface CourseData {
+    course_batch_program_id: number;
+    is_active: boolean;
+    is_registration_open: boolean;
+    registration_start_date: string; // ISO date string
+    registration_end_date: string; // ISO date string
+    course_id: number;
+    batch_id: number;
+    course_code: string;
+    course_name: string;
+    course_initials: string;
+    course_description: string;
+    course_outcomes: string[];
+    long_description: string;
+    pre_requisite: string[];
+    media_link: string;
+    program_id: number;
+  }
+
+
+  export interface CourseDetailsClientProps {
+    courseData: CourseData;
+    initialPrice: number;
+    initialCurrency: string;
+  }
+
+  
+  export interface LearnPointProps {
+    point: string;
+  }
+
+
+export interface CourseInfoProps {
+    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    text: string;
+  }
+  
+  
+
 export interface GetEnrolledProps {
     program_id: number;
     batch_id: number;
