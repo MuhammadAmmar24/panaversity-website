@@ -156,7 +156,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                                   ? "text"
                                   : "password"
                               }
-                              className="pl-3 pr-10 border-gray-300 focus:border-accent "
+                              className="pl-3 pr-10 border-gray-300 border focus:border-gray-400 "
                             />
                             <button
                               type="button"
