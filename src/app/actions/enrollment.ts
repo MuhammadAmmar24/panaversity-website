@@ -9,6 +9,7 @@ import {
   EnrollNewStudentRequestSchema,
   EnrollNewStudentResponse,
   EnrollNewStudentResponseSchema,
+  EnrollResponse,
   EnrollStudentRequest,
   EnrollStudentRequestSchema,
   EnrollStudentResponse,
@@ -77,7 +78,7 @@ export const enrollStudentInProgram = async (
 
 export const enrollNewStudentInProgramAndCourse = async (
   payload: EnrollNewStudentRequest
-): Promise<Result<EnrollNewStudentResponse>> => {
+): Promise<Result<EnrollResponse>> => {
   const validationResult = EnrollNewStudentRequestSchema.safeParse(payload);
 
   if (!validationResult.success) {
@@ -122,7 +123,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     // Successful response parsing
     const responseData = await response.json();
-    console.log(responseData)
+
     revalidatePath("/dashboard");
 
     return {
