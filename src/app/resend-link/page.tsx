@@ -1,30 +1,28 @@
-import ResendLink from "@/src/components/auth/resend-link/resendLink";
-import React, { Suspense } from "react";
-import type { Metadata } from "next";
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
-import Navbar from "@/src/components/Navbar";
+import ResendLink from "@/src/components/auth/resend-link/resendLink";
 import Footer from "@/src/components/Footer/Footer";
-
-
+import Navbar from "@/src/components/Navbar";
+import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Resend Email",
-  description: `Verify your email address to activate your Panaversity account and unlock access to cutting-edge Generative AI and cloud-native courses`
+  description: `Verify your email address to activate your Panaversity account and unlock access to cutting-edge Generative AI and cloud-native courses`,
 };
 
 const page = () => {
   return (
     <>
-    <Navbar />
-    <div className="flex justify-center items-center min-h-[85vh]">
-    <Suspense>
-      <CardWrapper headerLabel="Verify Your Email">
-        <ResendLink />
-      </CardWrapper>
-    </Suspense>
-  </div>
-  <Footer />
-  </>
+      <Navbar />
+      <div className="flex justify-center items-center min-h-[85vh]">
+        <Suspense>
+          <CardWrapper headerLabel="Verify Your Email">
+            <ResendLink />
+          </CardWrapper>
+        </Suspense>
+      </div>
+      <Footer />
+    </>
   );
 };
 
