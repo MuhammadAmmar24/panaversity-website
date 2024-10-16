@@ -23,7 +23,7 @@ import {
   AiOutlineLoading3Quarters,
   AiOutlineEdit,
   AiOutlineCheck,
-  AiOutlineClose
+  AiOutlineClose,
 } from "react-icons/ai";
 
 type VerifyEmailProps = {
@@ -35,9 +35,11 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const { toast } = useToast();
-  const [showPasswordCurrent, setShowPasswordCurrent] = useState<boolean>(false);
+  const [showPasswordCurrent, setShowPasswordCurrent] =
+    useState<boolean>(false);
   const [showPasswordNew, setShowPasswordNew] = useState<boolean>(false);
-  const [showPasswordConfirm, setShowPasswordConfirm] = useState<boolean>(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] =
+    useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof PasswordUpdateSchema>>({
@@ -95,72 +97,98 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
 
   return (
     <section className="mt-8 rounded-lg overflow-hidden">
-      <div 
+      <div
         className="py-2 flex justify-between items-center  cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
         <h2 className="text-xl font-semibold text-black">Password Settings</h2>
         <button className="text-accent hover:text-[#1a8e5c]">
           {isOpen ? (
-            <AiOutlineClose className="text-2xl" />
+            <AiOutlineClose className="text-xl text-red-500" />
           ) : (
-            <AiOutlineEdit className="text-2xl" />
+            <AiOutlineEdit className="text-xl" />
           )}
         </button>
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="md:p-6">
+        <div ref={formRef} className="py-2 md:px-24 md:py-6">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              {["current_password", "new_password", "confirm_password"].map((fieldName) => (
-                <FormField
-                  key={fieldName}
-                  control={form.control}
-                  name={fieldName as "current_password" | "new_password" | "confirm_password"}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-700 font-medium">
-                        {fieldName.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-                      </FormLabel>
-                      <FormControl>
-                        <div className="relative">
-                          <Input
-                            {...field}
-                            disabled={isPending}
-                            placeholder="******"
-                            type={
-                              fieldName === "current_password" ? (showPasswordCurrent ? "text" : "password") :
-                              fieldName === "new_password" ? (showPasswordNew ? "text" : "password") :
-                              (showPasswordConfirm ? "text" : "password")
-                            }
-                            className="pl-3 pr-10 border-gray-300 focus:border-accent "
-                          />
-                          <button
-                            type="button"
-                            onClick={() => {
-                              if (fieldName === "current_password") setShowPasswordCurrent(prev => !prev);
-                              else if (fieldName === "new_password") setShowPasswordNew(prev => !prev);
-                              else setShowPasswordConfirm(prev => !prev);
-                            }}
-                            disabled={isPending}
-                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-                          >
-                            {(fieldName === "current_password" && showPasswordCurrent) ||
-                             (fieldName === "new_password" && showPasswordNew) ||
-                             (fieldName === "confirm_password" && showPasswordConfirm) ? (
-                              <AiOutlineEyeInvisible className="w-5 h-5" />
-                            ) : (
-                              <AiOutlineEye className="w-5 h-5" />
-                            )}
-                          </button>
-                        </div>
-                      </FormControl>
-                      <FormMessage className="text-red-500 text-sm" />
-                    </FormItem>
-                  )}
-                />
-              ))}
+              {["current_password", "new_password", "confirm_password"].map(
+                (fieldName) => (
+                  <FormField
+                    key={fieldName}
+                    control={form.control}
+                    name={
+                      fieldName as
+                        | "current_password"
+                        | "new_password"
+                        | "confirm_password"
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-gray-700 font-medium">
+                          {fieldName
+                            .split("_")
+                            .map(
+                              (word) =>
+                                word.charAt(0).toUpperCase() + word.slice(1)
+                            )
+                            .join(" ")}
+                        </FormLabel>
+                        <FormControl>
+                          <div className="relative">
+                            <Input
+                              {...field}
+                              disabled={isPending}
+                              placeholder="******"
+                              type={
+                                fieldName === "current_password"
+                                  ? showPasswordCurrent
+                                    ? "text"
+                                    : "password"
+                                  : fieldName === "new_password"
+                                  ? showPasswordNew
+                                    ? "text"
+                                    : "password"
+                                  : showPasswordConfirm
+                                  ? "text"
+                                  : "password"
+                              }
+                              className="pl-3 pr-10 border-gray-300 focus:border-accent "
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (fieldName === "current_password")
+                                  setShowPasswordCurrent((prev) => !prev);
+                                else if (fieldName === "new_password")
+                                  setShowPasswordNew((prev) => !prev);
+                                else setShowPasswordConfirm((prev) => !prev);
+                              }}
+                              disabled={isPending}
+                              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                            >
+                              {(fieldName === "current_password" &&
+                                showPasswordCurrent) ||
+                              (fieldName === "new_password" &&
+                                showPasswordNew) ||
+                              (fieldName === "confirm_password" &&
+                                showPasswordConfirm) ? (
+                                <AiOutlineEyeInvisible className="w-5 h-5" />
+                              ) : (
+                                <AiOutlineEye className="w-5 h-5" />
+                              )}
+                            </button>
+                          </div>
+                        </FormControl>
+                        <FormMessage className="text-red-500 text-sm" />
+                      </FormItem>
+                    )}
+                  />
+                )
+              )}
 
               <FormError message={error} />
               <FormSuccess message={success} />
