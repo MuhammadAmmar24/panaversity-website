@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import Footer from "@/src/components/Footer";
+import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar";
 
 export const metadata: Metadata = {

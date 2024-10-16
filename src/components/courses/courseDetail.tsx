@@ -1,13 +1,18 @@
 import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
 import RatingStars from "../ui/Ratingstar";
-import Breadcrumbs from "../Breadcrumbs";
+import Breadcrumbs from "../ui/Breadcrumbs";
 import enrollmentStatus from "@/src/lib/enrollmentStatus";
+import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
+import { getCoursePrice } from "@/src/lib/coursePrice";
+import {
+  GetCoursePriceResponse,
+  TimeSlotsResponse,
+} from "@/src/lib/schemas/courses";
+import { CourseDetailsClientProps, CourseInfoProps, LearnPointProps } from "@/src/types/courseEnrollment";
 
-interface CourseInfoProps {
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
-  text: string;
-}
+
+
 
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
@@ -17,9 +22,7 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-interface LearnPointProps {
-  point: string;
-}
+
 
 const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   <div className="flex gap-3 items-start">
@@ -30,30 +33,8 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   </div>
 );
 
-export interface CourseData {
-  course_batch_program_id: number;
-  is_active: boolean;
-  is_registration_open: boolean;
-  registration_start_date: string; // ISO date string
-  registration_end_date: string; // ISO date string
-  course_id: number;
-  batch_id: number;
-  course_code: string;
-  course_name: string;
-  course_initials: string;
-  course_description: string;
-  course_outcomes: string[];
-  long_description: string;
-  pre_requisite: string[];
-  media_link: string;
-  program_id: string;
-}
 
-interface CourseDetailsClientProps {
-  courseData: CourseData;
-  initialPrice: number;
-  initialCurrency: string;
-}
+
 
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
@@ -82,7 +63,16 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const result = await enrollmentStatus(course_batch_program_id);
+  const courseStatus = await enrollmentStatus(course_batch_program_id);
+  const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({ course_batch_program_id });
+  const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? { class_time_slots: [], lab_time_slots: [] };
+  const coursePriceResult = await getCoursePrice({course_batch_program_id});
+  const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? { course_batch_program_id: 0, package_id: 0, amount: 0, currency: '' };
+
+
+
+
+
 
   return (
     <main className="overflow-x-hidden">
@@ -153,8 +143,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     program_id={program_id}
                     batch_id={batch_id}
                     course_batch_program_id={course_batch_program_id}
-                    profile_id={result.profileData.id}
-                    isEnrolled={result.isEnrolled}
+                    profile_id={courseStatus.profileData.id}
+                    isEnrolled={courseStatus.isEnrolled}
+                    timeSlots={timeSlots}
+                    coursePrice={coursePrice}
                   />
                 </div>
               </div>

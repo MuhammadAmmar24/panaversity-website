@@ -1,7 +1,7 @@
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import CoursesClient from "@/src/components/programs/courses";
 import type { Metadata } from "next";
-import Breadcrumbs from "@/src/components/Breadcrumbs";
+import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Flagship Program",

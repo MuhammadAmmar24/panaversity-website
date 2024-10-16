@@ -2,7 +2,7 @@ import EmailVerificationPending from "@/src/components/auth/verify/pendingverifi
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
 import Navbar from "@/src/components/Navbar";
-import Footer from "@/src/components/Footer";
+import Footer from "@/src/components/Footer/Footer";
 
 
 export const metadata: Metadata = {

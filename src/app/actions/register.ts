@@ -29,7 +29,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
       }),
       cache: "no-store",
     });
-    console.log(signup_request);
+  
     
     if (!signup_request || signup_request.status !== 200) {
       if (signup_request.status === 409) {

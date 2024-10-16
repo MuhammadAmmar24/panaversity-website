@@ -104,3 +104,55 @@ export type EnrollNewStudentRequest = z.infer<
 export type EnrollNewStudentResponse = z.infer<
 	typeof EnrollNewStudentResponseSchema
 >;
+
+
+export interface EnrollResponse {
+	status: string;
+	student_course: {
+	  student_program_id: number;
+	  course_batch_program_id: number;
+	  student_id: string;
+	  class_time_slot_id: number;
+	  lab_time_slot_id: number | null;
+	  student_course_status: "reserved_seat" | "active" | "expired_reservation" | "passed" | "failed" | "suspension" ; // Add other possible statuses here
+	  id: number;
+	  created_at: string; // ISO string
+	  updated_at: string; // ISO string
+	};
+	fee_voucher: {
+	  voucher: {
+		payment_date: string | null;
+		voucher_create_date: string; // ISO string
+		batch_no: number;
+		payment_provider: string | null;
+		payment_currency: string | null;
+		updated_at: string; // ISO string
+		is_valid: boolean;
+		id: number;
+		is_paid: boolean;
+		payment_amount: number;
+		created_at: string; // ISO string
+		student_course_id: number;
+		package_id: number;
+		last_date: string; // ISO string
+		vendor_id: number;
+		voucher_id: string;
+		student_id: string;
+	  };
+	  kuickpay: unknown | null;
+	  stripe: {
+		amount_after_due_date: number;
+		stripe_transaction_id: string;
+		voucher_id: number;
+		amount_within_due_date: number;
+		url_expiration_date: string; // ISO string
+		id: number;
+		updated_at: string; // ISO string
+		stripe_id: number;
+		payment_intent_id: string | null;
+		stripe_url: string;
+		created_at: string; // ISO string
+	  } | null;
+	};
+  }
+  

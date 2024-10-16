@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import Breadcrumbs from "@/src/components/Breadcrumbs";
+import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import ContactUs from "@/src/components/contact/contact";
 
 export const metadata: Metadata = {

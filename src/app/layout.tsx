@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url:siteUrl,
     images: [
       {
-        url: `${siteUrl}/logos/logoIcon.png`,
+        url: `${siteUrl}/logos/logo.png`,
         alt: "Panaversity Logo"
       },
     ],
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: "Learn Generative AI with AI-powered Panaversity.",
     images: [
       {
-        url: `${siteUrl}/logos/logoIcon.png`,
+        url: `${siteUrl}/logos/logo.png`,
       },
     ],
     site:"Panaversity: AI-Powered Online University"

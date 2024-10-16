@@ -22,8 +22,7 @@ export const updatePassword = async (values: z.infer<typeof UpdatePasswordSchema
       },
       cache: "no-store",
     });
-  
-    console.log(updatePassword.status, updatePassword.statusText);
+
   
     // Handle response and status codes
     if (updatePassword.status === 404) {
