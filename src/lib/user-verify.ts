@@ -1,5 +1,4 @@
 import { auth } from "./auth";
-import {check_token_expiry} from '@/src/lib/verify_token'
 
 export const user_verify = async () => {
 
