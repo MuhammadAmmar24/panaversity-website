@@ -1,16 +1,7 @@
+import { BreadcrumbProps } from "@/src/types/breadCrumbs";
 import { ChevronRight } from "lucide-react"; // Assuming this is your ChevronRight component
 import Link from "next/link";
 import React from "react";
-
-type BreadcrumbItem = {
-  label: string;
-  href?: string; // href is optional for the last item (current page)
-};
-
-type BreadcrumbProps = {
-  items: BreadcrumbItem[]; // Array of breadcrumb items
-  separator?: React.ReactNode; // Optional custom separator (default: ChevronRight)
-};
 
 const Breadcrumbs: React.FC<BreadcrumbProps> = ({
   items,

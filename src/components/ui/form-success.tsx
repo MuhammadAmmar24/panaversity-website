@@ -1,10 +1,6 @@
 import { CheckCircle } from "lucide-react";
 
-interface FormSuccessProps {
-  message?: string;
-}
-
-export const FormSuccess = ({ message }: FormSuccessProps) => {
+export const FormSuccess = ({ message }: {message:string|undefined}) => {
   if (!message) return null;
 
   return (

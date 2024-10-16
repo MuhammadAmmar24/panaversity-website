@@ -1,11 +1,7 @@
 import { AlertTriangleIcon } from "lucide-react";
 
-interface ErrorProps {
-  message?: string;
-}
+const Error: React.FC<{ message: string | undefined }> = ({ message }) => {
 
-const Error: React.FC<ErrorProps> = ({ message }) => {
-  // If no message is provided, don't render the component
   if (!message) return null;
 
   return (

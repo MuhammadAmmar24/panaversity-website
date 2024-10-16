@@ -26,11 +26,8 @@ import {
 import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
 
-type VerifyEmailProps = {
-  profile_email: string;
-};
 
-function PasswordSettings({ profile_email }: VerifyEmailProps) {
+function PasswordSettings({ profile_email }: {profile_email: string}) {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");

@@ -4,13 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai"; // For the loading spinner
 import { IoClose } from "react-icons/io5";
-
-// Props for PaymentDialog
-interface PaymentDialogProps {
-  onConfirm: (paymentMethod: string) => void; // Function to call when the user confirms payment
-  open: boolean; // State to control the dialog visibility
-  onOpenChange: (open: boolean) => void; // Function to change the dialog visibility
-}
+import { PaymentDialogProps } from "../../types/types";
 
 export default function PaymentDialog({
   onConfirm,
