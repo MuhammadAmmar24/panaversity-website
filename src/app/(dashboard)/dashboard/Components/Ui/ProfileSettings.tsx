@@ -197,7 +197,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                   className="text-accent transition-colors duration-200"
                   onClick={handleAddressEdit}
                 >
-                  <AiOutlineEdit className="text-2xl" />
+                  <AiOutlineEdit className="text-xl" />
                 </button>
               )}
             </div>
@@ -238,19 +238,19 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             {/* Address edit buttons */}
             {isEditingAddress && (
               <div className="mt-6 flex items-center justify-end space-x-3">
-                <button
-                  onClick={handleCancel}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] "
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={submitChanges}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] "
-                >
-                  Save Changes
-                </button>
-              </div>
+              <button
+                onClick={handleCancel}
+                className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={submitChanges}
+                className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
+              >
+                Save
+              </button>
+            </div>            
             )}
           </section>
 
