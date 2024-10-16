@@ -112,7 +112,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="py-2 md:px-24 md:py-6 ">
+        <div ref={formRef} className="py-2 xl:px-24 md:py-6 ">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {["current_password", "new_password", "confirm_password"].map(

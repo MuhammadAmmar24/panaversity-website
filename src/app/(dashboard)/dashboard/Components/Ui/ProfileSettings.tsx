@@ -161,7 +161,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl border mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="max-w-5xl xl:max-w-3xl border mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         {/* Profile header */}
         <div className=" bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col md:flex-row items-center space-x-4">
@@ -198,11 +198,11 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-5">
+            <div className="grid grid-cols-1 gap-6 xl:px-24 mt-5">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field}>
-                    <p className="text-gray-600 font-medium capitalize">
+                    <p className="text-gray-700 font-medium capitalize">
                       {field}
                     </p>
                     {isEditingAddress ? (
@@ -232,7 +232,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
             {/* Address edit buttons */}
             {isEditingAddress && (
-              <div className="mt-8 flex items-center justify-end space-x-3 sm:space-x-6">
+              <div className="mt-8 flex items-center justify-end space-x-3 sm:space-x-6 xl:px-24">
                 <button
                   onClick={handleCancel}
                   className="h-9 w-full py-1 px-4 flex justify-center items-center border border-gray-400 rounded-md shadow-sm text-gray-950 bg-gray-100 hover:bg-gray-200"
