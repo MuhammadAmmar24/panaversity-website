@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, ChangeEvent, useEffect } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
 import Image from "next/image";
@@ -120,14 +120,37 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     }
   };
 
-  const handleAddressEditToggle = () => {
-    setIsEditingAddress(!isEditingAddress);
-    if (isEditingPassword) setIsEditingPassword(false);
+  const handleAddressEdit = () => {
+    if (isEditingAddress) {
+      // If already editing, cancel the edit
+      handleCancel();
+    } else {
+      // If not editing, start editing
+      setIsEditingAddress(true);
+      if (isEditingPassword) setIsEditingPassword(false);
+    }
   };
 
-  const handlePasswordEditToggle = () => {
-    setIsEditingPassword(!isEditingPassword);
-    if (isEditingAddress) setIsEditingAddress(false);
+  const handleSaveChanges = async () => {
+    if (!validateAddress()) return;
+
+    const payload = {
+      address: addressInfo.address,
+      city: addressInfo.city,
+      country: addressInfo.country,
+      postal_code: addressInfo.postalCode,
+      is_active: profile?.student?.is_active || false,
+    };
+
+    const result = await update_student_Profile(payload);
+
+    if (result.type === "success") {
+      setErrors({ address: "", city: "", country: "", postalCode: "" });
+      setStatusMessage("Profile updated successfully.");
+      setIsEditingAddress(false);
+    } else {
+      setStatusMessage(`Error updating profile: ${result.message}`);
+    }
   };
 
   const handleCancel = () => {
@@ -165,34 +188,18 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
         <div className="py-6 px-3 sm:p-8">
           {/* Personal Information section */}
-          <section className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <p className="text-gray-600 font-medium">Phone</p>
-                <p className="text-gray-800">+{personalInfo.phone}</p>
-              </div>
-              <div>
-                <p className="text-gray-600 font-medium">Student ID</p>
-                <p className="text-gray-800">{personalInfo.studentId || "-"}</p>
-              </div>
-            </div>
-          </section>
-
           {/* Address Information section */}
           <section className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Address Information</h2>
-              <button
-                className="text-accent transition-colors duration-200"
-                onClick={handleAddressEditToggle}
-              >
-                {isEditingAddress ? (
-                  <AiOutlineCheck className="text-2xl" />
-                ) : (
+              {!isEditingAddress && (
+                <button
+                  className="text-accent transition-colors duration-200"
+                  onClick={handleAddressEdit}
+                >
                   <AiOutlineEdit className="text-2xl" />
-                )}
-              </button>
+                </button>
+              )}
             </div>
 
             {/* Address fields */}
@@ -200,7 +207,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field}>
-                    <p className="text-gray-600  font-medium capitalize">
+                    <p className="text-gray-600 font-medium capitalize">
                       {field}
                     </p>
                     {isEditingAddress ? (
@@ -233,13 +240,13 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               <div className="mt-6 flex items-center justify-end space-x-3">
                 <button
                   onClick={handleCancel}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a8e5c]"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] "
                 >
                   Cancel
                 </button>
                 <button
                   onClick={submitChanges}
-                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a8e5c]"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] "
                 >
                   Save Changes
                 </button>
