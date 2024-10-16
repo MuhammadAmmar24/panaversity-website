@@ -167,7 +167,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
               <Button
                 disabled={isPending}
                 type="submit"
-                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:[#1a8e5c]"
+                className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c]"
               >
                 {isPending ? (
                   <>
