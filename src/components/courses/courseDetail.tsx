@@ -3,6 +3,14 @@ import { Users, Calendar, Check } from "lucide-react";
 import RatingStars from "../ui/Ratingstar";
 import Breadcrumbs from "../Breadcrumbs";
 import enrollmentStatus from "@/src/lib/enrollmentStatus";
+import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
+import { getCoursePrice } from "@/src/lib/coursePrice";
+import {
+  GetCoursePriceResponse,
+  TimeSlotsResponse,
+} from "@/src/lib/schemas/courses";
+
+
 
 interface CourseInfoProps {
   icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -46,7 +54,7 @@ export interface CourseData {
   long_description: string;
   pre_requisite: string[];
   media_link: string;
-  program_id: string;
+  program_id: number;
 }
 
 interface CourseDetailsClientProps {
@@ -82,7 +90,16 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const result = await enrollmentStatus(course_batch_program_id);
+  const courseStatus = await enrollmentStatus(course_batch_program_id);
+  const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({ course_batch_program_id });
+  const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? { class_time_slots: [], lab_time_slots: [] };
+  const coursePriceResult = await getCoursePrice({course_batch_program_id});
+  const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? { course_batch_program_id: 0, package_id: 0, amount: 0, currency: '' };
+
+console.log(timeSlots, "timeSlots");
+
+
+
 
   return (
     <main className="overflow-x-hidden">
@@ -153,8 +170,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     program_id={program_id}
                     batch_id={batch_id}
                     course_batch_program_id={course_batch_program_id}
-                    profile_id={result.profileData.id}
-                    isEnrolled={result.isEnrolled}
+                    profile_id={courseStatus.profileData.id}
+                    isEnrolled={courseStatus.isEnrolled}
+                    timeSlots={timeSlots}
+                    coursePrice={coursePrice}
                   />
                 </div>
               </div>

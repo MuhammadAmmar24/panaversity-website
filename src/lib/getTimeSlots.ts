@@ -37,7 +37,7 @@ export const getTimeSlotsForCourseBatchProgram = async (
 					Accept: "application/json",
 					Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
 				},
-				next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
+				cache:'no-store'
 			}
 		);
 

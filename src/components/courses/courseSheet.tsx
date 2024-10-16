@@ -6,29 +6,36 @@ import { Sheet, SheetContent } from "@/src/components/ui/sheet";
 import { ChevronRight } from "lucide-react";
 import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
+import {
+  GetCoursePriceResponse,
+  TimeSlotsResponse,
+} from "@/src/lib/schemas/courses";
 
 interface CourseSheetProps {
-    is_registration_open: boolean;
-    program_id: string;
-    batch_id: number;
-    course_batch_program_id: number;
-    profile_id: string;
-    isEnrolled: boolean
-  }
+  is_registration_open: boolean;
+  program_id: number;
+  batch_id: number;
+  course_batch_program_id: number;
+  profile_id: string;
+  isEnrolled: boolean;
+  timeSlots: TimeSlotsResponse;
+  coursePrice: GetCoursePriceResponse;
+}
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
-    is_registration_open,
-    program_id,
-    batch_id,
-    course_batch_program_id,
-    profile_id,
-    isEnrolled
-  }) => {
+  is_registration_open,
+  program_id,
+  batch_id,
+  course_batch_program_id,
+  profile_id,
+  isEnrolled,
+  timeSlots,
+  coursePrice,
+}) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
 
   async function handleClick() {
     const res = await user_verify();
@@ -36,7 +43,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       console.log(res.redirectTo);
       localStorage.setItem("previousPath", window.location.pathname);
       router.push(res.redirectTo);
-      
     } else {
       console.log("Opening Sheet");
       setOpen(true);
@@ -62,7 +68,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
       <button
-        onClick={isEnrolled ? ()=>router.push('/dashboard') : handleClick}
+        onClick={isEnrolled ? () => router.push("/dashboard") : handleClick}
         className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
           is_registration_open
             ? "hover:bg-emerald-500"
@@ -70,7 +76,11 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         }`}
         disabled={!is_registration_open}
       >
-        {isEnrolled ? "Dashboard" : is_registration_open ? "Enroll Now" : "Registration Closed"}  
+        {isEnrolled
+          ? "Dashboard"
+          : is_registration_open
+          ? "Enroll Now"
+          : "Registration Closed"}
         <ChevronRight className="w-5 h-5 ml-2" />
       </button>
 
@@ -85,11 +95,12 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           batch_id={batch_id}
           course_batch_program_id={course_batch_program_id}
           profile_id={profile_id}
+          timeSlots={timeSlots}
+          coursePrice={coursePrice}
         />
       </SheetContent>
     </Sheet>
   );
-}
-
+};
 
 export default CourseSheet;
