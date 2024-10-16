@@ -232,7 +232,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
             {/* Address edit buttons */}
             {isEditingAddress && (
-              <div className="mt-8 flex items-center justify-end space-x-3">
+              <div className="mt-8 flex items-center justify-end space-x-3 sm:space-x-6">
                 <button
                   onClick={handleCancel}
                   className="h-9 w-full py-1 px-4 flex justify-center items-center border border-gray-400 rounded-md shadow-sm text-gray-950 bg-gray-100 hover:bg-gray-200"
