@@ -8,7 +8,7 @@ import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo"; // Import the zod schema
 import { ZodError } from "zod";
 
-const AccountSettings: React.FC<any> = ({ profile }) => {
+const ProfileSettings: React.FC<any> = ({ profile }) => {
   const [personalInfo] = useState({
     phone: profile?.phone || "",
     studentId: profile?.id || "",
@@ -30,7 +30,6 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
   });
 
   const [statusMessage, setStatusMessage] = useState<string | null>(null); // State to store success/error message
-
 
   // Handle changes to address input fields
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,7 +101,7 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
     <main className="min-h-screen flex justify-center items-center mt-8 mb-8 font-poppins">
       <section className="w-full max-w-full p-4 sm:p-6 md:p-8 bg-white rounded-lg shadow-lg">
         <h1 className="font-medium text-lg sm:text-xl md:text-2xl mb-4 text-center md:text-start">
-          Account Settings
+          Profile
         </h1>
 
         <section className="mb-6 border-2 border-gray-200 rounded-lg px-4 sm:px-6 pb-4 md:pb-4 pt-2 md:pt-4 overflow-hidden">
@@ -136,11 +135,15 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm sm:text-base">
             <div>
               <p className="text-gray-800 font-semibold">Phone</p>
-              <p className="text-gray-600">+{personalInfo.phone}</p> {/* Not editable */}
+              <p className="text-gray-600">+{personalInfo.phone}</p>{" "}
+              {/* Not editable */}
             </div>
             <div>
               <p className="text-gray-800 font-semibold">Student ID</p>
-              <p className="text-gray-600">{personalInfo.studentId || "-"}</p> {/* Not editable */}
+              <p className="text-gray-600">
+                {personalInfo.studentId || "-"}
+              </p>{" "}
+              {/* Not editable */}
             </div>
           </div>
 
@@ -245,7 +248,9 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
                     )}
                   </>
                 ) : (
-                  <p className="text-gray-600">{addressInfo.postalCode || "-"}</p>
+                  <p className="text-gray-600">
+                    {addressInfo.postalCode || "-"}
+                  </p>
                 )}
               </div>
             </div>
@@ -271,9 +276,10 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
 
         {/* Display Success/Error Message */}
         {statusMessage && (
-          <div className="text-center mt-[-0.5rem] mb-5  text-accent">{statusMessage}</div>
+          <div className="text-center mt-[-0.5rem] mb-5  text-accent">
+            {statusMessage}
+          </div>
         )}
-
 
         <PasswordSettings profile_email={profile?.email} />
       </section>
@@ -281,4 +287,4 @@ const AccountSettings: React.FC<any> = ({ profile }) => {
   );
 };
 
-export default AccountSettings;
+export default ProfileSettings;

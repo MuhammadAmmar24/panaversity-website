@@ -1,5 +1,4 @@
 import { auth } from "./auth";
-import {check_token_expiry} from '@/src/lib/verify_token'
 
 export const user_verify = async () => {
 
@@ -9,14 +8,7 @@ export const user_verify = async () => {
     return { isVerified: false, redirectTo: "/register" };
   }
   else if (session) {
+      return { isVerified: true }
+    }
 
-    const token = session?.access_token;
-    const is_token_expired = await check_token_expiry(token)
-    if(is_token_expired || is_token_expired === null){
-      return { isVerified: false, redirectTo: "/login" }
-    }
-    else {
-      return {isVerified: true }
-    }
-  }
 };

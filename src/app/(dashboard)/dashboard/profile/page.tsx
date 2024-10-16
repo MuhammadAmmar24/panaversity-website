@@ -1,4 +1,4 @@
-import AccountSettings from "../Components/Ui/AccountSettings";
+import ProfileSettings from "../Components/Ui/ProfileSettings";
 import TopBar from "../Components/Ui/TopBar";
 import type { Metadata } from "next";
 import fetchProfile from "@/src/lib/getProfile";
@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main className="flex-1 mx-3 mobileM:mx-4 xs:mx-6 sm:mr-20 sm:ml-20 overflow-hidden transition-all duration-300">
       <TopBar />
-      <AccountSettings  profile={user_data}/>
+      <ProfileSettings profile={user_data} />
     </main>
   );
 }

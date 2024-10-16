@@ -1,8 +1,8 @@
 "use client";
+import revalidateDashboard from "@/src/lib/revalidateDashboard";
 import Link from "next/link";
 import { useEffect } from "react";
 import { GoCheckCircleFill } from "react-icons/go";
-import revalidateDashboard from "@/src/lib/revalidateDashboard";
 
 const PaymentSuccess = () => {
   useEffect(() => {

@@ -1,22 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
-import Image from "next/image";
 import { Button } from "@/src/components/ui/button";
 import {
   Sheet,
-  SheetTrigger,
-  SheetContent,
   SheetClose,
+  SheetContent,
+  SheetTrigger,
 } from "@/src/components/ui/sheet";
-import logo from "../../public/logos/logo.png";
 import { navItems } from "@/src/constants/nav";
-import { usePathname } from "next/navigation";
 import { user_verify } from "@/src/lib/user-verify";
-import { useRouter } from "next/navigation";
-import { FaHome, FaSignInAlt} from "react-icons/fa";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
+import logo from "../../public/logos/logo.png";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
