@@ -3,7 +3,7 @@ import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo";
 import Image from "next/image";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineEdit} from "react-icons/ai";
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
 
@@ -161,7 +161,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl xl:max-w-3xl border mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+      <div className="max-w-5xl xl:max-w-5xl border mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
         {/* Profile header */}
         <div className=" bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col md:flex-row items-center space-x-4">
@@ -185,20 +185,22 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           {/* Personal Information section */}
           {/* Address Information section */}
           <section className="mb-8">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold">Address Information</h2>
-              {!isEditingAddress && (
-                <button
-                  className="text-gray-500 hover:text-gray-800 transition-colors duration-200"
-                  onClick={handleAddressEdit}
-                >
-                  <AiOutlineEdit className="text-xl" />
-                </button>
-              )}
-            </div>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Address Information</h2>
+          <button
+            className="text-accent transition-colors duration-200"
+            onClick={handleAddressEdit}
+          >
+            {isEditingAddress ? (
+              <AiOutlineClose className="text-2xl" />
+            ) : (
+              <AiOutlineEdit className="text-2xl" />
+            )}
+          </button>
+        </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 gap-6 xl:px-24 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6  mt-5">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field}>
@@ -232,22 +234,17 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
             {/* Address edit buttons */}
             {isEditingAddress && (
-              <div className="mt-8 flex items-center justify-end space-x-3 sm:space-x-6 xl:px-24">
-                <button
-                  onClick={handleCancel}
-                  className="h-9 w-full py-1 px-4 flex justify-center items-center border border-gray-400 rounded-md shadow-sm text-gray-950 bg-gray-100 hover:bg-gray-200"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={submitChanges}
-                  className="h-9 w-full py-1 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] flex justify-center items-center"
-                >
-                  Save
-                </button>
-              </div>
-            )}
-          </section>
+          <div className="mt-6 flex items-center justify-end space-x-3">
+            
+            <button
+              onClick={submitChanges}
+              className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-[#1a8e5c] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1a8e5c]"
+            >
+              Save Changes
+            </button>
+          </div>
+        )}
+      </section>
 
           {/* Status message */}
           {statusMessage && (

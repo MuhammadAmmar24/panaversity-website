@@ -96,12 +96,12 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
   };
 
   return (
-    <section className="mt-8 rounded-lg overflow-hidden">
+    <section className=" px-16 mt-8 rounded-lg overflow-hidden">
       <div
         className="py-2 flex justify-between items-center  cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h2 className="text-xl font-semibold text-black">Password Settings</h2>
+        <h2 className="text-xl  font-semibold text-black">Password Settings</h2>
         <button className="text-gray-500 hover:text-gray-800 transition-colors duration-200">
           {isOpen ? (
             <AiOutlineClose className="text-xl text-gray-800 " />
@@ -112,7 +112,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="py-2 xl:px-24 md:py-6 ">
+        <div ref={formRef} className="flex  py-2  md:py-6 ">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               {["current_password", "new_password", "confirm_password"].map(
