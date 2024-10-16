@@ -16,8 +16,8 @@ import {
   FormMessage,
 } from "../../ui/form";
 import { Input } from "../../ui/input";
-import { FormError } from "../../form-error";
-import { FormSuccess } from "../../form-success";
+import { FormError } from "../../ui/form-error";
+import { FormSuccess } from "../../ui/form-success";
 import "react-phone-input-2/lib/style.css";
 import { useRouter } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";

@@ -17,8 +17,8 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Button } from "@/src/components/ui/button";
-import { FormError } from "@/src/components/form-error";
-import { FormSuccess } from "@/src/components/form-success";
+import { FormError } from "@/src/components/ui/form-error";
+import { FormSuccess } from "@/src/components/ui/form-success";
 import { login } from "@/src/app/actions/login";
 import { useToast } from "@/src/components/ui/use-toast";
 import { ToastAction } from "@/src/components/ui/toast";

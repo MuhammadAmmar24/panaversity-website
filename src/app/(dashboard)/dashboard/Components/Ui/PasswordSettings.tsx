@@ -15,8 +15,8 @@ import {
   FormMessage,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
-import { FormError } from "@/src/components/form-error";
-import { FormSuccess } from "@/src/components/form-success";
+import { FormError } from "@/src/components/ui/form-error";
+import { FormSuccess } from "@/src/components/ui/form-success";
 import { changePassword } from "@/src/app/actions/change-password";
 import { signOut } from "@/src/lib/auth";
 import {

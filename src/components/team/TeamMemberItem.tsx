@@ -1,8 +1,8 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { TeamMember, SocialLink } from "../../types/team";
+import {  FaLinkedin, FaGithub } from "react-icons/fa";
 
 const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: boolean }) => (
   <div className="w-[280px] mt-5">
@@ -31,7 +31,8 @@ const TeamMemberItem = ({ member, priority }: { member: TeamMember; priority?: b
       <div className="flex justify-center items-center space-x-3 mt-3">
         {member.socialLinks.map((link: SocialLink, index: number) => (
           <Link key={index} href={link.href} target="_blank" className="text-gray-500 hover:text-gray-900">
-            <FontAwesomeIcon icon={link.icon} />
+           {link.icon === "linkedin" && <FaLinkedin />}
+           {link.icon === "github" && <FaGithub />}
           </Link>
         ))}
       </div>

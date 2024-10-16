@@ -1,6 +1,6 @@
 import CourseSheet from "./courseSheet";
 import { Users, Calendar, Check } from "lucide-react";
-import RatingStars from "../ui/Ratingstar";
+import RatingStars from "./Ratingstar";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import enrollmentStatus from "@/src/lib/enrollmentStatus";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";

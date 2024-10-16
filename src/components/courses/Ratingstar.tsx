@@ -1,10 +1,7 @@
+import { RatingStarsProps } from "@/src/types/courseEnrollment";
 import React from "react";
 
-interface RatingStarsProps {
-  rating: number; // A number between 0 and 5, including decimals
-  color?: string; // Custom color for the filled stars
-  size?: string; // Custom size for the stars (Tailwind CSS size classes or custom values)
-}
+
 
 const RatingStars: React.FC<RatingStarsProps> = ({
   rating,
