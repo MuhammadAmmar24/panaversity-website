@@ -23,6 +23,7 @@ import {
   AiOutlineLoading3Quarters,
   AiOutlineEdit,
   AiOutlineCheck,
+  AiOutlineClose
 } from "react-icons/ai";
 
 type VerifyEmailProps = {
@@ -101,7 +102,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
         <h2 className="text-xl font-semibold text-black">Password Settings</h2>
         <button className="text-accent hover:text-[#1a8e5c]">
           {isOpen ? (
-            <AiOutlineCheck className="text-2xl" />
+            <AiOutlineClose className="text-2xl" />
           ) : (
             <AiOutlineEdit className="text-2xl" />
           )}
