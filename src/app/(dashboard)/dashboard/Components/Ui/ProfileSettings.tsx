@@ -1,11 +1,11 @@
 "use client"
 import React, { useState, ChangeEvent } from "react";
 import { AiOutlineEdit, AiOutlineCheck } from "react-icons/ai";
-import PasswordSettings from "./PasswordSettings";
 import Image from "next/image";
 import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo";
 import { ZodError } from "zod";
+import PasswordSettings from "./PasswordSettings";
 
 interface Profile {
   phone?: string;
@@ -49,6 +49,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   });
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [errors, setErrors] = useState<Errors>({
     address: "",
     city: "",
@@ -107,10 +108,14 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     }
   };
 
-  const handleEditToggle = () => {
-    if (!isEditingAddress) {
-      setIsEditingAddress(true);
-    }
+  const handleAddressEditToggle = () => {
+    setIsEditingAddress(!isEditingAddress);
+    if (isEditingPassword) setIsEditingPassword(false);
+  };
+
+  const handlePasswordEditToggle = () => {
+    setIsEditingPassword(!isEditingPassword);
+    if (isEditingAddress) setIsEditingAddress(false);
   };
 
   const handleCancel = () => {
@@ -125,8 +130,9 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   };
 
   return (
-    <div className=" min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-xl overflow-hidden">
+        {/* Profile header */}
         <div className="bg-gradient-to-r from-accent to-[#1a8e5c] p-6 sm:p-8">
           <div className="flex flex-col md:flex-row items-center space-x-4">
             <Image
@@ -146,6 +152,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
         </div>
 
         <div className="py-6 px-3 sm:p-8">
+          {/* Personal Information section */}
           <section className="mb-8">
             <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -159,12 +166,14 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               </div>
             </div>
           </section>
+
+          {/* Address Information section */}
           <section className="mb-8">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Address Information</h2>
               <button
                 className="text-accent transition-colors duration-200"
-                onClick={handleEditToggle}
+                onClick={handleAddressEditToggle}
               >
                 {isEditingAddress ? (
                   <AiOutlineCheck className="text-2xl" />
@@ -174,6 +183,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               </button>
             </div>
 
+            {/* Address fields */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
@@ -188,7 +198,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                          className="mt-1 block w-full border border-gray-600 rounded-md shadow-sm focus:ring-accent focus:border-accent sm:text-sm"
                         />
                         {errors[field] && (
                           <p className="mt-1 text-sm text-red-600">
@@ -206,23 +216,26 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               )}
             </div>
 
+            {/* Address edit buttons */}
             {isEditingAddress && (
               <div className="mt-6 flex items-center justify-end space-x-3">
                 <button
                   onClick={handleCancel}
-                  className="h-9 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={submitChanges}
-                  className=" h-9 w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="h-9 w-full py-2 px-4 border border-gray-400 rounded-md shadow-sm text-white bg-accent hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Save Changes
                 </button>
               </div>
             )}
           </section>
+
+          {/* Status message */}
           {statusMessage && (
             <div
               className={`text-center p-3 rounded ${
