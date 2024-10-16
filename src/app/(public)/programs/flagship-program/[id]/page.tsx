@@ -1,12 +1,16 @@
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
-import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getCourseData } from "@/src/lib/courseData";
+import { getCoursePrice } from "@/src/lib/coursePrice";
 import type { Metadata } from "next";
 
 // Function to generate metadata dynamically
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const courseId = parseInt(params.id);  // Parse the id as a number
-  const data = await getCourseData(courseId);  // Fetch course data using the course id
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const courseId = parseInt(params.id); // Parse the id as a number
+  const data = await getCourseData(courseId); // Fetch course data using the course id
 
   if (!data || !data.data) {
     return {
@@ -42,8 +46,7 @@ export interface CourseData {
 }
 
 async function fetchCoursePrice(course_batch_program_id: number) {
-
-  const params = {course_batch_program_id: course_batch_program_id}; // Replace with actual course_batch_program_id
+  const params = { course_batch_program_id: course_batch_program_id }; // Replace with actual course_batch_program_id
 
   const result = await getCoursePrice(params);
 
@@ -61,8 +64,9 @@ const CoursePage = async ({ params }: any) => {
 
   const data = await getCourseData(c_id);
 
-
-  const { price, currency } = await fetchCoursePrice(data?.data?.course_batch_program_id);
+  const { price, currency } = await fetchCoursePrice(
+    data?.data?.course_batch_program_id
+  );
   // const courseData = await data.json();
   return (
     <CourseDetailsClient
