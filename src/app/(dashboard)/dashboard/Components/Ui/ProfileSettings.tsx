@@ -209,9 +209,9 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               onClick={handleAddressEdit}
             >
               {isEditingAddress ? (
-                <AiOutlineClose className="text-xl" />
+                <AiOutlineClose className="text-lg" />
               ) : (
-                <AiOutlineEdit className="text-xl" />
+                <AiOutlineEdit className="text-lg" />
               )}
             </button>
           </div>
@@ -254,7 +254,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             <div className="mt-6 flex justify-start">
               <button
                 onClick={submitChanges}
-                className="px-14 py-2 text-sm font-medium bg-accent text-white rounded-md transition duration-150 ease-in-out"
+                className="w-full py-2 text-sm font-medium bg-accent text-white rounded-md transition duration-150 ease-in-out"
               >
                 Save
               </button>
