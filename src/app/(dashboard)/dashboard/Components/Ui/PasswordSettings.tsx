@@ -149,8 +149,7 @@ function PasswordSettings({ profile_email }: VerifyEmailProps) {
                                     ? "text"
                                     : "password"
                                 }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
-                              />
+                                className="  px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"                              />
                               <button
                                 type="button"
                                 onClick={() => {
