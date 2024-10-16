@@ -198,7 +198,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-5">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field}>
