@@ -26,7 +26,7 @@ const Testimonials = () => {
   return (
     <section id="testimonials" className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative">
       <Image
-        src={"/testimonials/Element1.png"}
+        src={"/testimonials/Element1.webp"}
         alt={""}
         width={500}
         height={500}
@@ -34,7 +34,7 @@ const Testimonials = () => {
         className='absolute pl-[1rem] sm:right-[1rem] top-[1rem] md:top-[2rem] w-[4rem] sm:w-[5rem] md:w-[6rem] lg:w-[7rem] xl:w-[9rem]'
       />
       <Image
-        src={"/testimonials/Element2.png"}
+        src={"/testimonials/Element2.webp"}
         alt={""}
         width={500}
         height={500}

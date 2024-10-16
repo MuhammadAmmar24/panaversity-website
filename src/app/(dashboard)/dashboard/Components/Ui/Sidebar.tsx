@@ -98,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             }`}
           >
             <Image
-              src="/logos/logo.png"
+              src="/logos/logo.webp"
               alt="Logo"
               width={500}
               height={500}

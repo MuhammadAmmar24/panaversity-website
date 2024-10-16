@@ -1,6 +1,6 @@
-import Icon1 from "../../public/logos/piaic.png";
-import Icon2 from "../../public/logos/kpk.png";
-import Icon3 from "../../public/logos/goversindh.png";
+import Icon1 from "../../public/logos/piaic.webp";
+import Icon2 from "../../public/logos/kpk.webp";
+import Icon3 from "../../public/logos/goversindh.webp";
 
 export const programsData = {
   sectionHeading: "Programs",

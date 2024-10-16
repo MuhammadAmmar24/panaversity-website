@@ -7,7 +7,7 @@ export const testimonialData = {
 export const testimonialList = [
   [
     {
-      img: "/testimonials/ahmed.jpeg",
+      img: "/testimonials/ahmed.webp",
       name: "Ahmed Sheikh",
       position: "AI Visionary & Tech Entrepreneur",
       content:
@@ -21,14 +21,14 @@ export const testimonialList = [
         '"Panaversity’s AI curriculum gave me tools to build my business. The deep dive into Custom GPT and AI microservices laid the groundwork for the products we create today."',
     },
     {
-      img: "/testimonials/rasaf.jpg",
+      img: "/testimonials/rasaf.webp",
       name: "Resheph Inayat",
       position: "AI Engineer at TechInnovators Inc.",
       content:
         '"Panaversity transformed my career. The hands-on projects and mentorship advanced me from a novice to an AI engineer, allowing me to drive innovative tech solutions."',
     },
     {
-      img: "/testimonials/adam.jpeg",
+      img: "/testimonials/adam.webp",
       name: "Adam Chodhary",
       position: "Graduate Student, AI Researcher",
       content:

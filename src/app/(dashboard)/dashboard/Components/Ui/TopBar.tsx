@@ -30,7 +30,7 @@ const TopBar: React.FC = async () => {
         <Image
           width={500}
           height={500}
-          src="/logos/logo.png"
+          src="/logos/logo.webp"
           alt="Company Logo"
           className="h-14 w-auto mobileM:h-14 xs:h-14 sm:h-16 md:h-20"
           // layout="intrinsic" // Ensures image maintains its aspect ratio
