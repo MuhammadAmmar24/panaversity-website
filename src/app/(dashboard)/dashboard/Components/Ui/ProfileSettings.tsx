@@ -166,7 +166,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
         <div className=" bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col md:flex-row items-center space-x-4">
             <Image
-              src="/profile.png"
+              src="/profile.webp"
               alt="Profile"
               width={80}
               height={80}
