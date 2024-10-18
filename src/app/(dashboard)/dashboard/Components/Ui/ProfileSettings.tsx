@@ -3,7 +3,7 @@ import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo";
 import Image from "next/image";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineEdit} from "react-icons/ai";
+import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
 
@@ -165,121 +165,131 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* Profile header */}
-      <div className="bg-gray-100 p-6 sm:p-8">
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          <Image
-            src="/profile.png"
-            alt="Profile"
-            width={80}
-            height={80}
-            className="rounded-full border-2 border-gray-300"
-          />
-          <div className="text-center sm:text-left">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {profile?.full_name}
-            </h1>
-            <p className="text-gray-600">{profile?.email}</p>
+      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+        {/* Profile header */}
+        <div className="bg-gray-100 p-6 sm:p-8">
+          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <Image
+              src="/profile.png"
+              alt="Profile"
+              width={80}
+              height={80}
+              className="rounded-full border-2 border-gray-300"
+            />
+            <div className="text-center sm:text-left">
+              <h1 className="text-2xl font-bold text-gray-900">
+                {profile?.full_name}
+              </h1>
+              <p className="text-gray-600">{profile?.email}</p>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="p-6 sm:p-8">
-        {/* Personal Information */}
-      <section className="mb-8">
-            <h2 className="text-lg md:text-xl font-semibold mb-6 text-gray-900">Personal Information</h2>
+        <div className="p-6 sm:p-8">
+          {/* Personal Information */}
+          <section className="mb-8">
+            <h2 className="text-lg md:text-xl font-semibold mb-6 text-gray-900">
+              Personal Information
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p className="text-gray-700 capitalize font-medium">Phone</p>
-                <p className="text-gray-800 pt-2 text-sm">+{personalInfo.phone}</p>
+                <p className="text-gray-800 pt-2 text-sm">
+                  +{personalInfo.phone}
+                </p>
               </div>
               <div>
-                <p className="text-gray-700 capitalize font-medium">Student ID</p>
-                <p className="text-gray-800 pt-2 text-sm">{personalInfo.studentId || "-"}</p>
+                <p className="text-gray-700 capitalize font-medium">
+                  Student ID
+                </p>
+                <p className="text-gray-800 pt-2 text-sm">
+                  {personalInfo.studentId || "-"}
+                </p>
               </div>
             </div>
           </section>
-        {/* Address Information section */}
-        <section className="mb-8">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-lg md:text-xl font-semibold text-gray-900">Address Information</h2>
-            <button
-              className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
-              onClick={handleAddressEdit}
-            >
-              {isEditingAddress ? (
-                <AiOutlineClose className="text-lg" />
-              ) : (
-                <AiOutlineEdit className="text-lg" />
-              )}
-            </button>
-          </div>
-
-          {/* Address fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
-              (field) => (
-                <div key={field} className="space-y-2">
-                  <label className="block text-md font-medium text-gray-700 capitalize">
-                    {field}
-                  </label>
-                  {isEditingAddress ? (
-                    <div>
-                      <input
-                        type="text"
-                        name={field}
-                        value={addressInfo[field]}
-                        onChange={handleAddressChange}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
-                      />
-                      {errors[field] && (
-                        <p className="mt-1 text-md text-red-600">
-                          {errors[field]}
-                        </p>
-                      )}
-                    </div>
-                  ) : (
-                    <p className="text-gray-800 text-sm">
-                      {addressInfo[field] || "-"}
-                    </p>
-                  )}
-                </div>
-              )
-            )}
-          </div>
-
-          {/* Address edit buttons */}
-          {isEditingAddress && (
-            <div className="mt-6 flex justify-start">
+          {/* Address Information section */}
+          <section className="mt-8 w-full max-w-md xl:max-w-none">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-lg md:text-xl font-semibold text-gray-900">
+                Address Information
+              </h2>
               <button
-                onClick={submitChanges}
-                className="w-full py-2 text-sm font-medium bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
+                className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                onClick={handleAddressEdit}
               >
-                Save
+                {isEditingAddress ? (
+                  <AiOutlineClose className="text-lg" />
+                ) : (
+                  <AiOutlineEdit className="text-lg" />
+                )}
               </button>
             </div>
-          )}
-        </section>
 
-        {/* Status message */}
-        {statusMessage && (
-          <div
-            className={`p-4 rounded-md ${
-              statusMessage.includes("Error")
-                ? "bg-red-100 text-red-800"
-                : "bg-green-100 text-green-800"
-            }`}
-          >
-            {statusMessage}
-          </div>
-        )}
-        
-        {/* Password Settings */}
-        {profile?.email && <PasswordSettings profile_email={profile.email} />}
+            {/* Address fields */}
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-x-[4.1rem]">
+              {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
+                (field) => (
+                  <div key={field} className="space-y-2">
+                    <label className="block text-md font-medium text-gray-700 capitalize">
+                      {field}
+                    </label>
+                    {isEditingAddress ? (
+                      <div className="relative">
+                        <input
+                          type="text"
+                          name={field}
+                          value={addressInfo[field]}
+                          onChange={handleAddressChange}
+                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                        />
+                        {errors[field] && (
+                          <p className="mt-1 text-md text-red-600">
+                            {errors[field]}
+                          </p>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-gray-800 text-sm">
+                        {addressInfo[field] || "-"}
+                      </p>
+                    )}
+                  </div>
+                )
+              )}
+            </div>
+
+            {/* Address edit buttons */}
+            {isEditingAddress && (
+              <div className="mt-6 flex justify-start">
+                <button
+                  onClick={submitChanges}
+                  className="w-full xl:w-[calc(50%-2.05rem)] py-2 text-sm font-medium bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
+                >
+                  Save
+                </button>
+              </div>
+            )}
+          </section>
+
+          {/* Status message */}
+          {statusMessage && (
+            <div
+              className={`p-4 rounded-md ${
+                statusMessage.includes("Error")
+                  ? "bg-red-100 text-red-800"
+                  : "bg-green-100 text-green-800"
+              }`}
+            >
+              {statusMessage}
+            </div>
+          )}
+
+          {/* Password Settings */}
+          {profile?.email && <PasswordSettings profile_email={profile.email} />}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 
