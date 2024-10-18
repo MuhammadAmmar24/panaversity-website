@@ -66,6 +66,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       httpOnly: true,
     });
 
+    // another api call to check user verification status
     const verificationStatus = await checkUserVerification();
     return {
       success: "Authenticated!",
