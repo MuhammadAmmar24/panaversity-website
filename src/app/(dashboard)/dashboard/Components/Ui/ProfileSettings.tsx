@@ -209,7 +209,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
           </section>
           {/* Address Information section */}
-          <section className="mt-8 w-full max-w-md xl:max-w-none">
+          <section className="mt-8 w-full max-w-md lg:max-w-none">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-lg md:text-xl font-semibold text-gray-900">
                 Address Information
@@ -227,7 +227,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-x-[4.1rem]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-x-[4.1rem]">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field} className="space-y-2">

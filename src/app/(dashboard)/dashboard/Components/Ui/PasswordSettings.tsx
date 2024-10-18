@@ -93,7 +93,7 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
   };
 
   return (
-    <section className="mt-8 w-full max-w-md">
+    <section className="mt-8 w-full xl:max-w-md lg:max-w-none">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg md:text-xl font-semibold text-gray-900">
           Password Settings
