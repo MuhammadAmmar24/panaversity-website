@@ -1,8 +1,4 @@
-interface FooterColumnProps {
-  title: string;
-  links: { name: string; href: string }[];
-  className?: string; // Optional className prop
-}
+import { FooterColumnProps } from "@/src/types/footer";
 
 const FooterColumn: React.FC<FooterColumnProps> = ({
   title,

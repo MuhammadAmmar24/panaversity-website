@@ -40,7 +40,7 @@ const TopBar: React.FC = async () => {
       <Dropdown
         userName={profile.full_name}
         userEmail={profile.email}
-        userImage="/profile.png" // Placeholder for user profile image
+        userImage="/profile.webp" // Placeholder for user profile image
       />
     </header>
   );

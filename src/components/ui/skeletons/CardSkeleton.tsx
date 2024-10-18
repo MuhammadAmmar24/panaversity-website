@@ -1,16 +1,8 @@
 "use client";
 import { Skeleton } from "@/src/components/ui/skeleton";
 import { allTeamMembers } from "@/src/constants/teams";
+import { TeamMember } from "@/src/types/team";
 import { useState } from "react";
-
-// Define types for the social link and team member
-
-type TeamMember = {
-  picture: string;
-  fullName: string;
-  designation: string;
-  bio: string;
-};
 
 // Component to display individual team member
 const TeamMemberItem = ({ member }: { member: TeamMember }) => (
