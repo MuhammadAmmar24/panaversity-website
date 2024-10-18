@@ -9,7 +9,7 @@ import Navbar from "@/src/components/Navbar";
 import ProgramOverview from "@/src/components/ProgramOverview";
 import Programs from "@/src/components/Programs";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
-import Testimonials from "@/src/components/Testimonials";
+import Testimonials from "../components/Testimonials/Testimonials";
 
 export default function Home() {
   return (
