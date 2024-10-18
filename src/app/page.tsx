@@ -9,8 +9,7 @@ import Navbar from "@/src/components/Navbar";
 import ProgramOverview from "@/src/components/ProgramOverview";
 import Programs from "@/src/components/Programs";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
-import Testimonials from "@/src/components/Testimonials";
-import Testimonials2 from "../components/Testimonials/Testimonials";
+import Testimonials from "../components/Testimonials/Testimonials";
 
 export default function Home() {
   return (
@@ -23,7 +22,6 @@ export default function Home() {
       <About />
       <Programs />
       <Testimonials />
-      <Testimonials2 />
       <Faq />
       <CTAsection />
       <ScrollToTopButton />
