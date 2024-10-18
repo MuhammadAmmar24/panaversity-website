@@ -254,7 +254,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             <div className="mt-6 flex justify-start">
               <button
                 onClick={submitChanges}
-                className="w-full py-2 text-sm font-medium bg-accent text-white rounded-md transition duration-150 ease-in-out"
+                className="w-full py-2 text-sm font-medium bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
               >
                 Save
               </button>

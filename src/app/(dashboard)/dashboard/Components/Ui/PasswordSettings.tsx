@@ -93,7 +93,7 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
   };
 
   return (
-    <section className="mt-8">
+    <section className="mt-8 w-full max-w-md">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg md:text-xl font-semibold text-gray-900">
           Password Settings
@@ -114,20 +114,15 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
         <div ref={formRef} className="mt-4">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1  gap-6">
-                {["current_password", "new_password", "confirm_password"].map(
+              <div className="space-y-6">
+                {(["current_password", "new_password", "confirm_password"]as const).map(
                   (fieldName) => (
                     <FormField
                       key={fieldName}
                       control={form.control}
-                      name={
-                        fieldName as
-                          | "current_password"
-                          | "new_password"
-                          | "confirm_password"
-                      }
+                      name={fieldName}
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="text-left">
                           <FormLabel className="block text-md font-medium text-gray-700 mb-1">
                             {fieldName
                               .split("_")
@@ -156,7 +151,7 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
                                     ? "text"
                                     : "password"
                                 }
-                                className="  px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
                               />
                               <button
                                 type="button"
@@ -194,11 +189,11 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
               <FormError message={error} />
               <FormSuccess message={success} />
 
-              <div className="mt-6 flex justify-start">
+              <div className="mt-6">
                 <Button
                   disabled={isPending}
                   type="submit"
-                  className="w-full py-2 bg-accent text-white rounded-md  transition duration-150 ease-in-out"
+                  className="w-full py-2 bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
                 >
                   {isPending ? (
                     <>
@@ -206,14 +201,14 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
                       Updating...
                     </>
                   ) : (
-                    "Update "
+                    "Update"
                   )}
                 </Button>
               </div>
             </form>
           </FormProvider>
-          <p className="mt-4 text-sm text-yellow-600">
-            You will need to log in again after changing your password
+          <p className="mt-4 text-sm text-orange-300">
+            Log in again after changing your password
           </p>
         </div>
       )}
