@@ -32,7 +32,7 @@ export default function ContactUs() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="max-w-4xl mx-auto mt-[5rem] px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto my-[5rem] px-4 sm:px-6 lg:px-8">
         <div className="bg-card shadow-lg rounded-xl overflow-hidden">
           <div className="p-6 sm:p-10">
             <h2 className="text-3xl font-semibold mb-6">Get in Touch</h2>
@@ -47,8 +47,8 @@ export default function ContactUs() {
                     placeholder="Your Name"
                     className={`${
                       errors.name
-                        ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "focus:ring-primary focus:border-primary"
+                        ? "border-red-500  focus:border-red-500"
+                        : "focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
                     }`}
                   />
                   {errors.name && (
@@ -68,8 +68,8 @@ export default function ContactUs() {
                     placeholder="your@email.com"
                     className={`${
                       errors.email
-                        ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                        : "focus:ring-primary focus:border-primary"
+                        ? "border-red-500  focus:border-red-500"
+                        : "focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
                     }`}
                   />
                   {errors.email && (
@@ -90,7 +90,7 @@ export default function ContactUs() {
                   className={`${
                     errors.subject
                       ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "focus:ring-primary focus:border-primary"
+                      : " focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
                   }`}
                 />
                 {errors.subject && (
@@ -109,8 +109,8 @@ export default function ContactUs() {
                   placeholder="Your message"
                   className={`h-32 ${
                     errors.message
-                      ? "border-red-500 focus:ring-red-500 focus:border-red-500"
-                      : "focus:ring-primary focus:border-primary"
+                      ? "border-red-500  focus:border-red-500"
+                      : " focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
                   }`}
                 />
                 {errors.message && (

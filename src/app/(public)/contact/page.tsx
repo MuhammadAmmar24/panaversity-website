@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Courses() {
   return (
-    <section className="light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
+    <section className=" bg-background  text-zinc-900  overflow-x-hidden">
       <div className="w-full ">
         {/* program header */}
         <div className="flex justify-center items-center bg-teamBg bg-cover bg-center">
