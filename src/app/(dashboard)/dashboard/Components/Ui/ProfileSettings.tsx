@@ -164,17 +164,17 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className=" mx-auto  py-8">
+      <div className=" mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         {/* Profile header */}
         <div className="bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Image
-              src="/profile.png"
-              alt="Profile"
+              src="/profile.webp"
+              alt="Profile image"
               width={80}
               height={80}
-              className="rounded-full border-2 border-gray-300"
+              className="rounded-full w-20 h-20 object-cover border-2 border-gray-300"
             />
             <div className="text-center sm:text-left">
               <h1 className="text-2xl font-bold text-gray-900">
@@ -187,11 +187,11 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
         <div className="p-6 sm:p-8">
           {/* Personal Information */}
-          <section className="mb-8">
-            <h2 className="text-lg md:text-xl font-semibold mb-6 text-gray-900">
+          <section className="mb-8 w-full border-b pb-6">
+            <h2 className="text-lg leading-6 pr-4 mobileM:pr-0 md:text-xl font-semibold mb-6 text-gray-900">
               Personal Information
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:gap-x-16">
               <div>
                 <p className="text-gray-700 capitalize font-medium">Phone</p>
                 <p className="text-gray-800 pt-2 text-sm">
@@ -209,9 +209,9 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
           </section>
           {/* Address Information section */}
-          <section className="mt-8 w-full max-w-md lg:max-w-none">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-lg md:text-xl font-semibold text-gray-900">
+          <section className="mt-8 w-full  ">
+            <div className="flex justify-between items-center gap-x-0.5 mobileM:gap-x-0 mb-6">
+              <h2 className="text-lg leading-6 md:text-xl font-semibold text-gray-900">
                 Address Information
               </h2>
               <button
@@ -227,7 +227,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-x-[4.1rem]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-x-16">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field} className="space-y-2">
@@ -241,7 +241,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
                         />
                         {errors[field] && (
                           <p className="mt-1 text-md text-red-600">
@@ -261,7 +261,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
             {/* Address edit buttons */}
             {isEditingAddress && (
-              <div className="mt-6 flex justify-start">
+              <div className="mt-8 flex justify-start">
                 <button
                   onClick={submitChanges}
                   className="w-full xl:w-[calc(50%-2.05rem)] py-2 text-sm font-medium bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"

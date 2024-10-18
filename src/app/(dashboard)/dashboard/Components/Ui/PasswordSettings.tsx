@@ -93,9 +93,9 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
   };
 
   return (
-    <section className="mt-8 w-full xl:max-w-md lg:max-w-none">
+    <section className="mt-8 w-full xl:w-1/2 xl:pr-8 sm:py-4 ">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg md:text-xl font-semibold text-gray-900">
+        <h2 className="text-lg pr-5 mobileM:pr-0 leading-6 md:text-xl font-semibold text-gray-900">
           Password Settings
         </h2>
         <button
@@ -151,7 +151,7 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
                                     ? "text"
                                     : "password"
                                 }
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                                className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
                               />
                               <button
                                 type="button"
@@ -189,11 +189,11 @@ function PasswordSettings({ profile_email }: {profile_email: string}) {
               <FormError message={error} />
               <FormSuccess message={success} />
 
-              <div className="mt-6">
+              <div className="">
                 <Button
                   disabled={isPending}
                   type="submit"
-                  className="w-full py-2 bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
+                  className="w-full mt-2 py-2 bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
                 >
                   {isPending ? (
                     <>
