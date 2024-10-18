@@ -6,6 +6,7 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
+import { Input } from "@/src/components/ui/input";
 
 interface Profile {
   phone?: string;
@@ -236,12 +237,12 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                     </label>
                     {isEditingAddress ? (
                       <div className="relative">
-                        <input
+                        <Input
                           type="text"
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-transparent transition duration-150 ease-in-out"
+                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
                         />
                         {errors[field] && (
                           <p className="mt-1 text-md text-red-600">
