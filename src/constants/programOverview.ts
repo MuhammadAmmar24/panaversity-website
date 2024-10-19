@@ -8,15 +8,15 @@ export const programOverviewData = {
 
 export const features = [
   {
-    title: "Comprehensive Curriculum",
+    title: "Core Curriculum",
     description:
-      "Explore Generative AI, Cloud Native Computing, and Physical AI with our experts.",
+      "Learn Generative AI, Cloud Native Computing, and Physical AI with our experts.",
     icon: "/images/icons8-clock-100.png",
     bgColor: "#FA7F27",
     iconSize: { width: 24, height: 24 },
   },
   {
-    title: "Cutting-Edge Technology",
+    title: "Next-Gen Tech",
     description:
       "Stay ahead with hands-on experience using the latest AI tools and platforms.",
     icon: "/images/icons8-light-bulb-96.png",
