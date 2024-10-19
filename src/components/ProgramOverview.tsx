@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function ProgramOverview() {
   return (
-    <section className=" px-2 sm:px-6 xl:px-0  relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[11rem] z-10  mb-[-3rem] pb-[4rem]">
+    <section className=" px-2 sm:px-6 xl:px-0  relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[12rem] z-10  mb-[-3rem] pb-[4rem]">
       <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col gap-y-0 xs:gap-y-0 lg:gap-y-12 xl:flex-row items-center justify-between mb-[1rem]">
         {/* Left Section: Text Content */}
         <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
@@ -35,7 +35,7 @@ export default function ProgramOverview() {
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-0 mt-[-3rem] md:mt-[2rem] lg:-mt-[3rem]">
+        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-0 mt-[-3rem] md:mt-[2rem] lg:-mt-[4rem]">
           {features.map((feature: any, index: any) => (
             <div
               key={index}
