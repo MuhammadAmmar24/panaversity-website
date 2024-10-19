@@ -10,7 +10,7 @@ export const features = [
   {
     title: "Comprehensive Curriculum",
     description:
-      "Explore Generative AI, Cloud Native Computing, and Physical AI with expert guidance.",
+      "Explore Generative AI, Cloud Native Computing, and Physical AI with our experts.",
     icon: "/images/icons8-clock-100.png",
     bgColor: "#FA7F27",
     iconSize: { width: 24, height: 24 },
