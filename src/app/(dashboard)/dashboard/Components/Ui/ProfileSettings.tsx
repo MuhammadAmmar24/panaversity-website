@@ -131,27 +131,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     }
   };
 
-  const handleSaveChanges = async () => {
-    if (!validateAddress()) return;
-
-    const payload = {
-      address: addressInfo.address,
-      city: addressInfo.city,
-      country: addressInfo.country,
-      postal_code: addressInfo.postalCode,
-      is_active: profile?.student?.is_active || false,
-    };
-
-    const result = await update_student_Profile(payload);
-
-    if (result.type === "success") {
-      setErrors({ address: "", city: "", country: "", postalCode: "" });
-      setStatusMessage("Profile updated successfully.");
-      setIsEditingAddress(false);
-    } else {
-      setStatusMessage(`Error updating profile: ${result.message}`);
-    }
-  };
+ 
 
   const handleCancel = () => {
     setAddressInfo({
