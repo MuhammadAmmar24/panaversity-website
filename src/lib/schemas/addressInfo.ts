@@ -3,8 +3,7 @@ import * as z from "zod";
 export const addressSchema = z.object({
     address: z
       .string()
-      .min(1, "Address is required")
-      .regex(/^[A-Za-z\s]+$/, "Address should only contain letters and spaces"),
+      .min(1, "Address is required"),
     city: z
       .string()
       .min(1, "City is required")

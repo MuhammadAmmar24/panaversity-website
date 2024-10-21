@@ -256,7 +256,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           {/* Status message */}
           {statusMessage && (
             <div
-              className={`p-4 rounded-md ${
+              className={`p-4 mt-6 rounded-md ${
                 statusMessage.includes("Error")
                   ? "bg-red-100 text-red-800"
                   : "bg-green-100 text-green-800"
