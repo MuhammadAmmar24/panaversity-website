@@ -31,7 +31,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       }
     );
 
-    console.log(response.status);
+ 
 
     if (!response.ok) {
       const errorData = await response.json();
