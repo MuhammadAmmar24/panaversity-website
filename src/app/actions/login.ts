@@ -68,9 +68,6 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       httpOnly: true,
     });
 
-  
-  
-
     return {
       success: "Authenticated!",
       message: "Welcome!",
