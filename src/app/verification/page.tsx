@@ -1,6 +1,6 @@
 import Verify from "@/src/components/auth/verification/verify-user";
 import Footer from "@/src/components/Footer/Footer";
-import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

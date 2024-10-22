@@ -1,6 +1,6 @@
 import EmailVerificationPending from "@/src/components/auth/verify/pendingverification";
 import Footer from "@/src/components/Footer/Footer";
-import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

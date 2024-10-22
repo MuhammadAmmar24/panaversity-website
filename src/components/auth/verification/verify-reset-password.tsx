@@ -1,12 +1,10 @@
 "use client";
+import { verify } from "@/src/app/actions/verify";
+import UpdatePassword from "@/src/components/auth/update-password/update-password";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import { verify } from "@/src/app/actions/verify";
-import { useToast } from "@/src/components/ui/use-toast";
-import Link from "next/link";
-import { user_verify } from "@/src/lib/user-verify";
-import { useRouter } from "next/navigation";
-import UpdatePassword from "@/src/components/auth/update-password/update-password";
 
 type VerifyEmailProps = {
   token: string;
@@ -19,24 +17,7 @@ const VerifyResetPassword: React.FC<VerifyEmailProps> = ({ token }) => {
 
   const router = useRouter();
 
-  const handleClick = async () => {
-    try {
-      setIsLoading(true);
 
-      const res = await user_verify();
-
-      if (res?.redirectTo) {
-        router.push("/login");
-      } else {
-        router.push("/programs/flagship-program");
-      }
-    } catch (error) {
-      console.error("Verification failed", error);
-      setError("Verification failed. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   useEffect(() => {
     const verifyToken = async () => {

@@ -5,7 +5,7 @@ import Faq from "../components/Faq/Faq";
 import Footer from "@/src/components/Footer/Footer";
 import Hero from "@/src/components/Hero/Hero";
 import Video from "@/src/components/Hero/Video";
-import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar/Navbar";
 import ProgramOverview from "@/src/components/ProgramOverview";
 import Programs from "@/src/components/Programs";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";

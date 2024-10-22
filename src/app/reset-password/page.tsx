@@ -1,7 +1,7 @@
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import ResetPassword from "@/src/components/auth/reset-password/reset-password";
 import Footer from "@/src/components/Footer/Footer";
-import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
