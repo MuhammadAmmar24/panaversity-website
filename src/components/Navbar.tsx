@@ -1,5 +1,4 @@
 "use client";
-
 import { Button } from "@/src/components/ui/button";
 import {
   Sheet,
@@ -11,7 +10,7 @@ import { navItems } from "@/src/constants/nav";
 import { user_verify } from "@/src/lib/user-verify";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
@@ -22,7 +21,7 @@ export default function Navbar() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [IsLoggedIn, setIsLoggedIn] = useState(false);
   const pathName = usePathname();
-  const router = useRouter();
+
 
   useEffect(() => {
     async function checkUserStatus() {

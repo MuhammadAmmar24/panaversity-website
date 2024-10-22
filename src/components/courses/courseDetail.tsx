@@ -14,6 +14,7 @@ import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
+import { cookies } from "next/headers";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -71,6 +72,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     amount: 0,
     currency: "",
   };
+
+  const isLoggedIn = cookies().get("user_data") !== undefined;
+
+  console.log(isLoggedIn, "dfadf");
 
   return (
     <main className="overflow-x-hidden">
@@ -145,6 +150,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isEnrolled={courseStatus.isEnrolled}
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
+                    isLoggedIn={isLoggedIn ? true : false}
                   />
                 </div>
               </div>

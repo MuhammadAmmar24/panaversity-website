@@ -1,7 +1,6 @@
 "use client";
 import GetEnrolled from "@/src/components/courses/GetEnrolled";
 import { Sheet, SheetContent } from "@/src/components/ui/sheet";
-import { user_verify } from "@/src/lib/user-verify";
 import { CourseSheetProps } from "@/src/types/courseEnrollment";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -16,6 +15,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   isEnrolled,
   timeSlots,
   coursePrice,
+  isLoggedIn,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
@@ -23,10 +23,10 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const router = useRouter();
 
   async function handleClick() {
-    const res = await user_verify();
-    if (res?.redirectTo) {
+ 
+    if (!isLoggedIn) {
       localStorage.setItem("previousPath", window.location.pathname);
-      router.push(res.redirectTo);
+      router.push('/register');
     } else {
       setOpen(true);
     }

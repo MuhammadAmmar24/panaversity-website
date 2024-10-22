@@ -64,6 +64,7 @@ export interface CourseSheetProps {
     isEnrolled: boolean;
     timeSlots: TimeSlotsResponse;
     coursePrice: GetCoursePriceResponse;
+    isLoggedIn: boolean;
   }
 
   export interface RatingStarsProps {
