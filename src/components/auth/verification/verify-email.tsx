@@ -141,7 +141,7 @@ const VerifiedComponent = () => (
       href={"/login"}
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
-      Get Started
+      Login
     </Link>
   </div>
 );
