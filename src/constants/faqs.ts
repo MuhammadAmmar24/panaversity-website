@@ -28,10 +28,10 @@ export const faqData: FAQItem[] = [
     question: "What is the structure of the program?",
     answer: "The program is divided into 21 months, covering foundational and advanced levels across 8 courses. Each course focuses on specific skills in AI and cloud technologies.",
   },
-  {
-    question: "How much does the program cost?",
-    answer: "The tuition fee is $29.95 per course, with payments due every three months.",
-  },
+  // {
+  //   question: "How much does the program cost?",
+  //   answer: "The tuition fee is $29.95 per course, with payments due every three months.",
+  // },
   {
     question: "Are there any hands-on projects?",
     answer: "Yes, the program includes real-world projects and a capstone project in the final course, allowing you to apply your skills to practical challenges.",

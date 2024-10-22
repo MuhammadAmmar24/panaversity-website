@@ -184,19 +184,16 @@ export const LoginForm = () => {
           </Button>
         )}
 
-        <Button
-          size="sm"
-          variant="link"
-          asChild
-          className="w-full text-textPrimary"
+<p
+          className="w-full text-textPrimary text-center text-xs font-medium"
         >
+            Don't have an account?&nbsp;&nbsp;
           <Link href="/register" replace className="group">
-            Don't have an account?&nbsp;
-            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
+            <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Register
             </span>
           </Link>
-        </Button>
+        </p>
       </form>
     </Form>
   );

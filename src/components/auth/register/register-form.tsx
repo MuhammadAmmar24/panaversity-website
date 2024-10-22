@@ -52,6 +52,7 @@ export const RegisterForm = () => {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
       fullname: "",
       phone: "",
       affiliation: "None",
@@ -87,7 +88,6 @@ export const RegisterForm = () => {
             ),
           });
           router.replace("/verify");
-
         }
         startTransition(() => {});
       });
@@ -176,6 +176,43 @@ export const RegisterForm = () => {
           />
           <FormField
             control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      {...field}
+                      id="confirmPassword"
+                      disabled={isPending}
+                      placeholder="******"
+                      type={showPassword ? "text" : "password"}
+                      autoComplete="confirmPassword"
+                      className="pl-3 pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        !isPending && setShowPassword((prev) => !prev)
+                      }
+                      disabled={isPending}
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                      ) : (
+                        <AiOutlineEye className="w-5 h-5" />
+                      )}
+                    </button>
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="phone"
             render={({ field }) => (
               <FormItem>
@@ -203,6 +240,7 @@ export const RegisterForm = () => {
           <FormField
             control={form.control}
             name="affiliation"
+
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Affiliation</FormLabel>
@@ -210,6 +248,7 @@ export const RegisterForm = () => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                   disabled={isPending}
+                                    
                 >
                   <FormControl>
                     <SelectTrigger
@@ -219,10 +258,10 @@ export const RegisterForm = () => {
                           : ""
                       }
                     >
-                      <SelectValue placeholder="The Student’s affiliation" />
+                      <SelectValue placeholder="The Student&#39;s affiliation" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
+                  <SelectContent className="focus:border-none focus:ring-0">
                     {affiliations.map((affiliation, index) => (
                       <SelectItem
                         key={index}
@@ -257,19 +296,14 @@ export const RegisterForm = () => {
             )}
           </Button>
         )}
-        <Button
-          size="sm"
-          variant="link"
-          asChild
-          className="w-full text-textPrimary"
-        >
+        <p className="w-full text-textPrimary text-center text-xs font-medium">
+          Already have an account?&nbsp;&nbsp;
           <Link href="/login" replace className="group">
-            Already have an account?&nbsp;
-            <span className="group-hover:underline text-accent underline-offset-4 transition-colors duration-200">
+            <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Login
             </span>
           </Link>
-        </Button>
+        </p>
       </form>
     </Form>
   );

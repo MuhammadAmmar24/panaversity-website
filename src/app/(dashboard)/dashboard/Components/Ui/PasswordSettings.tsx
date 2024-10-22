@@ -92,9 +92,9 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
   };
 
   return (
-    <section className="mt-8 w-full xl:w-1/2 xl:pr-8 sm:py-4 ">
+    <section className="mt-8 w-full sm:py-4 ">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg pr-5 mobileM:pr-0 leading-6 md:text-xl font-semibold text-gray-900">
+        <h2 className="text-lg pr-5 xl:pr-8 mobileM:pr-0 leading-6 md:text-xl font-semibold text-gray-900">
           Password Settings
         </h2>
         <button
@@ -110,7 +110,7 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
       </div>
 
       {isOpen && (
-        <div ref={formRef} className="mt-4">
+        <div ref={formRef} className="mt-4 xl:w-1/2 xl:pr-8">
           <FormProvider {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="space-y-6">
