@@ -11,7 +11,7 @@ export default function Navbar() {
 
   const isCookie = cookies().get("user_data") !== undefined;
 
-  console.log(isCookie, "isCookie Cookie Navbae");
+
 
   return (
     <ScrollHandler>
