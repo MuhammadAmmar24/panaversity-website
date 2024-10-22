@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             links={[
               { name: "Contact Us", href: "/contact" },
               { name: "Privacy Policy", href: "/privacy-policy" },
-              { name: "FAQ", href: "/#faqs" },
+              { name: "FAQs", href: "/#faqs" },
             ]}
             className="lg:ml-20"
           />
