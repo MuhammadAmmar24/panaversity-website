@@ -1,6 +1,5 @@
 "use server";
 
-import { checkUserVerification } from "@/src/app/actions/profile";
 import { LoginSchema } from "@/src/lib/schemas/userschema";
 import { cookies } from "next/headers";
 import * as z from "zod";

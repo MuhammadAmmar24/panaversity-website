@@ -75,7 +75,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   const isLoggedIn = cookies().get("user_data") !== undefined;
 
-  console.log(isLoggedIn, "dfadf");
+  console.log(isLoggedIn, "isLoggedIn Cookie");
 
   return (
     <main className="overflow-x-hidden">

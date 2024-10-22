@@ -79,10 +79,10 @@ export const LoginForm = () => {
           // Handle redirection logic
           const previousPath = localStorage.getItem("previousPath");
           if (previousPath) {
-            window.location.href = previousPath; // Redirect to previous path
-            localStorage.removeItem("previousPath"); // Clear previous path
+            router.back(); 
+            localStorage.removeItem("previousPath"); 
           } else {
-            window.location.href = "/dashboard"; // Default redirect
+            window.location.href = "/dashboard"; 
           }
         }
       })

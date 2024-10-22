@@ -1,7 +1,7 @@
 import { CardWrapper } from "@/src/components/auth/card-wrapper";
 import ResendLink from "@/src/components/auth/resend-link/resendLink";
 import Footer from "@/src/components/Footer/Footer";
-import Navbar from "@/src/components/Navbar";
+import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 

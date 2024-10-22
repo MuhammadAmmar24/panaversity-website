@@ -1,10 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
-import { ImCancelCircle } from "react-icons/im";
 import { verify } from "@/src/app/actions/verify";
 import Link from "next/link";
-import { user_verify } from "@/src/lib/user-verify";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { ImCancelCircle } from "react-icons/im";
 
 type VerifyEmailProps = {
   token: string;
