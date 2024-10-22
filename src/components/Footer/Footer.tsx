@@ -37,9 +37,9 @@ const Footer: React.FC = () => {
           <FooterColumn
             title="Company"
             links={[
-              { name: "About Us", href: "#about" },
+              { name: "About Us", href: "/#about" },
               { name: "Programs", href: "/programs/flagship-program" },
-              { name: "Testimonials", href: "#testimonials" },
+              { name: "Testimonials", href: "/#testimonials" },
             ]}
             className="lg:ml-20"
           />
@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
             links={[
               { name: "Contact Us", href: "/contact" },
               { name: "Privacy Policy", href: "/privacy-policy" },
-              { name: "FAQ", href: "#faqs" },
+              { name: "FAQ", href: "/#faqs" },
             ]}
             className="lg:ml-20"
           />
