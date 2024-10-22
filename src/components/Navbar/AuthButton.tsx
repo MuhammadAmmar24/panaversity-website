@@ -15,26 +15,14 @@ type AuthButtonProps = {
 
 export function AuthButton({ isCookie }: AuthButtonProps) {
   const [IsLoggedIn, setIsLoggedIn] = useState(false);
-  const [loading, setLoading] = useState(true); // Loading state to handle async status check
-  const router = useRouter();
-
-  // const handleClick = () => {
-  //   if (IsLoggedIn) {
-  //     router.push("/dashboard");
-  //   } else {
-  //     router.push("/register");
-  //   }
-  // };
 
   useEffect(() => {
     async function checkUserStatus() {
-     
-
+  
       setIsLoggedIn(isCookie);
-      setLoading(false); // Set loading to false after status is checked
     }
     checkUserStatus();
-  }, []);
+  }, [isCookie]);
 
 
   return (
