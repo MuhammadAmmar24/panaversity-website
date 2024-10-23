@@ -10,11 +10,12 @@ export const dynamic = 'force-static'
 
 
 // Function to generate metadata dynamically
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ id: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const courseId = parseInt(params.id); // Parse the id as a number
   const data = await getCourseData(courseId); // Fetch course data using the course id
 
@@ -82,11 +83,17 @@ async function fetchCoursePrice(course_batch_program_id: number) {
   }
 }
 
-export default async function CoursePage({
-  params: { id },
-}: {
-  params: { id: number };
-}) {
+export default async function CoursePage(
+  props: {
+    params: Promise<{ id: number }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    id
+  } = params;
+
   const data = await getCourseData(id);
 
   const { price, currency } = await fetchCoursePrice(

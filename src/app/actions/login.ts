@@ -61,7 +61,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       accessTokenExpires: Date.now() + expiresInMilliseconds,
     };
 
-    cookies().set({
+    (await cookies()).set({
       name: "user_data",
       value: JSON.stringify(updatedUserData),
       httpOnly: true,

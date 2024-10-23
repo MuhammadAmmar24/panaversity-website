@@ -3,6 +3,8 @@ import { privacypolicydata } from "@/src/constants/privacypolicy";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import type { JSX } from "react";
+
 export const dynamic = "force-static";
 
 // Metadata for the page

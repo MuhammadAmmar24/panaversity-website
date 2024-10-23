@@ -73,7 +73,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn = cookies().get("user_data") !== undefined;
+  const isLoggedIn = (await cookies()).get("user_data") !== undefined;
 
 
   return (

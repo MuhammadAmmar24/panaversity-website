@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,15 +22,21 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": [
+        "./*"
+      ]
+    },
+    "target": "ES2017"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/update-password"
-, "src/app/(dashboard)/dashboard/Components/Ui/Dashboard.tsx"  ],
-  "exclude": ["node_modules"]
+    "src/app/update-password",
+    "src/app/(dashboard)/dashboard/Components/Ui/Dashboard.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -17,14 +17,13 @@ const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => {
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
+    (<div className="flex-1 flex flex-col gap-4">
       {/* Section title */}
       <div className="flex justify-start">
         <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
           {title}
         </h1>
       </div>
-
       {/* Render list of class cards */}
       {classes.length > 0 ? (
         classes.map((cls, index) => (
@@ -37,9 +36,9 @@ const ClassSection: React.FC<ClassSectionProps> = ({ title, classes }) => {
           />
         ))
       ) : (
-        <p className="text-gray-500">No classes available.</p> // Message if no classes are found
+        (<p className="text-gray-500">No classes available.</p>) // Message if no classes are found
       )}
-    </div>
+    </div>)
   );
 };
 
