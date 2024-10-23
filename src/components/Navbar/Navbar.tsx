@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/logos/logo.webp";
@@ -9,7 +9,7 @@ import { ScrollHandler } from "./ScrollHandler";
 
 export default function Navbar() {
 
-  const isCookie = cookies().get("user_data") !== undefined;
+
 
   return (
     <ScrollHandler>
@@ -30,11 +30,11 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="">
-            <AuthButton isCookie={isCookie ? true : false} />
+            <AuthButton  />
           </div>
 
           {/* Mobile Menu */}
-          <MobileMenu isCookie={isCookie ? true : false}/>
+          <MobileMenu />
         </div>
       </div>
     </ScrollHandler>
