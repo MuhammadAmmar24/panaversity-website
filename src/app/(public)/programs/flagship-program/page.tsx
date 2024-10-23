@@ -3,6 +3,8 @@ import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-static';
+export const revalidate = 604800;
 
 export const metadata: Metadata = {
   title: "Flagship Program",
