@@ -2,6 +2,8 @@ import ContactUs from "@/src/components/contact/contact";
 import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import type { Metadata } from "next";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Contact Us",
   description: `Get in touch with Panaversity University for inquiries about our Generative AI and Cloud Native programs. Reach out for admissions, technical support, or general questions.`,
