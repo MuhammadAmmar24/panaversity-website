@@ -3,6 +3,8 @@ import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-static'
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   title: "Register | Panaversity",
