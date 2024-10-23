@@ -4,7 +4,8 @@ import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
 
-export const dynamic = "force-static";
+export const revalidate = 604800;
+
 
 // Function to generate metadata dynamically
 export async function generateMetadata({
