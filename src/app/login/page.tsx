@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   description: `Access your Panaversity account. Login to manage your courses, track your learning progress, and stay connected with the latest AI-powered learning opportunities.`,
 };
 
+export const dynamic = 'force-static'
+
 const LoginPage = () => {
   return (
     <>
