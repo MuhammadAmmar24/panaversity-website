@@ -75,5 +75,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // If no special conditions match, proceed with the request
-  return NextResponse.next();
+  const response = NextResponse.next();
+  response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  return response;
 }
