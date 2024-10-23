@@ -3,6 +3,9 @@ import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
 
+export const dynamic = 'force-static';
+export const revalidate = 604800;
+
 export const metadata: Metadata = {
   title: "Flagship Program",
   description: `Discover Panaversity's Flagship Program featuring advanced courses on Generative AI, cloud-native technologies, custom GPTs. and AI Agents, Designed for learners aiming to master the future of AI and technology.`,

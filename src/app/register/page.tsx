@@ -2,7 +2,6 @@ import { RegisterFormPage } from "@/src/components/auth/register/register-page";
 import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
-import { Suspense } from "react";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
