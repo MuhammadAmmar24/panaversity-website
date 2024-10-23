@@ -79,10 +79,10 @@ export const LoginForm = () => {
           // Handle redirection logic
           const previousPath = localStorage.getItem("previousPath");
           if (previousPath) {
-            router.back(); 
-            localStorage.removeItem("previousPath"); 
+            router.back();
+            localStorage.removeItem("previousPath");
           } else {
-            window.location.href = "/dashboard"; 
+            window.location.href = "/dashboard";
           }
         }
       })
@@ -184,10 +184,8 @@ export const LoginForm = () => {
           </Button>
         )}
 
-<p
-          className="w-full text-textPrimary text-center text-xs font-medium"
-        >
-            Don't have an account?&nbsp;&nbsp;
+        <p className="w-full text-textPrimary text-center text-xs font-medium">
+          Don't have an account?&nbsp;&nbsp;
           <Link href="/register" replace className="group">
             <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Register
