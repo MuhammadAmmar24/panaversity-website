@@ -11,8 +11,6 @@ export default function Navbar() {
 
   const isCookie = cookies().get("user_data") !== undefined;
 
-
-
   return (
     <ScrollHandler>
       <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
