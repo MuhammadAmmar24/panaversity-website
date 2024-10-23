@@ -1,7 +1,11 @@
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
 import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
+import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
+
+export const dynamic = "force-static";
+export const revalidate = 604800;
 
 // Function to generate metadata dynamically
 export async function generateMetadata({
@@ -25,6 +29,25 @@ export async function generateMetadata({
     title: `Learn ${courseName} | Panaversity Flagship Program`,
     description: `Explore the course ${courseName}, part of Panaversity's Flagship Program, focusing on cutting-edge topics like Generative AI and cloud-native technologies.`,
   };
+}
+
+export async function generateStaticParams() {
+  const query = {
+    program_id: 1,
+    batch_id: 1,
+    limit: 10,
+  };
+  const result = await getProgramCoursesWithOpenRegistration(query);
+
+  if (result.type === "success" && result.data) {
+    const idRoutes: number[] = result?.data?.data.map(
+      (course: any) => course.course_id
+    );
+    return idRoutes?.map((course_id: number) => ({
+      id: course_id.toString(),
+    }));
+  }
+  return [];
 }
 
 export interface CourseData {
@@ -57,17 +80,17 @@ async function fetchCoursePrice(course_batch_program_id: number) {
   }
 }
 
-// The main server component
-const CoursePage = async ({ params }: any) => {
-  const { id } = params;
-  const c_id = parseInt(id);
-
-  const data = await getCourseData(c_id);
+export default async function CoursePage({
+  params: { id },
+}: {
+  params: { id: number };
+}) {
+  const data = await getCourseData(id);
 
   const { price, currency } = await fetchCoursePrice(
     data?.data?.course_batch_program_id
   );
-  // const courseData = await data.json();
+
   return (
     <CourseDetailsClient
       initialPrice={price}
@@ -75,6 +98,4 @@ const CoursePage = async ({ params }: any) => {
       courseData={data.data}
     />
   );
-};
-
-export default CoursePage;
+}
