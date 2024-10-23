@@ -4,6 +4,22 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
+export const config = {
+  matcher: [
+    // Match all protected routes
+    '/dashboard/:path*',
+    // Match auth routes
+    '/login',
+    '/register',
+    '/verify',
+    '/verification',
+    '/resend-link',
+    '/update-password',
+    // Exclude static files and api routes
+    '/((?!_next/static|_next/image|favicon.ico|public/|api/).*)',
+  ]
+};
+
 export async function middleware(req: NextRequest) {
   // Define routes
   const protectedRoutes = ["/dashboard"];
