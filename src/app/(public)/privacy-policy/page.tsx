@@ -3,6 +3,8 @@ import { privacypolicydata } from "@/src/constants/privacypolicy";
 import type { Metadata } from "next";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 // Metadata for the page
 export const metadata: Metadata = {
   title: "Panaversity’s Privacy Policy",

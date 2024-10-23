@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: `Access your Panaversity account. Login to manage your courses, track your learning progress, and stay connected with the latest AI-powered learning opportunities.`,
 };
 
-export const dynamic = 'force-static'
+export const dynamic = "force-static";
 
 const LoginPage = () => {
   return (
@@ -17,7 +17,7 @@ const LoginPage = () => {
       <main>
         <div className="flex flex-col justify-center items-center min-h-[85vh]">
           <div className="mt-10 mb-20">
-              <LoginFormPage />
+            <LoginFormPage />
           </div>
         </div>
       </main>

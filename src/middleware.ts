@@ -4,22 +4,6 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
-export const config = {
-  matcher: [
-    // Match all protected routes
-    '/dashboard/:path*',
-    // Match auth routes
-    '/login',
-    '/register',
-    '/verify',
-    '/verification',
-    '/resend-link',
-    '/update-password',
-    // Exclude static files and api routes
-    '/((?!_next/static|_next/image|favicon.ico|public/|api/).*)',
-  ]
-};
-
 export async function middleware(req: NextRequest) {
   // Define routes
   const protectedRoutes = ["/dashboard"];
@@ -60,11 +44,9 @@ export async function middleware(req: NextRequest) {
   // For protected routes, ensure user is authenticated and token is valid
   if (isProtectedRoute) {
     if (!session) {
-      
       // If no session, redirect to login
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (is_token_expired) {
-   
       // If the token is expired, attempt to refresh it using the refresh token
       const newTokens = await refreshAccessToken(old_refresh_token);
 
@@ -91,7 +73,5 @@ export async function middleware(req: NextRequest) {
   }
 
   // If no special conditions match, proceed with the request
-  const response = NextResponse.next();
-  response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-  return response;
+  return NextResponse.next();
 }
