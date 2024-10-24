@@ -80,8 +80,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div className=" w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
-          <div className=" lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className=" w-full flex items-center backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
+          <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs
               items={[
@@ -95,9 +95,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               ]}
             />
 
-            <div className="flex flex-col justify-between sm:flex-row sm:space-x-4 mt-6">
+            <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center sm:space-x-4 py-4 lg:pt-4">
               {/* Course Details */}
-              <div className="w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
+              <div className="  w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
                 <h1 className="font-bold text-3xl xs:text-4xl sm:text-4xl lg:text-5xl text-background font-poppins ">
                   {course_name}
                 </h1>
@@ -105,12 +105,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                   {course_description}
                 </p>
 
-                <div className="flex flex-wrap items-center font-medium">
+                <div className="flex flex-col gap-y-1 xs:flex-row xs:space-x-6 items-start font-medium">
                   <CourseInfo icon={Users} text={`${learnersCount} Learners`} />
                   <CourseInfo icon={Calendar} text={`Duration: ${duration}`} />
                 </div>
 
-                <div className="flex flex-wrap items-center space-x-2 mb-2 sm:mb-7">
+                <div className="flex flex-wrap items-center space-x-2">
                   <span className="text-2xl font-bold">{rating}</span>
                   <RatingStars
                     rating={4.9}
@@ -127,7 +127,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Price and Enroll Section */}
-              <div className=" max-w-[400px] sm:min-w-[280px] sm:w-1/3 mt-5 mb-12 sm:mt-0">
+              <div className=" max-w-[400px] sm:min-w-[280px] sm:w-1/3 ">
                 <div className="bg-background text-black p-6  rounded-lg shadow-lg w-full sm:w-auto sm:max-w-sm">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-gray-900 font-medium text-lg">
