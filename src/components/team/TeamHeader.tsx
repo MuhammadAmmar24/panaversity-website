@@ -13,12 +13,9 @@ const TeamHeader = () => (
       </div>
 
       <div className="max-w-[312px] xs:max-w-[400px] sm:max-w-[630px] md:pb-6 lg:max-w-[760px] mx-auto">
-        <h2
-          className="text-[1.8rem] xs:text-[2rem] sm:text-[2.7rem] md:text-[3rem] lg:text-[3.6rem] -mt-4 text-background font-bold font-poppins tracking-tighter mx-auto"
-          style={{ wordSpacing: "0.2em" }}
-        >
+        <h1 className="text-[1.8rem] xs:text-[2rem] sm:text-[2.7rem] md:text-[3rem] lg:text-[3.6rem] -mt-4 text-background font-bold font-poppins tracking-normal leading-2 mx-auto">
           Meet The Visionaries Behind Panaversity
-        </h2>
+        </h1>
         <p className="text-background/60 mb-14 md:mb-0 pt-2 px-4 mt-0 max-w-[28rem] mx-auto">
           Discover the Experts Shaping the Future of AI Education
         </p>
