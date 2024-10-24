@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const TeamPage = () => {
   return (
-    <section className=" dark:text-white overflow-x-hidden">
+    <section className=" overflow-x-hidden">
       <div>
         <div className="w-full mb-32">
           <TeamHeader />
