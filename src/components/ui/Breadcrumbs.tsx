@@ -8,8 +8,8 @@ const Breadcrumbs: React.FC<BreadcrumbProps> = ({
   separator = <ChevronRight className="w-4 h-4 mx-1" />,
 }) => {
   return (
-    <nav className="mb-8">
-      <ol className="flex flex-wrap items-center space-x-[1px] text-xs mt-8 sm:text-sm font-medium text-white">
+    <nav className="my-4">
+      <ol className="flex flex-wrap items-center space-x-[1px] text-xs sm:text-sm font-medium text-white">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
             {item.href ? (
