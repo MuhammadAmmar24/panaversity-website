@@ -17,7 +17,7 @@ export default function LoginDialog() {
     >
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-6 min-w-[18rem]  max-w-sm max-h-[94dvh] sm:w-full overflow-y-auto xl:overflow-y-hidden">
+        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-6 min-w-[18rem]  max-w-sm max-h-[94dvh] sm:w-full overflow-y-auto">
           <Dialog.Title className="text-lg font-bold mb-4">Login</Dialog.Title>
           <LoginForm />
           <Dialog.Close asChild>

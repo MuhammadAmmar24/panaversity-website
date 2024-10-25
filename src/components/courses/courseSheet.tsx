@@ -23,6 +23,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const router = useRouter();
 
   async function handleClick() {
+    console.log("isLoggedIn in CourseSheet:", isLoggedIn);
+    console.log("isEnrolled in CourseSheet:", isEnrolled);
  
     if (!isLoggedIn) {
       localStorage.setItem("previousPath", window.location.pathname);
