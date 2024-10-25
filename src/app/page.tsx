@@ -11,6 +11,7 @@ import Programs from "@/src/components/Programs";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
 import Testimonials from "../components/Testimonials/Testimonials";
 
+export const dynamic = "force-static";
 
 export default function Home() {
   return (
