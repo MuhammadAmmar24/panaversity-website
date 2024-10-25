@@ -2,7 +2,7 @@ import ContactUs from "@/src/components/contact/contact";
 import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
 import type { Metadata } from "next";
 
-// export const dynamic = "force-static";
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Contact Us",
