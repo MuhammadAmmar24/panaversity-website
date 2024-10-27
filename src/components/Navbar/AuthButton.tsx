@@ -14,7 +14,7 @@ export function AuthButton() {
   useEffect(() => {
     async function checkAuthStatus() {
       try {
-        const response = await fetch('/api', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api`, {
           method: 'GET',
           credentials: 'include', // important for cookies
         });
