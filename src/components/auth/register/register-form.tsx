@@ -129,7 +129,6 @@ export const RegisterForm = () => {
                     disabled={isPending}
                     placeholder="user@email.com"
                     type="email"
-                    id="email"
                     autoComplete="email"
                   />
                 </FormControl>
