@@ -149,6 +149,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isEnrolled={courseStatus.isEnrolled}
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
+                    courseName={course_name}
                     isLoggedIn={isLoggedIn ? true : false}
                   />
                 </div>

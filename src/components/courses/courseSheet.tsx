@@ -1,7 +1,14 @@
 "use client";
 import GetEnrolled from "@/src/components/courses/GetEnrolled";
-import { Sheet, SheetContent } from "@/src/components/ui/sheet";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+} from "@/src/components/ui/sheet";
 import { CourseSheetProps } from "@/src/types/courseEnrollment";
+import { DialogTitle } from "@radix-ui/react-dialog";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -15,6 +22,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   isEnrolled,
   timeSlots,
   coursePrice,
+  courseName,
   isLoggedIn,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
@@ -23,12 +31,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const router = useRouter();
 
   async function handleClick() {
-    console.log("isLoggedIn in CourseSheet:", isLoggedIn);
-    console.log("isEnrolled in CourseSheet:", isEnrolled);
- 
     if (!isLoggedIn) {
       localStorage.setItem("previousPath", window.location.pathname);
-      router.push('/register');
+      router.push("/register");
     } else {
       setOpen(true);
     }
@@ -75,6 +80,16 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           sheetSide === "bottom" ? "h-[80vh]" : "h-full"
         } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
       >
+        <SheetHeader>
+          <VisuallyHidden.Root>
+            <DialogTitle>Enroll in {courseName}</DialogTitle>
+          </VisuallyHidden.Root>
+          <SheetDescription>
+            <VisuallyHidden.Root>
+              This enrollment dialog where you can enroll in the course
+            </VisuallyHidden.Root>
+          </SheetDescription>
+        </SheetHeader>
         <GetEnrolled
           program_id={program_id}
           batch_id={batch_id}

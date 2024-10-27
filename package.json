@@ -19,6 +19,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
     "@radix-ui/react-toggle": "^1.1.0",
+    "@radix-ui/react-visually-hidden": "^1.1.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/react-icons": "^2.2.7",
     "class-variance-authority": "^0.7.0",
