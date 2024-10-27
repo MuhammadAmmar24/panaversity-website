@@ -10,6 +10,8 @@ export const CourseCard = ({ course }: { course: Course }) => (
           src={course.media_link}
           alt={course.course_name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
           className="object-top object-cover"
         />
       </div>
