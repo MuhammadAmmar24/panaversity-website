@@ -15,6 +15,8 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { cookies } from "next/headers";
+import { check_token_expiry } from "@/src/lib/verify_token";
+import { isValidToken } from "@/src/lib/tokenValidity";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -73,7 +75,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn = cookies().get("user_data") !== undefined;
+  // const isLoggedIn = cookies().get("user_data") !== undefined;
+  const isLoggedIn: boolean = await isValidToken()
 
 
   return (

@@ -6,7 +6,7 @@ export async function check_token_expiry(access_token: string) {
 
     // Check if the token has expired
     if (decodedToken.exp * 1000 < Date.now()) {
-      // Here we can implement the functionality of referesh token
+
     
       return true;
     } else {
