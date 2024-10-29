@@ -1,4 +1,4 @@
-import Breadcrumbs from "@/src/components/ui/Breadcrumbs";
+import HeaderSection from "@/src/components/ui/HeaderSection";
 import { privacypolicydata } from "@/src/constants/privacypolicy";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -60,31 +60,15 @@ const SectionWithList = ({
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-white font-poppins">
-      {/* Header */}
-      <div className="flex justify-center items-center bg-teamBg bg-cover bg-center">
-        <div className="text-center w-full backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-52 md:min-h-72 lg:min-h-[21rem]">
-          <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-3">
-            <Breadcrumbs
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Privacy Policy", href: "/privacy-policy" },
-              ]}
-            />
-          </div>
 
-          <div className="max-w-[312px] xs:max-w-[400px] sm:max-w-[630px] md:pb-6 lg:max-w-[760px] mx-auto">
-            <h2
-              className="text-[2rem] xs:text-[2rem] sm:text-[2.7rem] md:text-[3rem] lg:text-[3.9rem] -mt-4 text-background font-bold font-poppins tracking-tighter mx-auto"
-              style={{ wordSpacing: "0.2em" }}
-            >
-              {privacypolicydata.headline1}
-            </h2>
-            <p className="text-background/60 mb-14 md:mb-0 pt-2 px-4 mt-0 max-w-[40rem] mx-auto">
-              {privacypolicydata.headline3}
-            </p>
-          </div>
-        </div>
-      </div>
+      <HeaderSection
+          title={privacypolicydata.headline1}
+          description={privacypolicydata.headline3}
+          breadcrumbs={[
+            { label: "Home", href: "/" },
+            { label: "Privacy Policy", href: "/privacy-policy" },
+          ]}
+        />
 
       {/* Privacy Policy Section */}
       <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 py-10 sm:py-14 lg:py-18">
