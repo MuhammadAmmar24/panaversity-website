@@ -83,12 +83,10 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         <SheetHeader>
           <VisuallyHidden.Root>
             <DialogTitle>Enroll in {courseName}</DialogTitle>
-          </VisuallyHidden.Root>
-          <SheetDescription>
-            <VisuallyHidden.Root>
+            <SheetDescription>
               This enrollment dialog where you can enroll in the course
-            </VisuallyHidden.Root>
-          </SheetDescription>
+            </SheetDescription>
+          </VisuallyHidden.Root>
         </SheetHeader>
         <GetEnrolled
           program_id={program_id}
