@@ -4,6 +4,15 @@ import { FaDiscord, FaFacebook, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import Logo from "../../../public/logos/logo2.webp";
 import Newsletter from "../ui/Newsletter";
 import FooterColumn from "./FooterColumn";
+import Link from "next/link";
+
+const socialIcons = [
+  { icon: FaFacebook, name: "Facebook", link: "/" },
+  { icon: FaDiscord, name: "Discord", link: "/" },
+  { icon: FaTwitter, name: "Twitter", link: "/" },
+  { icon: BiLogoInstagramAlt, name: "Instagram", link: "/" },
+  { icon: FaLinkedinIn, name: "LinkedIn", link: "/" },
+];
 
 const Footer: React.FC = () => {
   return (
@@ -23,13 +32,13 @@ const Footer: React.FC = () => {
                 Panaversity is a cloud-native platform offering personalized
                 learning through generative AI.
               </p>
-              <div className="flex gap-4 py-2">
-                <FaFacebook className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
-                <FaDiscord className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
-                <FaTwitter className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
-                <BiLogoInstagramAlt className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
-                <FaLinkedinIn className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
-              </div>
+              {/* <div className="flex gap-4 py-2">
+                {socialIcons.map(({ icon: Icon, name, link }, index) => (
+                  <Link href={link} key={index} aria-label={name}>
+                    <Icon className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
+                  </Link>
+                ))}
+              </div> */}
             </div>
           </div>
 
