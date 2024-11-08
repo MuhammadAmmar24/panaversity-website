@@ -31,7 +31,7 @@ export const courseData = [
         quarter: "Course-5",
         title: "Physical and Humanoid Robotics AI",
         description:
-          "Design and deploy advanced humanoid robots using ROS2, Meta Llama 3, and OpenAI. Master robotic control, simulations, and conversational AI with GPT models.",
+          "Explore Physical AI and humanoid robotics using ROS 2, Meta LLaMA 3, and OpenAI for natural interactions.",
       },
     ],
   },

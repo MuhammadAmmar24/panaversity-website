@@ -9,9 +9,8 @@ export default async function enrollmentStatus(course_batch_program_id: number,)
     let isEnrolled = false
 
     if (profile?.is_verified) {
-        console.log(profile.id, "Profile ID")
-        const result = await getStudentCourses(profile.id);
 
+        const result = await getStudentCourses(profile.id);
         if (result?.data) {
             // Find if the course exists in the student's courses
             const course = result.data.find(

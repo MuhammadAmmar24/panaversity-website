@@ -74,10 +74,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  // const isLoggedIn = cookies().get("user_data") !== undefined;
-  // console.log(isLoggedIn, "isLoggedIn");
   const isLoggedIn: boolean = await isValidToken()
-
 
   return (
     <main className="overflow-x-hidden">
