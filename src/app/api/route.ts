@@ -4,9 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   const cookieStore = cookies();
-  const authCookie = cookieStore.get('user_data'); // replace 'name' with your cookie name
-
-
+  const authCookie = cookieStore.get('user_data');
   
   return NextResponse.json({
     isAuthenticated: !!authCookie,

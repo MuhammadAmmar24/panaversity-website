@@ -9,6 +9,7 @@ export default async function enrollmentStatus(course_batch_program_id: number,)
     let isEnrolled = false
 
     if (profile?.is_verified) {
+        console.log(profile.id, "Profile ID")
         const result = await getStudentCourses(profile.id);
 
         if (result?.data) {
@@ -16,8 +17,8 @@ export default async function enrollmentStatus(course_batch_program_id: number,)
             const course = result.data.find(
                 (course) => course.course_batch_program_id === course_batch_program_id
             );
-            // If course exists, student is enrolled
-            isEnrolled = !!course;
+            
+            isEnrolled = !!course && course.student_course_status != 'expired_reservation';
         }
     }
     return {profileData: profile, isEnrolled: isEnrolled}

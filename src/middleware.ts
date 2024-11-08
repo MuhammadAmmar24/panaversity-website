@@ -6,7 +6,6 @@ import { check_token_expiry } from "./lib/verify_token";
 
 export async function middleware(req: NextRequest) {
   // Define routes
-  console.log("Middleware executed");
   const protectedRoutes = ["/dashboard"];
   const authRoutes = [
     "/login",
