@@ -4,7 +4,13 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
+
 export async function middleware(req: NextRequest) {
+
+  // Skip _next and API routes
+  if (req.nextUrl.pathname.startsWith("/_next")) {
+    return NextResponse.next();
+  }
   // Define routes
   const protectedRoutes = ["/dashboard"];
   const authRoutes = [
@@ -13,7 +19,7 @@ export async function middleware(req: NextRequest) {
     "/verify",
     "/verification",
     "/resend-link",
-    "update-password",
+    "/update-password",
   ]; // Routes inaccessible when logged in
 
   // Retrieve tokens from cookies
@@ -31,6 +37,7 @@ export async function middleware(req: NextRequest) {
   );
 
   if (isProtectedRoute || isAuthRoute) {
+
     // Check if the access token is expired or invalid
     const is_token_expired = await check_token_expiry(access_token);
 
@@ -79,3 +86,9 @@ export async function middleware(req: NextRequest) {
   // If no special conditions match, proceed with the request
   return NextResponse.next();
 }
+
+
+export const config = {
+  matcher: ["/dashboard", "/login", "/register", "/verify", "/verification",
+    "/resend-link", "/update-password"],
+};

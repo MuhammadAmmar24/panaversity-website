@@ -26,7 +26,6 @@ export async function check_token_expiry(access_token: string) {
 
     // Check if 'exp' exists and return it
     if (payload.exp !== undefined) {
-      console.log(payload.exp * 1000 < Date.now(), "Token expiry")
       if(payload.exp * 1000 < Date.now()){
         return true
       }
