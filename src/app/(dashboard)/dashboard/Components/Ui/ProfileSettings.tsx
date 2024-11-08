@@ -26,14 +26,14 @@ interface AddressInfo {
   address: string;
   city: string;
   country: string;
-  "postal Code": string;
+  postalCode: string;
 }
 
 interface Errors {
   address: string;
   city: string;
   country: string;
-  "postal Code": string;
+  postalCode: string;
 }
 
 const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
@@ -45,7 +45,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     address: profile?.student?.address || "",
     city: profile?.student?.city || "",
     country: profile?.student?.country || "",
-    "postal Code": profile?.student?.postal_code || "",
+    postalCode: profile?.student?.postal_code || "",
   });
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -54,7 +54,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     address: "",
     city: "",
     country: "",
-    "postal Code": "",
+    postalCode: "",
   });
 
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -70,6 +70,13 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       if (timer) clearTimeout(timer);
     };
   }, [statusMessage]);
+
+  const labels: Record<keyof AddressInfo, string> = {
+    address: "Address",
+    city: "City",
+    country: "Country",
+    postalCode: "Postal Code",
+  };
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -105,14 +112,14 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       address: addressInfo.address,
       city: addressInfo.city,
       country: addressInfo.country,
-      postal_code: addressInfo["postal Code"],
+      postal_code: addressInfo.postalCode,
       is_active: profile?.student?.is_active || false,
     };
 
     const result = await update_student_Profile(payload);
 
     if (result.type === "success") {
-      setErrors({ address: "", city: "", country: "", "postal Code": "" });
+      setErrors({ address: "", city: "", country: "", postalCode: "" });
       setStatusMessage("Profile updated successfully.");
       setIsEditingAddress(false);
     } else {
@@ -138,10 +145,10 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       address: profile?.student?.address || "",
       city: profile?.student?.city || "",
       country: profile?.student?.country || "",
-      "postal Code": profile?.student?.postal_code || "",
+      postalCode: profile?.student?.postal_code || "",
     });
     setIsEditingAddress(false);
-    setErrors({ address: "", city: "", country: "", "postal Code": "" });
+    setErrors({ address: "", city: "", country: "", postalCode: "" });
   };
 
   return (
@@ -213,7 +220,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                 (field) => (
                   <div key={field} className="space-y-2">
                     <label className="block text-md font-medium text-gray-700 capitalize">
-                      {field}
+                    {labels[field]}
                     </label>
                     {isEditingAddress ? (
                       <div className="relative">

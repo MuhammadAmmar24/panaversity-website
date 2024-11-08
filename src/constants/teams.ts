@@ -215,7 +215,7 @@ const allTeamMembers = [
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Humera Aslam",
-    designation: "Team Lead",
+    designation: "Trainer PIAIC, Freelancer",
     bio: "Building seamless web applications with React.",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/humera-aslam/" },
@@ -250,8 +250,8 @@ const allTeamMembers = [
   },{
     picture: "/team/Ammar.webp",
     fullName: "Muhammad Ammar Masood",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications with React.",
     socialLinks: [
       {
         icon: "linkedin",
@@ -262,8 +262,8 @@ const allTeamMembers = [
   },{
     picture: "/team/Shayan.webp",
     fullName: "Muhammad Shayan Khan",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications with React.",
     socialLinks: [
       {
         icon: "linkedin",
@@ -275,8 +275,8 @@ const allTeamMembers = [
   {
     picture: "/team/Hasnain.webp",
     fullName: "Syed Husnain Khalid",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications with React.",
     socialLinks: [
       {
         icon: "linkedin",
