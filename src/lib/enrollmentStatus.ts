@@ -12,7 +12,7 @@ export default async function enrollmentStatus(course_batch_program_id: number,)
 
         const result = await getStudentCourses(profile.id);
         if (result?.data) {
-            // Find if the course exists in the student's courses
+
             const course = result.data.find(
                 (course) => course.course_batch_program_id === course_batch_program_id
             );
