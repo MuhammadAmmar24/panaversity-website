@@ -26,14 +26,14 @@ interface AddressInfo {
   address: string;
   city: string;
   country: string;
-  postalCode: string;
+  "postal Code": string;
 }
 
 interface Errors {
   address: string;
   city: string;
   country: string;
-  postalCode: string;
+  "postal Code": string;
 }
 
 const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
@@ -45,7 +45,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     address: profile?.student?.address || "",
     city: profile?.student?.city || "",
     country: profile?.student?.country || "",
-    postalCode: profile?.student?.postal_code || "",
+    "postal Code": profile?.student?.postal_code || "",
   });
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -54,7 +54,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     address: "",
     city: "",
     country: "",
-    postalCode: "",
+    "postal Code": "",
   });
 
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -105,14 +105,14 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       address: addressInfo.address,
       city: addressInfo.city,
       country: addressInfo.country,
-      postal_code: addressInfo.postalCode,
+      postal_code: addressInfo["postal Code"],
       is_active: profile?.student?.is_active || false,
     };
 
     const result = await update_student_Profile(payload);
 
     if (result.type === "success") {
-      setErrors({ address: "", city: "", country: "", postalCode: "" });
+      setErrors({ address: "", city: "", country: "", "postal Code": "" });
       setStatusMessage("Profile updated successfully.");
       setIsEditingAddress(false);
     } else {
@@ -138,10 +138,10 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
       address: profile?.student?.address || "",
       city: profile?.student?.city || "",
       country: profile?.student?.country || "",
-      postalCode: profile?.student?.postal_code || "",
+      "postal Code": profile?.student?.postal_code || "",
     });
     setIsEditingAddress(false);
-    setErrors({ address: "", city: "", country: "", postalCode: "" });
+    setErrors({ address: "", city: "", country: "", "postal Code": "" });
   };
 
   return (
