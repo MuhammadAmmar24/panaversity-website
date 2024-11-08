@@ -1,6 +1,6 @@
 export const courseData = [
   {
-    title: "AI Level-1: Agentic AI",
+    title: "Agentic & Robotic Core Level",
     image: "/111.webp",
     content: [
       {
@@ -11,30 +11,24 @@ export const courseData = [
       },
       {
         quarter: "Course-2",
-        title: "Agentic AI and Vertical LLM Agents",
+        title: "Agentic AI using LangGraph, LangChain, and Custom GPTs",
         description:
-          "Develop CustomGPTs, and implement Multi-AI agentic systems.Build Knowledge Graphs with LangChain and automate tasks using LangGraph.",
+          "Develop intelligent AI agents with LangGraph, LangChain, and Custom GPT models.",
       },
-    ],
-  },
-  {
-    title: "AI Level-2: Cloud Native AI",
-    image: "/111.webp",
-    content: [
       {
         quarter: "Course-3",
-        title: "CNAI Microservices Architecture",
+        title: "Knowledge Graphs and Agentic AI Frontend",
         description:
-          "Design and deploy Cloud-Native AI-powered Microservices leveraging FastAPI, Kafka, and Generative AI APIs and Container Apps.",
+          "Build and query Knowledge Graphs with GQL and develop AI frontends using Next.js and TypeScript.",
       },
-    ],
-  },
-  {
-    title: "AI Level-3: Physical & Robotic AI",
-    image: "https://assets.aceternity.com/pro/hero-sections.png",
-    content: [
       {
         quarter: "Course-4",
+        title: "Cloud Native AI",
+        description:
+          "Learn to build scalable AI-powered APIs and microservices using FastAPI, Kafka, Kong, and Generative AI APIs.",
+      },
+      {
+        quarter: "Course-5",
         title: "Physical and Humanoid Robotics AI",
         description:
           "Design and deploy advanced humanoid robots using ROS2, Meta Llama 3, and OpenAI. Master robotic control, simulations, and conversational AI with GPT models.",
@@ -42,20 +36,26 @@ export const courseData = [
     ],
   },
   {
-    title: "AI Level-4: Customizing LLMs",
+    title: "Professional Level",
     image: "https://assets.aceternity.com/features-section.png",
     content: [
       {
-        quarter: "Course-5",
-        title: "Customising AI Part 1 (PyTorch)",
+        quarter: "Course-6",
+        title: "Master Generative AI with PyTorch",
         description:
-          "Master generative AI with PyTorch, exploring GANs, Transformers, LLMs, and diffusion models. Gain hands-on experience building AI models using Python and PyTorch.",
+          "Master the concepts of Generative AI and large-scale AI models like GANs, LLMs, and Transformers using PyTorch.",
       },
       {
-        quarter: "Course-6",
-        title: "Customising AI Part 2 (Llama 3)",
+        quarter: "Course-7",
+        title: "Customising Open Source LLMs (Llama 3.2)",
         description:
-          "Master fine-tuning Meta LLaMA 3 with PyTorch, focusing on Cloud-Native training and deployment using Nvidia NIM",
+          "Fine-tune open-source LLMs like Meta LLaMA 3.2 using PyTorch and deploy them using cloud-native tools.",
+      },
+      {
+        quarter: "Course-8",
+        title: "Advanced Cloud Native AI (Kubernetes)",
+        description:
+          "Master Kubernetes, Terraform, and cloud-native deployment for scalable AI systems and microservices.",
       },
     ],
   },
