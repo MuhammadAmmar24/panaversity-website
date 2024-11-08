@@ -6,6 +6,7 @@ import { check_token_expiry } from "./lib/verify_token";
 
 export async function middleware(req: NextRequest) {
   // Define routes
+  console.log("Middleware executed");
   const protectedRoutes = ["/dashboard"];
   const authRoutes = [
     "/login",
@@ -30,44 +31,48 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(route)
   );
 
-  // Check if the access token is expired or invalid
-  const is_token_expired = await check_token_expiry(access_token);
+  if (isProtectedRoute || isAuthRoute) {
+    // Check if the access token is expired or invalid
+    const is_token_expired = await check_token_expiry(access_token);
 
-  // Check session for both protected and auth routes
-  const session = await auth();
+    // Check session for both protected and auth routes
+    const session = await auth();
 
-  // Redirect to dashboard if user is logged in and tries to access login/register routes
-  if (isAuthRoute && session && !is_token_expired) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
+    // Redirect to dashboard if user is logged in and tries to access login/register routes
+    if (isAuthRoute && session && !is_token_expired) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
 
-  // For protected routes, ensure user is authenticated and token is valid
-  if (isProtectedRoute) {
-    if (!session) {
-      // If no session, redirect to login
-      return NextResponse.redirect(new URL("/login", req.url));
-    } else if (is_token_expired) {
-      // If the token is expired, attempt to refresh it using the refresh token
-      const newTokens = await refreshAccessToken(old_refresh_token);
-
-      if (newTokens.success) {
-        const { access_token, refresh_token } = newTokens;
-
-        // Set new cookies for access_token and refresh_token
-        const response = NextResponse.redirect(new URL("/dashboard", req.url));
-
-        response.cookies.set({
-          name: "user_data",
-          value: JSON.stringify({ access_token, refresh_token }),
-          httpOnly: true,
-          path: "/",
-          secure: process.env.NODE_ENV === "production",
-        });
-
-        return response;
-      } else {
-        // If token refresh fails, redirect to login
+    // For protected routes, ensure user is authenticated and token is valid
+    if (isProtectedRoute) {
+      if (!session) {
+        // If no session, redirect to login
         return NextResponse.redirect(new URL("/login", req.url));
+      } else if (is_token_expired) {
+        // If the token is expired, attempt to refresh it using the refresh token
+        const newTokens = await refreshAccessToken(old_refresh_token);
+
+        if (newTokens.success) {
+          const { access_token, refresh_token } = newTokens;
+
+          // Set new cookies for access_token and refresh_token
+          const response = NextResponse.redirect(
+            new URL("/dashboard", req.url)
+          );
+
+          response.cookies.set({
+            name: "user_data",
+            value: JSON.stringify({ access_token, refresh_token }),
+            httpOnly: true,
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+          });
+
+          return response;
+        } else {
+          // If token refresh fails, redirect to login
+          return NextResponse.redirect(new URL("/login", req.url));
+        }
       }
     }
   }
