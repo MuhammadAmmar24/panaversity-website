@@ -13,6 +13,7 @@ export default function PaymentDialog({
 }: PaymentDialogProps) {
   const [selectedMethod, setSelectedMethod] = useState(""); // No default method selected
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [paymentMethods, setPaymentMethods] = useState<string[]>(["STRIPE"]);
 
   // Function to handle dialog close
   const handleClose = () => {
@@ -26,7 +27,6 @@ export default function PaymentDialog({
     onConfirm(selectedMethod); // Proceed with payment confirmation
   };
 
-  const paymentMethods = ["STRIPE"];
 
   // Automatically select Stripe if it's the only payment method
   useEffect(() => {

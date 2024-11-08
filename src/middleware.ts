@@ -4,7 +4,13 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
+
 export async function middleware(req: NextRequest) {
+
+  // Skip _next and API routes
+  if (req.nextUrl.pathname.startsWith("/_next")) {
+    return NextResponse.next();
+  }
   // Define routes
   const protectedRoutes = ["/dashboard"];
   const authRoutes = [
@@ -13,7 +19,7 @@ export async function middleware(req: NextRequest) {
     "/verify",
     "/verification",
     "/resend-link",
-    "update-password",
+    "/update-password",
   ]; // Routes inaccessible when logged in
 
   // Retrieve tokens from cookies
@@ -30,44 +36,49 @@ export async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith(route)
   );
 
-  // Check if the access token is expired or invalid
-  const is_token_expired = await check_token_expiry(access_token);
+  if (isProtectedRoute || isAuthRoute) {
 
-  // Check session for both protected and auth routes
-  const session = await auth();
+    // Check if the access token is expired or invalid
+    const is_token_expired = await check_token_expiry(access_token);
 
-  // Redirect to dashboard if user is logged in and tries to access login/register routes
-  if (isAuthRoute && session && !is_token_expired) {
-    return NextResponse.redirect(new URL("/dashboard", req.url));
-  }
+    // Check session for both protected and auth routes
+    const session = await auth();
 
-  // For protected routes, ensure user is authenticated and token is valid
-  if (isProtectedRoute) {
-    if (!session) {
-      // If no session, redirect to login
-      return NextResponse.redirect(new URL("/login", req.url));
-    } else if (is_token_expired) {
-      // If the token is expired, attempt to refresh it using the refresh token
-      const newTokens = await refreshAccessToken(old_refresh_token);
+    // Redirect to dashboard if user is logged in and tries to access login/register routes
+    if (isAuthRoute && session && !is_token_expired) {
+      return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
 
-      if (newTokens.success) {
-        const { access_token, refresh_token } = newTokens;
-
-        // Set new cookies for access_token and refresh_token
-        const response = NextResponse.redirect(new URL("/dashboard", req.url));
-
-        response.cookies.set({
-          name: "user_data",
-          value: JSON.stringify({ access_token, refresh_token }),
-          httpOnly: true,
-          path: "/",
-          secure: process.env.NODE_ENV === "production",
-        });
-
-        return response;
-      } else {
-        // If token refresh fails, redirect to login
+    // For protected routes, ensure user is authenticated and token is valid
+    if (isProtectedRoute) {
+      if (!session) {
+        // If no session, redirect to login
         return NextResponse.redirect(new URL("/login", req.url));
+      } else if (is_token_expired) {
+        // If the token is expired, attempt to refresh it using the refresh token
+        const newTokens = await refreshAccessToken(old_refresh_token);
+
+        if (newTokens.success) {
+          const { access_token, refresh_token } = newTokens;
+
+          // Set new cookies for access_token and refresh_token
+          const response = NextResponse.redirect(
+            new URL("/dashboard", req.url)
+          );
+
+          response.cookies.set({
+            name: "user_data",
+            value: JSON.stringify({ access_token, refresh_token }),
+            httpOnly: true,
+            path: "/",
+            secure: process.env.NODE_ENV === "production",
+          });
+
+          return response;
+        } else {
+          // If token refresh fails, redirect to login
+          return NextResponse.redirect(new URL("/login", req.url));
+        }
       }
     }
   }
@@ -75,3 +86,9 @@ export async function middleware(req: NextRequest) {
   // If no special conditions match, proceed with the request
   return NextResponse.next();
 }
+
+
+export const config = {
+  matcher: ["/dashboard", "/login", "/register", "/verify", "/verification",
+    "/resend-link", "/update-password"],
+};

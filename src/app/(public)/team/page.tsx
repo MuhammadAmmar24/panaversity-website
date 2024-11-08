@@ -1,5 +1,5 @@
 import TeamGrid from "@/src/components/team/TeamGrid";
-import TeamHeader from "@/src/components/team/TeamHeader";
+import HeaderSection from "@/src/components/ui/HeaderSection";
 import type { Metadata } from "next";
 
 export const dynamic = "force-static";
@@ -14,7 +14,14 @@ const TeamPage = () => {
     <section className=" overflow-x-hidden">
       <div>
         <div className="w-full mb-32">
-          <TeamHeader />
+          <HeaderSection
+            title="Meet The Visionaries"
+            description="Discover the Experts Shaping the Future of AI"
+            breadcrumbs={[
+              { label: "Home", href: "/" },
+              { label: "Our Team", href: "/team" },
+            ]}
+          />
           <TeamGrid />
         </div>
       </div>

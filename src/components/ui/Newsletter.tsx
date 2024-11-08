@@ -13,11 +13,14 @@ const Newsletter: React.FC = () => {
           type="email"
           placeholder="Enter email address"
           className="bg-transparent border-b border-gray-500 text-sm p-2 w-[85%] text-gray-300 focus:outline-none"
+          disabled
         />
         {/* Submit Button */}
         <button
-          className="bg-green-600 absolute right-0 hover:bg-green-500 text-white rounded-full p-2 transition-all"
+          className="bg-gray-600 absolute right-0 text-gray-400 rounded-full p-2 cursor-not-allowed transition-all"
+          // className="bg-green-600 absolute right-0 hover:bg-green-500 text-white rounded-full p-2 transition-all"
           aria-label="Submit Email"
+          disabled
         >
           <svg
             className="h-5 w-5"
@@ -35,8 +38,11 @@ const Newsletter: React.FC = () => {
           </svg>
         </button>
       </div>
-      <p className="mt-4 text-gray-400">
+            {/* <p className="mt-4 text-gray-400">
         We will send you daily updates about the tech.
+      </p> */}
+      <p className="mt-4 text-gray-400">
+        Our newsletter is coming soon! Stay tuned for updates.
       </p>
     </div>
   );

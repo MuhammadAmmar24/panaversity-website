@@ -15,6 +15,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { cookies } from "next/headers";
+import { isValidToken } from "@/src/lib/tokenValidity";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -73,7 +74,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn = cookies().get("user_data") !== undefined;
+  // const isLoggedIn = cookies().get("user_data") !== undefined;
+  // console.log(isLoggedIn, "isLoggedIn");
+  const isLoggedIn: boolean = await isValidToken()
 
 
   return (
@@ -149,6 +152,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isEnrolled={courseStatus.isEnrolled}
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
+                    courseName={course_name}
                     isLoggedIn={isLoggedIn ? true : false}
                   />
                 </div>
