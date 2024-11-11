@@ -144,11 +144,12 @@ export const RegisterForm = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <div className="relative">
+
                     <Input
                       {...field}
                       id="password"
                       disabled={isPending}
-                      placeholder="******"
+                      placeholder="Enter your password"
                       type={showPassword ? "text" : "password"}
                       autoComplete="password"
                       className="pl-3 pr-10"
@@ -185,7 +186,7 @@ export const RegisterForm = () => {
                       {...field}
                       id="confirmPassword"
                       disabled={isPending}
-                      placeholder="******"
+                      placeholder="Confirm your password"
                       type={showPassword ? "text" : "password"}
                       autoComplete="confirmPassword"
                       className="pl-3 pr-10"

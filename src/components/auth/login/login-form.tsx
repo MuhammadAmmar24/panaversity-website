@@ -128,7 +128,7 @@ export const LoginForm = () => {
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="******"
+                      placeholder="Enter your password"
                       type={showPassword ? "text" : "password"}
                       id="current-password"
                       autoComplete="current-password"
