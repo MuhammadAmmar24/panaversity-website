@@ -12,7 +12,7 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/zeeshan_hanif.webp",
+    picture: "/team/Zeeshan_Hanif.webp",
     fullName: "Zeeshan Hanif",
     designation: "Board of Directors, Panaversity",
     bio: "Web 3.0 and AI Integration Consultant",
@@ -259,7 +259,7 @@ const allTeamMembers = [
     picture: "/team/Ammar.webp",
     fullName: "Muhammad Ammar Masood",
     designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications with React.",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
@@ -272,7 +272,7 @@ const allTeamMembers = [
     picture: "/team/Shayan.webp",
     fullName: "Muhammad Shayan Khan",
     designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications with React.",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
@@ -285,7 +285,33 @@ const allTeamMembers = [
     picture: "/team/Hasnain.webp",
     fullName: "Syed Husnain Khalid",
     designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications with React.",
+    bio: "Building seamless AI-powered web applications",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/syed-hussnain/",
+      },
+      { icon: "github", href: "https://github.com/DevHusnainAi" },
+    ],
+  },
+  {
+    picture: "/team/Saad_Irfan.webp",
+    fullName: "Saad Irfan",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/syed-hussnain/",
+      },
+      { icon: "github", href: "https://github.com/DevHusnainAi" },
+    ],
+  },
+  {
+    picture: "/team/Humaira_Aslam.webp",
+    fullName: "Humaira Aslam",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
