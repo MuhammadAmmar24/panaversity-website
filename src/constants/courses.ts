@@ -4,34 +4,40 @@ export const courseData = [
     image: "/111.webp",
     content: [
       {
-        quarter: "Course-1",
+        quarter: "AI-101",
         title: "Modern AI Python Programming",
         description:
           "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
       },
       {
-        quarter: "Course-2",
-        title: "Agentic AI using LangGraph, LangChain, and Custom GPTs",
+        quarter: "AI-201",
+        title: "Agentic AI",
         description:
-          "Develop intelligent AI agents with LangGraph, LangChain, and Custom GPT models.",
+          "Learn to build and orchestrate AI agents with LangGraph and LangChain, from basic workflows to advanced GPT model customization.",
       },
       {
-        quarter: "Course-3",
+        quarter: "AI-202",
         title: "Knowledge Graphs and Agentic AI Frontend",
         description:
           "Build and query Knowledge Graphs with GQL and develop AI frontends using Next.js and TypeScript.",
       },
       {
-        quarter: "Course-4",
+        quarter: "AI-301",
         title: "Cloud Native AI",
         description:
           "Learn to build scalable AI-powered APIs and microservices using FastAPI, Kafka, Kong, and Generative AI APIs.",
       },
       {
-        quarter: "Course-5",
+        quarter: "AI-451",
         title: "Physical and Humanoid Robotics AI",
         description:
           "Explore Physical AI and humanoid robotics using ROS 2, Meta LLaMA 3, and OpenAI for natural interactions.",
+      },
+      {
+        quarter: "AI-461",
+        title: "Distributed AI Computing",
+        description:
+          "Learn to build, deploy, and optimize scalable distributed systems using Ray for AI and machine learning applications.",
       },
     ],
   },
@@ -40,22 +46,28 @@ export const courseData = [
     image: "https://assets.aceternity.com/features-section.png",
     content: [
       {
-        quarter: "Course-6",
-        title: "Master Generative AI with PyTorch",
+        quarter: "AI-500",
+        title: "AI Ethics and Governance: Principles and Practices",
         description:
-          "Master the concepts of Generative AI and large-scale AI models like GANs, LLMs, and Transformers using PyTorch.",
+          "Explore AI ethics and governance, learning to integrate fairness, transparency, and accountability into responsible AI design and deployment.",
       },
       {
-        quarter: "Course-7",
-        title: "Customising Open Source LLMs (Llama 3.2)",
+        quarter: "AI-501",
+        title: "Distributed Machine Learning",
+        description:
+          "Master the fundamentals of Generative AI by building and training models with PyTorch and Ray, exploring GANs, Transformers, LLMs, and more.",
+      },
+      {
+        quarter: "AI-502",
+        title: "Customising Open Source LLMs",
         description:
           "Fine-tune open-source LLMs like Meta LLaMA 3.2 using PyTorch and deploy them using cloud-native tools.",
       },
       {
-        quarter: "Course-8",
-        title: "Advanced Cloud Native AI (Kubernetes)",
+        quarter: "AI-651",
+        title: "Advanced Cloud Native AI Computing",
         description:
-          "Master Kubernetes, Terraform, and cloud-native deployment for scalable AI systems and microservices.",
+          "Master Kubernetes, Ray, Terraform, and GitHub Actions to deploy scalable, fault-tolerant AI pipelines and microservices in the cloud.",
       },
     ],
   },
@@ -65,69 +77,3 @@ export const timelineContent = {
   sectionHeading: "Courses Offered",
   mainHeading: "Master the Future of AI with Our Comprehensive Curriculum",
 };
-
-// export const courseData = [
-//     {
-//       title: "Applied GenAI Core Level",
-//       image: "/111.webp",
-//       content: [
-//         {
-//           quarter: "Course - 1",
-//           title: "Intro to Prompt Engineering, Docker, and Python",
-//           description: "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
-//         },
-//         {
-//           quarter: "Course - 2",
-//           title: "Applied Generative AI Fundamentals",
-//           description: "Develop custom GPTs, and implement multi-AI agent systems.",
-//         },
-//         {
-//           quarter: "Course - 3",
-//           title: "CNAI Microservices Architect",
-//           description: "Design and deploy cloud-native AI-powered microservices leveraging FastAPI, Kafka, and Generative AI APIs.",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Cloud Native GenAI Mastery Level",
-//       image: "https://assets.aceternity.com/pro/hero-sections.png",
-//       content: [
-//         {
-//           quarter: "Course - 4",
-//           title: "Generative AI with PyTorch",
-//           description: "Build and train advanced AI models like GANs and Transformers.",
-//         },
-//         {
-//           quarter: "Course - 5",
-//           title: "Advanced LLM Fine-Tuning",
-//           description: "Specialize in fine-tuning and deploying LLMs like Meta LLaMA 3.",
-//         },
-//         {
-//           quarter: "Course - 6",
-//           title: "Kubernetes & Cloud AI Mastery",
-//           description: "Master Kubernetes & Terraform for scalable and secure AI deployments.",
-//         },
-//       ],
-//     },
-//     {
-//       title: "Physical AI and Humanoids",
-//       image: "https://assets.aceternity.com/features-section.png",
-//       content: [
-//         {
-//           quarter: "Course - 7",
-//           title: "Physical AI & Robotics",
-//           description: "Design and deploy humanoid robots powered by advanced AI technology.",
-//         },
-//         {
-//           quarter: "Course - 8",
-//           title: "Capstone Project",
-//           description: "Apply all your skills in a comprehensive, real-world AI project.",
-//         },
-//       ],
-//     },
-//   ];
-
-//   export const timelineContent = {
-//     sectionHeading: "Courses Offered",
-//     mainHeading: "Master the Future of AI with Our Comprehensive Curriculum",
-//   };
