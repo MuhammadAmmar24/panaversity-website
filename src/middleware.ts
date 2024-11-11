@@ -4,13 +4,12 @@ import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
-
 export async function middleware(req: NextRequest) {
-
   // Skip _next and API routes
   if (req.nextUrl.pathname.startsWith("/_next")) {
     return NextResponse.next();
   }
+
   // Define routes
   const protectedRoutes = ["/dashboard"];
   const authRoutes = [
@@ -22,12 +21,6 @@ export async function middleware(req: NextRequest) {
     "/update-password",
   ]; // Routes inaccessible when logged in
 
-  // Retrieve tokens from cookies
-  const token = req.cookies.get("user_data")?.value || "";
-  const parsedToken = token ? JSON.parse(decodeURIComponent(token)) : {};
-  const access_token = parsedToken?.access_token;
-  const old_refresh_token = parsedToken?.refresh_token;
-
   // Check if the current route matches any defined routes
   const isProtectedRoute = protectedRoutes.some((route) =>
     req.nextUrl.pathname.startsWith(route)
@@ -37,27 +30,36 @@ export async function middleware(req: NextRequest) {
   );
 
   if (isProtectedRoute || isAuthRoute) {
+    // Retrieve tokens from cookies
+    const token = req.cookies.get("user_data")?.value || "";
+    const parsedToken = token ? JSON.parse(decodeURIComponent(token)) : {};
+    const access_token = parsedToken?.access_token;
+    const old_refresh_token = parsedToken?.refresh_token;
 
-    // Check if the access token is expired or invalid
-    const is_token_expired = await check_token_expiry(access_token);
-
-    // Check session for both protected and auth routes
+    // Check session and token validity if accessing protected or auth routes
     const session = await auth();
+    const is_token_expired = access_token
+      ? await check_token_expiry(access_token)
+      : true;
 
-    // Redirect to dashboard if user is logged in and tries to access login/register routes
-    if (isAuthRoute && session && !is_token_expired) {
-      return NextResponse.redirect(new URL("/dashboard", req.url));
+    if (isAuthRoute) {
+      // If user is already logged in and tries to access auth route, redirect to dashboard
+      if (session && !is_token_expired) {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
+      // Continue to auth route (e.g., login, register) if no token or expired token
+      return NextResponse.next();
     }
 
-    // For protected routes, ensure user is authenticated and token is valid
     if (isProtectedRoute) {
       if (!session) {
-        // If no session, redirect to login
+        // If no valid session or token, redirect to login
         return NextResponse.redirect(new URL("/login", req.url));
-      } else if (is_token_expired) {
-        // If the token is expired, attempt to refresh it using the refresh token
-        const newTokens = await refreshAccessToken(old_refresh_token);
+      }
 
+      // If token is expired, attempt to refresh it
+      if (is_token_expired) {
+        const newTokens = await refreshAccessToken(old_refresh_token);
         if (newTokens.success) {
           const { access_token, refresh_token } = newTokens;
 
@@ -65,7 +67,6 @@ export async function middleware(req: NextRequest) {
           const response = NextResponse.redirect(
             new URL("/dashboard", req.url)
           );
-
           response.cookies.set({
             name: "user_data",
             value: JSON.stringify({ access_token, refresh_token }),
@@ -87,8 +88,14 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 
-
 export const config = {
-  matcher: ["/dashboard", "/login", "/register", "/verify", "/verification",
-    "/resend-link", "/update-password"],
+  matcher: [
+    "/dashboard",
+    "/login",
+    "/register",
+    "/verify",
+    "/verification",
+    "/resend-link",
+    "/update-password",
+  ],
 };
