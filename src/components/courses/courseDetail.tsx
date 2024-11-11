@@ -14,7 +14,6 @@ import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
-import { cookies } from "next/headers";
 import { isValidToken } from "@/src/lib/tokenValidity";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
@@ -75,6 +74,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   };
 
   const isLoggedIn: boolean = await isValidToken()
+  console.log("Course Detail", isLoggedIn);
 
   return (
     <main className="overflow-x-hidden">
@@ -150,7 +150,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
                     courseName={course_name}
-                    isLoggedIn={isLoggedIn ? true : false}
+                    isLoggedIn={isLoggedIn}
                   />
                 </div>
               </div>
