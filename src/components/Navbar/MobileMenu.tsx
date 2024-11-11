@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 
 export function MobileMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +27,6 @@ export function MobileMenu() {
 
         const data = await response.json();
         setIsLoggedIn(data.isAuthenticated);
-        setUserData(data.user);
       } catch (error) {
         console.error('Auth check error:', error);
         setIsLoggedIn(false);
@@ -78,7 +76,7 @@ export function MobileMenu() {
                 alt="Logo"
                 width={500}
                 height={500}
-                className="mb-3 h-[84px]"
+                className="mb-3"
                 priority
               />
             </Link>
