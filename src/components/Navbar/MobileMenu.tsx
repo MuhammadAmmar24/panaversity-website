@@ -76,7 +76,7 @@ export function MobileMenu() {
                 alt="Logo"
                 width={500}
                 height={500}
-                className="mb-3 h-[84px]"
+                className="mb-3"
                 priority
               />
             </Link>
