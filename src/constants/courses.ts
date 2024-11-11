@@ -13,17 +13,17 @@ export const courseData = [
         quarter: "AI-201",
         title: "Agentic AI",
         description:
-          "Learn to build and orchestrate AI agents with LangGraph and LangChain, from basic workflows to advanced GPT model customization.",
+          "Learn to develop AI agents with LangGraph, LangChain, and Custom GPT models.",
       },
       {
         quarter: "AI-202",
-        title: "Knowledge Graphs and Agentic AI Frontend",
+        title: "Agentic AI Knowledge Graphs and Frontend",
         description:
           "Build and query Knowledge Graphs with GQL and develop AI frontends using Next.js and TypeScript.",
       },
       {
         quarter: "AI-301",
-        title: "Cloud Native AI",
+        title: "Cloud Native AI Microservices",
         description:
           "Learn to build scalable AI-powered APIs and microservices using FastAPI, Kafka, Kong, and Generative AI APIs.",
       },
