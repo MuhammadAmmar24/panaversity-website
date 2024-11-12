@@ -278,7 +278,7 @@ const allTeamMembers = [
         icon: "linkedin",
         href: "https://www.linkedin.com/in/shayanxkhan/",
       },
-      { icon: "github", href: "https://github.com/dev-shayan" },
+      { icon: "github", href: "https://github.com/devv-shayan" },
     ],
   },
   {
@@ -302,9 +302,9 @@ const allTeamMembers = [
     socialLinks: [
       {
         icon: "linkedin",
-        href: "https://www.linkedin.com/in/syed-hussnain/",
+        href: "https://www.linkedin.com/in/saad-irfan-25699a218/",
       },
-      { icon: "github", href: "https://github.com/DevHusnainAi" },
+      { icon: "github", href: "https://github.com/SaadIrfan41" },
     ],
   },
   {
