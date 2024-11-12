@@ -7,7 +7,7 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white dark:bg-[#0b1727] text-gray-900 relative"
+      className="light py-8 sm:py-12 lg:py-16 mb-8 md:mb-0 bg-white  text-gray-900 relative"
     >
       <Image
         src={"/testimonials/Element1.webp"}

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export const CourseCard = ({ course }: { course: Course }) => (
   <Link href={`/programs/flagship-program/${course.course_id}`}>
-    <div className="flex flex-col bg-background dark:bg-slate-800 rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full h-auto pb-0">
+    <div className="flex flex-col bg-background rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full h-auto pb-0">
       <div className="h-[14rem] relative">
         <Image
           src={course.media_link}

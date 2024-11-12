@@ -29,7 +29,7 @@ const TeamMemberItem = ({
         className="relative z-10 w-4/5 h-auto rounded-lg "
       />
     </div>
-    <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
+    <div className="bg-background  shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
       <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
       <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
       <p className="text-sm mt-1">{member.bio}</p>
