@@ -10,7 +10,7 @@ const TeamMemberItem = ({
   member: TeamMember;
   priority?: boolean;
 }) => (
-  <div className="w-[280px] mt-5">
+  <div className="w-[280px]">
     <div className="relative flex justify-center items-center">
       <Image
         alt="picbg"
@@ -29,11 +29,16 @@ const TeamMemberItem = ({
         className="relative z-10 w-4/5 h-auto rounded-lg "
       />
     </div>
-    <div className="bg-background  shadow-xl rounded-xl p-4 text-center mt-4 h-[180px] overflow-y-hidden">
-      <h4 className="text-lg font-medium mb-1">{member.fullName}</h4>
-      <h6 className="text-sm font-medium opacity-75">{member.designation}</h6>
-      <p className="text-sm mt-1">{member.bio}</p>
-      <div className="flex justify-center items-center space-x-3 mt-3">
+    <div className="flex flex-col justify-between bg-background  shadow-xl rounded-xl p-4 text-center h-[180px] overflow-y-hidden">
+      <div className="">
+        <h4 className="text-lg font-medium">{member.fullName}</h4>
+        <h6 className="text-sm font-medium opacity-75 leading-4">
+          {member.designation}
+        </h6>
+      </div>
+
+      <p className="text-sm">{member.bio}</p>
+      <div className="flex justify-center items-center space-x-3">
         {member.socialLinks.map((link: SocialLink, index: number) => (
           <Link
             key={index}
