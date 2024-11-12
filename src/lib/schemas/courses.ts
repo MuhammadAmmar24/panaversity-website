@@ -22,6 +22,7 @@ export const CourseSchema = z.object({
 	course_batch_program_id: z.number(),
 	order: z.number(),
 	media_link: z.string(),
+	course_code: z.string(),
 });
 
 export const ProgramCoursesResponseSchema = z.object({
