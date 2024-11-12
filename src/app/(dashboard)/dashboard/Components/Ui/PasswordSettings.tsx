@@ -141,7 +141,15 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                             <Input
                               {...field}
                               disabled={isPending}
-                              placeholder="******"
+                              placeholder={
+                                fieldName === "current_password"
+                                  ? "Enter current password"
+                                  : fieldName === "new_password"
+                                  ? "Enter new password"
+                                  : fieldName === "confirm_password"
+                                  ? "Confirm new password"
+                                  : ""
+                              }
                               type={
                                 fieldName === "current_password"
                                   ? showPasswordCurrent
