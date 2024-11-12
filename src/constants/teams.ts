@@ -220,12 +220,15 @@ const allTeamMembers = [
   // Team Leads
 
   {
-    picture: "/team/Girl_avatar.webp",
-    fullName: "Humera Aslam",
+    picture: "/team/Humaira_Aslam.webp",
+    fullName: "Humaira Aslam",
     designation: "Agentic AI Trainer Panaversity",
     bio: "Agentic AI Full Stack Developer",
     socialLinks: [
-      { icon: "linkedin", href: "https://www.linkedin.com/in/humera-aslam/" },
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/humera-aslam/",
+      },
       { icon: "github", href: "#" },
     ],
   },
@@ -297,7 +300,7 @@ const allTeamMembers = [
   {
     picture: "/team/Saad_Irfan.webp",
     fullName: "Saad Irfan",
-    designation: "Full Stack GENAI Engineer",
+    designation: "Agentic AI Trainer Panaversity",
     bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
@@ -307,19 +310,7 @@ const allTeamMembers = [
       { icon: "github", href: "https://github.com/SaadIrfan41" },
     ],
   },
-  {
-    picture: "/team/Humaira_Aslam.webp",
-    fullName: "Humaira Aslam",
-    designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications",
-    socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/syed-hussnain/",
-      },
-      { icon: "github", href: "https://github.com/DevHusnainAi" },
-    ],
-  },
+
 ];
 
 export { allTeamMembers };

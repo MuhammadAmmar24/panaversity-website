@@ -47,7 +47,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           >
             <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
               <div className="h-5 absolute left-[15px] lg:-left-[6] xl:left-[70px] w-5 rounded-full bg-accent/20 backdrop-blur-md flex justify-center items-center ">
-                <div className="md:h-2 md:w-2 h-2 w-2 rounded-full dark:bg-neutral-800 p-2" />
+                <div className="md:h-2 md:w-2 h-2 w-2 rounded-full  p-2" />
               </div>
               <h2 className="hidden md:block pl-10 lg:pl-12 xl:pl-32 text-start text-white font-bold text-lg md:text-3xl xl:text-4xl md:max-w-xl xl:max-w-full">
                 {item.title}
@@ -66,7 +66,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
           style={{
             height: height + "px",
           }}
-          className="absolute left-6  lg:left-6 xl:left-20 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
+          className="absolute left-6  lg:left-6 xl:left-20 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200  to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
         >
           <motion.div
             style={{

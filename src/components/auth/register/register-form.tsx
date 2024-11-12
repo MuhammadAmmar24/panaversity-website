@@ -237,7 +237,7 @@ export const RegisterForm = () => {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form.control}
             name="affiliation"
 
@@ -276,7 +276,7 @@ export const RegisterForm = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </div>
         <FormError message={error} />
         <FormSuccess message={success} />

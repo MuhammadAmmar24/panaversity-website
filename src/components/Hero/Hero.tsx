@@ -8,14 +8,14 @@ export default function Hero() {
         <div className="mx-auto max-w-5xl pt-[4rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem]">
           <div className="text-center">
             <h1 className="text-[2rem] xs:text-[2.5rem] sm:text-[3rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
-              Revolutionize Your Learning with{" "}
+              Learn Agentic AI in{" "}
               <span className="text-accent bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-transparent">
-                AI-Powered
+              Live Online Classes
               </span>{" "}
-              Education
+              by Experts
             </h1>
             <p className="mt-6 text-[0.9rem] md:text-[1.1rem] font-inter leading-8 text-textSecondary">
-              Master AI with Live, Expert-Led Courses — Tailored for Your{" "}
+            Master Agentic AI augmented with our Personalized, AI-Powered Platform — Tailored for Your{" "}
               <span className="gradient-border2">Success!</span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
