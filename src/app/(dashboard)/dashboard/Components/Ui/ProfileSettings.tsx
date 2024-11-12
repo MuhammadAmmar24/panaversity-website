@@ -71,6 +71,13 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     };
   }, [statusMessage]);
 
+  const labels: Record<keyof AddressInfo, string> = {
+    address: "Address",
+    city: "City",
+    country: "Country",
+    postalCode: "Postal Code",
+  };
+
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setAddressInfo((prev) => ({ ...prev, [name]: value }));
@@ -213,7 +220,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                 (field) => (
                   <div key={field} className="space-y-2">
                     <label className="block text-md font-medium text-gray-700 capitalize">
-                      {field}
+                    {labels[field]}
                     </label>
                     {isEditingAddress ? (
                       <div className="relative">

@@ -1,34 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
-
 
 export function AuthButton() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function checkAuthStatus() {
+      setIsLoading(true);
       try {
-        const response = await fetch('/api', {
-          method: 'GET',
-          credentials: 'include', // important for cookies
+        const response = await fetch(`/api/`, {
+          method: "GET",
+          credentials: "include",
         });
-        
+    
         if (!response.ok) {
-          throw new Error('Auth check failed');
+          throw new Error("Auth check failed");
         }
 
         const data = await response.json();
-
         setIsLoggedIn(data.isAuthenticated);
-        setUserData(data.user);
       } catch (error) {
-        console.error('Auth check error:', error);
+        console.error("Auth check error:", error);
         setIsLoggedIn(false);
       } finally {
         setIsLoading(false);
@@ -36,9 +31,7 @@ export function AuthButton() {
     }
 
     checkAuthStatus();
-  }, []);
-
-
+  }, [isLoggedIn]);
 
   return (
     <div className="flex items-center gap-4">

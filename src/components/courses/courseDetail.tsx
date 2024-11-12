@@ -14,7 +14,7 @@ import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
-import { cookies } from "next/headers";
+import { isValidToken } from "@/src/lib/tokenValidity";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -49,6 +49,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     batch_id,
     course_batch_program_id,
     program_id,
+    course_code,
   } = courseData;
 
   // Assign default values if necessary
@@ -73,8 +74,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn = cookies().get("user_data") !== undefined;
-
+  const isLoggedIn: boolean = await isValidToken()
 
   return (
     <main className="overflow-x-hidden">
@@ -98,6 +98,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
             <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center sm:space-x-4 py-4 lg:pt-4">
               {/* Course Details */}
               <div className="  w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
+              <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">{course_code}</p>
                 <h1 className="font-bold text-3xl xs:text-4xl sm:text-4xl lg:text-5xl text-background font-poppins ">
                   {course_name}
                 </h1>
@@ -149,7 +150,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isEnrolled={courseStatus.isEnrolled}
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
-                    isLoggedIn={isLoggedIn ? true : false}
+                    courseName={course_name}
+                    isLoggedIn={isLoggedIn}
                   />
                 </div>
               </div>
@@ -186,9 +188,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
           <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
             Pre Requisites
           </h2>
-          <h3 className="text-lg font-semibold text-textPrimary mb-4">
-            General Requirements
-          </h3>
           <ul className="list-disc pl-5 space-y-2">
             {Array.isArray(pre_requisite) ? (
               pre_requisite.map((requirement, index) => (

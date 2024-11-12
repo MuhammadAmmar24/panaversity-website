@@ -1,27 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function ScrollHandler({ children }: { children: React.ReactNode }) {
   const [hidden, setHidden] = useState(false);
-  const [scrollPosition, setScrollPosition] = useState(0);
+  // const [scrollPosition, setScrollPosition] = useState(0);
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
 
-      if (currentScrollPos > scrollPosition && currentScrollPos > 100) {
+      if (
+        currentScrollPos > scrollPositionRef.current &&
+        currentScrollPos > 100
+      ) {
         setHidden(true);
       } else {
         setHidden(false);
       }
 
-      setScrollPosition(currentScrollPos);
+      scrollPositionRef.current = currentScrollPos;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollPosition]);
+  }, []);
 
   return (
     <header

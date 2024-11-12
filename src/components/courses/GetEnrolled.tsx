@@ -33,10 +33,11 @@ export default function GetEnrolled({
         (slot) => slot.time_slot_day === selectedDay
       );
       if (selectedSlot) {
-        setRemainingSeats(selectedSlot.total_seats - selectedSlot.booked_seats);
+        const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats
+        seats_left > 0 ? setRemainingSeats(seats_left) : setRemainingSeats(0);
       }
     }
-  }, [selectedDay, classTimeSlots]);
+  }, [selectedDay, classTimeSlots, remainingSeats]);
 
   const uniqueDays = Array.from(
     new Set(classTimeSlots.map((slot) => slot.time_slot_day))
@@ -143,7 +144,7 @@ export default function GetEnrolled({
             {remainingSeats === null
               ? "..."
               : remainingSeats === 0
-              ? "N/A"
+              ? "0"
               : remainingSeats}
           </span>
         </div>
@@ -152,11 +153,11 @@ export default function GetEnrolled({
 
         <button
           className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-            selectedDay && selectedTimeSlot && !isPending
+            selectedDay && selectedTimeSlot && !isPending && remainingSeats! > 0
               ? "bg-accent text-white hover:bg-[#18c781]"
               : "bg-gray-300 text-gray-500 cursor-not-allowed"
           }`}
-          disabled={!selectedDay || !selectedTimeSlot || isPending}
+          disabled={!selectedDay || !selectedTimeSlot || isPending || remainingSeats === 0}
           onClick={handleEnroll}
         >
           {isPending ? (
@@ -218,7 +219,7 @@ function SelectField({
           >
             <path
               fillRule="evenodd"
-              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 111.414 1.414l-4 4a1 1 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
               clipRule="evenodd"
             />
           </svg>

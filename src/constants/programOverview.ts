@@ -1,10 +1,11 @@
 export const programOverviewData = {
   sectionHeading: "Program Overview",
-  mainHeading: "Certified Cloud Native Generative, Agentic, and Robotic AI Engineer",
-  content1: `Embark on a structured journey through 7 courses to master AI technologies. The first 3 courses lay the foundation in Generative AI, Python, and cloud-native microservices, followed by advanced topics like PyTorch, large language models, and Kubernetes.`,
-  content2: `The final courses delve into Physical AI and humanoid robotics, culminating in a comprehensive capstone project. The program prepares you for real-world applications, with regular breaks to reinforce learning.`,
+  mainHeading: "Certified Agentic and Robotic AI Engineer",
+  content1: `Embark on a Generative AI journey that prepares you for the $100 trillion AI industrial revolution by equipping you with skills in Python, Generative AI, Agentic AI, and cloud-native microservices, followed by advanced topics like PyTorch, Kubernetes and fine-tuning large language models.`,
+  content2: `At the program's end, choose from specialized tracks in fields like Healthcare, Finance, Cybersecurity, IoT, and the Metaverse to align your skills with high-demand industries.`,
   buttonText: "Continue With Us",
 };
+
 
 export const features = [
   {

@@ -3,8 +3,7 @@ import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
 
-export const dynamic = 'force-static'
-// export const revalidate = 604800;
+export const dynamic = "force-dynamic";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
@@ -46,7 +45,7 @@ const RegisterPage = () => {
       <main>
         <div className="flex flex-col justify-center items-center min-h-screen">
           <div className="mt-10 mb-20">
-              <RegisterFormPage />
+            <RegisterFormPage />
           </div>
         </div>
       </main>

@@ -10,14 +10,16 @@ export const CourseCard = ({ course }: { course: Course }) => (
           src={course.media_link}
           alt={course.course_name}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
           className="object-top object-cover"
         />
       </div>
       <div className="flex flex-col justify-between p-4 min-h-[12rem]">
         <div className="space-y-4">
           <div className="flex items-center justify-between mb-2">
-            <h6 className="text-xs font-medium ">
-              Course - {course.course_id}
+            <h6 className="text-xs font-medium text-gray-700 ">
+              Course Code: <span className="font-bold underline underline-offset-2 text-black decoration-accent decoration-1">{course.course_code}</span>
             </h6>
             <span
               className={`text-[10px] opacity-75 rounded-xl px-2 py-1 inline-block

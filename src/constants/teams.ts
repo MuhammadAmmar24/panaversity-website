@@ -1,23 +1,31 @@
-// import { "linkedin", github } from "@fortawesome/free-brands-svg-icons";
-
 // Merged list of all members
 const allTeamMembers = [
   // Executives
   {
     picture: "/team/Zia khan.webp",
     fullName: "Zia Khan",
-    designation: "CEO Panacloud / COO PIAIC",
-    bio: "Driving Pakistan’s tech revolution through PIAIC.",
+    designation: "CEO Panaversity",
+    bio: "Nation-Transforming Social Entrepreneur",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/ziaukhan/" },
       { icon: "github", href: "https://github.com/ziaukhan" },
     ],
   },
   {
+    picture: "/team/Zeeshan_Hanif.webp",
+    fullName: "Zeeshan Hanif",
+    designation: "Board of Directors, Panaversity",
+    bio: "Web 3.0 and AI Integration Consultant",
+    socialLinks: [
+      { icon: "linkedin", href: "https://www.linkedin.com/in/zeeshanhanif/" },
+      { icon: "github", href: "https://github.com/zeeshanhanif" },
+    ],
+  },
+  {
     picture: "/team/Daniyal.webp",
     fullName: "Daniyal Nagori",
-    designation: "CEO of PIAIC / CEO GIAIC",
-    bio: "Shaping Pakistan’s tech future with AI and Web 3.0 education.",
+    designation: "Board of Directors, Panaversity",
+    bio: "Cloud and AI Integration Consultant",
     socialLinks: [
       {
         icon: "linkedin",
@@ -29,19 +37,20 @@ const allTeamMembers = [
   {
     picture: "/team/Qasim.webp",
     fullName: "Muhammad Qasim",
-    designation: "Chief Gen AI Officer at PIAIC & GIAIC",
-    bio: "Pioneering Generative AI in Pakistan’s tech landscape.",
+    designation: "Chief Generative AI Officer, Panaversity",
+    bio: "International Generative AI Consultant in Healtcare",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/sirqasim/" },
       { icon: "github", href: "https://github.com/EnggQasim" },
     ],
   },
+
   // Professionals
   {
     picture: "/team/Imran.webp",
     fullName: "Imran Ali",
-    designation: "Management Head PIAIC / GIAIC",
-    bio: "Specializing in AI software development and training.",
+    designation: "Chief Data Officer, Panaversity",
+    bio: "Specialising in AI data pipelines and training.",
     socialLinks: [
       { icon: "linkedin", href: "#" },
       { icon: "github", href: "#" },
@@ -50,20 +59,32 @@ const allTeamMembers = [
   {
     picture: "/team/Ameen.webp",
     fullName: "Ameen Alam",
-    designation: "Multi-Cloud Solutions Architect",
-    bio: "Designing scalable cloud native architectures for PIAIC and GIAIC.",
+    designation: "Chief Agentic AI Cloud Officer, Panaversity",
+    bio: "Designing scalable cloud native AI for financial and banking sectors",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/ameen-alam/" },
       { icon: "github", href: "https://github.com/Ameen-Alam" },
     ],
   },
-
+  {
+    picture: "/team/Rehan.webp",
+    fullName: "M. Rehan ul Haq",
+    designation: "COO, Panaversity",
+    bio: "Agentic AI Education Manager and Developer",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/muhammad-rehan-ul-haq-b60a4b2a/",
+      },
+      { icon: "github", href: "https://github.com/rehan-ul-haq" },
+    ],
+  },
   // Trainers
   {
     picture: "/team/Junaid.webp",
     fullName: "M. Junaid Shaukat",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Expert in full-stack development and MERN stack.",
+    designation: "Lead Agentic AI Engineer, Panaversity",
+    bio: "Consultant Agentic AI Architecture and Development",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/mrjunaid/" },
       { icon: "github", href: "https://github.com/mjunaidca" },
@@ -72,8 +93,8 @@ const allTeamMembers = [
   {
     picture: "/team/Wania_kazmi.webp",
     fullName: "Wania Kazmi",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Modern web developer specializing in JavaScript and Python.",
+    designation: "Agentic AI Trainer, Panaversity",
+    bio: "Agentic AI Full Stack Developer and Consultant",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/waniakazmi/" },
       { icon: "github", href: "https://github.com/Wania-Kazmi" },
@@ -83,8 +104,8 @@ const allTeamMembers = [
   {
     picture: "/team/Usman.webp",
     fullName: "Usman Ashraf",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Creating clean, scalable applications with modern technologies.",
+    designation: "Agentic AI Trainer Panaversity, Freelancer",
+    bio: "Agentic AI Full Stack Developer and Consultant",
     socialLinks: [
       {
         icon: "linkedin",
@@ -96,7 +117,7 @@ const allTeamMembers = [
   {
     picture: "/team/Khubaib.webp",
     fullName: "Muhammad Khubaib",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Agentic AI Trainer Panaversity, Freelancer",
     bio: "Specializing in AI-driven software development and training.",
     socialLinks: [
       {
@@ -109,7 +130,7 @@ const allTeamMembers = [
   {
     picture: "/team/Jahanzeb.webp",
     fullName: "Jahanzaib Tayyab",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Specializing in MERN stack and modern web development.",
     socialLinks: [
       {
@@ -122,7 +143,7 @@ const allTeamMembers = [
   {
     picture: "/team/Ibtisam.webp",
     fullName: "Ibtisam Anwar",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Full-stack developer with a focus on MERN stack.",
     socialLinks: [
       {
@@ -130,19 +151,6 @@ const allTeamMembers = [
         href: "https://www.linkedin.com/in/ibtisamanwar32/",
       },
       { icon: "github", href: "https://github.com/ICODER32" },
-    ],
-  },
-  {
-    picture: "/team/Rehan.webp",
-    fullName: "M. Rehan ul Haq",
-    designation: "Trainer PIAIC, Freelancer",
-    bio: "Mentoring aspiring developers in modern web technologies.",
-    socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/muhammad-rehan-ul-haq-b60a4b2a/",
-      },
-      { icon: "github", href: "https://github.com/Em-Aar" },
     ],
   },
   {
@@ -159,7 +167,7 @@ const allTeamMembers = [
   {
     picture: "/team/Zeeshan_aziz.webp",
     fullName: "Zeeshan Aziz",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Focusing on web development and blockchain technologies.",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/zeeshanazizz/" },
@@ -169,19 +177,18 @@ const allTeamMembers = [
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Bushra Hussain",
-    designation: "Team Lead",
-    bio: "Building seamless web applications with Next.js.",
+    designation: "Team Lead Panaversity, Freelancer",
+    bio: "Focusing on Agentic AI and blockchain technologies.",
     socialLinks: [
       { icon: "linkedin", href: "#" },
       { icon: "github", href: "#" },
     ],
   },
 
-
   {
     picture: "/team/Hamza_syed.webp",
     fullName: "Hamza Syed",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Crafting seamless and interactive user experiences with Nextjs.",
     socialLinks: [
       { icon: "linkedin", href: "#" },
@@ -192,7 +199,7 @@ const allTeamMembers = [
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Mubarra Naz",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Building seamless web applications with React.",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/mubarra-naz/" },
@@ -202,7 +209,7 @@ const allTeamMembers = [
   {
     picture: "/team/Hassan_ali_khan.webp",
     fullName: "Hassan Ali Khan",
-    designation: "Trainer PIAIC, Freelancer",
+    designation: "Trainer Panaversity, Freelancer",
     bio: "Crafting seamless and interactive user experiences.",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/hassanak92/" },
@@ -215,8 +222,8 @@ const allTeamMembers = [
   {
     picture: "/team/Girl_avatar.webp",
     fullName: "Humera Aslam",
-    designation: "Team Lead",
-    bio: "Building seamless web applications with React.",
+    designation: "Agentic AI Trainer Panaversity",
+    bio: "Agentic AI Full Stack Developer",
     socialLinks: [
       { icon: "linkedin", href: "https://www.linkedin.com/in/humera-aslam/" },
       { icon: "github", href: "#" },
@@ -247,11 +254,12 @@ const allTeamMembers = [
       },
       { icon: "github", href: "https://github.com/aimanzaidi110" },
     ],
-  },{
+  },
+  {
     picture: "/team/Ammar.webp",
     fullName: "Muhammad Ammar Masood",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
@@ -259,24 +267,25 @@ const allTeamMembers = [
       },
       { icon: "github", href: "https://github.com/MuhammadAmmar24" },
     ],
-  },{
+  },
+  {
     picture: "/team/Shayan.webp",
     fullName: "Muhammad Shayan Khan",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
         href: "https://www.linkedin.com/in/shayanxkhan/",
       },
-      { icon: "github", href: "https://github.com/dev-shayan" },
+      { icon: "github", href: "https://github.com/devv-shayan" },
     ],
   },
   {
     picture: "/team/Hasnain.webp",
     fullName: "Syed Husnain Khalid",
-    designation: "AI Web Developer",
-    bio: "Building seamless web applications with React.",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
     socialLinks: [
       {
         icon: "linkedin",
@@ -285,7 +294,32 @@ const allTeamMembers = [
       { icon: "github", href: "https://github.com/DevHusnainAi" },
     ],
   },
-
+  {
+    picture: "/team/Saad_Irfan.webp",
+    fullName: "Saad Irfan",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/saad-irfan-25699a218/",
+      },
+      { icon: "github", href: "https://github.com/SaadIrfan41" },
+    ],
+  },
+  {
+    picture: "/team/Humaira_Aslam.webp",
+    fullName: "Humaira Aslam",
+    designation: "Full Stack GENAI Engineer",
+    bio: "Building seamless AI-powered web applications",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/syed-hussnain/",
+      },
+      { icon: "github", href: "https://github.com/DevHusnainAi" },
+    ],
+  },
 ];
 
 export { allTeamMembers };

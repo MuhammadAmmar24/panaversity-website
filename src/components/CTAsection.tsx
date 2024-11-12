@@ -15,7 +15,7 @@ export default function Component() {
           {/* Button Component */}
           <Link
             href="/programs/flagship-program"
-            className="relative inline-flex items-center px-8 py-2 lg:px-14 lg:py-4 overflow-hidden text-[1rem] text-textPrimary font-inter bg-background rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-accent"
+            className="relative inline-flex items-center px-8 py-2 md:px-14 md:py-4 overflow-hidden text-[1rem] text-textPrimary font-inter bg-background rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-accent"
           >
             <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
             <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
@@ -34,14 +34,13 @@ function ArrowRightIcon(props: any) {
     <svg
       {...props}
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      className="w-5 h-5 hidden md:flex"
     >
       <path d="M5 12h14" />
       <path d="m12 5 7 7-7 7" />

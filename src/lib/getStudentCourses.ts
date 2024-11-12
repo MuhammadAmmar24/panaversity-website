@@ -23,7 +23,7 @@ export const getStudentCourses = async (
                 Accept: "application/json",
                 Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
             },
-            cache:'force-cache'
+            cache:'no-store'
         });
 
         // Check if the response is successful

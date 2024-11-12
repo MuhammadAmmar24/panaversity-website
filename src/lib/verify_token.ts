@@ -1,18 +1,25 @@
-import jwt from "jsonwebtoken";
+import { decodeJwt } from "jose";
 
 export async function check_token_expiry(access_token: string) {
   try {
-    const decodedToken = jwt.decode(access_token) as { exp: number };
+    // Decode the JWT payload without verifying
+    const payload = decodeJwt(access_token);
 
-    // Check if the token has expired
-    if (decodedToken.exp * 1000 < Date.now()) {
-      // Here we can implement the functionality of referesh token
-    
-      return true;
+    // Check if 'exp' exists and return it
+    if (payload.exp !== undefined) {
+      if(payload.exp * 1000 < Date.now()){
+        return true
+      }
+      else {
+        return false
+      }
+
     } else {
-      return false;
+      return null;
     }
   } catch (error) {
+    console.error("Error decoding token:", error);
     return null;
   }
 }
+
