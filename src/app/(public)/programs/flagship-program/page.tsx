@@ -34,8 +34,8 @@ export default async function Courses() {
       <div className="w-full mb-32">
 
         <HeaderSection
-          title="Our Flagship Program"
-          description="Our GenAI Program for Innovators and Creators"
+          title="Artificial Intelligence Courses"
+          description="Certified Agentic and Robotic AI Engineer"
           breadcrumbs={[
             { label: "Home", href: "/" },
             { label: "Programs", href: "/programs" },
