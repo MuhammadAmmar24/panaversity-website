@@ -34,7 +34,7 @@ export default async function Courses() {
       <div className="w-full mb-32">
 
         <HeaderSection
-          title="Artificial Intelligence Courses"
+          title="Our Flagship Program"
           description="Certified Agentic and Robotic AI Engineer"
           breadcrumbs={[
             { label: "Home", href: "/" },
