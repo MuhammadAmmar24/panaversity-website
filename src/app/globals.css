@@ -9,10 +9,6 @@ body {
   font-family: var(--font-rubik); /* Default to Rubik */
 }
 
-/* .font-inter {
-  font-family: var(--font-inter);
-} */
-
 .swiper-pagination {
   margin-top: 20px; /* Adjust the value as needed */
 }
@@ -263,4 +259,21 @@ body {
 /* Disable Video Controls  */
 .custom-control {
   pointer-events: none;
+}
+
+/* AccordionItem.module.css */
+.content ul {
+  @apply list-disc ml-5 mt-2;
+}
+
+.content li {
+  @apply mb-2 text-sm text-gray-600;
+}
+
+.content p {
+  @apply mb-4 text-base text-gray-700;
+}
+
+.content strong {
+  @apply font-semibold text-gray-800;
 }
