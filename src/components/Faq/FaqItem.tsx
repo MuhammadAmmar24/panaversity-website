@@ -47,10 +47,14 @@ export default function AccordionItem({
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0",
         }}
       >
-        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-textSecondary font-inter text-xs sm:text-sm md:text-[0.999rem]">
-          {answer}
+        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-textSecondary font-inter text-xs sm:text-sm md:text-[0.999rem] content">
+          <RenderHTML html={answer} />
         </div>
       </div>
     </div>
   );
+}
+
+function RenderHTML({ html }: { html: string }) {
+  return <div className="" dangerouslySetInnerHTML={{ __html: html }} />;
 }

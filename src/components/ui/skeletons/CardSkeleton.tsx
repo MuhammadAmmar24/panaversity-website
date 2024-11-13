@@ -13,7 +13,7 @@ const TeamMemberItem = ({ member }: { member: TeamMember }) => (
       <Skeleton className="w-full h-[200px] rounded-xl" />
     </div>
 
-    <div className="bg-background dark:bg-slate-800 shadow-xl rounded-xl p-4 text-center mt-2 h-auto overflow-y-hidden">
+    <div className="bg-background  shadow-xl rounded-xl p-4 text-center mt-2 h-auto overflow-y-hidden">
       <div className="space-y-2">
         <Skeleton className="h-4 w-[250px]" />
         <Skeleton className="h-4 w-[200px]" />
@@ -34,7 +34,7 @@ const CardSkeleton = () => {
   };
 
   return (
-    <section className=" light bg-background dark:bg-[#0b1727] text-zinc-900 dark:text-white overflow-x-hidden">
+    <section className=" light bg-background  text-zinc-900  overflow-x-hidden">
       {/* Team Members */}
       <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8 ">
         <div className="flex flex-wrap justify-center -mx-4 ">

@@ -12,8 +12,8 @@ const TeamGrid = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8">
-      <div className="flex flex-wrap justify-center -mx-4">
+    <div className="container mx-auto px-2 xs:px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8">
+      <div className="flex flex-wrap gap-y-5 justify-center">
         {allTeamMembers
           .slice(0, visibleMembers)
           .map((member: TeamMember, i) => (

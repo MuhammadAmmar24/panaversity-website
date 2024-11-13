@@ -21,7 +21,7 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({
         <h1 className="text-[1.8rem] xs:text-[2rem] sm:text-[2.7rem] md:text-[3rem] lg:text-[3.6rem] leading-tight  text-background font-bold font-poppins tracking-normal mx-auto">
           {title}
         </h1>
-        <p className="text-background/60 mb-8 md:mb-0 pt-2 px-4 mt-0 max-w-[28rem] mx-auto text-sm">
+        <p className="text-background/60 mb-8 md:mb-0 pt-2 px-4 mt-0 max-w-[28rem] mx-auto text-sm xs:text-base md:text-lg lg:text-xl">
           {description}
         </p>
       </div>

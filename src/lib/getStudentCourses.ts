@@ -13,7 +13,7 @@ export const getStudentCourses = async (
         params.append('student_id', String(studentId));
 
         // Construct the API URL
-        const apiUrl = `${process.env.COURSE_API_URL}/status/student-active-courses?${params}`;
+        const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?${params}`;
 
 
         // Make the request to the API
