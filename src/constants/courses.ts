@@ -1,7 +1,6 @@
 export const courseData = [
   {
     title: "Agentic & Robotic Core Level",
-    image: "/111.webp",
     content: [
       {
         quarter: "AI-101",
@@ -43,7 +42,6 @@ export const courseData = [
   },
   {
     title: "Professional Level",
-    image: "https://assets.aceternity.com/features-section.png",
     content: [
       {
         quarter: "AI-500",
