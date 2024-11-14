@@ -133,6 +133,27 @@ export default function PrivacyPolicy() {
               </>,
             ]}
           />
+
+<SectionWithList
+            title={privacypolicydata.headpolicy2a}
+            subtitle={privacypolicydata.policy2asubhead}
+            items={[
+              <>
+                <strong>Obtaining Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription1}
+              </>,
+              <>
+                <strong>Withdrawing Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription2}
+              </>,
+              <>
+                <strong>Parental Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription3}
+              </>,
+      
+            ]}
+          />
+          
           <Section
             title={privacypolicydata.headpolicy3}
             content={privacypolicydata.policy3description1}
@@ -176,6 +197,7 @@ export default function PrivacyPolicy() {
               </p>
               <Link
                 href={"mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"}
+                aria-label="Contact Us"
                 className="text-green-500 hover:underline text-base sm:text-lg"
               >
                 {privacypolicydata.contactlink}.

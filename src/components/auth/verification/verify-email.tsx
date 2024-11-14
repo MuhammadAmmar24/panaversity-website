@@ -139,6 +139,7 @@ const VerifiedComponent = () => (
     </p>
     <Link
       href={"/login"}
+      aria-label="Go to login page"
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Login
@@ -155,6 +156,7 @@ const VerificationFailedComponent = () => (
     <p className="px-3">Invalid or expired verification link</p>
     <Link
       href="/verify"
+      aria-label="Go to verify email page"
       className="w-full text-center py-2 mt-4 max-w-[18.5rem] text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Re-verify Email

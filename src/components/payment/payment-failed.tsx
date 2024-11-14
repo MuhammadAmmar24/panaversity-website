@@ -16,6 +16,7 @@ const PaymentCancel = () => {
       <p className="text-gray-600 mb-8">Your payment is Failed.</p>
       <Link
         href={"/dashboard"}
+        aria-label="Go to dashboard"
         className="w-full text-center py-3   px-8   text-white rounded-xl bg-accent  hover:bg-[#18c781] font-medium"
       >
         Continue to Dashboard

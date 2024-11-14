@@ -14,6 +14,7 @@ const NavLinks = () => {
       <Link
               key={nav.name}
               href={nav.link}
+              aria-label= {`${nav.name}`}
               className={` text-base ${
                 pathName === nav.link
                   ? "text-[#40e477]"

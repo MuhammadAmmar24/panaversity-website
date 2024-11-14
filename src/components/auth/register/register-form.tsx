@@ -80,7 +80,7 @@ export const RegisterForm = () => {
             title: "Signup Success",
             description: "Please Verify Email To Continue",
             action: (
-              <Link href={"/verify"} replace>
+              <Link href={"/verify"} aria-label="Verify Email" replace>
                 <ToastAction altText="Verify to Continue">
                   Verify Email
                 </ToastAction>
@@ -298,7 +298,7 @@ export const RegisterForm = () => {
         )}
         <p className="w-full text-textPrimary text-center text-xs font-medium">
           Already have an account?&nbsp;&nbsp;
-          <Link href="/login" replace className="group">
+          <Link href="/login" aria-label="Go to Login page" replace className="group">
             <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Login
             </span>

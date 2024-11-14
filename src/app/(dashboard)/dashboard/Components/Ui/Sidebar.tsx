@@ -121,6 +121,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             <div key={item.label} className="relative group">
               <Link
                 href={item.href}
+                aria-label={`Go to ${item.label}`}
                 className="flex items-center px-2  py-4 hover:text-accent transition-all duration-300"
               >
                 {/* Menu icon */}

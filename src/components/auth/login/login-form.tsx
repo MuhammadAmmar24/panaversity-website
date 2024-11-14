@@ -189,7 +189,7 @@ export const LoginForm = () => {
 
         <p className="w-full text-textPrimary text-center text-xs font-medium">
           Don't have an account?&nbsp;&nbsp;
-          <Link href="/register" replace className="group">
+          <Link href="/register" aria-label="Go to register page" replace className="group">
             <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Register
             </span>

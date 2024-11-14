@@ -21,6 +21,7 @@ export default function Hero() {
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href="/programs"
+                aria-label="Go to programs page"
                 className="relative inline-flex items-center px-6 py-2.5 sm:px-12 sm:py-4  overflow-hidden text-sm sm:text-[0.9rem] text-textPrimary font-inter bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-background border-2 border-accent"
               >
                 <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>

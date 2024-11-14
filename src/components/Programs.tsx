@@ -18,9 +18,9 @@ const Programs = () => {
       <div className="mt-8 sm:mt-8 md:mt-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
           {programs.map((program, index) => (
-            <Link href={program.link} key={program.id} passHref target="_blank">
+            <Link href={program.link} aria-label={`Check out ${program.title}`} key={program.id} passHref target="_blank">
               <div
-                className={`relative bg-[#f8f8f9] group shadow-md p-6 transform transition duration-400 hover:shadow-md
+                className={`relative bg-[#f8f8f9] group shadow-lg p-6 transform transition duration-400 hover:shadow-md
               ${
                 index === 2
                   ? "sm:col-span-2 sm:mx-auto lg:col-span-1 lg:w-full"
@@ -55,7 +55,7 @@ const Programs = () => {
                 >
                   {program.title}
                 </h3>
-                <p className="pt-4 font-medium font-inter text-[0.8125rem] leading-6 text-center text-textSecondary/80">
+                <p className="pt-4 font-medium text-[0.8125rem] leading-6 text-textSecondary text-justify">
                   {program.description}
                 </p>
               </div>

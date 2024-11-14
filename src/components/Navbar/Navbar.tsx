@@ -15,7 +15,7 @@ export default function Navbar() {
     <ScrollHandler>
       <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2" aria-label="Home">
+        <Link href="/"  className="flex items-center gap-2" aria-label="Home">
           <Image
             src={logo}
             alt="Panaversity Logo"

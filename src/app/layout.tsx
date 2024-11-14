@@ -3,6 +3,7 @@ import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
 import NextTopLoader from 'nextjs-toploader'
+import CookieConsent from "../components/Cookies/cookieConsent";
 
 
 const inter = Inter({
@@ -77,8 +78,7 @@ export default function RootLayout({
         <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD" showSpinner={false}/>
         {children}
         {modal}
-     
-
+        <CookieConsent />
       </body>
     </html>
   );
