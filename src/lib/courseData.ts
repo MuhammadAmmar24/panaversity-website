@@ -10,7 +10,7 @@ export async function getCourseData(c_id: number) {
           Accept: "application/json",
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
-        cache: "force-cache",
+        cache: "no-store",
       }
     );
 

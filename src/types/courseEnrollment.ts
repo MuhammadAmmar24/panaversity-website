@@ -3,6 +3,11 @@ import {
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
 
+interface Pre_req_obj {
+  course_code: string,
+  course_name: string,
+}
+
 export interface CourseData {
   course_batch_program_id: number;
   is_active: boolean;
@@ -17,7 +22,7 @@ export interface CourseData {
   course_description: string;
   course_outcomes: string[];
   long_description: string;
-  pre_requisite: string[];
+  pre_requisite: Pre_req_obj[];
   media_link: string;
   program_id: number;
 }

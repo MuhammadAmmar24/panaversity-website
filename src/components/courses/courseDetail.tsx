@@ -79,7 +79,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
 
 
-
+  // console.log(pre_requisite, "pre_requisite");
 
   
 
@@ -261,26 +261,30 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
         {/* Prerequisites */}
         <div className="mt-12">
-          <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-            Pre Requisites
-          </h2>
-          <ul className="list-disc pl-5 space-y-2">
-            {Array.isArray(pre_requisite) ? (
-              pre_requisite.map((requirement, index) => (
+        <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
+          Pre Requisites
+        </h2>
+        <div>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div className="pl-5">
+            <ul className="list-disc space-y-2 pl-5">
+              {pre_requisite.map((pre_req, index) => (
                 <li
                   key={index}
                   className="text-base font-normal leading-relaxed text-textPrimary/90"
                 >
-                  {requirement}
+                  {pre_req.course_code} - {pre_req.course_name}
                 </li>
-              ))
-            ) : (
-              <li className="text-base font-normal leading-relaxed text-textPrimary/90">
-                No prerequisites available
-              </li>
-            )}
-          </ul>
+              ))}
+            </ul>
+            </div>
+          ) : (
+            <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
         </div>
+      </div>
       </section>
     </main>
   );

@@ -86,6 +86,8 @@ export default async function CoursePage({
 }) {
   const data = await getCourseData(id);
 
+
+
   const { price, currency } = await fetchCoursePrice(
     data?.data?.course_batch_program_id
   );
