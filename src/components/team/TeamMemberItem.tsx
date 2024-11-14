@@ -31,10 +31,10 @@ const TeamMemberItem = ({
     </div>
     <div className="flex flex-col justify-between bg-background  shadow-xl rounded-xl p-4 text-center h-[180px] overflow-y-hidden">
       <div className="">
-        <h4 className="text-lg font-medium">{member.fullName}</h4>
-        <h6 className="text-sm font-medium opacity-75 leading-4">
+        <h2 className="text-lg font-medium">{member.fullName}</h2>
+        <h3 className="text-sm font-medium opacity-75 leading-4">
           {member.designation}
-        </h6>
+        </h3>
       </div>
 
       <p className="text-sm">{member.bio}</p>
@@ -43,6 +43,7 @@ const TeamMemberItem = ({
           <Link
             key={index}
             href={link.href}
+            aria-label="Social Link of team member"
             target="_blank"
             className="text-gray-500 hover:text-gray-900"
           >

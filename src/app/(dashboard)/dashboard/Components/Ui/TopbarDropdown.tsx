@@ -117,7 +117,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         {/* Links to different sections */}
         <ul className="p-2" role="menu">
           {/* Profile settings */}
-          <Link href="/dashboard/profile">
+          <Link href="/dashboard/profile" aria-label="Go to Profile">
             <li
               className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer"
               role="menuitem"

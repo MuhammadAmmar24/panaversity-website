@@ -197,6 +197,7 @@ export default function PrivacyPolicy() {
               </p>
               <Link
                 href={"mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"}
+                aria-label="Contact Us"
                 className="text-green-500 hover:underline text-base sm:text-lg"
               >
                 {privacypolicydata.contactlink}.

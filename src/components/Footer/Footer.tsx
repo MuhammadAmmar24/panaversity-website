@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
               </p>
               <div className="flex gap-4 py-2">
                 {socialIcons.map(({ icon: Icon, name, link }, index) => (
-                  <Link href={link} key={index} target="_blank" aria-label={name}>
+                  <Link href={link}  key={index} target="_blank" aria-label={name}>
                     <Icon className="w-[1.5rem] h-[1.5rem] cursor-pointer text-gray-200 hover:text-green-400 transition-all duration-150" />
                   </Link>
                 ))}

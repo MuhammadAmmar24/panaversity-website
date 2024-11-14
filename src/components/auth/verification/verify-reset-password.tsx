@@ -127,6 +127,7 @@ const VerificationFailedComponent = () => (
     <p className="px-5">Invalid or expired verification link</p>
     <Link
       href="/reset-password"
+      aria-label="Reset password"
       className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
     >
       Reeset Password

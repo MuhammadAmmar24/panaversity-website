@@ -70,7 +70,7 @@ export function MobileMenu() {
       >
         <nav className="flex flex-col justify-between items-center px-4 py-8 h-full">
           <div className="flex flex-col gap-y-4">
-            <Link href="/">
+            <Link href="/" aria-label="Home">
               <Image
                 src="/logos/logo.webp"
                 alt="Logo"
@@ -84,6 +84,7 @@ export function MobileMenu() {
               <SheetClose asChild key={nav.name}>
                 <Link
                   href={nav.link}
+                  aria-label={`${nav.name}`}
                   className="text-md font-medium text-textPrimary hover:text-accent flex items-center gap-3"
                 >
                   {<nav.icon />}

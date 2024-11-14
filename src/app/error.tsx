@@ -24,7 +24,7 @@ export default function ErrorPage() {
           Error: {errorMessage}
         </p>
       )}
-      <Link href="/">
+      <Link href="/" aria-label="Go back to home">
         <div>Go back to Home</div>
       </Link>
     </div>

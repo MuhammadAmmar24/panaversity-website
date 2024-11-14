@@ -1,4 +1,5 @@
 import { FooterColumnProps } from "@/src/types/footer";
+import Link from "next/link";
 
 const FooterColumn: React.FC<FooterColumnProps> = ({
   title,
@@ -11,9 +12,9 @@ const FooterColumn: React.FC<FooterColumnProps> = ({
       <ul className="space-y-2 text-sm">
         {links.map((link, index) => (
           <li key={index}>
-            <a href={link.href} className="hover:text-gray-300 text-gray-400">
+            <Link href={link.href} aria-label={`${link.name}`} className="hover:text-gray-300 text-gray-400">
               {link.name}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

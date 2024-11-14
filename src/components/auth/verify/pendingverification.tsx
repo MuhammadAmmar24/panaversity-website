@@ -25,9 +25,10 @@ const EmailVerificationPending = () => {
         </p>
         <Link 
           href="/resend-link"
-          
-         className="w-full text-center py-3 px-9 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium"
-        replace>
+          aria-label='Click to resend link'
+          replace
+          className="w-full text-center py-3 px-9 text-white rounded-md  bg-accent  hover:bg-[#18c781] font-medium"
+        >
           Send Email Again
         </Link>
       

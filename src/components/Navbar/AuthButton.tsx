@@ -38,6 +38,7 @@ export function AuthButton() {
       <div className="hidden md:flex mt-6">
         <Link
           href={isLoggedIn ? "/dashboard" : "/register"}
+          aria-label={isLoggedIn? 'Go to dashboard page' : 'Go to register page'}
           className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3 overflow-hidden font-bold rounded-full group"
         >
           <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>

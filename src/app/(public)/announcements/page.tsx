@@ -21,6 +21,7 @@ export default function results() {
       </p>
       <Link
         href="/announcements"
+        aria-label="Go to announcements page"
         className="relative inline-block px-8 py-4 mt-6 overflow-hidden font-bold rounded-full group cursor-pointer"
       >
         {/* Background Shape */}
