@@ -15,6 +15,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
+import Courses from "../Courses";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -74,13 +75,59 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn: boolean = await isValidToken()
+  const isLoggedIn: boolean = await isValidToken();
+
+
+
+
+
+  
+
+  // Pre-req data
+  const pre_requisite_data = [
+    {
+      course_id: 1,
+      course_code: " AI-101",
+      course_name: "Modern AI Python Programming",
+    },  
+  ];
+
+  // Call the API to get the student course
+  const student_courses = [
+    {
+      is_graduated: false,
+      course_code: "AI-101",
+    },
+  ];
+
+
+  // Compare the pre-requisite courses with student courses and extract matching ones along with graduation status
+  const prereqCourses = pre_requisite_data
+    .map((prereq) => {
+      const studentCourse = student_courses.find(
+        (course) => course.course_code === prereq.course_code
+      );
+
+      if (studentCourse) {
+        return { ...prereq, is_graduated: studentCourse.is_graduated };
+      }
+      return null; // Return null if no match found (you can filter nulls later if needed)
+    })
+    .filter(Boolean); // Filter out null entries
+
+
+
+
+
+
+
 
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div className=" w-full flex items-center backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
+        <div className=" w-full flex items-center 
+         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
           <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs
@@ -98,7 +145,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
             <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center sm:space-x-4 py-4 lg:pt-4">
               {/* Course Details */}
               <div className="  w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
-              <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">{course_code}</p>
+                <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">
+                  {course_code}
+                </p>
                 <h1 className="font-bold text-3xl xs:text-4xl sm:text-4xl lg:text-5xl text-background font-poppins ">
                   {course_name}
                 </h1>
@@ -141,6 +190,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     </span>
                   </div>
 
+                  {/* Enroll Now Button and Sheet Component  */}
                   <CourseSheet
                     is_registration_open={is_registration_open}
                     program_id={program_id}
@@ -152,6 +202,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
+
+                    // prereqCourses={prereqCourses}
+
+                     
                   />
                 </div>
               </div>
