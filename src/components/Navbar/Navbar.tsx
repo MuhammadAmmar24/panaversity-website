@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../../../public/logos/logo.webp";
@@ -8,14 +7,11 @@ import NavLinks from "./NavLinks";
 import { ScrollHandler } from "./ScrollHandler";
 
 export default function Navbar() {
-
-
-
   return (
     <ScrollHandler>
       <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
         {/* Logo */}
-        <Link href="/"  className="flex items-center gap-2" aria-label="Home">
+        <Link href="/" className="flex items-center gap-2" aria-label="Home">
           <Image
             src={logo}
             alt="Panaversity Logo"
@@ -30,7 +26,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* CTA Button */}
           <div className="">
-            <AuthButton  />
+            <AuthButton />
           </div>
 
           {/* Mobile Menu */}
