@@ -10,6 +10,8 @@ import Link from "next/link";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import { courseData } from "@/src/constants/courses";
+import { formatTime } from "@/src/lib/timeUtils"
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -22,6 +24,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profileId
     );
+    console.log(result)
 
     if (result.type === "error") {
       if (result.message.includes("Not Found")) {
@@ -39,15 +42,18 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
         // Map API response data to the Course[] structure
         recentCourses = result.data.map((courseData) => ({
           title: courseData.course_name,
-          progress: courseData.is_active ? 40 : 100, // Mocked progress
-          lessons: 100, // Mocked lessons count
+          progress: courseData.is_active ? 10 : 14, // Mocked progress
+          classes: 14, // Mocked lessons count
           status: courseData.student_course_status,
           is_paid: courseData.is_paid,
           batch_no: courseData.batch_id,
           student_course_id: courseData.student_course_id,
           course_batch_program_id: courseData.course_batch_program_id,
+          course_id: courseData.course_id,
+          start_time: formatTime(courseData.class_time_slot?.slot_start_time || ""),
+          day: courseData.class_time_slot?.time_slot_day || "",
+          course_code: courseData.course_code
         }));
-
         status = recentCourses[0]?.status ?? "inactive"; // Set status based on the first course
         enrollmentStatus = "enrolled";
       }
@@ -68,7 +74,6 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
         <div className="flex justify-center mt-8">
           <Link
             href={"/programs"}
-            aria-label="Explore Courses"
             className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
           >
             <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
@@ -93,7 +98,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
       />
 
       {/* Render Class Sections only if the user has an active course */}
-      {status === "active" && (
+      {/* {status === "active" && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
           <ClassSection title="Recent Classes" classes={mockRecentClasses} />
           <UpcomingClassSection
@@ -101,7 +106,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
             classes={mockUpcomingClasses}
           />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

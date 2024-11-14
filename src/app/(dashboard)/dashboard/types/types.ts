@@ -9,12 +9,15 @@ export interface ClassCardProps {
 export interface CourseCardProps {
   title: string;
   progress: number;
-  lessons: number;
+  classes: number;
   status: string;
   batch_id: number;
   student_course_id: number;
   course_batch_program_id: number;
   profile: ProfileData;
+  course_code: string; // Add course_code property
+  start_time: string; // Add start_time property
+  day: string; // Add day property
 }
 
 export interface CardData {
@@ -26,12 +29,15 @@ export interface CardData {
 export interface Course {
   title: string;
   progress: number;
-  lessons: number;
+  classes: number;
   status: string;
   is_paid: boolean;
   batch_no: number;
   student_course_id: number;
   course_batch_program_id: number;
+  course_code: string; // Add course_code property
+  start_time: string; // Add start_time property
+  day: string; // Add day property
 }
 
 export interface Class {
