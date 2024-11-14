@@ -3,6 +3,7 @@ import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
+import { notFound } from 'next/navigation'; // Import the notFound helper
 
 export const revalidate = 7200;
 
@@ -38,16 +39,19 @@ export async function generateStaticParams() {
   };
   const result = await getProgramCoursesWithOpenRegistration(query);
 
-  if (result.type === "success" && result.data) {
-    const idRoutes: number[] = result?.data?.data.map(
-      (course: any) => course.course_id
-    );
-    return idRoutes?.map((course_id: number) => ({
+  if (result.type === "success" && Array.isArray(result.data?.data)) {
+    const idRoutes: number[] = result.data.data
+      .filter((course: any) => course.course_id) // Ensure each course has a valid ID
+      .map((course: any) => course.course_id);
+
+    return idRoutes.map((course_id: number) => ({
       id: course_id.toString(),
     }));
   }
+
   return [];
 }
+
 
 export interface CourseData {
   course_batch_program_id: number;
@@ -68,7 +72,7 @@ export interface CourseData {
 }
 
 async function fetchCoursePrice(course_batch_program_id: number) {
-  const params = { course_batch_program_id: course_batch_program_id }; // Replace with actual course_batch_program_id
+  const params = { course_batch_program_id: course_batch_program_id }; 
 
   const result = await getCoursePrice(params);
 
@@ -79,18 +83,26 @@ async function fetchCoursePrice(course_batch_program_id: number) {
   }
 }
 
+
 export default async function CoursePage({
   params: { id },
 }: {
-  params: { id: number };
+  params: { id: string };
 }) {
-  const data = await getCourseData(id);
+  const courseId = parseInt(id);
+  const data = await getCourseData(courseId);
 
+  // Handle case where course data is not found
+  if (!data || !data.data) {
+    return notFound(); // Renders a 404 page
+  }
 
+  const courseBatchProgramId = data.data.course_batch_program_id;
+  if (!courseBatchProgramId) {
+    return notFound(); // Renders a 404 page if course_batch_program_id is missing
+  }
 
-  const { price, currency } = await fetchCoursePrice(
-    data?.data?.course_batch_program_id
-  );
+  const { price, currency } = await fetchCoursePrice(courseBatchProgramId);
 
   return (
     <CourseDetailsClient
