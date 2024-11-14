@@ -1,13 +1,22 @@
 "use client";
 
 import { Button } from "@/src/components/ui/button";
-import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/src/components/ui/sheet";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetClose,
+  SheetHeader,
+  SheetDescription,
+} from "@/src/components/ui/sheet";
 import Link from "next/link";
 import { navItems } from "@/src/constants/nav";
 import Image from "next/image";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 export function MobileMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,19 +25,19 @@ export function MobileMenu() {
   useEffect(() => {
     async function checkAuthStatus() {
       try {
-        const response = await fetch('/api', {
-          method: 'GET',
-          credentials: 'include',
+        const response = await fetch("/api", {
+          method: "GET",
+          credentials: "include",
         });
-        
+
         if (!response.ok) {
-          throw new Error('Auth check failed');
+          throw new Error("Auth check failed");
         }
 
         const data = await response.json();
         setIsLoggedIn(data.isAuthenticated);
       } catch (error) {
-        console.error('Auth check error:', error);
+        console.error("Auth check error:", error);
         setIsLoggedIn(false);
       } finally {
         setIsLoading(false);
@@ -68,6 +77,14 @@ export function MobileMenu() {
         side="left"
         className="max-w-64 md:hidden border-0 bg-white/80 backdrop-blur-lg"
       >
+        <SheetHeader>
+          <VisuallyHidden>
+            <DialogTitle>Mobile Menu</DialogTitle>
+            <SheetDescription>
+              Menu Sheet for mobile devices
+            </SheetDescription>
+          </VisuallyHidden>
+        </SheetHeader>
         <nav className="flex flex-col justify-between items-center px-4 py-8 h-full">
           <div className="flex flex-col gap-y-4">
             <Link href="/" aria-label="Home">
