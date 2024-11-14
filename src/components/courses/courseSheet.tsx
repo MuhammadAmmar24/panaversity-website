@@ -24,6 +24,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   coursePrice,
   courseName,
   isLoggedIn,
+  prereqCourses,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 

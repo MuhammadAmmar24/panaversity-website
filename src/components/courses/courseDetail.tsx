@@ -83,40 +83,62 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   
 
-  // Pre-req data
-  const pre_requisite_data = [
+  interface PreRequisiteCourse {
+    course_code: string;
+    course_name: string;
+    is_graduated: boolean;
+  }
+  
+  interface PreRequisiteDataItem {
+    course_code: string;
+    course_name: string;
+  }
+  
+  interface StudentCourse {
+    is_graduated: boolean;
+    course_code: string;
+  }
+  
+  // Your data
+  const pre_requisite_data: PreRequisiteDataItem[] = [
     {
-      course_id: 1,
-      course_code: " AI-101",
+      course_code: "AI-101",
       course_name: "Modern AI Python Programming",
-    },  
+    },
   ];
-
-  // Call the API to get the student course
-  const student_courses = [
+  
+  const student_courses: StudentCourse[] = [
     {
       is_graduated: false,
       course_code: "AI-101",
     },
   ];
-
-
-  // Compare the pre-requisite courses with student courses and extract matching ones along with graduation status
-  const prereqCourses = pre_requisite_data
-    .map((prereq) => {
+  
+  // Fixed mapping logic with proper type assertions
+  const prereqCourses: PreRequisiteCourse[] = pre_requisite_data
+    .map((prereq): PreRequisiteCourse | null => {
       const studentCourse = student_courses.find(
         (course) => course.course_code === prereq.course_code
       );
-
+  
       if (studentCourse) {
-        return { ...prereq, is_graduated: studentCourse.is_graduated };
+        return {
+          course_code: prereq.course_code,
+          course_name: prereq.course_name,
+          is_graduated: studentCourse.is_graduated,
+        };
       }
-      return null; // Return null if no match found (you can filter nulls later if needed)
+      return null;
     })
-    .filter(Boolean); // Filter out null entries
+    .filter((course): course is PreRequisiteCourse => course !== null);
 
 
 
+  // 4 Senarios 
+  // 1. No pre-requisite courses -> Null
+  // 2. Pre-requisite courses but student does not have enrollment -> Enroll
+  // 3. Pre-requisite courses are not completed -> Complete
+  // 4. Pre-requisite courses are completed -> Completed
 
 
 
@@ -203,7 +225,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
 
-                    // prereqCourses={prereqCourses}
+                    prereqCourses={prereqCourses}
 
                      
                   />
