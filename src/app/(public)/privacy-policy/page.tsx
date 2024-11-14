@@ -133,6 +133,27 @@ export default function PrivacyPolicy() {
               </>,
             ]}
           />
+
+<SectionWithList
+            title={privacypolicydata.headpolicy2a}
+            subtitle={privacypolicydata.policy2asubhead}
+            items={[
+              <>
+                <strong>Obtaining Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription1}
+              </>,
+              <>
+                <strong>Withdrawing Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription2}
+              </>,
+              <>
+                <strong>Parental Consent:</strong>{" "}
+                {privacypolicydata.policy2adescription3}
+              </>,
+      
+            ]}
+          />
+          
           <Section
             title={privacypolicydata.headpolicy3}
             content={privacypolicydata.policy3description1}
