@@ -10,7 +10,6 @@ export async function getCourseData(c_id: number) {
           Accept: "application/json",
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
-        // next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
         cache: "force-cache",
       }
     );
