@@ -24,6 +24,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   coursePrice,
   courseName,
   isLoggedIn,
+  prereqCourses,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
@@ -88,6 +89,14 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             </SheetDescription>
           </VisuallyHidden.Root>
         </SheetHeader>
+
+
+        {/* Render this component if student has pre-req  */}
+        {/* <EnrollInPreReq /> */}
+
+        {/* OR */}
+
+        {/* Render this component if student has no pre-req or skipped pre-req */}
         <GetEnrolled
           program_id={program_id}
           batch_id={batch_id}
@@ -96,6 +105,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           timeSlots={timeSlots}
           coursePrice={coursePrice}
         />
+
+
+        
       </SheetContent>
     </Sheet>
   );

@@ -15,6 +15,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
+import Courses from "../Courses";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -74,13 +75,81 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     currency: "",
   };
 
-  const isLoggedIn: boolean = await isValidToken()
+  const isLoggedIn: boolean = await isValidToken();
+
+
+
+  // console.log(pre_requisite, "pre_requisite");
+
+  
+
+  interface PreRequisiteCourse {
+    course_code: string;
+    course_name: string;
+    is_graduated: boolean;
+  }
+  
+  interface PreRequisiteDataItem {
+    course_code: string;
+    course_name: string;
+  }
+  
+  interface StudentCourse {
+    is_graduated: boolean;
+    course_code: string;
+  }
+  
+  // Your data
+  const pre_requisite_data: PreRequisiteDataItem[] = [
+    {
+      course_code: "AI-101",
+      course_name: "Modern AI Python Programming",
+    },
+  ];
+  
+  const student_courses: StudentCourse[] = [
+    {
+      is_graduated: false,
+      course_code: "AI-101",
+    },
+  ];
+  
+  // Fixed mapping logic with proper type assertions
+  const prereqCourses: PreRequisiteCourse[] = pre_requisite_data
+    .map((prereq): PreRequisiteCourse | null => {
+      const studentCourse = student_courses.find(
+        (course) => course.course_code === prereq.course_code
+      );
+  
+      if (studentCourse) {
+        return {
+          course_code: prereq.course_code,
+          course_name: prereq.course_name,
+          is_graduated: studentCourse.is_graduated,
+        };
+      }
+      return null;
+    })
+    .filter((course): course is PreRequisiteCourse => course !== null);
+
+
+
+  // 4 Senarios 
+  // 1. No pre-requisite courses -> Null
+  // 2. Pre-requisite courses but student does not have enrollment -> Enroll
+  // 3. Pre-requisite courses are not completed -> Complete
+  // 4. Pre-requisite courses are completed -> Completed
+
+
+
+
 
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div className=" w-full flex items-center backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
+        <div className=" w-full flex items-center 
+         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
           <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs
@@ -98,7 +167,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
             <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center sm:space-x-4 py-4 lg:pt-4">
               {/* Course Details */}
               <div className="  w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
-              <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">{course_code}</p>
+                <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">
+                  {course_code}
+                </p>
                 <h1 className="font-bold text-3xl xs:text-4xl sm:text-4xl lg:text-5xl text-background font-poppins ">
                   {course_name}
                 </h1>
@@ -141,6 +212,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     </span>
                   </div>
 
+                  {/* Enroll Now Button and Sheet Component  */}
                   <CourseSheet
                     is_registration_open={is_registration_open}
                     program_id={program_id}
@@ -152,6 +224,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
+
+                    prereqCourses={prereqCourses}
+
+                     
                   />
                 </div>
               </div>
@@ -185,26 +261,30 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
         {/* Prerequisites */}
         <div className="mt-12">
-          <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-            Pre Requisites
-          </h2>
-          <ul className="list-disc pl-5 space-y-2">
-            {Array.isArray(pre_requisite) ? (
-              pre_requisite.map((requirement, index) => (
+        <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
+          Pre Requisites
+        </h2>
+        <div>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div className="pl-5">
+            <ul className="list-disc space-y-2 pl-5">
+              {pre_requisite.map((pre_req, index) => (
                 <li
                   key={index}
                   className="text-base font-normal leading-relaxed text-textPrimary/90"
                 >
-                  {requirement}
+                  {pre_req.course_code} - {pre_req.course_name}
                 </li>
-              ))
-            ) : (
-              <li className="text-base font-normal leading-relaxed text-textPrimary/90">
-                No prerequisites available
-              </li>
-            )}
-          </ul>
+              ))}
+            </ul>
+            </div>
+          ) : (
+            <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
         </div>
+      </div>
       </section>
     </main>
   );
