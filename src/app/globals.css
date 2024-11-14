@@ -261,7 +261,7 @@ body {
   pointer-events: none;
 }
 
-/* AccordionItem.module.css */
+/* FAQ AccordionItem Styling*/
 .content ul {
   @apply list-disc ml-5 mt-2;
 }

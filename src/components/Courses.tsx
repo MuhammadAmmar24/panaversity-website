@@ -7,8 +7,6 @@ export default function Courses() {
     title: course.title,
     content: (
       <CourseCard
-        title={"course.title"}
-        image={course.image}
         content={course.content}
       />
     ),

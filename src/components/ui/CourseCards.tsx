@@ -1,12 +1,10 @@
 import { Card, CardContent } from "@/src/components/ui/card";
 
 interface CourseCardProps {
-  title: string;
-  image: string;
   content: { quarter: string; title: string; description: string }[];
 }
 
-export default function CourseCard({ title, image, content }: CourseCardProps) {
+export default function CourseCard({ content }: CourseCardProps) {
   return (
     <Card className="w-full bg-inherit border-none shadow-none">
       <CardContent className="flex flex-col space-y-4 items-center justify-center">
