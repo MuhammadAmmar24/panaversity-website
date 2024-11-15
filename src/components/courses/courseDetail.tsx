@@ -81,42 +81,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
 
 
-
-  
-
-  interface PreRequisiteCourse {
-    course_code: string;
-    course_name: string;
-    is_graduated: boolean;
-  }
-  
-  interface PreRequisiteDataItem {
-    course_code: string;
-    course_name: string;
-  }
-  
-  interface StudentCourse {
-    is_graduated: boolean;
-    course_code: string;
-  }
-  
-  
-
-  console.log("************************************************************************************************************")
-  console.log(pre_requisite, "Pre Requisite Courses");
-
-  // const student_courses: StudentCourse[] = [
-  //   {
-  //     is_graduated: false,
-  //     course_code: "AI-101",
-  //   }
-  // ];
-
   let student_courses : any = []
   const profile: ProfileData = await fetchProfile();
-
-  
-
 
   try {
   
@@ -124,40 +90,18 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
       profile.id
     );
     student_courses  = result.data
+  
 
-    console.log(student_courses, "Student Courses");
 
   } catch (error: any) {
     console.error("Error fetching student courses: ", error.message); 
   }
   
 
-  const prereqCourses: PreRequisiteCourse[] = pre_requisite
-    .map((prereq): PreRequisiteCourse | null => {
-      const studentCourse = student_courses.find(
-        (course:any) => course?.course_code?.trim() === prereq?.course_code?.trim()
-      );
-      
-      if (studentCourse) {
-        return {
-          course_code: prereq.course_code.trim(), 
-          course_name: prereq.course_name,
-          is_graduated: studentCourse.is_graduated,
-        };
-      }
-      return null;
-    })
-    .filter((course): course is PreRequisiteCourse => course !== null);
 
-
-
-  console.log(prereqCourses, "Pre-Req");
-  console.log("************************************************************************************************************")
-
-  
 
   // 4 Senarios 
-    // 1. No pre-requisite courses -> Null =
+    // 1. No pre-requisite courses -> Null 
     // 2. Pre-requisite courses but student does not have enrollment -> Enroll
     // 3. Pre-requisite courses are not completed -> Complete
     // 4. Pre-requisite courses are completed -> Completed
@@ -247,6 +191,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
+                    student_courses={student_courses}
                     // prereqCourses={prereqCourses}
                   />
                 </div>

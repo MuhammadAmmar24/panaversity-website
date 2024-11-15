@@ -50,6 +50,7 @@ export interface GetEnrolledProps {
   timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
   pre_requisite: Pre_req_obj[];
+  student_courses: any;
 }
 
 interface PreRequisiteCourse {
@@ -70,6 +71,7 @@ export interface CourseSheetProps {
   courseName: string;
   isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
+  student_courses: any;
   // prereqCourses: PreRequisiteCourse[]; 
 }
 
