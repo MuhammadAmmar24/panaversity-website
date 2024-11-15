@@ -17,8 +17,6 @@ const VerifyResetPassword: React.FC<VerifyEmailProps> = ({ token }) => {
 
   const router = useRouter();
 
-
-
   useEffect(() => {
     const verifyToken = async () => {
       if (token) {

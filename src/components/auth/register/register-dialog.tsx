@@ -2,7 +2,6 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { RegisterForm } from "./register-form";
 

@@ -2,7 +2,11 @@ import ResendLinkDialog from "@/src/components/auth/resend-link/resendLink-dialo
 import { Suspense } from "react";
 
 const page = () => {
-  return <ResendLinkDialog />;
+  return (
+    <Suspense fallback={null}>
+      <ResendLinkDialog />
+    </Suspense>
+  );
 };
 
 export default page;

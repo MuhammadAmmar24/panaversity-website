@@ -41,13 +41,13 @@ export default function CookieConsent() {
       <div className="space-x-8">
         <button
           onClick={handleAccept}
-          className="bg-accent hover:bg-white text-white hover:text-accent py-2 px-4 rounded-lg"
+          className="bg-accent  text-white py-2 px-4 rounded-lg"
         >
           Accept
         </button>
         <button
           onClick={handleReject}
-          className="bg-gray-800 hover:bg-white text-white hover:text-gray-600 py-2 px-4 rounded-lg"
+          className="bg-gray-800  text-white  py-2 px-4 rounded-lg"
         >
           Reject
         </button>
