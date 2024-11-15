@@ -79,43 +79,26 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   const isLoggedIn: boolean = await isValidToken();
 
-
-
-  let student_courses : any = []
+  let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
 
   try {
-  
     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profile.id
     );
-    student_courses  = result.data
-  
-
-
+    student_courses = result.data;
   } catch (error: any) {
-    console.error("Error fetching student courses: ", error.message); 
+    console.error("Error fetching student courses: ", error.message);
   }
-  
-
-
-
-  // 4 Senarios 
-    // 1. No pre-requisite courses -> Null 
-    // 2. Pre-requisite courses but student does not have enrollment -> Enroll
-    // 3. Pre-requisite courses are not completed -> Complete
-    // 4. Pre-requisite courses are completed -> Completed
-
-
-
-
 
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div className=" w-full flex items-center 
-         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
+        <div
+          className=" w-full flex items-center 
+         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]"
+        >
           <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs
@@ -192,7 +175,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
-                    // prereqCourses={prereqCourses}
+
                   />
                 </div>
               </div>
@@ -226,30 +209,30 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
         {/* Prerequisites */}
         <div className="mt-12">
-        <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-          Pre Requisites
-        </h2>
-        <div>
-          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-            <div className="pl-5">
-            <ul className="list-disc space-y-2 pl-5">
-              {pre_requisite.map((pre_req, index) => (
-                <li
-                  key={index}
-                  className="text-base font-normal leading-relaxed text-textPrimary/90"
-                >
-                  {pre_req.course_code} - {pre_req.course_name}
-                </li>
-              ))}
-            </ul>
-            </div>
-          ) : (
-            <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
-              There are no pre-requisites for this course.
-            </p>
-          )}
+          <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
+            Pre Requisites
+          </h2>
+          <div>
+            {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+              <div className="pl-5">
+                <ul className="list-disc space-y-2 pl-5">
+                  {pre_requisite.map((pre_req, index) => (
+                    <li
+                      key={index}
+                      className="text-base font-normal leading-relaxed text-textPrimary/90"
+                    >
+                      {pre_req.course_code} - {pre_req.course_name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
+                There are no pre-requisites for this course.
+              </p>
+            )}
+          </div>
         </div>
-      </div>
       </section>
     </main>
   );

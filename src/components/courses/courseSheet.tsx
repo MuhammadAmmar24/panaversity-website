@@ -26,7 +26,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   isLoggedIn,
   pre_requisite,
   student_courses,
-  // prereqCourses,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
@@ -106,8 +105,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           student_courses={student_courses}
           />
 
-
-        
       </SheetContent>
     </Sheet>
   );

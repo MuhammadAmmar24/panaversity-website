@@ -1,4 +1,5 @@
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
+import { formatTime } from "@/src/lib/timeUtils";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -105,67 +106,60 @@ export default function GetEnrolled({
   return (
     <>
       <div className="rounded-3xl container mx-auto max-w-full px-2 pt-5">
-        <h1 className="text-2xl font-bold mb-4 mt-5">Pre Requisite Courses:</h1>
+        <h1 className="text-2xl font-bold mb-4 mt-5">Pre Requisites:</h1>
         <div>
-        {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-  <div className="pl-5">
-    <ol className="list-decimal space-y-2 pl-5">
-      {pre_requisite.map((pre_req, index) => {
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div>
+              <ol className="list-decimal space-y-2 pl-5 ">
+                {pre_requisite.map((pre_req, index) => {
+                  const studentCourse = student_courses.find(
+                    (course: any) =>
+                      course?.course_code?.trim() === pre_req.course_code.trim()
+                  );
 
-        const studentCourse = student_courses.find(
-          (course: any) => course?.course_code?.trim() === pre_req.course_code.trim()
-        );
+                  let statusText = "Not Enrolled";
+                  let statusClass = "bg-red-600 text-white";
+                  let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
 
-     
-        let statusText = "Not Enrolled";
-        let statusClass = "bg-red-600 text-white";
-        let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
+                  if (studentCourse) {
+                    linkHref = "/dashboard";
+                    if (studentCourse.is_graduated) {
+                      statusText = "Completed";
+                      statusClass = "bg-green-500 text-white";
+                    } else {
+                      statusText = "In Progress";
+                      statusClass = "bg-yellow-500 text-white";
+                    }
+                  }
 
-
-        if (studentCourse) {
-          linkHref = "/dashboard"; 
-          if (studentCourse.is_graduated) {
-            statusText = "Completed";
-            statusClass = "bg-green-500 text-white";
-          } else {
-            statusText = "In Progress";
-            statusClass = "bg-yellow-500 text-white";
-          }
-        }
-
-        return (
-          <Link
-            key={index}
-            href={linkHref}
-          >
-            <li className="text-base font-normal leading-relaxed text-textPrimary/90  ">
-            <div className="flex items-center gap-4 ">
-  <span className="underline decoration-accent decoration-2">
-    {pre_req.course_code}
-  </span>
-  <span className={`text-[0.6rem] rounded-xl px-2 py-1 ${statusClass}`}>
-    {statusText}
-  </span>
-</div>
-              
-              {/* <span className="">
-              {pre_req.course_name}
-              </span> */}
-            </li>
-          </Link>
-        );
-      })}
-    </ol>
-  </div>
-) : (
-  <p className="pl-5 text-base font-normal leading-relaxed text-textPrimary/90">
-    There are no pre-requisites for this course.
-  </p>
-)}
+                  return (
+                    <Link key={index} href={linkHref}>
+                      <li className="text-base font-normal leading-relaxed text-textPrimary/90  ">
+                        <div className="flex items-center gap-4  ml-1 ">
+                          <span className="underline decoration-accent decoration-2">
+                            {pre_req.course_code}
+                          </span>
+                          <span
+                            className={`text-[0.6rem] rounded-xl px-2 py-1 ${statusClass}`}
+                          >
+                            {statusText}
+                          </span>
+                        </div>
+                      </li>
+                    </Link>
+                  );
+                })}
+              </ol>
+            </div>
+          ) : (
+            <p className="text-base font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
         </div>
       </div>
       <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
-        <h1 className="text-2xl font-bold mb-8 mt-5">Get Enrolled</h1>
+        <h1 className="text-2xl font-bold mb-4 mt-5">Get Enrolled</h1>
 
         <div className="space-y-7 w-full">
           <SelectField
@@ -300,15 +294,4 @@ function SelectField({
       </div>
     </div>
   );
-}
-
-export function formatTime(time: string): string {
-  const date = new Date(`1970-01-01T${time}Z`);
-  const formattedTime = date.toLocaleString(undefined, {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  });
-  return formattedTime;
 }

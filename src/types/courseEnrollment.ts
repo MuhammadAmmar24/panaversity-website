@@ -2,6 +2,7 @@ import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
+import { StudentCourseStatus } from "../lib/schemas/enrollment";
 
 interface Pre_req_obj {
   course_code: string,
@@ -71,8 +72,7 @@ export interface CourseSheetProps {
   courseName: string;
   isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
-  student_courses: any;
-  // prereqCourses: PreRequisiteCourse[]; 
+  student_courses: StudentCourseStatus[];
 }
 
 export interface RatingStarsProps {
