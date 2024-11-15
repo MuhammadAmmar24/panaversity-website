@@ -25,7 +25,7 @@ const initialData = {
 };
 
 const mockRecentCourses = [
-  { title: "Gen AI & Cloud Services", progress: 60, lessons: 100 },
+  { title: "Gen AI & Cloud Services", progress: 10, lessons: 14 },
 ];
 
 const mockRecentClasses = [
