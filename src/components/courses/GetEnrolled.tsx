@@ -1,5 +1,7 @@
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
+import { formatTime } from "@/src/lib/timeUtils";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -11,6 +13,8 @@ export default function GetEnrolled({
   profile_id,
   timeSlots,
   coursePrice,
+  pre_requisite,
+  student_courses,
 }: GetEnrolledProps) {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -33,7 +37,7 @@ export default function GetEnrolled({
         (slot) => slot.time_slot_day === selectedDay
       );
       if (selectedSlot) {
-        const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats
+        const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats;
         seats_left > 0 ? setRemainingSeats(seats_left) : setRemainingSeats(0);
       }
     }
@@ -100,81 +104,144 @@ export default function GetEnrolled({
   };
 
   return (
-    <div className="rounded-3xl container mx-auto max-w-full px-2">
-      <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
+    <>
+      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-5">
+        <h1 className="text-2xl font-bold mb-4 mt-5">Pre Requisites:</h1>
+        <div>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div>
+              <ol className="list-decimal space-y-2 pl-5 ">
+                {pre_requisite.map((pre_req, index) => {
+                  const studentCourse = student_courses.find(
+                    (course: any) =>
+                      course?.course_code?.trim() === pre_req.course_code.trim()
+                  );
 
-      <div className="space-y-7 w-full">
-        <SelectField
-          label="Day"
-          value={selectedDay}
-          onChange={(e: any) => {
-            setSelectedDay(e.target.value);
-            setSelectedTimeSlot("");
-          }}
-          options={uniqueDays}
-          placeholder="Select Day"
-        />
+                  let statusText = "Not Enrolled";
+                  let statusClass = "bg-red-600 text-white";
+                  let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
 
-        <SelectField
-          label="Time"
-          value={selectedTimeSlot}
-          onChange={(e: any) => {
-            setSelectedTimeSlot(e.target.value);
-            setSelectedTimeSlotId(parseInt(e.target.value, 10));
-          }}
-          options={timeSlotsForSelectedDay.map((slot) => ({
-            value: slot.timeSlotId.toString(),
-            label: slot.label,
-          }))}
-          placeholder="Select Time"
-          disabled={!selectedDay}
-        />
+                  if (studentCourse) {
+                    linkHref = "/dashboard";
+                    if (studentCourse.is_graduated) {
+                      statusText = "Completed";
+                      statusClass = "bg-green-500 text-white";
+                    } else {
+                      statusText = "In Progress";
+                      statusClass = "bg-yellow-500 text-white";
+                    }
+                  }
 
-        <SelectField
-          label="Payment Method"
-          value={paymentMethod}
-          onChange={(e: any) => setPaymentMethod(e.target.value)}
-          options={[{ value: "STRIPE", label: "Stripe" }]} // Currently only Stripe
-          placeholder="Select Payment Method"
-        />
-
-        <div className="mb-6 text-red-500">
-          <span className="text-lg font-semibold">Remaining Seats: </span>
-          <span className="text-lg">
-            {remainingSeats === null
-              ? "..."
-              : remainingSeats === 0
-              ? "0"
-              : remainingSeats}
-          </span>
-        </div>
-
-        {/* Payment Method Dropdown */}
-
-        <button
-          className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
-            selectedDay && selectedTimeSlot && !isPending && remainingSeats! > 0
-              ? "bg-accent text-white hover:bg-[#18c781]"
-              : "bg-gray-300 text-gray-500 cursor-not-allowed"
-          }`}
-          disabled={!selectedDay || !selectedTimeSlot || isPending || remainingSeats === 0}
-          onClick={handleEnroll}
-        >
-          {isPending ? (
-            <>
-              <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-              Enrolling...
-            </>
+                  return (
+                    <Link key={index} href={linkHref}>
+                      <li className="text-base font-normal leading-relaxed text-textPrimary/90  ">
+                        <div className="flex items-center gap-4  ml-1 ">
+                          <span className="underline decoration-accent decoration-2">
+                            {pre_req.course_code}
+                          </span>
+                          <span
+                            className={`text-[0.6rem] rounded-xl px-2 py-1 ${statusClass}`}
+                          >
+                            {statusText}
+                          </span>
+                        </div>
+                      </li>
+                    </Link>
+                  );
+                })}
+              </ol>
+            </div>
           ) : (
-            "Enroll"
+            <p className="text-base font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
           )}
-        </button>
-
-        {enrollmentError && (
-          <p className="text-red-500 mt-4">{enrollmentError}</p>
-        )}
+        </div>
       </div>
-    </div>
+      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
+        <h1 className="text-2xl font-bold mb-4 mt-5">Get Enrolled</h1>
+
+        <div className="space-y-7 w-full">
+          <SelectField
+            label="Day"
+            value={selectedDay}
+            onChange={(e: any) => {
+              setSelectedDay(e.target.value);
+              setSelectedTimeSlot("");
+            }}
+            options={uniqueDays}
+            placeholder="Select Day"
+          />
+
+          <SelectField
+            label="Time"
+            value={selectedTimeSlot}
+            onChange={(e: any) => {
+              setSelectedTimeSlot(e.target.value);
+              setSelectedTimeSlotId(parseInt(e.target.value, 10));
+            }}
+            options={timeSlotsForSelectedDay.map((slot) => ({
+              value: slot.timeSlotId.toString(),
+              label: slot.label,
+            }))}
+            placeholder="Select Time"
+            disabled={!selectedDay}
+          />
+
+          <SelectField
+            label="Payment Method"
+            value={paymentMethod}
+            onChange={(e: any) => setPaymentMethod(e.target.value)}
+            options={[{ value: "STRIPE", label: "Stripe" }]} // Currently only Stripe
+            placeholder="Select Payment Method"
+          />
+
+          <div className="mb-6 text-red-500">
+            <span className="text-lg font-semibold">Remaining Seats: </span>
+            <span className="text-lg">
+              {remainingSeats === null
+                ? "..."
+                : remainingSeats === 0
+                ? "0"
+                : remainingSeats}
+            </span>
+          </div>
+
+          {/* Payment Method Dropdown */}
+
+          <button
+            className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
+              selectedDay &&
+              selectedTimeSlot &&
+              !isPending &&
+              remainingSeats! > 0
+                ? "bg-accent text-white hover:bg-[#18c781]"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+            }`}
+            disabled={
+              !selectedDay ||
+              !selectedTimeSlot ||
+              isPending ||
+              remainingSeats === 0
+            }
+            onClick={handleEnroll}
+          >
+            {isPending ? (
+              <>
+                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+                Enrolling...
+              </>
+            ) : (
+              "Enroll"
+            )}
+          </button>
+
+          {enrollmentError && (
+            <p className="text-red-500 mt-4">{enrollmentError}</p>
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -227,15 +294,4 @@ function SelectField({
       </div>
     </div>
   );
-}
-
-export function formatTime(time: string): string {
-  const date = new Date(`1970-01-01T${time}Z`);
-  const formattedTime = date.toLocaleString(undefined, {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  });
-  return formattedTime;
 }

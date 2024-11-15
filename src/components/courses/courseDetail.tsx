@@ -5,17 +5,20 @@ import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
+import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import fetchProfile from "@/src/lib/getProfile";
 import {
   CourseDetailsClientProps,
   CourseInfoProps,
   LearnPointProps,
 } from "@/src/types/courseEnrollment";
+import { Result } from "@/src/types/types";
+import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
-import Courses from "../Courses";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -45,7 +48,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     course_outcomes,
     long_description,
     pre_requisite,
-    media_link,
     is_registration_open,
     batch_id,
     course_batch_program_id,
@@ -77,79 +79,26 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   const isLoggedIn: boolean = await isValidToken();
 
+  let student_courses: any = [];
+  const profile: ProfileData = await fetchProfile();
 
-
-  // console.log(pre_requisite, "pre_requisite");
-
-  
-
-  interface PreRequisiteCourse {
-    course_code: string;
-    course_name: string;
-    is_graduated: boolean;
+  try {
+    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+      profile.id
+    );
+    student_courses = result.data;
+  } catch (error: any) {
+    console.error("Error fetching student courses: ", error.message);
   }
-  
-  interface PreRequisiteDataItem {
-    course_code: string;
-    course_name: string;
-  }
-  
-  interface StudentCourse {
-    is_graduated: boolean;
-    course_code: string;
-  }
-  
-  // Your data
-  const pre_requisite_data: PreRequisiteDataItem[] = [
-    {
-      course_code: "AI-101",
-      course_name: "Modern AI Python Programming",
-    },
-  ];
-  
-  const student_courses: StudentCourse[] = [
-    {
-      is_graduated: false,
-      course_code: "AI-101",
-    },
-  ];
-  
-  // Fixed mapping logic with proper type assertions
-  const prereqCourses: PreRequisiteCourse[] = pre_requisite_data
-    .map((prereq): PreRequisiteCourse | null => {
-      const studentCourse = student_courses.find(
-        (course) => course.course_code === prereq.course_code
-      );
-  
-      if (studentCourse) {
-        return {
-          course_code: prereq.course_code,
-          course_name: prereq.course_name,
-          is_graduated: studentCourse.is_graduated,
-        };
-      }
-      return null;
-    })
-    .filter((course): course is PreRequisiteCourse => course !== null);
-
-
-
-  // 4 Senarios 
-  // 1. No pre-requisite courses -> Null
-  // 2. Pre-requisite courses but student does not have enrollment -> Enroll
-  // 3. Pre-requisite courses are not completed -> Complete
-  // 4. Pre-requisite courses are completed -> Completed
-
-
-
-
 
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div className=" w-full flex items-center 
-         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]">
+        <div
+          className=" w-full flex items-center 
+         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]"
+        >
           <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
             {/* Breadcrumb Navigation */}
             <Breadcrumbs
@@ -224,10 +173,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
+                    pre_requisite={pre_requisite}
+                    student_courses={student_courses}
 
-                    prereqCourses={prereqCourses}
-
-                     
                   />
                 </div>
               </div>
@@ -261,30 +209,30 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
         {/* Prerequisites */}
         <div className="mt-12">
-        <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
-          Pre Requisites
-        </h2>
-        <div>
-          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-            <div className="pl-5">
-            <ul className="list-disc space-y-2 pl-5">
-              {pre_requisite.map((pre_req, index) => (
-                <li
-                  key={index}
-                  className="text-base font-normal leading-relaxed text-textPrimary/90"
-                >
-                  {pre_req.course_code} - {pre_req.course_name}
-                </li>
-              ))}
-            </ul>
-            </div>
-          ) : (
-            <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
-              There are no pre-requisites for this course.
-            </p>
-          )}
+          <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
+            Pre Requisites
+          </h2>
+          <div>
+            {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+              <div className="pl-5">
+                <ul className="list-disc space-y-2 pl-5">
+                  {pre_requisite.map((pre_req, index) => (
+                    <li
+                      key={index}
+                      className="text-base font-normal leading-relaxed text-textPrimary/90"
+                    >
+                      {pre_req.course_code} - {pre_req.course_name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
+                There are no pre-requisites for this course.
+              </p>
+            )}
+          </div>
         </div>
-      </div>
       </section>
     </main>
   );
