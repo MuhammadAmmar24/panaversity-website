@@ -15,11 +15,9 @@ const page = () => {
     <>
       <Navbar />
       <div className="flex justify-center items-center min-h-[85vh]">
-        <Suspense>
-          <CardWrapper headerLabel="Verify Your Email">
-            <ResendLink />
-          </CardWrapper>
-        </Suspense>
+        <CardWrapper headerLabel="Verify Your Email">
+          <ResendLink />
+        </CardWrapper>
       </div>
       <Footer />
     </>
