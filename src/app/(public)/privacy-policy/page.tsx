@@ -31,12 +31,15 @@ const SectionWithList = ({
   title,
   subtitle,
   items,
+  id,
 }: {
+  
   title: string;
   subtitle: string;
   items: (string | JSX.Element)[];
+  id?: string;
 }) => (
-  <div className="space-y-6">
+  <div id={id} className="space-y-6">
     {" "}
     {/* Increased spacing */}
     <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">
@@ -60,15 +63,14 @@ const SectionWithList = ({
 export default function PrivacyPolicy() {
   return (
     <main className="min-h-screen bg-white font-poppins">
-
       <HeaderSection
-          title={privacypolicydata.headline1}
-          description={privacypolicydata.headline3}
-          breadcrumbs={[
-            { label: "Home", href: "/" },
-            { label: "Privacy Policy", href: "/privacy-policy" },
-          ]}
-        />
+        title={privacypolicydata.headline1}
+        description={privacypolicydata.headline3}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Privacy Policy", href: "/privacy-policy" },
+        ]}
+      />
 
       {/* Privacy Policy Section */}
       <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 py-10 sm:py-14 lg:py-18">
@@ -133,8 +135,8 @@ export default function PrivacyPolicy() {
               </>,
             ]}
           />
-
-<SectionWithList
+          <SectionWithList
+            id="consent-policy"
             title={privacypolicydata.headpolicy2a}
             subtitle={privacypolicydata.policy2asubhead}
             items={[
@@ -145,15 +147,22 @@ export default function PrivacyPolicy() {
               <>
                 <strong>Withdrawing Consent:</strong>{" "}
                 {privacypolicydata.policy2adescription2}
+                <Link
+                href={
+                  "mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"
+                }
+                aria-label="Contact Us"
+                className="text-green-500 hover:underline text-base sm:text-lg"
+              >
+                {privacypolicydata.contactlink}.
+              </Link>
               </>,
               <>
                 <strong>Parental Consent:</strong>{" "}
                 {privacypolicydata.policy2adescription3}
               </>,
-      
             ]}
           />
-          
           <Section
             title={privacypolicydata.headpolicy3}
             content={privacypolicydata.policy3description1}
@@ -196,7 +205,9 @@ export default function PrivacyPolicy() {
                 {privacypolicydata.policy9description1}
               </p>
               <Link
-                href={"mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"}
+                href={
+                  "mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"
+                }
                 aria-label="Contact Us"
                 className="text-green-500 hover:underline text-base sm:text-lg"
               >

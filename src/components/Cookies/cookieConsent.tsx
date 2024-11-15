@@ -27,9 +27,16 @@ export default function CookieConsent() {
 
   return (
     <aside className="p-4 w-full sm:max-w-[350px] fixed bottom-2 right-0 sm:right-2 flex flex-col gap-y-6 justify-between items-center  rounded-lg bg-white/40 backdrop-blur-md border border-gray-400/50 z-50">
-      <p className="mb-4 md:mb-0 text-gray-900 text-center md:text-left">
-        We use cookies to ensure user get the best experience on our website. Checkout our{" "}
-        <Link href={'/privacy-policy/#consent-policy'} aria-label="Read more aboutContent Policy" className=" text-gray-900 underline underline-offset-4 decoration-2 decoration-accent">Consent Policy.</Link>
+      <p className="mb-4 md:mb-0 text-gray-900  md:text-left">
+        We use cookies to ensure user get the best experience on our website.
+        Checkout our{" "}
+        <Link
+          href={"/privacy-policy/#consent-policy"}
+          aria-label="Read more aboutContent Policy"
+          className=" text-gray-900 underline underline-offset-4 decoration-2 decoration-accent"
+        >
+          Consent Policy.
+        </Link>
       </p>
       <div className="space-x-8">
         <button

@@ -39,7 +39,7 @@ export const privacypolicydata = {
   policy2adescription1:
     "By registering with Panaversity and providing personal information, you consent to the collection, use, and processing of your data as described in this policy. When required, we will seek explicit consent, especially for purposes such as personalized learning recommendations and data sharing with third-party services.",
   policy2adescription2:
-    "You have the right to withdraw your consent at any time. Please note that withdrawing consent may limit your access to certain features and services. To withdraw consent, contact us at [info@panaversity.com].",
+    "You have the right to withdraw your consent at any time. Please note that withdrawing consent may limit your access to certain features and services. To withdraw consent, contact us at ",
   policy2adescription3:
     "If you are under the age of 18, we require consent from a parent or guardian for registration and data collection.",
 
