@@ -2,11 +2,7 @@ import ResetPasswordDialog from "@/src/components/auth/reset-password/reset-pass
 import { Suspense } from "react";
 
 const verification = () => {
-  return (
-    <Suspense>
-      <ResetPasswordDialog />
-    </Suspense>
-  );
+  return <ResetPasswordDialog />;
 };
 
 export default verification;
