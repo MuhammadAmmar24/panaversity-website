@@ -2,11 +2,7 @@ import EmailVerificationPendingDialog from "@/src/components/auth/verify/pending
 import { Suspense } from "react";
 
 const page = () => {
-  return (
-    <Suspense>
-      <EmailVerificationPendingDialog />
-    </Suspense>
-  );
+  return <EmailVerificationPendingDialog />;
 };
 
 export default page;

@@ -1,6 +1,5 @@
 // Merged list of all members
 const allTeamMembers = [
-  // Executives
   {
     picture: "/team/Zia khan.webp",
     fullName: "Zia Khan",
@@ -45,7 +44,6 @@ const allTeamMembers = [
     ],
   },
 
-  // Professionals
   {
     picture: "/team/Imran.webp",
     fullName: "Imran Ali",
@@ -79,7 +77,6 @@ const allTeamMembers = [
       { icon: "github", href: "https://github.com/rehan-ul-haq" },
     ],
   },
-  // Trainers
   {
     picture: "/team/Junaid.webp",
     fullName: "M. Junaid Shaukat",
@@ -112,6 +109,32 @@ const allTeamMembers = [
         href: "https://www.linkedin.com/in/usman-ashraf-127b70185/",
       },
       { icon: "github", href: "https://github.com/usmanashrf" },
+    ],
+  },
+  {
+    picture: "/team/Ammar.webp",
+    fullName: "Muhammad Ammar Masood",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/muhammadammar24/",
+      },
+      { icon: "github", href: "https://github.com/MuhammadAmmar24" },
+    ],
+  },
+  {
+    picture: "/team/ammar-aamir.webp",
+    fullName: "Ammar Aamir",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/ammar-aamir-0781722bb/",
+      },
+      { icon: "github", href: "https://github.com/AmmarAamir786" },
     ],
   },
   {
@@ -184,28 +207,6 @@ const allTeamMembers = [
       { icon: "github", href: "#" },
     ],
   },
-
-  {
-    picture: "/team/Hamza_syed.webp",
-    fullName: "Hamza Syed",
-    designation: "Trainer Panaversity, Freelancer",
-    bio: "Crafting seamless and interactive user experiences with Nextjs.",
-    socialLinks: [
-      { icon: "linkedin", href: "#" },
-      { icon: "github", href: "#" },
-    ],
-  },
-
-  {
-    picture: "/team/Girl_avatar.webp",
-    fullName: "Mubarra Naz",
-    designation: "Trainer Panaversity, Freelancer",
-    bio: "Building seamless web applications with React.",
-    socialLinks: [
-      { icon: "linkedin", href: "https://www.linkedin.com/in/mubarra-naz/" },
-      { icon: "github", href: "https://github.com/Mubarra-naz" },
-    ],
-  },
   {
     picture: "/team/Hassan_ali_khan.webp",
     fullName: "Hassan Ali Khan",
@@ -216,9 +217,6 @@ const allTeamMembers = [
       { icon: "github", href: "https://github.com/hassan-ak" },
     ],
   },
-
-  // Team Leads
-
   {
     picture: "/team/Humaira_Aslam.webp",
     fullName: "Humaira Aslam",
@@ -232,43 +230,15 @@ const allTeamMembers = [
       { icon: "github", href: "#" },
     ],
   },
+
   {
-    picture: "/team/Girl_avatar.webp",
-    fullName: "Ayesha Nazish",
-    designation: "Team Lead",
-    bio: "Building seamless web applications with React.",
+    picture: "/team/Hamza_syed.webp",
+    fullName: "Hamza Syed",
+    designation: "Trainer Panaversity, Freelancer",
+    bio: "Crafting seamless and interactive user experiences with Nextjs.",
     socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
-      },
+      { icon: "linkedin", href: "#" },
       { icon: "github", href: "#" },
-    ],
-  },
-  {
-    picture: "/team/Girl_avatar.webp",
-    fullName: "Aiman Zaidi",
-    designation: "UI/UX designer",
-    bio: "Design mobile and web applications with a strong focus on user experience.",
-    socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/aiman-zaidi999/",
-      },
-      { icon: "github", href: "https://github.com/aimanzaidi110" },
-    ],
-  },
-  {
-    picture: "/team/Ammar.webp",
-    fullName: "Muhammad Ammar Masood",
-    designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications",
-    socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/muhammadammar24/",
-      },
-      { icon: "github", href: "https://github.com/MuhammadAmmar24" },
     ],
   },
   {
@@ -298,6 +268,44 @@ const allTeamMembers = [
     ],
   },
   {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Aiman Zaidi",
+    designation: "UI/UX designer",
+    bio: "Design mobile and web applications with a strong focus on user experience.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/aiman-zaidi999/",
+      },
+      { icon: "github", href: "https://github.com/aimanzaidi110" },
+    ],
+  },
+  {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Mubarra Naz",
+    designation: "Trainer Panaversity, Freelancer",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      { icon: "linkedin", href: "https://www.linkedin.com/in/mubarra-naz/" },
+      { icon: "github", href: "https://github.com/Mubarra-naz" },
+    ],
+  },
+
+  {
+    picture: "/team/Girl_avatar.webp",
+    fullName: "Ayesha Nazish",
+    designation: "Team Lead",
+    bio: "Building seamless web applications with React.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/ayesha-nazish-hussain-gen-ai/",
+      },
+      { icon: "github", href: "#" },
+    ],
+  },
+
+  {
     picture: "/team/Saad_Irfan.webp",
     fullName: "Saad Irfan",
     designation: "Agentic AI Trainer Panaversity",
@@ -310,7 +318,6 @@ const allTeamMembers = [
       { icon: "github", href: "https://github.com/SaadIrfan41" },
     ],
   },
-
 ];
 
 export { allTeamMembers };
