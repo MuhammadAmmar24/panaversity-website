@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import ResetPassword from "./reset-password";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import ResetPassword from "./reset-password";
 
 export default function ResetPasswordDialog() {
   const [open, setOpen] = useState(false);
@@ -36,13 +35,10 @@ export default function ResetPasswordDialog() {
     <Dialog.Root open={true} onOpenChange={() => router.back()}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-5 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] overflow-y-auto">
-          <VisuallyHidden>
-            <Dialog.Title>Reset Your Password</Dialog.Title>
-            <Dialog.Description>
-              Click to reset your password
-            </Dialog.Description>
-          </VisuallyHidden>
+        <Dialog.Content
+          aria-describedby={undefined}
+          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-5 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] overflow-y-auto"
+        >
           <ResetPassword />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">

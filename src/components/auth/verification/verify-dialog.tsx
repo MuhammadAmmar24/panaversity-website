@@ -1,12 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import Verify from "./verify-user";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import Verify from "./verify-user";
 
 export default function VerificationDialog() {
   const [open, setOpen] = useState(false);
@@ -16,11 +14,10 @@ export default function VerificationDialog() {
     <Dialog.Root open={true} onOpenChange={() => router.back()}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
-          <VisuallyHidden>
-            <Dialog.Title>Email Verification Status</Dialog.Title>
-            <Dialog.Description>Email verification status dialog</Dialog.Description>
-          </VisuallyHidden>
+        <Dialog.Content
+          aria-describedby={undefined}
+          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto"
+        >
           <Verify />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">

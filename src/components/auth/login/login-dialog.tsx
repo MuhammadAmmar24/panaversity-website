@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { LoginForm } from "./login-form";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 export default function LoginDialog() {
   const [open, setOpen] = useState(true);
@@ -19,14 +18,10 @@ export default function LoginDialog() {
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
         <Dialog.Content
+          aria-describedby={undefined}
           className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-6 min-w-[18rem]  max-w-sm max-h-[94dvh] sm:w-full overflow-y-auto"
         >
           <Dialog.Title className="text-lg font-bold mb-4">Login</Dialog.Title>
-          <VisuallyHidden>
-            <Dialog.Description>
-              Login here to continue your learning journey.
-            </Dialog.Description>
-          </VisuallyHidden>
           <LoginForm />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">

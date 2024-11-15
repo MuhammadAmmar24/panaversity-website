@@ -1,12 +1,10 @@
 "use client";
 
-import * as React from "react";
-import { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
-import EmailVerificationPending from "./pendingverification";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import EmailVerificationPending from "./pendingverification";
 
 export default function EmailVerificationPendingDialog() {
   const [open, setOpen] = useState(true);
@@ -37,13 +35,10 @@ export default function EmailVerificationPendingDialog() {
     <Dialog.Root open={open} onOpenChange={() => router.back()}>
       <Dialog.Portal>
         <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-        <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-8 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] max-h-[85vh] overflow-y-auto">
-          <VisuallyHidden>
-            <Dialog.Title>Pending Verification</Dialog.Title>
-            <Dialog.Description>
-              Email verification pending dialog
-            </Dialog.Description>
-          </VisuallyHidden>
+        <Dialog.Content
+          aria-describedby={undefined}
+          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg p-8 w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] max-h-[85vh] overflow-y-auto"
+        >
           <EmailVerificationPending />
           <Dialog.Close asChild>
             <button className="absolute top-4 right-4 p-1" aria-label="Close">

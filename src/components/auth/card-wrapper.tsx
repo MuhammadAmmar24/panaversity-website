@@ -1,8 +1,7 @@
 
-import { 
+import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader
 } from "@/src/components/ui/card";
 
