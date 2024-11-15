@@ -102,6 +102,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   
   
 
+  console.log("************************************************************************************************************")
   console.log(pre_requisite, "Pre Requisite Courses");
 
   // const student_courses: StudentCourse[] = [
@@ -151,9 +152,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
 
   console.log(prereqCourses, "Pre-Req");
+  console.log("************************************************************************************************************")
+
+  
 
   // 4 Senarios 
-    // 1. No pre-requisite courses -> Null
+    // 1. No pre-requisite courses -> Null =
     // 2. Pre-requisite courses but student does not have enrollment -> Enroll
     // 3. Pre-requisite courses are not completed -> Complete
     // 4. Pre-requisite courses are completed -> Completed
@@ -242,10 +246,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
-
-                    prereqCourses={prereqCourses}
-
-                     
+                    pre_requisite={pre_requisite}
+                    // prereqCourses={prereqCourses}
                   />
                 </div>
               </div>

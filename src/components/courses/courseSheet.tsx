@@ -24,7 +24,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   coursePrice,
   courseName,
   isLoggedIn,
-  prereqCourses,
+  pre_requisite,
+  // prereqCourses,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
 
@@ -45,12 +46,14 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
     };
 
+
     handleResize(); // Call once on mount
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+    
   }, []);
 
   return (
@@ -104,7 +107,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           profile_id={profile_id}
           timeSlots={timeSlots}
           coursePrice={coursePrice}
-        />
+          pre_requisite={pre_requisite}
+          />
 
 
         

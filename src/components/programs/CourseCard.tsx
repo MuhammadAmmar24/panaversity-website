@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const CourseCard = ({ course }: { course: Course }) => (
-  <Link href={`/programs/flagship-program/${course.course_id}`} aria-label={`Go to ${course.course_name} page`}>
+  <Link href={`/programs/flagship-program/${course.course_code}`} aria-label={`Go to ${course.course_name} page`}>
     <div className="flex flex-col bg-background rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full h-auto pb-0">
       <div className="h-[14rem] relative">
         <Image

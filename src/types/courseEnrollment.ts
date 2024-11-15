@@ -49,6 +49,7 @@ export interface GetEnrolledProps {
   profile_id: string;
   timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
+  pre_requisite: Pre_req_obj[];
 }
 
 interface PreRequisiteCourse {
@@ -68,7 +69,8 @@ export interface CourseSheetProps {
   coursePrice: GetCoursePriceResponse;
   courseName: string;
   isLoggedIn: boolean;
-  prereqCourses: PreRequisiteCourse[]; 
+  pre_requisite: Pre_req_obj[];
+  // prereqCourses: PreRequisiteCourse[]; 
 }
 
 export interface RatingStarsProps {

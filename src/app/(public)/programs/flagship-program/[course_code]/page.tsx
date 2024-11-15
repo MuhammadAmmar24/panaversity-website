@@ -8,13 +8,17 @@ import { notFound } from 'next/navigation'; // Import the notFound helper
 export const revalidate = 7200;
 
 // Function to generate metadata dynamically
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const courseId = parseInt(params.id); // Parse the id as a number
-  const data = await getCourseData(courseId); // Fetch course data using the course id
+export async function generateMetadata({ params }: { params: { course_code: string } }): Promise<Metadata> {
+  const courseId = await getCourseIdFromCode(params.course_code); // New function to fetch course_id
+
+  if (!courseId) {
+    return {
+      title: "Course Not Found",
+      description: "The course you are looking for does not exist.",
+    };
+  }
+
+  const data = await getCourseData(courseId); // Use course_id here
 
   if (!data || !data.data) {
     return {
@@ -31,6 +35,22 @@ export async function generateMetadata({
   };
 }
 
+async function getCourseIdFromCode(course_code: string): Promise<number | null> {
+  const result = await getProgramCoursesWithOpenRegistration({
+    program_id: 1,
+    batch_id: 1,
+    limit: 10,
+  });
+
+  if (result.type === "success" && Array.isArray(result.data?.data)) {
+    const course = result.data.data.find((course: any) => course.course_code === course_code);
+    return course ? course.course_id : null;
+  }
+
+  return null; // Return null if course_code not found
+}
+
+
 export async function generateStaticParams() {
   const query = {
     program_id: 1,
@@ -40,17 +60,18 @@ export async function generateStaticParams() {
   const result = await getProgramCoursesWithOpenRegistration(query);
 
   if (result.type === "success" && Array.isArray(result.data?.data)) {
-    const idRoutes: number[] = result.data.data
-      .filter((course: any) => course.course_id) // Ensure each course has a valid ID
-      .map((course: any) => course.course_id);
+    const codeRoutes: string[] = result.data.data
+      .filter((course: any) => course.course_code) // Ensure each course has a valid code
+      .map((course: any) => course.course_code);
 
-    return idRoutes.map((course_id: number) => ({
-      id: course_id.toString(),
+    return codeRoutes.map((course_code: string) => ({
+      course_code,
     }));
   }
 
   return [];
 }
+
 
 
 export interface CourseData {
@@ -85,21 +106,24 @@ async function fetchCoursePrice(course_batch_program_id: number) {
 
 
 export default async function CoursePage({
-  params: { id },
+  params: { course_code },
 }: {
-  params: { id: string };
+  params: { course_code: string };
 }) {
-  const courseId = parseInt(id);
-  const data = await getCourseData(courseId);
+  const courseId = await getCourseIdFromCode(course_code);
 
-  // Handle case where course data is not found
+  if (!courseId) {
+    return notFound(); // Handle if no course_id found
+  }
+
+  const data = await getCourseData(courseId);
   if (!data || !data.data) {
-    return notFound(); // Renders a 404 page
+    return notFound();
   }
 
   const courseBatchProgramId = data.data.course_batch_program_id;
   if (!courseBatchProgramId) {
-    return notFound(); // Renders a 404 page if course_batch_program_id is missing
+    return notFound();
   }
 
   const { price, currency } = await fetchCoursePrice(courseBatchProgramId);
@@ -112,3 +136,4 @@ export default async function CoursePage({
     />
   );
 }
+

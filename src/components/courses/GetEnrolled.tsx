@@ -1,5 +1,6 @@
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -11,6 +12,7 @@ export default function GetEnrolled({
   profile_id,
   timeSlots,
   coursePrice,
+  pre_requisite,
 }: GetEnrolledProps) {
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
@@ -100,7 +102,34 @@ export default function GetEnrolled({
   };
 
   return (
-    <div className="rounded-3xl container mx-auto max-w-full px-2">
+    <>
+    <div className="rounded-3xl container mx-auto max-w-full px-2 pt-5">
+      <h1 className="text-3xl font-bold mb-4 mt-5">Pre Requisite Courses:</h1>
+      <div>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div className="pl-5">
+            <ul className="list-disc space-y-2 pl-5">
+              {pre_requisite.map((pre_req, index) => (
+                <Link href={`/programs/flagship-program/${pre_req.course_code.trim()}`}>
+                <li
+                  key={index}
+                  className="text-base font-normal leading-relaxed text-textPrimary/90 hover:text-accent transition-all duration-300 ease-in-out"
+                  >
+                  {pre_req.course_code} <br />
+                  {pre_req.course_name}
+                </li>
+                  </Link>
+              ))}
+            </ul>
+            </div>
+          ) : (
+            <p className="pl-5 text-base font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
+        </div>
+    </div>
+    <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
       <h1 className="text-3xl font-bold mb-8 mt-5">Get Enrolled Today</h1>
 
       <div className="space-y-7 w-full">
@@ -175,6 +204,7 @@ export default function GetEnrolled({
         )}
       </div>
     </div>
+    </>
   );
 }
 
