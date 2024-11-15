@@ -5,17 +5,20 @@ import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
+import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import fetchProfile from "@/src/lib/getProfile";
 import {
   CourseDetailsClientProps,
   CourseInfoProps,
   LearnPointProps,
 } from "@/src/types/courseEnrollment";
+import { Result } from "@/src/types/types";
+import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
-import Courses from "../Courses";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -45,7 +48,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     course_outcomes,
     long_description,
     pre_requisite,
-    media_link,
     is_registration_open,
     batch_id,
     course_batch_program_id,
@@ -79,7 +81,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
 
 
-  // console.log(pre_requisite, "pre_requisite");
 
   
 
@@ -99,31 +100,46 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     course_code: string;
   }
   
-  // Your data
-  const pre_requisite_data: PreRequisiteDataItem[] = [
-    {
-      course_code: "AI-101",
-      course_name: "Modern AI Python Programming",
-    },
-  ];
   
-  const student_courses: StudentCourse[] = [
-    {
-      is_graduated: false,
-      course_code: "AI-101",
-    },
-  ];
+
+  console.log(pre_requisite, "Pre Requisite Courses");
+
+  // const student_courses: StudentCourse[] = [
+  //   {
+  //     is_graduated: false,
+  //     course_code: "AI-101",
+  //   }
+  // ];
+
+  let student_courses : any = []
+  const profile: ProfileData = await fetchProfile();
+
   
-  // Fixed mapping logic with proper type assertions
-  const prereqCourses: PreRequisiteCourse[] = pre_requisite_data
+
+
+  try {
+  
+    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+      profile.id
+    );
+    student_courses  = result.data
+
+    console.log(student_courses, "Student Courses");
+
+  } catch (error: any) {
+    console.error("Error fetching student courses: ", error.message); 
+  }
+  
+
+  const prereqCourses: PreRequisiteCourse[] = pre_requisite
     .map((prereq): PreRequisiteCourse | null => {
       const studentCourse = student_courses.find(
-        (course) => course.course_code === prereq.course_code
+        (course:any) => course?.course_code?.trim() === prereq?.course_code?.trim()
       );
-  
+      
       if (studentCourse) {
         return {
-          course_code: prereq.course_code,
+          course_code: prereq.course_code.trim(), 
           course_name: prereq.course_name,
           is_graduated: studentCourse.is_graduated,
         };
@@ -134,11 +150,13 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
 
 
+  console.log(prereqCourses, "Pre-Req");
+
   // 4 Senarios 
-  // 1. No pre-requisite courses -> Null
-  // 2. Pre-requisite courses but student does not have enrollment -> Enroll
-  // 3. Pre-requisite courses are not completed -> Complete
-  // 4. Pre-requisite courses are completed -> Completed
+    // 1. No pre-requisite courses -> Null
+    // 2. Pre-requisite courses but student does not have enrollment -> Enroll
+    // 3. Pre-requisite courses are not completed -> Complete
+    // 4. Pre-requisite courses are completed -> Completed
 
 
 
