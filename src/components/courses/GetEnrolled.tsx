@@ -1,6 +1,8 @@
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { formatTime } from "@/src/lib/timeUtils";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import { StudentCourse } from "@/src/types/studentCourses";
+import { studentCourses } from "@/src/types/studentCourses";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
@@ -16,6 +18,10 @@ export default function GetEnrolled({
   pre_requisite,
   student_courses,
 }: GetEnrolledProps) {
+
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
@@ -24,12 +30,67 @@ export default function GetEnrolled({
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState("STRIPE"); // Add payment method state
-  const [isPending, startTransition] = useTransition();
+  const [skipped, setSkipped] = useState(false);
 
-  const router = useRouter();
+
+  const findStudentCourse = (courseCode: string): StudentCourse | undefined =>
+    student_courses.find(
+      (course : StudentCourse) => course?.course_code?.trim() === courseCode.trim()
+    );
+
+  const getCourseStatus = (
+    studentCourse: StudentCourse | undefined,
+    courseCode: string
+  ) => {
+    if (!studentCourse) {
+      return {
+        statusText: "Not Enrolled",
+        statusClass: "text-red-600",
+        linkHref: `/programs/flagship-program/${courseCode.trim()}`,
+      };
+    }
+
+    if (studentCourse.is_graduated) {
+      return {
+        statusText: "Completed",
+        statusClass: "text-green-500",
+        linkHref: "/dashboard",
+      };
+    }
+
+    return {
+      statusText: "In Progress",
+      statusClass: "text-yellow-500",
+      linkHref: "/dashboard",
+    };
+  };
+
+  const notEnrolledCourses =
+    pre_requisite?.filter((pre_req) => !findStudentCourse(pre_req.course_code)) || [];
+
+  const hasNotEnrolledPreReq = notEnrolledCourses.length > 0;
+  const skipText = `Skip ${
+    notEnrolledCourses.length === 1 ? "pre-requisite course" : "all pre-requisite courses"
+  }`;
+  const skippedMessage = `You skipped ${
+    notEnrolledCourses.length === 1 ? "the pre-requisite course" : "all pre-requisite courses"
+  }`;
+
+  const handleSkip = () => {
+    setSkipped(true);
+  };
+
+  useEffect(() => {
+    if (!hasNotEnrolledPreReq) {
+      setSkipped(true);
+    }
+  }, [hasNotEnrolledPreReq]);
+
+
+
 
   const classTimeSlots = timeSlots.class_time_slots;
-  const enrollmentPackage = coursePrice.package_id;
+  const enrollmentPackage = coursePrice.package_id;  
 
   useEffect(() => {
     if (selectedDay) {
@@ -105,62 +166,64 @@ export default function GetEnrolled({
 
   return (
     <>
-      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-5">
-        <h1 className="text-2xl font-bold mb-4 mt-5">Pre Requisites:</h1>
-        <div>
-          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-            <div>
-              <ol className="list-decimal space-y-2 pl-5 ">
-                {pre_requisite.map((pre_req, index) => {
-                  const studentCourse = student_courses.find(
-                    (course: any) =>
-                      course?.course_code?.trim() === pre_req.course_code.trim()
-                  );
+    <div className="rounded-3xl container mx-auto max-w-full px-2">
+      <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
+      <div>
+        <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
+        {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+          <div>
+            {pre_requisite.map((pre_req, index) => {
+              const studentCourse = findStudentCourse(pre_req.course_code);
+              const { statusText, statusClass, linkHref } = getCourseStatus(
+                studentCourse,
+                pre_req.course_code
+              );
 
-                  let statusText = "Not Enrolled";
-                  let statusClass = "bg-red-600 text-white";
-                  let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
-
-                  if (studentCourse) {
-                    linkHref = "/dashboard";
-                    if (studentCourse.is_graduated) {
-                      statusText = "Completed";
-                      statusClass = "bg-green-500 text-white";
-                    } else {
-                      statusText = "In Progress";
-                      statusClass = "bg-yellow-500 text-white";
-                    }
-                  }
-
-                  return (
-                    <Link key={index} href={linkHref}>
-                      <li className="text-base font-normal leading-relaxed text-textPrimary/90  ">
-                        <div className="flex items-center gap-4  ml-1 ">
-                          <span className="underline decoration-accent decoration-2">
-                            {pre_req.course_code}
-                          </span>
-                          <span
-                            className={`text-[0.6rem] rounded-xl px-2 py-1 ${statusClass}`}
-                          >
+              return (
+                <div className="mb-3" key={index}>
+                  <ol className="list-decimal px-8 py-1 border-2 rounded-lg">
+                    <Link href={linkHref}>
+                      <li className="text-base font-normal leading-relaxed text-textPrimary/90">
+                        <div className="flex items-center justify-between gap-4 ml-1">
+                          <div className="flex flex-col justify-center items-start">
+                            <span className="underline decoration-accent decoration-2">
+                              {pre_req.course_code}
+                            </span>
+                            <span>{pre_req.course_name}</span>
+                          </div>
+                          <span className={`text-[1rem] ${statusClass}`}>
                             {statusText}
                           </span>
                         </div>
                       </li>
                     </Link>
-                  );
-                })}
-              </ol>
-            </div>
-          ) : (
-            <p className="text-base font-normal leading-relaxed text-textPrimary/90">
-              There are no pre-requisites for this course.
-            </p>
-          )}
-        </div>
+                  </ol>
+                </div>
+              );
+            })}
+            {hasNotEnrolledPreReq && (
+              <div className="flex items-center gap-3 mt-4">
+                <button
+                  onClick={handleSkip}
+                  className="text-base px-8 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
+                >
+                  Skip
+                </button>
+                <span className="text-red-500">
+                  {skipped ? skippedMessage : skipText}
+                </span>
+              </div>
+            )}
+          </div>
+        ) : (
+          <p className="text-base font-normal leading-relaxed text-textPrimary/90">
+            There are no pre-requisites for this course.
+          </p>
+        )}
       </div>
-      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
-        <h1 className="text-2xl font-bold mb-4 mt-5">Get Enrolled</h1>
+    </div>
 
+      <div className={`rounded-3xl container mx-auto max-w-full px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
         <div className="space-y-7 w-full">
           <SelectField
             label="Day"
@@ -171,6 +234,7 @@ export default function GetEnrolled({
             }}
             options={uniqueDays}
             placeholder="Select Day"
+            disabled={!skipped}
           />
 
           <SelectField
@@ -194,6 +258,7 @@ export default function GetEnrolled({
             onChange={(e: any) => setPaymentMethod(e.target.value)}
             options={[{ value: "STRIPE", label: "Stripe" }]} // Currently only Stripe
             placeholder="Select Payment Method"
+            disabled={!skipped || !selectedDay}
           />
 
           <div className="mb-6 text-red-500">

@@ -3,6 +3,7 @@ import {
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
 import { StudentCourseStatus } from "../lib/schemas/enrollment";
+import { studentCourses } from "./studentCourses";
 
 interface Pre_req_obj {
   course_code: string,
@@ -51,13 +52,7 @@ export interface GetEnrolledProps {
   timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
   pre_requisite: Pre_req_obj[];
-  student_courses: any;
-}
-
-interface PreRequisiteCourse {
-  course_code: string;
-  course_name: string;
-  is_graduated: boolean;
+  student_courses: studentCourses[];
 }
 
 export interface CourseSheetProps {
@@ -72,7 +67,7 @@ export interface CourseSheetProps {
   courseName: string;
   isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
-  student_courses: StudentCourseStatus[];
+  student_courses: studentCourses[];
 }
 
 export interface RatingStarsProps {
