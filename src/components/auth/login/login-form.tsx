@@ -108,7 +108,7 @@ export const LoginForm = () => {
                   <Input
                     {...field}
                     disabled={isPending}
-                    placeholder="example@gmail.com"
+                    placeholder="user@gmail.com"
                     type="email"
                     autoComplete="username"
                   />
@@ -149,25 +149,20 @@ export const LoginForm = () => {
                     </button>
                   </div>
                 </FormControl>
-
-                <Button
-                  size="sm"
-                  variant="link"
-                  asChild
-                  className="px-0 font-normal"
-                >
-                  <Link
-                    href="/reset-password"
-                    className="hover:underline underline-offset-4 transition-colors duration-200"
-                  >
-                    Forgot password?
-                  </Link>
-                </Button>
                 <FormMessage />
               </FormItem>
             )}
           />
+          <Button size="sm" variant="link" asChild className="px-0 font-normal">
+            <Link
+              href="/reset-password"
+              className="hover:underline underline-offset-4 transition-colors duration-200"
+            >
+              Forgot password?
+            </Link>
+          </Button>
         </div>
+
         <FormError message={error} />
         <FormSuccess message={success} />
         {!success && (
@@ -189,7 +184,12 @@ export const LoginForm = () => {
 
         <p className="w-full text-textPrimary text-center text-xs font-medium">
           Don't have an account?&nbsp;&nbsp;
-          <Link href="/register" aria-label="Go to register page" replace className="group">
+          <Link
+            href="/register"
+            aria-label="Go to register page"
+            replace
+            className="group"
+          >
             <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
               Register
             </span>
