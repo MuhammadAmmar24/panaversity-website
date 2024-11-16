@@ -14,11 +14,11 @@ export const testimonialList = [
         '"Panaversity provided me the skills and confidence to make my ideas reality. The hands-on AI experience and expert guidance were essential to my success as an entrepreneur."',
     },
     {
-      img: "/testimonials/ammar.webp",
-      name: "Ammar Aamir",
-      position: "CEO & Founder at EasyFrontend",
+      img: "/testimonials/shaheer.webp",
+      name: "M Shaheer Kamran",
+      position: "Graduate Student, AI Researcher",
       content:
-        '"Panaversity’s AI curriculum gave me tools to build my business. The deep dive into Custom GPT and AI microservices laid the groundwork for the products we create today."',
+        '"The mentorship and real-world AI projects at Panaversity were instrumental in shaping my understanding of modern technologies, allowing me to excel in my academic and professional journey."',
     },
     {
       img: "/testimonials/rasaf.webp",
