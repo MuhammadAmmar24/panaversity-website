@@ -1,6 +1,7 @@
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { formatTime } from "@/src/lib/timeUtils";
 import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import { studentCourses } from "@/src/types/studentCourses";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
@@ -16,6 +17,8 @@ export default function GetEnrolled({
   pre_requisite,
   student_courses,
 }: GetEnrolledProps) {
+  const router = useRouter();
+
   const [selectedDay, setSelectedDay] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
@@ -26,7 +29,30 @@ export default function GetEnrolled({
   const [paymentMethod, setPaymentMethod] = useState("STRIPE"); // Add payment method state
   const [isPending, startTransition] = useTransition();
 
-  const router = useRouter();
+  const [skipped, setSkipped] = useState(false);
+
+  // Get array of not enrolled courses
+  const notEnrolledCourses =
+    pre_requisite?.filter((pre_req) => {
+      const studentCourse = student_courses.find(
+        (course : studentCourses) => course?.course_code?.trim() === pre_req.course_code.trim()
+      );
+      return !studentCourse;
+    }) || [];
+
+  const hasNotEnrolledPreReq = notEnrolledCourses.length > 0;
+  const skipText =
+    notEnrolledCourses.length === 1
+      ? "Skip pre-requisite course"
+      : "Skip all pre-requisite courses";
+  const skippedMessage =
+    notEnrolledCourses.length === 1
+      ? "You skipped the pre-requisite course"
+      : "You skipped all pre-requisite courses";
+
+  const handleSkip = () => {
+    setSkipped(true);
+  };
 
   const classTimeSlots = timeSlots.class_time_slots;
   const enrollmentPackage = coursePrice.package_id;
@@ -105,60 +131,70 @@ export default function GetEnrolled({
 
   return (
     <>
-      <div className="rounded-3xl container mx-auto max-w-full px-2 ">
+      <div className="rounded-3xl container mx-auto max-w-full px-2">
         <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
         <div>
           <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
           {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
             <div>
-                {pre_requisite.map((pre_req, index) => {
-                  const studentCourse = student_courses.find(
-                    (course: any) =>
-                      course?.course_code?.trim() === pre_req.course_code.trim()
-                  );
+              {pre_requisite.map((pre_req, index) => {
+                const studentCourse = student_courses.find(
+                  (course:any) =>
+                    course?.course_code?.trim() === pre_req.course_code.trim()
+                );
 
-                  let statusText = "Not Enrolled";
-                  let statusClass = "text-red-600";
-                  let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
+                console.log("studentCourse", studentCourse);
 
-                  if (studentCourse) {
-                    linkHref = "/dashboard";
-                    if (studentCourse.is_graduated) {
-                      statusText = "Completed";
-                      statusClass = "text-green-500";
-                    } else {
-                      statusText = "In Progress";
-                      statusClass = "text-yellow-500";
-                    }
+                let statusText = "Not Enrolled";
+                let statusClass = "text-red-600";
+                let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
+
+                if (studentCourse) {
+                  linkHref = "/dashboard";
+                  if (studentCourse.is_graduated) {
+                    statusText = "Completed";
+                    statusClass = "text-green-500";
+                  } else {
+                    statusText = "In Progress";
+                    statusClass = "text-yellow-500";
                   }
+                }
 
-                  return (
-                    <div className="mb-3">
+                return (
+                  <div className="mb-3" key={index}>
                     <ol className="list-decimal px-8 py-1 border-2 rounded-lg">
-                    <Link key={index} href={linkHref}>
-                      <li className="text-base font-normal leading-relaxed text-textPrimary/90 ">
-
-                        <div className="flex items-center justify-between gap-4  ml-1">
-                          <div className="flex flex-col justify-center items-start">
-                          <span className="underline decoration-accent  decoration-2">
-                            {pre_req.course_code}
-                          </span> 
-                          <span>{pre_req.course_name}</span>
+                      <Link href={linkHref}>
+                        <li className="text-base font-normal leading-relaxed text-textPrimary/90">
+                          <div className="flex items-center justify-between gap-4 ml-1">
+                            <div className="flex flex-col justify-center items-start">
+                              <span className="underline decoration-accent decoration-2">
+                                {pre_req.course_code}
+                              </span>
+                              <span>{pre_req.course_name}</span>
+                            </div>
+                            <span className={`text-[1rem] ${statusClass}`}>
+                              {statusText}
+                            </span>
                           </div>
-
-                          <span
-                            className={`text-[1rem] ${statusClass}`}
-                          >
-                            {statusText}
-                          </span>
-                        </div>
-
-                      </li>
-                    </Link>
-              </ol>
-              </div>
-                  );
-                })}
+                        </li>
+                      </Link>
+                    </ol>
+                  </div>
+                );
+              })}
+              {hasNotEnrolledPreReq && (
+                <div className="flex items-center gap-3 mt-4">
+                  <button
+                    onClick={handleSkip}
+                    className="text-base px-8 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
+                  >
+                    Skip
+                  </button>
+                  <span className="text-red-500">
+                    {skipped ? skippedMessage : skipText}
+                  </span>
+                </div>
+              )}
             </div>
           ) : (
             <p className="text-base font-normal leading-relaxed text-textPrimary/90">
@@ -167,7 +203,8 @@ export default function GetEnrolled({
           )}
         </div>
       </div>
-      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
+
+      <div className={`rounded-3xl container mx-auto max-w-full px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
         <div className="space-y-7 w-full">
           <SelectField
             label="Day"
@@ -178,6 +215,7 @@ export default function GetEnrolled({
             }}
             options={uniqueDays}
             placeholder="Select Day"
+            disabled={!skipped}
           />
 
           <SelectField
@@ -201,6 +239,7 @@ export default function GetEnrolled({
             onChange={(e: any) => setPaymentMethod(e.target.value)}
             options={[{ value: "STRIPE", label: "Stripe" }]} // Currently only Stripe
             placeholder="Select Payment Method"
+            disabled={!skipped || !selectedDay}
           />
 
           <div className="mb-6 text-red-500">

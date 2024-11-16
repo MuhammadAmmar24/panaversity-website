@@ -3,6 +3,7 @@ import {
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
 import { StudentCourseStatus } from "../lib/schemas/enrollment";
+import { studentCourses } from "./studentCourses";
 
 interface Pre_req_obj {
   course_code: string,
