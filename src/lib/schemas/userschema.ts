@@ -1,16 +1,19 @@
 import * as z from "zod";
 
 export const LoginSchema = z.object({
-  username: z.string().email({
-    message: "Email is required",
-  }),
+  username: z
+    .string()
+    .email({
+      message: "Invalid email address",
+    })
+    .min(1, { message: "Email is required" }),
 
   password: z
     .string()
-    .min(8, { message: "Invalid Password or Email" })
+    .min(8, { message: "Invalid email or password" })
     .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
-      message: "Invalid Password or Email",
-    }), // also change in UpdatePasswordSchema and PasswordUpdateSchema
+      message: "Invalid email or password",
+    }),
 });
 
 export const RegisterSchema = z
@@ -27,12 +30,12 @@ export const RegisterSchema = z
 
     password: z
       .string()
-      .min(8, { message: "Minimum 8 characters required" })
+      .min(8, { message: "Password must be at least 8 characters long" })
       .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
         message:
-          "Password must contain at least 1 alphabet, 1 number, and 1 special character",
+          "Password must include a letter, number, and special character.",
       }),
-      
+
     confirmPassword: z.string(),
 
     phone: z.string().min(9, {
@@ -70,22 +73,16 @@ export const UpdatePasswordSchema = z
     }),
     new_password: z
       .string()
-      .min(8, { message: "Minimum 8 characters required" })
+      .min(8, { message: "Password must be at least 8 characters long" })
       .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
         message:
           "Password must contain at least 1 alphabet, 1 number, and 1 special character",
       }),
-    confirm_password: z
-      .string()
-      .min(8, { message: "Minimum 8 characters required" })
-      .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
-        message:
-          "Password must contain at least 1 alphabet, 1 number, and 1 special character",
-      }),
+    confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {
     message: "Passwords do not match",
-    path: ["confirm_password"], // Error will show for the confirm_password field
+    path: ["confirm_password"],
   });
 
 export const ContactSchema = z.object({
@@ -102,26 +99,22 @@ export const ContactSchema = z.object({
 
 export const PasswordUpdateSchema = z
   .object({
-    email: z.string().email({
-      message: "Email is required",
-    }),
-    current_password: z.string().min(6, {
-      message: "Minimum 6 characters required",
-    }),
+    email: z
+      .string()
+      .email({
+        message: "Invalid email address",
+      })
+      .min(1, { message: "Email is required" }),
+
+    current_password: z.string(),
     new_password: z
       .string()
-      .min(8, { message: "Minimum 8 characters required" })
+      .min(8, { message: "Password must be at least 8 characters long" })
       .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
         message:
           "Password must contain at least 1 alphabet, 1 number, and 1 special character",
       }),
-    confirm_password: z
-      .string()
-      .min(8, { message: "Minimum 8 characters required" })
-      .regex(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, {
-        message:
-          "Password must contain at least 1 alphabet, 1 number, and 1 special character",
-      }),
+    confirm_password: z.string(),
   })
   .refine((data) => data.new_password === data.confirm_password, {
     message: "Passwords do not match",
