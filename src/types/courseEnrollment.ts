@@ -55,12 +55,6 @@ export interface GetEnrolledProps {
   student_courses: studentCourses[];
 }
 
-interface PreRequisiteCourse {
-  course_code: string;
-  course_name: string;
-  is_graduated: boolean;
-}
-
 export interface CourseSheetProps {
   is_registration_open: boolean;
   program_id: number;
@@ -73,7 +67,7 @@ export interface CourseSheetProps {
   courseName: string;
   isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
-  student_courses: StudentCourseStatus[];
+  student_courses: studentCourses[];
 }
 
 export interface RatingStarsProps {

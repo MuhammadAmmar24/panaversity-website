@@ -6,23 +6,24 @@ export interface Language {
 }
 
 export interface TimeSlot {
-    time_slot_name: string;
-    is_time_slot_active: boolean;
-    time_slot_day: string;
-    slot_start_time: string | null;
-    slot_end_time: string | null;
-    total_seats: number;
-    booked_seats: number;
-    confirmed_seats: number;
-    zoom_link: string | null;
-    social_links: string[] | null;
-    id: number;
-    course_batch_program_id: number;
-    language: Language | string; // Union type for flexibility
-    time_zone: string;
-  }
+  time_slot_name: string;
+  is_time_slot_active: boolean;
+  time_slot_day: string;
+  slot_start_time: string | null;
+  slot_end_time: string | null;
+  total_seats: number;
+  booked_seats: number;
+  confirmed_seats: number;
+  zoom_link: string | null;
+  social_links: string[] | null;
+  id: number;
+  course_batch_program_id: number;
+  language: string; 
+  time_zone: string;
+}
 
-export interface studentCourses {
+
+  export interface studentCourses {
     student_course_id: number;
     course_id: number;
     course_name: string;
@@ -39,9 +40,9 @@ export interface studentCourses {
     program_id: number;
     course_batch_program_id: number;
     course_code: string;
-    class_time_slot?: TimeSlot; 
+    class_time_slot?: TimeSlot;
   }
-
+  
   export interface StudentCourse {
     course_code: string;
     is_graduated: boolean;
