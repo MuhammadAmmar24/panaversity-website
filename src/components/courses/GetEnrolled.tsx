@@ -105,12 +105,12 @@ export default function GetEnrolled({
 
   return (
     <>
-      <div className="rounded-3xl container mx-auto max-w-full px-2 pt-5">
-        <h1 className="text-2xl font-bold mb-4 mt-5">Pre Requisites:</h1>
+      <div className="rounded-3xl container mx-auto max-w-full px-2 ">
+        <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
         <div>
+          <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
           {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
             <div>
-              <ol className="list-decimal space-y-2 pl-5 ">
                 {pre_requisite.map((pre_req, index) => {
                   const studentCourse = student_courses.find(
                     (course: any) =>
@@ -118,38 +118,47 @@ export default function GetEnrolled({
                   );
 
                   let statusText = "Not Enrolled";
-                  let statusClass = "bg-red-600 text-white";
+                  let statusClass = "text-red-600";
                   let linkHref = `/programs/flagship-program/${pre_req.course_code.trim()}`;
 
                   if (studentCourse) {
                     linkHref = "/dashboard";
                     if (studentCourse.is_graduated) {
                       statusText = "Completed";
-                      statusClass = "bg-green-500 text-white";
+                      statusClass = "text-green-500";
                     } else {
                       statusText = "In Progress";
-                      statusClass = "bg-yellow-500 text-white";
+                      statusClass = "text-yellow-500";
                     }
                   }
 
                   return (
+                    <div className="mb-3">
+                    <ol className="list-decimal px-8 py-1 border-2 rounded-lg">
                     <Link key={index} href={linkHref}>
-                      <li className="text-base font-normal leading-relaxed text-textPrimary/90  ">
-                        <div className="flex items-center gap-4  ml-1 ">
-                          <span className="underline decoration-accent decoration-2">
+                      <li className="text-base font-normal leading-relaxed text-textPrimary/90 ">
+
+                        <div className="flex items-center justify-between gap-4  ml-1">
+                          <div className="flex flex-col justify-center items-start">
+                          <span className="underline decoration-accent  decoration-2">
                             {pre_req.course_code}
-                          </span>
+                          </span> 
+                          <span>{pre_req.course_name}</span>
+                          </div>
+
                           <span
-                            className={`text-[0.6rem] rounded-xl px-2 py-1 ${statusClass}`}
+                            className={`text-[1rem] ${statusClass}`}
                           >
                             {statusText}
                           </span>
                         </div>
+
                       </li>
                     </Link>
+              </ol>
+              </div>
                   );
                 })}
-              </ol>
             </div>
           ) : (
             <p className="text-base font-normal leading-relaxed text-textPrimary/90">
@@ -159,8 +168,6 @@ export default function GetEnrolled({
         </div>
       </div>
       <div className="rounded-3xl container mx-auto max-w-full px-2 pt-8">
-        <h1 className="text-2xl font-bold mb-4 mt-5">Get Enrolled</h1>
-
         <div className="space-y-7 w-full">
           <SelectField
             label="Day"
