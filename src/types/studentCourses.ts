@@ -41,3 +41,9 @@ export interface studentCourses {
     course_code: string;
     class_time_slot?: TimeSlot; 
   }
+
+  export interface StudentCourse {
+    course_code: string;
+    is_graduated: boolean;
+  }
+  

@@ -52,7 +52,7 @@ export interface GetEnrolledProps {
   timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
   pre_requisite: Pre_req_obj[];
-  student_courses: any;
+  student_courses: studentCourses[];
 }
 
 interface PreRequisiteCourse {
