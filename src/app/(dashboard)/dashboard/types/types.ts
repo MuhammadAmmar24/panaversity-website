@@ -85,7 +85,7 @@ export interface SidebarProps {
 export interface CourseSectionProps {
   courses: Course[] | undefined;
   enrollmentStatus: string | null;
-  status: string;
+  // status: string;
 }
 
 export interface DropdownProps {

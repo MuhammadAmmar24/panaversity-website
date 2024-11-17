@@ -17,12 +17,12 @@ const Welcome: React.FC<WelcomeProps> = ({ profile }) => {
   return (
     <section className="mx-auto">
       {/* Container for the welcome message */}
-      <div className="w-full mt-14 flex gap-4 items-center justify-start">
+      <div className="w-full mt-10 sm:mt-14 flex gap-4 items-center justify-start">
         {/* Heading with user's first name */}
-        <h1 className="font-medium text-start text-xl fold:text-lg mobileM:text-2xl md:text-4xl font-poppins">
+        <h1 className="font-medium text-start text-xl fold:text-lg mobileM:text-2xl md:text-4xl font-poppins text-textPrimary/90">
           Welcome {profile.full_name?.split(" ")[0]}{" "}
           {/* Display user's first name */}
-          <br />
+          {/* <br /> */}
           {/* Subtitle with responsive text size */}
           {/* <span className="text-xs fold:text-sm mobileM:text-base md:text-lg font-medium">
             Overview of your courses

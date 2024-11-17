@@ -28,9 +28,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
-  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
-    null
-  );
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(null);
 
   const router = useRouter();
 
@@ -48,7 +46,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   });
 
   const ReEnroll = () => {
-    router.push("programs/flagship-program");
+    router.push(`programs/flagship-program/${course_code}`);
   };
 
   // Function to handle enrollment and payment processing
@@ -82,11 +80,11 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   // New icons with links
   const icons = [
-    { component: <FaYoutube />, link: "/", name: "YouTube", className: "text-red-600 text-5xl" },
-    { component: <FaGithub />, link: "/", name: "GitHub", className: "text-gray-800 text-4xl" },
-    { component: <SiZoom />, link: "/", name: "Zoom", className: "text-blue-500 text-7xl" },
-    { component: <FaBullhorn />, link: "/", name: "Announcements", className: "text-gray-800 text-4xl" },
-    { component: <RiRobot2Line />, link: "/", name: "Student Bot", className: "text-4xl text-gray-300 pointer-events-none cursor-not-allowed" },
+    { component: <FaYoutube />, link: "/", name: "YouTube", className: `text-red-600 text-2xl mobileM:text-3xl sm:text-4xl md:text-5xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
+    { component: <FaGithub />, link: "/", name: "GitHub", className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
+    { component: <SiZoom />, link: "/", name: "Zoom", className: `text-blue-500 text-4xl mobileM:text-5xl sm:text-6xl md:text-7xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
+    { component: <FaBullhorn />, link: "/", name: "Announcements", className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
+    { component: <RiRobot2Line />, link: "/", name: "Student Bot", className: `text-gray-300 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl pointer-events-none cursor-not-allowed` },
   ];
 
 const progressPercentage = (progress / classes * 100); // Calculate progress as a percentage
@@ -94,28 +92,29 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
   return (
     <section className="">
       <div className="relative">
-        <article className="bg-white shadow-lg rounded-xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col gap-6">
+        <article className="bg-white shadow-lg rounded-xl border px-4 sm:px-6 lg:px-8 py-4 md:py-6 flex flex-col gap-4 md:gap-6">
           <div className="flex justify-between items-center">
-            <h6 className="text-sm font-medium text-gray-700 ">
+            <h6 className={`text-[10px] sm:text-sm font-medium text-gray-700 ${
+                status === "active" ? "text-gray-500" : "opacity-30"}`}>
               Course Code: <span className="font-bold underline underline-offset-2 text-black decoration-accent decoration-1">{course_code}</span>
             </h6>
             {/* Button Container */}
-            <div className="ml-auto">
+            <div className="ml-auto text-[10px] sm:text-xs font-medium md:font-semibold">
               {status === "active" ? (
-                <button className="md:text-[15px] font-medium md:font-semibold text-[8px] text-white h-6 md:h-8 border border-accent rounded-full px-6 md:px-6 bg-accent shadow-lg cursor-default">
+                <button className="text-white min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border border-accent rounded-full px-4 md:px-6 bg-accent shadow-lg cursor-default">
                   Paid
                 </button>
               ) : status === "reserved_seat" ? (
                 <button
                   onClick={() => setPaymentDialogOpen(true)} // Open dialog on click
-                  className="md:text-[15px] font-medium md:font-semibold text-[8px] text-red-600 h-6 md:h-8 border-2 border-red-600 rounded-full px-2 md:px-4 hover:text-white hover:bg-red-600 transition duration-300 shadow-xl"
+                  className="text-red-600 min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border-2 border-red-600 rounded-full px-2 md:px-4 hover:text-white hover:bg-red-600 transition duration-300 shadow-xl"
                 >
                   Pay to Proceed
                 </button>
               ) : status === "expired_reservation" ? (
                 <button
                   onClick={ReEnroll}
-                  className="md:text-[15px] font-medium md:font-semibold text-[8px] text-accent h-6 md:h-8 border-2 border-accent rounded-full px-2 md:px-4 hover:text-white hover:bg-accent transition duration-300 shadow-xl"
+                  className="text-yellow-500 min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border-2 border-yellow-500 rounded-full px-2 md:px-4 hover:text-white hover:bg-yellow-500 transition duration-300 shadow-xl"
                 >
                   Enroll Again
                 </button>
@@ -124,15 +123,15 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
           </div>
 
           <h2
-            className={`font-poppins font-medium text-lg md:text-xl truncate${
-              status === "active" ? "" : "opacity-30"
+            className={`font-poppins font-medium md:text-xl truncate ${
+              status === "active" ? "text-textPrimary/90" : "opacity-30"
             } `}
           >
             {title}
           </h2>
 
           {status == "active" ? (
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 sm:gap-6">
               <div className="flex-1 bg-gray-200 rounded-full h-2">
                 <div
                   className="bg-accent h-2 rounded-full"
@@ -145,17 +144,13 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
               </p>
             </div>
           ) : (
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-4 sm:gap-6">
               <div className="flex-1 bg-gray-200 rounded-full h-2 "></div>
               <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
                 <span
-                  className={`text-black ${
-                    status === "active" ? "" : "opacity-30"
-                  }`}
-                >
-                  0/
+                  className="text-black opacity-30">
+                  0/14 Classes
                 </span>
-                {progress} Classes
               </p>
             </div>
           )}
@@ -175,7 +170,8 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
           </div>
 
               {/* Date and time details */}
-          <div className="flex justify-between text-xs sm:text-sm text-gray-500">
+          <div className={`flex justify-between text-xs sm:text-sm ${
+                status === "active" ? "text-gray-500" : "opacity-30"}`}>
               {/* Class date */}
               <div className="flex items-center gap-2">
                 <HiMiniCalendar className="text-sm md:text-base" />
