@@ -76,11 +76,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         <ChevronRight className="w-5 h-5 ml-2" />
       </button>
 
-      <div className="mt-2">
-        <span className="text-textSecondary font-medium">Languages:</span> {"  "}
-        <span  className="text-textSecondary">English,</span> <span  className="text-textSecondary">Urdu/Hindi</span>
-      </div>
-
       <SheetContent
         side={sheetSide}
         className={`w-full max-w-full overflow-y-auto ${
