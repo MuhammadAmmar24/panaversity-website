@@ -61,7 +61,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     >
       <button
         onClick={isEnrolled ? () => router.push("/dashboard") : handleClick}
-        className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
+        className={`w-auto min-w-[20rem] p-8 bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
           is_registration_open
             ? "hover:bg-emerald-500"
             : "bg-gray-400 cursor-not-allowed"
@@ -76,10 +76,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         <ChevronRight className="w-5 h-5 ml-2" />
       </button>
 
-      <div className="mt-2">
-        <span className="text-textSecondary font-medium">Languages:</span> {"  "}
-        <span  className="text-textSecondary">English,</span> <span  className="text-textSecondary">Urdu/Hindi</span>
-      </div>
+
 
       <SheetContent
         side={sheetSide}

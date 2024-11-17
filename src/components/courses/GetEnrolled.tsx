@@ -169,9 +169,9 @@ export default function GetEnrolled({
 
   return (
     <>
-    <div className="rounded-3xl bg-background container mx-auto max-w-full px-0 sm:px-2">
+    <div className="rounded-3xl bg container mx-auto max-w-full px-0 sm:px-2">
       <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
-      <div className="bg-white border-white border rounded-lg p-5">
+      <div className=" ">
         <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
         {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
           <div>
@@ -191,7 +191,7 @@ export default function GetEnrolled({
                             <span className="underline decoration-accent decoration-2">
                               {pre_req.course_code}
                             </span>
-                            <span className="hidden mobileM:block">{pre_req.course_name}</span>
+                            <span className="hidden sm:block">{pre_req.course_name}</span>
                           </div>
                           <span className={`text-[1rem] ${statusClass}`}>
                             {statusText}
@@ -203,7 +203,7 @@ export default function GetEnrolled({
               );
             })}
             {hasNotEnrolledPreReq && (
-              <div className="flex items-center gap-3 mt-4">
+              <div className="flex items-center justify-between  gap-3 mt-4">
                 <button
                   onClick={handleSkip}
                   className="text-[0.9rem] px-8 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"

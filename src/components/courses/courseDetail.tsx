@@ -18,6 +18,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
+import ClassSections from "@/src/components/ClassSections";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -122,17 +123,20 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Content grid with fixed proportions */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-1 gap-8 items-center">
                 {/* Course details - takes up 2/3 of space */}
                 <div className="sm:col-span-2 space-y-6">
                   <div className="space-y-4">
-                    <p className="inline-block bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
+                    <div className="flex flex-row items-center  gap-x-5">
+
+                    <p className="min-w-20 text-center bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
                       {course_code}
                     </p>
 
                     <h1 className="font-bold text-3xl xs:text-4xl lg:text-5xl text-background font-poppins">
                       {course_name}
                     </h1>
+                    </div>
 
                     <p className="text-gray-100 text-sm sm:text-base font-medium leading-relaxed">
                       {course_description}
@@ -168,16 +172,20 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
                   {/* Price and enrollment - takes up 1/3 of space */}
                   <div className="sm:col-span-2 md:col-span-1">
-                  <div className="bg-background text-black p-6 rounded-lg shadow-lg w-full">
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="text-gray-900 font-medium text-lg">
+                  <div className="flex flex-col justify-center  gap-y-6 bg-background text-black p-6 rounded-lg shadow-lg w-full">
+                    
+                  <ClassSections />
+
+                  <div className="flex items-center justify-between ">
+                    <div className="flex items-center justify-between gap-x-5 ">
+                      <p className="text-gray-900 font-medium text-lg">
                         Price:
-                      </span>
-                      <span className="text-3xl font-bold uppercase">
+                      </p>
+                      <p className="text-3xl font-bold uppercase">
                         {initialCurrency
                           ? `${initialCurrency} ${initialPrice}`
                           : initialPrice}
-                      </span>
+                      </p>
                     </div>
 
                     <CourseSheet
@@ -195,7 +203,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                       student_courses={student_courses}
                     />
                   </div>
+                  </div>
                 </div>
+                
               </div>
             </div>
           </div>
