@@ -23,6 +23,7 @@ export default function GetEnrolled({
   const [isPending, startTransition] = useTransition();
 
   const [selectedDay, setSelectedDay] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
     null
@@ -108,6 +109,8 @@ export default function GetEnrolled({
     new Set(classTimeSlots.map((slot) => slot.time_slot_day))
   );
 
+  const languages = ["Urdu/Hindi", "English"]
+
   const timeSlotsForSelectedDay = classTimeSlots
     .filter((slot) => slot.time_slot_day === selectedDay)
     .map((slot) => ({
@@ -166,9 +169,9 @@ export default function GetEnrolled({
 
   return (
     <>
-    <div className="rounded-3xl container mx-auto max-w-full px-2">
+    <div className="rounded-3xl bg-background container mx-auto max-w-full px-0 sm:px-2">
       <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
-      <div>
+      <div className="bg-white border-white border rounded-lg p-5">
         <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
         {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
           <div>
@@ -180,24 +183,22 @@ export default function GetEnrolled({
               );
 
               return (
-                <div className="mb-3" key={index}>
-                  <ol className="list-decimal px-8 py-1 border-2 rounded-lg">
+                <div className="mb-3 px-4 py-1 border-2 rounded-lg" key={index}>
                     <Link href={linkHref}>
-                      <li className="text-base font-normal leading-relaxed text-textPrimary/90">
-                        <div className="flex items-center justify-between gap-4 ml-1">
+                      <div className="text-base font-normal leading-relaxed text-textPrimary/90">
+                        <div className="flex  items-center justify-between gap-4 ml-1">
                           <div className="flex flex-col justify-center items-start">
                             <span className="underline decoration-accent decoration-2">
                               {pre_req.course_code}
                             </span>
-                            <span>{pre_req.course_name}</span>
+                            <span className="hidden mobileM:block">{pre_req.course_name}</span>
                           </div>
                           <span className={`text-[1rem] ${statusClass}`}>
                             {statusText}
                           </span>
                         </div>
-                      </li>
+                      </div>
                     </Link>
-                  </ol>
                 </div>
               );
             })}
@@ -205,7 +206,7 @@ export default function GetEnrolled({
               <div className="flex items-center gap-3 mt-4">
                 <button
                   onClick={handleSkip}
-                  className="text-base px-8 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
+                  className="text-[0.9rem] px-8 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
                 >
                   Skip
                 </button>
@@ -216,15 +217,27 @@ export default function GetEnrolled({
             )}
           </div>
         ) : (
-          <p className="text-base font-normal leading-relaxed text-textPrimary/90">
+          <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
             There are no pre-requisites for this course.
           </p>
         )}
       </div>
     </div>
 
-      <div className={`rounded-3xl container mx-auto max-w-full px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
+      <div className={`bg-background rounded-3xl  container mx-auto max-w-full px-0 sm:px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
         <div className="space-y-7 w-full">
+        <SelectField
+            label="Language"
+            value={selectedLanguage}
+            onChange={(e: any) => {
+              setSelectedLanguage(e.target.value);
+              setSelectedDay("");
+            }}
+            options={languages}
+            placeholder="Select Language"
+            disabled={!skipped}
+          />
+
           <SelectField
             label="Day"
             value={selectedDay}
@@ -234,7 +247,7 @@ export default function GetEnrolled({
             }}
             options={uniqueDays}
             placeholder="Select Day"
-            disabled={!skipped}
+            disabled={!skipped || !selectedLanguage}
           />
 
           <SelectField

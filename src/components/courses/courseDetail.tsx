@@ -1,5 +1,4 @@
 import { getCoursePrice } from "@/src/lib/coursePrice";
-import enrollmentStatus from "@/src/lib/enrollmentStatus";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
 import {
   GetCoursePriceResponse,
@@ -61,7 +60,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const courseStatus = await enrollmentStatus(course_batch_program_id);
+  // const courseStatus = await enrollmentStatus(course_batch_program_id);
   const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
     course_batch_program_id,
   });
@@ -78,6 +77,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   };
 
   const isLoggedIn: boolean = await isValidToken();
+  let isEnrolled: boolean = false;
 
   let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
@@ -87,6 +87,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
       profile.id
     );
     student_courses = result.data;
+
+    const course = result?.data?.find(
+      (course) => course.course_batch_program_id === course_batch_program_id
+    );
+    isEnrolled =
+      !!course && course.student_course_status != "expired_reservation";
   } catch (error: any) {
     console.error("Error fetching student courses: ", error.message);
   }
@@ -94,89 +100,101 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
-      <section className=" bg-teamBg bg-cover bg-center text-white">
-        <div
-          className=" w-full flex items-center 
-         backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px] min-h-48 sm:min-h-72 lg:min-h-[26rem]"
-        >
-          <div className=" flex flex-col justify-between  lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Breadcrumb Navigation */}
-            <Breadcrumbs
-              items={[
-                { label: "Home", href: "/" },
-                { label: "Programs", href: "/programs" },
-                {
-                  label: "Flagship-Program",
-                  href: "/programs/flagship-program",
-                },
-                { label: course_name },
-              ]}
-            />
-
-            <div className="flex flex-col justify-between gap-y-4 sm:flex-row sm:items-center sm:space-x-4 py-4 lg:pt-4">
-              {/* Course Details */}
-              <div className="  w-full flex flex-col gap-y-3 lg:gap-y-4 xl:gap-y-5 items-start justify-between sm:w-2/3">
-                <p className=" bg-accent/70 backdrop-blur-3xl px-4  py-1 rounded-full text-md font-semibold text-white">
-                  {course_code}
-                </p>
-                <h1 className="font-bold text-3xl xs:text-4xl sm:text-4xl lg:text-5xl text-background font-poppins ">
-                  {course_name}
-                </h1>
-                <p className=" text-gray-100 text-sm sm:text-base font-medium leading-relaxed max-w-[600px]">
-                  {course_description}
-                </p>
-
-                <div className="flex flex-col gap-y-1 xs:flex-row xs:space-x-6 items-start font-medium">
-                  <CourseInfo icon={Users} text={`${learnersCount} Learners`} />
-                  <CourseInfo icon={Calendar} text={`Duration: ${duration}`} />
-                </div>
-
-                <div className="flex flex-wrap items-center space-x-2">
-                  <span className="text-2xl font-bold">{rating}</span>
-                  <RatingStars
-                    rating={4.9}
-                    color="text-yellow-500"
-                    size="w-5 h-5"
-                  />
-                  <span className="text-sm text-gray-400 font-medium">
-                    ({ratingCount} ratings)
-                  </span>
-                  <span className="text-sm text-gray-400 font-medium">
-                    {learnersCount} students
-                  </span>
-                </div>
+      <section className="bg-teamBg bg-cover bg-center text-white">
+        <div className="backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
+          {/* Replace the generic container with the same max-width constraints */}
+          <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Main content wrapper with fixed padding */}
+            <div className="py-10">
+              {/* Breadcrumbs */}
+              <div className="mb-6">
+                <Breadcrumbs
+                  items={[
+                    { label: "Home", href: "/" },
+                    { label: "Programs", href: "/programs" },
+                    {
+                      label: "Flagship-Program",
+                      href: "/programs/flagship-program",
+                    },
+                    { label: course_name },
+                  ]}
+                />
               </div>
 
-              {/* Price and Enroll Section */}
-              <div className=" max-w-[400px] sm:min-w-[280px] sm:w-1/3 ">
-                <div className="bg-background text-black p-6  rounded-lg shadow-lg w-full sm:w-auto sm:max-w-sm">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-gray-900 font-medium text-lg">
-                      Price:
-                    </span>
-                    <span className="text-3xl font-bold uppercase">
-                      {initialCurrency
-                        ? `${initialCurrency} ${initialPrice}`
-                        : initialPrice}
-                    </span>
+              {/* Content grid with fixed proportions */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
+                {/* Course details - takes up 2/3 of space */}
+                <div className="sm:col-span-2 space-y-6">
+                  <div className="space-y-4">
+                    <p className="inline-block bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
+                      {course_code}
+                    </p>
+
+                    <h1 className="font-bold text-3xl xs:text-4xl lg:text-5xl text-background font-poppins">
+                      {course_name}
+                    </h1>
+
+                    <p className="text-gray-100 text-sm sm:text-base font-medium leading-relaxed">
+                      {course_description}
+                    </p>
                   </div>
 
-                  {/* Enroll Now Button and Sheet Component  */}
-                  <CourseSheet
-                    is_registration_open={is_registration_open}
-                    program_id={program_id}
-                    batch_id={batch_id}
-                    course_batch_program_id={course_batch_program_id}
-                    profile_id={courseStatus.profileData.id}
-                    isEnrolled={courseStatus.isEnrolled}
-                    timeSlots={timeSlots}
-                    coursePrice={coursePrice}
-                    courseName={course_name}
-                    isLoggedIn={isLoggedIn}
-                    pre_requisite={pre_requisite}
-                    student_courses={student_courses}
+                  <div className="flex flex-col xs:flex-row gap-4 xs:gap-6">
+                    <CourseInfo
+                      icon={Users}
+                      text={`${learnersCount} Learners`}
+                    />
+                    <CourseInfo
+                      icon={Calendar}
+                      text={`Duration: ${duration}`}
+                    />
+                  </div>
 
-                  />
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-2xl font-bold">{rating}</span>
+                    <RatingStars
+                      rating={4.9}
+                      color="text-yellow-500"
+                      size="w-5 h-5"
+                    />
+                    <span className="text-sm text-gray-400 font-medium">
+                      ({ratingCount} ratings)
+                    </span>
+                    <span className="text-sm text-gray-400 font-medium">
+                      {learnersCount} students
+                    </span>
+                  </div>
+                </div>
+
+                  {/* Price and enrollment - takes up 1/3 of space */}
+                  <div className="sm:col-span-2 md:col-span-1">
+                  <div className="bg-background text-black p-6 rounded-lg shadow-lg w-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <span className="text-gray-900 font-medium text-lg">
+                        Price:
+                      </span>
+                      <span className="text-3xl font-bold uppercase">
+                        {initialCurrency
+                          ? `${initialCurrency} ${initialPrice}`
+                          : initialPrice}
+                      </span>
+                    </div>
+
+                    <CourseSheet
+                      is_registration_open={is_registration_open}
+                      program_id={program_id}
+                      batch_id={batch_id}
+                      course_batch_program_id={course_batch_program_id}
+                      profile_id={profile.id}
+                      isEnrolled={isEnrolled}
+                      timeSlots={timeSlots}
+                      coursePrice={coursePrice}
+                      courseName={course_name}
+                      isLoggedIn={isLoggedIn}
+                      pre_requisite={pre_requisite}
+                      student_courses={student_courses}
+                    />
+                  </div>
                 </div>
               </div>
             </div>

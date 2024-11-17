@@ -46,14 +46,12 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
     };
 
-
     handleResize(); // Call once on mount
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-    
   }, []);
 
   return (
@@ -78,6 +76,11 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         <ChevronRight className="w-5 h-5 ml-2" />
       </button>
 
+      <div className="mt-2">
+        <span className="text-textSecondary font-medium">Languages:</span> {"  "}
+        <span  className="text-textSecondary">English,</span> <span  className="text-textSecondary">Urdu/Hindi</span>
+      </div>
+
       <SheetContent
         side={sheetSide}
         className={`w-full max-w-full overflow-y-auto ${
@@ -93,7 +96,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           </VisuallyHidden.Root>
         </SheetHeader>
 
-
         <GetEnrolled
           program_id={program_id}
           batch_id={batch_id}
@@ -103,8 +105,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
-          />
-
+        />
       </SheetContent>
     </Sheet>
   );
