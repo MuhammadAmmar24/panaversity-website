@@ -42,7 +42,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
         // Map API response data to the Course[] structure
         recentCourses = result.data.map((courseData) => ({
           title: courseData.course_name,
-          progress: courseData.is_active ? 10 : 14, // Mocked progress
+          progress: courseData.is_active ? 1 : 14, // Mocked progress
           classes: 14, // Mocked lessons count
           status: courseData.student_course_status,
           is_paid: courseData.is_paid,
@@ -54,7 +54,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
           day: courseData.class_time_slot?.time_slot_day || "",
           course_code: courseData.course_code
         }));
-        status = recentCourses[0]?.status ?? "inactive"; // Set status based on the first course
+        // status = recentCourses[0]?.status ?? "inactive"; // Set status based on the first course
         enrollmentStatus = "enrolled";
       }
     }
@@ -94,7 +94,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
       <CourseSection
         courses={recentCourses}
         enrollmentStatus={enrollmentStatus}
-        status={status}
+        // status={status}
       />
 
       {/* Render Class Sections only if the user has an active course */}

@@ -5,23 +5,23 @@ import CourseCard from "./CourseCard";
 
 const CourseSection: React.FC<CourseSectionProps> = async ({
   courses,
-  status,
+  // status,
 }) => {
   const profile: ProfileData = await fetchProfile();
 
   return (
-    <div className="my-14">
-      <h1 className="font-medium text-start text-xl md:text-2xl font-poppins mb-4">
+    <div className="my-10 sm:my-14">
+      <h1 className="font-medium text-sm fold:text-base mobileM:text-xl md:text-3xl font-poppins mb-4 text-textPrimary/90">
         Enrolled Courses
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {courses?.map((course: Course, index: number) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-y-12">
+        {courses?.slice().reverse().map((course: Course, index: number) => (
           <CourseCard
             key={index}
             title={course.title}
             progress={course.progress}
             classes={course.classes}
-            status={status}
+            status={course.status}
             batch_id={course.batch_no}
             student_course_id={course.student_course_id}
             course_batch_program_id={course.course_batch_program_id}
