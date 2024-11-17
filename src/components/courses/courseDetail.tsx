@@ -168,8 +168,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
                   {/* Price and enrollment - takes up 1/3 of space */}
                   <div className="sm:col-span-2 md:col-span-1">
-                  <div className="bg-background text-black p-6 rounded-lg shadow-lg w-full">
-                    <div className="flex items-center justify-between mb-6">
+                  <div className="bg-background text-black p-0 rounded-lg shadow-lg w-full">
+                    {/* <div className="flex items-center justify-between mb-6">
                       <span className="text-gray-900 font-medium text-lg">
                         Price:
                       </span>
@@ -178,7 +178,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                           ? `${initialCurrency} ${initialPrice}`
                           : initialPrice}
                       </span>
-                    </div>
+                    </div> */}
 
                     <CourseSheet
                       is_registration_open={is_registration_open}
