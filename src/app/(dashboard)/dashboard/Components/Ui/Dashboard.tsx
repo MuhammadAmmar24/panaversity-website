@@ -13,6 +13,8 @@ import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { courseData } from "@/src/constants/courses";
 import { formatTime } from "@/src/lib/timeUtils"
 
+
+
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
   let recentCourses: Course[] = [];
@@ -20,11 +22,13 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   let enrollmentStatus: string | null = null; // Tracks enrollment status
 
   try {
+    
+ 
     // Fetch enrolled courses based on profileId
     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profileId
     );
-    console.log(result)
+  
 
     if (result.type === "error") {
       if (result.message.includes("Not Found")) {

@@ -25,22 +25,26 @@ const UpcomingClassSectionSkeleton: React.FC = () => (
 // Dashboard skeleton
 const DashboardSkeleton: React.FC = () => {
   return (
-    <main className=" ">
+    <main className="my-10 sm:my-14 ">
+        <h1 className="font-medium text-sm fold:text-base mobileM:text-xl md:text-3xl font-poppins mb-4 text-textPrimary/90">
+        Enrolled Courses
+      </h1>
       {/* Render recent courses skeleton */}
-      <section className="mb-8 mt-8">
-        {[1].map((index) => (
-          <CourseCardSkeleton key={index} />
-        ))}
-      </section>
+      <section className="mb-8 mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+  {[1, 2, 3, 4].map((index) => (
+    <CourseCardSkeleton key={index} />
+  ))}
+</section>
+
 
       {/* Grid layout for aligning classes side by side on larger screens */}
-      <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
+      {/* <section className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10"> */}
         {/* Render recent classes skeleton */}
-        <ClassSectionSkeleton />
+        {/* <ClassSectionSkeleton /> */}
 
         {/* Render upcoming classes skeleton */}
-        <UpcomingClassSectionSkeleton />
-      </section>
+        {/* <UpcomingClassSectionSkeleton /> */}
+      {/* </section> */}
     </main>
   );
 };
