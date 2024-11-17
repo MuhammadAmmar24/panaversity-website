@@ -217,7 +217,7 @@ export default function GetEnrolled({
             )}
           </div>
         ) : (
-          <p className="text-[0.8rem] font-normal leading-relaxed text-textPrimary/90">
+          <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
             There are no pre-requisites for this course.
           </p>
         )}
