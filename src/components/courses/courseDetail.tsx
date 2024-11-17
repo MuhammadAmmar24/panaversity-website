@@ -1,5 +1,4 @@
 import { getCoursePrice } from "@/src/lib/coursePrice";
-import enrollmentStatus from "@/src/lib/enrollmentStatus";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
 import {
   GetCoursePriceResponse,
@@ -61,7 +60,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const courseStatus = await enrollmentStatus(course_batch_program_id);
+  // const courseStatus = await enrollmentStatus(course_batch_program_id);
   const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
     course_batch_program_id,
   });
@@ -78,6 +77,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   };
 
   const isLoggedIn: boolean = await isValidToken();
+  let isEnrolled: boolean =  false;
 
   let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
@@ -87,6 +87,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
       profile.id
     );
     student_courses = result.data;
+
+    const course = result?.data?.find(
+      (course) => course.course_batch_program_id === course_batch_program_id
+  );
+    isEnrolled = !!course && course.student_course_status != 'expired_reservation';
+
   } catch (error: any) {
     console.error("Error fetching student courses: ", error.message);
   }
@@ -167,15 +173,14 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     program_id={program_id}
                     batch_id={batch_id}
                     course_batch_program_id={course_batch_program_id}
-                    profile_id={courseStatus.profileData.id}
-                    isEnrolled={courseStatus.isEnrolled}
+                    profile_id={profile.id}
+                    isEnrolled={isEnrolled}
                     timeSlots={timeSlots}
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
-
                   />
                 </div>
               </div>
