@@ -113,7 +113,7 @@ const allTeamMembers = [
   },
   {
     picture: "/team/Ammar.webp",
-    fullName: "Muhammad Ammar Masood",
+    fullName: "M Ammar Masood",
     designation: "Full Stack Agentic AI Engineer",
     bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
     socialLinks: [
@@ -203,8 +203,8 @@ const allTeamMembers = [
     designation: "Team Lead Panaversity, Freelancer",
     bio: "Focusing on Agentic AI and blockchain technologies.",
     socialLinks: [
-      { icon: "linkedin", href: "#" },
-      { icon: "github", href: "#" },
+      { icon: "linkedin", href: "https://pk.linkedin.com/in/bushra-hussain" },
+      { icon: "github", href: "https://github.com/BushraHussain" },
     ],
   },
   {
@@ -243,7 +243,7 @@ const allTeamMembers = [
   },
   {
     picture: "/team/Shayan.webp",
-    fullName: "Muhammad Shayan Khan",
+    fullName: "M Shayan Khan",
     designation: "Full Stack GENAI Engineer",
     bio: "Building seamless AI-powered web applications",
     socialLinks: [
