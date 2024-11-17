@@ -1,4 +1,5 @@
-import { RegisterFormPage } from "@/src/components/auth/register/register-page";
+import { CardWrapper } from "@/src/components/auth/card-wrapper";
+import { RegisterForm } from "@/src/components/auth/register/register-form";
 import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
@@ -45,7 +46,11 @@ const RegisterPage = () => {
       <main>
         <div className="flex flex-col justify-center items-center min-h-screen">
           <div className="mt-10 mb-20">
-            <RegisterFormPage />
+            <CardWrapper headerLabel="Create an account">
+              <div className="p-4 mobileM:p-2">
+                <RegisterForm />
+              </div>{" "}
+            </CardWrapper>
           </div>
         </div>
       </main>

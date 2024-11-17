@@ -1,4 +1,5 @@
-import { LoginFormPage } from "@/src/components/auth/login/login-page";
+import { CardWrapper } from "@/src/components/auth/card-wrapper";
+import { LoginForm } from "@/src/components/auth/login/login-form";
 import Footer from "@/src/components/Footer/Footer";
 import Navbar from "@/src/components/Navbar/Navbar";
 import type { Metadata } from "next";
@@ -14,10 +15,12 @@ const LoginPage = () => {
     <>
       <Navbar />
       <main>
-        <div className="flex flex-col justify-center items-center min-h-[85vh]">
-          <div className="mt-10 mb-20">
-            <LoginFormPage />
-          </div>
+        <div className="flex flex-col justify-center items-center min-h-[85vh] mt-10 mb-20">
+            <CardWrapper headerLabel="Login">
+            <div className="p-4 mobileM:p-2">
+              <LoginForm />
+              </div>
+            </CardWrapper>
         </div>
       </main>
       <Footer />
