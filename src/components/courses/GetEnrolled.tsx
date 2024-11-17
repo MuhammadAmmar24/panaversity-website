@@ -23,6 +23,7 @@ export default function GetEnrolled({
   const [isPending, startTransition] = useTransition();
 
   const [selectedDay, setSelectedDay] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
     null
@@ -107,6 +108,8 @@ export default function GetEnrolled({
   const uniqueDays = Array.from(
     new Set(classTimeSlots.map((slot) => slot.time_slot_day))
   );
+
+  const languages = ["Urdu/Hindi", "English"]
 
   const timeSlotsForSelectedDay = classTimeSlots
     .filter((slot) => slot.time_slot_day === selectedDay)
@@ -223,6 +226,18 @@ export default function GetEnrolled({
 
       <div className={`bg-background rounded-3xl  container mx-auto max-w-full px-0 sm:px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
         <div className="space-y-7 w-full">
+        <SelectField
+            label="Language"
+            value={selectedLanguage}
+            onChange={(e: any) => {
+              setSelectedLanguage(e.target.value);
+              setSelectedDay("");
+            }}
+            options={languages}
+            placeholder="Select Language"
+            disabled={!skipped}
+          />
+
           <SelectField
             label="Day"
             value={selectedDay}
@@ -232,7 +247,7 @@ export default function GetEnrolled({
             }}
             options={uniqueDays}
             placeholder="Select Day"
-            disabled={!skipped}
+            disabled={!skipped || !selectedLanguage}
           />
 
           <SelectField
