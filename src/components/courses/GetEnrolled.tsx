@@ -171,18 +171,18 @@ export default function GetEnrolled({
 
   return (
     <>
-    <div className="rounded-3xl bg container mx-auto max-w-full px-0 sm:px-2">
-      <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
-      <div className=" ">
-        <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
-        {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-          <div>
-            {pre_requisite.map((pre_req, index) => {
-              const studentCourse = findStudentCourse(pre_req.course_code);
-              const { statusText, statusClass, linkHref } = getCourseStatus(
-                studentCourse,
-                pre_req.course_code
-              );
+      <div className="bg container mx-auto max-w-full rounded-3xl px-0 sm:px-2">
+        <h1 className="mb-4 mt-5 text-3xl font-bold">Get Enrolled</h1>
+        <div className=" ">
+          <h1 className="mb-3 mt-5 text-xl font-bold">Prerequisites:</h1>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div>
+              {pre_requisite.map((pre_req, index) => {
+                const studentCourse = findStudentCourse(pre_req.course_code);
+                const { statusText, statusClass, linkHref } = getCourseStatus(
+                  studentCourse,
+                  pre_req.course_code,
+                );
 
                 return (
                   <div
@@ -191,43 +191,49 @@ export default function GetEnrolled({
                   >
                     <Link href={linkHref}>
                       <div className="text-base font-normal leading-relaxed text-textPrimary/90">
-                        <div className="flex  items-center justify-between gap-4">
-                          <div className="flex flex-col justify-center items-start">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex flex-col items-start justify-center">
                             <span className="underline decoration-accent decoration-2">
                               {pre_req.course_code}
                             </span>
-                            <span className="line-clamp-1 text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem]">{pre_req.course_name}</span>
+                            <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
+                              {pre_req.course_name}
+                            </span>
                           </div>
-                          <span className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}>
+                          <span
+                            className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
+                          >
                             {statusText}
                           </span>
                         </div>
                       </div>
                     </Link>
+                  </div>
+                );
+              })}
+              {hasNotEnrolledPreReq && (
+                <div className="mt-4 flex items-center gap-3 px-4 lg:justify-between">
+                  {skipped || (
+                    <button
+                      onClick={handleSkip}
+                      className="rounded-lg border-2 border-blue-700 px-4 py-0.5 text-sm text-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:text-white"
+                    >
+                      Skip
+                    </button>
+                  )}
+                  <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+                    {skipped ? skippedMessage : skipText}
+                  </span>
                 </div>
-              );
-            })}
-            {hasNotEnrolledPreReq && (
-              <div className="flex items-center lg:justify-between   gap-3 mt-4">
-                <button
-                  onClick={handleSkip}
-                  className="text-[0.9rem] px-8 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
-                >
-                  Skip
-                </button>
-                <span className="text-red-500 text-[0.8rem] mobileM:text-[0.9rem] sm:text-[1rem]">
-                  {skipped ? skippedMessage : skipText}
-                </span>
-              </div>
-            )}
-          </div>
-        ) : (
-          <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
-            There are no pre-requisites for this course.
-          </p>
-        )}
+              )}
+            </div>
+          ) : (
+            <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
+        </div>
       </div>
-    </div>
 
       <div
         className={`container mx-auto max-w-full rounded-3xl bg-background px-0 pt-[3rem] sm:px-2 ${!skipped ? "opacity-50" : "opacity-100"}`}

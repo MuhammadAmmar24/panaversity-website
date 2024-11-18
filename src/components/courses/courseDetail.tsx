@@ -219,7 +219,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
         {/* Prerequisites */}
         <div className="mt-12">
           <h2 className="font-poppins mb-5 text-3xl font-semibold leading-tight text-textPrimary md:text-4xl">
-            Pre Requisites
+          Prerequisites
           </h2>
           <div>
             {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
