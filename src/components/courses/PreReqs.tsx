@@ -1,0 +1,40 @@
+interface PreReqsProps {
+  course_code: string;
+  course_name: string;
+}
+
+interface CoursePrerequisitesProps {
+  prerequisites?: PreReqsProps[];
+  className?: string;
+}
+
+export default function CoursePrerequisites({
+  prerequisites = [],
+  className = "",
+}: CoursePrerequisitesProps) {
+  if (!prerequisites || prerequisites.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className={`flex items-center space-x-2 ${className}`}>
+      <span className="text-xl font-bold text-white dark:text-gray-300">
+        Prerequisites:
+      </span>
+      <div
+        className="flex flex-wrap gap-2"
+        role="list"
+        aria-label="Course prerequisites"
+      >
+        {prerequisites.map((pre_req, index) => (
+          <div
+            key={index}
+            className="inline-flex items-center rounded-md bg-gray-400 px-2.5 py-0.5 text-xs font-semibold text-gray-800"
+          >
+            {pre_req.course_code}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
