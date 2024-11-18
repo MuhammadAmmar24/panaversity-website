@@ -97,7 +97,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             }
             return acc;
           },
-          {}
+          {},
         );
         setErrors((prev) => ({ ...prev, ...fieldErrors }));
       }
@@ -138,8 +138,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     }
   };
 
- 
-
   const handleCancel = () => {
     setAddressInfo({
       address: profile?.student?.address || "",
@@ -152,17 +150,17 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   };
 
   return (
-    <div className=" mx-auto  py-8">
-      <div className=" mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+    <div className="mx-auto py-8">
+      <div className="mx-auto overflow-hidden rounded-lg bg-white shadow-lg">
         {/* Profile header */}
         <div className="bg-gray-100 p-6 sm:p-8">
-          <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+          <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
             <Image
               src="/profile.webp"
               alt="Profile image"
               width={80}
               height={80}
-              className="rounded-full w-20 h-20 object-cover border-2 border-gray-300"
+              className="h-20 w-20 rounded-full border-2 border-gray-300 object-cover"
             />
             <div className="text-center sm:text-left">
               <h1 className="text-2xl font-bold text-gray-900">
@@ -176,34 +174,34 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
         <div className="p-6 sm:p-8">
           {/* Personal Information */}
           <section className="mb-8 w-full border-b pb-6">
-            <h2 className="text-lg leading-6 pr-4 mobileM:pr-0 md:text-xl font-semibold mb-6 text-gray-900">
+            <h2 className="mb-6 pr-4 text-lg font-semibold leading-6 text-gray-900 mobileM:pr-0 md:text-xl">
               Personal Information
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 xl:gap-x-16">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:gap-x-16">
               <div>
-                <p className="text-gray-700 capitalize font-medium">Phone</p>
-                <p className="text-gray-800 pt-2 text-sm">
+                <p className="font-medium capitalize text-gray-700">Phone</p>
+                <p className="pt-2 text-sm text-gray-800">
                   +{personalInfo.phone}
                 </p>
               </div>
               <div>
-                <p className="text-gray-700 capitalize font-medium">
+                <p className="font-medium capitalize text-gray-700">
                   Student ID
                 </p>
-                <p className="text-gray-800 pt-2 text-sm">
+                <p className="pt-2 text-sm text-gray-800">
                   {personalInfo.studentId || "-"}
                 </p>
               </div>
             </div>
           </section>
           {/* Address Information section */}
-          <section className="mt-8 w-full  ">
-            <div className="flex justify-between items-center gap-x-0.5 mobileM:gap-x-0 mb-6">
-              <h2 className="text-lg leading-6 md:text-xl font-semibold text-gray-900">
+          <section className="mt-8 w-full">
+            <div className="mb-6 flex items-center justify-between gap-x-0.5 mobileM:gap-x-0">
+              <h2 className="text-lg font-semibold leading-6 text-gray-900 md:text-xl">
                 Address Information
               </h2>
               <button
-                className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
+                className="text-gray-600 transition-colors duration-200 hover:text-gray-800"
                 onClick={handleAddressEdit}
               >
                 {isEditingAddress ? (
@@ -215,12 +213,12 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
             </div>
 
             {/* Address fields */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 xl:gap-x-16">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:gap-x-16">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
                   <div key={field} className="space-y-2">
-                    <label className="block text-md font-medium text-gray-700 capitalize">
-                    {labels[field]}
+                    <label className="text-md block font-medium capitalize text-gray-700">
+                      {labels[field]}
                     </label>
                     {isEditingAddress ? (
                       <div className="relative">
@@ -229,21 +227,21 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                           name={field}
                           value={addressInfo[field]}
                           onChange={handleAddressChange}
-                          className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
+                          className="w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
                         />
                         {errors[field] && (
-                          <p className="mt-1 text-md text-red-600">
+                          <p className="text-md mt-1 text-red-600">
                             {errors[field]}
                           </p>
                         )}
                       </div>
                     ) : (
-                      <p className="text-gray-800 text-sm">
+                      <p className="text-sm text-gray-800">
                         {addressInfo[field] || "-"}
                       </p>
                     )}
                   </div>
-                )
+                ),
               )}
             </div>
 
@@ -252,7 +250,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               <div className="mt-8 flex justify-start">
                 <button
                   onClick={submitChanges}
-                  className="w-full xl:w-[calc(50%-2.05rem)] py-2 text-sm font-medium bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
+                  className="w-full rounded-md bg-accent py-2 text-sm font-medium text-white transition duration-150 ease-in-out hover:bg-green-600 xl:w-[calc(50%-2.05rem)]"
                 >
                   Save
                 </button>
@@ -263,7 +261,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           {/* Status message */}
           {statusMessage && (
             <div
-              className={`p-4 mt-6 rounded-md ${
+              className={`mt-6 rounded-md p-4 ${
                 statusMessage.includes("Error")
                   ? "bg-red-100 text-red-800"
                   : "bg-green-100 text-green-800"

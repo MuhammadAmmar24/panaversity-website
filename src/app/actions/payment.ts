@@ -1,11 +1,14 @@
 "use server";
-import { PaymentRequestSchema, PaymentRequest } from "@/src/lib/schemas/payment";
+import {
+  PaymentRequest,
+  PaymentRequestSchema,
+} from "@/src/lib/schemas/payment";
 import { Result } from "@/src/types/types";
 import { revalidatePath } from "next/cache";
 
 // Payment Server Action to process the payment
 export const processPayment = async (
-  paymentData: PaymentRequest
+  paymentData: PaymentRequest,
 ): Promise<Result<{ success: boolean; transactionId: string }>> => {
   try {
     // Validate payment data using the schema
@@ -14,13 +17,14 @@ export const processPayment = async (
     if (!validationResult.success) {
       return {
         type: "error",
-        message: validationResult.error.errors.map((err) => err.message).join(", "),
+        message: validationResult.error.errors
+          .map((err) => err.message)
+          .join(", "),
       };
     }
 
     // Make the POST request to your payment backend
     const apiUrl = `${process.env.PAYMENT_API_URL}/voucher/create_voucher`;
-
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -29,17 +33,15 @@ export const processPayment = async (
         Authorization: `Bearer ${process.env.TOKEN_SECRET}`, // Use secret from environment
       },
       body: JSON.stringify(validationResult.data), // Convert validated data to JSON string
-      cache: 'no-store'
+      cache: "no-store",
     });
 
     if (!response.ok) {
-
       throw new Error(`Failed to process payment: ${response.statusText}`);
     }
 
     // Parse the JSON response
     const responseData = await response.json();
-
 
     revalidatePath("/dashboard");
 

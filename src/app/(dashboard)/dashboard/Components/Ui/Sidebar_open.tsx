@@ -21,7 +21,7 @@ const IsSidebarOpen: React.FC = () => {
 
       {/* Overlay that appears when sidebar is open */}
       {isSidebarOpen && (
-        <div className="fixed inset-0 bg-black opacity-80 transition-opacity duration-1000 z-30"></div>
+        <div className="fixed inset-0 z-30 bg-black opacity-80 transition-opacity duration-1000"></div>
       )}
     </div>
   );

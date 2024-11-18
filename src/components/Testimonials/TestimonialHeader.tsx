@@ -8,11 +8,11 @@ const TestimonialHeader = ({
   mainHeading,
 }: TestimonialHeaderProps) => {
   return (
-    <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
-      <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
+    <div className="mb-6 flex flex-col items-center justify-center text-center sm:mb-8 md:mb-12">
+      <h2 className="text-md gradient-border mb-5 mt-5 rounded-[100px] border-b text-center font-medium uppercase tracking-wide text-textPrimary sm:text-lg md:mt-0">
         {sectionHeading}
       </h2>
-      <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
+      <h2 className="font-poppins text-center text-3xl font-semibold tracking-tighter text-textPrimary sm:text-4xl md:text-5xl">
         {mainHeading}
       </h2>
     </div>

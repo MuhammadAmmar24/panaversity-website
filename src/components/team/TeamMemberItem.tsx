@@ -11,10 +11,10 @@ const TeamMemberItem = ({
   priority?: boolean;
 }) => (
   <div className="w-[280px]">
-    <div className="relative flex justify-center items-center">
+    <div className="relative flex items-center justify-center">
       <Image
         alt="picbg"
-        className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-full object-cover"
+        className="absolute left-1/2 top-0 h-full w-full -translate-x-1/2 transform object-cover"
         src="/team/picbg.svg"
         width={500}
         height={500}
@@ -26,19 +26,19 @@ const TeamMemberItem = ({
         width={500}
         height={500}
         priority={priority}
-        className="relative z-10 w-4/5 h-auto rounded-lg "
+        className="relative z-10 h-auto w-4/5 rounded-lg"
       />
     </div>
-    <div className="flex flex-col justify-between bg-background  shadow-xl rounded-xl p-4 text-center min-h-[180px] overflow-y-hidden">
+    <div className="flex min-h-[180px] flex-col justify-between overflow-y-hidden rounded-xl bg-background p-4 text-center shadow-xl">
       <div className="">
         <h2 className="text-lg font-medium leading-6">{member.fullName}</h2>
-        <h3 className="text-sm font-medium opacity-75 leading-4">
+        <h3 className="text-sm font-medium leading-4 opacity-75">
           {member.designation}
         </h3>
       </div>
 
       <p className="text-sm leading-4">{member.bio}</p>
-      <div className="flex justify-center items-center space-x-3">
+      <div className="flex items-center justify-center space-x-3">
         {member.socialLinks.map((link: SocialLink, index: number) => (
           <Link
             key={index}

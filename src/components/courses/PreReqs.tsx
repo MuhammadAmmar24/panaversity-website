@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 interface PreReqsProps {
   course_code: string;
   course_name: string;
@@ -27,12 +29,14 @@ export default function CoursePrerequisites({
         aria-label="Course prerequisites"
       >
         {prerequisites.map((pre_req, index) => (
-          <div
+          <Link
+            href={`/programs/flagship-program/${pre_req.course_code}`}
+            target="_blank"
             key={index}
-            className="inline-flex items-center rounded-md bg-gray-400 px-2.5 py-0.5 text-xs font-semibold text-gray-800"
+            className="inline-flex items-center rounded-md bg-accent px-2.5 py-0.5 text-xs text-white"
           >
             {pre_req.course_code}
-          </div>
+          </Link>
         ))}
       </div>
     </div>

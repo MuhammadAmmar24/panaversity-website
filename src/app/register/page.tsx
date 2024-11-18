@@ -44,8 +44,8 @@ const RegisterPage = () => {
     <>
       <Navbar />
       <main>
-        <div className="flex flex-col justify-center items-center min-h-screen">
-          <div className="mt-10 mb-20">
+        <div className="flex min-h-screen flex-col items-center justify-center">
+          <div className="mb-20 mt-10">
             <CardWrapper headerLabel="Create an account">
               <div className="p-4 mobileM:p-2">
                 <RegisterForm />

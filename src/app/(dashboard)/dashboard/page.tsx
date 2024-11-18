@@ -13,7 +13,7 @@ export default async function Home() {
   const profile: ProfileData = await fetchProfile();
 
   return (
-    <main className="flex-1 mx-3 mobileM:mx-4 xs:mx-6 sm:mr-20 sm:ml-20 lg:mx-10 xl:mx-20 overflow-hidden transition-all duration-300">
+    <main className="mx-3 flex-1 overflow-hidden transition-all duration-300 mobileM:mx-4 xs:mx-6 sm:ml-20 sm:mr-20 lg:mx-10 xl:mx-20">
       <TopBar />
       <Welcome profile={profile} />
       <Dashboard profileId={profile?.id} />

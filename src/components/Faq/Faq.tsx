@@ -14,18 +14,18 @@ export default function Faqs() {
   return (
     <section
       id="faqs"
-      className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-[0rem] py-8 sm:py-12 lg:py-16"
+      className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:max-w-[950px] lg:px-[0rem] lg:py-16 xl:max-w-6xl"
     >
-      <div className="flex flex-col items-center justify-center text-center mb-6 sm:mb-8 md:mb-12">
-        <h2 className="text-md text-textPrimary mt-5 md:mt-0 text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 tracking-wide">
+      <div className="mb-6 flex flex-col items-center justify-center text-center sm:mb-8 md:mb-12">
+        <h2 className="text-md gradient-border mb-5 mt-5 rounded-[100px] border-b text-center font-medium tracking-wide text-textPrimary sm:text-lg md:mt-0">
           FAQs
         </h2>
-        <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
+        <h2 className="font-poppins text-center text-3xl font-semibold tracking-tighter text-textPrimary sm:text-4xl md:text-5xl">
           Top Answered Questions
         </h2>
       </div>
 
-      <div className="mt-8 sm:mt-8 md:mt-10 space-y-4">
+      <div className="mt-8 space-y-4 sm:mt-8 md:mt-10">
         {faqData.map((item: FaqItem, index: number) => (
           <AccordionItem
             key={index}

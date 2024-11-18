@@ -1,25 +1,19 @@
 "use server";
 
 import {
-  EnrollCourseRequest,
-  EnrollCourseRequestSchema,
-  EnrollCourseResponse,
-  EnrollCourseResponseSchema,
   EnrollNewStudentRequest,
   EnrollNewStudentRequestSchema,
-  EnrollNewStudentResponse,
-  EnrollNewStudentResponseSchema,
   EnrollResponse,
   EnrollStudentRequest,
   EnrollStudentRequestSchema,
   EnrollStudentResponse,
-  EnrollStudentResponseSchema,
+  EnrollStudentResponseSchema
 } from "@/src/lib/schemas/enrollment";
 import { Result } from "@/src/types/types";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export const enrollStudentInProgram = async (
-  payload: EnrollStudentRequest
+  payload: EnrollStudentRequest,
 ): Promise<Result<EnrollStudentResponse>> => {
   const validationResult = EnrollStudentRequestSchema.safeParse(payload);
 
@@ -43,7 +37,7 @@ export const enrollStudentInProgram = async (
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
         body: JSON.stringify(validationResult.data),
-      }
+      },
     );
 
     if (response.status !== 201) {
@@ -77,7 +71,7 @@ export const enrollStudentInProgram = async (
 };
 
 export const enrollNewStudentInProgramAndCourse = async (
-  payload: EnrollNewStudentRequest
+  payload: EnrollNewStudentRequest,
 ): Promise<Result<EnrollResponse>> => {
   const validationResult = EnrollNewStudentRequestSchema.safeParse(payload);
 
@@ -102,13 +96,12 @@ export const enrollNewStudentInProgramAndCourse = async (
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
         body: JSON.stringify(validationResult.data),
-      }
+      },
     );
 
     if (!response.ok) {
       // Log the backend error response for debugging
       const errorResponse = await response.json();
-     
 
       // Extract the backend error message (detail) if available
       let errorMessage = `Failed to enroll student in program and course: ${response.statusText}`;

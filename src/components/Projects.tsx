@@ -19,14 +19,14 @@ export default function Projects() {
   }, []);
 
   return (
-    <div className="bg-[#fcfcff] py-5 md:px-10 px-6 mt-10 flex justify-center">
+    <div className="mt-10 flex justify-center bg-[#fcfcff] px-6 py-5 md:px-10">
       <div className="w-full max-w-6xl">
         <div className="flex justify-center">
-          <div className="flex flex-col items-center justify-center text-center mb-6 md:mb-12">
-            <h2 className="text-md text-textPrimary text-center sm:text-lg gradient-border font-medium border-b rounded-[100px] mb-5 uppercase tracking-wide">
+          <div className="mb-6 flex flex-col items-center justify-center text-center md:mb-12">
+            <h2 className="text-md gradient-border mb-5 rounded-[100px] border-b text-center font-medium uppercase tracking-wide text-textPrimary sm:text-lg">
               {projectsData.sectionHeading}
             </h2>
-            <h2 className="text-3xl text-textPrimary font-poppins font-semibold tracking-tighter text-center sm:text-4xl md:text-5xl">
+            <h2 className="font-poppins text-center text-3xl font-semibold tracking-tighter text-textPrimary sm:text-4xl md:text-5xl">
               {projectsData.mainHeading}
             </h2>
           </div>
@@ -53,9 +53,9 @@ export default function Projects() {
             {projects.map((data: any, index: number) => (
               <SwiperSlide
                 key={index}
-                className="flex flex-col border rounded-lg p-2"
+                className="flex flex-col rounded-lg border p-2"
               >
-                <div className="w-full h-[180px] relative">
+                <div className="relative h-[180px] w-full">
                   <Image
                     src={data.image}
                     alt={data.title}
@@ -64,14 +64,14 @@ export default function Projects() {
                     className="rounded-lg object-cover"
                   />
                 </div>
-                <div className="text-left mt-2">
+                <div className="mt-2 text-left">
                   <h3 className="text-lg font-bold">{data.title}</h3>
                   <p className="text-sm">{data.description}</p>
                   <div className="flex flex-wrap">
                     {data.tags.map((tag: any, tagIndex: number) => (
                       <p
                         key={tagIndex}
-                        className={`text-xs mr-2 font-semibold ${tag?.color}`}
+                        className={`mr-2 text-xs font-semibold ${tag?.color}`}
                       >
                         {tag.tag}
                       </p>
@@ -83,31 +83,31 @@ export default function Projects() {
           </Swiper>
         </div>
 
-        <div className="w-full flex justify-center">
+        <div className="flex w-full justify-center">
           {projects.length > 3 && (
-            <div className="flex gap-10 w-full justify-center my-4 mb-10 md:mb-0">
+            <div className="my-4 mb-10 flex w-full justify-center gap-10 md:mb-0">
               {/* Previous Button */}
               <button
                 aria-label="go to previous"
-                className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
+                className="group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full font-bold"
                 onClick={() => swiperRef.current?.slidePrev()}
               >
-                <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
-                <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
-                <FaArrowLeftLong className="relative w-4 h-4 text-gray-800 group-hover:text-textPrimary" />
-                <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+                <span className="absolute left-0 top-0 h-32 w-32 -translate-y-2 translate-x-12 rotate-45 bg-accent opacity-[3%]"></span>
+                <span className="absolute left-0 top-0 -mt-1 h-48 w-48 -translate-x-56 -translate-y-24 rotate-45 bg-accent opacity-100 transition-all duration-500 ease-in-out group-hover:-translate-x-8"></span>
+                <FaArrowLeftLong className="relative h-4 w-4 text-gray-800 group-hover:text-textPrimary" />
+                <span className="absolute inset-0 rounded-full border-2 border-accent"></span>
               </button>
 
               {/* Next Button */}
               <button
                 aria-label="go to next"
-                className="relative flex items-center justify-center w-10 h-10 overflow-hidden font-bold rounded-full group"
+                className="group relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full font-bold"
                 onClick={() => swiperRef.current?.slideNext()}
               >
-                <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
-                <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
-                <FaArrowRight className="relative w-4 h-4 text-gray-800 group-hover:text-textPrimary" />
-                <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+                <span className="absolute left-0 top-0 h-32 w-32 -translate-y-2 translate-x-12 rotate-45 bg-accent opacity-[3%]"></span>
+                <span className="absolute left-0 top-0 -mt-1 h-48 w-48 -translate-x-56 -translate-y-24 rotate-45 bg-accent opacity-100 transition-all duration-500 ease-in-out group-hover:-translate-x-8"></span>
+                <FaArrowRight className="relative h-4 w-4 text-gray-800 group-hover:text-textPrimary" />
+                <span className="absolute inset-0 rounded-full border-2 border-accent"></span>
               </button>
             </div>
           )}

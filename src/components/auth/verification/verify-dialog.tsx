@@ -13,14 +13,14 @@ export default function VerificationDialog() {
   return (
     <Dialog.Root open={true} onOpenChange={() => router.back()}>
       <Dialog.Portal>
-        <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2  bg-background  rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto"
+          className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-background p-6"
         >
           <Verify />
           <Dialog.Close asChild>
-            <button className="absolute top-4 right-4 p-1" aria-label="Close">
+            <button className="absolute right-4 top-4 p-1" aria-label="Close">
               <IoClose />
             </button>
           </Dialog.Close>

@@ -5,15 +5,19 @@ import React from "react";
 
 const Breadcrumbs: React.FC<BreadcrumbProps> = ({
   items,
-  separator = <ChevronRight className="w-4 h-4 mx-1" />,
+  separator = <ChevronRight className="mx-1 h-4 w-4" />,
 }) => {
   return (
     <nav className="my-4">
-      <ol className="flex flex-wrap items-center space-x-[1px] text-xs sm:text-sm font-medium text-white">
+      <ol className="flex flex-wrap items-center space-x-[1px] text-xs font-medium text-white sm:text-sm">
         {items.map((item, index) => (
           <li key={index} className="flex items-center">
             {item.href ? (
-              <Link href={item.href} aria-label = {`${item.label}`} className="hover:underline">
+              <Link
+                href={item.href}
+                aria-label={`${item.label}`}
+                className="hover:underline"
+              >
                 {item.label}
               </Link>
             ) : (

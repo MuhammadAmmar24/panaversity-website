@@ -4,20 +4,20 @@ import React from "react";
 const Newsletter: React.FC = () => {
   return (
     <div className="">
-      <h3 className="font-semibold mb-2 text-white text-lg">
+      <h3 className="mb-2 text-lg font-semibold text-white">
         Join Our Newsletter
       </h3>
-      <div className="flex items-center relative space-x-2">
+      <div className="relative flex items-center space-x-2">
         {/* Email Input */}
         <input
           type="email"
           placeholder="Enter email address"
-          className="bg-transparent border-b border-gray-500 text-sm p-2 w-[85%] text-gray-300 focus:outline-none"
+          className="w-[85%] border-b border-gray-500 bg-transparent p-2 text-sm text-gray-300 focus:outline-none"
           disabled
         />
         {/* Submit Button */}
         <button
-          className="bg-gray-600 absolute right-0 text-gray-400 rounded-full p-2 cursor-not-allowed transition-all"
+          className="absolute right-0 cursor-not-allowed rounded-full bg-gray-600 p-2 text-gray-400 transition-all"
           // className="bg-green-600 absolute right-0 hover:bg-green-500 text-white rounded-full p-2 transition-all"
           aria-label="Submit Email"
           disabled
@@ -38,7 +38,7 @@ const Newsletter: React.FC = () => {
           </svg>
         </button>
       </div>
-            {/* <p className="mt-4 text-gray-400">
+      {/* <p className="mt-4 text-gray-400">
         We will send you daily updates about the tech.
       </p> */}
       <p className="mt-4 text-gray-400">

@@ -1,6 +1,6 @@
 "use server";
-import * as z from "zod";
 import { UpdatePasswordSchema } from "@/src/lib/schemas/userschema";
+import * as z from "zod";
 
 export const updatePassword = async (values: z.infer<typeof UpdatePasswordSchema>) => {
   // Validate the input fields

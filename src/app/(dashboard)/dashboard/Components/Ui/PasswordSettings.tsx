@@ -92,13 +92,13 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
   };
 
   return (
-    <section className="mt-8 w-full sm:py-4 ">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg pr-5 xl:pr-8 mobileM:pr-0 leading-6 md:text-xl font-semibold text-gray-900">
+    <section className="mt-8 w-full sm:py-4">
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="pr-5 text-lg font-semibold leading-6 text-gray-900 mobileM:pr-0 md:text-xl xl:pr-8">
           Password Settings
         </h2>
         <button
-          className="text-gray-600 hover:text-gray-800 transition-colors duration-200"
+          className="text-gray-600 transition-colors duration-200 hover:text-gray-800"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -127,12 +127,12 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                     name={fieldName}
                     render={({ field }) => (
                       <FormItem className="text-left">
-                        <FormLabel className="block text-md font-medium text-gray-700 mb-1">
+                        <FormLabel className="text-md mb-1 block font-medium text-gray-700">
                           {fieldName
                             .split("_")
                             .map(
                               (word) =>
-                                word.charAt(0).toUpperCase() + word.slice(1)
+                                word.charAt(0).toUpperCase() + word.slice(1),
                             )
                             .join(" ")}
                         </FormLabel>
@@ -145,10 +145,10 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                                 fieldName === "current_password"
                                   ? "Enter current password"
                                   : fieldName === "new_password"
-                                  ? "Enter new password"
-                                  : fieldName === "confirm_password"
-                                  ? "Confirm new password"
-                                  : ""
+                                    ? "Enter new password"
+                                    : fieldName === "confirm_password"
+                                      ? "Confirm new password"
+                                      : ""
                               }
                               type={
                                 fieldName === "current_password"
@@ -156,14 +156,14 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                                     ? "text"
                                     : "password"
                                   : fieldName === "new_password"
-                                  ? showPasswordNew
-                                    ? "text"
-                                    : "password"
-                                  : showPasswordConfirm
-                                  ? "text"
-                                  : "password"
+                                    ? showPasswordNew
+                                      ? "text"
+                                      : "password"
+                                    : showPasswordConfirm
+                                      ? "text"
+                                      : "password"
                               }
-                              className="w-full px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-1 focus:ring-gray-200 focus:border-transparent transition duration-150 ease-in-out"
+                              className="w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
                             />
                             <button
                               type="button"
@@ -204,11 +204,11 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                 <Button
                   disabled={isPending}
                   type="submit"
-                  className="w-full mt-2 py-2 bg-accent hover:bg-green-600 text-white rounded-md transition duration-150 ease-in-out"
+                  className="mt-2 w-full rounded-md bg-accent py-2 text-white transition duration-150 ease-in-out hover:bg-green-600"
                 >
                   {isPending ? (
                     <>
-                      <AiOutlineLoading3Quarters className="inline-block mr-2 h-4 w-4 animate-spin" />
+                      <AiOutlineLoading3Quarters className="mr-2 inline-block h-4 w-4 animate-spin" />
                       Updating...
                     </>
                   ) : (

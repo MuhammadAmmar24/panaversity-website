@@ -4,46 +4,46 @@ import Link from "next/link";
 
 export default function ProgramOverview() {
   return (
-    <section className=" px-2 sm:px-6 xl:px-0  relative bg-white mt-[4rem] sm:mt-[-6rem] md:mt-[0rem] py-[2rem] md:pt-[12rem] z-10  mb-[-3rem] pb-[4rem]">
-      <div className="lg:max-w-[950px] xl:max-w-[1140px] mx-auto flex flex-col gap-y-0 xs:gap-y-0 lg:gap-y-12 xl:flex-row items-center justify-between mb-[1rem]">
+    <section className="relative z-10 mb-[-3rem] mt-[4rem] bg-white px-2 py-[2rem] pb-[4rem] sm:mt-[-6rem] sm:px-6 md:mt-[0rem] md:pt-[12rem] xl:px-0">
+      <div className="mx-auto mb-[1rem] flex flex-col items-center justify-between gap-y-0 xs:gap-y-0 lg:max-w-[950px] lg:gap-y-12 xl:max-w-[1140px] xl:flex-row">
         {/* Left Section: Text Content */}
-        <div className="text-left mb-24 lg:-mt-28 md:mb-0 md:pr-10 xl:w-[612px] animate-fade-in-up px-[1rem]  sm:px-[0.5rem]">
-          <h2 className="text-sm sm:text-md md:text-lg text-textPrimary  gradient-border font-semibold border-b w-fit uppercase tracking-wide">
+        <div className="animate-fade-in-up mb-24 px-[1rem] text-left sm:px-[0.5rem] md:mb-0 md:pr-10 lg:-mt-28 xl:w-[612px]">
+          <h2 className="sm:text-md gradient-border w-fit border-b text-sm font-semibold uppercase tracking-wide text-textPrimary md:text-lg">
             {programOverviewData.sectionHeading}
           </h2>
-          <h3 className="text-2xl xs:text-3xl sm:text-4xl xl:text-4xl/[3.5rem] font-bold text-textPrimary mt-6 leading-tight font-poppins">
+          <h3 className="font-poppins mt-6 text-2xl font-bold leading-tight text-textPrimary xs:text-3xl sm:text-4xl xl:text-4xl/[3.5rem]">
             {programOverviewData.mainHeading}
           </h3>
-          <p className="mt-6 text-[1rem]/[2] sm:text-md/[2] text-[#031811]/70 font-rubik">
+          <p className="sm:text-md/[2] font-rubik mt-6 text-[1rem]/[2] text-[#031811]/70">
             {programOverviewData.content1}
           </p>
-          <p className="mt-4 text-[1rem]/[2] sm:text-md/[2] mb-4 text-[#031811]/70 font-rubik">
+          <p className="sm:text-md/[2] font-rubik mb-4 mt-4 text-[1rem]/[2] text-[#031811]/70">
             {programOverviewData.content2}
           </p>
           {/* Button Component */}
           <Link
             href="/dashboard"
             aria-label="Go to dashboard"
-            className="relative items-center justify-start inline-block px-6 py-3 md:px-4 lg:px-5 lg:py-3  mt-4    overflow-hidden font-bold rounded-full group"
+            className="group relative mt-4 inline-block items-center justify-start overflow-hidden rounded-full px-6 py-3 font-bold md:px-4 lg:px-5 lg:py-3"
           >
-            <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2  absolute left-0 top-0 bg-accent opacity-[3%]"></span>
-            <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
-            <span className="relative w-full text-left text-[0.9rem] lg:text-[0.9rem] text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-textPrimary font-poppins font-medium">
+            <span className="absolute left-0 top-0 h-32 w-32 -translate-y-2 translate-x-12 rotate-45 bg-accent opacity-[3%]"></span>
+            <span className="absolute left-0 top-0 -mt-1 h-48 w-48 -translate-x-56 -translate-y-24 rotate-45 bg-accent opacity-100 transition-all duration-500 ease-in-out group-hover:-translate-x-8"></span>
+            <span className="font-poppins relative w-full text-left text-[0.9rem] font-medium text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-textPrimary lg:text-[0.9rem]">
               {programOverviewData.buttonText}
             </span>
-            <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+            <span className="absolute inset-0 rounded-full border-2 border-accent"></span>
           </Link>
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="px-4 grid grid-cols-1 sm:grid-cols-2 gap-6 xl:w-1/2 xl:pt-0 pt-0 mt-[-3rem] md:mt-[2rem] lg:-mt-[4rem]">
+        <div className="mt-[-3rem] grid grid-cols-1 gap-6 px-4 pt-0 sm:grid-cols-2 md:mt-[2rem] lg:-mt-[4rem] xl:w-1/2 xl:pt-0">
           {features.map((feature: any, index: any) => (
             <div
               key={index}
-              className="bg-white custom-shadow p-6 rounded-3xl border border-[#000000]/5 shadow-md hover:shadow-lg transition-all duration-300"
+              className="custom-shadow rounded-3xl border border-[#000000]/5 bg-white p-6 shadow-md transition-all duration-300 hover:shadow-lg"
             >
               <div
-                className="flex justify-center items-center mb-4"
+                className="mb-4 flex items-center justify-center"
                 style={{
                   backgroundColor: feature.bgColor,
                   borderRadius: "50%",
@@ -58,7 +58,7 @@ export default function ProgramOverview() {
                   height={feature.iconSize.height}
                 />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2 font-poppins">
+              <h3 className="font-poppins mb-2 text-lg font-semibold text-gray-800">
                 {feature.title}
               </h3>
               <p className="text-sm text-gray-600">{feature.description}</p>

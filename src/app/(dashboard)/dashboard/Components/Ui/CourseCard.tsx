@@ -12,7 +12,6 @@ import { HiMiniCalendar } from "react-icons/hi2";
 import { TbClockHour3 } from "react-icons/tb";
 import { RiRobot2Line } from "react-icons/ri";
 
-
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
   progress,
@@ -24,11 +23,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
   profile,
   course_code,
   start_time, // Accept start time
-  day // Accept day
+  day, // Accept day
 }) => {
   // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
-  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(null);
+  const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
+    null,
+  );
 
   const router = useRouter();
 
@@ -80,41 +81,72 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   // New icons with links
   const icons = [
-    { component: <FaYoutube />, link: "/", name: "YouTube", className: `text-red-600 text-2xl mobileM:text-3xl sm:text-4xl md:text-5xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
-    { component: <FaGithub />, link: "/", name: "GitHub", className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
-    { component: <SiZoom />, link: "/", name: "Zoom", className: `text-blue-500 text-4xl mobileM:text-5xl sm:text-6xl md:text-7xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
-    { component: <FaBullhorn />, link: "/", name: "Announcements", className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}` },
-    { component: <RiRobot2Line />, link: "/", name: "Student Bot", className: `text-gray-300 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl pointer-events-none cursor-not-allowed` },
+    {
+      component: <FaYoutube />,
+      link: "/",
+      name: "YouTube",
+      className: `text-red-600 text-2xl mobileM:text-3xl sm:text-4xl md:text-5xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+    },
+    {
+      component: <FaGithub />,
+      link: "/",
+      name: "GitHub",
+      className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+    },
+    {
+      component: <SiZoom />,
+      link: "/",
+      name: "Zoom",
+      className: `text-blue-500 text-4xl mobileM:text-5xl sm:text-6xl md:text-7xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+    },
+    {
+      component: <FaBullhorn />,
+      link: "/",
+      name: "Announcements",
+      className: `text-gray-800 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+    },
+    {
+      component: <RiRobot2Line />,
+      link: "/",
+      name: "Student Bot",
+      className: `text-gray-300 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl pointer-events-none cursor-not-allowed`,
+    },
   ];
 
-const progressPercentage = (progress / classes * 100); // Calculate progress as a percentage
+  const progressPercentage = (progress / classes) * 100; // Calculate progress as a percentage
 
   return (
     <section className="">
       <div className="relative">
-        <article className="bg-white shadow-lg rounded-xl border px-4 sm:px-6 lg:px-8 py-4 md:py-6 flex flex-col gap-4 md:gap-6">
-          <div className="flex justify-between items-center">
-            <h6 className={`text-[10px] sm:text-sm font-medium text-gray-700 ${
-                status === "active" ? "text-gray-500" : "opacity-30"}`}>
-              Course Code: <span className="font-bold underline underline-offset-2 text-black decoration-accent decoration-1">{course_code}</span>
+        <article className="flex flex-col gap-4 rounded-xl border bg-white px-4 py-4 shadow-lg sm:px-6 md:gap-6 md:py-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            <h6
+              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${
+                status === "active" ? "text-gray-500" : "opacity-30"
+              }`}
+            >
+              Course Code:{" "}
+              <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
+                {course_code}
+              </span>
             </h6>
             {/* Button Container */}
-            <div className="ml-auto text-[10px] sm:text-xs font-medium md:font-semibold">
+            <div className="ml-auto text-[10px] font-medium sm:text-xs md:font-semibold">
               {status === "active" ? (
-                <button className="text-white min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border border-accent rounded-full px-4 md:px-6 bg-accent shadow-lg cursor-default">
+                <button className="min-h-6 min-w-[93px] cursor-default rounded-full border border-accent bg-accent px-4 text-white shadow-lg md:min-h-8 md:min-w-[125px] md:px-6">
                   Paid
                 </button>
               ) : status === "reserved_seat" ? (
                 <button
                   onClick={() => setPaymentDialogOpen(true)} // Open dialog on click
-                  className="text-red-600 min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border-2 border-red-600 rounded-full px-2 md:px-4 hover:text-white hover:bg-red-600 transition duration-300 shadow-xl"
+                  className="min-h-6 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-xl transition duration-300 hover:bg-red-600 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
                 >
                   Pay to Proceed
                 </button>
               ) : status === "expired_reservation" ? (
                 <button
                   onClick={ReEnroll}
-                  className="text-yellow-500 min-h-6 md:min-h-8 min-w-[93px] md:min-w-[125px] border-2 border-yellow-500 rounded-full px-2 md:px-4 hover:text-white hover:bg-yellow-500 transition duration-300 shadow-xl"
+                  className="min-h-6 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-xl transition duration-300 hover:bg-yellow-500 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
                 >
                   Enroll Again
                 </button>
@@ -123,7 +155,7 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
           </div>
 
           <h2
-            className={`font-poppins font-medium md:text-xl truncate ${
+            className={`font-poppins truncate font-medium md:text-xl ${
               status === "active" ? "text-textPrimary/90" : "opacity-30"
             } `}
           >
@@ -132,30 +164,27 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
 
           {status == "active" ? (
             <div className="flex items-center gap-4 sm:gap-6">
-              <div className="flex-1 bg-gray-200 rounded-full h-2">
+              <div className="h-2 flex-1 rounded-full bg-gray-200">
                 <div
-                  className="bg-accent h-2 rounded-full"
+                  className="h-2 rounded-full bg-accent"
                   style={{ width: `${progressPercentage}%` }}
                 ></div>
               </div>
-              <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
+              <p className="text-xs text-gray-500 sm:text-sm md:text-lg">
                 <span className="text-black">{progress}/</span>
                 {classes} Classes
               </p>
             </div>
           ) : (
             <div className="flex items-center gap-4 sm:gap-6">
-              <div className="flex-1 bg-gray-200 rounded-full h-2 "></div>
-              <p className="text-gray-500 text-xs sm:text-sm md:text-lg">
-                <span
-                  className="text-black opacity-30">
-                  0/14 Classes
-                </span>
+              <div className="h-2 flex-1 rounded-full bg-gray-200"></div>
+              <p className="text-xs text-gray-500 sm:text-sm md:text-lg">
+                <span className="text-black opacity-30">0/14 Classes</span>
               </p>
             </div>
           )}
 
-          <div className="flex justify-between items-center border-t -mt-2 -mb-4">
+          <div className="-mb-4 -mt-2 flex items-center justify-between border-t">
             {icons.map((icon, index) => (
               <Link
                 key={index}
@@ -169,21 +198,24 @@ const progressPercentage = (progress / classes * 100); // Calculate progress as 
             ))}
           </div>
 
-              {/* Date and time details */}
-          <div className={`flex justify-between text-xs sm:text-sm ${
-                status === "active" ? "text-gray-500" : "opacity-30"}`}>
-              {/* Class date */}
-              <div className="flex items-center gap-2">
-                <HiMiniCalendar className="text-sm md:text-base" />
-                <span>{day}</span>
-              </div>
-
-              {/* Class duration or time */}
-              <div className="flex items-center gap-2">
-                <TbClockHour3 className="text-sm md:text-base" />
-                <span>{start_time}</span>
-              </div>
+          {/* Date and time details */}
+          <div
+            className={`flex justify-between text-xs sm:text-sm ${
+              status === "active" ? "text-gray-500" : "opacity-30"
+            }`}
+          >
+            {/* Class date */}
+            <div className="flex items-center gap-2">
+              <HiMiniCalendar className="text-sm md:text-base" />
+              <span>{day}</span>
             </div>
+
+            {/* Class duration or time */}
+            <div className="flex items-center gap-2">
+              <TbClockHour3 className="text-sm md:text-base" />
+              <span>{start_time}</span>
+            </div>
+          </div>
         </article>
       </div>
 

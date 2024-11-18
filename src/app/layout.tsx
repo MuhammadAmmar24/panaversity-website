@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 
-import NextTopLoader from 'nextjs-toploader'
+import NextTopLoader from "nextjs-toploader";
 import CookieConsent from "../components/Cookies/cookieConsent";
-
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,14 +28,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Panaversity",
     description: "Learn Generative AI with AI-powered Panaversity.",
-    url:siteUrl,
+    url: siteUrl,
     images: [
       {
         url: `${siteUrl}/logos/logo.png`,
-        alt: "Panaversity Logo"
+        alt: "Panaversity Logo",
       },
     ],
-    siteName: "Panaversity: AI-Powered Online University"
+    siteName: "Panaversity: AI-Powered Online University",
   },
   twitter: {
     card: "summary",
@@ -47,8 +46,7 @@ export const metadata: Metadata = {
         url: `${siteUrl}/logos/logo.png`,
       },
     ],
-    site:"Panaversity: AI-Powered Online University"
-  
+    site: "Panaversity: AI-Powered Online University",
   },
 
   title: {
@@ -75,7 +73,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} ${rubik.variable} bg-background`}
       >
-        <NextTopLoader color='#1cd98e' height={3} shadow="0 0 5px #2299DD,0 0 5px #2299DD" showSpinner={false}/>
+        <NextTopLoader
+          color="#1cd98e"
+          height={3}
+          shadow="0 0 5px #2299DD,0 0 5px #2299DD"
+          showSpinner={false}
+        />
         {children}
         {modal}
         <CookieConsent />

@@ -11,7 +11,7 @@ export default function Counters() {
   });
 
   const [counters, setCounters] = useState(
-    stats.map(() => ({ hasStarted: false, value: 0 }))
+    stats.map(() => ({ hasStarted: false, value: 0 })),
   );
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function Counters() {
           ...counter,
           hasStarted: true,
           value: stats[index].number,
-        }))
+        })),
       );
     }
   }, [inView]);
@@ -29,15 +29,15 @@ export default function Counters() {
   return (
     <section ref={ref}>
       <div className="mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 px-[7rem] justify-center items-center">
+        <div className="grid grid-cols-1 items-center justify-center gap-2 px-[7rem] sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((item, index) => (
             <div
-              className={`flex flex-col justify-center items-center relative ${
+              className={`relative flex flex-col items-center justify-center ${
                 index < stats.length - 1 ? "" : ""
               }`}
               key={index}
             >
-              <div className="font-bold text-xl text-primary text-center">
+              <div className="text-center text-xl font-bold text-primary">
                 <CountUp
                   start={0}
                   end={counters[index].value}
@@ -56,12 +56,12 @@ export default function Counters() {
                 </CountUp>
               </div>
 
-              <div className="text-center mt-2">
+              <div className="mt-2 text-center">
                 <h3 className="text-sm text-gray-700">{item.text}</h3>
               </div>
 
               {index < stats.length - 1 && (
-                <div className="absolute lg:flex hidden -right-4 top-1/2 transform -translate-y-1/2 h-12 border-r border-gray-300"></div>
+                <div className="absolute -right-4 top-1/2 hidden h-12 -translate-y-1/2 transform border-r border-gray-300 lg:flex"></div>
               )}
             </div>
           ))}

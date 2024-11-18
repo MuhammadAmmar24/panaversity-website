@@ -11,9 +11,8 @@ export const metadata: Metadata = {
 
 export default async function Courses() {
   return (
-    <section className=" bg-background  text-zinc-900  overflow-x-hidden">
-      <div className="w-full ">
-
+    <section className="overflow-x-hidden bg-background text-zinc-900">
+      <div className="w-full">
         <HeaderSection
           title="Contact Us"
           description="We’re here to assist you on your journey."

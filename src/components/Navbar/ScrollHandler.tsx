@@ -29,7 +29,7 @@ export function ScrollHandler({ children }: { children: React.ReactNode }) {
 
   return (
     <header
-      className={`py-1 sm:py-4 sticky bg-white/50 backdrop-blur-lg top-0 z-40 w-full transition-transform duration-500 ${
+      className={`sticky top-0 z-40 w-full bg-white/50 py-1 backdrop-blur-lg transition-transform duration-500 sm:py-4 ${
         hidden ? "-translate-y-full" : "translate-y-0"
       }`}
     >

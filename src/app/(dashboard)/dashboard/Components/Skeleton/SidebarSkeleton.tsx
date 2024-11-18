@@ -17,10 +17,10 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="relative h-screen flex animate-pulse">
-      <div className="bg-gray-200 shadow-2xl text-gray-700 fixed h-full z-40 flex flex-col w-16">
-        <div className="p-4 mt-5">
-          <IoIosArrowRoundForward className="text-gray-700 text-2xl ml-1" />
+    <aside className="relative flex h-screen animate-pulse">
+      <div className="fixed z-40 flex h-full w-16 flex-col bg-gray-200 text-gray-700 shadow-2xl">
+        <div className="mt-5 p-4">
+          <IoIosArrowRoundForward className="ml-1 text-2xl text-gray-700" />
         </div>
         <nav className="mt-14 flex-1 px-5">
           {menuItems.map(({ icon: Icon, href }) => (

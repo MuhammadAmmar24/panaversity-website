@@ -123,9 +123,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Content grid with fixed proportions */}
-              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
+              <div className="grid grid-cols-1 items-center justify-center gap-4 sm:grid-cols-3 md:grid-cols-5 md:justify-between lg:grid-cols-3">
                 {/* Course details - takes up 2/3 of space */}
-                <div className="space-y-6 sm:col-span-2">
+                <div className="space-y-6 sm:col-span-3 md:col-span-3 lg:col-span-2">
                   <div className="space-y-4">
                     <p className="text-md inline-block rounded-full bg-accent/70 px-4 py-1 font-semibold text-white backdrop-blur-3xl">
                       {course_code}
@@ -170,7 +170,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                 </div>
 
                 {/* Price and enrollment - takes up 1/3 of space */}
-                <div className="sm:col-span-2 md:col-span-2 md:items-center lg:col-span-1">
+                <div className="sm:col-span-2 md:col-span-2 md:place-self-end md:self-end lg:col-span-1">
                   <CourseSheet
                     is_registration_open={is_registration_open}
                     program_id={program_id}

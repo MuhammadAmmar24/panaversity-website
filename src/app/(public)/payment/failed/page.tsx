@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <div className="flex justify-center mt-[-4rem] items-center px-[1rem] min-h-[85vh]">
-      <div className="bg-white p-4  sm:p-8 rounded-xl shadow-md ">
+    <div className="mt-[-4rem] flex min-h-[85vh] items-center justify-center px-[1rem]">
+      <div className="rounded-xl bg-white p-4 shadow-md sm:p-8">
         <Suspense>
           <PaymentFailed />
         </Suspense>

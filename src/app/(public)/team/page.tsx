@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 const TeamPage = () => {
   return (
-    <section className=" overflow-x-hidden">
+    <section className="overflow-x-hidden">
       <div>
-        <div className="w-full mb-32">
+        <div className="mb-32 w-full">
           <HeaderSection
             title="Meet The Visionaries"
             description="Discover the Experts Shaping the Future of AI"

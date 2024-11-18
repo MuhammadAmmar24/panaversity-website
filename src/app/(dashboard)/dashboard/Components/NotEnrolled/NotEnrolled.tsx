@@ -21,7 +21,7 @@ export default async function NotEnrolledCourses() {
   const courses = await fetchCourses();
 
   return (
-    <section className=" bg-background text-zinc-900 overflow-x-hidden">
+    <section className="overflow-x-hidden bg-background text-zinc-900">
       <div className="">
         <CoursesClientNotEnrolled initialCourses={courses} />
       </div>

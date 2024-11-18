@@ -27,7 +27,6 @@ export default function PaymentDialog({
     onConfirm(selectedMethod); // Proceed with payment confirmation
   };
 
-
   // Automatically select Stripe if it's the only payment method
   useEffect(() => {
     if (paymentMethods.length === 1) {
@@ -39,9 +38,9 @@ export default function PaymentDialog({
     <>
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
-          <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-          <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
-            <Dialog.Title className="text-lg font-bold mb-4">
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
+            <Dialog.Title className="mb-4 text-lg font-bold">
               Select Payment Method
             </Dialog.Title>
             <Dialog.Description className="mb-4">
@@ -52,7 +51,7 @@ export default function PaymentDialog({
             <div className="mb-4">
               <label
                 htmlFor="payment"
-                className="block text-sm font-semibold mb-2"
+                className="mb-2 block text-sm font-semibold"
               >
                 Payment Method
               </label>
@@ -61,7 +60,7 @@ export default function PaymentDialog({
                 <div className="relative w-full">
                   <select
                     id="payment"
-                    className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+                    className={`w-full appearance-none rounded-lg border bg-transparent p-3 pr-10 text-gray-700 focus:outline-none ${
                       selectedMethod ? "border-accent" : "border-neutral-400"
                     }`}
                     value={selectedMethod}
@@ -77,9 +76,9 @@ export default function PaymentDialog({
                       </option>
                     ))}
                   </select>
-                  <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <svg
-                      className="w-5 h-5 text-gray-400"
+                      className="h-5 w-5 text-gray-400"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
@@ -93,7 +92,7 @@ export default function PaymentDialog({
                   </div>
                 </div>
               ) : (
-                <p className="w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none border-accent">
+                <p className="w-full appearance-none rounded-lg border border-accent bg-transparent p-3 pr-10 text-gray-700 focus:outline-none">
                   {paymentMethods[0]}
                 </p> // Display Stripe directly when only one method is available
               )}
@@ -102,22 +101,22 @@ export default function PaymentDialog({
             <div className="flex justify-end space-x-4">
               <button
                 onClick={handleClose}
-                className="bg-transparent border px-4 py-2 rounded-lg text-black hover:bg-gray-50 transition-all duration-300 ease-in-out"
+                className="rounded-lg border bg-transparent px-4 py-2 text-black transition-all duration-300 ease-in-out hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 onClick={handleConfirmClick}
                 disabled={!selectedMethod || isLoading} // Disable if no payment method is selected or during loading
-                className={`bg-accent text-white px-4 py-2 rounded-lg transition-all duration-300 ease-in-out flex items-center justify-center ${
+                className={`flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-white transition-all duration-300 ease-in-out ${
                   !selectedMethod && !isLoading
-                    ? "cursor-not-allowed opacity-70 bg-gray-600"
+                    ? "cursor-not-allowed bg-gray-600 opacity-70"
                     : "bg-accent"
                 }`}
               >
                 {isLoading ? (
                   <>
-                    <AiOutlineLoading3Quarters className="animate-spin mr-2" />
+                    <AiOutlineLoading3Quarters className="mr-2 animate-spin" />
                     Processing...
                   </>
                 ) : (
@@ -127,7 +126,7 @@ export default function PaymentDialog({
             </div>
             <Dialog.Close asChild>
               <button
-                className="absolute top-4 right-4 p-1"
+                className="absolute right-4 top-4 p-1"
                 aria-label="Close"
                 onClick={handleClose}
               >

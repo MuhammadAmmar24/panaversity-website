@@ -5,9 +5,9 @@ import { IoClose } from "react-icons/io5";
 
 // Props for LogoutDialog
 interface LogoutDialogProps {
-  onConfirm: () => void; // Function to call when the user confirms logout
-  open: boolean; // State to control the dialog visibility
-  onOpenChange: (open: boolean) => void; // Function to change the dialog visibility
+  onConfirm: () => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 }
 
 export default function LogoutDialog({
@@ -22,9 +22,9 @@ export default function LogoutDialog({
     <>
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
-          <Dialog.Overlay className="z-40 fixed inset-0 bg-black/70 backdrop-blur-sm" />
-          <Dialog.Content className="z-50 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-full max-w-md max-h-[85vh] overflow-y-auto">
-            <Dialog.Title className="text-lg font-bold mb-4">
+          <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
+            <Dialog.Title className="mb-4 text-lg font-bold">
               Confirm Logout
             </Dialog.Title>
             <Dialog.Description className="mb-4">
@@ -33,23 +33,23 @@ export default function LogoutDialog({
             <div className="flex justify-end space-x-4">
               <button
                 onClick={handleClose}
-                className="bg-transparent border px-4 py-2 rounded-lg text-black hover:bg-gray-50 transition-all duration-300 ease-in-out"
+                className="rounded-lg border bg-transparent px-4 py-2 text-black transition-all duration-300 ease-in-out hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 onClick={() => {
                   handleClose();
-                  onConfirm(); // Call the logout action if confirmed
+                  onConfirm();
                 }}
-                className="bg-transparent text-red-600 px-4 py-2 rounded-lg border border-red-600 hover:bg-red-600 hover:text-white hover:shadow-mdtransition-all duration-300 ease-in-out"
+                className="hover:shadow-mdtransition-all rounded-lg border border-red-600 bg-transparent px-4 py-2 text-red-600 duration-300 ease-in-out hover:bg-red-600 hover:text-white"
               >
                 Logout
               </button>
             </div>
             <Dialog.Close asChild>
               <button
-                className="absolute top-4 right-4 p-1"
+                className="absolute right-4 top-4 p-1"
                 aria-label="Close"
                 onClick={handleClose}
               >

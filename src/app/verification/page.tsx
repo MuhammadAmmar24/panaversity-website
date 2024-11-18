@@ -13,8 +13,8 @@ const verification = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center min-h-[85vh] ">
-        <div className="bg-white  rounded-lg shadow-md w-[300px] mobileM:w-[350px] xs:w-[400px] md:w-[400px] ">
+      <div className="flex min-h-[85vh] items-center justify-center">
+        <div className="w-[300px] rounded-lg bg-white shadow-md mobileM:w-[350px] xs:w-[400px] md:w-[400px]">
           <Suspense>
             <Verify />
           </Suspense>

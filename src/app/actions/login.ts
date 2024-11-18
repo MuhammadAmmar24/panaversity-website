@@ -27,16 +27,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     );
-
-
 
     if (!response.ok) {
       const errorData = await response.json();
 
       if (response.status === 401) {
-
         if (errorData.detail === "Incorrect email or password") {
           return {
             error: "Incorrect email or password",
