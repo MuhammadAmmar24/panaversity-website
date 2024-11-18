@@ -18,7 +18,7 @@ export const testimonialList = [
       name: "M Shaheer Kamran",
       position: "Graduate Student, AI Researcher",
       content:
-        '"The mentorship and real-world AI projects at Panaversity were instrumental in shaping my understanding of modern technologies, allowing me to excel in my academic and professional journey."',
+        '"The mentorship and real-world AI projects at Panaversity shaped my understanding of modern technologies, helping me excel in my both academic and professional journey."',
     },
     {
       img: "/testimonials/rasaf.webp",
