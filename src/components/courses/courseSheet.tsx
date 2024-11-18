@@ -207,18 +207,18 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
       {/* New Component */}
-      <Card className="w-full max-w-sm mb-6">
-        <CardContent className="p-6">
+      <Card className="mb-6 w-full max-w-sm">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6">
           <Tabs
             defaultValue="1"
             onValueChange={(value) =>
               setSelectedCourse(
                 courseOptions.find((course) => course.id === value) ||
-                  courseOptions[0]
+                  courseOptions[0],
               )
             }
           >
-            <TabsList className="grid w-full grid-cols-3 mb-6">
+            <TabsList className="mb-6 grid w-full grid-cols-3">
               {courseOptions.map((course) => (
                 <TabsTrigger key={course.id} value={course.id}>
                   Section {course.id}
@@ -258,19 +258,19 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         <CardFooter>
           <button
             onClick={isEnrolled ? () => router.push("/dashboard") : handleClick}
-            className={`w-full bg-accent text-white py-3 rounded-md font-semibold flex items-center justify-center transition duration-300 ${
+            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
               is_registration_open
                 ? "hover:bg-emerald-500"
-                : "bg-gray-400 cursor-not-allowed"
+                : "cursor-not-allowed bg-gray-400"
             }`}
             disabled={!is_registration_open}
           >
             {isEnrolled
               ? "Dashboard"
               : is_registration_open
-              ? "Enroll Now"
-              : "Registration Closed"}
-            <ChevronRight className="w-5 h-5 ml-2" />
+                ? "Enroll Now"
+                : "Registration Closed"}
+            <ChevronRight className="ml-2 h-5 w-5" />
           </button>
         </CardFooter>
       </Card>

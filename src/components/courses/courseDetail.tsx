@@ -1,35 +1,36 @@
 import { getCoursePrice } from "@/src/lib/coursePrice";
+import fetchProfile from "@/src/lib/getProfile";
+import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
 import {
+  CourseEnrollmentResponse,
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import fetchProfile from "@/src/lib/getProfile";
+import { isValidToken } from "@/src/lib/tokenValidity";
 import {
   CourseDetailsClientProps,
   CourseInfoProps,
   LearnPointProps,
 } from "@/src/types/courseEnrollment";
 import { Result } from "@/src/types/types";
-import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
+import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./Ratingstar";
-import { isValidToken } from "@/src/lib/tokenValidity";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
-    <Icon className="w-5 h-5" />
+    <Icon className="h-5 w-5" />
     <span>{text}</span>
   </div>
 );
 
 const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
-  <div className="flex gap-3 items-start">
-    <div className="bg-green-500 rounded-full p-1">
-      <Check className="text-white w-4 h-4" />
+  <div className="flex items-start gap-3">
+    <div className="rounded-full bg-green-500 p-1">
+      <Check className="h-4 w-4 text-white" />
     </div>
     <p className="text-sm font-normal text-textPrimary">{point}</p>
   </div>
@@ -84,12 +85,12 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   try {
     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-      profile.id
+      profile.id,
     );
     student_courses = result.data;
 
     const course = result?.data?.find(
-      (course) => course.course_batch_program_id === course_batch_program_id
+      (course) => course.course_batch_program_id === course_batch_program_id,
     );
     isEnrolled =
       !!course && course.student_course_status != "expired_reservation";
@@ -101,9 +102,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
     <main className="overflow-x-hidden">
       {/* Hero Section */}
       <section className="bg-teamBg bg-cover bg-center text-white">
-        <div className="backdrop-brightness-75 backdrop-opacity-100 bg-blur-[1px]">
+        <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
-          <div className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
             {/* Main content wrapper with fixed padding */}
             <div className="py-10">
               {/* Breadcrumbs */}
@@ -122,24 +123,24 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Content grid with fixed proportions */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
+              <div className="grid grid-cols-1 items-center gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3">
                 {/* Course details - takes up 2/3 of space */}
-                <div className="sm:col-span-2 space-y-6">
+                <div className="space-y-6 sm:col-span-2">
                   <div className="space-y-4">
-                    <p className="inline-block bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
+                    <p className="text-md inline-block rounded-full bg-accent/70 px-4 py-1 font-semibold text-white backdrop-blur-3xl">
                       {course_code}
                     </p>
 
-                    <h1 className="font-bold text-3xl xs:text-4xl lg:text-5xl text-background font-poppins">
+                    <h1 className="font-poppins text-3xl font-bold text-background xs:text-4xl lg:text-5xl">
                       {course_name}
                     </h1>
 
-                    <p className="text-gray-100 text-sm sm:text-base font-medium leading-relaxed">
+                    <p className="text-sm font-medium leading-relaxed text-gray-100 sm:text-base">
                       {course_description}
                     </p>
                   </div>
 
-                  <div className="flex flex-col xs:flex-row gap-4 xs:gap-6">
+                  <div className="flex flex-col gap-4 xs:flex-row xs:gap-6">
                     <CourseInfo
                       icon={Users}
                       text={`${learnersCount} Learners`}
@@ -157,44 +158,34 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                       color="text-yellow-500"
                       size="w-5 h-5"
                     />
-                    <span className="text-sm text-gray-400 font-medium">
+                    <span className="text-sm font-medium text-gray-400">
                       ({ratingCount} ratings)
                     </span>
-                    <span className="text-sm text-gray-400 font-medium">
+                    <span className="text-sm font-medium text-gray-400">
                       {learnersCount} students
                     </span>
                   </div>
+
+                  <CoursePrerequisites prerequisites={pre_requisite} />
                 </div>
 
-                  {/* Price and enrollment - takes up 1/3 of space */}
-                  <div className="sm:col-span-2 md:col-span-1">
-                  <div className="bg-background text-black p-0 rounded-lg shadow-lg w-full">
-                    {/* <div className="flex items-center justify-between mb-6">
-                      <span className="text-gray-900 font-medium text-lg">
-                        Price:
-                      </span>
-                      <span className="text-3xl font-bold uppercase">
-                        {initialCurrency
-                          ? `${initialCurrency} ${initialPrice}`
-                          : initialPrice}
-                      </span>
-                    </div> */}
-
-                    <CourseSheet
-                      is_registration_open={is_registration_open}
-                      program_id={program_id}
-                      batch_id={batch_id}
-                      course_batch_program_id={course_batch_program_id}
-                      profile_id={profile.id}
-                      isEnrolled={isEnrolled}
-                      timeSlots={timeSlots}
-                      coursePrice={coursePrice}
-                      courseName={course_name}
-                      isLoggedIn={isLoggedIn}
-                      pre_requisite={pre_requisite}
-                      student_courses={student_courses}
-                    />
-                  </div>
+                {/* Price and enrollment - takes up 1/3 of space */}
+                <div className="sm:col-span-2 md:col-span-2 md:items-center lg:col-span-1">
+                  <CourseSheet
+                    is_registration_open={is_registration_open}
+                    program_id={program_id}
+                    batch_id={batch_id}
+                    course_batch_program_id={course_batch_program_id}
+                    profile_id={profile.id}
+                    isEnrolled={isEnrolled}
+                    timeSlots={timeSlots}
+                    coursePrice={coursePrice}
+                    courseName={course_name}
+                    isLoggedIn={isLoggedIn}
+                    pre_requisite={pre_requisite}
+                    student_courses={student_courses}
+                  />
+                  {/* </div> */}
                 </div>
               </div>
             </div>
@@ -203,9 +194,9 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
       </section>
 
       {/* Course Details Section */}
-      <section className="lg:max-w-[990px] xl:max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
-        <div className="flex flex-col justify-start items-start gap-4 mx-auto">
-          <h2 className="text-3xl md:text-4xl font-semibold font-poppins text-textPrimary">
+      <section className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:max-w-[990px] lg:px-8 lg:py-16 xl:max-w-[1200px]">
+        <div className="mx-auto flex flex-col items-start justify-start gap-4">
+          <h2 className="font-poppins text-3xl font-semibold text-textPrimary md:text-4xl">
             Details
           </h2>
           <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
@@ -214,11 +205,11 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
         </div>
 
         {/* What You Will Learn */}
-        <div className="bg-gray-300/40 flex flex-col justify-start items-start gap-5 p-6 sm:p-8 md:p-10 rounded-md mt-12">
-          <h3 className="text-xl sm:text-2xl font-semibold leading-loose text-textPrimary">
+        <div className="mt-12 flex flex-col items-start justify-start gap-5 rounded-md bg-gray-300/40 p-6 sm:p-8 md:p-10">
+          <h3 className="text-xl font-semibold leading-loose text-textPrimary sm:text-2xl">
             What you will learn in this course
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {course_outcomes.map((point: any, index: any) => (
               <LearnPoint key={index} point={point} />
             ))}
@@ -227,7 +218,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
         {/* Prerequisites */}
         <div className="mt-12">
-          <h2 className="text-3xl md:text-4xl font-semibold font-poppins leading-tight text-textPrimary mb-5">
+          <h2 className="font-poppins mb-5 text-3xl font-semibold leading-tight text-textPrimary md:text-4xl">
             Pre Requisites
           </h2>
           <div>
