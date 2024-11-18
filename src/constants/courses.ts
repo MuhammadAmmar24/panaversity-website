@@ -10,13 +10,13 @@ export const courseData = [
       },
       {
         quarter: "AI-201",
-        title: "Agentic AI",
+        title: "Fundamentals of Agentic AI",
         description:
           "Learn to develop AI agents with LangGraph, LangChain, and Custom GPT models.",
       },
       {
         quarter: "AI-202",
-        title: "Agentic AI Knowledge Graphs and Frontend",
+        title: "Advanced Agentic AI Engineering",
         description:
           "Build and query Knowledge Graphs with GQL and develop AI frontends using Next.js and TypeScript.",
       },
@@ -63,7 +63,7 @@ export const courseData = [
       },
       {
         quarter: "AI-651",
-        title: "Advanced Cloud Native AI Computing",
+        title: "Advanced Cloud Native and Distributed AI Computing",
         description:
           "Master Kubernetes, Ray, Terraform, and GitHub Actions to deploy scalable, fault-tolerant AI pipelines and microservices in the cloud.",
       },
