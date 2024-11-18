@@ -18,7 +18,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
-import ClassSections from "@/src/components/ClassSections";
+
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -174,7 +174,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                   <div className="sm:col-span-2 md:col-span-1">
                   <div className="flex flex-col justify-center  gap-y-6 bg-background text-black p-6 rounded-lg shadow-lg w-full">
                     
-                  <ClassSections />
+
 
                   <div className="flex items-center justify-between ">
                     <div className="flex items-center justify-between gap-x-5 ">
