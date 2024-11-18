@@ -19,7 +19,6 @@ import CourseSheet from "./courseSheet";
 import RatingStars from "./Ratingstar";
 import { isValidToken } from "@/src/lib/tokenValidity";
 
-
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
     <Icon className="w-5 h-5" />
@@ -123,20 +122,17 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
               </div>
 
               {/* Content grid with fixed proportions */}
-              <div className="grid grid-cols-1 sm:grid-cols-1 gap-8 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center">
                 {/* Course details - takes up 2/3 of space */}
                 <div className="sm:col-span-2 space-y-6">
                   <div className="space-y-4">
-                    <div className="flex flex-row items-center  gap-x-5">
-
-                    <p className="min-w-20 text-center bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
+                    <p className="inline-block bg-accent/70 backdrop-blur-3xl px-4 py-1 rounded-full text-md font-semibold text-white">
                       {course_code}
                     </p>
 
                     <h1 className="font-bold text-3xl xs:text-4xl lg:text-5xl text-background font-poppins">
                       {course_name}
                     </h1>
-                    </div>
 
                     <p className="text-gray-100 text-sm sm:text-base font-medium leading-relaxed">
                       {course_description}
@@ -176,8 +172,8 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     {/* <div className="flex items-center justify-between mb-6">
                       <span className="text-gray-900 font-medium text-lg">
                         Price:
-                      </p>
-                      <p className="text-3xl font-bold uppercase">
+                      </span>
+                      <span className="text-3xl font-bold uppercase">
                         {initialCurrency
                           ? `${initialCurrency} ${initialPrice}`
                           : initialPrice}
@@ -199,9 +195,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                       student_courses={student_courses}
                     />
                   </div>
-                  </div>
                 </div>
-                
               </div>
             </div>
           </div>
