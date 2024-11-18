@@ -9,7 +9,7 @@ import { ScrollHandler } from "./ScrollHandler";
 export default function Navbar() {
   return (
     <ScrollHandler>
-      <div className="container mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 xs:px-1 sm:px-2  md:px-0">
+      <div className="px-2 xs:px-4 mx-auto flex h-16 lg:max-w-[950px] xl:max-w-6xl items-center justify-between mobileM:px-3 sm:px-6 md:px-6 lg:px-0">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2" aria-label="Home">
           <Image
