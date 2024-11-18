@@ -148,7 +148,7 @@ const courseOptions = [
     days: "Tuesday, Thursday",
     time: "12:00 - 14:00 GMT",
     languages: "English",
-    price: 7500,
+    price: 75000,
   },
   {
     id: "3",
