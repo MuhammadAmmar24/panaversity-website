@@ -12,10 +12,10 @@ export default function AccordionItem({
   return (
     <div className={`border-b ${isOpen ? "border-accent" : "border-gray-200"}`}>
       <button
-        className="w-full py-4 md:py-5 -mb-2 px-2 md:px-4 flex justify-between items-center focus:outline-none"
+        className="-mb-2 flex w-full items-center justify-between px-2 py-4 focus:outline-none md:px-4 md:py-5"
         onClick={onToggle}
       >
-        <span className="font-semibold text-sm sm:text-md md:text-[1.19rem] text-textPrimary font-poppins text-left mr-2">
+        <span className="sm:text-md font-poppins mr-2 text-left text-sm font-semibold text-textPrimary md:text-[1.19rem]">
           {question}
         </span>
         <span
@@ -47,7 +47,7 @@ export default function AccordionItem({
           maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0",
         }}
       >
-        <div className="pb-4 sm:pb-5 px-2 sm:px-4 text-textSecondary font-inter text-xs sm:text-sm md:text-[0.999rem] content">
+        <div className="font-inter content px-2 pb-4 text-xs text-textSecondary sm:px-4 sm:pb-5 sm:text-sm md:text-[0.999rem]">
           <RenderHTML html={answer} />
         </div>
       </div>

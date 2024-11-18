@@ -103,14 +103,16 @@ function UpdatePassword({ token }: VerifyEmailProps) {
                     />
                     <button
                       type="button"
-                      onClick={() => !isPending && setShowNewPassword((prev) => !prev)}
+                      onClick={() =>
+                        !isPending && setShowNewPassword((prev) => !prev)
+                      }
                       disabled={isPending}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
                     >
                       {showNewPassword ? (
-                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                        <AiOutlineEyeInvisible className="h-5 w-5" />
                       ) : (
-                        <AiOutlineEye className="w-5 h-5" />
+                        <AiOutlineEye className="h-5 w-5" />
                       )}
                     </button>
                   </div>
@@ -132,18 +134,20 @@ function UpdatePassword({ token }: VerifyEmailProps) {
                       disabled={isPending}
                       placeholder="******"
                       type={showConfirmPassword ? "text" : "password"}
-                      className="pl-3 pr-10 "
+                      className="pl-3 pr-10"
                     />
                     <button
                       type="button"
-                      onClick={() => !isPending && setShowConfirmPassword((prev) => !prev)}
+                      onClick={() =>
+                        !isPending && setShowConfirmPassword((prev) => !prev)
+                      }
                       disabled={isPending}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
                     >
                       {showConfirmPassword ? (
-                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                        <AiOutlineEyeInvisible className="h-5 w-5" />
                       ) : (
-                        <AiOutlineEye className="w-5 h-5" />
+                        <AiOutlineEye className="h-5 w-5" />
                       )}
                     </button>
                   </div>
@@ -159,7 +163,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
           <Button
             disabled={isPending || !!success}
             type="submit"
-            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+            className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
           >
             {isPending ? (
               <>

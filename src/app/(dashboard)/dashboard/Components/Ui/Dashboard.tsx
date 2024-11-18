@@ -11,9 +11,7 @@ import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { courseData } from "@/src/constants/courses";
-import { formatTime } from "@/src/lib/timeUtils"
-
-
+import { formatTime } from "@/src/lib/timeUtils";
 
 // Server-side component for Dashboard
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
@@ -22,13 +20,9 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   let enrollmentStatus: string | null = null; // Tracks enrollment status
 
   try {
-    
- 
     // Fetch enrolled courses based on profileId
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-      profileId
-    );
-  
+    const result: Result<CourseEnrollmentResponse> =
+      await getStudentCourses(profileId);
 
     if (result.type === "error") {
       if (result.message.includes("Not Found")) {
@@ -54,9 +48,11 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
           student_course_id: courseData.student_course_id,
           course_batch_program_id: courseData.course_batch_program_id,
           course_id: courseData.course_id,
-          start_time: formatTime(courseData.class_time_slot?.slot_start_time || ""),
+          start_time: formatTime(
+            courseData.class_time_slot?.slot_start_time || "",
+          ),
           day: courseData.class_time_slot?.time_slot_day || "",
-          course_code: courseData.course_code
+          course_code: courseData.course_code,
         }));
         // status = recentCourses[0]?.status ?? "inactive"; // Set status based on the first course
         enrollmentStatus = "enrolled";
@@ -71,21 +67,21 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
   if (!recentCourses.length && enrollmentStatus === "not_enrolled") {
     return (
       <div className="flex flex-col justify-center">
-        <h1 className="md:text-4xl font-bold text-center mt-20">
+        <h1 className="mt-20 text-center font-bold md:text-4xl">
           You are not enrolled in any course.
         </h1>
         {/* CTA Button */}
-        <div className="flex justify-center mt-8">
+        <div className="mt-8 flex justify-center">
           <Link
             href={"/programs"}
-            className="relative items-center justify-start inline-block px-3 py-2 md:px-4 lg:px-5 lg:py-3  overflow-hidden font-bold rounded-full group"
+            className="group relative inline-block items-center justify-start overflow-hidden rounded-full px-3 py-2 font-bold md:px-4 lg:px-5 lg:py-3"
           >
-            <span className="w-32 h-32 rotate-45 translate-x-12 -translate-y-2 absolute left-0 top-0 bg-accent opacity-[3%]"></span>
-            <span className="absolute top-0 left-0 w-48 h-48 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-56 -translate-y-24 bg-accent opacity-100 group-hover:-translate-x-8"></span>
-            <span className="relative w-full text-left text-[0.8rem] lg:text-[0.9rem] text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white font-poppins font-semibold">
+            <span className="absolute left-0 top-0 h-32 w-32 -translate-y-2 translate-x-12 rotate-45 bg-accent opacity-[3%]"></span>
+            <span className="absolute left-0 top-0 -mt-1 h-48 w-48 -translate-x-56 -translate-y-24 rotate-45 bg-accent opacity-100 transition-all duration-500 ease-in-out group-hover:-translate-x-8"></span>
+            <span className="font-poppins relative w-full text-left text-[0.8rem] font-semibold text-textPrimary transition-colors duration-200 ease-in-out group-hover:text-white lg:text-[0.9rem]">
               Explore Courses
             </span>
-            <span className="absolute inset-0 border-2 border-accent rounded-full"></span>
+            <span className="absolute inset-0 rounded-full border-2 border-accent"></span>
           </Link>
         </div>
       </div>

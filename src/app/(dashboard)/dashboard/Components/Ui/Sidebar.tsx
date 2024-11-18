@@ -75,10 +75,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   ];
 
   return (
-    <aside ref={sidebarRef} className="relative h-screen flex">
+    <aside ref={sidebarRef} className="relative flex h-screen">
       {/* Sidebar container */}
       <div
-        className={`bg-white shadow-2xl text-black fixed h-full transition-all duration-500 z-40 flex flex-col ${
+        className={`fixed z-40 flex h-full flex-col bg-white text-black shadow-2xl transition-all duration-500 ${
           isOpen ? "w-60" : "w-12"
         }`}
         onClick={(e) => {
@@ -90,11 +90,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         }}
       >
         {/* Logo and toggle button */}
-        <div className="p-4 flex justify-between items-center">
+        <div className="flex items-center justify-between p-4">
           {/* Sidebar logo */}
           <div
             className={`transition-all duration-300 ease-in-out ${
-              isOpen ? "opacity-100 visible delay-200" : "opacity-0 invisible"
+              isOpen ? "visible opacity-100 delay-200" : "invisible opacity-0"
             }`}
           >
             <Image
@@ -108,30 +108,30 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
           {/* Sidebar toggle button */}
           <button onClick={toggleSidebar} className="focus:outline-none">
             {isOpen ? (
-              <IoIosArrowRoundBack className="text-black text-2xl hover:text-accent transition-all duration-300 mr-0" />
+              <IoIosArrowRoundBack className="mr-0 text-2xl text-black transition-all duration-300 hover:text-accent" />
             ) : (
-              <IoIosArrowRoundForward className="text-black text-2xl hover:text-accent transition-all duration-300 mr-1 -ml-1" />
+              <IoIosArrowRoundForward className="-ml-1 mr-1 text-2xl text-black transition-all duration-300 hover:text-accent" />
             )}
           </button>
         </div>
 
         {/* Main Menu Items */}
-        <nav className="mt-10 space-y-2 flex-1">
+        <nav className="mt-10 flex-1 space-y-2">
           {menuItems.map((item) => (
-            <div key={item.label} className="relative group">
+            <div key={item.label} className="group relative">
               <Link
                 href={item.href}
                 aria-label={`Go to ${item.label}`}
-                className="flex items-center px-2  py-4 hover:text-accent transition-all duration-300"
+                className="flex items-center px-2 py-4 transition-all duration-300 hover:text-accent"
               >
                 {/* Menu icon */}
-                <item.icon className="text-2xl min-w-[2rem]" />
+                <item.icon className="min-w-[2rem] text-2xl" />
                 {/* Menu label (hidden when sidebar is closed) */}
                 <span
                   className={`ml-4 text-base transition-all duration-300 ease-in-out ${
                     isOpen
-                      ? "opacity-100 visible delay-100"
-                      : "opacity-0 invisible"
+                      ? "visible opacity-100 delay-100"
+                      : "invisible opacity-0"
                   }`}
                 >
                   {item.label}
@@ -139,7 +139,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
               </Link>
               {/* Tooltip when sidebar is closed */}
               {!isOpen && (
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-accent text-white text-sm py-1 px-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute left-full top-1/2 -translate-y-1/2 transform rounded-md bg-accent px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {item.label}
                 </div>
               )}
@@ -148,21 +148,21 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         </nav>
 
         {/* Bottom Menu Items */}
-        <div className="mt-auto mb-4">
+        <div className="mb-4 mt-auto">
           {menuItemsBottom.map((item) => (
-            <div key={item.label} className="relative group">
+            <div key={item.label} className="group relative">
               <button
                 onClick={item.onClick}
-                className="flex items-center px-2  py-4 hover:text-accent transition-all duration-300 w-full text-left"
+                className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
               >
                 {/* Bottom menu icon */}
-                <item.icon className="text-2xl min-w-[2rem]" />
+                <item.icon className="min-w-[2rem] text-2xl" />
                 {/* Bottom menu label (hidden when sidebar is closed) */}
                 <span
                   className={`ml-4 text-base transition-all duration-300 ease-in-out ${
                     isOpen
-                      ? "opacity-100 visible delay-100"
-                      : "opacity-0 invisible"
+                      ? "visible opacity-100 delay-100"
+                      : "invisible opacity-0"
                   }`}
                 >
                   {item.label}
@@ -170,7 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
               </button>
               {/* Tooltip when sidebar is closed */}
               {!isOpen && (
-                <div className="absolute left-full top-1/2 transform -translate-y-1/2 bg-accent text-white text-sm py-1 px-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute left-full top-1/2 -translate-y-1/2 transform rounded-md bg-accent px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   {item.label}
                 </div>
               )}

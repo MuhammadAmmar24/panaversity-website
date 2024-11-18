@@ -68,7 +68,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           height={100}
           src={userImage}
           alt={`${userName} profile`}
-          className="w-8 h-8 mobileM:w-10 mobileM:h-10 md:w-12 md:h-12 rounded-full object-cover"
+          className="h-8 w-8 rounded-full object-cover mobileM:h-10 mobileM:w-10 md:h-12 md:w-12"
         />
         {/* Dropdown arrow icon */}
 
@@ -81,31 +81,31 @@ const Dropdown: React.FC<DropdownProps> = ({
 
       {/* Dropdown content */}
       <div
-        className={`absolute right-2 mt-2 w-48 sm:w-64 bg-white rounded-lg shadow-lg border border-gray-200 font-poppins transform transition-all duration-300 ease-in-out origin-top-right ${
+        className={`font-poppins absolute right-2 mt-2 w-48 origin-top-right transform rounded-lg border border-gray-200 bg-white shadow-lg transition-all duration-300 ease-in-out sm:w-64 ${
           isOpen
-            ? "opacity-100 scale-100 visible"
-            : "opacity-0 scale-95 invisible"
+            ? "visible scale-100 opacity-100"
+            : "invisible scale-95 opacity-0"
         }`}
         role="menu"
         aria-hidden={!isOpen}
       >
         {/* User info */}
         <div className="p-4">
-          <div className="flex items-center space-x-3 w-full">
+          <div className="flex w-full items-center space-x-3">
             {/* User profile image */}
             <Image
               width={100}
               height={100}
               src={userImage}
               alt={`${userName} profile`}
-              className="w-8 h-8 rounded-full object-cover mobileM:w-10 mobileM:h-10"
+              className="h-8 w-8 rounded-full object-cover mobileM:h-10 mobileM:w-10"
             />
             {/* Display username and email */}
             <div>
-              <h2 className="text-gray-900 font-semibold text-sm sm:text-base w-24 md:w-44 truncate">
+              <h2 className="w-24 truncate text-sm font-semibold text-gray-900 sm:text-base md:w-44">
                 {userName}
               </h2>
-              <p className="text-gray-500 text-xs sm:text-sm w-24 md:w-44 truncate">
+              <p className="w-24 truncate text-xs text-gray-500 sm:text-sm md:w-44">
                 {userEmail}
               </p>
             </div>
@@ -119,21 +119,21 @@ const Dropdown: React.FC<DropdownProps> = ({
           {/* Profile settings */}
           <Link href="/dashboard/profile" aria-label="Go to Profile">
             <li
-              className="flex items-center space-x-2 p-2 hover:bg-gray-100 hover:text-accent rounded-lg cursor-pointer"
+              className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100 hover:text-accent"
               role="menuitem"
             >
-              <CgProfile className="w-5 h-5 text-gray-700" />
-              <span className="text-gray-700 text-xs sm:text-sm">Profile</span>
+              <CgProfile className="h-5 w-5 text-gray-700" />
+              <span className="text-xs text-gray-700 sm:text-sm">Profile</span>
             </li>
           </Link>
 
           {/* Help center */}
           <li
-            className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100"
             role="menuitem"
           >
-            <TfiHelp className="w-5 h-5 text-gray-700" />
-            <span className="text-gray-700 text-xs sm:text-sm">
+            <TfiHelp className="h-5 w-5 text-gray-700" />
+            <span className="text-xs text-gray-700 sm:text-sm">
               Help Center
             </span>
           </li>
@@ -143,11 +143,11 @@ const Dropdown: React.FC<DropdownProps> = ({
           {/* Sign out */}
           <li
             onClick={() => setIsLogoutDialogOpen(true)}
-            className="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-lg cursor-pointer"
+            className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100"
             role="menuitem"
           >
-            <CiLogout className="w-5 h-5 text-gray-700" />
-            <span className="text-gray-700 text-xs sm:text-sm">Sign Out</span>
+            <CiLogout className="h-5 w-5 text-gray-700" />
+            <span className="text-xs text-gray-700 sm:text-sm">Sign Out</span>
           </li>
         </ul>
       </div>

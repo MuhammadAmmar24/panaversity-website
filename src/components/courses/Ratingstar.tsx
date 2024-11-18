@@ -22,7 +22,7 @@ const RatingStars: React.FC<RatingStarsProps> = ({
             className={`${size} ${color}`} // Apply size and color dynamically
           >
             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-          </svg>
+          </svg>,
         );
       } else if (i - rating < 1 && i - rating > 0) {
         // Half star
@@ -44,7 +44,7 @@ const RatingStars: React.FC<RatingStarsProps> = ({
               fill="url(#half)"
               d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
             />
-          </svg>
+          </svg>,
         );
       } else {
         // Empty star
@@ -58,7 +58,7 @@ const RatingStars: React.FC<RatingStarsProps> = ({
             className={`${size}`} // Apply size dynamically for unfilled stars
           >
             <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-          </svg>
+          </svg>,
         );
       }
     }

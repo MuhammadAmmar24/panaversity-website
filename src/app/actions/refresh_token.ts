@@ -10,7 +10,7 @@ export const refreshAccessToken = async (old_refresh_token: string) => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     // Check if the response was successful
@@ -26,7 +26,7 @@ export const refreshAccessToken = async (old_refresh_token: string) => {
       }
 
       throw new Error(
-        errorData.message || "An error occurred during token refresh."
+        errorData.message || "An error occurred during token refresh.",
       );
     }
 

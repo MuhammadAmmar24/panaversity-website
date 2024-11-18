@@ -75,17 +75,15 @@ export function MobileMenu() {
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="max-w-64 md:hidden border-0 bg-white/80 backdrop-blur-lg"
+        className="max-w-64 border-0 bg-white/80 backdrop-blur-lg md:hidden"
       >
         <SheetHeader>
           <VisuallyHidden>
             <DialogTitle>Mobile Menu</DialogTitle>
-            <SheetDescription>
-              Menu Sheet for mobile devices
-            </SheetDescription>
+            <SheetDescription>Menu Sheet for mobile devices</SheetDescription>
           </VisuallyHidden>
         </SheetHeader>
-        <nav className="flex flex-col justify-between items-center px-4 py-8 h-full">
+        <nav className="flex h-full flex-col items-center justify-between px-4 py-8">
           <div className="flex flex-col gap-y-4">
             <Link href="/" aria-label="Home">
               <Image
@@ -102,7 +100,7 @@ export function MobileMenu() {
                 <Link
                   href={nav.link}
                   aria-label={`${nav.name}`}
-                  className="text-md font-medium text-textPrimary hover:text-accent flex items-center gap-3"
+                  className="text-md flex items-center gap-3 font-medium text-textPrimary hover:text-accent"
                 >
                   {<nav.icon />}
                   {nav.name}
@@ -114,7 +112,7 @@ export function MobileMenu() {
             <SheetClose asChild>
               <Link
                 href={isLoggedIn ? "/dashboard" : "/register"}
-                className="relative flex items-center justify-center text-center px-4 py-2 gap-x-2 overflow-hidden font-medium rounded-3xl group border-2 border-accent"
+                className="group relative flex items-center justify-center gap-x-2 overflow-hidden rounded-3xl border-2 border-accent px-4 py-2 text-center font-medium"
               >
                 {isLoggedIn ? (
                   <>

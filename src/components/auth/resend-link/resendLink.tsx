@@ -40,7 +40,7 @@ function ResetPassword() {
     setSuccess("");
 
     startTransition(() => {
-      resendVerification(values).then((data:any) => {
+      resendVerification(values).then((data: any) => {
         setError(data?.error);
         setSuccess(data?.success);
 
@@ -101,7 +101,7 @@ function ResetPassword() {
           <Button
             disabled={isPending || !!success}
             type="submit"
-            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+            className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
           >
             {isPending ? (
               <>

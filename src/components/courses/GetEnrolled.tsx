@@ -18,7 +18,6 @@ export default function GetEnrolled({
   pre_requisite,
   student_courses,
 }: GetEnrolledProps) {
-
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -26,22 +25,22 @@ export default function GetEnrolled({
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
-    null
+    null,
   );
   const [remainingSeats, setRemainingSeats] = useState<number | null>(null);
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [paymentMethod, setPaymentMethod] = useState("STRIPE"); // Add payment method state
   const [skipped, setSkipped] = useState(false);
 
-
   const findStudentCourse = (courseCode: string): StudentCourse | undefined =>
     student_courses.find(
-      (course : StudentCourse) => course?.course_code?.trim() === courseCode.trim()
+      (course: StudentCourse) =>
+        course?.course_code?.trim() === courseCode.trim(),
     );
 
   const getCourseStatus = (
     studentCourse: StudentCourse | undefined,
-    courseCode: string
+    courseCode: string,
   ) => {
     if (!studentCourse) {
       return {
@@ -67,14 +66,20 @@ export default function GetEnrolled({
   };
 
   const notEnrolledCourses =
-    pre_requisite?.filter((pre_req) => !findStudentCourse(pre_req.course_code)) || [];
+    pre_requisite?.filter(
+      (pre_req) => !findStudentCourse(pre_req.course_code),
+    ) || [];
 
   const hasNotEnrolledPreReq = notEnrolledCourses.length > 0;
   const skipText = `Skip ${
-    notEnrolledCourses.length === 1 ? "pre-requisite course" : "all pre-requisite courses"
+    notEnrolledCourses.length === 1
+      ? "pre-requisite course"
+      : "all pre-requisite courses"
   }`;
   const skippedMessage = `You skipped ${
-    notEnrolledCourses.length === 1 ? "the pre-requisite course" : "all pre-requisite courses"
+    notEnrolledCourses.length === 1
+      ? "the pre-requisite course"
+      : "all pre-requisite courses"
   }`;
 
   const handleSkip = () => {
@@ -87,16 +92,13 @@ export default function GetEnrolled({
     }
   }, [hasNotEnrolledPreReq]);
 
-
-
-
   const classTimeSlots = timeSlots.class_time_slots;
-  const enrollmentPackage = coursePrice.package_id;  
+  const enrollmentPackage = coursePrice.package_id;
 
   useEffect(() => {
     if (selectedDay) {
       const selectedSlot = classTimeSlots.find(
-        (slot) => slot.time_slot_day === selectedDay
+        (slot) => slot.time_slot_day === selectedDay,
       );
       if (selectedSlot) {
         const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats;
@@ -106,10 +108,10 @@ export default function GetEnrolled({
   }, [selectedDay, classTimeSlots, remainingSeats]);
 
   const uniqueDays = Array.from(
-    new Set(classTimeSlots.map((slot) => slot.time_slot_day))
+    new Set(classTimeSlots.map((slot) => slot.time_slot_day)),
   );
 
-  const languages = ["Urdu/Hindi", "English"]
+  const languages = ["Urdu/Hindi", "English"];
 
   const timeSlotsForSelectedDay = classTimeSlots
     .filter((slot) => slot.time_slot_day === selectedDay)
@@ -117,7 +119,7 @@ export default function GetEnrolled({
       id: slot.id,
       timeSlotId: slot.id,
       label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(
-        slot.slot_end_time ?? ""
+        slot.slot_end_time ?? "",
       )}`,
     }));
 
@@ -129,7 +131,7 @@ export default function GetEnrolled({
       enrollmentPackage === null
     ) {
       setEnrollmentError(
-        "Please select a valid time slot and ensure the package is available."
+        "Please select a valid time slot and ensure the package is available.",
       );
       return;
     }
@@ -157,7 +159,7 @@ export default function GetEnrolled({
           }
         } else {
           setEnrollmentError(
-            result.message || "An error occurred during enrollment."
+            result.message || "An error occurred during enrollment.",
           );
         }
       } catch (error) {
@@ -169,64 +171,75 @@ export default function GetEnrolled({
 
   return (
     <>
-    <div className="rounded-3xl bg container mx-auto max-w-full px-0 sm:px-2">
-      <h1 className="text-3xl font-bold mb-4 mt-5">Get Enrolled</h1>
-      <div className=" ">
-        <h1 className="text-xl font-bold mb-3 mt-5">Pre Requisites:</h1>
-        {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-          <div>
-            {pre_requisite.map((pre_req, index) => {
-              const studentCourse = findStudentCourse(pre_req.course_code);
-              const { statusText, statusClass, linkHref } = getCourseStatus(
-                studentCourse,
-                pre_req.course_code
-              );
+      <div className="bg container mx-auto max-w-full rounded-3xl px-0 sm:px-2">
+        <h1 className="mb-4 mt-5 text-3xl font-bold">Get Enrolled</h1>
+        <div className=" ">
+          <h1 className="mb-3 mt-5 text-xl font-bold">Prerequisites:</h1>
+          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+            <div>
+              {pre_requisite.map((pre_req, index) => {
+                const studentCourse = findStudentCourse(pre_req.course_code);
+                const { statusText, statusClass, linkHref } = getCourseStatus(
+                  studentCourse,
+                  pre_req.course_code,
+                );
 
-              return (
-                <div className="mb-3 px-4 py-1 border-2 rounded-lg" key={index}>
+                return (
+                  <div
+                    className="mb-3 rounded-lg border-2 px-4 py-1"
+                    key={index}
+                  >
                     <Link href={linkHref}>
                       <div className="text-base font-normal leading-relaxed text-textPrimary/90">
-                        <div className="flex  items-center justify-between gap-4">
-                          <div className="flex flex-col justify-center items-start">
+                        <div className="flex items-center justify-between gap-4">
+                          <div className="flex flex-col items-start justify-center">
                             <span className="underline decoration-accent decoration-2">
                               {pre_req.course_code}
                             </span>
-                            <span className="line-clamp-1 text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem]">{pre_req.course_name}</span>
+                            <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
+                              {pre_req.course_name}
+                            </span>
                           </div>
-                          <span className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}>
+                          <span
+                            className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
+                          >
                             {statusText}
                           </span>
                         </div>
                       </div>
                     </Link>
+                  </div>
+                );
+              })}
+              {hasNotEnrolledPreReq && (
+                <div className="mt-4 flex items-center gap-3 px-4 lg:justify-between">
+                  {skipped || (
+                    <button
+                      onClick={handleSkip}
+                      className="rounded-lg border-2 border-blue-700 px-4 py-0.5 text-sm text-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:text-white"
+                    >
+                      Skip
+                    </button>
+                  )}
+                  <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+                    {skipped ? skippedMessage : skipText}
+                  </span>
                 </div>
-              );
-            })}
-            {hasNotEnrolledPreReq && (
-              <div className="flex items-center lg:justify-between   gap-3 mt-4">
-                <button
-                  onClick={handleSkip}
-                  className="text-[0.9rem] px-8 py-1 bg-gray-500 text-white rounded-lg hover:bg-gray-600 duration-300 ease-in-out transition-colors"
-                >
-                  Skip
-                </button>
-                <span className="text-red-500 text-[0.8rem] mobileM:text-[0.9rem] sm:text-[1rem]">
-                  {skipped ? skippedMessage : skipText}
-                </span>
-              </div>
-            )}
-          </div>
-        ) : (
-          <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
-            There are no pre-requisites for this course.
-          </p>
-        )}
+              )}
+            </div>
+          ) : (
+            <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
+              There are no pre-requisites for this course.
+            </p>
+          )}
+        </div>
       </div>
-    </div>
 
-      <div className={`bg-background rounded-3xl  container mx-auto max-w-full px-0 sm:px-2 pt-[3rem] ${!skipped ? "opacity-50": "opacity-100"}`}>
-        <div className="space-y-7 w-full">
-        <SelectField
+      <div
+        className={`container mx-auto max-w-full rounded-3xl bg-background px-0 pt-[3rem] sm:px-2 ${!skipped ? "opacity-50" : "opacity-100"}`}
+      >
+        <div className="w-full space-y-7">
+          <SelectField
             label="Language"
             value={selectedLanguage}
             onChange={(e: any) => {
@@ -280,21 +293,21 @@ export default function GetEnrolled({
               {remainingSeats === null
                 ? "..."
                 : remainingSeats === 0
-                ? "0"
-                : remainingSeats}
+                  ? "0"
+                  : remainingSeats}
             </span>
           </div>
 
           {/* Payment Method Dropdown */}
 
           <button
-            className={`w-full flex items-center justify-center p-3 rounded-lg font-semibold ${
+            className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold ${
               selectedDay &&
               selectedTimeSlot &&
               !isPending &&
               remainingSeats! > 0
                 ? "bg-accent text-white hover:bg-[#18c781]"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "cursor-not-allowed bg-gray-300 text-gray-500"
             }`}
             disabled={
               !selectedDay ||
@@ -315,7 +328,7 @@ export default function GetEnrolled({
           </button>
 
           {enrollmentError && (
-            <p className="text-red-500 mt-4">{enrollmentError}</p>
+            <p className="mt-4 text-red-500">{enrollmentError}</p>
           )}
         </div>
       </div>
@@ -333,13 +346,13 @@ function SelectField({
 }: any) {
   return (
     <div>
-      <label htmlFor={label} className="block text-lg font-semibold mb-2">
+      <label htmlFor={label} className="mb-2 block text-lg font-semibold">
         {label}
       </label>
       <div className="relative w-full">
         <select
           id={label}
-          className={`w-full p-3 pr-10 border rounded-lg text-gray-700 focus:outline-none bg-transparent appearance-none ${
+          className={`w-full appearance-none rounded-lg border bg-transparent p-3 pr-10 text-gray-700 focus:outline-none ${
             value ? "border-accent" : "border-neutral-400"
           }`}
           value={value}
@@ -355,9 +368,9 @@ function SelectField({
             </option>
           ))}
         </select>
-        <div className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <svg
-            className="w-5 h-5 text-gray-400"
+            className="h-5 w-5 text-gray-400"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"

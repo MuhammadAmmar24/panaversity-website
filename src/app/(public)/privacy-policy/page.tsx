@@ -17,7 +17,7 @@ const Section = ({ title, content }: { title: string; content: string }) => (
   <div className="space-y-6">
     {" "}
     {/* Increased spacing */}
-    <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+    <h3 className="text-2xl font-semibold text-gray-900 sm:text-3xl">
       {title}
     </h3>{" "}
     {/* Increased font size */}
@@ -33,7 +33,6 @@ const SectionWithList = ({
   items,
   id,
 }: {
-  
   title: string;
   subtitle: string;
   items: (string | JSX.Element)[];
@@ -42,15 +41,15 @@ const SectionWithList = ({
   <div id={id} className="space-y-6">
     {" "}
     {/* Increased spacing */}
-    <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+    <h3 className="text-2xl font-semibold text-gray-900 sm:text-3xl">
       {title}
     </h3>{" "}
     {/* Increased font size */}
-    <p className="text-base sm:text-lg font-medium text-gray-800">
+    <p className="text-base font-medium text-gray-800 sm:text-lg">
       {subtitle}
     </p>{" "}
     {/* Increased font size */}
-    <ul className="list-disc pl-5 space-y-3 sm:space-y-4 text-base sm:text-lg">
+    <ul className="list-disc space-y-3 pl-5 text-base sm:space-y-4 sm:text-lg">
       {" "}
       {/* Increased font size */}
       {items.map((item, idx) => (
@@ -62,7 +61,7 @@ const SectionWithList = ({
 
 export default function PrivacyPolicy() {
   return (
-    <main className="min-h-screen bg-white font-poppins">
+    <main className="font-poppins min-h-screen bg-white">
       <HeaderSection
         title={privacypolicydata.headline1}
         description={privacypolicydata.headline3}
@@ -73,19 +72,19 @@ export default function PrivacyPolicy() {
       />
 
       {/* Privacy Policy Section */}
-      <section className="lg:max-w-[950px] xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-0 py-10 sm:py-14 lg:py-18">
+      <section className="lg:py-18 mx-auto px-4 py-10 sm:px-6 sm:py-14 lg:max-w-[950px] lg:px-0 xl:max-w-6xl">
         {" "}
         {/* Increased padding */}
-        <div className="text-black space-y-10">
+        <div className="space-y-10 text-black">
           {" "}
           {/* Increased spacing */}
           {/* Effective Date */}
-          <h2 className="text-4xl sm:text-[2.5rem] font-bold text-gray-800 mb-6 sm:mb-8">
+          <h2 className="mb-6 text-4xl font-bold text-gray-800 sm:mb-8 sm:text-[2.5rem]">
             {" "}
             {/* Increased font size */}
             {privacypolicydata.head2}
           </h2>
-          <p className="text-base sm:text-lg leading-relaxed">
+          <p className="text-base leading-relaxed sm:text-lg">
             {" "}
             {/* Increased font size */}
             {privacypolicydata.paraline1}
@@ -148,14 +147,14 @@ export default function PrivacyPolicy() {
                 <strong>Withdrawing Consent:</strong>{" "}
                 {privacypolicydata.policy2adescription2}
                 <Link
-                href={
-                  "mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"
-                }
-                aria-label="Contact Us"
-                className="text-green-500 hover:underline text-base sm:text-lg"
-              >
-                {privacypolicydata.contactlink}.
-              </Link>
+                  href={
+                    "mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"
+                  }
+                  aria-label="Contact Us"
+                  className="text-base text-green-500 hover:underline sm:text-lg"
+                >
+                  {privacypolicydata.contactlink}.
+                </Link>
               </>,
               <>
                 <strong>Parental Consent:</strong>{" "}
@@ -195,7 +194,7 @@ export default function PrivacyPolicy() {
           <div className="space-y-6">
             {" "}
             {/* Increased spacing */}
-            <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900">
+            <h3 className="text-2xl font-semibold text-gray-900 sm:text-3xl">
               {privacypolicydata.headpolicy9}
             </h3>
             <div className="flex flex-wrap gap-1">
@@ -209,7 +208,7 @@ export default function PrivacyPolicy() {
                   "mailto:info@panaversity.com?subject=Privacy%20Policy%20Inquiry&body=Please%20provide%20details%20about%20your%20inquiry"
                 }
                 aria-label="Contact Us"
-                className="text-green-500 hover:underline text-base sm:text-lg"
+                className="text-base text-green-500 hover:underline sm:text-lg"
               >
                 {privacypolicydata.contactlink}.
               </Link>

@@ -12,24 +12,24 @@ const TeamGrid = () => {
   };
 
   return (
-    <div className="container mx-auto px-2 xs:px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32 mt-8">
-      <div className="flex flex-wrap gap-y-5 justify-center">
+    <div className="container mx-auto mt-8 px-2 xs:px-4 sm:px-6 md:px-7 lg:px-1 xl:px-32">
+      <div className="flex flex-wrap justify-center gap-y-5">
         {allTeamMembers
           .slice(0, visibleMembers)
           .map((member: TeamMember, i) => (
             <div
               key={i}
-              className="w-full sm:w-1/2 lg:w-1/3 px-4 mb-8 flex justify-center"
+              className="mb-8 flex w-full justify-center px-4 sm:w-1/2 lg:w-1/3"
             >
               <TeamMemberItem member={member} priority={i < 3} />
             </div>
           ))}
       </div>
       {visibleMembers < allTeamMembers.length && (
-        <div className="flex justify-center mt-8">
+        <div className="mt-8 flex justify-center">
           <button
             onClick={handleLoadMore}
-            className="bg-accent text-white px-6 py-2 rounded hover:bg-accent/90 transition-colors"
+            className="rounded bg-accent px-6 py-2 text-white transition-colors hover:bg-accent/90"
           >
             Load More
           </button>

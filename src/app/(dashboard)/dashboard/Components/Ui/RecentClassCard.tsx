@@ -16,40 +16,40 @@ const ClassCard: React.FC<ClassCardProps> = ({ title, time }) => {
     );
   }
   return (
-    <article className="w-full h-full">
+    <article className="h-full w-full">
       {/* Card container with shadow and rounded corners */}
-      <div className="bg-white shadow-xl rounded-lg flex flex-col items-start md:flex-row md:items-center md:gap-6 px-4 sm:px-6 lg:px-8 py-6 md:py-4">
+      <div className="flex flex-col items-start rounded-lg bg-white px-4 py-6 shadow-xl sm:px-6 md:flex-row md:items-center md:gap-6 md:py-4 lg:px-8">
         {/* YouTube Icon with link to class video */}
         <FaYoutube
-          className="w-auto h-10 sm:h-14 md:h-20 lg:h-24 text-red-600"
+          className="h-10 w-auto text-red-600 sm:h-14 md:h-20 lg:h-24"
           title="Click here to watch the video"
         />
 
         {/* Class details container */}
-        <div className="flex flex-col justify-between gap-1 items-start w-full">
+        <div className="flex w-full flex-col items-start justify-between gap-1">
           {/* Class Title */}
-          <h2 className="text-center font-medium text-lg md:text-xl font-poppins truncate mt-1 md:mt-0">
+          <h2 className="font-poppins mt-1 truncate text-center text-lg font-medium md:mt-0 md:text-xl">
             {title}
           </h2>
 
           {/* Class metadata container */}
           <div className="w-full pt-2">
             {/* Static class category */}
-            <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
+            <p className="flex items-center text-xs text-gray-600 sm:text-sm md:text-base">
               Panaversity Urdu Gen AI & Cloud Services
             </p>
 
             {/* GitHub and Topics covered section */}
-            <div className="flex items-center gap-2 hover:underline border-t mt-2 pt-4 cursor-pointer">
-              <FaGithub className="w-auto h-6" />
-              <p className="text-gray-600 flex items-center text-xs sm:text-sm md:text-base">
+            <div className="mt-2 flex cursor-pointer items-center gap-2 border-t pt-4 hover:underline">
+              <FaGithub className="h-6 w-auto" />
+              <p className="flex items-center text-xs text-gray-600 sm:text-sm md:text-base">
                 Topics Covered
               </p>
               <IoIosLink className="text-blue-500" />
             </div>
 
             {/* Date and time details */}
-            <div className="flex justify-between text-xs sm:text-sm text-gray-500 pt-4">
+            <div className="flex justify-between pt-4 text-xs text-gray-500 sm:text-sm">
               {/* Class date */}
               <div className="flex items-center gap-2">
                 <HiMiniCalendar className="text-sm md:text-base" />

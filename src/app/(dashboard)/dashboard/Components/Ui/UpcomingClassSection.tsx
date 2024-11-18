@@ -13,10 +13,10 @@ const UpcomingClassSection: React.FC<UpcomingClassSectionProps> = ({
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
+    <div className="flex flex-1 flex-col gap-4">
       {/* Section title */}
       <div className="flex justify-start">
-        <h1 className="mt-10 font-medium text-start text-xl md:text-2xl font-poppins">
+        <h1 className="font-poppins mt-10 text-start text-xl font-medium md:text-2xl">
           {title}
         </h1>
       </div>

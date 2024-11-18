@@ -18,11 +18,11 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   return (
     <div
-      className="testimonial-card p-3 xs:p-4 sm:p-6 border rounded-[20px] shadow-md"
+      className="testimonial-card rounded-[20px] border p-3 shadow-md xs:p-4 sm:p-6"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex items-center justify-between xs:justify-start xs:space-x-4 pb-4 sm:pb-6">
+      <div className="flex items-center justify-between pb-4 xs:justify-start xs:space-x-4 sm:pb-6">
         <div className="">
           <Image
             src={testimonial.img}
@@ -34,11 +34,13 @@ const TestimonialCard = ({
           />
         </div>
         <div>
-          <h3 className="text-lg mobileM:text-xl font-medium font-poppins">{testimonial.name}</h3>
-          <p className="text-sm md:text-xs leading-4">{testimonial.position}</p>
+          <h3 className="font-poppins text-lg font-medium mobileM:text-xl">
+            {testimonial.name}
+          </h3>
+          <p className="text-sm leading-4 md:text-xs">{testimonial.position}</p>
         </div>
       </div>
-      <p className="opacity-75 mb-2 text-base">{testimonial.content}</p>
+      <p className="mb-2 text-base opacity-75">{testimonial.content}</p>
     </div>
   );
 };

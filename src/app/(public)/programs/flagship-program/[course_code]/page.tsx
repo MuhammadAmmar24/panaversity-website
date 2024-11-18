@@ -3,12 +3,16 @@ import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
-import { notFound } from 'next/navigation'; // Import the notFound helper
+import { notFound } from "next/navigation"; // Import the notFound helper
 
 export const revalidate = 7200;
 
 // Function to generate metadata dynamically
-export async function generateMetadata({ params }: { params: { course_code: string } }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { course_code: string };
+}): Promise<Metadata> {
   const courseId = await getCourseIdFromCode(params.course_code); // New function to fetch course_id
 
   if (!courseId) {
@@ -35,7 +39,9 @@ export async function generateMetadata({ params }: { params: { course_code: stri
   };
 }
 
-async function getCourseIdFromCode(course_code: string): Promise<number | null> {
+async function getCourseIdFromCode(
+  course_code: string,
+): Promise<number | null> {
   const result = await getProgramCoursesWithOpenRegistration({
     program_id: 1,
     batch_id: 1,
@@ -43,13 +49,14 @@ async function getCourseIdFromCode(course_code: string): Promise<number | null> 
   });
 
   if (result.type === "success" && Array.isArray(result.data?.data)) {
-    const course = result.data.data.find((course: any) => course.course_code === course_code);
+    const course = result.data.data.find(
+      (course: any) => course.course_code === course_code,
+    );
     return course ? course.course_id : null;
   }
 
   return null; // Return null if course_code not found
 }
-
 
 export async function generateStaticParams() {
   const query = {
@@ -72,8 +79,6 @@ export async function generateStaticParams() {
   return [];
 }
 
-
-
 export interface CourseData {
   course_batch_program_id: number;
   is_active: boolean;
@@ -93,7 +98,7 @@ export interface CourseData {
 }
 
 async function fetchCoursePrice(course_batch_program_id: number) {
-  const params = { course_batch_program_id: course_batch_program_id }; 
+  const params = { course_batch_program_id: course_batch_program_id };
 
   const result = await getCoursePrice(params);
 
@@ -103,7 +108,6 @@ async function fetchCoursePrice(course_batch_program_id: number) {
     throw new Error(result.message);
   }
 }
-
 
 export default async function CoursePage({
   params: { course_code },
@@ -136,4 +140,3 @@ export default async function CoursePage({
     />
   );
 }
-

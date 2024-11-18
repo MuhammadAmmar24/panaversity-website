@@ -3,31 +3,36 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const CourseCard = ({ course }: { course: Course }) => (
-  <Link href={`/programs/flagship-program/${course.course_code}`} aria-label={`Go to ${course.course_name} page`}>
-    <div className="flex flex-col bg-background rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transform transition-all duration-300 ease-in-out hover:-translate-y-[2px] w-full h-auto pb-0">
-      <div className="h-[14rem] relative">
+  <Link
+    href={`/programs/flagship-program/${course.course_code}`}
+    aria-label={`Go to ${course.course_name} page`}
+  >
+    <div className="flex h-auto w-full transform flex-col overflow-hidden rounded-xl bg-background pb-0 shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-[2px] hover:shadow-2xl">
+      <div className="relative h-[14rem]">
         <Image
           src={course.media_link}
           alt={course.course_name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
-          className="object-top object-cover"
+          className="object-cover object-top"
         />
       </div>
-      <div className="flex flex-col justify-between p-4 min-h-[12rem]">
+      <div className="flex min-h-[12rem] flex-col justify-between p-4">
         <div className="space-y-4">
-          <div className="flex items-center justify-between mb-2">
-            <h6 className="text-xs font-medium text-gray-700 ">
-              Course Code: <span className="font-bold underline underline-offset-2 text-black decoration-accent decoration-1">{course.course_code}</span>
+          <div className="mb-2 flex items-center justify-between">
+            <h6 className="text-xs font-medium text-gray-700">
+              Course Code:{" "}
+              <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
+                {course.course_code}
+              </span>
             </h6>
             <span
-              className={`text-[10px] opacity-75 rounded-xl px-2 py-1 inline-block
-                ${
-                  course.is_registration_open
-                    ? "bg-green-500 text-white"
-                    : "bg-gray-700 text-white"
-                }`}
+              className={`inline-block rounded-xl px-2 py-1 text-[10px] opacity-75 ${
+                course.is_registration_open
+                  ? "bg-green-500 text-white"
+                  : "bg-gray-700 text-white"
+              }`}
             >
               {course.is_registration_open
                 ? "Registration Open"
@@ -35,10 +40,10 @@ export const CourseCard = ({ course }: { course: Course }) => (
             </span>
           </div>
           <div>
-            <h4 className="font-medium text-[1rem] font-poppins  mb-2">
+            <h4 className="font-poppins mb-2 text-[1rem] font-medium">
               {course.course_name}
             </h4>
-            <p className="text-sm line-clamp-3">{course.course_description}</p>
+            <p className="line-clamp-3 text-sm">{course.course_description}</p>
           </div>
         </div>
       </div>

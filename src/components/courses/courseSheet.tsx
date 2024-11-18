@@ -207,7 +207,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
       {/* New Component */}
-      <Card className="mb-6 w-full max-w-sm">
+      <Card className="w-full max-w-sm items-end">
         <CardContent className="p-4 mobileM:p-4 xs:p-6">
           <Tabs
             defaultValue="1"

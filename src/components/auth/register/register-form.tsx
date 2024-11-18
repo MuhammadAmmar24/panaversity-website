@@ -144,7 +144,6 @@ export const RegisterForm = () => {
                 <FormLabel>Password</FormLabel>
                 <FormControl>
                   <div className="relative">
-
                     <Input
                       {...field}
                       id="password"
@@ -160,12 +159,12 @@ export const RegisterForm = () => {
                         !isPending && setShowPassword((prev) => !prev)
                       }
                       disabled={isPending}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
                     >
                       {showPassword ? (
-                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                        <AiOutlineEyeInvisible className="h-5 w-5" />
                       ) : (
-                        <AiOutlineEye className="w-5 h-5" />
+                        <AiOutlineEye className="h-5 w-5" />
                       )}
                     </button>
                   </div>
@@ -197,12 +196,12 @@ export const RegisterForm = () => {
                         !isPending && setShowPassword((prev) => !prev)
                       }
                       disabled={isPending}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
                     >
                       {showPassword ? (
-                        <AiOutlineEyeInvisible className="w-5 h-5" />
+                        <AiOutlineEyeInvisible className="h-5 w-5" />
                       ) : (
-                        <AiOutlineEye className="w-5 h-5" />
+                        <AiOutlineEye className="h-5 w-5" />
                       )}
                     </button>
                   </div>
@@ -284,7 +283,7 @@ export const RegisterForm = () => {
           <Button
             disabled={isPending || !!success}
             type="submit"
-            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+            className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
           >
             {isPending ? (
               <>
@@ -296,10 +295,15 @@ export const RegisterForm = () => {
             )}
           </Button>
         )}
-        <p className="w-full text-textPrimary text-center text-xs font-medium">
+        <p className="w-full text-center text-xs font-medium text-textPrimary">
           Already have an account?&nbsp;&nbsp;
-          <Link href="/login" aria-label="Go to Login page" replace className="group">
-            <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
+          <Link
+            href="/login"
+            aria-label="Go to Login page"
+            replace
+            className="group"
+          >
+            <span className="text-sm text-accent underline-offset-4 transition-colors duration-200 group-hover:underline">
               Login
             </span>
           </Link>

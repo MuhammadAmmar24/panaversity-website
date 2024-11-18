@@ -3,31 +3,31 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <div className="bg-background relative">
+    <div className="relative bg-background">
       <div className="relative isolate px-6 lg:px-8">
         <div className="mx-auto max-w-5xl pt-[4rem] sm:pt-[6rem] md:pt-[7rem] lg:pt-[8rem]">
           <div className="text-center">
-            <h1 className="text-[2rem] xs:text-[2.5rem] sm:text-[3rem] md:text-[4rem] font-poppins font-bold tracking-tight text-textPrimary">
+            <h1 className="font-poppins text-[2rem] font-bold tracking-tight text-textPrimary xs:text-[2.5rem] sm:text-[3rem] md:text-[4rem]">
               Learn Agentic AI in{" "}
-              <span className="text-accent bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-transparent">
-              Live Online Classes
+              <span className="bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-accent text-transparent">
+                Live Online Classes
               </span>{" "}
               by Experts
             </h1>
-            <p className="mt-6 text-[0.9rem] md:text-[1.1rem] font-inter leading-8 text-textSecondary">
-            Master Agentic AI augmented with our Personalized, AI-Powered Platform — Tailored for Your{" "}
-              <span className="gradient-border2">Success!</span>
+            <p className="font-inter mt-6 text-[0.9rem] leading-8 text-textSecondary md:text-[1.1rem]">
+            Access Live Classes and Labs on Zoom from Anywhere Worldwide - Choose Between Dedicated English or Urdu/Hindi{" "}
+              <span className="gradient-border2">Sections!</span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
                 href="/programs"
                 aria-label="Go to programs page"
-                className="relative inline-flex items-center px-6 py-2.5 sm:px-12 sm:py-4  overflow-hidden text-sm sm:text-[0.9rem] text-textPrimary font-inter bg-accent rounded-[40px] hover:text-textPrimary font-semibold group hover:bg-background border-2 border-accent"
+                className="font-inter group relative inline-flex items-center overflow-hidden rounded-[40px] border-2 border-accent bg-accent px-6 py-2.5 text-sm font-semibold text-textPrimary hover:bg-background hover:text-textPrimary sm:px-12 sm:py-4 sm:text-[0.9rem]"
               >
-                <span className="absolute left-0 block w-full h-0 transition-all bg-transparent opacity-100 group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"></span>
-                <span className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 transform translate-x-full group-hover:translate-x-0 ease">
+                <span className="duration-400 ease absolute left-0 top-1/2 block h-0 w-full bg-transparent opacity-100 transition-all group-hover:top-0 group-hover:h-full"></span>
+                <span className="ease absolute right-0 flex h-10 w-10 translate-x-full transform items-center justify-start duration-300 group-hover:translate-x-0">
                   <svg
-                    className="w-5 h-5 hidden sm:flex"
+                    className="hidden h-5 w-5 sm:flex"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 overflow-hidden mt-[-30rem] xs:mt-[-34.5rem] sm:mt-[-33rem]  md:mt-[-32rem] lg:mt-[-34.5rem] xl:mt-[-37rem] sm:ml-[-8rem]  md:ml-[-2rem]  xl:ml-[-6rem] -z-10 "
+          className="absolute inset-x-0 -z-10 mt-[-30rem] overflow-hidden xs:mt-[-34.5rem] sm:ml-[-8rem] sm:mt-[-33rem] md:ml-[-2rem] md:mt-[-32rem] lg:mt-[-34.5rem] xl:ml-[-6rem] xl:mt-[-37rem]"
         >
           <HeroBg />
         </div>

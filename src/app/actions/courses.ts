@@ -1,15 +1,15 @@
 "use server";
 
 import {
-	GetCoursePriceParams,
-	GetCoursePriceParamsSchema,
-	GetCoursePriceResponse,
-	GetCoursePriceResponseSchema
+  GetCoursePriceParams,
+  GetCoursePriceParamsSchema,
+  GetCoursePriceResponse,
+  GetCoursePriceResponseSchema,
 } from "@/src/lib/schemas/courses";
 import { Result } from "@/src/types/types";
 
 export const getCoursePrice = async (
-  params: GetCoursePriceParams
+  params: GetCoursePriceParams,
 ): Promise<Result<GetCoursePriceResponse>> => {
   // Validate the path parameters using zod schema
   const validationResult = GetCoursePriceParamsSchema.safeParse(params);
@@ -34,7 +34,7 @@ export const getCoursePrice = async (
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
         next: { revalidate: 604800 }, // Revalidate every week (604,800 seconds)
-      }
+      },
     );
 
     if (!response.ok) {

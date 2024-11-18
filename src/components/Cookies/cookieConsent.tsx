@@ -26,14 +26,14 @@ export default function CookieConsent() {
   if (!isVisible) return null;
 
   return (
-    <aside className="p-4 w-full sm:max-w-[350px] fixed bottom-2 right-0 sm:right-2 flex flex-col gap-y-6 justify-between items-center  rounded-lg bg-white/40 backdrop-blur-md border border-gray-400/50 z-50">
-      <p className="mb-4 md:mb-0 text-gray-900  md:text-left">
+    <aside className="fixed bottom-2 right-0 z-50 flex w-full flex-col items-center justify-between gap-y-6 rounded-lg border border-gray-400/50 bg-white/40 p-4 backdrop-blur-md sm:right-2 sm:max-w-[350px]">
+      <p className="mb-4 text-gray-900 md:mb-0 md:text-left">
         We use cookies to ensure user get the best experience on our website.
         Checkout our{" "}
         <Link
           href={"/privacy-policy/#consent-policy"}
           aria-label="Read more aboutContent Policy"
-          className=" text-gray-900 underline underline-offset-4 decoration-2 decoration-accent"
+          className="text-gray-900 underline decoration-accent decoration-2 underline-offset-4"
         >
           Consent Policy.
         </Link>
@@ -41,13 +41,13 @@ export default function CookieConsent() {
       <div className="space-x-8">
         <button
           onClick={handleAccept}
-          className="bg-accent  text-white py-2 px-4 rounded-lg"
+          className="rounded-lg bg-accent px-4 py-2 text-white"
         >
           Accept
         </button>
         <button
           onClick={handleReject}
-          className="bg-gray-800  text-white  py-2 px-4 rounded-lg"
+          className="rounded-lg bg-gray-800 px-4 py-2 text-white"
         >
           Reject
         </button>

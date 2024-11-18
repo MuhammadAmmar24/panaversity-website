@@ -60,12 +60,12 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
 
 // Separate components for different states
 const LoadingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center py-[5rem]  px-5">
-    <div className="flex justify-center mb-4">
-      <div className="bg-green-100 p-4 rounded-full">
+  <div className="flex flex-col items-center justify-center gap-y-5 px-5 py-[5rem]">
+    <div className="mb-4 flex justify-center">
+      <div className="rounded-full bg-green-100 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 text-accent animate-spin"
+          className="h-12 w-12 animate-spin text-accent"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -83,8 +83,8 @@ const LoadingComponent = () => (
 );
 
 const ErrorComponent = ({ message }: { message: string }) => (
-  <div className="flex flex-col justify-center gap-y-5 items-center w-[400px] px-5 h-[400px]">
-    <div className="flex justify-center mb-4">
+  <div className="flex h-[400px] w-[400px] flex-col items-center justify-center gap-y-5 px-5">
+    <div className="mb-4 flex justify-center">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
     <h2 className="text-2xl font-bold">Error</h2>
@@ -93,12 +93,12 @@ const ErrorComponent = ({ message }: { message: string }) => (
 );
 
 const VerifyingComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center py-7 w-[400px] px-5 h-[400px]">
-    <div className="flex justify-center mb-4">
-      <div className="bg-green-100 p-4 rounded-full">
+  <div className="flex h-[400px] w-[400px] flex-col items-center justify-center gap-y-5 px-5 py-7">
+    <div className="mb-4 flex justify-center">
+      <div className="rounded-full bg-green-100 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-12 w-12 text-accent animate-spin"
+          className="h-12 w-12 animate-spin text-accent"
           viewBox="0 0 20 20"
           fill="currentColor"
         >
@@ -116,9 +116,9 @@ const VerifyingComponent = () => (
 );
 
 const VerifiedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-5 items-center  px-5 h-[400px]">
-    <div className="flex justify-center mb-4">
-      <div className="bg-green-100 p-4 rounded-full">
+  <div className="flex h-[400px] flex-col items-center justify-center gap-y-5 px-5">
+    <div className="mb-4 flex justify-center">
+      <div className="rounded-full bg-green-100 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="h-12 w-12 text-green-600"
@@ -140,7 +140,7 @@ const VerifiedComponent = () => (
     <Link
       href={"/login"}
       aria-label="Go to login page"
-      className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+      className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
     >
       Login
     </Link>
@@ -148,16 +148,16 @@ const VerifiedComponent = () => (
 );
 
 const VerificationFailedComponent = () => (
-  <div className="flex flex-col justify-center gap-y-[1rem] py-[3rem] items-center px-3 text-center  ">
-    <div className="flex justify-center mb-2">
+  <div className="flex flex-col items-center justify-center gap-y-[1rem] px-3 py-[3rem] text-center">
+    <div className="mb-2 flex justify-center">
       <ImCancelCircle size={50} className="text-red-500" />
     </div>
-    <h2 className="text-2xl font-bold px-0">Email Verification Failed</h2>
+    <h2 className="px-0 text-2xl font-bold">Email Verification Failed</h2>
     <p className="px-3">Invalid or expired verification link</p>
     <Link
       href="/verify"
       aria-label="Go to verify email page"
-      className="w-full text-center py-2 mt-4 max-w-[18.5rem] text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+      className="mt-4 w-full max-w-[18.5rem] rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
     >
       Re-verify Email
     </Link>

@@ -30,9 +30,8 @@ export default async function Courses() {
   const courses = await fetchCourses();
 
   return (
-    <section className="light bg-background text-zinc-900 overflow-x-hidden">
-      <div className="w-full mb-32">
-
+    <section className="light overflow-x-hidden bg-background text-zinc-900">
+      <div className="mb-32 w-full">
         <HeaderSection
           title="Our Flagship Program"
           description="Certified Agentic and Robotic AI Engineer"

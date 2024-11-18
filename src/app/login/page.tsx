@@ -15,12 +15,12 @@ const LoginPage = () => {
     <>
       <Navbar />
       <main>
-        <div className="flex flex-col justify-center items-center min-h-[85vh] mt-10 mb-20">
-            <CardWrapper headerLabel="Login">
+        <div className="mb-20 mt-10 flex min-h-[85vh] flex-col items-center justify-center">
+          <CardWrapper headerLabel="Login">
             <div className="p-4 mobileM:p-2">
               <LoginForm />
-              </div>
-            </CardWrapper>
+            </div>
+          </CardWrapper>
         </div>
       </main>
       <Footer />

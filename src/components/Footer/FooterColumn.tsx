@@ -8,11 +8,15 @@ const FooterColumn: React.FC<FooterColumnProps> = ({
 }) => {
   return (
     <div className={className}>
-      <h3 className="font-semibold mb-4 text-white text-lg">{title}</h3>
+      <h3 className="mb-4 text-lg font-semibold text-white">{title}</h3>
       <ul className="space-y-2 text-sm">
         {links.map((link, index) => (
           <li key={index}>
-            <Link href={link.href} aria-label={`${link.name}`} className="hover:text-gray-300 text-gray-400">
+            <Link
+              href={link.href}
+              aria-label={`${link.name}`}
+              className="text-gray-400 hover:text-gray-300"
+            >
               {link.name}
             </Link>
           </li>

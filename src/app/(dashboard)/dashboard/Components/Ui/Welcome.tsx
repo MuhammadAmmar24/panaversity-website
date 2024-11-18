@@ -17,9 +17,9 @@ const Welcome: React.FC<WelcomeProps> = ({ profile }) => {
   return (
     <section className="mx-auto">
       {/* Container for the welcome message */}
-      <div className="w-full mt-10 sm:mt-14 flex gap-4 items-center justify-start">
+      <div className="mt-10 flex w-full items-center justify-start gap-4 sm:mt-14">
         {/* Heading with user's first name */}
-        <h1 className="font-medium text-start text-xl fold:text-lg mobileM:text-2xl md:text-4xl font-poppins text-textPrimary/90">
+        <h1 className="font-poppins text-start text-xl font-medium text-textPrimary/90 fold:text-lg mobileM:text-2xl md:text-4xl">
           Welcome {profile.full_name?.split(" ")[0]}{" "}
           {/* Display user's first name */}
           {/* <br /> */}

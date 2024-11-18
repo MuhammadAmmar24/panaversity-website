@@ -96,7 +96,7 @@ export const LoginForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -135,7 +135,7 @@ export const LoginForm = () => {
                     />
                     <button
                       type="button"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 transform"
                       onClick={() =>
                         !isPending && setShowPassword((prev) => !prev)
                       }
@@ -156,7 +156,7 @@ export const LoginForm = () => {
           <Button size="sm" variant="link" asChild className="px-0 font-normal">
             <Link
               href="/reset-password"
-              className="hover:underline underline-offset-4 transition-colors duration-200"
+              className="underline-offset-4 transition-colors duration-200 hover:underline"
             >
               Forgot password?
             </Link>
@@ -169,7 +169,7 @@ export const LoginForm = () => {
           <Button
             disabled={isPending || !!success}
             type="submit"
-            className="w-full text-center py-2 text-white rounded-md bg-accent hover:bg-[#18c781] font-medium"
+            className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
           >
             {isPending ? (
               <>
@@ -182,7 +182,7 @@ export const LoginForm = () => {
           </Button>
         )}
 
-        <p className="w-full text-textPrimary text-center text-xs font-medium">
+        <p className="w-full text-center text-xs font-medium text-textPrimary">
           Don't have an account?&nbsp;&nbsp;
           <Link
             href="/register"
@@ -190,7 +190,7 @@ export const LoginForm = () => {
             replace
             className="group"
           >
-            <span className="group-hover:underline text-accent text-sm underline-offset-4 transition-colors duration-200">
+            <span className="text-sm text-accent underline-offset-4 transition-colors duration-200 group-hover:underline">
               Register
             </span>
           </Link>
