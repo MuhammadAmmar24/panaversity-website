@@ -268,7 +268,7 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/Girl_avatar.webp",
+    picture: "/team/aimen_zaidi.webp",
     fullName: "Aiman Zaidi",
     designation: "UI/UX designer",
     bio: "Design mobile and web applications with a strong focus on user experience.",
