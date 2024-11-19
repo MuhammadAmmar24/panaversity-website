@@ -179,10 +179,10 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                             >
                               {(fieldName === "current_password" &&
                                 showPasswordCurrent) ||
-                              (fieldName === "new_password" &&
-                                showPasswordNew) ||
-                              (fieldName === "confirm_password" &&
-                                showPasswordConfirm) ? (
+                                (fieldName === "new_password" &&
+                                  showPasswordNew) ||
+                                (fieldName === "confirm_password" &&
+                                  showPasswordConfirm) ? (
                                 <AiOutlineEyeInvisible className="h-5 w-5 text-gray-400" />
                               ) : (
                                 <AiOutlineEye className="h-5 w-5 text-gray-400" />

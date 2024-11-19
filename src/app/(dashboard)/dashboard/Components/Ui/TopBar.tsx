@@ -8,22 +8,18 @@ import Dropdown from "./TopbarDropdown";
 const TopBar: React.FC = async () => {
   let profile: ProfileData | null = null;
 
-  // Fetch the profile data with error handling
   try {
     profile = await fetchProfile();
   } catch (error) {
     console.error("Error fetching profile data:", error);
-    // In case of an error, you could return default data or handle it appropriately
   }
 
-  // Fallback UI if profile data is not available
   if (!profile) {
     return <Error message="Error loading profile" />;
   }
 
   return (
     <header className="mb-4 mt-6 flex h-16 items-center justify-between sm:mt-10">
-      {/* Logo link for home navigation */}
       <Link href="/" aria-label="Home">
         <Image
           width={500}
@@ -31,16 +27,13 @@ const TopBar: React.FC = async () => {
           src="/logos/logo.webp"
           alt="Company Logo"
           className="h-14 w-auto mobileM:h-14 xs:h-14 sm:h-16 md:h-20"
-          // layout="intrinsic" // Ensures image maintains its aspect ratio
-          priority={true} // Optional: helps load the logo faster
+          priority={true}
         />
       </Link>
-
-      {/* Client-side component to fetch user data and display the dropdown */}
       <Dropdown
         userName={profile.full_name}
         userEmail={profile.email}
-        userImage="/profile.webp" // Placeholder for user profile image
+        userImage="/profile.webp"
       />
     </header>
   );
