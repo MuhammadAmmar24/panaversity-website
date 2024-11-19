@@ -15,9 +15,9 @@ export interface CourseCardProps {
   student_course_id: number;
   course_batch_program_id: number;
   profile: ProfileData;
-  course_code: string; // Add course_code property
-  start_time: string; // Add start_time property
-  day: string; // Add day property
+  course_code: string;
+  start_time: string;
+  day: string;
 }
 
 export interface CardData {
@@ -35,9 +35,9 @@ export interface Course {
   batch_no: number;
   student_course_id: number;
   course_batch_program_id: number;
-  course_code: string; // Add course_code property
-  start_time: string; // Add start_time property
-  day: string; // Add day property
+  course_code: string;
+  start_time: string;
+  day: string;
 }
 
 export interface Class {
@@ -99,7 +99,7 @@ export interface ProfileIdProps {
 }
 
 export type PaymentDialogProps = {
-  onConfirm: (paymentMethod: string) => void; // Function to call when the user confirms payment
-  open: boolean; // State to control the dialog visibility
-  onOpenChange: (open: boolean) => void; // Function to change the dialog visibility
+  onConfirm: (paymentMethod: string) => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
 };

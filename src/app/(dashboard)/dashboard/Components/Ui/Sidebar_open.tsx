@@ -3,9 +3,8 @@ import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 
 const IsSidebarOpen: React.FC = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar visibility state
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  // Error handling: Ensure setIsSidebarOpen is properly passed to Sidebar
   const handleSidebarState = (state: boolean) => {
     if (typeof state === "boolean") {
       setIsSidebarOpen(state);
@@ -16,10 +15,7 @@ const IsSidebarOpen: React.FC = () => {
 
   return (
     <div>
-      {/* Sidebar component with the ability to control open/close state */}
       <Sidebar setIsSidebarOpen={handleSidebarState} />
-
-      {/* Overlay that appears when sidebar is open */}
       {isSidebarOpen && (
         <div className="fixed inset-0 z-30 bg-black opacity-80 transition-opacity duration-1000"></div>
       )}

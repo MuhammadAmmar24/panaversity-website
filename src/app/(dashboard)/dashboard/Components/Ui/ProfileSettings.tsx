@@ -129,10 +129,8 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
 
   const handleAddressEdit = () => {
     if (isEditingAddress) {
-      // If already editing, cancel the edit
       handleCancel();
     } else {
-      // If not editing, start editing
       setIsEditingAddress(true);
       if (isEditingPassword) setIsEditingPassword(false);
     }
@@ -172,7 +170,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
         </div>
 
         <div className="p-6 sm:p-8">
-          {/* Personal Information */}
           <section className="mb-8 w-full border-b pb-6">
             <h2 className="mb-6 pr-4 text-lg font-semibold leading-6 text-gray-900 mobileM:pr-0 md:text-xl">
               Personal Information
@@ -194,7 +191,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               </div>
             </div>
           </section>
-          {/* Address Information section */}
           <section className="mt-8 w-full">
             <div className="mb-6 flex items-center justify-between gap-x-0.5 mobileM:gap-x-0">
               <h2 className="text-lg font-semibold leading-6 text-gray-900 md:text-xl">
@@ -211,8 +207,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                 )}
               </button>
             </div>
-
-            {/* Address fields */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:gap-x-16">
               {(Object.keys(addressInfo) as Array<keyof AddressInfo>).map(
                 (field) => (
@@ -244,8 +238,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                 ),
               )}
             </div>
-
-            {/* Address edit buttons */}
             {isEditingAddress && (
               <div className="mt-8 flex justify-start">
                 <button
@@ -257,21 +249,16 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               </div>
             )}
           </section>
-
-          {/* Status message */}
           {statusMessage && (
             <div
-              className={`mt-6 rounded-md p-4 ${
-                statusMessage.includes("Error")
+              className={`mt-6 rounded-md p-4 ${statusMessage.includes("Error")
                   ? "bg-red-100 text-red-800"
                   : "bg-green-100 text-green-800"
-              }`}
+                }`}
             >
               {statusMessage}
             </div>
           )}
-
-          {/* Password Settings */}
           {profile?.email && <PasswordSettings profile_email={profile.email} />}
         </div>
       </div>

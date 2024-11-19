@@ -2,7 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { useEffect, useState } from "react";
-import { AiOutlineLoading3Quarters } from "react-icons/ai"; // For the loading spinner
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
 import { PaymentDialogProps } from "../../types/types";
 
@@ -11,28 +11,26 @@ export default function PaymentDialog({
   open,
   onOpenChange,
 }: PaymentDialogProps) {
-  const [selectedMethod, setSelectedMethod] = useState(""); // No default method selected
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [selectedMethod, setSelectedMethod] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [paymentMethods, setPaymentMethods] = useState<string[]>(["STRIPE"]);
 
-  // Function to handle dialog close
   const handleClose = () => {
-    setSelectedMethod(""); // Reset the selected payment method
-    setIsLoading(false); // Reset loading state (optional, depending on your needs)
-    onOpenChange(false); // Close the dialog
+    setSelectedMethod("");
+    setIsLoading(false);
+    onOpenChange(false);
   };
 
   const handleConfirmClick = () => {
-    setIsLoading(true); // Start loading state
-    onConfirm(selectedMethod); // Proceed with payment confirmation
+    setIsLoading(true);
+    onConfirm(selectedMethod);
   };
 
-  // Automatically select Stripe if it's the only payment method
   useEffect(() => {
     if (paymentMethods.length === 1) {
-      setSelectedMethod(paymentMethods[0]); // Automatically select "Stripe"
+      setSelectedMethod(paymentMethods[0]);
     }
-  }, [paymentMethods]); // This runs whenever paymentMethods is updated
+  }, [paymentMethods]);
 
   return (
     <>
@@ -55,14 +53,13 @@ export default function PaymentDialog({
               >
                 Payment Method
               </label>
-              {/* Only show the payment method dropdown if there's more than one method */}
+
               {paymentMethods.length > 1 ? (
                 <div className="relative w-full">
                   <select
                     id="payment"
-                    className={`w-full appearance-none rounded-lg border bg-transparent p-3 pr-10 text-gray-700 focus:outline-none ${
-                      selectedMethod ? "border-accent" : "border-neutral-400"
-                    }`}
+                    className={`w-full appearance-none rounded-lg border bg-transparent p-3 pr-10 text-gray-700 focus:outline-none ${selectedMethod ? "border-accent" : "border-neutral-400"
+                      }`}
                     value={selectedMethod}
                     onChange={(e) => setSelectedMethod(e.target.value)}
                     disabled={isLoading}
@@ -94,7 +91,7 @@ export default function PaymentDialog({
               ) : (
                 <p className="w-full appearance-none rounded-lg border border-accent bg-transparent p-3 pr-10 text-gray-700 focus:outline-none">
                   {paymentMethods[0]}
-                </p> // Display Stripe directly when only one method is available
+                </p>
               )}
             </div>
 
@@ -107,12 +104,11 @@ export default function PaymentDialog({
               </button>
               <button
                 onClick={handleConfirmClick}
-                disabled={!selectedMethod || isLoading} // Disable if no payment method is selected or during loading
-                className={`flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-white transition-all duration-300 ease-in-out ${
-                  !selectedMethod && !isLoading
+                disabled={!selectedMethod || isLoading}
+                className={`flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-white transition-all duration-300 ease-in-out ${!selectedMethod && !isLoading
                     ? "cursor-not-allowed bg-gray-600 opacity-70"
                     : "bg-accent"
-                }`}
+                  }`}
               >
                 {isLoading ? (
                   <>

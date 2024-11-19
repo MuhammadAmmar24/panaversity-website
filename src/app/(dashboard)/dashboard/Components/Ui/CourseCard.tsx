@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { CourseCardProps } from "../../types/types";
 import PaymentDialog from "../Dialog/PaynowDialog";
-import { FaYoutube, FaGithub, FaBullhorn } from "react-icons/fa"; // Icons for new links
+import { FaYoutube, FaGithub, FaBullhorn } from "react-icons/fa";
 import Link from "next/link";
 import { SiZoom } from "react-icons/si";
 import { HiMiniCalendar } from "react-icons/hi2";
@@ -22,10 +22,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
   course_batch_program_id,
   profile,
   course_code,
-  start_time, // Accept start time
-  day, // Accept day
+  start_time,
+  day,
 }) => {
-  // State to control the payment dialog visibility
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
   const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
     null,
@@ -50,36 +49,33 @@ const CourseCard: React.FC<CourseCardProps> = ({
     router.push(`programs/flagship-program/${course_code}`);
   };
 
-  // Function to handle enrollment and payment processing
   const handleEnroll = async (paymentMethod: string) => {
     try {
       const payload: any = {
         batch_no: batch_id,
         package_id: enrollmentPackage,
         student_course_id: student_course_id,
-        student_id: profile?.id, // Use the actual student ID now that it's available
-        vendor_type: paymentMethod, // Pass the selected payment method
+        student_id: profile?.id,
+        vendor_type: paymentMethod,
       };
 
-      // Call the payment processing API
       const result: any = await processPayment(payload);
 
       if (result.type === "success") {
-        const url = result?.data?.stripe?.stripe_url; // Get the Stripe payment URL
+        const url = result?.data?.stripe?.stripe_url;
         if (url) {
-          window.location.href = url; // Redirect to payment URL if successful
+          window.location.href = url;
         } else {
           console.error("Stripe URL not found.");
         }
       } else {
-        console.error("API Error:", result.message); // Handle error response
+        console.error("API Error:", result.message);
       }
     } catch (error) {
-      console.error("Enrollment failed:", error); // Catch and log any errors
+      console.error("Enrollment failed:", error);
     }
   };
 
-  // New icons with links
   const icons = [
     {
       component: <FaYoutube />,
@@ -113,7 +109,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
     },
   ];
 
-  const progressPercentage = (progress / classes) * 100; // Calculate progress as a percentage
+  const progressPercentage = (progress / classes) * 100;
 
   return (
     <section className="">
@@ -121,9 +117,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
         <article className="flex flex-col gap-4 rounded-xl border bg-white px-4 py-4 shadow-lg sm:px-6 md:gap-6 md:py-6 lg:px-8">
           <div className="flex items-center justify-between">
             <h6
-              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${
-                status === "active" ? "text-gray-500" : "opacity-30"
-              }`}
+              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${status === "active" ? "text-gray-500" : "opacity-30"
+                }`}
             >
               Course Code:{" "}
               <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
@@ -138,7 +133,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 </button>
               ) : status === "reserved_seat" ? (
                 <button
-                  onClick={() => setPaymentDialogOpen(true)} // Open dialog on click
+                  onClick={() => setPaymentDialogOpen(true)}
                   className="min-h-6 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-xl transition duration-300 hover:bg-red-600 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
                 >
                   Pay to Proceed
@@ -155,9 +150,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
 
           <h2
-            className={`font-poppins truncate font-medium md:text-xl ${
-              status === "active" ? "text-textPrimary/90" : "opacity-30"
-            } `}
+            className={`font-poppins truncate font-medium md:text-xl ${status === "active" ? "text-textPrimary/90" : "opacity-30"
+              } `}
           >
             {title}
           </h2>
@@ -198,19 +192,14 @@ const CourseCard: React.FC<CourseCardProps> = ({
             ))}
           </div>
 
-          {/* Date and time details */}
           <div
-            className={`flex justify-between text-xs sm:text-sm ${
-              status === "active" ? "text-gray-500" : "opacity-30"
-            }`}
+            className={`flex justify-between text-xs sm:text-sm ${status === "active" ? "text-gray-500" : "opacity-30"
+              }`}
           >
-            {/* Class date */}
             <div className="flex items-center gap-2">
               <HiMiniCalendar className="text-sm md:text-base" />
               <span>{day}</span>
             </div>
-
-            {/* Class duration or time */}
             <div className="flex items-center gap-2">
               <TbClockHour3 className="text-sm md:text-base" />
               <span>{start_time}</span>
@@ -219,11 +208,10 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </article>
       </div>
 
-      {/* Payment Dialog Component */}
       <PaymentDialog
         open={isPaymentDialogOpen}
         onOpenChange={setPaymentDialogOpen}
-        onConfirm={(paymentMethod) => handleEnroll(paymentMethod)} // Pass payment method to handleEnroll
+        onConfirm={(paymentMethod) => handleEnroll(paymentMethod)}
       />
     </section>
   );

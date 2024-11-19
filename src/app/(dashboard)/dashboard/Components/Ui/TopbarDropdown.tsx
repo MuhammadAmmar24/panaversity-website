@@ -16,16 +16,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   userEmail,
   userImage,
 }) => {
-  const [isOpen, setIsOpen] = useState(false); // State to track dropdown visibility
-  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false); // State to track logout dialog visibility
-  const dropdownRef = useRef<HTMLDivElement>(null); // Ref for the dropdown element
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLogoutDialogOpen, setIsLogoutDialogOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  // Close the dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -42,27 +40,23 @@ const Dropdown: React.FC<DropdownProps> = ({
     };
   }, []);
 
-  // Sign out function
   const handleSignOut = async () => {
     await signOut();
     window.location.reload();
   };
 
-  // Error handling: If user information is missing, display a fallback
   if (!userName || !userEmail || !userImage) {
     return <Error message="Error" />;
   }
 
   return (
     <div className="relative" ref={dropdownRef}>
-      {/* Button to toggle dropdown */}
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-2 focus:outline-none"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
-        {/* User profile image */}
         <Image
           width={100}
           height={100}
@@ -70,29 +64,23 @@ const Dropdown: React.FC<DropdownProps> = ({
           alt={`${userName} profile`}
           className="h-8 w-8 rounded-full object-cover mobileM:h-10 mobileM:w-10 md:h-12 md:w-12"
         />
-        {/* Dropdown arrow icon */}
 
         <HiChevronDown
-          className={`h-4 w-4 transform transition-transform duration-300 ${
-            isOpen ? "rotate-180" : "rotate-0"
-          }`}
+          className={`h-4 w-4 transform transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"
+            }`}
         />
       </button>
 
-      {/* Dropdown content */}
       <div
-        className={`font-poppins absolute right-2 mt-2 w-48 origin-top-right transform rounded-lg border border-gray-200 bg-white shadow-lg transition-all duration-300 ease-in-out sm:w-64 ${
-          isOpen
-            ? "visible scale-100 opacity-100"
-            : "invisible scale-95 opacity-0"
-        }`}
+        className={`font-poppins absolute right-2 mt-2 w-48 origin-top-right transform rounded-lg border border-gray-200 bg-white shadow-lg transition-all duration-300 ease-in-out sm:w-64 ${isOpen
+          ? "visible scale-100 opacity-100"
+          : "invisible scale-95 opacity-0"
+          }`}
         role="menu"
         aria-hidden={!isOpen}
       >
-        {/* User info */}
         <div className="p-4">
           <div className="flex w-full items-center space-x-3">
-            {/* User profile image */}
             <Image
               width={100}
               height={100}
@@ -100,7 +88,6 @@ const Dropdown: React.FC<DropdownProps> = ({
               alt={`${userName} profile`}
               className="h-8 w-8 rounded-full object-cover mobileM:h-10 mobileM:w-10"
             />
-            {/* Display username and email */}
             <div>
               <h2 className="w-24 truncate text-sm font-semibold text-gray-900 sm:text-base md:w-44">
                 {userName}
@@ -114,9 +101,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
         <hr className="border-gray-200" />
 
-        {/* Links to different sections */}
         <ul className="p-2" role="menu">
-          {/* Profile settings */}
           <Link href="/dashboard/profile" aria-label="Go to Profile">
             <li
               className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100 hover:text-accent"
@@ -127,7 +112,6 @@ const Dropdown: React.FC<DropdownProps> = ({
             </li>
           </Link>
 
-          {/* Help center */}
           <li
             className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100"
             role="menuitem"
@@ -140,7 +124,6 @@ const Dropdown: React.FC<DropdownProps> = ({
 
           <hr className="border-gray-200" />
 
-          {/* Sign out */}
           <li
             onClick={() => setIsLogoutDialogOpen(true)}
             className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100"
@@ -152,7 +135,6 @@ const Dropdown: React.FC<DropdownProps> = ({
         </ul>
       </div>
 
-      {/* Logout confirmation dialog */}
       <LogoutDialog
         open={isLogoutDialogOpen}
         onOpenChange={setIsLogoutDialogOpen}

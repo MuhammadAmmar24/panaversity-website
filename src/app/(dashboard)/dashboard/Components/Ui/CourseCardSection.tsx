@@ -5,7 +5,6 @@ import CourseCard from "./CourseCard";
 
 const CourseSection: React.FC<CourseSectionProps> = async ({
   courses,
-  // status,
 }) => {
   const profile: ProfileData = await fetchProfile();
 
@@ -29,9 +28,9 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
               student_course_id={course.student_course_id}
               course_batch_program_id={course.course_batch_program_id}
               profile={profile}
-              course_code={course.course_code} // Pass dynamic course code
-              start_time={course.start_time} // Pass start time
-              day={course.day} // Pass day of the class
+              course_code={course.course_code}
+              start_time={course.start_time}
+              day={course.day}
             />
           ))}
       </div>
