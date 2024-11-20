@@ -2,11 +2,11 @@ export const courseData = [
     {
         quarter: "Course-1",
         title: "Gen AI & Cloud Basics",
-        description: "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
+        description: "Foundations of Agentic AI, Python, Docker, GitHub, and modern development practices.",
       },
       {
         quarter: "Course-2",
-        title: "Applied Generative AI",
+        title: "Applied Agentic AI",
         description: "Develop Custom GPTs and AI Agents using Langchain & CrewAI.",
       },
       {
@@ -16,7 +16,7 @@ export const courseData = [
       },
       {
         quarter: "Course-4",
-        title: "Generative AI with PyTorch",
+        title: "Agentic AI with PyTorch",
         description: "Build and train advanced AI models like GANs and Transformers.",
       },
       {

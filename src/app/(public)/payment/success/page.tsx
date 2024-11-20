@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Payment Success",
-  description: `Your payment was successful. Thank you for enrolling in Panaversity's Generative AI courses. We look forward to helping you master AI-powered technologies and advance your skills.`,
+  description: `Your payment was successful. Thank you for enrolling in Panaversity's Agentic AI courses. We look forward to helping you master AI-powered technologies and advance your skills.`,
 };
 
 const page = () => {

@@ -28,7 +28,7 @@ export async function generateMetadata({
 
   return {
     title: `Learn ${courseName} | Panaversity Flagship Program`,
-    description: `Explore the course ${courseName}, part of Panaversity's Flagship Program, focusing on cutting-edge topics like Generative AI and cloud-native technologies.`,
+    description: `Explore the course ${courseName}, part of Panaversity's Flagship Program, focusing on cutting-edge topics like Agentic AI and cloud-native technologies.`,
   };
 }
 

@@ -2,7 +2,7 @@ const programs = [
   {
     title: "GenAI",
     description:
-      "Generative Artificial Intelligence program focusing on creating AI systems that can produce original content.",
+      "Agentic Artificial Intelligence program focusing on creating AI systems that can produce original content.",
   },
   {
     title: "Robotics",

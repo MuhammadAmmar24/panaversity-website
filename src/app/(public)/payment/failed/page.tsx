@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Payment Failed",
-  description: `Unfortunately, your payment was not successful. Please try again or contact Panaversity support for assistance with enrolling in our Generative AI courses.`,
+  description: `Unfortunately, your payment was not successful. Please try again or contact Panaversity support for assistance with enrolling in our Agentic AI courses.`,
 };
 
 const page = () => {

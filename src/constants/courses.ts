@@ -6,7 +6,7 @@ export const courseData = [
         quarter: "AI-101",
         title: "Modern AI Python Programming",
         description:
-          "Foundations of Generative AI, Python, Docker, GitHub, and modern development practices.",
+          "Foundations of Agentic AI, Python, Docker, GitHub, and modern development practices.",
       },
       {
         quarter: "AI-201",
@@ -24,7 +24,7 @@ export const courseData = [
         quarter: "AI-301",
         title: "Cloud Native AI Microservices",
         description:
-          "Learn to build scalable AI-powered APIs and microservices using FastAPI, Kafka, Kong, and Generative AI APIs.",
+          "Learn to build scalable AI-powered APIs and microservices using FastAPI, Kafka, Kong, and Agentic AI APIs.",
       },
       {
         quarter: "AI-451",
@@ -53,7 +53,7 @@ export const courseData = [
         quarter: "AI-501",
         title: "Distributed Machine Learning",
         description:
-          "Master the fundamentals of Generative AI by building and training models with PyTorch and Ray, exploring GANs, Transformers, LLMs, and more.",
+          "Master the fundamentals of Agentic AI by building and training models with PyTorch and Ray, exploring GANs, Transformers, LLMs, and more.",
       },
       {
         quarter: "AI-502",

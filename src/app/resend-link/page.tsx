@@ -7,7 +7,7 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Resend Email",
-  description: `Verify your email address to activate your Panaversity account and unlock access to cutting-edge Generative AI and cloud-native courses`,
+  description: `Verify your email address to activate your Panaversity account and unlock access to cutting-edge Agentic AI and cloud-native courses`,
 };
 
 const page = () => {

@@ -27,7 +27,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   openGraph: {
     title: "Panaversity",
-    description: "Learn Generative AI with AI-powered Panaversity.",
+    description: "Learn Agentic AI with AI-powered Panaversity.",
     url: siteUrl,
     images: [
       {
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Panaversity",
-    description: "Learn Generative AI with AI-powered Panaversity.",
+    description: "Learn Agentic AI with AI-powered Panaversity.",
     images: [
       {
         url: `${siteUrl}/logos/logo.png`,
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     template: "%s | Panaversity",
   },
   description: `Panaversity is revolutionizing AI education with cutting-edge
-                programs in Generative AI and cloud computing, preparing you for the
+                programs in Agentic AI and cloud computing, preparing you for the
                 $100 trillion AI industry. Our hands-on programs combine advanced
                 technology with essential skills and personalized coaching.
                 Transform your ambition into success and lead in the AI-driven

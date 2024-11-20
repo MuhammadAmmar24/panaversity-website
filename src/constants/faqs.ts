@@ -29,7 +29,7 @@ export const faqData: FAQItem[] = [
     question: "Why should I choose this program?",
     answer: `<p>This program offers several compelling reasons to enroll:</p>
     <ul>
-      <li><strong>High-Demand Skills: </strong>Develop sought-after skills in intelligent, scalable cloud applications using Generative AI and Cloud Native technologies.</li>
+      <li><strong>High-Demand Skills: </strong>Develop sought-after skills in intelligent, scalable cloud applications using Agentic AI and Cloud Native technologies.</li>
       <li><strong>Industry-Ready: </strong>Prepare for global certifications, startup and freelance opportunities after just six months.</li>
       <li><strong>Future-Proof Your Career: </strong>Stay ahead of the curve in a rapidly evolving tech landscape.</li>
     </ul>

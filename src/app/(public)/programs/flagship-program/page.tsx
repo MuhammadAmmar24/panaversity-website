@@ -7,7 +7,7 @@ export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "Flagship Program",
-  description: `Discover Panaversity's Flagship Program featuring advanced courses on Generative AI, cloud-native technologies, custom GPTs. and AI Agents, Designed for learners aiming to master the future of AI and technology.`,
+  description: `Discover Panaversity's Flagship Program featuring advanced courses on Agentic AI, cloud-native technologies, custom GPTs. and AI Agents, Designed for learners aiming to master the future of AI and technology.`,
 };
 
 async function fetchCourses() {
