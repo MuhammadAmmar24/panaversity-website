@@ -1,7 +1,6 @@
 import CourseDetailsClient from "@/src/components/courses/courseDetail";
 import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
-import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation"; // Import the notFound helper

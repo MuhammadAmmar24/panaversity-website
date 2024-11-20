@@ -115,7 +115,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     <span className="text-xs text-red-500">
                       Registration Deadline:{" "}
                       {new Date(
-                        section.registration_deadline,
+                        section.registration_deadline!,
                       ).toLocaleDateString("en-US", {
                         year: "numeric",
                         month: "short",
@@ -128,7 +128,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     <div className="col-span-2 flex items-center gap-x-2">
                       <GiTeacher className="h-4 w-4 text-muted-foreground" />
                       <span className="">
-                        Instructor: {section.class_time_slots[0].instructor}
+                        Instructor: {section?.class_time_slots?.[0]?.instructor}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -142,7 +142,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                   </div>
 
                   <ul className="space-y-2">
-                    {section.class_time_slots.map((slot, index) => (
+                    {section?.class_time_slots?.map((slot, index) => (
                       <li
                         key={index}
                         className="grid grid-cols-3 items-center justify-between capitalize"

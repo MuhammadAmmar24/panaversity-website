@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CourseSectionSchema } from "./sections";
 
 // Schema for course_info
 
@@ -84,6 +85,7 @@ export type GetCoursePriceResponse = z.infer<
 	course_id: z.number(),
 	course_name: z.string(),
 	course_order: z.number(),
+	course_code: z.string(),
 	is_active: z.boolean(),
 	is_paid: z.boolean(),
 	student_course_status: z.string(),
@@ -91,12 +93,11 @@ export type GetCoursePriceResponse = z.infer<
 	is_registration_open: z.boolean(),
 	is_class_started: z.boolean(),
 	class_start_date: z.union([z.string(), z.null()]),
-	is_class_completed: z.boolean(),
+	class_end_date: z.union([z.string(), z.null()]),
 	batch_id: z.number(),
 	program_id: z.number(),
 	course_batch_program_id: z.number(),
-	course_code: z.string(),
-    class_time_slot: TimeSlotSchema.optional(),
+    section: z.array(CourseSectionSchema),
   });
   
   // Define the schema for the entire response (an array of course enrollments)

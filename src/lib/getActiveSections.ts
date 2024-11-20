@@ -25,23 +25,23 @@ export const getCourseActiceSections = async (
     const responseData = await response.json();
     
     // Validate the response data against our schema
-    const validationResult = CourseActiceSectionsResponseSchema.safeParse(responseData);
+    // const validationResult = CourseActiceSectionsResponseSchema.safeParse(responseData);
 
-    if (!validationResult.success) {
-      // Create a more detailed error message
-      const formattedError = JSON.stringify(validationResult.error.format(), null, 2);
-      console.error('Validation errors:', formattedError);
+    // if (!validationResult.success) {
+    //   // Create a more detailed error message
+    //   const formattedError = JSON.stringify(validationResult.error.format(), null, 2);
+    //   console.error('Validation errors:', formattedError);
       
-      return {
-        type: "error",
-        message: "Data validation failed: " + formattedError,
-      };
-    }
+    //   return {
+    //     type: "error",
+    //     message: "Data validation failed: " + formattedError,
+    //   };
+    // }
 
     return {
       type: "success",
       message: "Course data fetched successfully",
-      data: validationResult.data,
+      data: responseData,
     };
   } catch (error: any) {
     console.error('Error fetching course data:', error);
