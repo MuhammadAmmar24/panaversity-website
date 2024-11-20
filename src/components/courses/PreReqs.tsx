@@ -1,12 +1,9 @@
+import { Pre_req_obj } from "@/src/types/courseEnrollment";
 import Link from "next/link";
 
-interface PreReqsProps {
-  course_code: string;
-  course_name: string;
-}
 
 interface CoursePrerequisitesProps {
-  prerequisites?: PreReqsProps[];
+  prerequisites?: Pre_req_obj[];
   className?: string;
 }
 

@@ -1,8 +1,8 @@
-export async function getCourseData(c_id: number) {
+export async function getCourseData(course_code: string) {
 
   try {
     const response = await fetch(
-      `${process.env.ENROLLMENT_API_URL}/data/course-batch-program/${c_id}`,
+      `${process.env.ENROLLMENT_API_URL}/data/course/${course_code}`,
       {
         method: "GET",
         headers: {

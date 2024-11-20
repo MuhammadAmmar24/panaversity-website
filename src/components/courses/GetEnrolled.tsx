@@ -10,7 +10,6 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
-  batch_id,
   course_batch_program_id,
   profile_id,
   timeSlots,
@@ -139,7 +138,6 @@ export default function GetEnrolled({
     const payload = {
       student_id: profile_id,
       program_id,
-      batch_id,
       course_batch_program_id,
       class_time_slot_id: selectedTimeSlotId,
       vendor_type: paymentMethod, // Pass the selected payment method

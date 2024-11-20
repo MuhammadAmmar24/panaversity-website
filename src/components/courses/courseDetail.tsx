@@ -43,16 +43,14 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 }) => {
   // Destructure the course data
   const {
+    course_code,
     course_name,
     course_description,
     course_outcomes,
     long_description,
-    pre_requisite,
-    is_registration_open,
-    batch_id,
-    course_batch_program_id,
+    is_active,
     program_id,
-    course_code,
+    pre_requisite,
   } = courseData;
 
   // Assign default values if necessary
@@ -61,21 +59,22 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
+
   // const courseStatus = await enrollmentStatus(course_batch_program_id);
-  const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
-    course_batch_program_id,
-  });
-  const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? {
-    class_time_slots: [],
-    lab_time_slots: [],
-  };
-  const coursePriceResult = await getCoursePrice({ course_batch_program_id });
-  const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? {
-    course_batch_program_id: 0,
-    package_id: 0,
-    amount: 0,
-    currency: "",
-  };
+  // const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
+  //   course_batch_program_id,
+  // });
+  // const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? {
+  //   class_time_slots: [],
+  //   lab_time_slots: [],
+  // };
+  // const coursePriceResult = await getCoursePrice({ course_batch_program_id });
+  // const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? {
+  //   course_batch_program_id: 0,
+  //   package_id: 0,
+  //   amount: 0,
+  //   currency: "",
+  // };
 
   const isLoggedIn: boolean = await isValidToken();
   let isEnrolled: boolean = false;
@@ -83,20 +82,20 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
 
-  try {
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-      profile.id,
-    );
-    student_courses = result.data;
+  // try {
+  //   const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+  //     profile.id,
+  //   );
+  //   student_courses = result.data;
 
-    const course = result?.data?.find(
-      (course) => course.course_batch_program_id === course_batch_program_id,
-    );
-    isEnrolled =
-      !!course && course.student_course_status != "expired_reservation";
-  } catch (error: any) {
-    console.error("Error fetching student courses: ", error.message);
-  }
+  //   const course = result?.data?.find(
+  //     (course) => course.course_batch_program_id === course_batch_program_id,
+  //   );
+  //   isEnrolled =
+  //     !!course && course.student_course_status != "expired_reservation";
+  // } catch (error: any) {
+  //   console.error("Error fetching student courses: ", error.message);
+  // }
 
   return (
     <main className="overflow-x-hidden">
@@ -171,11 +170,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
                 {/* Price and enrollment - takes up 1/3 of space */}
                 <div className="sm:col-span-2 md:col-span-2 md:place-self-end md:self-end lg:col-span-1">
-                  <CourseSheet
-                    is_registration_open={is_registration_open}
+                  {/* <CourseSheet
+                    is_active={is_active}
                     program_id={program_id}
-                    batch_id={batch_id}
-                    course_batch_program_id={course_batch_program_id}
+                    // course_batch_program_id={course_batch_program_id}
                     profile_id={profile.id}
                     isEnrolled={isEnrolled}
                     timeSlots={timeSlots}
@@ -184,7 +182,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
-                  />
+                  /> */}
                   {/* </div> */}
                 </div>
               </div>
