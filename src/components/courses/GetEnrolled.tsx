@@ -10,12 +10,11 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function GetEnrolled({
   program_id,
-  course_batch_program_id,
   profile_id,
-  timeSlots,
   coursePrice,
   pre_requisite,
   student_courses,
+  sections,
 }: GetEnrolledProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();

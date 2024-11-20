@@ -19,6 +19,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./Ratingstar";
+import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -32,7 +33,7 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
     <div className="rounded-full bg-green-500 p-1">
       <Check className="h-4 w-4 text-white" />
     </div>
-    <p className="text-sm font-normal text-textPrimary">{point}</p>
+    <p className="text-sm font-normal text-textPrimary ">{point}</p>
   </div>
 );
 
@@ -59,21 +60,10 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   const ratingCount = 1249;
 
 
-  // const courseStatus = await enrollmentStatus(course_batch_program_id);
-  // const timeSlotsResult = await getTimeSlotsForCourseBatchProgram({
-  //   course_batch_program_id,
-  // });
-  // const timeSlots: TimeSlotsResponse = timeSlotsResult.data ?? {
-  //   class_time_slots: [],
-  //   lab_time_slots: [],
-  // };
-  // const coursePriceResult = await getCoursePrice({ course_batch_program_id });
-  // const coursePrice: GetCoursePriceResponse = coursePriceResult.data ?? {
-  //   course_batch_program_id: 0,
-  //   package_id: 0,
-  //   amount: 0,
-  //   currency: "",
-  // };
+  
+  const sections = await getCourseActiceSections(course_code);
+
+
 
   const isLoggedIn: boolean = await isValidToken();
   let isEnrolled: boolean = false;
@@ -168,20 +158,19 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                 </div>
 
                 {/* Price and enrollment - takes up 1/3 of space */}
-                <div className="sm:col-span-2 md:col-span-2 md:place-self-end md:self-end lg:col-span-1">
-                  {/* <CourseSheet
+                <div className="sm:col-span-2 md:col-span-2 md:place-self-end md:self-end lg:col-span-1 ">
+                  <CourseSheet
                     is_active={is_active}
                     program_id={program_id}
-                    // course_batch_program_id={course_batch_program_id}
                     profile_id={profile.id}
                     isEnrolled={isEnrolled}
-                    timeSlots={timeSlots}
                     coursePrice={coursePrice}
                     courseName={course_name}
                     isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
-                  /> */}
+                    sections={sections.data || []}
+                  />
                 </div>
               </div>
             </div>
@@ -195,9 +184,11 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
           <h2 className="font-poppins text-3xl font-semibold text-textPrimary md:text-4xl">
             Details
           </h2>
-          <p className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            {long_description}
-          </p>
+          <div className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
+                {long_description.split('\n').map((line, index) => (
+              <p key={index}>{line}</p>
+              ))}
+          </div>
         </div>
 
         {/* What You Will Learn */}

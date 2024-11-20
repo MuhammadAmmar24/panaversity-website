@@ -1,4 +1,5 @@
 "use client";
+
 import GetEnrolled from "@/src/components/courses/GetEnrolled";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import {
@@ -12,9 +13,14 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaGraduationCap, FaLanguage } from "react-icons/fa";
-import { BsCalendarDay, BsClock } from "react-icons/bs";
+import { MdLanguage } from "react-icons/md";
+import { BsClock } from "react-icons/bs";
+import { SiGoogleclassroom } from "react-icons/si";
+import { SlCalender } from "react-icons/sl";
+import { GiTeacher } from "react-icons/gi";
 import { Button } from "@/src/components/ui/button";
+import { formatTime } from "@/src/lib/timeUtils";
+
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
   Tabs,
@@ -23,49 +29,23 @@ import {
   TabsTrigger,
 } from "@/src/components/ui/tabs";
 
-const courseOptions = [
-  {
-    id: "1",
-    instructor: "Zia Khan",
-    days: "Monday, Wednesday",
-    time: "13:00 - 15:00 GMT",
-    languages: "Urdu/Hindi",
-    price: 100,
-  },
-  {
-    id: "2",
-    instructor: "Prof. Ammar",
-    days: "Tuesday, Thursday",
-    time: "12:00 - 14:00 GMT",
-    languages: "English",
-    price: 75000,
-  },
-  {
-    id: "3",
-    instructor: "M Rehan",
-    days: "Saturday, Sunday",
-    time: "05:00 - 07:00 GMT",
-    languages: "Urdu/Hindi",
-    price: 9000,
-  },
-];
-
 const CourseSheet: React.FC<CourseSheetProps> = ({
   is_active,
   program_id,
-  course_batch_program_id,
   profile_id,
   isEnrolled,
-  timeSlots,
   coursePrice,
   courseName,
   isLoggedIn,
   pre_requisite,
   student_courses,
+  sections,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
-  const [selectedCourse, setSelectedCourse] = useState(courseOptions[0]);
+  const [selectedSection, setSelectedSection] = useState(
+    sections && sections.length > 0 ? sections[0] : null,
+  );
   const router = useRouter();
 
   async function handleClick() {
@@ -90,54 +70,98 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     };
   }, []);
 
+  if (!sections || sections.length === 0) {
+    return (
+      <div className="text-center text-muted-foreground">
+        <div>No sections available for this course.</div>
+      </div>
+    );
+  }
+
   return (
     <Sheet
       open={open}
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
-      {/* New Component */}
-      <Card className="w-full max-w-sm items-end">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6">
+      <Card className="w-auto min-w-[22rem] max-w-sm items-end">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6 md:p-4 sm:p-4 lg:p-4 xl:p-4">
+          <p className="pb-1 text-xs text-primary">Available Sections:</p>
           <Tabs
-            defaultValue="1"
+            defaultValue={sections[0].id.toString()}
             onValueChange={(value) =>
-              setSelectedCourse(
-                courseOptions.find((course) => course.id === value) ||
-                  courseOptions[0],
+              setSelectedSection(
+                sections.find((section) => section.id.toString() === value) ||
+                  sections[0],
               )
             }
           >
-            <TabsList className="mb-6 grid w-full grid-cols-3">
-              {courseOptions.map((course) => (
-                <TabsTrigger key={course.id} value={course.id}>
-                  Section {course.id}
+            <TabsList
+              className={`mb-6 grid w-full grid-cols-3 grid-cols-${sections.length}`}
+            >
+              {sections.map((section) => (
+                <TabsTrigger key={section.id} value={section.id.toString()}>
+                  {section.section_name}
                 </TabsTrigger>
               ))}
             </TabsList>
-            {courseOptions.map((course) => (
-              <TabsContent key={course.id} value={course.id}>
-                <div className="space-y-3 text-sm">
+            {sections.map((section) => (
+              <TabsContent key={section.id} value={section.id.toString()}>
+                <div className="space-y-2 text-sm">
+                  {/* <div className="flex items-center gap-2">
+                    <GiTeacher className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-red-500">Instructor: ???</span>
+                  </div> */}
                   <div className="flex items-center gap-2">
-                    <FaGraduationCap className="h-4 w-4 text-muted-foreground" />
-                    <span>Instructor: {course.instructor}</span>
+                    <SlCalender className="h-4 w-4 text-muted-foreground" />
+                    <span>
+                      Registration Deadline:{" "}
+                      {new Date(
+                        section.registration_deadline,
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </span>
                   </div>
+     
+                 
+
+                  <div className="flex flex-col justify-center items-start gap-2">
+                    {section.class_time_slots.map((slot, index) => (
+                        <span key={index} className="flex gap-2 capitalize">
+                          <BsClock className="h-4 w-4 text-muted-foreground" />
+                          Days: {slot.time_slot_day.slice(0,3)} ({(formatTime(slot.slot_start_time ?? ""))} - {formatTime(slot.slot_end_time ?? "")})
+                        </span>
+                        ))}
+                  </div>
+
+                  <div className="flex flex-row justify-between">
                   <div className="flex items-center gap-2">
-                    <BsCalendarDay className="h-4 w-4 text-muted-foreground" />
-                    <span>Days: {course.days}</span>
+                    <MdLanguage className="h-4 w-4 text-muted-foreground" />
+                    <span>
+                      Language:{" "}
+                      {typeof section.language === "string"
+                        ? section.language
+                        : section.language.language_name}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <BsClock className="h-4 w-4 text-muted-foreground" />
-                    <span>Time (GMT): {course.time}</span>
+                  <div className="flex items-center gap-2 ">
+                    <SiGoogleclassroom className="h-4 w-4 text-muted-foreground" />
+                    <span>
+                      Seats: {section.booked_seats}/{section.total_seats}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <FaLanguage className="h-4 w-4 text-muted-foreground" />
-                    <span>Languages: {course.languages}</span>
                   </div>
-                  <div className="mb-6 flex items-center justify-between">
+
+            
+
+                  <div className="mb-4 flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
-                      PKR {course.price}
+                      {coursePrice.currency.toUpperCase()} {coursePrice.amount}
                     </span>
+               
                   </div>
                 </div>
               </TabsContent>
@@ -180,15 +204,14 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         </SheetHeader>
 
         {/* Existing Enrollment Component */}
-        <GetEnrolled
+        {/* <GetEnrolled
           program_id={program_id}
-          course_batch_program_id={course_batch_program_id}
           profile_id={profile_id}
-          timeSlots={timeSlots}
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
-        />
+          sections={sections}
+        /> */}
       </SheetContent>
     </Sheet>
   );

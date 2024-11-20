@@ -46,16 +46,12 @@ export const TimeSlotSchema = z.object({
     time_slot_name: z.string(),
     is_time_slot_active: z.boolean(),
     time_slot_day: z.string(),
-    slot_start_time: z.union([z.string(), z.null()]), // Allow null for datetime
-    slot_end_time: z.union([z.string(), z.null()]),   // Allow null for datetime
-    total_seats: z.number(),
-    booked_seats: z.number(),
-    confirmed_seats: z.number(),
-    zoom_link: z.union([z.string(), z.null()]),       // Allow null for zoom link
-    social_links: z.array(z.string()).nullable().default([]), // Allow null or default empty array
+    slot_start_time: z.union([z.string(), z.null()]), 
+    slot_end_time: z.union([z.string(), z.null()]),   
+    zoom_link: z.union([z.string(), z.null()]),      
+	instructor_id: z.number().int(),
+	section_id: z.number().int(),
     id: z.number(),
-    course_batch_program_id: z.number(),
-    language: z.union([LanguageSchema, z.string()]), // Accept either a LanguageSchema object or a string
     time_zone: z.string(),
 });
 

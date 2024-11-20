@@ -2,8 +2,14 @@ import {
   GetCoursePriceResponse,
   TimeSlotsResponse,
 } from "@/src/lib/schemas/courses";
-import { StudentCourseStatus } from "../lib/schemas/enrollment";
+import {
+  CourseSectionSchema,
+} from "@/src/lib/schemas/sections";
+import { z } from "zod";
 import { studentCourses } from "./studentCourses";
+
+export type CourseSections = z.infer<typeof CourseSectionSchema>;
+
 
 export interface Pre_req_obj {
   course_code: string,
@@ -43,26 +49,24 @@ export interface CourseInfoProps {
 
 export interface GetEnrolledProps {
   program_id: number;
-  course_batch_program_id: number;
   profile_id: string;
-  timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
   pre_requisite: Pre_req_obj[];
   student_courses: studentCourses[];
-}
+  sections: CourseSections[];}
+
 
 export interface CourseSheetProps {
   is_active: boolean;
   program_id: number;
-  course_batch_program_id: number;
   profile_id: string;
   isEnrolled: boolean;
-  timeSlots: TimeSlotsResponse;
   coursePrice: GetCoursePriceResponse;
   courseName: string;
   isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
   student_courses: studentCourses[];
+  sections: CourseSections[];
 }
 
 export interface RatingStarsProps {
