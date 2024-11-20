@@ -5,24 +5,19 @@ import { z } from "zod";
 
 export const ProgramCoursesQuerySchema = z.object({
 	program_id: z.number(),
-	batch_id: z.number(),
 	last_id: z.number().optional(),
 	limit: z.number().min(1).max(100).default(10),
 });
 
 export const CourseSchema = z.object({
 	course_id: z.number(),
+	course_code: z.string(),
 	course_name: z.string(),
 	course_description: z.string(),
-	is_registration_open: z.boolean(),
-	registration_start_date: z.union([z.string(), z.null()]), // Allow null or string (no strict datetime)
-	registration_end_date: z.union([z.string(), z.null()]),   // Allow null
-	batch_id: z.number(),
+	is_offered_now: z.boolean(),
 	program_id: z.number(),
-	course_batch_program_id: z.number(),
 	order: z.number(),
 	media_link: z.string(),
-	course_code: z.string(),
 });
 
 export const ProgramCoursesResponseSchema = z.object({

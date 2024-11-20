@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 async function fetchCourses() {
   const query = {
     program_id: 1,
-    batch_id: 1,
-    limit: 10,
+    limit: 20,
   };
 
   const result = await getProgramCoursesWithOpenRegistration(query);

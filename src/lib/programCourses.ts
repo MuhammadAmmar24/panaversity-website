@@ -22,7 +22,7 @@ export const getProgramCoursesWithOpenRegistration = async (
 		}
 
 		const response = await fetch(
-			`${process.env.ENROLLMENT_API_URL}/data/open/programs/batches/courses?${params}`,
+			`${process.env.ENROLLMENT_API_URL}/data/open/programs/courses?${params}`,
 			{
 				method: "GET",
 				headers: {

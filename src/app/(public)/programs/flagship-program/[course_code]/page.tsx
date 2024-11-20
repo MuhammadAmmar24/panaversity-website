@@ -44,8 +44,7 @@ async function getCourseIdFromCode(
 ): Promise<number | null> {
   const result = await getProgramCoursesWithOpenRegistration({
     program_id: 1,
-    batch_id: 1,
-    limit: 10,
+    limit: 20,
   });
 
   if (result.type === "success" && Array.isArray(result.data?.data)) {

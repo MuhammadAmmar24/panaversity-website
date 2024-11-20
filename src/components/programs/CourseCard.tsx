@@ -29,12 +29,12 @@ export const CourseCard = ({ course }: { course: Course }) => (
             </h6>
             <span
               className={`inline-block rounded-xl px-2 py-1 text-[10px] opacity-75 ${
-                course.is_registration_open
+                course.is_offered_now
                   ? "bg-green-500 text-white"
                   : "bg-gray-700 text-white"
               }`}
             >
-              {course.is_registration_open
+              {course.is_offered_now
                 ? "Registration Open"
                 : "Registration Closed"}
             </span>
