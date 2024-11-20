@@ -67,20 +67,24 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
 
-  // try {
-  //   const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-  //     profile.id,
-  //   );
-  //   student_courses = result.data;
+  try {
+    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+      profile.id,
+    );
+    student_courses = result.data;
 
-  //   const course = result?.data?.find(
-  //     (course) => course.course_batch_program_id === course_batch_program_id,
-  //   );
-  //   isEnrolled =
-  //     !!course && course.student_course_status != "expired_reservation";
-  // } catch (error: any) {
-  //   console.error("Error fetching student courses: ", error.message);
-  // }
+    
+  
+
+    const course = result?.data?.find(
+      (course) => course.course_code === course_code,
+    );
+
+    isEnrolled =
+      !!course && course.student_course_status != "expired_reservation";
+  } catch (error: any) {
+    console.error("Error fetching student courses: ", error.message);
+  }
 
   return (
     <main className="overflow-x-hidden">

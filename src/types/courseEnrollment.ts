@@ -50,7 +50,7 @@ export interface GetEnrolledProps {
   coursePrice: GetCoursePriceResponse;
   pre_requisite: Pre_req_obj[];
   student_courses: studentCourses[];
-  sections: CourseSections[];
+  sections: any;
 }
 
 export interface CourseSheetProps {

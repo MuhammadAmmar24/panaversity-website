@@ -50,6 +50,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const [selectedSection, setSelectedSection] = useState(
     sections && sections.length > 0 ? sections[0] : null,
   );
+
   const router = useRouter();
 
   async function handleClick() {
@@ -207,7 +208,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
 
       <SheetContent
         side={sheetSide}
-        className={`w-full max-w-full overflow-y-auto ${
+        className={`w-full max-w-full overflow-y-auto p-0 ${
           sheetSide === "bottom" ? "h-[80vh]" : "h-full"
         } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
       >
@@ -227,7 +228,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
-          sections={sections}
+          sections={sections || []}
+          sectionName1={selectedSection}
         />
       </SheetContent>
     </Sheet>

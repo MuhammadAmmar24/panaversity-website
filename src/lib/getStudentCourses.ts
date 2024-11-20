@@ -12,10 +12,12 @@ export const getStudentCourses = async (
         const params = new URLSearchParams();
         params.append('student_id', String(studentId));
 
-        const paramstest = "12345"
+
+
+
 
         // Construct the API URL
-        const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?student_id=${paramstest}`;
+        const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?${params}`;
 
 
         // Make the request to the API
@@ -27,7 +29,6 @@ export const getStudentCourses = async (
             },
             cache:'no-store'
         });
-
 
         // Check if the response is successful
         if (!response.ok) {
