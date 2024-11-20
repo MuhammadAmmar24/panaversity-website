@@ -20,7 +20,7 @@ export default function GetEnrolled({
   const [isPending, startTransition] = useTransition();
 
   const [selectedDay, setSelectedDay] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
   const [selectedTimeSlot, setSelectedTimeSlot] = useState("");
   const [selectedTimeSlotId, setSelectedTimeSlotId] = useState<number | null>(
     null,
@@ -90,36 +90,39 @@ export default function GetEnrolled({
     }
   }, [hasNotEnrolledPreReq]);
 
-  const classTimeSlots = timeSlots.class_time_slots;
+  // const classTimeSlots = timeSlots.class_time_slots;
   const enrollmentPackage = coursePrice.package_id;
 
-  useEffect(() => {
-    if (selectedDay) {
-      const selectedSlot = classTimeSlots.find(
-        (slot) => slot.time_slot_day === selectedDay,
-      );
-      if (selectedSlot) {
-        const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats;
-        seats_left > 0 ? setRemainingSeats(seats_left) : setRemainingSeats(0);
-      }
-    }
-  }, [selectedDay, classTimeSlots, remainingSeats]);
+  // useEffect(() => {
+  //   if (selectedDay) {
+  //     const selectedSlot = classTimeSlots.find(
+  //       (slot) => slot.time_slot_day === selectedDay,
+  //     );
+  //     if (selectedSlot) {
+  //       const seats_left = selectedSlot.total_seats - selectedSlot.booked_seats;
+  //       seats_left > 0 ? setRemainingSeats(seats_left) : setRemainingSeats(0);
+  //     }
+  //   }
+  // }, [selectedDay, classTimeSlots, remainingSeats]);
 
-  const uniqueDays = Array.from(
-    new Set(classTimeSlots.map((slot) => slot.time_slot_day)),
-  );
+  // const uniqueDays = Array.from(
+  //   new Set(classTimeSlots.map((slot) => slot.time_slot_day)),
+  // );
 
-  const languages = ["Urdu/Hindi", "English"];
+  const sectionNames = sections.map((sec)=>{
+    return sec.section_name
 
-  const timeSlotsForSelectedDay = classTimeSlots
-    .filter((slot) => slot.time_slot_day === selectedDay)
-    .map((slot) => ({
-      id: slot.id,
-      timeSlotId: slot.id,
-      label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(
-        slot.slot_end_time ?? "",
-      )}`,
-    }));
+  })
+
+  // const timeSlotsForSelectedDay = classTimeSlots
+  //   .filter((slot) => slot.time_slot_day === selectedDay)
+  //   .map((slot) => ({
+  //     id: slot.id,
+  //     timeSlotId: slot.id,
+  //     label: `${formatTime(slot.slot_start_time ?? "")} - ${formatTime(
+  //       slot.slot_end_time ?? "",
+  //     )}`,
+  //   }));
 
   const handleEnroll = async () => {
     if (
@@ -137,10 +140,10 @@ export default function GetEnrolled({
     const payload = {
       student_id: profile_id,
       program_id,
-      course_batch_program_id,
-      class_time_slot_id: selectedTimeSlotId,
+      section_id: sections[0].id, // change as per user selection
       vendor_type: paymentMethod, // Pass the selected payment method
       package_id: enrollmentPackage,
+      course_id:sections[0].course_id,
     };
 
     startTransition(async () => {
@@ -237,18 +240,18 @@ export default function GetEnrolled({
       >
         <div className="w-full space-y-7">
           <SelectField
-            label="Language"
-            value={selectedLanguage}
+            label="Section"
+            value={selectedSection}
             onChange={(e: any) => {
-              setSelectedLanguage(e.target.value);
+              setSelectedSection(e.target.value);
               setSelectedDay("");
             }}
-            options={languages}
-            placeholder="Select Language"
+            options={sections}
+            placeholder="Select Section"
             disabled={!skipped}
           />
 
-          <SelectField
+          {/* <SelectField
             label="Day"
             value={selectedDay}
             onChange={(e: any) => {
@@ -257,9 +260,9 @@ export default function GetEnrolled({
             }}
             options={uniqueDays}
             placeholder="Select Day"
-            disabled={!skipped || !selectedLanguage}
-          />
-
+            disabled={!skipped || !selectedSection}
+          /> */}
+{/* 
           <SelectField
             label="Time"
             value={selectedTimeSlot}
@@ -273,7 +276,7 @@ export default function GetEnrolled({
             }))}
             placeholder="Select Time"
             disabled={!selectedDay}
-          />
+          /> */}
 
           <SelectField
             label="Payment Method"
