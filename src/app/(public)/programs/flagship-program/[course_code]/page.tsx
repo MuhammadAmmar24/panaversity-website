@@ -53,13 +53,12 @@ export async function generateStaticParams() {
 }
 
 
-async function fetchCoursePrice(course_batch_program_id: number) {
-  const params = { course_batch_program_id: course_batch_program_id };
+async function fetchCoursePrice(course_code: string) {
 
-  const result = await getCoursePrice(params);
+  const result = await getCoursePrice(course_code);
 
   if (result.type === "success" && result.data) {
-    return { price: result.data.amount, currency: result.data.currency };
+    return result.data;
   } else {
     throw new Error(result.message);
   }
@@ -76,13 +75,11 @@ export default async function CoursePage({
     return notFound();
   }
 
-  // const { price, currency } = await fetchCoursePrice(courseBatchProgramId);
-  const { price, currency } = { price: 100, currency: "USD" };
+  const price = await fetchCoursePrice(course_code);
 
   return (
     <CourseDetailsClient
-      initialPrice={price}
-      initialCurrency={currency}
+      coursePrice={price}
       courseData={data.data}
     />
   );

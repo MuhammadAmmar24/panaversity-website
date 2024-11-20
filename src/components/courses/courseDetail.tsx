@@ -38,8 +38,7 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
 
 const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   courseData,
-  initialPrice,
-  initialCurrency,
+  coursePrice,
 }) => {
   // Destructure the course data
   const {
@@ -183,7 +182,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
                   /> */}
-                  {/* </div> */}
                 </div>
               </div>
             </div>

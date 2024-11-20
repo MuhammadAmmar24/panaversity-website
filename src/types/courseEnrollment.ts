@@ -29,8 +29,7 @@ export interface CourseData {
 
 export interface CourseDetailsClientProps {
   courseData: CourseData;
-  initialPrice: number;
-  initialCurrency: string;
+  coursePrice: GetCoursePriceResponse;
 }
 
 export interface LearnPointProps {

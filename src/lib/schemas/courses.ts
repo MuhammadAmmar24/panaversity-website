@@ -68,18 +68,15 @@ export type TimeSlotsQuery = z.infer<typeof TimeSlotsQuerySchema>;
 export type TimeSlot = z.infer<typeof TimeSlotSchema>;
 export type TimeSlotsResponse = z.infer<typeof TimeSlotsResponseSchema>;
 
-export const GetCoursePriceParamsSchema = z.object({
-	course_batch_program_id: z.number(),
-});
+
 
 export const GetCoursePriceResponseSchema = z.object({
 	package_id: z.number(),
-	course_batch_program_id: z.number(),
+	course_id: z.number(),
 	amount: z.number(),
 	currency: z.string(),
 });
 
-export type GetCoursePriceParams = z.infer<typeof GetCoursePriceParamsSchema>;
 export type GetCoursePriceResponse = z.infer<
 	typeof GetCoursePriceResponseSchema
 >;
