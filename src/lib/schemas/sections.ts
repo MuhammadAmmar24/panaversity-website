@@ -11,6 +11,7 @@ export const TimeSlotSchema = z.object({
   section_id: z.number().int(),
   id: z.number(),
   time_zone: z.string(),
+  instructor:z.string(),
 });
 
 // Custom date transformer

@@ -14,7 +14,9 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdLanguage } from "react-icons/md";
+import { GrLanguage } from "react-icons/gr";
 import { BsClock } from "react-icons/bs";
+import { CiCalendar } from "react-icons/ci";
 import { SiGoogleclassroom } from "react-icons/si";
 import { SlCalender } from "react-icons/sl";
 import { GiTeacher } from "react-icons/gi";
@@ -28,6 +30,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/src/components/ui/tabs";
+import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
+import { getTimeDifference } from "@/src/lib/getDuration";
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
   is_active,
@@ -83,9 +87,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       open={open}
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
-      <Card className="w-auto min-w-[22rem] max-w-sm items-end">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6 md:p-4 sm:p-4 lg:p-4 xl:p-4">
-          <p className="pb-1 text-xs text-primary">Available Sections:</p>
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
+          <p className="text-xs text-primary font-semibold">Available Sections:</p>
           <Tabs
             defaultValue={sections[0].id.toString()}
             onValueChange={(value) =>
@@ -96,7 +100,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             }
           >
             <TabsList
-              className={`mb-6 grid w-full grid-cols-3 grid-cols-${sections.length}`}
+              className={`mb-4 grid w-full ${sections.length === 2 ? "grid-cols-2" : sections.length === 3 ? "grid-cols-3" : "justify-center"}`}
             >
               {sections.map((section) => (
                 <TabsTrigger key={section.id} value={section.id.toString()}>
@@ -107,13 +111,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             {sections.map((section) => (
               <TabsContent key={section.id} value={section.id.toString()}>
                 <div className="space-y-2 text-sm">
-                  {/* <div className="flex items-center gap-2">
-                    <GiTeacher className="h-4 w-4 text-muted-foreground" />
-                    <span className="text-red-500">Instructor: ???</span>
-                  </div> */}
                   <div className="flex items-center gap-2">
-                    <SlCalender className="h-4 w-4 text-muted-foreground" />
-                    <span>
+                    <span className="text-xs text-red-500">
                       Registration Deadline:{" "}
                       {new Date(
                         section.registration_deadline,
@@ -124,51 +123,69 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                       })}
                     </span>
                   </div>
-     
-                 
 
-                  <div className="flex flex-col justify-center items-start gap-2">
-                    {section.class_time_slots.map((slot, index) => (
-                        <span key={index} className="flex gap-2 capitalize">
-                          <BsClock className="h-4 w-4 text-muted-foreground" />
-                          Days: {slot.time_slot_day.slice(0,3)} ({(formatTime(slot.slot_start_time ?? ""))} - {formatTime(slot.slot_end_time ?? "")})
-                        </span>
-                        ))}
+                  <div className="grid grid-cols-3 items-center justify-between">
+                    <div className="col-span-2 flex items-center gap-x-2">
+                      <GiTeacher className="h-4 w-4 text-muted-foreground" />
+                      <span className="">
+                        Instructor: {section.class_time_slots[0].instructor}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <GrLanguage className="h-4 w-4 text-muted-foreground" />
+                      <span>
+                        {typeof section.language === "string"
+                          ? section.language
+                          : section.language.language_name}
+                      </span>
+                    </div>
                   </div>
+
+                  <ul className="space-y-2">
+                    {section.class_time_slots.map((slot, index) => (
+                      <li
+                        key={index}
+                        className="grid grid-cols-3 items-center justify-between capitalize"
+                      >
+                        <div className="col-span-2 flex items-center gap-x-2">
+                          <SlCalender className="h-4 w-4 text-muted-foreground" />
+                          {slot.time_slot_day.slice(0, 3)}{" "}
+                          {formatTimeToUserGMT(slot.slot_start_time)}
+                        </div>
+                        <div className="col-span-1 flex items-center gap-2">
+                          <BsClock className="h-4 w-4 text-muted-foreground" />
+                          {getTimeDifference(
+                            slot.slot_start_time,
+                            slot.slot_end_time,
+                          ).toFixed(0)}{" "}
+                          hours
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
 
                   <div className="flex flex-row justify-between">
-                  <div className="flex items-center gap-2">
-                    <MdLanguage className="h-4 w-4 text-muted-foreground" />
-                    <span>
-                      Language:{" "}
-                      {typeof section.language === "string"
-                        ? section.language
-                        : section.language.language_name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 ">
-                    <SiGoogleclassroom className="h-4 w-4 text-muted-foreground" />
-                    <span>
-                      Seats: {section.booked_seats}/{section.total_seats}
-                    </span>
-                  </div>
+                    <div className="flex items-center gap-2">
+                      <SiGoogleclassroom className="h-4 w-4 text-muted-foreground" />
+                      <span>
+                        Seats Booked: {section.booked_seats}/
+                        {section.total_seats}
+                      </span>
+                    </div>
                   </div>
 
-            
-
-                  <div className="mb-4 flex items-center justify-between">
+                  <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
                       {coursePrice.currency.toUpperCase()} {coursePrice.amount}
                     </span>
-               
                   </div>
                 </div>
               </TabsContent>
             ))}
           </Tabs>
         </CardContent>
-        <CardFooter>
+        <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
           <button
             onClick={isEnrolled ? () => router.push("/dashboard") : handleClick}
             className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
