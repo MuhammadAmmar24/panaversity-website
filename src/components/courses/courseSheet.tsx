@@ -221,14 +221,14 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         </SheetHeader>
 
         {/* Existing Enrollment Component */}
-        {/* <GetEnrolled
+        <GetEnrolled
           program_id={program_id}
           profile_id={profile_id}
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections}
-        /> */}
+        />
       </SheetContent>
     </Sheet>
   );
