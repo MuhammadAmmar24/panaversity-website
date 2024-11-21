@@ -32,7 +32,7 @@ export function formatTimeToUserGMT(utcTime: string | null) {
   // Format the time as HH:mm:ss
   const hours = localTime.getUTCHours().toString().padStart(2, "0");
   const minutes = localTime.getUTCMinutes().toString().padStart(2, "0");
-  const formattedTime = `${hours}:${minutes} ${gmtOffset}`;
+  const formattedTime = `${hours}:${minutes} (${gmtOffset})`;
 
   return formattedTime;
 }

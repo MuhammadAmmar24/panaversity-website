@@ -110,9 +110,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
               ))}
             </TabsList>
             {sections.map((section) => (
-              <TabsContent key={section.id} value={section.id.toString()}>
+              <TabsContent key={section.id} value={section.id.toString()} className="mb-2">
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 mb-1">
                     <span className="text-xs text-red-500">
                       Registration Deadline:{" "}
                       {new Date(
@@ -175,7 +175,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between ">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
                       {coursePrice.currency.toUpperCase()} {coursePrice.amount}
@@ -229,7 +229,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections || []}
-          sectionName1={selectedSection}
+          selected_section_name={selectedSection}
         />
       </SheetContent>
     </Sheet>

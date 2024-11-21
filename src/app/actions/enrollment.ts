@@ -71,7 +71,7 @@ export const enrollStudentInProgram = async (
 };
 
 export const enrollNewStudentInProgramAndCourse = async (
-  payload: EnrollNewStudentRequest,
+  payload: any,
 ): Promise<Result<EnrollResponse>> => {
   const validationResult = EnrollNewStudentRequestSchema.safeParse(payload);
 

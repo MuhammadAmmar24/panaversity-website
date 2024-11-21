@@ -1,11 +1,3 @@
-import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
-import { formatTime } from "@/src/lib/timeUtils";
-import { GetEnrolledProps } from "@/src/types/courseEnrollment";
-import { StudentCourse } from "@/src/types/studentCourses";
-import { studentCourses } from "@/src/types/studentCourses";
-import Link from "next/link";
-// import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 // import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 // export default function GetEnrolled({
@@ -401,15 +393,15 @@ import { useEffect } from "react";
 //   coursePrice,
 //   student_courses,
 //   sections,
-//   sectionName1,
+//   selected_section_name,
 // }: any) {
 
-// console.log(sectionName1, "sectionName1")
+// console.log(selected_section_name, "selected_section_name")
 
 //   const router = useRouter();
 //   const [isPending, startTransition] = useTransition();
 
-//   const [selectedSection, setSelectedSection] = useState<any>(sectionName1);
+//   const [selectedSection, setSelectedSection] = useState<any>(selected_section_name);
 //   const [paymentMethod, setPaymentMethod] = useState("STRIPE");
 //   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
 
@@ -601,36 +593,32 @@ import { useEffect } from "react";
 //     </div>
 //   );
 // }
+"use client";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/src/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
+import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
+import { formatTime } from "@/src/lib/timeUtils";
+import { GetEnrolledProps } from "@/src/types/courseEnrollment";
+import { StudentCourse } from "@/src/types/studentCourses";
+
+
+import { useState, useTransition, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Button } from "@/src/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/src/components/ui/card"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
-import { Alert, AlertDescription } from "@/src/components/ui/alert";
-import { Badge } from "@/src/components/ui/badge";
-import { Separator } from "@/src/components/ui/separator";
-import {
-  FaCalendarAlt,
-  FaClock,
-  FaUsers,
-  FaExclamationCircle,
-  FaCreditCard,
-} from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+} from "@/src/components/ui/select"
+import { Alert, AlertDescription } from "@/src/components/ui/alert"
+import { Badge } from "@/src/components/ui/badge"
+import { Separator } from "@/src/components/ui/separator"
+import { FaCalendarAlt, FaClock, FaUsers, FaExclamationCircle, FaCreditCard } from 'react-icons/fa'
+import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 
 export default function GetEnrolled({
   program_id,
@@ -639,32 +627,31 @@ export default function GetEnrolled({
   pre_requisite,
   student_courses,
   sections,
-  sectionName1,
+  selected_section_name,
 }: any) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const [selectedSection, setSelectedSection] = useState<any>(sectionName1);
-  const [paymentMethod, setPaymentMethod] = useState("STRIPE");
-  const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
+  const router = useRouter()
+  const [isPending, startTransition] = useTransition()
+  const [selectedSection, setSelectedSection] = useState<any>(selected_section_name)
+  const [paymentMethod, setPaymentMethod] = useState("STRIPE")
+  const [enrollmentError, setEnrollmentError] = useState<string | null>(null)
+  const [skipped, setSkipped] = useState(false)
 
-    const [skipped, setSkipped] = useState(false);
-
-  const findStudentCourse = (courseCode: string): StudentCourse | undefined =>
+  const findStudentCourse = (courseCode: string) =>
     student_courses.find(
-      (course: StudentCourse) =>
-        course?.course_code?.trim() === courseCode.trim(),
-    );
+      (course: any) =>
+        course?.course_code?.trim() === courseCode.trim()
+    )
 
   const getCourseStatus = (
-    studentCourse: StudentCourse | undefined,
-    courseCode: string,
+    studentCourse: any,
+    courseCode: string
   ) => {
     if (!studentCourse) {
       return {
         statusText: "Not Enrolled",
         statusClass: "text-red-600",
         linkHref: `/programs/flagship-program/${courseCode.trim()}`,
-      };
+      }
     }
 
     if (studentCourse.is_graduated) {
@@ -672,55 +659,52 @@ export default function GetEnrolled({
         statusText: "Completed",
         statusClass: "text-green-500",
         linkHref: "/dashboard",
-      };
+      }
     }
 
     return {
       statusText: "In Progress",
       statusClass: "text-yellow-500",
       linkHref: "/dashboard",
-    };
-  };
+    }
+  }
 
   const notEnrolledCourses =
     pre_requisite?.filter(
-      (pre_req:any) => !findStudentCourse(pre_req.course_code),
-    ) || [];
+      (pre_req: any) => !findStudentCourse(pre_req.course_code)
+    ) || []
 
-  const hasNotEnrolledPreReq = notEnrolledCourses.length > 0;
+  const hasNotEnrolledPreReq = notEnrolledCourses.length > 0
   const skipText = `Skip ${
     notEnrolledCourses.length === 1
       ? "pre-requisite course"
       : "all pre-requisite courses"
-  }`;
+  }`
   const skippedMessage = `You skipped ${
     notEnrolledCourses.length === 1
       ? "the pre-requisite course"
       : "all pre-requisite courses"
-  }`;
+  }`
 
   const handleSkip = () => {
-    setSkipped(true);
-  };
+    setSkipped(true)
+  }
 
   useEffect(() => {
     if (!hasNotEnrolledPreReq) {
-      setSkipped(true);
+      setSkipped(true)
     }
-  }, [hasNotEnrolledPreReq]);
-
+  }, [hasNotEnrolledPreReq])
 
   const handleSectionSelect = (sectionName: string) => {
-    const section = sections.find(
-      (sec: any) => sec.section_name === sectionName,
-    );
-    setSelectedSection(section);
-  };
+    const section = sections.find((sec: any) => sec.section_name === sectionName)
+    setSelectedSection(section)
+  }
 
   const handleEnroll = async () => {
     if (!selectedSection || !paymentMethod) {
-      setEnrollmentError("Please select a section and payment method.");
-      return;
+      setEnrollmentError("Please select a section and payment method.")
+      return
     }
 
     const payload = {
@@ -730,113 +714,107 @@ export default function GetEnrolled({
       vendor_type: paymentMethod,
       package_id: coursePrice.package_id,
       course_id: selectedSection.course_id,
-    };
+    }
 
     startTransition(async () => {
       try {
-        const result = await enrollNewStudentInProgramAndCourse(payload);
+        const result = await enrollNewStudentInProgramAndCourse(payload)
         if (result.type === "success") {
-          const url = result.data?.fee_voucher?.stripe?.stripe_url;
+          const url = result.data?.fee_voucher?.stripe?.stripe_url
           if (url) {
-            router.push(url);
+            router.push(url)
           } else {
-            router.push("/dashboard");
+            router.push("/dashboard")
           }
         } else {
           setEnrollmentError(
-            result.message || "An error occurred during enrollment.",
-          );
+            result.message || "An error occurred during enrollment."
+          )
         }
       } catch (error) {
-        console.error("Unexpected error during enrollment:", error);
-        setEnrollmentError("Failed to enroll student. Please try again later.");
+        console.error("Unexpected error during enrollment:", error)
+        setEnrollmentError("Failed to enroll student. Please try again later.")
       }
-    });
-  };
+    })
+  }
 
   return (
-    <div className="bg-background mx-auto max-w-3xl ">
-      <Card className="border-0 shadow-none rounded-none">
-        <CardHeader>
+    <div className="bg-background mx-auto max-w-3xl">
+      <Card className=" shadow-none border-0 bg-background rounded-none">
+        <CardHeader className="-mb-4">
           <CardTitle className="text-3xl">Course Enrollment</CardTitle>
           <CardDescription>
             Select your preferred section and complete enrollment
           </CardDescription>
         </CardHeader>
 
-    <div className=" mx-auto max-w-full rounded-3xl px-0 sm:px-6">
-        {/* <h1 className="mb-4 mt-5 text-3xl font-bold">Get Enrolled</h1> */}
-        <div className=" ">
-          <h1 className="mb-3 mt-5 text-xl font-bold">Prerequisites:</h1>
-          {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-            <div>
-              {pre_requisite.map((pre_req, index) => {
-                const studentCourse = findStudentCourse(pre_req.course_code);
-                const { statusText, statusClass, linkHref } = getCourseStatus(
-                  studentCourse,
-                  pre_req.course_code,
-                );
+        <div className="mx-auto max-w-full rounded-3xl  p-4 sm:p-6 ">
+          <div>
+            <h1 className="mb-3 text-xl font-bold">Prerequisites:</h1>
+            {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
+              <div>
+                {pre_requisite.map((pre_req, index) => {
+                  const studentCourse = findStudentCourse(pre_req.course_code)
+                  const { statusText, statusClass, linkHref } = getCourseStatus(
+                    studentCourse,
+                    pre_req.course_code
+                  )
 
-                return (
-                  <div
-                    className="mb-3 rounded-lg border-2 px-4 py-1"
-                    key={index}
-                  >
-                    <Link href={linkHref}>
-                      <div className="text-base font-normal leading-relaxed text-textPrimary/90">
-                        <div className="flex items-center justify-between gap-4">
-                          <div className="flex flex-col items-start justify-center">
-                            <span className="underline decoration-accent decoration-2">
-                              {pre_req.course_code}
-                            </span>
-                            <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
-                              {pre_req.course_name}
+                  return (
+                    <div
+                      className="mb-3 rounded-lg border-2 px-4 py-1 hover:border-accent transition-all duration-300 ease-in-out"
+                      key={index}
+                    >
+                      <Link href={linkHref}>
+                        <div className="text-base font-normal leading-relaxed text-textPrimary/90">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex flex-col items-start justify-center">
+                              <span className="underline decoration-accent decoration-2">
+                                {pre_req.course_code}
+                              </span>
+                              <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
+                                {pre_req.course_name}
+                              </span>
+                            </div>
+                            <span
+                              className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
+                            >
+                              {statusText}
                             </span>
                           </div>
-                          <span
-                            className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
-                          >
-                            {statusText}
-                          </span>
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </div>
+                  )
+                })}
+                {hasNotEnrolledPreReq && (
+                  <div className="mt-4 flex items-center gap-3 px-4 lg:justify-between">
+                    {skipped || (
+                      <button
+                        onClick={handleSkip}
+                        className="rounded-lg border-2 border-blue-700 px-4 py-0.5 text-sm text-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:text-white"
+                      >
+                        Skip
+                      </button>
+                    )}
+                    <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+                      {skipped ? skippedMessage : skipText}
+                    </span>
                   </div>
-                );
-              })}
-              {hasNotEnrolledPreReq && (
-                <div className="mt-4 flex items-center gap-3 px-4 lg:justify-between">
-                  {skipped || (
-                    <button
-                      onClick={handleSkip}
-                      className="rounded-lg border-2 border-blue-700 px-4 py-0.5 text-sm text-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:text-white"
-                    >
-                      Skip
-                    </button>
-                  )}
-                  <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
-                    {skipped ? skippedMessage : skipText}
-                  </span>
-                </div>
-              )}
-            </div>
-          ) : (
-            <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
-              There are no pre-requisites for this course.
-            </p>
-          )}
+                )}
+              </div>
+            ) : (
+              <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
+                There are no pre-requisites for this course.
+              </p>
+            )}
+          </div>
         </div>
-      </div> 
 
-
-
-        <CardContent className={`space-y-6 p-0 ${!skipped ? "opacity-50" : "opacity-100"}`}>
-          <div className="space-y-4">
-            <label className="text-sm font-medium">Section</label>
-            <Select
-              value={selectedSection?.section_name}
-              onValueChange={handleSectionSelect}
-              // disabled={!skipped}
+        <CardContent className={`space-y-8 p-4 sm:p-6 ${!skipped ? "opacity-50" : "opacity-100"} `}>
+          <div className="">
+            <label className="text-lg font-medium mb-2 block">Section</label>
+            <Select value={selectedSection?.section_name} onValueChange={handleSectionSelect} disabled={!skipped}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select a section" />
@@ -852,84 +830,65 @@ export default function GetEnrolled({
           </div>
 
           {selectedSection && (
-            <Card className="bg-muted/50">
-              <CardHeader>
-                <CardTitle className="text-lg">Section Details</CardTitle>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">
-                    {selectedSection.section_code}
-                  </Badge>
-                  <Badge variant="outline">{selectedSection.language}</Badge>
+            <div className="space-y-6">
+              <div className="space-y-3  ">
+                <h3 className="text-xl font-semibold">{selectedSection.section_name}</h3>
+                <div className="flex gap-4">
+                <Badge variant="outline">{selectedSection.section_code}</Badge>
+                <Badge variant="outline">{selectedSection.language}</Badge>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="flex items-center gap-2">
-                    <FaUsers className="h-4 w-4 text-muted-foreground" />
-                    <div className="text-sm">
-                      <p className="text-muted-foreground">Available Seats</p>
-                      <p className="font-medium">
-                        {selectedSection.total_seats -
-                          selectedSection.booked_seats}{" "}
-                        of {selectedSection.total_seats}
-                      </p>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div className="flex items-center gap-2">
+                  <FaUsers className="h-4 w-4 text-muted-foreground" />
+                  <div className="text-sm">
+                    <p className="text-muted-foreground">Available Seats</p>
+                    <p className="font-medium">
+                      {selectedSection.total_seats - selectedSection.booked_seats} of {selectedSection.total_seats}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaCalendarAlt className="h-4 w-4 text-muted-foreground" />
+                  <div className="text-sm">
+                    <p className="text-muted-foreground">Class Start Date</p>
+                    <p className="font-medium">
+                    {new Date(
+                        selectedSection.start_date!,
+                      ).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <Separator />
+              <div className="space-y-2">
+                <h4 className="font-medium text-base mb-3">Class Schedule</h4>
+                <div className="grid gap-0">
+                  {selectedSection.class_time_slots.map((slot: any, index: number) => (
+                    <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm p-2 bg-muted/20 rounded-md">
+                      <div className="flex items-center gap-2 mb-1 sm:mb-0">
+                        <FaClock className="h-4 w-4 text-muted-foreground capitalize" />
+                        <span>{slot.time_slot_day.slice(0, 3)}</span>
+                      </div>
+                      <span className="text-muted-foreground sm:mx-2">
+                      {formatTimeToUserGMT(slot.slot_start_time)} - {" "}
+                      {formatTimeToUserGMT(slot.slot_end_time)}
+                      </span>
+                      <Badge variant="secondary" className="text-xs self-start sm:self-auto mt-1 sm:mt-0">{slot.instructor}</Badge>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <FaCalendarAlt className="h-4 w-4 text-muted-foreground" />
-                    <div className="text-sm">
-                      <p className="text-muted-foreground">Duration</p>
-                      <p className="font-medium">
-                        {new Date(
-                          selectedSection.start_date,
-                        ).toLocaleDateString()}{" "}
-                        -{" "}
-                        {new Date(
-                          selectedSection.end_date,
-                        ).toLocaleDateString()}
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-
-                <Separator />
-
-                <div className="space-y-4">
-                  <h4 className="font-medium">Class Schedule</h4>
-                  <div className="grid gap-3">
-                    {selectedSection.class_time_slots.map(
-                      (slot: any, index: number) => (
-                        <Card key={index}>
-                          <CardContent className="flex items-center gap-4 p-4">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                              <FaClock className="h-5 w-5 text-primary" />
-                            </div>
-                            <div className="flex-1">
-                              <p className="font-medium">
-                                {slot.time_slot_day}
-                              </p>
-                              <p className="text-sm text-muted-foreground">
-                                {slot.slot_start_time} - {slot.slot_end_time}
-                              </p>
-                            </div>
-                            <Badge variant="secondary">{slot.instructor}</Badge>
-                          </CardContent>
-                        </Card>
-                      ),
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           )}
 
-          <div className="space-y-4">
-            <label className="text-sm font-medium">Payment Method</label>
-            <Select
-              value={paymentMethod}
-              onValueChange={setPaymentMethod}
-              disabled={!selectedSection}
-            >
+          <div className="">
+            <label className="text-lg font-medium mb-2 block">Payment Method</label>
+            <Select value={paymentMethod} onValueChange={setPaymentMethod} disabled={!selectedSection || !skipped}>
               <SelectTrigger>
                 <SelectValue>
                   <div className="flex items-center gap-2">
@@ -955,11 +914,10 @@ export default function GetEnrolled({
               <AlertDescription>{enrollmentError}</AlertDescription>
             </Alert>
           )}
-        </CardContent>
-        <CardFooter>
+
           <Button
             className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold ${
-              selectedSection && !isPending && !skipped
+              selectedSection && !isPending && skipped
                 ? "bg-accent text-white hover:bg-[#18c781]"
                 : "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
             }`}
@@ -976,8 +934,8 @@ export default function GetEnrolled({
               "Enroll"
             )}
           </Button>
-        </CardFooter>
+        </CardContent>
       </Card>
     </div>
-  );
+  )
 }
