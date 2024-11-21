@@ -804,14 +804,14 @@ export default function GetEnrolled({
                 )}
               </div>
             ) : (
-              <p className="text-[0.9rem] font-normal leading-relaxed text-textPrimary/90">
+              <p className="text-[0.9rem] font-normal leading-relaxed text-muted-foreground ">
                 There are no pre-requisites for this course.
               </p>
             )}
           </div>
         </div>
 
-        <CardContent className={`space-y-8 p-4 sm:p-6 ${!skipped ? "opacity-50" : "opacity-100"} `}>
+        <CardContent className={`space-y-8 -mt-3 p-4 sm:p-6 ${!skipped ? "opacity-50" : "opacity-100"} `}>
           <div className="">
             <label className="text-lg font-medium mb-2 block">Section</label>
             <Select value={selectedSection?.section_name} onValueChange={handleSectionSelect} disabled={!skipped}
@@ -909,9 +909,15 @@ export default function GetEnrolled({
           </div>
 
           {enrollmentError && (
-            <Alert variant="destructive">
-              <FaExclamationCircle className="h-4 w-4" />
+            <Alert variant="destructive" className="flex gap-2 items-center border-2">
+              <div>
+
+              <FaExclamationCircle className="h-4 w-4 " />
+              </div>
+              <div>
               <AlertDescription>{enrollmentError}</AlertDescription>
+              </div>
+                
             </Alert>
           )}
 

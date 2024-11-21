@@ -188,7 +188,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
           <button
-            onClick={isEnrolled ? () => router.push("/dashboard") : handleClick}
+            onClick={handleClick}
             className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
               is_active
                 ? "hover:bg-emerald-500"
@@ -196,9 +196,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             }`}
             disabled={!is_active}
           >
-            {isEnrolled
-              ? "Dashboard"
-              : is_active
+            {is_active
                 ? "Enroll Now"
                 : "Registration Closed"}
             <ChevronRight className="ml-2 h-5 w-5" />
