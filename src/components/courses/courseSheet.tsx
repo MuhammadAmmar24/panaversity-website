@@ -1,29 +1,13 @@
 "use client";
 
 import GetEnrolled from "@/src/components/courses/GetEnrolled";
-import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
 } from "@/src/components/ui/sheet";
-import { CourseSheetProps } from "@/src/types/courseEnrollment";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { ChevronRight } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { MdLanguage } from "react-icons/md";
-import { GrLanguage } from "react-icons/gr";
-import { BsClock } from "react-icons/bs";
-import { CiCalendar } from "react-icons/ci";
-import { SiGoogleclassroom } from "react-icons/si";
-import { SlCalender } from "react-icons/sl";
-import { GiTeacher } from "react-icons/gi";
-import { Button } from "@/src/components/ui/button";
-import { formatTime } from "@/src/lib/timeUtils";
-
-import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
   Tabs,
   TabsContent,
@@ -32,6 +16,18 @@ import {
 } from "@/src/components/ui/tabs";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { getTimeDifference } from "@/src/lib/getDuration";
+import { CourseSheetProps } from "@/src/types/courseEnrollment";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { BsClock } from "react-icons/bs";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { GiTeacher } from "react-icons/gi";
+import { GrLanguage } from "react-icons/gr";
+import { SiGoogleclassroom } from "react-icons/si";
+import { SlCalender } from "react-icons/sl";
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
   is_active,
@@ -45,11 +41,561 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   student_courses,
   sections,
 }) => {
+  sections = [
+    {
+      section_name: "UR-2D-3",
+      section_code: "UR-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 5,
+      language: "Urdu",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - UR-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 1,
+          section_id: 5,
+          id: 9,
+          time_zone: "Z",
+          instructor: "Saqib",
+        },
+        {
+          time_slot_name: "AI-202 - UR-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 1,
+          section_id: 5,
+          id: 10,
+          time_zone: "Z",
+          instructor: "Saqib",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - UR-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 1,
+          section_id: 5,
+          id: 5,
+          time_zone: "Z",
+          instructor: "Saqib",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-3",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 6,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-4",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 7,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-5",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 8,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Zeeshan",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-6",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 9,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-7",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 10,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "07:00:00",
+          slot_end_time: "11:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "05:00:00",
+          slot_end_time: "10:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Monday",
+          slot_start_time: "18:00:00",
+          slot_end_time: "21:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-9",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 15,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "09:00:00",
+          slot_end_time: "12:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Friday",
+          slot_start_time: "13:00:00",
+          slot_end_time: "15:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Rehan",
+        },
+      ],
+    },
+    {
+      section_name: "EN-2D-8",
+      section_code: "EN-AI-202",
+      course_id: 3,
+      total_seats: 130,
+      booked_seats: 0,
+      confirmed_seats: 0,
+      start_date: "2024-09-01T00:00:00",
+      end_date: "2026-12-15T00:00:00",
+      registration_deadline: "2024-11-30T00:00:00",
+      is_registration_open: true,
+      status: "Active",
+      is_virtual: true,
+      is_active: true,
+      id: 12,
+      language: "English",
+      class_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Wednesday",
+          is_time_slot_active: true,
+          time_slot_day: "Wednesday",
+          slot_start_time: "07:00:00",
+          slot_end_time: "11:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 11,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Days.Thursday",
+          is_time_slot_active: true,
+          time_slot_day: "Thursday",
+          slot_start_time: "05:00:00",
+          slot_end_time: "10:00:00",
+          zoom_link: null,
+          github_link: "https://github.com/panaversity/learn-agentic-ai",
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 12,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+      ],
+      lab_time_slots: [
+        {
+          time_slot_name: "AI-202 - EN-AI-202 - Lab Days.Friday",
+          is_time_slot_active: true,
+          time_slot_day: "Monday",
+          slot_start_time: "18:00:00",
+          slot_end_time: "21:00:00",
+          zoom_link: null,
+          github_link: null,
+          lectures_playlist: null,
+          instructor_id: 2,
+          section_id: 6,
+          id: 6,
+          time_zone: "Z",
+          instructor: "Ammar",
+        },
+      ],
+    },
+  ];
+
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
   const [selectedSection, setSelectedSection] = useState(
     sections && sections.length > 0 ? sections[0] : null,
   );
+
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const sectionsPerPage = 3;
+  const totalPages = Math.ceil(sections.length / sectionsPerPage);
+  const visibleSections = sections.slice(
+    currentPage * sectionsPerPage,
+    (currentPage + 1) * sectionsPerPage,
+  );
+
+  const showArrows = sections.length > 3;
+
+  const handleNextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
 
   const router = useRouter();
 
@@ -90,7 +636,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     >
       <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
         <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
-          <p className="text-xs text-primary font-semibold">Available Sections:</p>
+          <p className="text-xs mb-1 font-semibold text-primary">
+            Available Sections:
+          </p>
           <Tabs
             defaultValue={sections[0].id.toString()}
             onValueChange={(value) =>
@@ -100,19 +648,54 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
               )
             }
           >
-            <TabsList
-              className={`mb-4 grid w-full ${sections.length === 2 ? "grid-cols-2" : sections.length === 3 ? "grid-cols-3" : "justify-center"}`}
-            >
-              {sections.map((section) => (
-                <TabsTrigger key={section.id} value={section.id.toString()}>
-                  {section.section_name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="flex items-start justify-center">
+              {showArrows && ( <button
+                onClick={handlePrevPage}
+                className={`rounded-full p-2 text-primary hover:text-accent-foreground ${
+                  currentPage === 0 ? "opacity-25" : ""
+                }`}
+                aria-label="Previous sections"
+                disabled={currentPage === 0}
+              >
+                <FaChevronLeft className="h-4 w-4" />
+              </button> )}
+              <TabsList
+                className={`mb-1 grid w-full overflow-auto ${
+                  visibleSections.length === 1
+                    ? "grid-cols-1"
+                    : visibleSections.length === 2
+                      ? "grid-cols-2"
+                      : "grid-cols-3"
+                }`}
+              >
+                {visibleSections.map((section) => (
+                  <TabsTrigger key={section.id} value={section.id.toString()}>
+                    {section.section_name}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              {showArrows && ( <button
+                onClick={handleNextPage}
+                className={`rounded-full p-2 text-primary  hover:text-accent-foreground ${
+                  currentPage === totalPages - 1
+                    ? "opacity-25 "
+                    : ""
+                }`}
+                aria-label="Next sections"
+                disabled={currentPage === totalPages - 1}
+              >
+                <FaChevronRight className="h-4 w-4" />
+              </button> )}
+            </div>
+
             {sections.map((section) => (
-              <TabsContent key={section.id} value={section.id.toString()} className="mb-2">
+              <TabsContent
+                key={section.id}
+                value={section.id.toString()}
+                className="mb-2"
+              >
                 <div className="space-y-2 text-sm">
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="mb-1 flex items-center gap-2">
                     <span className="text-xs text-red-500">
                       Registration Deadline:{" "}
                       {new Date(
@@ -175,7 +758,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between ">
+                  <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
                       {coursePrice.currency.toUpperCase()} {coursePrice.amount}
@@ -196,9 +779,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             }`}
             disabled={!is_active}
           >
-            {is_active
-                ? "Enroll Now"
-                : "Registration Closed"}
+            {is_active ? "Enroll Now" : "Registration Closed"}
             <ChevronRight className="ml-2 h-5 w-5" />
           </button>
         </CardFooter>
@@ -228,6 +809,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           student_courses={student_courses}
           sections={sections || []}
           selected_section_name={selectedSection}
+          isEnrolled={isEnrolled}
         />
       </SheetContent>
     </Sheet>

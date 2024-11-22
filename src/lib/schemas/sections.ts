@@ -14,7 +14,7 @@ export const TimeSlotSchema = z.object({
   id: z.number(),
   time_zone: z.string(),
   instructor: z.string(),
-  is_active: z.boolean(),
+  // is_active: z.boolean(),
 });
 
 // Custom date transformer

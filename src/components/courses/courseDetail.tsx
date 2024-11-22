@@ -82,6 +82,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
     isEnrolled =
       !!course && course.student_course_status != "expired_reservation";
+      
   } catch (error: any) {
     console.error("Error fetching student courses: ", error.message);
   }
