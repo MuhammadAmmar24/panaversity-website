@@ -39,22 +39,31 @@ export const TimeSlotsQuerySchema = z.object({
 export const LanguageSchema = z.object({
     language_name: z.string(),
     is_language_active: z.boolean(),
-    created_by: z.string(),
-    updated_by: z.string(),
 });
 
 export const TimeSlotSchema = z.object({
-    time_slot_name: z.string(),
-    is_time_slot_active: z.boolean(),
-    time_slot_day: z.string(),
-    slot_start_time: z.union([z.string(), z.null()]), 
-    slot_end_time: z.union([z.string(), z.null()]),   
-    zoom_link: z.union([z.string(), z.null()]),      
+	time_slot_name: z.string(),
+	is_time_slot_active: z.boolean(),
+	time_slot_day: z.string(),
+	slot_start_time: z.union([z.string(), z.null()]), 
+	slot_end_time: z.union([z.string(), z.null()]),   
+	zoom_link: z.union([z.string(), z.null()]),      
+	github_link: z.union([z.string(), z.null()]),
+	lectures_playlist: z.union([z.string(), z.null()]),
 	instructor_id: z.number().int(),
 	section_id: z.number().int(),
-    id: z.number(),
-    time_zone: z.string(),
-});
+	id: z.number(),
+	time_zone: z.string(),
+	instructor: z.union([
+	  z.string(),
+	  z.object({
+		instructor_id: z.string(),
+		name: z.string(),
+		socials: z.array(z.record(z.any())).optional(),
+		is_active: z.boolean(),
+	  }),
+	]),
+  });
 
 export const TimeSlotsResponseSchema = z.object({
 	class_time_slots: z.array(TimeSlotSchema),
@@ -80,7 +89,7 @@ export type GetCoursePriceResponse = z.infer<
 
 
 
-  export const CourseEnrollmentSchema = z.object({
+export const CourseEnrollmentSchema = z.object({
 	student_course_id: z.number(),
 	course_id: z.number(),
 	course_name: z.string(),
@@ -91,13 +100,11 @@ export type GetCoursePriceResponse = z.infer<
 	student_course_status: z.string(),
 	is_graduated: z.boolean(),
 	is_registration_open: z.boolean(),
-	is_class_started: z.boolean(),
 	class_start_date: z.union([z.string(), z.null()]),
 	class_end_date: z.union([z.string(), z.null()]),
 	batch_id: z.number(),
 	program_id: z.number(),
-	course_batch_program_id: z.number(),
-    section: z.array(CourseSectionSchema),
+	section: z.object(CourseSectionSchema.shape).optional(),
   });
   
   // Define the schema for the entire response (an array of course enrollments)

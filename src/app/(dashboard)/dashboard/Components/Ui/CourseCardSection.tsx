@@ -26,11 +26,10 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
               status={course.status}
               batch_id={course.batch_no}
               student_course_id={course.student_course_id}
-              course_batch_program_id={course.course_batch_program_id}
               profile={profile}
               course_code={course.course_code}
-              start_time={course.start_time}
-              day={course.day}
+              course_section={course.course_section}
+              course_price={course.course_price}
             />
           ))}
       </div>

@@ -7,9 +7,45 @@ import Link from "next/link";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import { formatTime } from "@/src/lib/timeUtils";
+import { getCoursePrice } from "@/src/lib/coursePrice";
 
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
+  // let recentCourses: Course[] = [];
+  // let enrollmentStatus: string | null = null;
+
+  // try {
+  //   const result: Result<CourseEnrollmentResponse> =
+  //     await getStudentCourses(profileId);
+
+  //   if (result.type === "error") {
+  //     if (result.message.includes("Not Found")) {
+  //       enrollmentStatus = "not_enrolled";
+  //     } else {
+  //       throw new Error(result.message);
+  //     }
+  //   } else if (result.type === "success" && result.data) {
+  //     if (result.data.length === 0) {
+  //       enrollmentStatus = "not_enrolled";
+  //     } else {
+  //       recentCourses = result.data.map((courseData) => ({
+  //         title: courseData.course_name,
+  //         progress: courseData.is_active ? 1 : 14, // Mocked progress need to change later
+  //         classes: 14, // Mocked lessons count
+  //         status: courseData.student_course_status,
+  //         is_paid: courseData.is_paid,
+  //         batch_no: courseData.batch_id,
+  //         student_course_id: courseData.student_course_id,
+  //         // course_batch_program_id: courseData.course_batch_program_id,
+  //         course_id: courseData.course_id,
+  //         course_code: courseData.course_code,
+  //         course_section: courseData.section
+  //       }));
+  //       enrollmentStatus = "enrolled";
+  //     }
+  //   }
+  // } catch (error: any) {
+  //   return <div>Error: {error.message}</div>;
+  // }
   let recentCourses: Course[] = [];
   let enrollmentStatus: string | null = null;
 
@@ -27,22 +63,31 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
       if (result.data.length === 0) {
         enrollmentStatus = "not_enrolled";
       } else {
-        recentCourses = result.data.map((courseData) => ({
-          title: courseData.course_name,
-          progress: courseData.is_active ? 1 : 14, // Mocked progress need to change later
-          classes: 14, // Mocked lessons count
-          status: courseData.student_course_status,
-          is_paid: courseData.is_paid,
-          batch_no: courseData.batch_id,
-          student_course_id: courseData.student_course_id,
-          course_batch_program_id: courseData.course_batch_program_id,
-          course_id: courseData.course_id,
-          start_time: formatTime(
-            courseData.class_time_slot?.slot_start_time || "",
-          ),
-          day: courseData.class_time_slot?.time_slot_day || "",
-          course_code: courseData.course_code,
-        }));
+        // Map courses and fetch their prices
+        recentCourses = await Promise.all(
+          result.data.map(async (courseData) => {
+            const priceResult = await getCoursePrice(courseData.course_code);
+
+            let coursePrice = null;
+            if (priceResult.type === "success" && priceResult.data) {
+              coursePrice = priceResult.data;
+            }
+
+            return {
+              title: courseData.course_name,
+              progress: courseData.is_active ? 1 : 14, // Mocked progress need to change later
+              classes: 14, // Mocked lessons count
+              status: courseData.student_course_status,
+              is_paid: courseData.is_paid,
+              batch_no: courseData.batch_id,
+              student_course_id: courseData.student_course_id,
+              course_id: courseData.course_id,
+              course_code: courseData.course_code,
+              course_section: courseData.section,
+              course_price: coursePrice,
+            };
+          })
+        );
         enrollmentStatus = "enrolled";
       }
     }

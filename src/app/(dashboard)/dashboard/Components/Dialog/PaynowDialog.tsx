@@ -16,7 +16,6 @@ export default function PaymentDialog({
   const [paymentMethods, setPaymentMethods] = useState<string[]>(["STRIPE"]);
 
   const handleClose = () => {
-    setSelectedMethod("");
     setIsLoading(false);
     onOpenChange(false);
   };
