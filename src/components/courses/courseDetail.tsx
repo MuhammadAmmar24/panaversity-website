@@ -72,6 +72,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
       profile.id,
     );
     student_courses = result.data;
+    
 
     
   
@@ -156,7 +157,7 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                 </div>
 
                 {/* Price and enrollment - takes up 1/3 of space */}
-                <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-end md:self-end lg:col-span-1">
+                <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
                   <CourseSheet
                     is_active={is_active}
                     program_id={program_id}

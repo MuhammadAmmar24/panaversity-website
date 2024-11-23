@@ -1092,7 +1092,7 @@ export default function GetEnrolled({
   isEnrolled,
 }: any) {
 
- 
+
 
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -1275,7 +1275,7 @@ export default function GetEnrolled({
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      {!hasSkippedPrerequisites && pre_requisite.length > 0  && (
+      {!hasSkippedPrerequisites && pre_requisite.length > 0 && (
         <div className="mt-3 flex items-center gap-3 lg:justify-between">
           {skipped || (
             <Button
@@ -1285,9 +1285,9 @@ export default function GetEnrolled({
               Skip
             </Button>
           )}
-      <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
-        {skippedMessage}
-      </span>
+          <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+            {skippedMessage}
+          </span>
         </div>
       )}
     </div>
@@ -1295,23 +1295,20 @@ export default function GetEnrolled({
 
   const renderEnrollmentForm = () => (
     <CardContent
-      className={`space-y-8 ${
-        (isEnrolled && !showReEnrollment) ||
-        (isEnrolled && showReEnrollment && !hasSkippedPrerequisites)
-        || (!isEnrolled && !skipped) 
-          ? "opacity-50"
-          : "opacity-100"
-      }`}
+      className={`space-y-8 ${(isEnrolled && !skipped) || (!isEnrolled && !skipped) ? "opacity-50" : "opacity-100"
+        }`}
     >
+
       <div>
         <label className="mb-2 block text-lg font-medium">Section</label>
         <Select
-          value={selectedSection?.section_name}
-          onValueChange={handleSectionSelect}
-          disabled={
-            (isEnrolled && !showReEnrollment) || (!isEnrolled && !skipped) 
-          }
-        >
+  value={selectedSection?.section_name}
+  onValueChange={handleSectionSelect}
+  disabled={
+    isEnrolled && !skipped || !isEnrolled && !skipped
+  }
+>
+
           <SelectTrigger>
             <SelectValue placeholder="Select a section" />
           </SelectTrigger>
@@ -1395,14 +1392,13 @@ export default function GetEnrolled({
       <div>
         <label className="mb-2 block text-lg font-medium">Payment Method</label>
         <Select
-          value={paymentMethod}
-          onValueChange={setPaymentMethod}
-          disabled={
-            !selectedSection ||
-            (isEnrolled && !showReEnrollment) ||
-            (!isEnrolled && !skipped)
-          }
-        >
+  value={paymentMethod}
+  onValueChange={setPaymentMethod}
+  disabled={
+    isEnrolled && !skipped || !isEnrolled && !skipped
+  }
+>
+
           <SelectTrigger>
             <SelectValue>
               <div className="flex items-center gap-2">
@@ -1436,24 +1432,18 @@ export default function GetEnrolled({
         </Alert>
       )}
 
-      <Button
-        className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
-          selectedSection &&
-          !isPending &&
-          (!isEnrolled ||
-            (isEnrolled && showReEnrollment && hasSkippedPrerequisites))
-            ? "bg-accent text-white hover:bg-[#18c781]"
-            : "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
-        }`}
-        size="lg"
-        disabled={
-          !selectedSection ||
-          isPending ||
-          (isEnrolled && !showReEnrollment) ||
-          (isEnrolled && showReEnrollment && !hasSkippedPrerequisites)
-        }
-        onClick={handleEnroll}
-      >
+<Button
+  className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${(isEnrolled && !skipped) || (!isEnrolled && !skipped)
+      ? "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300" 
+      : "bg-accent text-white hover:bg-[#18c781]"
+  }`}
+  size="lg"
+  disabled={
+    isEnrolled && !skipped || !isEnrolled && !skipped
+  }
+  onClick={handleEnroll}
+>
+
         {isPending ? (
           <>
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
@@ -1501,8 +1491,8 @@ export default function GetEnrolled({
             </div>
           </CardContent>
         )}
-         {((isEnrolled && showReEnrollment) || !isEnrolled) && renderPrerequisites()}
-         {renderEnrollmentForm()}
+        {((isEnrolled && showReEnrollment) || !isEnrolled) && renderPrerequisites()}
+        {renderEnrollmentForm()}
       </Card>
     </div>
   );
