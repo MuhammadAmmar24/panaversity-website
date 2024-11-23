@@ -13,8 +13,15 @@ export const TimeSlotSchema = z.object({
   section_id: z.number().int(),
   id: z.number(),
   time_zone: z.string(),
-  instructor: z.string(),
-  // is_active: z.boolean(),
+  instructor: z.union([
+    z.string(),
+    z.object({
+      instructor_id: z.string(),
+      name: z.string(),
+      socials: z.array(z.record(z.any())).optional(),
+      is_active: z.boolean(),
+    }),
+  ]),
 });
 
 // Custom date transformer
@@ -50,7 +57,7 @@ export const CourseSectionSchema = z.object({
     })
   ]),
   class_time_slots: z.array(TimeSlotSchema).optional(),
-  lab_time_slots: z.array(TimeSlotSchema).optional(),  
+  lab_time_slots: z.array(TimeSlotSchema).optional(),
 });
 
 export const CourseActiceSectionsResponseSchema = z.array(CourseSectionSchema);
