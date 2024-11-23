@@ -9,6 +9,9 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { RiWhatsappLine } from "react-icons/ri";
+import Link from "next/link";
+import { FaLink } from "react-icons/fa6";
 
 // Infer form types from ContactSchema
 type ContactFormValues = z.infer<typeof ContactSchema>;
@@ -34,7 +37,7 @@ export default function ContactUs() {
     <div className="min-h-screen bg-background">
       <div className="mx-auto my-[5rem] max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="overflow-hidden rounded-xl bg-card shadow-lg">
-          <div className="p-6 sm:p-10">
+          <div className="p-4 sm:p-10">
             <h2 className="mb-6 text-3xl font-semibold">Get in Touch</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -132,9 +135,9 @@ export default function ContactUs() {
             {formStatus && <p className="mt-4 text-green-600">{formStatus}</p>}
           </div>
 
-          <div className="bg-muted p-6 sm:p-10">
-            <h2 className="mb-6 text-2xl font-semibold">Contact Information</h2>
-            <div className="space-y-4">
+          <div className="bg-muted p-4 sm:p-10">
+            <h2 className="mb-6 text-xl sm:text-2xl font-semibold">Contact Information</h2>
+            <div className="space-y-4 text-sm sm:text-base">
               <div className="flex items-center">
                 <Mail className="mr-4 h-5 w-5 text-primary" />
                 <span>info@panaversity.org</span>
@@ -146,6 +149,19 @@ export default function ContactUs() {
               <div className="flex items-center">
                 <MapPin className="mr-4 h-5 w-5 text-primary" />
                 <span>Virtual Campus, Panaversity</span>
+              </div>
+              <div className="flex items-center">
+                <Link
+                  href="https://whatsapp.com/channel/0029VanobNVHbFV2oZLXX125"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-4 transition cursor-pointer"
+                >
+                  <RiWhatsappLine className="h-5 w-5 text-primary" />
+                  <span className="nav font-medium flex items-center gap-2">
+                    Subscribe For Latest AI News <FaLink />
+                  </span>
+                </Link>
               </div>
             </div>
           </div>
