@@ -1,7 +1,7 @@
 export const programOverviewData = {
   sectionHeading: "Program Overview",
   mainHeading: "Certified Agentic and Robotic AI Engineer",
-  content1: `Embark on a Generative AI journey that prepares you for the $100 trillion AI industrial revolution by equipping you with skills in Python, Generative AI, Agentic AI, and cloud-native microservices, followed by advanced topics like PyTorch, Kubernetes and fine-tuning large language models.`,
+  content1: `Embark on a Agentic AI journey that prepares you for the $100 trillion AI industrial revolution by equipping you with skills in Python, Agentic AI, Agentic AI, and cloud-native microservices, followed by advanced topics like PyTorch, Kubernetes and fine-tuning large language models.`,
   content2: `At the program's end, choose from specialized tracks in fields like Healthcare, Finance, Cybersecurity, IoT, and the Metaverse to align your skills with high-demand industries.`,
   buttonText: "Continue With Us",
 };
@@ -11,7 +11,7 @@ export const features = [
   {
     title: "Core Curriculum",
     description:
-      "Learn Generative AI, Cloud Native Computing, and Physical AI with our experts.",
+      "Learn Agentic AI, Cloud Native Computing, and Physical AI with our experts.",
     icon: "/program_overview/clock.webp",
     bgColor: "#FA7F27",
     iconSize: { width: 24, height: 24 },

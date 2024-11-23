@@ -1,6 +1,6 @@
 # Panaversity Web
 
-Panaversity Web is a comprehensive platform for delivering digital learning and developer training in Generative AI applications. Built with Next.js and a suite of microservices, Panaversity offers structured programs, progress tracking, and diverse payment options.
+Panaversity Web is a comprehensive platform for delivering digital learning and developer training in Agentic AI applications. Built with Next.js and a suite of microservices, Panaversity offers structured programs, progress tracking, and diverse payment options.
 
 ## Table of Contents
 

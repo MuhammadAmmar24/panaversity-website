@@ -10,11 +10,11 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   title: "Register | Panaversity",
   description:
-    "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+    "Join Panaversity today! Create your account to start learning with our cutting-edge Agentic AI courses and become part of a global learning community.",
   openGraph: {
     title: "Register | Panaversity",
     description:
-      "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+      "Join Panaversity today! Create your account to start learning with our cutting-edge Agentic AI courses and become part of a global learning community.",
     url: siteUrl,
     images: [
       {
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Register | Panaversity",
     description:
-      "Join Panaversity today! Create your account to start learning with our cutting-edge Generative AI courses and become part of a global learning community.",
+      "Join Panaversity today! Create your account to start learning with our cutting-edge Agentic AI courses and become part of a global learning community.",
     images: [
       {
         url: `${siteUrl}/logos/logoIcon.png`,

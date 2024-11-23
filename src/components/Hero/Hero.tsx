@@ -15,7 +15,7 @@ export default function Hero() {
               by Experts
             </h1>
             <p className="font-inter mt-6 text-[0.9rem] leading-8 text-textSecondary md:text-[1.1rem]">
-            Access Live Classes and Labs on Zoom from Anywhere Worldwide - Choose Between Dedicated English or Urdu/Hindi{" "}
+              Access Live Classes and Labs on <span className="gradient-border2">Zoom</span> from Anywhere Worldwide - Choose Between Dedicated English or Urdu/Hindi{" "}
               <span className="gradient-border2">Sections!</span>
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">

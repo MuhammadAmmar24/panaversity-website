@@ -6,7 +6,7 @@ import Welcome from "./Components/Ui/Welcome";
 
 export const metadata: Metadata = {
   title: "Dashboard",
-  description: `Access your personalized Panaversity dashboard. Manage your enrolled courses, track progress, and explore additional learning opportunities powered by Generative AI and cutting-edge technologies.`,
+  description: `Access your personalized Panaversity dashboard. Manage your enrolled courses, track progress, and explore additional learning opportunities powered by Agentic AI and cutting-edge technologies.`,
 };
 
 export default async function Home() {

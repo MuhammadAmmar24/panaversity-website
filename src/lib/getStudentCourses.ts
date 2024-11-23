@@ -12,6 +12,10 @@ export const getStudentCourses = async (
         const params = new URLSearchParams();
         params.append('student_id', String(studentId));
 
+
+
+
+
         // Construct the API URL
         const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?${params}`;
 
@@ -35,21 +39,25 @@ export const getStudentCourses = async (
         // Parse the JSON response
         const responseData = await response.json();
 
+
+
         // Validate the response against the schema
-        const parsedResponse = CourseEnrollmentResponseSchema.safeParse(responseData);
+        // const parsedResponse = CourseEnrollmentResponseSchema.safeParse(responseData);
 
-        if (!parsedResponse.success) {
 
-            return {
-                type: "error",
-                message: parsedResponse.error.errors.map((err) => err.message).join(", "),
-            };
-        }
+
+        // if (!parsedResponse.success) {
+
+        //     return {
+        //         type: "error",
+        //         message: parsedResponse.error.errors.map((err) => err.message).join(", "),
+        //     };
+        // }
 
         return {
             type: "success",
             message: "Enrolled courses fetched successfully",
-            data: parsedResponse.data,
+            data: responseData,
         };
     } catch (error: any) {
         console.error("Error fetching enrolled courses:", error.message);

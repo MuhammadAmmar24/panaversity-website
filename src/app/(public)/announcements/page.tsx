@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Announcements",
-  description: `Stay updated with the latest news and updates from Panaversity. Explore our announcements on new courses, Generative AI advancements, and important information for our learners.`,
+  description: `Stay updated with the latest news and updates from Panaversity. Explore our announcements on new courses, Agentic AI advancements, and important information for our learners.`,
 };
 
 export default function results() {

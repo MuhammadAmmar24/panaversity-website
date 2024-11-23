@@ -1,11 +1,3 @@
-export interface ClassCardProps {
-  title?: string;
-  time: string;
-  image?: string;
-  lessons?: string;
-  assignment?: string;
-}
-
 export interface CourseCardProps {
   title: string;
   progress: number;
@@ -13,18 +5,35 @@ export interface CourseCardProps {
   status: string;
   batch_id: number;
   student_course_id: number;
-  course_batch_program_id: number;
   profile: ProfileData;
   course_code: string;
-  start_time: string;
-  day: string;
+  course_section?: {
+    section_name: string;
+    language: string | { language_name: string; is_language_active: boolean };
+    class_time_slots?: Array<{
+      time_slot_day: string;
+      slot_start_time: string | null;
+      slot_end_time: string | null;
+    }>;
+    lab_time_slots?: Array<{
+      time_slot_day: string;
+      slot_start_time: string | null;
+      slot_end_time: string | null;
+    }>;
+  };
+  course_price?: {
+    package_id: number;
+    course_id: number;
+    amount: number;
+    currency: string;
+  } | null;
 }
 
-export interface CardData {
-  title: string;
-  count: number;
-  icon: JSX.Element;
+export interface CourseSectionProps {
+  courses: Course[] | undefined;
+  enrollmentStatus: string | null;
 }
+
 
 export interface Course {
   title: string;
@@ -34,41 +43,27 @@ export interface Course {
   is_paid: boolean;
   batch_no: number;
   student_course_id: number;
-  course_batch_program_id: number;
   course_code: string;
-  start_time: string;
-  day: string;
-}
-
-export interface Class {
-  date: string;
-  title: string;
-  time: string;
-  assignment?: string;
-  lessons?: string;
-}
-
-export interface InfoCardProps {
-  title: string;
-  count: number;
-  icon: JSX.Element;
-}
-
-export interface UpcomingClassProps {
-  title: string;
-  time: string;
-  ClassName?: string;
-  date: string;
-}
-
-export interface ClassSectionProps {
-  title: string;
-  classes: Class[];
-}
-
-export interface UpcomingClassSectionProps {
-  title: string;
-  classes: Class[];
+  course_section?: {
+    section_name: string;
+    language: string | { language_name: string; is_language_active: boolean };
+    class_time_slots?: Array<{
+      time_slot_day: string;
+      slot_start_time: string | null;
+      slot_end_time: string | null;
+    }>;
+    lab_time_slots?: Array<{
+      time_slot_day: string;
+      slot_start_time: string | null;
+      slot_end_time: string | null;
+    }>;
+  };
+  course_price?: {
+    package_id: number;
+    course_id: number;
+    amount: number;
+    currency: string;
+  } | null;
 }
 
 export interface ClientDropdownProps {
@@ -80,12 +75,6 @@ export interface ClientDropdownProps {
 
 export interface SidebarProps {
   setIsSidebarOpen: (open: boolean) => void;
-}
-
-export interface CourseSectionProps {
-  courses: Course[] | undefined;
-  enrollmentStatus: string | null;
-  // status: string;
 }
 
 export interface DropdownProps {
