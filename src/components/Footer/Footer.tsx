@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { BiLogoInstagramAlt } from "react-icons/bi";
-import { FaDiscord, FaFacebook, FaLinkedinIn } from "react-icons/fa";
+import { FaDiscord, FaFacebook, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Logo from "../../../public/logos/logo2.webp";
 import Newsletter from "../ui/Newsletter";
@@ -14,12 +14,19 @@ const socialIcons = [
     link: "https://facebook.com/panaversity/",
   },
   // { icon: FaDiscord, name: "Discord", link: "/" },
-  { icon: FaXTwitter, name: "Twitter", link: "https://x.com/panaversity" },
+  { icon: FaXTwitter, 
+    name: "Twitter", 
+    link: "https://x.com/panaversity" },
   // { icon: BiLogoInstagramAlt, name: "Instagram", link: "/" },
   {
     icon: FaLinkedinIn,
     name: "LinkedIn",
     link: "https://www.linkedin.com/company/panaversity/",
+  },
+  {
+    icon: FaWhatsapp,
+    name: "Whatsapp",
+    link: "https://whatsapp.com/channel/0029VanobNVHbFV2oZLXX125",
   },
 ];
 
