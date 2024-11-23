@@ -1208,7 +1208,6 @@ export default function GetEnrolled({
 
   const handleSkip = () => {
     setSkipped(true);
-    // setHasSkippedPrerequisites(true);
     setIsAccordionOpen("");
   };
 
