@@ -24,15 +24,6 @@ export const TimeSlotSchema = z.object({
   ]),
 });
 
-// Custom date transformer
-// const dateSchema = z.string().transform((date) => {
-//   const parsed = new Date(date);
-//   if (isNaN(parsed.getTime())) {
-//     throw new Error('Invalid date format');
-//   }
-//   return date;
-// });
-
 // Main section schema
 export const CourseSectionSchema = z.object({
   section_name: z.string(),

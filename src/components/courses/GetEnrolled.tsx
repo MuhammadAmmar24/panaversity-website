@@ -593,476 +593,6 @@
 //     </div>
 //   );
 // }
-"use client";
-
-import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
-import { formatTime } from "@/src/lib/timeUtils";
-import { GetEnrolledProps } from "@/src/types/courseEnrollment";
-import { StudentCourse } from "@/src/types/studentCourses";
-
-import { useState, useTransition, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { Button } from "@/src/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/src/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/src/components/ui/select";
-import { Alert, AlertDescription } from "@/src/components/ui/alert";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/src/components/ui/accordion";
-import { Badge } from "@/src/components/ui/badge";
-import { Separator } from "@/src/components/ui/separator";
-import {
-  FaCalendarAlt,
-  FaClock,
-  FaUsers,
-  FaExclamationCircle,
-  FaCreditCard,
-} from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
-
-export default function GetEnrolled({
-  program_id,
-  profile_id,
-  coursePrice,
-  pre_requisite,
-  student_courses,
-  sections,
-  selected_section_name,
-  isEnrolled,
-}: any) {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-  const [selectedSection, setSelectedSection] = useState<any>(
-    selected_section_name,
-  );
-  const [paymentMethod, setPaymentMethod] = useState("STRIPE");
-  const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
-  const [skipped, setSkipped] = useState(false);
-  const [isAccordionOpen, setIsAccordionOpen] =
-    useState<string>("prerequisites");
-  const [showReEnrollment, setShowReEnrollment] = useState(false);
-
-  const findStudentCourse = (courseCode: string) =>
-    student_courses.find(
-      (course: any) => course?.course_code?.trim() === courseCode.trim(),
-    );
-
-  const getCourseStatus = (studentCourse: any, courseCode: string) => {
-    if (!studentCourse) {
-      return {
-        statusText: "Not Enrolled",
-        statusClass: "text-red-600",
-        linkHref: `/programs/flagship-program/${courseCode.trim()}`,
-      };
-    }
-
-    if (studentCourse.is_graduated) {
-      return {
-        statusText: "Completed",
-        statusClass: "text-green-500",
-        linkHref: "/dashboard",
-      };
-    }
-
-    return {
-      statusText: "In Progress",
-      statusClass: "text-yellow-500",
-      linkHref: "/dashboard",
-    };
-  };
-
-  const notEnrolledCourses =
-    pre_requisite?.filter(
-      (pre_req: any) => !findStudentCourse(pre_req.course_code),
-    ) || [];
-
-  const hasNotEnrolledPreReq = notEnrolledCourses.length > 0;
-  const skipText = `Skip ${
-    notEnrolledCourses.length === 1
-      ? "pre-requisite course"
-      : "all pre-requisite courses"
-  }`;
-  const skippedMessage = `You skipped ${
-    notEnrolledCourses.length === 1
-      ? "the pre-requisite course"
-      : "all pre-requisite courses"
-  }`;
-
-  const handleSkip = () => {
-    setSkipped(true);
-    setIsAccordionOpen("");
-  };
-
-  useEffect(() => {
-    if (!hasNotEnrolledPreReq) {
-      setSkipped(true);
-    }
-  }, [hasNotEnrolledPreReq]);
-
-  const handleSectionSelect = (sectionName: string) => {
-    const section = sections.find(
-      (sec: any) => sec.section_name === sectionName,
-    );
-    setSelectedSection(section);
-  };
-
-  const handleEnroll = async () => {
-    if (!selectedSection || !paymentMethod) {
-      setEnrollmentError("Please select a section and payment method.");
-      return;
-    }
-
-    const payload = {
-      student_id: profile_id,
-      program_id,
-      section_id: selectedSection.id,
-      vendor_type: paymentMethod,
-      package_id: coursePrice.package_id,
-      course_id: selectedSection.course_id,
-    };
-
-    startTransition(async () => {
-      try {
-        const result = await enrollNewStudentInProgramAndCourse(payload);
-        if (result.type === "success") {
-          const url = result.data?.fee_voucher?.stripe?.stripe_url;
-          if (url) {
-            router.push(url);
-          } else {
-            router.push("/dashboard");
-          }
-        } else {
-          setEnrollmentError(
-            result.message || "An error occurred during enrollment.",
-          );
-        }
-      } catch (error) {
-        console.error("Unexpected error during enrollment:", error);
-        setEnrollmentError("Failed to enroll student. Please try again later.");
-      }
-    });
-  };
-
-
- 
-
-  return (
-    <div className="mx-auto max-w-3xl bg-background">
-      <Card className="rounded-none border-0 bg-background shadow-none">
-        <CardHeader className="-mb-4">
-          <CardTitle className="text-3xl">Course Enrollment</CardTitle>
-          <CardDescription>
-            Select your preferred section and complete enrollment
-          </CardDescription>
-        </CardHeader>
-
-        <div className="mx-auto max-w-full rounded-3xl p-4 sm:p-5">
-          <Accordion
-            type="single"
-            collapsible
-            value={isAccordionOpen}
-            onValueChange={setIsAccordionOpen}
-          >
-            <AccordionItem value="prerequisites">
-              <AccordionTrigger className="text-xl font-bold hover:no-underline">
-                Prerequisites
-              </AccordionTrigger>
-              <AccordionContent>
-                {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-                  <div>
-                    {pre_requisite.map((pre_req, index) => {
-                      const studentCourse = findStudentCourse(
-                        pre_req.course_code,
-                      );
-                      const { statusText, statusClass, linkHref } =
-                        getCourseStatus(studentCourse, pre_req.course_code);
-
-                      return (
-                        <div
-                          className="mb-3 rounded-lg border-2 px-4 py-1 transition-all duration-300 ease-in-out hover:-translate-y-[1px]"
-                          key={index}
-                        >
-                          <Link href={linkHref}>
-                            <div className="text-base font-normal leading-relaxed text-textPrimary/90">
-                              <div className="flex items-center justify-between gap-4">
-                                <div className="flex flex-col items-start justify-center">
-                                  <span className="underline decoration-accent decoration-2">
-                                    {pre_req.course_code}
-                                  </span>
-                                  <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
-                                    {pre_req.course_name}
-                                  </span>
-                                </div>
-                                <span
-                                  className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
-                                >
-                                  {statusText}
-                                </span>
-                              </div>
-                            </div>
-                          </Link>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <p className="text-[0.9rem] font-normal leading-relaxed text-muted-foreground">
-                    There are no pre-requisites for this course.
-                  </p>
-                )}
-              </AccordionContent>
-            </AccordionItem>
-
-            {hasNotEnrolledPreReq && (
-              <div className="mt-3 flex items-center gap-3 lg:justify-between">
-                {skipped || (
-                  <button
-                    onClick={handleSkip}
-                    className="rounded-lg border-2 border-blue-700 px-4 py-0.5 text-sm text-blue-700 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:text-white"
-                  >
-                    Skip
-                  </button>
-                )}
-                <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
-                  {skipped ? skippedMessage : skipText}
-                </span>
-              </div>
-            )}
-          </Accordion>
-        </div>
-
-      {isEnrolled && (
-      <div className="mx-auto max-w-3xl bg-background">
-      <Card className="rounded-none border-0 bg-background shadow-none">
-        <CardHeader>
-          <CardTitle className="text-3xl">Course Enrollment</CardTitle>
-          <CardDescription>You are already enrolled in this course</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="rounded-lg bg-gray-100 p-4">
-            <p className="text-lg font-medium">Already enrolled in course</p>
-          </div>
-          <div className="flex gap-4">
-            <Button
-              variant="outline"
-              className="flex-1 hover:border-accent hover:shadow-lg hover:bg-transparent transition-all duration-300 ease-in-out"
-              onClick={() => setShowReEnrollment(true)}
-            >
-              Re-enroll
-            </Button>
-            <Button
-              className="flex-1 bg-accent text-white hover:bg-[#18c781] transition-all duration-300 ease-in-out"
-              onClick={() => router.push("/dashboard")}
-            >
-              Go to Dashboard
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-    )}
-
-   <CardContent
-          className={`-mt-3 space-y-8 p-4 sm:p-6 ${!skipped ? "opacity-50" : "opacity-100"} `}
-        >
-          <div className="">
-            <label className="mb-2 block text-lg font-medium">Section</label>
-            <Select
-              value={selectedSection?.section_name}
-              onValueChange={handleSectionSelect}
-              disabled={!skipped}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a section" />
-              </SelectTrigger>
-              <SelectContent>
-                {sections.map((sec: any) => (
-                  <SelectItem key={sec.section_name} value={sec.section_name}>
-                    {sec.section_name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-
-          {selectedSection && (
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h3 className="text-xl font-semibold">
-                  {selectedSection.section_name}
-                </h3>
-                <div className="flex gap-4">
-                  <Badge variant="outline">
-                    {selectedSection.section_code}
-                  </Badge>
-                  <Badge variant="outline">{selectedSection.language}</Badge>
-                </div>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="flex items-baseline gap-2">
-                  <FaUsers className="h-4 w-4 text-muted-foreground" />
-                  <div className="flex flex-col">
-                    <p className="text-sm text-muted-foreground">
-                      Available Seats
-                    </p>
-                    <p className="text-sm font-medium">
-                      {selectedSection.total_seats -
-                        selectedSection.booked_seats}{" "}
-                      of {selectedSection.total_seats}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-baseline gap-2 sm:place-self-end">
-                  <FaCalendarAlt className="h-4 w-4 text-muted-foreground" />
-                  <div className="flex flex-col">
-                    <p className="text-sm text-muted-foreground">
-                      Class Start Date
-                    </p>
-                    <p className="text-sm font-medium">
-                      {new Date(selectedSection.start_date!).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "short",
-                          day: "2-digit",
-                        },
-                      )}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <Separator />
-              <div className="space-y-2">
-                <h4 className="mb-3 text-base font-medium">Class Schedule</h4>
-                <div className="grid gap-0">
-                  {selectedSection.class_time_slots.map(
-                    (slot: any, index: number) => (
-                      <div
-                        key={index}
-                        className="flex flex-col rounded-md bg-muted/20 p-2 text-sm sm:flex-row sm:items-center sm:justify-between"
-                      >
-                        <div className="mb-1 flex items-center gap-2 sm:mb-0">
-                          <FaClock className="h-4 w-4 capitalize text-muted-foreground" />
-                          <span>{slot.time_slot_day.slice(0, 3)}</span>
-                        </div>
-                        <span className="text-muted-foreground sm:mx-2">
-                          {formatTimeToUserGMT(slot.slot_start_time)} -{" "}
-                          {formatTimeToUserGMT(slot.slot_end_time)}
-                        </span>
-                        {/* <Badge variant="secondary" className="text-xs self-start sm:self-auto mt-1 sm:mt-0">{slot.instructor}</Badge> */}
-                      </div>
-                    ),
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="">
-            <label className="mb-2 block text-lg font-medium">
-              Payment Method
-            </label>
-            <Select
-              value={paymentMethod}
-              onValueChange={setPaymentMethod}
-              disabled={!selectedSection || !skipped}
-            >
-              <SelectTrigger>
-                <SelectValue>
-                  <div className="flex items-center gap-2">
-                    <FaCreditCard className="h-4 w-4" />
-                    Stripe
-                  </div>
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="STRIPE">
-                  <div className="flex items-center gap-2">
-                    <FaCreditCard className="h-4 w-4" />
-                    Stripe
-                  </div>
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          {enrollmentError && (
-            <Alert
-              variant="destructive"
-              className="flex items-center gap-2 border-2"
-            >
-              <div>
-                <FaExclamationCircle className="h-4 w-4" />
-              </div>
-              <div>
-                <AlertDescription>{enrollmentError}</AlertDescription>
-              </div>
-            </Alert>
-          )}
-
-          <Button
-            className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold ${
-              selectedSection && !isPending && skipped
-                ? "bg-accent text-white hover:bg-[#18c781]"
-                : "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
-            }`}
-            size="lg"
-            disabled={!selectedSection || isPending || !skipped}
-            onClick={handleEnroll}
-          >
-            {isPending ? (
-              <>
-                <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-                Enrolling...
-              </>
-            ) : (
-              "Enroll"
-            )}
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // "use client";
 
@@ -1231,7 +761,7 @@ export default function GetEnrolled({
 //     });
 //   };
 
-//   const renderEnrollmentForm = () => (
+//   return (
 //     <div className="mx-auto max-w-3xl bg-background">
 //       <Card className="rounded-none border-0 bg-background shadow-none">
 //         <CardHeader className="-mb-4">
@@ -1316,10 +846,39 @@ export default function GetEnrolled({
 //           </Accordion>
 //         </div>
 
-//         <CardContent
-//           className={`-mt-3 space-y-8 p-4 sm:p-6 ${
-//             !skipped ? "opacity-50" : "opacity-100"
-//           } `}
+//       {isEnrolled && (
+//       <div className="mx-auto max-w-3xl bg-background">
+//       <Card className="rounded-none border-0 bg-background shadow-none">
+//         <CardHeader>
+//           <CardTitle className="text-3xl">Course Enrollment</CardTitle>
+//           <CardDescription>You are already enrolled in this course</CardDescription>
+//         </CardHeader>
+//         <CardContent className="space-y-4">
+//           <div className="rounded-lg bg-gray-100 p-4">
+//             <p className="text-lg font-medium">Already enrolled in course</p>
+//           </div>
+//           <div className="flex gap-4">
+//             <Button
+//               variant="outline"
+//               className="flex-1 hover:border-accent  hover:bg-transparent transition-all duration-300 ease-in-out"
+//               onClick={() => setShowReEnrollment(true)}
+//             >
+//               Re-enroll
+//             </Button>
+//             <Button
+//               className="flex-1 bg-accent text-white hover:bg-[#18c781] transition-all duration-300 ease-in-out"
+//               onClick={() => router.push("/dashboard")}
+//             >
+//               Go to Dashboard
+//             </Button>
+//           </div>
+//         </CardContent>
+//       </Card>
+//     </div>
+//     )}
+
+//    <CardContent
+//           className={`-mt-3 space-y-8 p-4 sm:p-6 ${!skipped ? "opacity-50" : "opacity-100"} `}
 //         >
 //           <div className="">
 //             <label className="mb-2 block text-lg font-medium">Section</label>
@@ -1405,6 +964,7 @@ export default function GetEnrolled({
 //                           {formatTimeToUserGMT(slot.slot_start_time)} -{" "}
 //                           {formatTimeToUserGMT(slot.slot_end_time)}
 //                         </span>
+//                         {/* <Badge variant="secondary" className="text-xs self-start sm:self-auto mt-1 sm:mt-0">{slot.instructor}</Badge> */}
 //                       </div>
 //                     ),
 //                   )}
@@ -1456,7 +1016,7 @@ export default function GetEnrolled({
 //           )}
 
 //           <Button
-//             className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
+//             className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold ${
 //               selectedSection && !isPending && skipped
 //                 ? "bg-accent text-white hover:bg-[#18c781]"
 //                 : "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
@@ -1478,44 +1038,472 @@ export default function GetEnrolled({
 //       </Card>
 //     </div>
 //   );
-
-//   if (isEnrolled && !showReEnrollment) {
-//     return (
-//       <div className="mx-auto max-w-3xl bg-background">
-//         <Card className="rounded-none border-0 bg-background shadow-none">
-//           <CardHeader>
-//             <CardTitle className="text-3xl">Course Enrollment</CardTitle>
-//             <CardDescription>Already enrolled in course</CardDescription>
-//           </CardHeader>
-//           <CardContent className="space-y-4">
-//             <div className="rounded-lg bg-gray-100 p-4">
-//               <p className="text-lg font-medium">You are already enrolled in this course</p>
-//             </div>
-//             <Button
-//               className="flex w-full items-center justify-center rounded-lg p-3 font-semibold bg-accent text-white hover:bg-[#18c781] transition-all duration-300 ease-in-out"
-//               size="lg"
-//               onClick={() => router.push("/dashboard")}
-//             >
-//               Go to Dashboard
-//             </Button>
-//             <Separator />
-//             <div className="text-center">
-//               <p className="text-sm text-muted-foreground">
-//                 Do you want to re-enroll?
-//               </p>
-//               <Button
-//                 variant="outline"
-//                 className="mt-2 hover:border-accent hover:shadow-lg hover:bg-transparent transition-all duration-300 ease-in-out"
-//                 onClick={() => setShowReEnrollment(true)}
-//               >
-//                 Yes, re-enroll
-//               </Button>
-//             </div>
-//           </CardContent>
-//         </Card>
-//       </div>
-//     );
-//   }
-
-//   return renderEnrollmentForm();
 // }
+
+"use client";
+
+import { useEffect, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/src/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/src/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/src/components/ui/select";
+import { Alert, AlertDescription } from "@/src/components/ui/alert";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/components/ui/accordion";
+import { Badge } from "@/src/components/ui/badge";
+import { Separator } from "@/src/components/ui/separator";
+import {
+  FaCalendarAlt,
+  FaClock,
+  FaUsers,
+  FaExclamationCircle,
+  FaCreditCard,
+} from "react-icons/fa";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
+import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
+
+export default function GetEnrolled({
+  program_id,
+  profile_id,
+  coursePrice,
+  pre_requisite,
+  student_courses,
+  sections,
+  selected_section_name,
+  isEnrolled,
+}: any) {
+
+ 
+
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [selectedSection, setSelectedSection] = useState<any>(
+    selected_section_name,
+  );
+  const [paymentMethod, setPaymentMethod] = useState("STRIPE");
+  const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
+  const [showReEnrollment, setShowReEnrollment] = useState(false);
+  const [skippedPrerequisites, setSkippedPrerequisites] = useState(false);
+  const [hasSkippedPrerequisites, setHasSkippedPrerequisites] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState<string | undefined>(
+    "prerequisites",
+  );
+  const [skipped, setSkipped] = useState(false);
+  const [skippedMessage, setSkippedMessage] = useState("");
+
+  const findStudentCourse = (courseCode: string) =>
+    student_courses.find(
+      (course: any) => course?.course_code?.trim() === courseCode.trim(),
+    );
+
+  const getCourseStatus = (studentCourse: any, courseCode: string) => {
+    if (!studentCourse) {
+      return {
+        statusText: "Not Enrolled",
+        statusClass: "text-red-600",
+        linkHref: `/programs/flagship-program/${courseCode.trim()}`,
+      };
+    }
+
+    if (studentCourse.is_graduated) {
+      return {
+        statusText: "Completed",
+        statusClass: "text-green-500",
+        linkHref: "/dashboard",
+      };
+    }
+
+    return {
+      statusText: "In Progress",
+      statusClass: "text-yellow-500",
+      linkHref: "/dashboard",
+    };
+  };
+
+  const notEnrolledCourses = pre_requisite.filter(
+    (pre_req: any) => !findStudentCourse(pre_req.course_code),
+  );
+
+
+  useEffect(() => {
+
+    if (!notEnrolledCourses.length) {
+      setSkipped(true);
+    }
+
+    const message =
+      notEnrolledCourses.length === 1
+        ? "pre-requisite course"
+        : "all pre-requisite courses";
+
+    if (!skipped) {
+      setSkippedMessage(`Skip ${message}`);
+    } else {
+      setSkippedMessage(`You skipped ${message}`);
+    }
+  }, [notEnrolledCourses.length, skipped]);
+
+  const handleSectionSelect = (sectionName: string) => {
+    const section = sections.find(
+      (sec: any) => sec.section_name === sectionName,
+    );
+    setSelectedSection(section);
+  };
+
+  const handleEnroll = async () => {
+    if (!selectedSection || !paymentMethod) {
+      setEnrollmentError("Please select a section and payment method.");
+      return;
+    }
+
+    const payload = {
+      student_id: profile_id,
+      program_id,
+      section_id: selectedSection.id,
+      vendor_type: paymentMethod,
+      package_id: coursePrice.package_id,
+      course_id: selectedSection.course_id,
+    };
+
+    startTransition(async () => {
+      try {
+        const result = await enrollNewStudentInProgramAndCourse(payload);
+        if (result.type === "success") {
+          const url = result.data?.fee_voucher?.stripe?.stripe_url;
+          if (url) {
+            router.push(url);
+          } else {
+            router.push("/dashboard");
+          }
+        } else {
+          setEnrollmentError(
+            result.message || "An error occurred during enrollment.",
+          );
+        }
+      } catch (error) {
+        console.error("Unexpected error during enrollment:", error);
+        setEnrollmentError("Failed to enroll student. Please try again later.");
+      }
+    });
+  };
+
+  const handleSkip = () => {
+    setSkipped(true);
+    // setHasSkippedPrerequisites(true);
+    setIsAccordionOpen("");
+  };
+
+  const isEnrollButtonDisabled =
+    !selectedSection ||
+    isPending ||
+    (isEnrolled && !showReEnrollment) ||
+    (isEnrolled && showReEnrollment && !hasSkippedPrerequisites);
+
+  const renderPrerequisites = () => (
+    <div className="mx-auto max-w-full rounded-3xl p-4 sm:p-5">
+      <Accordion
+        type="single"
+        collapsible
+        value={isAccordionOpen}
+        onValueChange={setIsAccordionOpen}
+      >
+        <AccordionItem value="prerequisites">
+          <AccordionTrigger className="text-xl font-bold hover:no-underline">
+            Prerequisites
+          </AccordionTrigger>
+          <AccordionContent>
+            {pre_requisite.length > 0 ? (
+              <div>
+                {pre_requisite.map((pre_req: any, index: any) => {
+                  const { statusText, statusClass, linkHref } = getCourseStatus(
+                    findStudentCourse(pre_req.course_code),
+                    pre_req.course_code,
+                  );
+
+                  return (
+                    <div
+                      className="mb-3 rounded-lg border-2 px-4 py-1 transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:shadow-md"
+                      key={index}
+                    >
+                      <Link href={linkHref}>
+                        <div className="text-base font-normal leading-relaxed text-textPrimary/90">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex flex-col items-start justify-center">
+                              <span className="underline decoration-accent decoration-2">
+                                {pre_req.course_code}
+                              </span>
+                              <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
+                                {pre_req.course_name}
+                              </span>
+                            </div>
+                            <span
+                              className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
+                            >
+                              {statusText}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-[0.9rem] font-normal leading-relaxed text-muted-foreground">
+                There are no pre-requisites for this course.
+              </p>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+      {!hasSkippedPrerequisites && pre_requisite.length > 0  && (
+        <div className="mt-3 flex items-center gap-3 lg:justify-between">
+          {skipped || (
+            <Button
+              onClick={handleSkip}
+              className="rounded-lg px-6 py-0.5 text-sm transition-all duration-300 ease-in-out hover:bg-gray-950/80"
+            >
+              Skip
+            </Button>
+          )}
+      <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+        {skippedMessage}
+      </span>
+        </div>
+      )}
+    </div>
+  );
+
+  const renderEnrollmentForm = () => (
+    <CardContent
+      className={`space-y-8 ${
+        (isEnrolled && !showReEnrollment) ||
+        (isEnrolled && showReEnrollment && !hasSkippedPrerequisites)
+        || (!isEnrolled && !skipped) 
+          ? "opacity-50"
+          : "opacity-100"
+      }`}
+    >
+      <div>
+        <label className="mb-2 block text-lg font-medium">Section</label>
+        <Select
+          value={selectedSection?.section_name}
+          onValueChange={handleSectionSelect}
+          disabled={
+            (isEnrolled && !showReEnrollment) || (!isEnrolled && !skipped) 
+          }
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Select a section" />
+          </SelectTrigger>
+          <SelectContent>
+            {sections.map((sec: any) => (
+              <SelectItem key={sec.section_name} value={sec.section_name}>
+                {sec.section_name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      {selectedSection && (
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <h3 className="text-xl font-semibold">
+              {selectedSection.section_name}
+            </h3>
+            <div className="flex gap-4">
+              <Badge variant="outline">{selectedSection.section_code}</Badge>
+              <Badge variant="outline">{selectedSection.language}</Badge>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="flex items-baseline gap-2">
+              <FaUsers className="h-4 w-4 text-muted-foreground" />
+              <div className="flex flex-col">
+                <p className="text-sm text-muted-foreground">Available Seats</p>
+                <p className="text-sm font-medium">
+                  {selectedSection.total_seats - selectedSection.booked_seats}{" "}
+                  of {selectedSection.total_seats}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-baseline gap-2 sm:place-self-end">
+              <FaCalendarAlt className="h-4 w-4 text-muted-foreground" />
+              <div className="flex flex-col">
+                <p className="text-sm text-muted-foreground">
+                  Class Start Date
+                </p>
+                <p className="text-sm font-medium">
+                  {new Date(selectedSection.start_date!).toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "short",
+                      day: "2-digit",
+                    },
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+          <Separator />
+          <div className="space-y-2">
+            <h4 className="mb-3 text-base font-medium">Class Schedule</h4>
+            <div className="grid gap-0">
+              {selectedSection.class_time_slots.map(
+                (slot: any, index: number) => (
+                  <div
+                    key={index}
+                    className="flex flex-col rounded-md bg-muted/20 p-2 text-sm sm:flex-row sm:items-center sm:justify-between"
+                  >
+                    <div className="mb-1 flex items-center gap-2 sm:mb-0">
+                      <FaClock className="h-4 w-4 capitalize text-muted-foreground" />
+                      <span>{slot.time_slot_day.slice(0, 3)}</span>
+                    </div>
+                    <span className="text-muted-foreground sm:mx-2">
+                      {formatTimeToUserGMT(slot.slot_start_time)} -{" "}
+                      {formatTimeToUserGMT(slot.slot_end_time)}
+                    </span>
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <label className="mb-2 block text-lg font-medium">Payment Method</label>
+        <Select
+          value={paymentMethod}
+          onValueChange={setPaymentMethod}
+          disabled={
+            !selectedSection ||
+            (isEnrolled && !showReEnrollment) ||
+            (!isEnrolled && !skipped)
+          }
+        >
+          <SelectTrigger>
+            <SelectValue>
+              <div className="flex items-center gap-2">
+                <FaCreditCard className="h-4 w-4" />
+                Stripe
+              </div>
+            </SelectValue>
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="STRIPE">
+              <div className="flex items-center gap-2">
+                <FaCreditCard className="h-4 w-4" />
+                Stripe
+              </div>
+            </SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {enrollmentError && (
+        <Alert
+          variant="destructive"
+          className="flex items-center gap-2 border-2"
+        >
+          <div>
+            <FaExclamationCircle className="h-4 w-4" />
+          </div>
+          <div>
+            <AlertDescription>{enrollmentError}</AlertDescription>
+          </div>
+        </Alert>
+      )}
+
+      <Button
+        className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
+          selectedSection &&
+          !isPending &&
+          (!isEnrolled ||
+            (isEnrolled && showReEnrollment && hasSkippedPrerequisites))
+            ? "bg-accent text-white hover:bg-[#18c781]"
+            : "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
+        }`}
+        size="lg"
+        disabled={
+          !selectedSection ||
+          isPending ||
+          (isEnrolled && !showReEnrollment) ||
+          (isEnrolled && showReEnrollment && !hasSkippedPrerequisites)
+        }
+        onClick={handleEnroll}
+      >
+        {isPending ? (
+          <>
+            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+            Enrolling...
+          </>
+        ) : (
+          "Enroll"
+        )}
+      </Button>
+    </CardContent>
+  );
+
+  return (
+    <div className="mx-auto max-w-3xl bg-background">
+      <Card className="rounded-none border-0 bg-background shadow-none">
+        <CardHeader>
+          <CardTitle className="text-3xl">Course Enrollment</CardTitle>
+          <CardDescription>
+            {isEnrolled
+              ? showReEnrollment
+                ? "Select your preferred section and complete re-enrollment"
+                : "You are already enrolled in this course"
+              : "Select your preferred section and complete enrollment"}
+          </CardDescription>
+        </CardHeader>
+        {isEnrolled && !showReEnrollment && (
+          <CardContent className="space-y-4">
+            <div className="rounded-lg bg-gray-100 p-4">
+              <p className="text-lg font-medium">Already enrolled in course</p>
+            </div>
+            <div className="flex gap-4">
+              <Button
+                variant="outline"
+                className="flex-1 transition-all duration-300 ease-in-out hover:border-accent hover:bg-transparent"
+                onClick={() => setShowReEnrollment(true)}
+              >
+                Enroll Again
+              </Button>
+              <Button
+                className="flex-1 bg-accent text-white transition-all duration-300 ease-in-out hover:bg-[#18c781]"
+                onClick={() => router.push("/dashboard")}
+              >
+                Go to Dashboard
+              </Button>
+            </div>
+          </CardContent>
+        )}
+         {((isEnrolled && showReEnrollment) || !isEnrolled) && renderPrerequisites()}
+         {renderEnrollmentForm()}
+      </Card>
+    </div>
+  );
+}
