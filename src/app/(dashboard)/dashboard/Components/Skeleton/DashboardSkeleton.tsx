@@ -6,7 +6,7 @@ const DashboardSkeleton: React.FC = () => {
       <h1 className="font-poppins mb-4 text-sm font-medium text-textPrimary/90 fold:text-base mobileM:text-xl md:text-3xl">
         Enrolled Courses
       </h1>
-      <section className="mb-8 mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-8 sm:gap-y-12 lg:grid-cols-2">
         {[1, 2, 3, 4].map((index) => (
           <CourseCardSkeleton key={index} />
         ))}
