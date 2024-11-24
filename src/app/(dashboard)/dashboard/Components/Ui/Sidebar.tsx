@@ -14,6 +14,8 @@ import { IoLibraryOutline } from "react-icons/io5";
 import { SlBookOpen } from "react-icons/sl";
 import { SidebarProps } from "../../types/types";
 import LogoutDialog from "../Dialog/LogoutDialog";
+import { Tooltip } from "../../../../../components/ui/Tooltip";
+import { cn } from "@/src/lib/utils";
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,7 +106,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
         </div>
         <nav className="mt-10 flex-1 space-y-2">
           {menuItems.map((item) => (
-            <div key={item.label} className="group relative">
+            <Tooltip
+              key={item.label}
+              text={item.label}
+              position="right"
+              className={!isOpen ? "" : "hidden"}
+            >
               <Link
                 href={item.href}
                 aria-label={`Go to ${item.label}`}
@@ -112,48 +119,44 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
               >
                 <item.icon className="min-w-[2rem] text-2xl" />
                 <span
-                  className={`ml-4 text-base transition-all duration-300 ease-in-out ${isOpen
-                      ? "visible opacity-100 delay-100"
-                      : "invisible opacity-0"
-                    }`}
+                  className={cn(
+                    "ml-4 text-base transition-all duration-300 ease-in-out",
+                    isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                  )}
                 >
                   {item.label}
                 </span>
               </Link>
-              {!isOpen && (
-                <div className="absolute left-full top-1/2 -translate-y-1/2 transform rounded-md bg-accent px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {item.label}
-                </div>
-              )}
-            </div>
+            </Tooltip>
           ))}
         </nav>
 
         <div className="mb-4 mt-auto">
           {menuItemsBottom.map((item) => (
-            <div key={item.label} className="group relative">
+            <Tooltip
+              key={item.label}
+              text={item.label}
+              position="right"
+              className={!isOpen ? "" : "hidden"}
+            >
               <button
                 onClick={item.onClick}
                 className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
               >
                 <item.icon className="min-w-[2rem] text-2xl" />
                 <span
-                  className={`ml-4 text-base transition-all duration-300 ease-in-out ${isOpen
-                      ? "visible opacity-100 delay-100"
-                      : "invisible opacity-0"
-                    }`}
+                  className={cn(
+                    "ml-4 text-base transition-all duration-300 ease-in-out",
+                    isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                  )}
                 >
                   {item.label}
                 </span>
               </button>
-              {!isOpen && (
-                <div className="absolute left-full top-1/2 -translate-y-1/2 transform rounded-md bg-accent px-2 py-1 text-sm text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {item.label}
-                </div>
-              )}
-            </div>
+            </Tooltip>
           ))}
         </div>
+
       </div>
 
       <main className="flex-1 p-6 transition-all duration-300">

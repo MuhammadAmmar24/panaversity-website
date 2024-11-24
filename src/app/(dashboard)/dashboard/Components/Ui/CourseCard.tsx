@@ -12,6 +12,7 @@ import { HiMiniCalendar } from "react-icons/hi2";
 import { TbClockHour3 } from "react-icons/tb";
 import { RiRobot2Line } from "react-icons/ri";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
+import { Tooltip } from "../../../../../components/ui/Tooltip";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -253,20 +254,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
         <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-between border-t bg-gray-100">
           {icons.map((icon, index) => (
-            <div key={index} className="group relative">
+            <Tooltip
+              key={index}
+              text={icon.name}
+              position="top"
+              className={status === "active" ? "" : "hidden"}
+            >
               <Link
                 href={icon.link}
                 target="_blank"
-                className={`${icon.className}`}
+                className={icon.className}
               >
                 {icon.component}
               </Link>
-              {status === "active" && (
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-max rounded-md bg-accent px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  {icon.name}
-                </div>
-              )}
-            </div>
+            </Tooltip>
           ))}
         </div>
         
