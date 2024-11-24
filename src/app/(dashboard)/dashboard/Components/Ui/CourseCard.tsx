@@ -115,7 +115,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       component: <FaGithub />,
       link: "/",
       name: "GitHub",
-      className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale-105 transition-all duration-300 ease-in-out block m-0 p-0 ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+      className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale- transition-all duration-300 ease-in-out block m-0 p-0 ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
     },
     {
       component: <SiZoom />,
@@ -258,7 +258,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 href={icon.link}
                 target="_blank"
                 className={`${icon.className}`}
-                title={icon.name}
               >
                 {icon.component}
               </Link>

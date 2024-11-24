@@ -118,7 +118,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           >
             <TfiHelp className="h-5 w-5 text-gray-700" />
             <span className="text-xs text-gray-700 sm:text-sm">
-              Help Center
+              Help
             </span>
           </li>
 
@@ -130,7 +130,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             role="menuitem"
           >
             <CiLogout className="h-5 w-5 text-gray-700" />
-            <span className="text-xs text-gray-700 sm:text-sm">Sign Out</span>
+            <span className="text-xs text-gray-700 sm:text-sm">Logout</span>
           </li>
         </ul>
       </div>
