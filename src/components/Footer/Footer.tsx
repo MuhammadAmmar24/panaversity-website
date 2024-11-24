@@ -31,6 +31,9 @@ const socialIcons = [
 ];
 
 const Footer: React.FC = () => {
+
+  const currentYear = new Date().getFullYear(); // Get current year dynamically
+
   return (
     <footer className="bg-[#031811] pt-[4.5rem] text-white">
       <div className="flex w-full justify-center">
@@ -93,7 +96,7 @@ const Footer: React.FC = () => {
 
       {/* Bottom copyright section */}
       <div className="mt-14 flex h-16 items-center justify-center bg-[#041F16] text-center text-sm text-gray-400">
-        © Copyright 2024 Panaversity, Inc.
+        © Copyright {currentYear} Panaversity, Inc.
       </div>
     </footer>
   );

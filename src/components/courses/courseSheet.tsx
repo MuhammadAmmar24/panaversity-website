@@ -42,22 +42,39 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   sections,
 }) => {
 
-
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
-  const [selectedSection, setSelectedSection] = useState(
-    sections && sections.length > 0 ? sections[0] : null,
-  );
 
   const [currentPage, setCurrentPage] = useState(0);
 
   const sectionsPerPage = 3;
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
-  const visibleSections = sections.slice(
+  const router = useRouter();
+
+  const isStudentEnrolledInSection = (sectionId: number) => {
+    return student_courses?.some(course => course.section?.id === sectionId);
+  };
+
+  const sortedSections = [...sections].sort((a, b) => {
+    const isAEnrolled = isStudentEnrolledInSection(a.id);
+    const isBEnrolled = isStudentEnrolledInSection(b.id);
+    
+    if (isAEnrolled && !isBEnrolled) return 1;
+    if (!isAEnrolled && isBEnrolled) return -1;
+    return 0;
+  });
+
+  let visibleSections = sortedSections.slice(
     currentPage * sectionsPerPage,
-    (currentPage + 1) * sectionsPerPage,
+    (currentPage + 1) * sectionsPerPage
   );
 
+
+  const [selectedSection, setSelectedSection] = useState(
+    sections && sections.length > 0 ? visibleSections[0] : null
+  );
+
+  
   const showArrows = sections.length > 3;
 
   const handleNextPage = () => {
@@ -68,28 +85,34 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const router = useRouter();
-
-  async function handleClick() {
+  const handleClick = () => {
     if (!isLoggedIn) {
+      // Redirect to register page if not logged in
       localStorage.setItem("previousPath", window.location.pathname);
       router.push("/register");
+    } else if (isStudentEnrolledInSection(selectedSection?.id!)) {
+      // If the user is already enrolled, navigate to dashboard
+      router.push("/dashboard");
     } else {
+      // Otherwise, open the enrollment sheet
       setOpen(true);
     }
-  }
+  };
+  
+
+  const getEnrollButtonText = (sectionId: number) => {
+    if (!is_active) return "Registration Closed";
+    return isStudentEnrolledInSection(sectionId) ? "Already Enrolled" : "Enroll Now";
+  };
 
   useEffect(() => {
     const handleResize = () => {
       setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
     };
 
-    handleResize(); // Call once on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (!sections || sections.length === 0) {
@@ -131,7 +154,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
             Available Sections:
           </p>
           <Tabs
-            defaultValue={sections[0].id.toString()}
+            defaultValue={visibleSections[0].id.toString()}
             onValueChange={(value) =>
               setSelectedSection(
                 sections.find((section) => section.id.toString() === value) ||
@@ -218,7 +241,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                   </div>
 
                   <ul className="space-y-2">
-                    {section?.class_time_slots?.map((slot, index) => (
+                    {section?.class_time_slots?.map((slot:any, index:any) => (
                       <li
                         key={index}
                         className="grid grid-cols-3 items-center justify-between capitalize"
@@ -262,18 +285,17 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           </Tabs>
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
-          <button
-            onClick={handleClick}
-            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${is_active
-                ? "hover:bg-emerald-500"
-                : "cursor-not-allowed bg-gray-400"
-              }`}
-            disabled={!is_active}
-          >
-            {is_active ? "Enroll Now" : "Registration Closed"}
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </button>
-        </CardFooter>
+      <button
+        onClick={handleClick}
+        className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
+          is_active ? "hover:bg-emerald-500" : "cursor-not-allowed bg-gray-400"
+        }`}
+        disabled={!is_active}
+      >
+        {getEnrollButtonText(selectedSection?.id!)}
+        <ChevronRight className="ml-2 h-5 w-5" />
+      </button>
+    </CardFooter>
       </Card>
 
       <SheetContent
@@ -297,7 +319,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
-          sections={sections || []}
+          sections={sections.filter(section => 
+            !student_courses?.some(course => course.section?.id === section.id)
+          )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
         />
