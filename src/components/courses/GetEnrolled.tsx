@@ -1091,9 +1091,6 @@ export default function GetEnrolled({
   selected_section_name,
   isEnrolled,
 }: any) {
-
-
-
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [selectedSection, setSelectedSection] = useState<any>(
@@ -1102,7 +1099,6 @@ export default function GetEnrolled({
   const [paymentMethod, setPaymentMethod] = useState("STRIPE");
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [showReEnrollment, setShowReEnrollment] = useState(false);
-  const [skippedPrerequisites, setSkippedPrerequisites] = useState(false);
   const [hasSkippedPrerequisites, setHasSkippedPrerequisites] = useState(false);
   const [isAccordionOpen, setIsAccordionOpen] = useState<string | undefined>(
     "prerequisites",
@@ -1139,28 +1135,61 @@ export default function GetEnrolled({
     };
   };
 
-  const notEnrolledCourses = pre_requisite.filter(
-    (pre_req: any) => !findStudentCourse(pre_req.course_code),
-  );
+  
+  const shouldDisableForm = () => {
+    // If not enrolled and there are prerequisites that haven't been skipped
+    if (!isEnrolled && !skipped && pre_requisite.length > 0) {
+      return true;
+    }
+    
+    // If enrolled but not showing re-enrollment form
+    if (isEnrolled && !showReEnrollment) {
+      return true;
+    }
+    
+    // If enrolled, showing re-enrollment form, but prerequisites haven't been skipped
+    if (isEnrolled && showReEnrollment && !skipped && pre_requisite.length > 0) {
+      return true;
+    }
+    
+    // If not enrolled and no prerequisites
+    if (!isEnrolled && pre_requisite.length === 0) {
+      return false;
+    }
+    
+    return false;
+  };
 
+  const getNotCompletedPreReqs = () => {
+    return        pre_requisite?.filter(
+      (pre_req: any) => !findStudentCourse(pre_req.course_code),
+    ) || [];
+  };
 
   useEffect(() => {
+    const notCompletedPreReqs = getNotCompletedPreReqs();
 
-    if (!notEnrolledCourses.length) {
-      setSkipped(true);
-    }
+  if (notCompletedPreReqs.length == 0) {
+    console.log("notCompletedPreReqs.length > 0")
+    setSkipped(true);
+  } 
 
-    const message =
-      notEnrolledCourses.length === 1
-        ? "pre-requisite course"
-        : "all pre-requisite courses";
-
-    if (!skipped) {
-      setSkippedMessage(`Skip ${message}`);
+    // Only set skip message if there are incomplete prerequisites
+    if (notCompletedPreReqs.length > 0) {
+      const message = notCompletedPreReqs.length === 1 
+        ? "Skip pre-requisite course" 
+        : "Skip all pre-requisite courses";
+        
+      if (!skipped) {
+        setSkippedMessage(message);
+      } else {
+        setSkippedMessage(`You skipped ${notCompletedPreReqs.length === 1 ? 'pre-requisite course' : 'all pre-requisite courses'}`);
+      }
     } else {
-      setSkippedMessage(`You skipped ${message}`);
+      setSkippedMessage("");
     }
-  }, [notEnrolledCourses.length, skipped]);
+  }, [pre_requisite, student_courses, skipped]);
+  
 
   const handleSectionSelect = (sectionName: string) => {
     const section = sections.find(
@@ -1217,97 +1246,92 @@ export default function GetEnrolled({
     (isEnrolled && !showReEnrollment) ||
     (isEnrolled && showReEnrollment && !hasSkippedPrerequisites);
 
-  const renderPrerequisites = () => (
-    <div className="mx-auto max-w-full rounded-3xl p-4 sm:p-5">
-      <Accordion
-        type="single"
-        collapsible
-        value={isAccordionOpen}
-        onValueChange={setIsAccordionOpen}
-      >
-        <AccordionItem value="prerequisites">
-          <AccordionTrigger className="text-xl font-bold hover:no-underline">
-            Prerequisites
-          </AccordionTrigger>
-          <AccordionContent>
-            {pre_requisite.length > 0 ? (
-              <div>
-                {pre_requisite.map((pre_req: any, index: any) => {
-                  const { statusText, statusClass, linkHref } = getCourseStatus(
-                    findStudentCourse(pre_req.course_code),
-                    pre_req.course_code,
-                  );
-
-                  return (
-                    <div
-                      className="mb-3 rounded-lg border-2 px-4 py-1 transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:shadow-md"
-                      key={index}
-                    >
-                      <Link href={linkHref}>
-                        <div className="text-base font-normal leading-relaxed text-textPrimary/90">
-                          <div className="flex items-center justify-between gap-4">
-                            <div className="flex flex-col items-start justify-center">
-                              <span className="underline decoration-accent decoration-2">
-                                {pre_req.course_code}
-                              </span>
-                              <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
-                                {pre_req.course_name}
+    const renderPrerequisites = () => (
+      <div className="mx-auto max-w-full rounded-3xl p-4 sm:p-5">
+        <Accordion
+          type="single"
+          collapsible
+          value={isAccordionOpen}
+          onValueChange={setIsAccordionOpen}
+        >
+          <AccordionItem value="prerequisites">
+            <AccordionTrigger className="text-xl font-bold hover:no-underline">
+              Prerequisites
+            </AccordionTrigger>
+            <AccordionContent>
+              {pre_requisite.length > 0 ? (
+                <div>
+                  {pre_requisite.map((pre_req: any, index: any) => {
+                    const { statusText, statusClass, linkHref } = getCourseStatus(
+                      findStudentCourse(pre_req.course_code),
+                      pre_req.course_code,
+                    );
+    
+                    return (
+                      <div
+                        className="mb-3 rounded-lg border-2 px-4 py-1 transition-all duration-300 ease-in-out hover:-translate-y-[1px] hover:shadow-md"
+                        key={index}
+                      >
+                        <Link href={linkHref}>
+                          <div className="text-base font-normal leading-relaxed text-textPrimary/90">
+                            <div className="flex items-center justify-between gap-4">
+                              <div className="flex flex-col items-start justify-center">
+                                <span className="underline decoration-accent decoration-2">
+                                  {pre_req.course_code}
+                                </span>
+                                <span className="line-clamp-1 text-[0.6rem] font-normal text-textSecondary mobileM:text-[0.8rem] sm:text-[0.9rem]">
+                                  {pre_req.course_name}
+                                </span>
+                              </div>
+                              <span
+                                className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
+                              >
+                                {statusText}
                               </span>
                             </div>
-                            <span
-                              className={`text-[0.6rem] mobileM:text-[0.8rem] sm:text-[1rem] ${statusClass}`}
-                            >
-                              {statusText}
-                            </span>
                           </div>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-[0.9rem] font-normal leading-relaxed text-muted-foreground">
-                There are no pre-requisites for this course.
-              </p>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <p className="text-[0.9rem] font-normal leading-relaxed text-muted-foreground">
+                  There are no pre-requisites for this course.
+                </p>
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+        {getNotCompletedPreReqs().length > 0 && (
+          <div className="mt-3 flex items-center gap-3 lg:justify-between">
+            {!skipped && (
+              <Button
+                onClick={handleSkip}
+                className="rounded-lg px-6 py-0.5 text-sm transition-all duration-300 ease-in-out hover:bg-gray-950/80"
+              >
+                Skip
+              </Button>
             )}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-      {!hasSkippedPrerequisites && pre_requisite.length > 0 && (
-        <div className="mt-3 flex items-center gap-3 lg:justify-between">
-          {skipped || (
-            <Button
-              onClick={handleSkip}
-              className="rounded-lg px-6 py-0.5 text-sm transition-all duration-300 ease-in-out hover:bg-gray-950/80"
-            >
-              Skip
-            </Button>
-          )}
-          <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
-            {skippedMessage}
-          </span>
-        </div>
-      )}
-    </div>
-  );
+            <span className="text-[0.8rem] text-red-500 mobileM:text-[0.9rem] sm:text-[1rem]">
+              {skippedMessage}
+            </span>
+          </div>
+        )}
+      </div>
+    );
 
   const renderEnrollmentForm = () => (
-    <CardContent
-      className={`space-y-8 ${(isEnrolled && !skipped) || (!isEnrolled && !skipped) ? "opacity-50" : "opacity-100"
-        }`}
+<CardContent
+      className={`space-y-8 ${shouldDisableForm() ? "opacity-50" : "opacity-100"}`}
     >
-
       <div>
         <label className="mb-2 block text-lg font-medium">Section</label>
         <Select
-  value={selectedSection?.section_name}
-  onValueChange={handleSectionSelect}
-  disabled={
-    isEnrolled && !skipped || !isEnrolled && !skipped
-  }
->
-
+          value={selectedSection?.section_name}
+          onValueChange={handleSectionSelect}
+           disabled={shouldDisableForm()}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select a section" />
           </SelectTrigger>
@@ -1391,13 +1415,11 @@ export default function GetEnrolled({
       <div>
         <label className="mb-2 block text-lg font-medium">Payment Method</label>
         <Select
-  value={paymentMethod}
-  onValueChange={setPaymentMethod}
-  disabled={
-    isEnrolled && !skipped || !isEnrolled && !skipped
-  }
->
+          value={paymentMethod}
+          onValueChange={setPaymentMethod}
+           disabled={shouldDisableForm()}
 
+        >
           <SelectTrigger>
             <SelectValue>
               <div className="flex items-center gap-2">
@@ -1431,18 +1453,17 @@ export default function GetEnrolled({
         </Alert>
       )}
 
-<Button
-  className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${(isEnrolled && !skipped) || (!isEnrolled && !skipped)
-      ? "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300" 
-      : "bg-accent text-white hover:bg-[#18c781]"
-  }`}
-  size="lg"
-  disabled={
-    isEnrolled && !skipped || !isEnrolled && !skipped
-  }
-  onClick={handleEnroll}
->
+      <Button
+        className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
+          shouldDisableForm()
+            ? "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
+            : "bg-accent text-white hover:bg-[#18c781]"
+        }`}
+        size="lg"
+         disabled={shouldDisableForm()}
 
+        onClick={handleEnroll}
+      >
         {isPending ? (
           <>
             <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
@@ -1478,7 +1499,7 @@ export default function GetEnrolled({
                 variant="outline"
                 className="flex-1 transition-all duration-300 ease-in-out hover:border-accent hover:bg-transparent"
                 onClick={() => setShowReEnrollment(true)}
-              >
+                >
                 Enroll Again
               </Button>
               <Button
@@ -1490,7 +1511,8 @@ export default function GetEnrolled({
             </div>
           </CardContent>
         )}
-        {((isEnrolled && showReEnrollment) || !isEnrolled) && renderPrerequisites()}
+        {((isEnrolled && showReEnrollment) || !isEnrolled) &&
+          renderPrerequisites()}
         {renderEnrollmentForm()}
       </Card>
     </div>
