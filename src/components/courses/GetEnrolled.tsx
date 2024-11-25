@@ -69,29 +69,29 @@ export default function GetEnrolled({
       (course: any) => course?.course_code?.trim() === courseCode.trim(),
     );
 
-  const getCourseStatus = (studentCourse: any, courseCode: string) => {
-    if (!studentCourse) {
+    const getCourseStatus = (studentCourse: any, courseCode: string) => {
+      if (!studentCourse || studentCourse.student_course_status === "expired_reservation") {
+        return {
+          statusText: "Not Enrolled",
+          statusClass: "text-red-600",
+          linkHref: `/programs/flagship-program/${courseCode.trim()}`,
+        };
+      }
+    
+      if (studentCourse.is_graduated) {
+        return {
+          statusText: "Completed",
+          statusClass: "text-green-500",
+          linkHref: "/dashboard",
+        };
+      }
+    
       return {
-        statusText: "Not Enrolled",
-        statusClass: "text-red-600",
-        linkHref: `/programs/flagship-program/${courseCode.trim()}`,
-      };
-    }
-
-    if (studentCourse.is_graduated) {
-      return {
-        statusText: "Completed",
-        statusClass: "text-green-500",
+        statusText: "In Progress",
+        statusClass: "text-yellow-500",
         linkHref: "/dashboard",
       };
-    }
-
-    return {
-      statusText: "In Progress",
-      statusClass: "text-yellow-500",
-      linkHref: "/dashboard",
     };
-  };
 
   const shouldDisableForm = () => {
     // If not enrolled and there are prerequisites that haven't been skipped
@@ -124,20 +124,21 @@ export default function GetEnrolled({
 
   const getNotCompletedPreReqs = () => {
     return (
-      pre_requisite?.filter(
-        (pre_req: any) => !findStudentCourse(pre_req.course_code),
-      ) || []
+      pre_requisite?.filter((pre_req: any) => {
+        const studentCourse = findStudentCourse(pre_req.course_code);
+        return !studentCourse || studentCourse.student_course_status === "expired_reservation";
+      }) || []
     );
   };
+  
 
   useEffect(() => {
     const notCompletedPreReqs = getNotCompletedPreReqs();
-
+ 
     if (notCompletedPreReqs.length == 0) {
-      console.log("notCompletedPreReqs.length > 0");
       setSkipped(true);
     }
-
+ 
     // Only set skip message if there are incomplete prerequisites
     if (notCompletedPreReqs.length > 0) {
       const message =
