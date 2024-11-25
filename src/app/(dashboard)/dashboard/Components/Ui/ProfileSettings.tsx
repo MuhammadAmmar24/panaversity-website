@@ -150,7 +150,6 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   return (
     <div className="mx-auto py-8">
       <div className="mx-auto overflow-hidden rounded-lg bg-white shadow-lg">
-        {/* Profile header */}
         <div className="bg-gray-100 p-6 sm:p-8">
           <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-x-6 sm:space-y-0">
             <Image
@@ -186,7 +185,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                   Student ID
                 </p>
                 <p className="pt-2 text-sm text-gray-800">
-                  {personalInfo.studentId || "-"}
+                  {personalInfo.studentId ? personalInfo.studentId.substring(0, 5) : "-"}
                 </p>
               </div>
             </div>
@@ -252,8 +251,8 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           {statusMessage && (
             <div
               className={`mt-6 rounded-md p-4 ${statusMessage.includes("Error")
-                  ? "bg-red-100 text-red-800"
-                  : "bg-green-100 text-green-800"
+                ? "bg-red-100 text-red-800"
+                : "bg-green-100 text-green-800"
                 }`}
             >
               {statusMessage}

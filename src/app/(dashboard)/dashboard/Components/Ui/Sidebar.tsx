@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   return (
     <aside ref={sidebarRef} className="relative flex h-screen">
       <div
-        className={`fixed z-40 flex h-full flex-col bg-white text-black shadow-2xl transition-all duration-500 ${isOpen ? "w-60" : "w-12"
+        className={`fixed z-40 flex h-full flex-col bg-white text-black shadow-2xl transition-all duration-500 ${isOpen ? "w-48" : "w-12"
           }`}
         onClick={(e) => {
           const target = e.target as Element;

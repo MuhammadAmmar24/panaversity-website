@@ -1,8 +1,7 @@
 "use client";
-// import { getCoursePrice } from "@/src/app/actions/courses";
 import { processPayment } from "@/src/app/actions/payment";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { CourseCardProps } from "../../types/types";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { FaYoutube, FaGithub, FaBullhorn } from "react-icons/fa";
@@ -27,55 +26,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
   course_price
 }) => {
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
-  // const [enrollmentPackage, setEnrollmentPackage] = useState<number | null>(
-  //   null,
-  // );
 
   const router = useRouter();
-
-  // useEffect(() => {
-  //   const fetchEnrollmentPrice = async () => {
-  //     const query = { course_batch_program_id: course_batch_program_id };
-  //     const price_result = await getCoursePrice(query);
-
-  //     if (price_result.type == "success" && price_result.data) {
-  //       setEnrollmentPackage(price_result?.data.package_id);
-  //     }
-  //   };
-
-  //   fetchEnrollmentPrice();
-  // });
 
   const ReEnroll = () => {
     router.push(`programs/flagship-program/${course_code}`);
   };
-
-  // const handleEnroll = async (paymentMethod: string) => {
-  //   try {
-  //     const payload: any = {
-  //       batch_no: batch_id,
-  //       package_id: enrollmentPackage,
-  //       student_course_id: student_course_id,
-  //       student_id: profile?.id,
-  //       vendor_type: paymentMethod,
-  //     };
-
-  //     const result: any = await processPayment(payload);
-
-  //     if (result.type === "success") {
-  //       const url = result?.data?.stripe?.stripe_url;
-  //       if (url) {
-  //         window.location.href = url;
-  //       } else {
-  //         console.error("Stripe URL not found.");
-  //       }
-  //     } else {
-  //       console.error("API Error:", result.message);
-  //     }
-  //   } catch (error) {
-  //     console.error("Enrollment failed:", error);
-  //   }
-  // };
 
   const handleEnroll = async (paymentMethod: string) => {
     try {
