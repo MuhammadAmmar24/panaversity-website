@@ -31,6 +31,8 @@ const CourseCard: React.FC<CourseCardProps> = ({
   //   null,
   // );
 
+
+
   const router = useRouter();
 
   // useEffect(() => {

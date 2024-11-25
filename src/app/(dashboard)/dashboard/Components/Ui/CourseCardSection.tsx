@@ -8,6 +8,8 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
 }) => {
   const profile: ProfileData = await fetchProfile();
 
+
+
   return (
     <div className="my-10 sm:my-14">
       <h1 className="font-poppins mb-4 text-sm font-medium text-textPrimary/90 fold:text-base mobileM:text-xl md:text-3xl">
@@ -23,7 +25,7 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
               title={course.title}
               progress={course.progress}
               classes={course.classes}
-              status={"active"}
+              status={course.status}
               batch_id={course.batch_no}
               student_course_id={course.student_course_id}
               profile={profile}
