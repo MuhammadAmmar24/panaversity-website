@@ -10,7 +10,6 @@ import ProgramOverview from "@/src/components/ProgramOverview";
 import Programs from "@/src/components/Programs";
 import ScrollToTopButton from "@/src/components/ScrollToTopButton";
 import Testimonials from "../components/Testimonials/Testimonials";
-import WhatsAppIcon from "../components/WhatsAppIcon";
 
 export const dynamic = "force-static";
 
@@ -27,8 +26,7 @@ export default function Home() {
       <Testimonials />
       <Faq />
       <CTAsection />
-      {/* <ScrollToTopButton /> */}
-      <WhatsAppIcon />
+      <ScrollToTopButton />
       <Footer />
     </>
   );
