@@ -1,13 +1,9 @@
-import { getCoursePrice } from "@/src/lib/coursePrice";
+import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import fetchProfile from "@/src/lib/getProfile";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import { getTimeSlotsForCourseBatchProgram } from "@/src/lib/getTimeSlots";
 import {
-  CourseEnrollmentResponse,
-  GetCoursePriceResponse,
-  TimeSlotsResponse,
+  CourseEnrollmentResponse
 } from "@/src/lib/schemas/courses";
-import { isValidToken } from "@/src/lib/tokenValidity";
 import {
   CourseDetailsClientProps,
   CourseInfoProps,
@@ -19,7 +15,6 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import CourseSheet from "./courseSheet";
 import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./Ratingstar";
-import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -61,7 +56,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
 
   const sections = await getCourseActiceSections(course_code);
 
-  const isLoggedIn: boolean = await isValidToken();
   let isEnrolled: boolean = false;
 
   let student_courses: any = [];
@@ -165,7 +159,6 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
                     isEnrolled={isEnrolled}
                     coursePrice={coursePrice}
                     courseName={course_name}
-                    isLoggedIn={isLoggedIn}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
                     sections={sections.data || []}

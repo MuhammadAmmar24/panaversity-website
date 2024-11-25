@@ -29,14 +29,13 @@ import { GrLanguage } from "react-icons/gr";
 import { SiGoogleclassroom } from "react-icons/si";
 import { SlCalender } from "react-icons/sl";
 
-const CourseSheet: React.FC<CourseSheetProps> = ({
+const CourseSheet: React.FC<CourseSheetProps> =  ({
   is_active,
   program_id,
   profile_id,
   isEnrolled,
   coursePrice,
   courseName,
-  isLoggedIn,
   pre_requisite,
   student_courses,
   sections,
@@ -50,6 +49,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const sectionsPerPage = 3;
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
+
+
 
 
   const isStudentEnrolledInSection = (sectionId: number) => {
@@ -89,16 +90,33 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const handleClick = () => {
-    if (!isLoggedIn) {
-      // Redirect to register page if not logged in
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch("/api/", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Auth check failed");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Auth check error:", error);
+      return null;
+    }
+  };
+
+  const handleClick = async () => {
+    const isLoggedIn = await checkAuthStatus();
+    if (!isLoggedIn.isAuthenticated) {
       localStorage.setItem("previousPath", window.location.pathname);
       router.push("/register");
     } else if (isStudentEnrolledInSection(selectedSection?.id!)) {
-      // If the user is already enrolled, navigate to dashboard
       router.push("/dashboard");
     } else {
-      // Otherwise, open the enrollment sheet
       setOpen(true);
     }
   };
@@ -121,25 +139,25 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
 
   if (!sections || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
-          <div className="flex items-center justify-between">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2 ">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4 ">
+          <div className="flex items-center justify-between -mb-2 xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
             <span className="text-2xl font-bold">
               {coursePrice.currency.toUpperCase()} {coursePrice.amount}
             </span>
           </div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
+        <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-4 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0 ">
           <button
             onClick={handleClick}
-            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${is_active
+            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${!(sections.length == 0)
                 ? "hover:bg-emerald-500"
                 : "cursor-not-allowed bg-gray-400"
               }`}
-            disabled={!is_active}
+            disabled={sections.length == 0}
           >
-            {is_active ? "Enroll Now" : "Registration Closed"}
+            {!(sections.length == 0) ? "Enroll Now" : "Registration Closed"}
             <ChevronRight className="ml-2 h-5 w-5" />
           </button>
         </CardFooter>
@@ -153,7 +171,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
       <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4 -mb-3 xl:mb-2">
           <p className="text-xs mb-1 font-semibold text-primary">
             Available Sections:
           </p>
@@ -207,9 +225,8 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
               <TabsContent
                 key={section.id}
                 value={section.id.toString()}
-                className="mb-2"
               >
-                <div className="space-y-2 text-sm">
+                <div className="space-y-2  text-sm">
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-xs text-red-500">
                       Registration Deadline:{" "}

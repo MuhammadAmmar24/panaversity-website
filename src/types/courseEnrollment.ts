@@ -61,7 +61,6 @@ export interface CourseSheetProps {
   isEnrolled: boolean;
   coursePrice: GetCoursePriceResponse;
   courseName: string;
-  isLoggedIn: boolean;
   pre_requisite: Pre_req_obj[];
   student_courses: CourseEnrollment[];
   sections: CourseSections[];

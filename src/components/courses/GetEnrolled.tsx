@@ -136,7 +136,6 @@ export default function GetEnrolled({
     const notCompletedPreReqs = getNotCompletedPreReqs();
  
     if (notCompletedPreReqs.length == 0) {
-      console.log("notCompletedPreReqs.length > 0");
       setSkipped(true);
     }
  
