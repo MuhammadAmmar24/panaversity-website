@@ -15,7 +15,9 @@ const Verify = () => {
     return (
       <div className="flex items-center justify-center">
         <CardWrapper headerLabel="Update Password">
+        <div className="p-4 mobileM:p-2">
           <UpdatePassword token={token} />
+          </div>
         </CardWrapper>
       </div>
     );

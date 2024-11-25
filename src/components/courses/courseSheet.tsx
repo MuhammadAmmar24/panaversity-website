@@ -51,9 +51,13 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
 
+
   const isStudentEnrolledInSection = (sectionId: number) => {
-    return student_courses?.some(course => course.section?.id === sectionId);
-  };
+    return student_courses?.some(course => 
+      course.section?.id === sectionId && 
+      course.student_course_status !== "expired_reservation"
+    );
+  }
 
   const sortedSections = [...sections].sort((a, b) => {
     const isAEnrolled = isStudentEnrolledInSection(a.id);
@@ -162,7 +166,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
               )
             }
           >
-            <div className="flex items-start justify-center">
+            <div className="flex items-center justify-center">
               {showArrows && (<button
                 onClick={handlePrevPage}
                 className={`rounded-full p-2 text-primary hover:text-accent-foreground ${currentPage === 0 ? "opacity-25" : ""
@@ -173,7 +177,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                 <FaChevronLeft className="h-4 w-4" />
               </button>)}
               <TabsList
-                className={`mb-1 grid w-full overflow-auto ${visibleSections.length === 1
+                className={`grid w-full overflow-auto ${visibleSections.length === 1
                     ? "grid-cols-1"
                     : visibleSections.length === 2
                       ? "grid-cols-2"
@@ -320,7 +324,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections.filter(section => 
-            !student_courses?.some(course => course.section?.id === section.id)
+            !student_courses?.some(course => 
+              course.section?.id === section.id && 
+              course.student_course_status !== "expired_reservation")
           )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
