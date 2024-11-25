@@ -50,7 +50,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   }
 
   return (
-    <div className="relative z-50" ref={dropdownRef}>
+    <div className="relative z-10" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
         className="flex items-center space-x-2 focus:outline-none"
