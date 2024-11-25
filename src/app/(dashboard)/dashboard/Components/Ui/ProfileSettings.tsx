@@ -48,6 +48,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     postalCode: profile?.student?.postal_code || "",
   });
 
+  const [isSaving, setIsSaving] = useState(false);
   const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
   const [errors, setErrors] = useState<Errors>({
@@ -108,6 +109,8 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   const submitChanges = async () => {
     if (!validateAddress()) return;
 
+    setIsSaving(true);
+
     const payload = {
       address: addressInfo.address,
       city: addressInfo.city,
@@ -125,6 +128,8 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
     } else {
       setStatusMessage(`Error updating profile: ${result.message}`);
     }
+
+    setIsSaving(false);
   };
 
   const handleAddressEdit = () => {
@@ -241,9 +246,19 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
               <div className="mt-8 flex justify-start">
                 <button
                   onClick={submitChanges}
-                  className="w-full rounded-md bg-accent py-2 text-sm font-medium text-white transition duration-150 ease-in-out hover:bg-green-600 xl:w-[calc(50%-2.05rem)]"
+                  className={`w-full rounded-md py-2 text-sm font-medium text-white transition duration-150 ease-in-out xl:w-[calc(50%-2.05rem)] ${isSaving
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-accent hover:bg-green-600"
+                    }`}
+                  disabled={isSaving}
                 >
-                  Save
+                  {isSaving ? (
+                    <>
+                      Saving...
+                    </>
+                  ) : (
+                    "Save"
+                  )}
                 </button>
               </div>
             )}
