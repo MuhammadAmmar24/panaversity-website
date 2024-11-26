@@ -137,7 +137,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
 
   useEffect(() => {
     const handleResize = () => {
-      setSheetSide(window.innerWidth >= 1024 ? "right" : "bottom");
+      setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
     };
 
     handleResize();
@@ -471,7 +471,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
         side={sheetSide}
         className={`w-full max-w-full overflow-y-auto p-0 ${
           sheetSide === "bottom" ? "h-[80vh]" : "h-full"
-        } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
+        } ${sheetSide === "right" ? "sm:max-w-lg" : ""}`}
       >
         <SheetHeader>
           <VisuallyHidden.Root>
