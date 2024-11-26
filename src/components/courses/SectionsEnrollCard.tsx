@@ -29,7 +29,7 @@ import { GrLanguage } from "react-icons/gr";
 import { SiGoogleclassroom } from "react-icons/si";
 import { SlCalender } from "react-icons/sl";
 
-const CourseSheet: React.FC<CourseSheetProps> =  ({
+const CourseSheet: React.FC<CourseSheetProps> = ({
   is_active,
   program_id,
   profile_id,
@@ -41,6 +41,8 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
   sections,
 }) => {
 
+  
+
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
 
@@ -50,20 +52,18 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
 
-
-
-
   const isStudentEnrolledInSection = (sectionId: number) => {
-    return student_courses?.some(course => 
-      course.section?.id === sectionId && 
-      course.student_course_status !== "expired_reservation"
+    return student_courses?.some(
+      (course) =>
+        course.section?.id === sectionId &&
+        course.student_course_status !== "expired_reservation",
     );
-  }
+  };
 
   const sortedSections = [...sections].sort((a, b) => {
     const isAEnrolled = isStudentEnrolledInSection(a.id);
     const isBEnrolled = isStudentEnrolledInSection(b.id);
-    
+
     if (isAEnrolled && !isBEnrolled) return 1;
     if (!isAEnrolled && isBEnrolled) return -1;
     return 0;
@@ -71,15 +71,25 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
 
   let visibleSections = sortedSections.slice(
     currentPage * sectionsPerPage,
-    (currentPage + 1) * sectionsPerPage
+    (currentPage + 1) * sectionsPerPage,
   );
-
 
   const [selectedSection, setSelectedSection] = useState(
-    sections && sections.length > 0 ? visibleSections[0] : null
+    sections && sections.length > 0 ? visibleSections[0] : null,
   );
 
-  
+  const [selectedDay, setSelectedDay] = useState<string | null>(() => {
+    const firstAvailableDay =
+      selectedSection?.class_time_slots?.[0]?.time_slot_day || null;
+    return firstAvailableDay;
+  });
+
+  useEffect(() => {
+    const firstAvailableDay =
+      selectedSection?.class_time_slots?.[0]?.time_slot_day || null;
+    setSelectedDay(firstAvailableDay);
+  }, [selectedSection]);
+
   const showArrows = sections.length > 3;
 
   const handleNextPage = () => {
@@ -120,11 +130,12 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
       setOpen(true);
     }
   };
-  
 
   const getEnrollButtonText = (sectionId: number) => {
     if (!is_active) return "Registration Closed";
-    return isStudentEnrolledInSection(sectionId) ? "Already Enrolled" : "Enroll Now";
+    return isStudentEnrolledInSection(sectionId)
+      ? "Already Enrolled"
+      : "Enroll Now";
   };
 
   useEffect(() => {
@@ -139,22 +150,23 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
 
   if (!sections || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2 ">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4 ">
-          <div className="flex items-center justify-between -mb-2 xl:mb-2">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
+        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
+          <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
             <span className="text-2xl font-bold">
               {coursePrice.currency.toUpperCase()} {coursePrice.amount}
             </span>
           </div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-4 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0 ">
+        <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-4 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
           <button
             onClick={handleClick}
-            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${!(sections.length == 0)
+            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
+              !(sections.length == 0)
                 ? "hover:bg-emerald-500"
                 : "cursor-not-allowed bg-gray-400"
-              }`}
+            }`}
             disabled={sections.length == 0}
           >
             {!(sections.length == 0) ? "Enroll Now" : "Registration Closed"}
@@ -170,9 +182,9 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
       open={open}
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
-      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
-        <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4 -mb-3 xl:mb-2">
-          <p className="text-xs mb-1 font-semibold text-primary">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-0">
+        <CardContent className="-mb-3 p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:mb-2 xl:px-4 xl:py-0 xl:pt-4">
+          <p className="mb-1 text-xs font-semibold text-primary">
             Available Sections:
           </p>
           <Tabs
@@ -180,27 +192,31 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
             onValueChange={(value) =>
               setSelectedSection(
                 sections.find((section) => section.id.toString() === value) ||
-                sections[0],
+                  sections[0],
               )
             }
           >
             <div className="flex items-center justify-center">
-              {showArrows && (<button
-                onClick={handlePrevPage}
-                className={`rounded-full p-2 text-primary hover:text-accent-foreground ${currentPage === 0 ? "opacity-25" : ""
+              {showArrows && (
+                <button
+                  onClick={handlePrevPage}
+                  className={`rounded-full p-2 text-primary hover:text-accent-foreground ${
+                    currentPage === 0 ? "opacity-25" : ""
                   }`}
-                aria-label="Previous sections"
-                disabled={currentPage === 0}
-              >
-                <FaChevronLeft className="h-4 w-4" />
-              </button>)}
+                  aria-label="Previous sections"
+                  disabled={currentPage === 0}
+                >
+                  <FaChevronLeft className="h-4 w-4" />
+                </button>
+              )}
               <TabsList
-                className={`grid w-full overflow-auto ${visibleSections.length === 1
+                className={`grid w-full overflow-auto ${
+                  visibleSections.length === 1
                     ? "grid-cols-1"
                     : visibleSections.length === 2
                       ? "grid-cols-2"
                       : "grid-cols-3"
-                  }`}
+                }`}
               >
                 {visibleSections.map((section) => (
                   <TabsTrigger key={section.id} value={section.id.toString()}>
@@ -208,25 +224,23 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
                   </TabsTrigger>
                 ))}
               </TabsList>
-              {showArrows && (<button
-                onClick={handleNextPage}
-                className={`rounded-full p-2 text-primary  hover:text-accent-foreground ${currentPage === totalPages - 1
-                    ? "opacity-25 "
-                    : ""
+              {showArrows && (
+                <button
+                  onClick={handleNextPage}
+                  className={`rounded-full p-2 text-primary hover:text-accent-foreground ${
+                    currentPage === totalPages - 1 ? "opacity-25" : ""
                   }`}
-                aria-label="Next sections"
-                disabled={currentPage === totalPages - 1}
-              >
-                <FaChevronRight className="h-4 w-4" />
-              </button>)}
+                  aria-label="Next sections"
+                  disabled={currentPage === totalPages - 1}
+                >
+                  <FaChevronRight className="h-4 w-4" />
+                </button>
+              )}
             </div>
 
             {sections.map((section) => (
-              <TabsContent
-                key={section.id}
-                value={section.id.toString()}
-              >
-                <div className="space-y-2  text-sm">
+              <TabsContent key={section.id} value={section.id.toString()}>
+                <div className="space-y-2 text-sm">
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-xs text-red-500">
                       Registration Deadline:{" "}
@@ -240,15 +254,29 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 items-center justify-between">
+                  {/* <div className="grid grid-cols-3 items-center justify-between">
                     <div className="col-span-2 flex items-center gap-x-2">
                       <GiTeacher className="h-4 w-4 text-muted-foreground" />
-                      <span >
-                        Instructor: {
-                          typeof section?.class_time_slots?.[0]?.instructor === 'string'
-                            ? section?.class_time_slots?.[0]?.instructor
-                            : section?.class_time_slots?.[0]?.instructor?.name || 'N/A'
-                        }
+                      <span>
+                        Instructor:{" "}
+                        {selectedDay
+                          ? selectedSection?.class_time_slots?.find(
+                              (slot) => slot.time_slot_day === selectedDay,
+                            )?.instructor
+                            ? typeof selectedSection?.class_time_slots?.find(
+                                (slot) => slot.time_slot_day === selectedDay,
+                              )?.instructor === "string"
+                              ? selectedSection?.class_time_slots?.find(
+                                  (slot) => slot.time_slot_day === selectedDay,
+                                )?.instructor
+                              : (
+                                  selectedSection?.class_time_slots?.find(
+                                    (slot) =>
+                                      slot.time_slot_day === selectedDay,
+                                  )?.instructor as any
+                                )?.name
+                            : "N/A"
+                          : "N/A"}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -259,9 +287,9 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
                           : section.language.language_name}
                       </span>
                     </div>
-                  </div>
+                  </div> */}
 
-                  <ul className="space-y-2">
+                  {/* <ul className="space-y-2">
                     {section?.class_time_slots?.map((slot:any, index:any) => (
                       <li
                         key={index}
@@ -282,7 +310,126 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
                         </div>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
+
+                  <div className="flex flex-col justify-center space-y-1 rounded-lg border border-gray-200 bg-gray-50">
+                    <div className="flex items-center justify-between rounded-t-lg bg-gray-300 px-1">
+                      {[
+                        "Monday",
+                        "Tuesday",
+                        "Wednesday",
+                        "Thursday",
+                        "Friday",
+                        "Saturday",
+                        "Sunday",
+                      ].map((day) => {
+                        const hasClass =
+                          selectedSection?.class_time_slots?.some(
+                            (slot) => slot.time_slot_day === day,
+                          );
+
+                        return (
+                          <button
+                            key={day}
+                            className={`flex rounded-md px-2 py-1 text-sm transition-all duration-200 ${
+                              hasClass
+                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent"
+                                : "text-gray-500"
+                            } ${
+                              selectedDay === day
+                                ? "bg-accent font-bold text-accent"
+                                : ""
+                            }`}
+                            onClick={() =>
+                              setSelectedDay(hasClass ? day : null)
+                            }
+                            disabled={!hasClass}
+                          >
+                            {day.slice(0, 2)}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {selectedDay && (
+                      <div className="space-y-2 p-3">
+                        <div className="grid grid-cols-3 items-center">
+                          {/* Time with GMT */}
+                          <div className="col-span-2 flex items-center gap-x-2">
+                            <SlCalender className="h-4 w-4 text-muted-foreground" />
+                            <span>
+                               {selectedSection?.class_time_slots
+                              ?.find(
+                                (slot) => slot.time_slot_day === selectedDay,
+                              )
+                              ?.time_slot_day.slice(0, 3) || ""}{" "}
+                              {formatTimeToUserGMT(
+                                selectedSection?.class_time_slots?.find(
+                                  (slot) => slot.time_slot_day === selectedDay,
+                                )?.slot_start_time || "",
+                              )}
+                            </span>
+                          </div>
+
+                          {/* Duration  */}
+                          <div className="col-span-1 flex items-center gap-x-2">
+                            <BsClock className="h-4 w-4 text-muted-foreground" />
+                            <span>
+                              {getTimeDifference(
+                                selectedSection?.class_time_slots?.find(
+                                  (slot) => slot.time_slot_day === selectedDay,
+                                )?.slot_start_time || "00:00",
+                                selectedSection?.class_time_slots?.find(
+                                  (slot) => slot.time_slot_day === selectedDay,
+                                )?.slot_end_time || "00:00",
+                              ).toFixed(1)}{" "}
+                              hrs
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 items-center">
+                          {/* Instructor */}
+                          <div className="col-span-2 flex items-center gap-x-2">
+                            <GiTeacher className="h-4 w-4 text-muted-foreground" />
+                            <span>
+                              {selectedDay
+                                ? selectedSection?.class_time_slots?.find(
+                                    (slot) =>
+                                      slot.time_slot_day === selectedDay,
+                                  )?.instructor
+                                  ? typeof selectedSection?.class_time_slots?.find(
+                                      (slot) =>
+                                        slot.time_slot_day === selectedDay,
+                                    )?.instructor === "string"
+                                    ? selectedSection?.class_time_slots?.find(
+                                        (slot) =>
+                                          slot.time_slot_day === selectedDay,
+                                      )?.instructor
+                                    : (
+                                        selectedSection?.class_time_slots?.find(
+                                          (slot) =>
+                                            slot.time_slot_day === selectedDay,
+                                        )?.instructor as any
+                                      )?.name
+                                  : "N/A"
+                                : "N/A"}
+                            </span>
+                          </div>
+
+                          {/* Language */}
+                          <div className="col-span-1 flex items-center gap-x-2">
+                            <GrLanguage className="h-4 w-4 text-muted-foreground" />
+                            <span>
+                              {typeof section.language === "string"
+                                ? section.language
+                                : section.language.language_name}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="flex flex-row justify-between">
                     <div className="flex items-center gap-2">
@@ -306,23 +453,26 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
           </Tabs>
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
-      <button
-        onClick={handleClick}
-        className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
-          is_active ? "hover:bg-emerald-500" : "cursor-not-allowed bg-gray-400"
-        }`}
-        disabled={!is_active}
-      >
-        {getEnrollButtonText(selectedSection?.id!)}
-        <ChevronRight className="ml-2 h-5 w-5" />
-      </button>
-    </CardFooter>
+          <button
+            onClick={handleClick}
+            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
+              is_active
+                ? "hover:bg-emerald-500"
+                : "cursor-not-allowed bg-gray-400"
+            }`}
+            disabled={!is_active}
+          >
+            {getEnrollButtonText(selectedSection?.id!)}
+            <ChevronRight className="ml-2 h-5 w-5" />
+          </button>
+        </CardFooter>
       </Card>
 
       <SheetContent
         side={sheetSide}
-        className={`w-full max-w-full overflow-y-auto p-0 ${sheetSide === "bottom" ? "h-[80vh]" : "h-full"
-          } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
+        className={`w-full max-w-full overflow-y-auto p-0 ${
+          sheetSide === "bottom" ? "h-[80vh]" : "h-full"
+        } ${sheetSide === "right" ? "lg:max-w-lg" : ""}`}
       >
         <SheetHeader>
           <VisuallyHidden.Root>
@@ -340,10 +490,13 @@ const CourseSheet: React.FC<CourseSheetProps> =  ({
           coursePrice={coursePrice}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
-          sections={sections.filter(section => 
-            !student_courses?.some(course => 
-              course.section?.id === section.id && 
-              course.student_course_status !== "expired_reservation")
+          sections={sections.filter(
+            (section) =>
+              !student_courses?.some(
+                (course) =>
+                  course.section?.id === section.id &&
+                  course.student_course_status !== "expired_reservation",
+              ),
           )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
