@@ -23,7 +23,7 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaUsers } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { GrLanguage } from "react-icons/gr";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -40,9 +40,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   student_courses,
   sections,
 }) => {
-
-  
-
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
 
@@ -358,11 +355,11 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                           <div className="col-span-2 flex items-center gap-x-2">
                             <SlCalender className="h-4 w-4 text-muted-foreground" />
                             <span>
-                               {selectedSection?.class_time_slots
-                              ?.find(
-                                (slot) => slot.time_slot_day === selectedDay,
-                              )
-                              ?.time_slot_day.slice(0, 3) || ""}{" "}
+                              {selectedSection?.class_time_slots
+                                ?.find(
+                                  (slot) => slot.time_slot_day === selectedDay,
+                                )
+                                ?.time_slot_day.slice(0, 3) || ""}{" "}
                               {formatTimeToUserGMT(
                                 selectedSection?.class_time_slots?.find(
                                   (slot) => slot.time_slot_day === selectedDay,
@@ -431,11 +428,13 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     )}
                   </div>
 
-                  <div className="flex flex-row justify-between">
-                    <div className="flex items-center gap-2">
-                      <SiGoogleclassroom className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex flex-row items-center justify-between">
+                    <div className="flex justify-center items-center gap-2">
                       <span>
-                        Seats Booked: {section.booked_seats}/
+                        <FaUsers className="h-4 w-4 text-muted-foreground" />
+                      </span>
+                      <span>
+                        Available Seats:  {section.total_seats - section.booked_seats} of{" "}
                         {section.total_seats}
                       </span>
                     </div>
