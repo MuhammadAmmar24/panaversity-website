@@ -31,7 +31,7 @@ export interface CourseData {
   pre_requisite: Pre_req_obj[];
 }
 
-export interface CourseDetailsClientProps {
+export interface CourseDetailsProps {
   courseData: CourseData;
   coursePrice: GetCoursePriceResponse;
 }
