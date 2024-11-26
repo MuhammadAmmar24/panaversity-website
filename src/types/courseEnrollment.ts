@@ -45,7 +45,7 @@ export interface CourseInfoProps {
   text: string;
 }
 
-export interface GetEnrolledProps {
+export interface EnrollmentSheetProps {
   program_id: number;
   profile_id: string;
   coursePrice: GetCoursePriceResponse;
@@ -54,7 +54,7 @@ export interface GetEnrolledProps {
   sections: any;
 }
 
-export interface CourseSheetProps {
+export interface EnrollmentCardProps {
   is_active: boolean;
   program_id: number;
   profile_id: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import GetEnrolled from "@/src/components/courses/EnrollmentSheet";
+import EnrollmentSheet from "@/src/components/courses/EnrollmentSheet";
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
   Sheet,
@@ -16,7 +16,7 @@ import {
 } from "@/src/components/ui/tabs";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { getTimeDifference } from "@/src/lib/getDuration";
-import { CourseSheetProps } from "@/src/types/courseEnrollment";
+import { EnrollmentCardProps } from "@/src/types/courseEnrollment";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { ChevronRight } from "lucide-react";
@@ -28,7 +28,7 @@ import { GiTeacher } from "react-icons/gi";
 import { GrLanguage } from "react-icons/gr";
 import { SlCalender } from "react-icons/sl";
 
-const CourseSheet: React.FC<CourseSheetProps> = ({
+const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
   program_id,
   profile_id,
@@ -493,7 +493,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           </VisuallyHidden.Root>
         </SheetHeader>
 
-        <GetEnrolled
+        <EnrollmentSheet
           program_id={program_id}
           profile_id={profile_id}
           coursePrice={coursePrice}
@@ -515,4 +515,4 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
   );
 };
 
-export default CourseSheet;
+export default EnrollmentCard;
