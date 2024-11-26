@@ -10,6 +10,7 @@ import {
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
 import { Input } from "@/src/components/ui/input";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
 import { useToast } from "@/src/components/ui/use-toast";
 import { signOut } from "@/src/lib/auth";
 import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
@@ -138,33 +139,57 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                         </FormLabel>
                         <FormControl>
                           <div className="relative">
-                            <Input
-                              {...field}
-                              disabled={isPending}
-                              placeholder={
-                                fieldName === "current_password"
-                                  ? "Enter current password"
-                                  : fieldName === "new_password"
-                                    ? "Enter new password"
+                            {fieldName === "new_password" ? (
+                              <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <Input
+                                    {...field}
+                                    disabled={isPending}
+                                    placeholder="Enter new password"
+                                    type={showPasswordNew ? "text" : "password"}
+                                    className="w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
+                                  />
+                                </TooltipTrigger>
+                                <TooltipContent 
+                                  className="w-52 sm:w-full bg-white text-black border shadow-md text-xs"
+                                  side="bottom">
+                                  <div className="p-2">
+                                    <h3 className="mb-1 font-semibold">Password Requirements:</h3>
+                                    <ul className="list-disc pl-4 space-y-1">
+                                      <li>At least 8 characters long</li>
+                                      <li>At least 1 alphabet, 1 number, and 1 special character</li>
+                                    </ul>
+                                  </div>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
+                            ) : (
+                              <Input
+                                {...field}
+                                disabled={isPending}
+                                placeholder={
+                                  fieldName === "current_password"
+                                    ? "Enter current password"
                                     : fieldName === "confirm_password"
-                                      ? "Confirm new password"
-                                      : ""
-                              }
-                              type={
-                                fieldName === "current_password"
-                                  ? showPasswordCurrent
-                                    ? "text"
+                                    ? "Confirm new password"
+                                    : ""
+                                }
+                                type={
+                                  fieldName === "current_password"
+                                    ? showPasswordCurrent
+                                      ? "text"
+                                      : "password"
+                                    : fieldName === "confirm_password"
+                                    ? showPasswordConfirm
+                                      ? "text"
+                                      : "password"
                                     : "password"
-                                  : fieldName === "new_password"
-                                    ? showPasswordNew
-                                      ? "text"
-                                      : "password"
-                                    : showPasswordConfirm
-                                      ? "text"
-                                      : "password"
-                              }
-                              className="w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
-                            />
+                                }
+                                className="w-full rounded-md border border-gray-300 px-3 py-1 shadow-sm transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
+                              />
+                            )}
+
                             <button
                               type="button"
                               onClick={() => {
@@ -179,10 +204,10 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
                             >
                               {(fieldName === "current_password" &&
                                 showPasswordCurrent) ||
-                                (fieldName === "new_password" &&
-                                  showPasswordNew) ||
-                                (fieldName === "confirm_password" &&
-                                  showPasswordConfirm) ? (
+                              (fieldName === "new_password" &&
+                                showPasswordNew) ||
+                              (fieldName === "confirm_password" &&
+                                showPasswordConfirm) ? (
                                 <AiOutlineEyeInvisible className="h-5 w-5 text-gray-400" />
                               ) : (
                                 <AiOutlineEye className="h-5 w-5 text-gray-400" />

@@ -14,7 +14,7 @@ import { IoLibraryOutline } from "react-icons/io5";
 import { SlBookOpen } from "react-icons/sl";
 import { SidebarProps } from "../../types/types";
 import LogoutDialog from "../Dialog/LogoutDialog";
-import { Tooltip } from "../../../../../components/ui/Tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
 import { cn } from "@/src/lib/utils";
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
@@ -105,56 +105,66 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
           </button>
         </div>
         <nav className="mt-10 flex-1 space-y-2">
-          {menuItems.map((item) => (
-            <Tooltip
-              key={item.label}
-              text={item.label}
-              position="right"
-              className={!isOpen ? "" : "hidden"}
-            >
-              <Link
-                href={item.href}
-                aria-label={`Go to ${item.label}`}
-                className="flex items-center px-2 py-4 transition-all duration-300 hover:text-accent"
-              >
-                <item.icon className="min-w-[2rem] text-2xl" />
-                <span
-                  className={cn(
-                    "ml-4 text-base transition-all duration-300 ease-in-out",
-                    isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
-                  )}
+          <TooltipProvider>
+            {menuItems.map((item) => (
+              <Tooltip key={item.label}>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={item.href}
+                    aria-label={`Go to ${item.label}`}
+                    className="flex items-center px-2 py-4 transition-all duration-300 hover:text-accent"
+                  >
+                    <item.icon className="min-w-[2rem] text-2xl" />
+                    <span
+                      className={cn(
+                        "ml-4 text-base transition-all duration-300 ease-in-out",
+                        isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                      )}
+                    >
+                      {item.label}
+                    </span>
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent
+                  className={cn("", !isOpen ? "" : "hidden")}
+                  side="right"
                 >
                   {item.label}
-                </span>
-              </Link>
-            </Tooltip>
-          ))}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </nav>
 
         <div className="mb-4 mt-auto">
-          {menuItemsBottom.map((item) => (
-            <Tooltip
-              key={item.label}
-              text={item.label}
-              position="right"
-              className={!isOpen ? "" : "hidden"}
-            >
-              <button
-                onClick={item.onClick}
-                className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
-              >
-                <item.icon className="min-w-[2rem] text-2xl" />
-                <span
-                  className={cn(
-                    "ml-4 text-base transition-all duration-300 ease-in-out",
-                    isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
-                  )}
+          <TooltipProvider>
+            {menuItemsBottom.map((item) => (
+              <Tooltip key={item.label}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={item.onClick}
+                    className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
+                  >
+                    <item.icon className="min-w-[2rem] text-2xl" />
+                    <span
+                      className={cn(
+                        "ml-4 text-base transition-all duration-300 ease-in-out",
+                        isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                      )}
+                    >
+                      {item.label}
+                    </span>
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent
+                  className={cn("", !isOpen ? "" : "hidden")}
+                  side="right"
                 >
                   {item.label}
-                </span>
-              </button>
-            </Tooltip>
-          ))}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </div>
 
       </div>

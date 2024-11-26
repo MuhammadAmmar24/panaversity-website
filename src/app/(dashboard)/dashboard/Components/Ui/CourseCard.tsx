@@ -11,7 +11,8 @@ import { HiMiniCalendar } from "react-icons/hi2";
 import { TbClockHour3 } from "react-icons/tb";
 import { RiRobot2Line } from "react-icons/ri";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
-import { Tooltip } from "../../../../../components/ui/Tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
+import { cn } from "@/src/lib/utils";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -72,7 +73,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
       component: <FaGithub />,
       link: "/",
       name: "GitHub",
-      className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale- transition-all duration-300 ease-in-out block m-0 p-0 ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
+      className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
     },
     {
       component: <SiZoom />,
@@ -209,22 +210,29 @@ const CourseCard: React.FC<CourseCardProps> = ({
         </div>
 
         <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-between border-t bg-gray-100">
-          {icons.map((icon, index) => (
-            <Tooltip
-              key={index}
-              text={icon.name}
-              position="top"
-              className={status === "active" ? "" : "hidden"}
-            >
-              <Link
-                href={icon.link}
-                target="_blank"
-                className={icon.className}
-              >
-                {icon.component}
-              </Link>
-            </Tooltip>
-          ))}
+          <TooltipProvider>
+            {icons.map((icon, index) => (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
+                  <Link
+                    href={icon.link}
+                    target="_blank"
+                    className={icon.className}
+                  >
+                    {icon.component}
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent
+                  className={cn(
+                    "mb-2",
+                    status === "active" ? "" : "hidden"
+                  )}
+                >
+                  {icon.name}
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </div>
         
       </div>
