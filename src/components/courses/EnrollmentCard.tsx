@@ -26,7 +26,6 @@ import { BsClock } from "react-icons/bs";
 import { FaChevronLeft, FaChevronRight, FaUsers } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
 import { GrLanguage } from "react-icons/gr";
-import { SiGoogleclassroom } from "react-icons/si";
 import { SlCalender } from "react-icons/sl";
 
 const CourseSheet: React.FC<CourseSheetProps> = ({
@@ -239,15 +238,9 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
               <TabsContent key={section.id} value={section.id.toString()}>
                 <div className="space-y-2 text-sm">
                   <div className="mb-1 flex items-center gap-2">
-                    <span className="text-xs text-red-500">
-                      Registration Deadline:{" "}
-                      {new Date(
-                        section.registration_deadline!,
-                      ).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "2-digit",
-                      })}
+                    <span className="text-sm font-semibold text-primary">
+                      Section Class Schedule:{" "}
+                    
                     </span>
                   </div>
 
@@ -349,7 +342,7 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     </div>
 
                     {selectedDay && (
-                      <div className="space-y-2 p-3">
+                      <div className="space-y-2 px-1 py-2 mobileM:px-3 md:px-1 tablet_lg:px-3">
                         <div className="grid grid-cols-3 items-center">
                           {/* Time with GMT */}
                           <div className="col-span-2 flex items-center gap-x-2">
@@ -428,14 +421,32 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
                     )}
                   </div>
 
-                  <div className="flex flex-row items-center justify-between">
-                    <div className="flex justify-center items-center gap-2">
+                  <div className="flex flex-col mobileM:flex-row md:flex-col tablet_lg:flex-row lg:flex-row justify-between items-start mobileM:items-center tablet_lg:items-center md:items-start gap-y-2 pt-1">
+                    {/* Deadline  */}
+                    <div className=" flex items-center gap-x-2">
+                      <BsClock className="h-4 w-4 text-muted-foreground" />
                       <span>
-                        <FaUsers className="h-4 w-4 text-muted-foreground" />
+                        Closes on:{" "}
+                        <span className="text-red-600 font-semibold">
+
+                        {new Date(
+                          section.registration_deadline!,
+                        ).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "2-digit",
+                        })}
+                        </span>
                       </span>
+                    </div>
+
+                    {/* Seats */}
+                    <div className=" flex items-center gap-x-2">
+                      <FaUsers className="h-4 w-4 text-muted-foreground" />
                       <span>
-                        Available Seats:  {section.total_seats - section.booked_seats} of{" "}
-                        {section.total_seats}
+                        Seats Left:{" "}
+                        <span className="text-red-600 font-semibold">
+                        {section.total_seats - section.booked_seats}
+                        </span>
                       </span>
                     </div>
                   </div>
@@ -482,7 +493,6 @@ const CourseSheet: React.FC<CourseSheetProps> = ({
           </VisuallyHidden.Root>
         </SheetHeader>
 
-        {/* Existing Enrollment Component */}
         <GetEnrolled
           program_id={program_id}
           profile_id={profile_id}
