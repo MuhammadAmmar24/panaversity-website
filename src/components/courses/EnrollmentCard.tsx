@@ -146,7 +146,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   if (!sections || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
+      <Card className="w-full items-end px-0  sm:px-2 md:px-0 lg:px-2">
         <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
@@ -178,7 +178,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       open={open}
       onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
     >
-      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-0">
+      <Card className="w-full items-end  ssm:max-w-[30em] sm:w-full px-0  sm:px-2 md:px-0 lg:px-0">
         <CardContent className="-mb-3 p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:mb-2 xl:px-4 xl:py-0 xl:pt-4">
           <p className="mb-1 text-xs font-semibold text-primary">
             Available Sections:
