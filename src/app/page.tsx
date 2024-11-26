@@ -1,5 +1,5 @@
 import About from "@/src/components/About";
-import Courses from "@/src/components/Courses";
+import Courses from "@/src/components/CoursesOffered";
 import CTAsection from "@/src/components/CTAsection";
 import Faq from "../components/Faq/Faq";
 import Footer from "@/src/components/Footer/Footer";

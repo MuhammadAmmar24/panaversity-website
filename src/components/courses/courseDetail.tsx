@@ -12,9 +12,9 @@ import {
 import { Result } from "@/src/types/types";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
-import CourseSheet from "./courseSheet";
+import CourseSheet from "./SectionsEnrollCard";
 import CoursePrerequisites from "./PreReqs";
-import RatingStars from "./Ratingstar";
+import RatingStars from "./RatingStar";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">

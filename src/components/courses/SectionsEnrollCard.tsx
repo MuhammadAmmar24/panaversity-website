@@ -1,6 +1,6 @@
 "use client";
 
-import GetEnrolled from "@/src/components/courses/GetEnrolled";
+import GetEnrolled from "@/src/components/courses/EnrollmentSheet";
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
   Sheet,
