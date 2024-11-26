@@ -1,4 +1,4 @@
-import CourseDetailsClient from "@/src/components/courses/courseDetail";
+import CourseDetailsClient from "@/src/components/courses/CourseDetail";
 import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
