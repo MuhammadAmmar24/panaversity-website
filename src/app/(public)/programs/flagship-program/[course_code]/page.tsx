@@ -1,4 +1,4 @@
-import CourseDetailsClient from "@/src/components/courses/CourseDetail";
+import CourseDetails from "@/src/components/courses/CourseDetail";
 import { getCourseData } from "@/src/lib/courseData";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
@@ -79,7 +79,7 @@ export default async function CoursePage({
 
 
   return (
-    <CourseDetailsClient
+    <CourseDetails
       coursePrice={price}
       courseData={data.data}
     />

@@ -5,7 +5,7 @@ import {
   CourseEnrollmentResponse
 } from "@/src/lib/schemas/courses";
 import {
-  CourseDetailsClientProps,
+  CourseDetailsProps,
   CourseInfoProps,
   LearnPointProps,
 } from "@/src/types/courseEnrollment";
@@ -32,7 +32,7 @@ const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
   </div>
 );
 
-const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
+const CourseDetails: React.FC<CourseDetailsProps> = async ({
   courseData,
   coursePrice,
 }) => {
@@ -226,4 +226,4 @@ const CourseDetailsClient: React.FC<CourseDetailsClientProps> = async ({
   );
 };
 
-export default CourseDetailsClient;
+export default CourseDetails;
