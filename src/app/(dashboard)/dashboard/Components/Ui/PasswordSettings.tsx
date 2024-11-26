@@ -243,8 +243,8 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
               </div>
             </form>
           </FormProvider>
-          <p className="mt-4 text-sm text-orange-300">
-            Log in again after changing your password
+          <p className="mt-4 text-xs text-gray-500">
+            <span className="text-red-600">Note:</span> After changing your password, you’ll be logged out and need to log in again.
           </p>
         </div>
       )}
