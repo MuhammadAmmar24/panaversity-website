@@ -3,7 +3,7 @@ import { update_student_Profile } from "@/src/app/actions/profile";
 import { addressSchema } from "@/src/lib/schemas/addressInfo";
 import Image from "next/image";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { AiOutlineClose, AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineEdit, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
 import { Input } from "@/src/components/ui/input";
@@ -247,13 +247,14 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
                 <button
                   onClick={submitChanges}
                   className={`w-full rounded-md py-2 text-sm font-medium text-white transition duration-150 ease-in-out xl:w-[calc(50%-2.05rem)] ${isSaving
-                      ? "bg-gray-400 cursor-not-allowed"
+                      ? "bg-accent/40 cursor-not-allowed"
                       : "bg-accent hover:bg-green-600"
                     }`}
                   disabled={isSaving}
                 >
                   {isSaving ? (
                     <>
+                      <AiOutlineLoading3Quarters className="mr-2 inline-block h-4 w-4 animate-spin" />
                       Saving...
                     </>
                   ) : (
@@ -265,7 +266,7 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
           </section>
           {statusMessage && (
             <div
-              className={`mt-6 rounded-md p-4 ${statusMessage.includes("Error")
+              className={`mt-6 rounded-md p-4 xl:w-[calc(50%-2.05rem)] ${statusMessage.includes("Error")
                 ? "bg-red-100 text-red-800"
                 : "bg-green-100 text-green-800"
                 }`}
