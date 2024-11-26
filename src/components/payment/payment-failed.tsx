@@ -13,7 +13,7 @@ const PaymentCancel = () => {
       <h2 className="mb-4 text-2xl font-semibold text-gray-800">
         Payment Failed
       </h2>
-      <p className="mb-8 text-gray-600">Your payment is Failed.</p>
+      <p className="mb-8 text-gray-600">Your payment has Failed.</p>
       <Link
         href={"/dashboard"}
         aria-label="Go to dashboard"

@@ -13,20 +13,18 @@ import { RiWhatsappLine } from "react-icons/ri";
 import Link from "next/link";
 import { FaLink } from "react-icons/fa6";
 
-// Infer form types from ContactSchema
 type ContactFormValues = z.infer<typeof ContactSchema>;
 
 export default function ContactUs() {
   const [formStatus, setFormStatus] = useState<string | null>(null);
 
-  // Initialize react-hook-form with zod schema
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(ContactSchema),
-    mode: "onChange", // Validate as the user types or changes focus
+    mode: "onChange",
   });
 
   const onSubmit = (data: ContactFormValues) => {
@@ -41,7 +39,6 @@ export default function ContactUs() {
             <h2 className="mb-6 text-3xl font-semibold">Get in Touch</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {/* Name Field */}
                 <div>
                   <Label htmlFor="name">Name</Label>
                   <Input
@@ -61,7 +58,6 @@ export default function ContactUs() {
                   )}
                 </div>
 
-                {/* Email Field */}
                 <div>
                   <Label htmlFor="email">Email</Label>
                   <Input
@@ -83,7 +79,6 @@ export default function ContactUs() {
                 </div>
               </div>
 
-              {/* Subject Field */}
               <div>
                 <Label htmlFor="subject">Subject</Label>
                 <Input
@@ -103,7 +98,6 @@ export default function ContactUs() {
                 )}
               </div>
 
-              {/* Message Field */}
               <div>
                 <Label htmlFor="message">Message</Label>
                 <Textarea
@@ -123,16 +117,15 @@ export default function ContactUs() {
                 )}
               </div>
 
-              {/* Submit Button */}
               <Button
                 type="submit"
                 className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
-                disabled={!isValid} // Disable button if form is invalid
+                disabled={!isValid}
               >
                 Send Message
               </Button>
             </form>
-            {formStatus && <p className="mt-4 text-green-600">{formStatus}</p>}
+            {formStatus && <p className="mt-4 text-green-600 text-xs xs:text-sm">{formStatus}</p>}
           </div>
 
           <div className="bg-muted p-4 sm:p-10">

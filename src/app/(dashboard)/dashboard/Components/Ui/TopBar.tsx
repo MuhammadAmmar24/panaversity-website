@@ -14,9 +14,6 @@ const TopBar: React.FC = async () => {
     console.error("Error fetching profile data:", error);
   }
 
-  if (!profile) {
-    return <Error message="Error loading profile" />;
-  }
 
   return (
     <header className="mb-4 mt-6 flex h-16 items-center justify-between sm:mt-10">
@@ -30,11 +27,15 @@ const TopBar: React.FC = async () => {
           priority={true}
         />
       </Link>
-      <Dropdown
-        userName={profile.full_name}
-        userEmail={profile.email}
-        userImage="/profile.webp"
-      />
+      {profile ? (
+        <Dropdown
+          userName={profile.full_name}
+          userEmail={profile.email}
+          userImage="/profile.webp"
+        />
+      ) : (
+        <Error message="Profile not available" />
+      )}
     </header>
   );
 };

@@ -29,7 +29,7 @@ export default function Counters() {
   return (
     <section ref={ref}>
       <div className="mx-auto">
-        <div className="grid grid-cols-1 items-center justify-center gap-2 px-[7rem] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 items-center justify-center gap-2 gap-y-6 px-[7rem] sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((item, index) => (
             <div
               className={`relative flex flex-col items-center justify-center ${
@@ -56,7 +56,7 @@ export default function Counters() {
                 </CountUp>
               </div>
 
-              <div className="mt-2 text-center">
+              <div className="mt-1 lg:mt-2 text-center">
                 <h3 className="text-sm text-gray-700">{item.text}</h3>
               </div>
 
