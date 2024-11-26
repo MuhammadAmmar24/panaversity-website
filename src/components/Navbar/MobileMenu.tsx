@@ -12,6 +12,7 @@ import {
 import Link from "next/link";
 import { navItems } from "@/src/constants/nav";
 import Image from "next/image";
+import logo from "../../../public/logos/logo.webp";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -87,10 +88,8 @@ export function MobileMenu() {
           <div className="flex flex-col gap-y-4">
             <Link href="/" aria-label="Home">
               <Image
-                src="/logos/logo.webp"
-                alt="Logo"
-                width={500}
-                height={500}
+                src={logo}
+                alt="Panaversity Logo"
                 className="mb-3"
                 priority
               />
