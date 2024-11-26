@@ -69,29 +69,32 @@ export default function GetEnrolled({
       (course: any) => course?.course_code?.trim() === courseCode.trim(),
     );
 
-    const getCourseStatus = (studentCourse: any, courseCode: string) => {
-      if (!studentCourse || studentCourse.student_course_status === "expired_reservation") {
-        return {
-          statusText: "Not Enrolled",
-          statusClass: "text-red-600",
-          linkHref: `/programs/flagship-program/${courseCode.trim()}`,
-        };
-      }
-    
-      if (studentCourse.is_graduated) {
-        return {
-          statusText: "Completed",
-          statusClass: "text-green-500",
-          linkHref: "/dashboard",
-        };
-      }
-    
+  const getCourseStatus = (studentCourse: any, courseCode: string) => {
+    if (
+      !studentCourse ||
+      studentCourse.student_course_status === "expired_reservation"
+    ) {
       return {
-        statusText: "In Progress",
-        statusClass: "text-yellow-500",
+        statusText: "Not Enrolled",
+        statusClass: "text-red-600",
+        linkHref: `/programs/flagship-program/${courseCode.trim()}`,
+      };
+    }
+
+    if (studentCourse.is_graduated) {
+      return {
+        statusText: "Completed",
+        statusClass: "text-green-500",
         linkHref: "/dashboard",
       };
+    }
+
+    return {
+      statusText: "In Progress",
+      statusClass: "text-yellow-500",
+      linkHref: "/dashboard",
     };
+  };
 
   const shouldDisableForm = () => {
     // If not enrolled and there are prerequisites that haven't been skipped
@@ -126,19 +129,21 @@ export default function GetEnrolled({
     return (
       pre_requisite?.filter((pre_req: any) => {
         const studentCourse = findStudentCourse(pre_req.course_code);
-        return !studentCourse || studentCourse.student_course_status === "expired_reservation";
+        return (
+          !studentCourse ||
+          studentCourse.student_course_status === "expired_reservation"
+        );
       }) || []
     );
   };
-  
 
   useEffect(() => {
     const notCompletedPreReqs = getNotCompletedPreReqs();
- 
+
     if (notCompletedPreReqs.length == 0) {
       setSkipped(true);
     }
- 
+
     // Only set skip message if there are incomplete prerequisites
     if (notCompletedPreReqs.length > 0) {
       const message =
@@ -206,12 +211,6 @@ export default function GetEnrolled({
     setSkipped(true);
     setIsAccordionOpen("");
   };
-
-  const isEnrollButtonDisabled =
-    !selectedSection ||
-    isPending ||
-    (isEnrolled && !showReEnrollment) ||
-    (isEnrolled && showReEnrollment && !hasSkippedPrerequisites);
 
   const renderPrerequisites = () => (
     <div className="mx-auto max-w-full rounded-3xl p-4 sm:p-5">
@@ -290,7 +289,7 @@ export default function GetEnrolled({
 
   const renderEnrollmentForm = () => (
     <CardContent
-      className={`p-4 mobileM:p-4 xs:p-4 sm:p-5 md:p-4 lg:p-5 space-y-8 ${shouldDisableForm() ? "opacity-50" : "opacity-100"}`}
+      className={`space-y-8 p-4 mobileM:p-4 xs:p-4 sm:p-5 md:p-4 lg:p-5 ${shouldDisableForm() ? "opacity-50" : "opacity-100"}`}
     >
       <div>
         <label className="mb-2 block text-lg font-medium">Section</label>
@@ -323,7 +322,7 @@ export default function GetEnrolled({
               <Badge variant="outline">{selectedSection.language}</Badge>
             </div>
           </div>
-          <div className="flex items-center justify-between mt-1 px-1">
+          <div className="mt-1 flex items-center justify-between px-1">
             {/* Available Seats */}
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-2">
@@ -409,6 +408,26 @@ export default function GetEnrolled({
         </Select>
       </div>
 
+      <Button
+        className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
+          shouldDisableForm() || isPending
+            ? "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
+            : "bg-accent text-white hover:bg-[#18c781]"
+        }`}
+        size="lg"
+        disabled={shouldDisableForm() || isPending}
+        onClick={handleEnroll}
+      >
+        {isPending ? (
+          <>
+            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
+            Enrolling...
+          </>
+        ) : (
+          "Enroll"
+        )}
+      </Button>
+
       {enrollmentError && (
         <Alert
           variant="destructive"
@@ -422,26 +441,6 @@ export default function GetEnrolled({
           </div>
         </Alert>
       )}
-
-      <Button
-        className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
-          shouldDisableForm()
-            ? "cursor-not-allowed bg-gray-300 text-gray-500 hover:bg-gray-300"
-            : "bg-accent text-white hover:bg-[#18c781]"
-        }`}
-        size="lg"
-        disabled={shouldDisableForm()}
-        onClick={handleEnroll}
-      >
-        {isPending ? (
-          <>
-            <AiOutlineLoading3Quarters className="mr-2 h-4 w-4 animate-spin" />
-            Enrolling...
-          </>
-        ) : (
-          "Enroll"
-        )}
-      </Button>
     </CardContent>
   );
 
@@ -449,7 +448,9 @@ export default function GetEnrolled({
     <div className="mx-auto max-w-3xl bg-background">
       <Card className="rounded-none border-0 bg-background shadow-none">
         <CardHeader>
-          <CardTitle className="text-3xl">Course Enrollment</CardTitle>
+          <CardTitle className="text-2xl mobileM:text-3xl">
+            Course Enrollment
+          </CardTitle>
           <CardDescription>
             {isEnrolled
               ? showReEnrollment

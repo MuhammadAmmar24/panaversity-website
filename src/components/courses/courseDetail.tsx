@@ -12,7 +12,7 @@ import {
 import { Result } from "@/src/types/types";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
-import CourseSheet from "./SectionsEnrollCard";
+import CourseSheet from "./EnrollmentCard";
 import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./RatingStar";
 
