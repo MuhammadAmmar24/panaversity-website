@@ -1,5 +1,4 @@
 "use client";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -7,20 +6,31 @@ export default function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const consent = Cookies.get("cookieConsent");
-    if (!consent) {
+    const cookieValue = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("cookieConsent="))
+      ?.split("=")[1];
+
+
+    if (!cookieValue) {
       setIsVisible(true);
     }
   }, []);
 
-  const handleAccept = () => {
-    Cookies.set("cookieConsent", "accepted", { expires: 365 });
-    setIsVisible(false);
-  };
+  const handleAction = async (consent : string) => {
+    try {
+      await fetch("/api/cookie-consent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ consent }),
+      });
 
-  const handleReject = () => {
-    Cookies.set("cookieConsent", "rejected", { expires: 365 });
-    setIsVisible(false);
+      setIsVisible(false);
+    } catch (error) {
+      console.error("Error saving cookie consent:", error);
+    }
   };
 
   if (!isVisible) return null;
@@ -40,13 +50,13 @@ export default function CookieConsent() {
       </p>
       <div className="space-x-8">
         <button
-          onClick={handleAccept}
+          onClick={() => handleAction("accepted")}
           className="rounded-lg bg-accent px-4 py-2 text-white"
         >
           Accept
         </button>
         <button
-          onClick={handleReject}
+          onClick={() => handleAction("rejected")}
           className="rounded-lg bg-gray-800 px-4 py-2 text-white"
         >
           Reject

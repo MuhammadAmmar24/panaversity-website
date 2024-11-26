@@ -39,7 +39,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 
-export default function GetEnrolled({
+export default function EnrollmentSheet({
   program_id,
   profile_id,
   coursePrice,

@@ -12,7 +12,7 @@ import {
 import { Result } from "@/src/types/types";
 import { Calendar, Check, Users } from "lucide-react";
 import Breadcrumbs from "../ui/Breadcrumbs";
-import CourseSheet from "./EnrollmentCard";
+import EnrollmentCard from "./EnrollmentCard";
 import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./Ratingstar";
 
@@ -88,11 +88,11 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
       <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
-          <div className="mx-auto px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
+          <div className="mx-auto  px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
             {/* Main content wrapper with fixed padding */}
-            <div className="py-10">
+            <div className="py-4 md:py-10">
               {/* Breadcrumbs */}
-              <div className="mb-6">
+              <div className="mb-6 ">
                 <Breadcrumbs
                   items={[
                     { label: "Home", href: "/" },
@@ -152,7 +152,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
 
                 {/* Price and enrollment - takes up 1/3 of space */}
                 <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
-                  <CourseSheet
+                  <EnrollmentCard
                     is_active={is_active}
                     program_id={program_id}
                     profile_id={profile.id}
