@@ -13,8 +13,6 @@ import {
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
 import { Input } from "@/src/components/ui/input";
-import { ToastAction } from "@/src/components/ui/toast";
-import { useToast } from "@/src/components/ui/use-toast";
 import { LoginSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -26,6 +24,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import { toast } from "sonner";
 import * as z from "zod";
 
 export const LoginForm = () => {
@@ -34,7 +33,6 @@ export const LoginForm = () => {
   const [isPending, startTransition] = useState(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
-  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -47,20 +45,13 @@ export const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     setError("");
     setSuccess("");
-    startTransition(true); // Set isPending to true when starting the login process
+    startTransition(true);
 
     login(values)
       .then((data) => {
         if (data?.error) {
           setError(data.error);
-          toast({
-            title: "Login Failed",
-            description: data.message
-              ? data.message
-              : "Request Failed, Try Again",
-            action: <ToastAction altText="Dismiss">Dismiss</ToastAction>,
-          });
-
+          toast.error(data.message || "Oops! Login failed. Please try again.");
           if (data?.error === "Email not verified") {
             router.push("/resend-link");
           }
@@ -70,13 +61,8 @@ export const LoginForm = () => {
         if (data?.success) {
           form.reset();
           setSuccess(data.success);
-          toast({
-            title: "Login Success",
-            description: data.message ? data.message : "Welcome to Panaversity",
-            action: <ToastAction altText="Close">Close</ToastAction>,
-          });
+          toast.success("Welcome back! You’re now logged in.");
 
-          // Handle redirection logic
           const previousPath = localStorage.getItem("previousPath");
           if (previousPath) {
             router.back();

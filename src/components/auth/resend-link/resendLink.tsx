@@ -1,11 +1,14 @@
 "use client";
+import { resendVerification } from "@/src/app/actions/resend-verification";
 import { ResendLinkSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import * as z from "zod";
-import { useToast } from "../../ui/use-toast";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { resendVerification } from "@/src/app/actions/resend-verification";
+import { FormProvider, useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
+import * as z from "zod";
 import { Button } from "../../ui/button";
 import {
   FormControl,
@@ -14,17 +17,13 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { Input } from "../../ui/input";
 import { FormError } from "../../ui/form-error";
 import { FormSuccess } from "../../ui/form-success";
-import "react-phone-input-2/lib/style.css";
-import { redirect, useRouter } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Input } from "../../ui/input";
 
 function ResetPassword() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined | boolean>("");
-  const { toast } = useToast();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -46,16 +45,9 @@ function ResetPassword() {
 
         // Ensure isPending is set to false after the response
         if (data?.error) {
-          toast({
-            title: "Request Failed",
-            description: data?.error,
-            variant: "destructive",
-          });
+          toast.error(data?.error || "An error occurred. Please try again.");
         } else if (data?.success) {
-          toast({
-            title: "Email sent Successfully",
-            description: "Verification Link has been sent to your email",
-          });
+          toast.success("A verification link has been sent to your email.");
 
           if (data.success === "Your account is already verified.") {
             router.replace("/login");

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
-import "./globals.css";
-
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "sonner";
 import CookieConsent from "../components/Cookies/cookieConsent";
+import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,6 +81,12 @@ export default function RootLayout({
         />
         {children}
         {modal}
+        <Toaster
+          position="bottom-right"
+          richColors={true}
+          closeButton={true}
+          pauseWhenPageIsHidden={true}
+        />
         <CookieConsent />
       </body>
     </html>

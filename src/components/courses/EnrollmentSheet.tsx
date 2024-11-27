@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -203,18 +203,25 @@ export default function EnrollmentSheet({
         if (result.type === "success") {
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
           if (url) {
-            router.push(url);
+            toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
+            setTimeout(() => {
+              router.push(url);
+            }, 3000);
+            // router.push(url);
           } else {
+            toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
             router.push("/dashboard");
           }
         } else {
           setEnrollmentError(
             result.message || "An error occurred during enrollment.",
           );
+          toast.error(result.message || "Oops! Something went wrong with your enrollment. Please try again.");
         }
       } catch (error) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later.");
+        toast.error("We couldn’t complete your enrollment. Please try again later.");
       }
     });
   };

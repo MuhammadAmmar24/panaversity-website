@@ -13,16 +13,6 @@ import {
 import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
 import { Input } from "@/src/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/src/components/ui/select";
-import { ToastAction } from "@/src/components/ui/toast";
-import { useToast } from "@/src/components/ui/use-toast";
-import { affiliations } from "@/src/constants/affiliation";
 import { RegisterSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -36,6 +26,7 @@ import {
 } from "react-icons/ai";
 import ReactPhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 import * as z from "zod";
 
 export const RegisterForm = () => {
@@ -43,7 +34,7 @@ export const RegisterForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
-  const { toast } = useToast();
+
   const router = useRouter();
 
   // Initialize form with react-hook-form and zod schema
@@ -67,26 +58,12 @@ export const RegisterForm = () => {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast({
-            title: "Signup Failed",
-            description: data?.error,
-            variant: "destructive",
-          });
+          toast.error(data.error || "Account registration failed. Please try again.");
         } else if (data?.success) {
           form.reset();
           setError("");
           setSuccess(data.success);
-          toast({
-            title: "Signup Success",
-            description: "Please Verify Email To Continue",
-            action: (
-              <Link href={"/verify"} aria-label="Verify Email" replace>
-                <ToastAction altText="Verify to Continue">
-                  Verify Email
-                </ToastAction>
-              </Link>
-            ),
-          });
+          toast.success("You're almost there! Check your email to verify your account and get started.");
           router.replace("/verify");
         }
         startTransition(() => {});
