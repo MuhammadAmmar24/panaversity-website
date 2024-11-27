@@ -38,11 +38,13 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
+import { getStudentCourses } from "@/src/lib/getStudentCourses";
 
 export default function EnrollmentSheet({
   program_id,
   profile_id,
   coursePrice,
+  courseCode,
   pre_requisite,
   student_courses,
   sections,
@@ -57,7 +59,7 @@ export default function EnrollmentSheet({
   const [paymentMethod, setPaymentMethod] = useState("STRIPE");
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [showReEnrollment, setShowReEnrollment] = useState(false);
-  const [hasSkippedPrerequisites, setHasSkippedPrerequisites] = useState(false);
+  const [enrolledSection, setEnrolledSection] = useState();
   const [isAccordionOpen, setIsAccordionOpen] = useState<string | undefined>(
     "prerequisites",
   );
@@ -129,6 +131,7 @@ export default function EnrollmentSheet({
     return (
       pre_requisite?.filter((pre_req: any) => {
         const studentCourse = findStudentCourse(pre_req.course_code);
+
         return (
           !studentCourse ||
           studentCourse.student_course_status === "expired_reservation"
@@ -137,7 +140,16 @@ export default function EnrollmentSheet({
     );
   };
 
+
+
+
   useEffect(() => {
+
+    const enrolled_section = findStudentCourse(courseCode)
+    setEnrolledSection(enrolled_section?.section?.section_name)
+
+
+
     const notCompletedPreReqs = getNotCompletedPreReqs();
 
     if (notCompletedPreReqs.length == 0) {
@@ -360,7 +372,7 @@ export default function EnrollmentSheet({
           <div className="space-y-2">
             <h4 className="mb-3 text-base font-medium">Class Schedule</h4>
             <div className="grid gap-0">
-              {selectedSection.class_time_slots.map(
+              {selectedSection?.class_time_slots?.map(
                 (slot: any, index: number) => (
                   <div
                     key={index}
@@ -455,14 +467,14 @@ export default function EnrollmentSheet({
             {isEnrolled
               ? showReEnrollment
                 ? "Select your preferred section and complete re-enrollment"
-                : "You are already enrolled in this course"
+                : ``
               : "Select your preferred section and complete enrollment"}
           </CardDescription>
         </CardHeader>
         {isEnrolled && !showReEnrollment && (
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 px-4">
             <div className="rounded-lg bg-gray-100 p-4">
-              <p className="text-lg font-medium">Already enrolled in course</p>
+              <p className="text-md xs:text-lg font-medium">You’re already enrolled in the <span className="underline decoration-accent decoration-2 underline-offset-4">{enrolledSection}</span> section of this course.</p>
             </div>
             <div className="flex gap-4">
               <Button

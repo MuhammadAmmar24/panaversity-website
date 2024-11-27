@@ -35,10 +35,12 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   isEnrolled,
   coursePrice,
   courseName,
+  courseCode,
   pre_requisite,
   student_courses,
   sections,
 }) => {
+
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
 
@@ -497,6 +499,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           program_id={program_id}
           profile_id={profile_id}
           coursePrice={coursePrice}
+          courseCode={courseCode}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections.filter(

@@ -61,6 +61,7 @@ export interface EnrollmentCardProps {
   isEnrolled: boolean;
   coursePrice: GetCoursePriceResponse;
   courseName: string;
+  courseCode: string;
   pre_requisite: Pre_req_obj[];
   student_courses: CourseEnrollment[];
   sections: CourseSections[];
