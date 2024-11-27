@@ -106,7 +106,7 @@ export const PasswordUpdateSchema = z
       })
       .min(1, { message: "Email is required" }),
 
-    current_password: z.string(),
+    current_password: z.string().min(1, { message: "Current password is required" }),
     new_password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters long" })

@@ -51,7 +51,7 @@ export const LoginForm = () => {
       .then((data) => {
         if (data?.error) {
           setError(data.error);
-          toast.error(data.message || "Oops! Login failed. Please try again.");
+          toast.error("Oops! Login failed. Please try again.");
           if (data?.error === "Email not verified") {
             router.push("/resend-link");
           }
