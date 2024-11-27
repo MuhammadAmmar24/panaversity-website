@@ -36,7 +36,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   courseData,
   coursePrice,
 }) => {
-  // Destructure the course data
+
   const {
     course_code,
     course_name,
@@ -48,7 +48,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
     pre_requisite,
   } = courseData;
 
-  // Assign default values if necessary
+  // Hardcoded Values
   const learnersCount = "20,000+";
   const duration = "3 months";
   const rating = 4.8;
