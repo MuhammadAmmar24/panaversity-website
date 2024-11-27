@@ -1,12 +1,15 @@
 "use client";
 
+import { resetPassword } from "@/src/app/actions/recover-password"; // Adjust the path as needed
 import { RecoverPasswordSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 import * as z from "zod";
-import { useToast } from "../../ui/use-toast";
-import { useState, useTransition } from "react";
-import { resetPassword } from "@/src/app/actions/recover-password"; // Adjust the path as needed
 import { Button } from "../../ui/button";
 import {
   FormControl,
@@ -15,18 +18,14 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { Input } from "../../ui/input";
 import { FormError } from "../../ui/form-error";
 import { FormSuccess } from "../../ui/form-success";
-import "react-phone-input-2/lib/style.css";
-import { useRouter } from "next/navigation";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Input } from "../../ui/input";
 
 function ResetPassword() {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<any>("");
   const [isPending, setIsPending] = useState(false); // Use useState for isPending
-  const { toast } = useToast();
   const router = useRouter();
 
   // Initialize the form with react-hook-form and zod schema
@@ -48,11 +47,9 @@ function ResetPassword() {
         if (data?.error) {
           setError(data.error as string);
           setSuccess("");
-          toast({
-            title: "Request Failed",
-            description: data.error as string,
-            variant: "destructive",
-          });
+          toast.error(
+            (data.error as string) || "An error occurred. Please try again.",
+          );
 
           if (data.error === "User is not verified") {
             router.replace("/verify");
@@ -60,10 +57,10 @@ function ResetPassword() {
         } else if (data?.message) {
           setError("");
           setSuccess(data.message);
-          toast({
-            title: "Email sent Successfully",
-            description: "An email has been sent to reset your password.",
-          });
+          toast.success(
+            data.message ||
+              "A password reset link has been sent to your email. Please check your inbox.",
+          );
 
           if (data.message === "Password reset link sent successfully") {
             // router.replace("/login");
@@ -72,6 +69,7 @@ function ResetPassword() {
       })
       .catch(() => {
         setError("An error occurred. Please try again.");
+        toast.error("An error occurred. Please try again.");
       })
       .finally(() => {
         setIsPending(false); // Ensure isPending is set to false after response

@@ -1,9 +1,9 @@
 "use client";
 import { verify } from "@/src/app/actions/verify";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
+import { toast } from "sonner";
 
 type VerifyEmailProps = {
   token: string;
@@ -14,8 +14,6 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter();
-
   useEffect(() => {
     const verifyToken = async () => {
       if (token) {
@@ -23,10 +21,12 @@ const VerifyEmail: React.FC<VerifyEmailProps> = ({ token }) => {
           const result = await verify(token); // verify email server action.
           setVerified(result);
           if (result === true) {
+            toast.success("Email verified!");
             localStorage.setItem("emailVerified", "true");
           }
         } catch (error) {
           console.error("Verification failed", error);
+          toast.error("Verification failed. Please try again.")
           setError("Verification failed. Please try again.");
         } finally {
           setIsLoading(false);

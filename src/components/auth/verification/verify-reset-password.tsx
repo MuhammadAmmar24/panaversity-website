@@ -2,9 +2,9 @@
 import { verify } from "@/src/app/actions/verify";
 import UpdatePassword from "@/src/components/auth/update-password/update-password";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
+import { toast } from "sonner";
 
 type VerifyEmailProps = {
   token: string;
@@ -15,8 +15,6 @@ const VerifyResetPassword: React.FC<VerifyEmailProps> = ({ token }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const router = useRouter();
-
   useEffect(() => {
     const verifyToken = async () => {
       if (token) {
@@ -25,9 +23,10 @@ const VerifyResetPassword: React.FC<VerifyEmailProps> = ({ token }) => {
           setVerified(result);
           if (result === true) {
             localStorage.setItem("emailVerified", "true");
+            toast.success("Email verified!");
           }
         } catch (error) {
-          console.error("Verification failed", error);
+          toast.error("Verification failed. Please try again.")
           setError("Verification failed. Please try again.");
         } finally {
           setIsLoading(false);

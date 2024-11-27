@@ -1,11 +1,17 @@
 "use client";
+import { updatePassword } from "@/src/app/actions/update-password";
 import { UpdatePasswordSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import "react-phone-input-2/lib/style.css";
-import * as z from "zod";
-import { useToast } from "../../ui/use-toast";
 import { useState, useTransition } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLoading3Quarters,
+} from "react-icons/ai";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
+import * as z from "zod";
 import { Button } from "../../ui/button";
 import {
   FormControl,
@@ -14,16 +20,9 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import { Input } from "../../ui/input";
 import { FormError } from "../../ui/form-error";
 import { FormSuccess } from "../../ui/form-success";
-import { updatePassword } from "@/src/app/actions/update-password";
-import { useRouter } from "next/navigation";
-import {
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-  AiOutlineLoading3Quarters,
-} from "react-icons/ai";
+import { Input } from "../../ui/input";
 
 type VerifyEmailProps = {
   token: string;
@@ -35,7 +34,6 @@ function UpdatePassword({ token }: VerifyEmailProps) {
   const [showNewPassword, setShowNewPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof UpdatePasswordSchema>>({
@@ -55,11 +53,8 @@ function UpdatePassword({ token }: VerifyEmailProps) {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast({
-            title: "Request Failed",
-            description: data.error,
-            variant: "destructive",
-          });
+          toast.error(data.error || "An error occurred. Please try again.");
+
           if (data.error === "User is not verified") {
             window.location.href = "/verify";
           }
@@ -67,10 +62,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
           form.reset();
           setError("");
           setSuccess(data.message);
-          toast({
-            title: "Password updated successfully",
-            description: "Your password has been updated.",
-          });
+          toast.success("Your password has been updated.");
 
           if (data.message === "Password updated successfully") {
             localStorage.setItem("updatePassword", "true");
