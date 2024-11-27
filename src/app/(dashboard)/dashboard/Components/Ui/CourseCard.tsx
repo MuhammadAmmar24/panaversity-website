@@ -204,7 +204,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           ) : (
             <div className="flex flex-col items-end gap-2">
               <div className="h-2 w-full rounded-full bg-gray-200"></div>
-              <p className="text-xs sm:text-sm md:text-base">
+              <p className="text-xs sm:text-sm">
                 <span className="text-black opacity-30">0/14 Classes</span>
               </p>
             </div>
