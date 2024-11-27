@@ -69,8 +69,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   });
 
   let visibleSections = sortedSections.slice(
-    currentPage * sectionsPerPage,
-    (currentPage + 1) * sectionsPerPage,
+    currentPage,
+    currentPage + sectionsPerPage,
   );
 
   const [selectedSection, setSelectedSection] = useState(
