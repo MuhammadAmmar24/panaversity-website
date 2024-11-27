@@ -50,6 +50,7 @@ export default function EnrollmentSheet({
   sections,
   selected_section_name,
   isEnrolled,
+  setPendingState,
 }: any) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -145,6 +146,8 @@ export default function EnrollmentSheet({
 
   useEffect(() => {
 
+  
+
     const enrolled_section = findStudentCourse(courseCode)
     setEnrolledSection(enrolled_section?.section?.section_name)
 
@@ -197,6 +200,11 @@ export default function EnrollmentSheet({
       course_id: selectedSection.course_id,
     };
 
+    setPendingState(true);
+
+    
+
+
     startTransition(async () => {
       try {
         const result = await enrollNewStudentInProgramAndCourse(payload);
@@ -215,6 +223,9 @@ export default function EnrollmentSheet({
       } catch (error) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later.");
+      }
+      finally {
+        setPendingState(false);
       }
     });
   };
