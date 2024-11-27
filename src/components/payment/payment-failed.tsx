@@ -4,10 +4,10 @@ import { ImCancelCircle } from "react-icons/im";
 
 const PaymentCancel = () => {
   return (
-    <div className="w-full max-w-sm pb-5 text-center sm:pb-2">
-      <div className="mb-4 flex justify-center">
+    <div className="w-full max-w-sm pb-5 text-center sm:pb-1">
+      <div className="mb-8   flex justify-center">
         <div className="rounded-full bg-white p-4">
-          <ImCancelCircle size={50} className="text-red-500" />
+          <ImCancelCircle size={60} className="text-red-500" />
         </div>
       </div>
       <h2 className="mb-4 text-2xl font-semibold text-gray-800">
