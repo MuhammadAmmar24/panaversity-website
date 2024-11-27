@@ -121,19 +121,37 @@ const CourseCard: React.FC<CourseCardProps> = ({
                   Paid
                 </button>
               ) : status === "reserved_seat" ? (
-                <button
-                  onClick={() => setPaymentDialogOpen(true)}
-                  className="min-h-6 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-xl transition duration-300 hover:bg-red-600 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
-                >
-                  Pay to Proceed
-                </button>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => setPaymentDialogOpen(true)}
+                        className="min-h-6 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-xl transition duration-300 hover:bg-red-600 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
+                      >
+                        Pay to Proceed
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent className="mb-1 text-xs font-medium">
+                      <span>Click to pay</span>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               ) : status === "expired_reservation" ? (
-                <button
-                  onClick={ReEnroll}
-                  className="min-h-6 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-xl transition duration-300 hover:bg-yellow-500 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
-                >
-                  Enroll Again
-                </button>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={ReEnroll}
+                        className="min-h-6 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-xl transition duration-300 hover:bg-yellow-500 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
+                      >
+                        Enroll Again
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent  className="mb-1 font-medium">
+                      <span>Reservation Expired, click to re-enroll again</span>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               ) : null}
             </div>
           </div>
@@ -226,7 +244,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                 </TooltipTrigger>
                 <TooltipContent
                   className={cn(
-                    "mb-2",
+                    "mb-2 font-medium",
                     status === "active" ? "" : "hidden"
                   )}
                 >
@@ -236,7 +254,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             ))}
           </TooltipProvider>
         </div>
-        
+
       </div>
 
       <PaymentDialog
