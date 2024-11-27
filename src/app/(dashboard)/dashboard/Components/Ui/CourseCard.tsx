@@ -115,9 +115,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </span>
             </h6>
 
-            <div className="ml-auto text-[10px] font-medium sm:text-xs md:font-semibold">
+            <div className="ml-auto text-[10px] font-medium sm:text-xs sm:font-semibold tablet_lg:text-[10px] tablet_lg:font-medium lg:text-xs lg:font-semibold">
               {status === "active" ? (
-                <button className="min-h-6 min-w-[93px] cursor-default rounded-full border border-accent bg-accent px-4 text-white shadow-lg md:min-h-8 md:min-w-[125px] md:px-6">
+                <button className="py-1 min-w-[93px] cursor-default rounded-full border border-accent bg-accent px-4 text-white shadow-lg md:min-w-[125px] md:px-6 tablet_lg:px-2 lg:px-4  tablet_lg:min-w-[93px] lg:min-w-[125px]">
                   Paid
                 </button>
               ) : status === "reserved_seat" ? (
@@ -126,7 +126,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
                     <TooltipTrigger asChild>
                       <button
                         onClick={() => setPaymentDialogOpen(true)}
-                        className="min-h-6 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-xl transition duration-300 hover:bg-red-600 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
+                        className="py-1 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-lg transition duration-300 hover:bg-red-600 hover:text-white md:min-w-[125px] md:px-4 tablet_lg:px-2 lg:px-4 tablet_lg:min-w-[93px] lg:min-w-[125px]"
                       >
                         Pay to Proceed
                       </button>
@@ -142,13 +142,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
                     <TooltipTrigger asChild>
                       <button
                         onClick={ReEnroll}
-                        className="min-h-6 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-xl transition duration-300 hover:bg-yellow-500 hover:text-white md:min-h-8 md:min-w-[125px] md:px-4"
+                        className="py-1 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-lg transition duration-300 hover:bg-yellow-500 hover:text-white md:min-w-[125px] md:px-4 tablet_lg:px-2 lg:px-4 tablet_lg:min-w-[93px] lg:min-w-[125px]"
                       >
                         Enroll Again
                       </button>
                     </TooltipTrigger>
                     <TooltipContent  className="mb-1 font-medium">
-                      <span>Reservation Expired, click to re-enroll again</span>
+                      <span>Reservation expired. Click to re-enroll again</span>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -210,7 +210,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
             </div>
           )}
 
-          <div className={`flex flex-col gap-2 ${status === "active" ? "text-gray-500" : "opacity-30"}`}>
+          <div className={`flex flex-col gap-2 px-4 max-h-[3rem] overflow-y-auto ${status === "active" ? "text-gray-500" : "opacity-30"}`}>
             {course_section?.class_time_slots?.map((slot, index) => (
               <div key={index} className="flex justify-between text-xs sm:text-sm">
                 <div className="flex items-center gap-2">
