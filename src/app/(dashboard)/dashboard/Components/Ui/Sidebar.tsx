@@ -126,7 +126,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                   </Link>
                 </TooltipTrigger>
                 <TooltipContent
-                  className={cn("", !isOpen ? "" : "hidden")}
+                  className={cn("font-medium", !isOpen ? "" : "hidden")}
                   side="right"
                 >
                   {item.label}
@@ -157,7 +157,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                   </button>
                 </TooltipTrigger>
                 <TooltipContent
-                  className={cn("", !isOpen ? "" : "hidden")}
+                  className={cn("font-medium", !isOpen ? "" : "hidden")}
                   side="right"
                 >
                   {item.label}

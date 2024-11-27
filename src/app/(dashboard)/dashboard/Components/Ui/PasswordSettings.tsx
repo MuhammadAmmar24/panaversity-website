@@ -23,6 +23,7 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import { IoInformationCircleOutline } from "react-icons/io5";
 import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
 import { toast } from "sonner";
@@ -236,8 +237,8 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
               </div>
             </form>
           </FormProvider>
-          <p className="mt-4 text-xs text-gray-500">
-            <span className="text-red-600">Note:</span> After changing your password, you’ll be logged out and need to log in again.
+          <p className="mt-4 text-xs text-gray-500 flex gap-1 items-center">
+            <IoInformationCircleOutline className="text-black text-sm"/> After changing your password, you’ll be logged out and need to log in again.
           </p>
         </div>
       )}
