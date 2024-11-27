@@ -27,7 +27,8 @@ export const getStudentCourses = async (
                 Accept: "application/json",
                 Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
             },
-            cache:'force-cache'
+            cache:'force-cache',
+            next: { tags: ['fetchStudentCourses'] },
         });
 
         // Check if the response is successful

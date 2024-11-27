@@ -6,7 +6,7 @@ import { GoCheckCircleFill } from "react-icons/go";
 
 const PaymentSuccess = () => {
   useEffect(() => {
-    revalidateDashboard("/dashboard");
+    revalidateDashboard("fetchStudentCourses");
   }, []);
 
   return (

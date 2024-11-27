@@ -19,6 +19,7 @@ export default async function fetchProfile() {
           Authorization: `Bearer ${token}`,
         },
         cache: "force-cache",
+        next: { tags: ['fetchStudentProfileTag'] },
       }
     );
     const profile = await response.json();
