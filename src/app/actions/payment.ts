@@ -4,7 +4,7 @@ import {
   PaymentRequestSchema,
 } from "@/src/lib/schemas/payment";
 import { Result } from "@/src/types/types";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 // Payment Server Action to process the payment
 export const processPayment = async (
@@ -43,7 +43,7 @@ export const processPayment = async (
     // Parse the JSON response
     const responseData = await response.json();
 
-    revalidatePath("/dashboard");
+    revalidateTag("fetchStudentCourses")
 
     // Assuming the response contains a transaction ID indicating a successful payment
     return {

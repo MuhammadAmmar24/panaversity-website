@@ -23,8 +23,7 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
-import { FaChevronLeft, FaChevronRight, FaUsers } from "react-icons/fa";
-import { GiTeacher } from "react-icons/gi";
+import { FaChevronLeft, FaChevronRight, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
 import { GrLanguage } from "react-icons/gr";
 import { SlCalender } from "react-icons/sl";
 
@@ -35,10 +34,12 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   isEnrolled,
   coursePrice,
   courseName,
+  courseCode,
   pre_requisite,
   student_courses,
   sections,
 }) => {
+
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
 
@@ -246,7 +247,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
                   {/* <div className="grid grid-cols-3 items-center justify-between">
                     <div className="col-span-2 flex items-center gap-x-2">
-                      <GiTeacher className="h-4 w-4 text-muted-foreground" />
+                      <FaChalkboardTeacher className="h-4 w-4 text-muted-foreground" />
                       <span>
                         Instructor:{" "}
                         {selectedDay
@@ -381,7 +382,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                         <div className="grid grid-cols-3 items-center">
                           {/* Instructor */}
                           <div className="col-span-2 flex items-center gap-x-2">
-                            <GiTeacher className="h-4 w-4 text-muted-foreground" />
+                            <FaChalkboardTeacher className="h-4 w-4 text-muted-foreground" />
                             <span>
                               {selectedDay
                                 ? selectedSection?.class_time_slots?.find(
@@ -497,6 +498,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           program_id={program_id}
           profile_id={profile_id}
           coursePrice={coursePrice}
+          courseCode={courseCode}
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections.filter(

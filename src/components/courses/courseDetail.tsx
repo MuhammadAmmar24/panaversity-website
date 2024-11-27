@@ -159,6 +159,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                     isEnrolled={isEnrolled}
                     coursePrice={coursePrice}
                     courseName={course_name}
+                    courseCode={course_code}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
                     sections={sections.data || []}

@@ -1,7 +1,6 @@
 "use server";
 
 import {
-  EnrollNewStudentRequest,
   EnrollNewStudentRequestSchema,
   EnrollResponse,
   EnrollStudentRequest,
@@ -10,7 +9,7 @@ import {
   EnrollStudentResponseSchema
 } from "@/src/lib/schemas/enrollment";
 import { Result } from "@/src/types/types";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const enrollStudentInProgram = async (
   payload: EnrollStudentRequest,
@@ -117,7 +116,7 @@ export const enrollNewStudentInProgramAndCourse = async (
     // Successful response parsing
     const responseData = await response.json();
 
-    revalidatePath("/dashboard");
+    revalidateTag("fetchStudentCourses")
 
     return {
       type: "success",
