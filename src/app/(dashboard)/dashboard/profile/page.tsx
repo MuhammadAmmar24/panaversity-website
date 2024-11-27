@@ -12,7 +12,7 @@ export default async function Home() {
   const user_data = await fetchProfile();
 
   return (
-    <main className="mx-2 flex-1 overflow-hidden px-1 transition-all duration-300 mobileM:px-2 xs:px-3 sm:px-8 md:px-24">
+    <main className="flex-1 px-2 mobileM:px-4 xs:px-6 ssm:px-12 md:px-24">
       <TopBar />
       <ProfileSettings profile={user_data} />
     </main>
