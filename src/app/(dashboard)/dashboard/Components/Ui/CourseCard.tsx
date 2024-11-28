@@ -13,6 +13,7 @@ import { RiRobot2Line } from "react-icons/ri";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
 import { cn } from "@/src/lib/utils";
+import { CardButton } from "./CardButton";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -117,41 +118,25 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
             <div className="ml-auto text-[10px] font-medium sm:text-xs sm:font-semibold tablet_lg:text-[10px] tablet_lg:font-medium lg:text-xs lg:font-semibold">
               {status === "active" ? (
-                <button className="py-1 min-w-[93px] cursor-default rounded-full border border-accent bg-accent px-4 text-white shadow-lg md:min-w-[125px] md:px-6 tablet_lg:px-2 lg:px-4  tablet_lg:min-w-[93px] lg:min-w-[125px]">
+                <CardButton status="active">
                   Paid
-                </button>
+                </CardButton>
               ) : status === "reserved_seat" ? (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button
-                        onClick={() => setPaymentDialogOpen(true)}
-                        className="py-1 min-w-[93px] rounded-full border-2 border-red-600 px-2 text-red-600 shadow-lg transition duration-300 hover:bg-red-600 hover:text-white md:min-w-[125px] md:px-4 tablet_lg:px-2 lg:px-4 tablet_lg:min-w-[93px] lg:min-w-[125px]"
-                      >
-                        Pay to Proceed
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent className="mb-1 text-xs font-medium">
-                      <span>Click to pay</span>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <CardButton
+                  status="reserved_seat"
+                  onClick={() => setPaymentDialogOpen(true)}
+                  tooltipContent="Click to pay"
+                >
+                  Pay to Proceed
+                </CardButton>
               ) : status === "expired_reservation" ? (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <button
-                        onClick={ReEnroll}
-                        className="py-1 min-w-[93px] rounded-full border-2 border-yellow-500 px-2 text-yellow-500 shadow-lg transition duration-300 hover:bg-yellow-500 hover:text-white md:min-w-[125px] md:px-4 tablet_lg:px-2 lg:px-4 tablet_lg:min-w-[93px] lg:min-w-[125px]"
-                      >
-                        Enroll Again
-                      </button>
-                    </TooltipTrigger>
-                    <TooltipContent  className="mb-1 font-medium">
-                      <span>Reservation expired. Click to re-enroll again</span>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                <CardButton
+                  status="expired_reservation"
+                  onClick={ReEnroll}
+                  tooltipContent="Reservation expired. Click to re-enroll again"
+                >
+                  Enroll Again
+                </CardButton>
               ) : null}
             </div>
           </div>
