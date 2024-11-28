@@ -11,7 +11,6 @@ import { FormError } from "@/src/components/ui/form-error";
 import { FormSuccess } from "@/src/components/ui/form-success";
 import { Input } from "@/src/components/ui/input";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
-import { useToast } from "@/src/components/ui/use-toast";
 import { signOut } from "@/src/lib/auth";
 import { PasswordUpdateSchema } from "@/src/lib/schemas/userschema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,14 +23,15 @@ import {
   AiOutlineEyeInvisible,
   AiOutlineLoading3Quarters,
 } from "react-icons/ai";
+import { IoInformationCircleOutline } from "react-icons/io5";
 import "react-phone-input-2/lib/style.css";
 import * as z from "zod";
+import { toast } from "sonner";
 
 function PasswordSettings({ profile_email }: { profile_email: string }) {
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
-  const { toast } = useToast();
   const [showPasswordCurrent, setShowPasswordCurrent] =
     useState<boolean>(false);
   const [showPasswordNew, setShowPasswordNew] = useState<boolean>(false);
@@ -68,11 +68,7 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast({
-            title: "Request Failed",
-            description: data.error,
-            variant: "destructive",
-          });
+          toast.error(data.error || "Password change failed. Please verify your information and try again.");
 
           if (data.error === "User is not verified") {
             window.location.href = "/verify";
@@ -80,10 +76,8 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
         } else if (data?.message) {
           setError("");
           setSuccess(data.message);
-          toast({
-            title: "Password updated successfully",
-            description: "Your password has been updated.",
-          });
+          toast.success("Password updated successfully! Please log in again to continue.");
+
           if (data.message === "Password updated successfully") {
             signOut();
           }
@@ -243,8 +237,8 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
               </div>
             </form>
           </FormProvider>
-          <p className="mt-4 text-xs text-gray-500">
-            <span className="text-red-600">Note:</span> After changing your password, you’ll be logged out and need to log in again.
+          <p className="mt-4 text-xs text-gray-500 flex gap-1 items-center">
+            <IoInformationCircleOutline className="text-black text-sm"/> After changing your password, you’ll be logged out and need to log in again.
           </p>
         </div>
       )}

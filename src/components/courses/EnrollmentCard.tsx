@@ -42,6 +42,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
+  const [isPending, setIsPending] = useState(false); 
+
 
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -67,8 +69,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   });
 
   let visibleSections = sortedSections.slice(
-    currentPage * sectionsPerPage,
-    (currentPage + 1) * sectionsPerPage,
+    currentPage,
+    currentPage + sectionsPerPage,
   );
 
   const [selectedSection, setSelectedSection] = useState(
@@ -176,9 +178,13 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   return (
     <Sheet
-      open={open}
-      onOpenChange={(isOpen) => (isOpen ? setOpen(true) : setOpen(false))}
-    >
+    open={open}
+    onOpenChange={(isOpen) => {
+      if (!isPending) {
+        isOpen ? setOpen(true) : setOpen(false);
+      }
+    }}
+  >
       <Card className="w-full items-end  ssm:max-w-[30em] sm:w-full px-0  sm:px-2 md:px-0 lg:px-0">
         <CardContent className="-mb-3 p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:mb-2 xl:px-4 xl:py-0 xl:pt-4">
           <p className="mb-1 text-xs font-semibold text-primary">
@@ -511,6 +517,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
+          setPendingState={setIsPending} 
+
         />
       </SheetContent>
     </Sheet>

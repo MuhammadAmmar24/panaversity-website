@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "sonner";
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -50,6 +50,7 @@ export default function EnrollmentSheet({
   sections,
   selected_section_name,
   isEnrolled,
+  setPendingState,
 }: any) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -140,10 +141,9 @@ export default function EnrollmentSheet({
     );
   };
 
-
-
-
   useEffect(() => {
+
+  
 
     const enrolled_section = findStudentCourse(courseCode)
     setEnrolledSection(enrolled_section?.section?.section_name)
@@ -197,24 +197,48 @@ export default function EnrollmentSheet({
       course_id: selectedSection.course_id,
     };
 
+    setPendingState(true);
+
+    
+
+
     startTransition(async () => {
       try {
         const result = await enrollNewStudentInProgramAndCourse(payload);
         if (result.type === "success") {
           const url = result.data?.fee_voucher?.stripe?.stripe_url;
           if (url) {
-            router.push(url);
+            toast.success(
+              "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+            );
+            setTimeout(() => {
+              router.push(url);
+            }, 3000);
+            // router.push(url);
           } else {
+            toast.success(
+              "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+            );
             router.push("/dashboard");
           }
         } else {
           setEnrollmentError(
             result.message || "An error occurred during enrollment.",
           );
+          toast.error(
+            result.message ||
+              "Oops! Something went wrong with your enrollment. Please try again.",
+          );
         }
       } catch (error) {
         console.error("Unexpected error during enrollment:", error);
         setEnrollmentError("Failed to enroll student. Please try again later.");
+        toast.error(
+          "We couldn’t complete your enrollment. Please try again later.",
+        );
+      }
+      finally {
+        setPendingState(false);
       }
     });
   };
@@ -420,6 +444,20 @@ export default function EnrollmentSheet({
         </Select>
       </div>
 
+      {enrollmentError && (
+        <Alert
+          variant="destructive"
+          className="flex items-center gap-2 border-2"
+        >
+          <div>
+            <FaExclamationCircle className="h-4 w-4" />
+          </div>
+          <div>
+            <AlertDescription>{enrollmentError}</AlertDescription>
+          </div>
+        </Alert>
+      )}
+
       <Button
         className={`flex w-full items-center justify-center rounded-lg p-3 font-semibold transition-all duration-300 ease-in-out ${
           shouldDisableForm() || isPending
@@ -439,20 +477,6 @@ export default function EnrollmentSheet({
           "Enroll"
         )}
       </Button>
-
-      {enrollmentError && (
-        <Alert
-          variant="destructive"
-          className="flex items-center gap-2 border-2"
-        >
-          <div>
-            <FaExclamationCircle className="h-4 w-4" />
-          </div>
-          <div>
-            <AlertDescription>{enrollmentError}</AlertDescription>
-          </div>
-        </Alert>
-      )}
     </CardContent>
   );
 
@@ -474,7 +498,13 @@ export default function EnrollmentSheet({
         {isEnrolled && !showReEnrollment && (
           <CardContent className="space-y-4 px-4">
             <div className="rounded-lg bg-gray-100 p-4">
-              <p className="text-md xs:text-lg font-medium">You’re already enrolled in the <span className="underline decoration-accent decoration-2 underline-offset-4">{enrolledSection}</span> section of this course.</p>
+              <p className="text-md font-medium xs:text-lg">
+                You’re already enrolled in the{" "}
+                <span className="underline decoration-accent decoration-2 underline-offset-4">
+                  {enrolledSection}
+                </span>{" "}
+                section of this course.
+              </p>
             </div>
             <div className="flex gap-4">
               <Button

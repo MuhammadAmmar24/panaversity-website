@@ -46,6 +46,11 @@ export const changePassword = async (
         error: "New password cannot be the same as the current password",
       };
     }
+    if (password_update_request.status === 401) {
+      return {
+        error: "Incorrect current password",
+      };
+    }
     if (password_update_request.status !== 200) {
       return { error: "An error occurred while updating the password" };
     }
