@@ -53,7 +53,7 @@ export default function EnrollmentSheet({
   setPendingState,
 }: any) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, setIsPending] = useState(false);
   const [selectedSection, setSelectedSection] = useState<any>(
     selected_section_name,
   );
@@ -187,7 +187,7 @@ export default function EnrollmentSheet({
       setEnrollmentError("Please select a section and payment method.");
       return;
     }
-
+  
     const payload = {
       student_id: profile_id,
       program_id,
@@ -196,51 +196,34 @@ export default function EnrollmentSheet({
       package_id: coursePrice.package_id,
       course_id: selectedSection.course_id,
     };
-
+  
+    setIsPending(true)
     setPendingState(true);
-
-    
-
-
-    startTransition(async () => {
-      try {
-        const result = await enrollNewStudentInProgramAndCourse(payload);
-        if (result.type === "success") {
-          const url = result.data?.fee_voucher?.stripe?.stripe_url;
-          if (url) {
-            toast.success(
-              "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-            );
-            setTimeout(() => {
-              router.push(url);
-            }, 3000);
-            // router.push(url);
-          } else {
-            toast.success(
-              "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-            );
-            router.push("/dashboard");
-          }
+  
+    try {
+      const result = await enrollNewStudentInProgramAndCourse(payload);
+      
+      if (result.type === "success") {
+        const url = result.data?.fee_voucher?.stripe?.stripe_url;
+        if (url) {
+          toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
+          setTimeout(() => {
+            router.push(url);
+          }, 3000);
         } else {
-          setEnrollmentError(
-            result.message || "An error occurred during enrollment.",
-          );
-          toast.error(
-            result.message ||
-              "Oops! Something went wrong with your enrollment. Please try again.",
-          );
+          toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
+          router.push("/dashboard");
         }
-      } catch (error) {
-        console.error("Unexpected error during enrollment:", error);
-        setEnrollmentError("Failed to enroll student. Please try again later.");
-        toast.error(
-          "We couldn’t complete your enrollment. Please try again later.",
-        );
+      } else {
+        setEnrollmentError(result.message || "An error occurred during enrollment.");
       }
-      finally {
-        setPendingState(false);
-      }
-    });
+    } catch (error) {
+      console.error("Unexpected error during enrollment:", error);
+      setEnrollmentError("Failed to enroll student. Please try again later.");
+    } finally {
+      setIsPending(false);
+      setPendingState(false);
+    }
   };
 
   const handleSkip = () => {
@@ -332,7 +315,7 @@ export default function EnrollmentSheet({
         <Select
           value={selectedSection?.section_name}
           onValueChange={handleSectionSelect}
-          disabled={shouldDisableForm()}
+          disabled={shouldDisableForm() || isPending}
         >
           <SelectTrigger>
             <SelectValue placeholder="Select a section" />
@@ -423,7 +406,7 @@ export default function EnrollmentSheet({
         <Select
           value={paymentMethod}
           onValueChange={setPaymentMethod}
-          disabled={shouldDisableForm()}
+          disabled={shouldDisableForm() || isPending}
         >
           <SelectTrigger>
             <SelectValue>
