@@ -49,7 +49,25 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  const sectionsPerPage = 3;
+  
+  const [sectionsPerPage, setSectionsPerPage] = useState(3);
+
+
+    // Update sectionsPerPage based on screen width
+    useEffect(() => {
+      const handleResize = () => {
+        setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
+        
+        setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
+      };
+  
+      handleResize();
+  
+      window.addEventListener("resize", handleResize);
+  
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
 
@@ -139,15 +157,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       : "Enroll Now";
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   if (!sections || sections.length === 0) {
     return (
@@ -217,10 +226,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               <TabsList
                 className={`grid w-full overflow-auto ${
                   visibleSections.length === 1
-                    ? "grid-cols-1"
-                    : visibleSections.length === 2
-                      ? "grid-cols-2"
-                      : "grid-cols-3"
+                  ? "grid-cols-1"
+                  : visibleSections.length === 2
+                    ? "grid-cols-2"
+                    : "grid-cols-2 sm:grid-cols-3"
                 }`}
               >
                 {visibleSections.map((section) => (

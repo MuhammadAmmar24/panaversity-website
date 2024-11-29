@@ -244,8 +244,8 @@ const allTeamMembers = [
   {
     picture: "/team/Shayan.webp",
     fullName: "M Shayan Khan",
-    designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
     socialLinks: [
       {
         icon: "linkedin",
@@ -257,8 +257,8 @@ const allTeamMembers = [
   {
     picture: "/team/Hasnain.webp",
     fullName: "Syed Husnain Khalid",
-    designation: "Full Stack GENAI Engineer",
-    bio: "Building seamless AI-powered web applications",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
     socialLinks: [
       {
         icon: "linkedin",
