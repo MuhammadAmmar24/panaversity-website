@@ -15,7 +15,7 @@ const LoginPage = () => {
     <>
       <Navbar />
       <main>
-        <div className="mb-20 mt-10 flex min-h-[85vh] flex-col items-center justify-center">
+        <div className="mb-20 mt-10 flex min-h-[85vh] flex-col items-center justify-center ">
           <CardWrapper headerLabel="Login">
             <div className="p-4 mobileM:p-2">
               <LoginForm />

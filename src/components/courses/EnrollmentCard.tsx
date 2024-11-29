@@ -26,6 +26,8 @@ import { BsClock } from "react-icons/bs";
 import { FaChevronLeft, FaChevronRight, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
 import { GrLanguage } from "react-icons/gr";
 import { SlCalender } from "react-icons/sl";
+import { IoLanguage  } from "react-icons/io5";
+
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
@@ -47,7 +49,25 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  const sectionsPerPage = 3;
+  
+  const [sectionsPerPage, setSectionsPerPage] = useState(3);
+
+
+    // Update sectionsPerPage based on screen width
+    useEffect(() => {
+      const handleResize = () => {
+        setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
+        
+        setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
+      };
+  
+      handleResize();
+  
+      window.addEventListener("resize", handleResize);
+  
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
 
@@ -137,15 +157,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       : "Enroll Now";
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   if (!sections || sections.length === 0) {
     return (
@@ -215,10 +226,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               <TabsList
                 className={`grid w-full overflow-auto ${
                   visibleSections.length === 1
-                    ? "grid-cols-1"
-                    : visibleSections.length === 2
-                      ? "grid-cols-2"
-                      : "grid-cols-3"
+                  ? "grid-cols-1"
+                  : visibleSections.length === 2
+                    ? "grid-cols-2"
+                    : "grid-cols-2 sm:grid-cols-3"
                 }`}
               >
                 {visibleSections.map((section) => (
@@ -246,68 +257,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                 <div className="space-y-2 text-sm">
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-sm font-semibold text-primary">
-                      Section Class Schedule:{" "}
+                      Section Classes Schedule:{" "}
                     
                     </span>
                   </div>
-
-                  {/* <div className="grid grid-cols-3 items-center justify-between">
-                    <div className="col-span-2 flex items-center gap-x-2">
-                      <FaChalkboardTeacher className="h-4 w-4 text-muted-foreground" />
-                      <span>
-                        Instructor:{" "}
-                        {selectedDay
-                          ? selectedSection?.class_time_slots?.find(
-                              (slot) => slot.time_slot_day === selectedDay,
-                            )?.instructor
-                            ? typeof selectedSection?.class_time_slots?.find(
-                                (slot) => slot.time_slot_day === selectedDay,
-                              )?.instructor === "string"
-                              ? selectedSection?.class_time_slots?.find(
-                                  (slot) => slot.time_slot_day === selectedDay,
-                                )?.instructor
-                              : (
-                                  selectedSection?.class_time_slots?.find(
-                                    (slot) =>
-                                      slot.time_slot_day === selectedDay,
-                                  )?.instructor as any
-                                )?.name
-                            : "N/A"
-                          : "N/A"}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <GrLanguage className="h-4 w-4 text-muted-foreground" />
-                      <span>
-                        {typeof section.language === "string"
-                          ? section.language
-                          : section.language.language_name}
-                      </span>
-                    </div>
-                  </div> */}
-
-                  {/* <ul className="space-y-2">
-                    {section?.class_time_slots?.map((slot:any, index:any) => (
-                      <li
-                        key={index}
-                        className="grid grid-cols-3 items-center justify-between capitalize"
-                      >
-                        <div className="col-span-2 flex items-center gap-x-2">
-                          <SlCalender className="h-4 w-4 text-muted-foreground" />
-                          {slot.time_slot_day.slice(0, 3)}{" "}
-                          {formatTimeToUserGMT(slot.slot_start_time)}
-                        </div>
-                        <div className="col-span-1 flex items-center gap-2">
-                          <BsClock className="h-4 w-4 text-muted-foreground" />
-                          {getTimeDifference(
-                            slot.slot_start_time,
-                            slot.slot_end_time,
-                          ).toFixed(0)}{" "}
-                          hours
-                        </div>
-                      </li>
-                    ))}
-                  </ul> */}
 
                   <div className="flex flex-col justify-center space-y-1 rounded-lg border border-gray-200 bg-gray-50">
                     <div className="flex items-center justify-between rounded-t-lg bg-gray-300 px-1">
@@ -330,7 +283,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             key={day}
                             className={`flex rounded-md px-2 py-1 text-sm transition-all duration-200 ${
                               hasClass
-                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent"
+                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent "
                                 : "text-gray-500"
                             } ${
                               selectedDay === day
@@ -416,7 +369,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
                           {/* Language */}
                           <div className="col-span-1 flex items-center gap-x-2">
-                            <GrLanguage className="h-4 w-4 text-muted-foreground" />
+                            <IoLanguage   className="h-4 w-4 text-muted-foreground" />
                             <span>
                               {typeof section.language === "string"
                                 ? section.language
