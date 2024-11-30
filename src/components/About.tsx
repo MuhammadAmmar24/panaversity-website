@@ -14,7 +14,7 @@ export default function About() {
               width={500}
               height={500}
               alt={"Panaversity Logo"}
-              className="max-h-[8rem] w-auto lg:max-h-[45rem] xl:max-h-[32rem]"
+              className="max-h-[8rem] w-auto md:max-h-[45rem] xl:max-h-[32rem]"
             />
           </div>
           <div className="mt-6 flex flex-col items-center gap-5 md:mt-0 md:items-start">
