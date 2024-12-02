@@ -237,8 +237,8 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
               </div>
             </form>
           </FormProvider>
-          <p className="mt-4 text-xs text-gray-500 flex gap-1 items-center">
-            <IoInformationCircleOutline className="text-black text-sm"/> After changing your password, you’ll be logged out and need to log in again.
+          <p className="mt-4 text-xs text-gray-500 flex gap-1 items-start">
+            <IoInformationCircleOutline className="text-black h-4 w-6 ssm:w-3"/> After changing your password, you’ll be logged out and need to log in again.
           </p>
         </div>
       )}
