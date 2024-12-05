@@ -48,7 +48,7 @@ function ResetPassword() {
           setError(data.error as string);
           setSuccess("");
           toast.error(
-            (data.error as string) || "An error occurred. Please try again.",
+            "An error occurred. Please try again.",
           );
 
           if (data.error === "User is not verified") {

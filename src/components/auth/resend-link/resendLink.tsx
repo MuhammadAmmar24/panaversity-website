@@ -45,7 +45,7 @@ function ResetPassword() {
 
         // Ensure isPending is set to false after the response
         if (data?.error) {
-          toast.error(data?.error || "An error occurred. Please try again.");
+          toast.error("An error occurred. Please try again.");
         } else if (data?.success) {
           toast.success("A verification link has been sent to your email.");
 

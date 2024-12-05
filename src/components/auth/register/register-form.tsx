@@ -58,7 +58,7 @@ export const RegisterForm = () => {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast.error(data.error || "Account registration failed. Please try again.");
+          toast.error("Account registration failed. Please try again.");
         } else if (data?.success) {
           form.reset();
           setError("");
