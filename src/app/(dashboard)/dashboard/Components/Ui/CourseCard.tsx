@@ -14,6 +14,7 @@ import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
 import { cn } from "@/src/lib/utils";
 import { CardButton } from "./CardButton";
+import { toast } from "sonner";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -55,12 +56,15 @@ const CourseCard: React.FC<CourseCardProps> = ({
           window.location.href = url;
         } else {
           console.error("Stripe URL not found.");
+          toast.error("Something went wrong, please try again.");
         }
       } else {
         console.error("API Error:", result.message);
+        toast.error("Something went wrong, please try again.");
       }
     } catch (error) {
       console.error("Enrollment failed:", error);
+      toast.error("Something went wrong, please try again.");
     }
   };
 

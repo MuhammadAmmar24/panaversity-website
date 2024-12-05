@@ -53,7 +53,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast.error(data.error || "An error occurred. Please try again.");
+          toast.error("An error occurred. Please try again.");
 
           if (data.error === "User is not verified") {
             window.location.href = "/verify";

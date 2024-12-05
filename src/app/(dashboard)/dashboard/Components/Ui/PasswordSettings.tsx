@@ -68,7 +68,7 @@ function PasswordSettings({ profile_email }: { profile_email: string }) {
         if (data?.error) {
           setError(data.error);
           setSuccess("");
-          toast.error(data.error || "Password change failed. Please verify your information and try again.");
+          toast.error("Password change failed. Please verify your information and try again.");
 
           if (data.error === "User is not verified") {
             window.location.href = "/verify";

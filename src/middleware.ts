@@ -60,6 +60,7 @@ export async function middleware(req: NextRequest) {
       // If token is expired, attempt to refresh it
       if (is_token_expired) {
         const newTokens = await refreshAccessToken(old_refresh_token);
+        console.log("New Tokens", newTokens);
         if (newTokens.success) {
           const { access_token, refresh_token } = newTokens;
 
@@ -71,8 +72,10 @@ export async function middleware(req: NextRequest) {
             name: "user_data",
             value: JSON.stringify({ access_token, refresh_token }),
             httpOnly: true,
+            sameSite:"strict",
             path: "/",
-            secure: process.env.NODE_ENV === "production",
+            secure: true,
+            
           });
 
           return response;

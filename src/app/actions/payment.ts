@@ -6,6 +6,7 @@ import {
 import { Result } from "@/src/types/types";
 import { revalidateTag } from "next/cache";
 
+
 // Payment Server Action to process the payment
 export const processPayment = async (
   paymentData: PaymentRequest,
@@ -30,7 +31,7 @@ export const processPayment = async (
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.TOKEN_SECRET}`, // Use secret from environment
+        Authorization: `Bearer ${process.env.VOUCHER_JWT_KEY}`, // Use secret from environment
       },
       body: JSON.stringify(validationResult.data), // Convert validated data to JSON string
       cache: "no-store",
