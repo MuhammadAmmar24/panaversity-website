@@ -20,9 +20,16 @@ export default function PaymentDialog({
     onOpenChange(false);
   };
 
-  const handleConfirmClick = () => {
+  const handleConfirmClick = async () => {
     setIsLoading(true);
-    onConfirm(selectedMethod);
+    try {
+      await onConfirm(selectedMethod);
+    } catch (error) {
+      console.error("Payment failed:", error);
+    }
+    finally {
+      setIsLoading(false)
+    }
   };
 
   useEffect(() => {
@@ -36,7 +43,7 @@ export default function PaymentDialog({
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-[300px] mobileM:max-w-[350px] ssm:max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
             <Dialog.Title className="mb-4 text-lg font-bold">
               Select Payment Method
             </Dialog.Title>
@@ -94,7 +101,7 @@ export default function PaymentDialog({
               )}
             </div>
 
-            <div className="flex justify-end space-x-4">
+            <div className="flex justify-end space-x-4 text-sm xs:text-base">
               <button
                 onClick={handleClose}
                 className="rounded-lg border bg-transparent px-4 py-2 text-black transition-all duration-300 ease-in-out hover:bg-gray-50"
@@ -104,7 +111,7 @@ export default function PaymentDialog({
               <button
                 onClick={handleConfirmClick}
                 disabled={!selectedMethod || isLoading}
-                className={`flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-white transition-all duration-300 ease-in-out ${!selectedMethod && !isLoading
+                className={`flex items-center justify-center min-w-[145px] xs:min-w-[162px] rounded-lg bg-accent px-4 py-2 text-white transition-all duration-300 ease-in-out ${!selectedMethod && !isLoading
                     ? "cursor-not-allowed bg-gray-600 opacity-70"
                     : "bg-accent"
                   }`}

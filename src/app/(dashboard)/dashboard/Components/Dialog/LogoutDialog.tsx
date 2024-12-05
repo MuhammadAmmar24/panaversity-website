@@ -21,14 +21,14 @@ export default function LogoutDialog({
       <Dialog.Root open={open} onOpenChange={onOpenChange}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[85vh] w-full max-w-[300px] mobileM:max-w-[350px] ssm:max-w-md -translate-x-1/2 -translate-y-1/2 transform overflow-y-auto rounded-lg bg-white p-6">
             <Dialog.Title className="mb-4 text-lg font-bold">
               Confirm Logout
             </Dialog.Title>
             <Dialog.Description className="mb-4">
               Are you sure you want to logout?
             </Dialog.Description>
-            <div className="flex justify-end space-x-4">
+            <div className="flex justify-end space-x-4 text-sm xs:text-base">
               <button
                 onClick={handleClose}
                 className="rounded-lg border bg-transparent px-4 py-2 text-black transition-all duration-300 ease-in-out hover:bg-gray-50"
