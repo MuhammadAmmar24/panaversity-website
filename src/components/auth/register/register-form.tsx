@@ -33,6 +33,7 @@ export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
   const router = useRouter();
@@ -163,19 +164,19 @@ export const RegisterForm = () => {
                       id="confirmPassword"
                       disabled={isPending}
                       placeholder="Confirm your password"
-                      type={showPassword ? "text" : "password"}
+                      type={showConfirmPassword ? "text" : "password"}
                       autoComplete="confirmPassword"
                       className="pl-3 pr-10"
                     />
                     <button
                       type="button"
                       onClick={() =>
-                        !isPending && setShowPassword((prev) => !prev)
+                        !isPending && setShowConfirmPassword((prev) => !prev)
                       }
                       disabled={isPending}
                       className="absolute right-3 top-1/2 -translate-y-1/2 transform text-gray-500"
                     >
-                      {showPassword ? (
+                      {showConfirmPassword ? (
                         <AiOutlineEyeInvisible className="h-5 w-5" />
                       ) : (
                         <AiOutlineEye className="h-5 w-5" />
