@@ -14,6 +14,9 @@ export interface CourseCardProps {
       time_slot_day: string;
       slot_start_time: string | null;
       slot_end_time: string | null;
+      zoom_link?: string | null;
+      github_link?: string | null;
+      lectures_playlist?: string | null;
     }>;
     lab_time_slots?: Array<{
       time_slot_day: string;
@@ -51,6 +54,9 @@ export interface Course {
       time_slot_day: string;
       slot_start_time: string | null;
       slot_end_time: string | null;
+      zoom_link?: string | null;
+      github_link?: string | null;
+      lectures_playlist?: string | null;
     }>;
     lab_time_slots?: Array<{
       time_slot_day: string;
