@@ -68,23 +68,26 @@ const CourseCard: React.FC<CourseCardProps> = ({
     }
   };
 
+  const zoomLink = course_section?.class_time_slots?.[0]?.zoom_link || "/";
+  const githubLink = course_section?.class_time_slots?.[0]?.github_link || "/";
+  const youtubeLink = course_section?.class_time_slots?.[0]?.lectures_playlist || "/";
 
   const icons = [
     {
       component: <FaYoutube />,
-      link: "/",
+      link: youtubeLink,
       name: "YouTube",
       className: `text-red-600 text-xl mobileM:text-2xl sm:text-3xl md:text-4xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
     },
     {
       component: <FaGithub />,
-      link: "/",
+      link: githubLink,
       name: "GitHub",
       className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
     },
     {
       component: <SiZoom />,
-      link: "/",
+      link: zoomLink,
       name: "Zoom",
       className: `text-blue-500 text-3xl mobileM:text-4xl sm:text-5xl md:text-6xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
     },
