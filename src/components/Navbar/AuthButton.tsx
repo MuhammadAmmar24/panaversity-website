@@ -10,7 +10,7 @@ export function AuthButton() {
   const [isLoading, setIsLoading] = useState(false);
 
   const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
-  console.log("Login Status:", isLoggedIn);
+
 
 
   // useEffect(() => {

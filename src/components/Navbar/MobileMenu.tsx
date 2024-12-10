@@ -18,35 +18,39 @@ import { FiMenu } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import { useAuthStore } from "@/src/lib/stores/authStore";
 
 export function MobileMenu() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function checkAuthStatus() {
-      try {
-        const response = await fetch("/api", {
-          method: "GET",
-          credentials: "include",
-        });
+  const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
 
-        if (!response.ok) {
-          throw new Error("Auth check failed");
-        }
 
-        const data = await response.json();
-        setIsLoggedIn(data.isAuthenticated);
-      } catch (error) {
-        console.error("Auth check error:", error);
-        setIsLoggedIn(false);
-      } finally {
-        setIsLoading(false);
-      }
-    }
+  // useEffect(() => {
+  //   async function checkAuthStatus() {
+  //     try {
+  //       const response = await fetch("/api", {
+  //         method: "GET",
+  //         credentials: "include",
+  //       });
 
-    checkAuthStatus();
-  }, []);
+  //       if (!response.ok) {
+  //         throw new Error("Auth check failed");
+  //       }
+
+  //       const data = await response.json();
+  //       setIsLoggedIn(data.isAuthenticated);
+  //     } catch (error) {
+  //       console.error("Auth check error:", error);
+  //       setIsLoggedIn(false);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+
+  //   checkAuthStatus();
+  // }, []);
 
   if (isLoading) {
     return (
