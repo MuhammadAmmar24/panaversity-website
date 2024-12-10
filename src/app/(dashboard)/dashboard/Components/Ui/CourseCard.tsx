@@ -21,7 +21,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
   progress,
   classes,
   status,
-  batch_id,
   student_course_id,
   profile,
   course_code,
@@ -41,7 +40,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleEnroll = async (paymentMethod: string) => {
     try {
       const payload: any = {
-        batch_no: batch_id,
+        batch_no: course_section?.id,
         package_id: course_price?.package_id,
         student_course_id: student_course_id,
         student_id: profile?.id,

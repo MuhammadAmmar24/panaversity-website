@@ -42,7 +42,6 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
               classes: 14,
               status: courseData.student_course_status,
               is_paid: courseData.is_paid,
-              batch_no: courseData.batch_id,
               student_course_id: courseData.student_course_id,
               course_id: courseData.course_id,
               course_code: courseData.course_code,
