@@ -20,6 +20,7 @@ export interface CourseData {
   course_initials: string;
   course_description: string;
   is_active: boolean;
+  is_offered_now: boolean,
   created_by: string;
   updated_by: string;
   order: number;
@@ -56,6 +57,7 @@ export interface EnrollmentSheetProps {
 
 export interface EnrollmentCardProps {
   is_active: boolean;
+  is_offered_now: boolean;
   program_id: number;
   profile_id: string;
   isEnrolled: boolean;

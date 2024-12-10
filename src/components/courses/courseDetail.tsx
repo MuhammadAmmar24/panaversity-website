@@ -44,6 +44,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
     course_outcomes,
     long_description,
     is_active,
+    is_offered_now,
     program_id,
     pre_requisite,
   } = courseData;
@@ -154,6 +155,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                 <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
                   <EnrollmentCard
                     is_active={is_active}
+                    is_offered_now={is_offered_now}
                     program_id={program_id}
                     profile_id={profile.id}
                     isEnrolled={isEnrolled}

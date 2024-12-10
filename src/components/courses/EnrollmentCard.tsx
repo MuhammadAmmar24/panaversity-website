@@ -31,6 +31,7 @@ import { IoLanguage  } from "react-icons/io5";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
+  is_offered_now,
   program_id,
   profile_id,
   isEnrolled,
@@ -41,6 +42,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   student_courses,
   sections,
 }) => {
+
+
 
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
@@ -158,9 +161,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   };
 
 
-  if (!sections || sections.length === 0) {
+  if (!is_offered_now || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0  sm:px-2 md:px-0 lg:px-2">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
         <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
@@ -171,21 +174,26 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-4 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
           <button
-            onClick={handleClick}
             className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
-              !(sections.length == 0)
-                ? "hover:bg-emerald-500"
-                : "cursor-not-allowed bg-gray-400"
+              !is_offered_now
+                ? "cursor-not-allowed bg-gray-400"
+                : "hover:bg-emerald-500"
+
             }`}
-            disabled={sections.length == 0}
+            disabled={!is_offered_now}
           >
-            {!(sections.length == 0) ? "Enroll Now" : "Registration Closed"}
+            {!is_offered_now
+              ? "Registration Closed"
+              : sections.length === 0
+              ? "Join Waiting List"
+              : "Enroll Now"}
             <ChevronRight className="ml-2 h-5 w-5" />
           </button>
         </CardFooter>
       </Card>
     );
   }
+  
 
   return (
     <Sheet
