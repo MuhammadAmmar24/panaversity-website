@@ -81,7 +81,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   const isStudentEnrolledInSection = (sectionId: number) => {
     return student_courses?.some(
-      (course) =>
+      (course:any) =>
         course.section?.id === sectionId &&
         course.student_course_status !== "expired_reservation",
     );
@@ -187,9 +187,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
     try {
       // Check if the user already has an interest for this course
       const existingInterest = student_course_interests?.find(
-        (interest) => interest.course_code === courseCode,
+        (interest:any) => interest.course_code === courseCode,
       );
 
+
+      
   
 
       if (existingInterest) {
@@ -271,9 +273,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           </p>
           <Tabs
             defaultValue={visibleSections[0].id.toString()}
-            onValueChange={(value) =>
+            onValueChange={(value:any) =>
               setSelectedSection(
-                sections.find((section) => section.id.toString() === value) ||
+                sections.find((section:any) => section.id.toString() === value) ||
                   sections[0],
               )
             }
@@ -320,7 +322,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               )}
             </div>
 
-            {sections.map((section) => (
+            {sections.map((section:any) => (
               <TabsContent key={section.id} value={section.id.toString()}>
                 <div className="space-y-2 text-sm">
                   <div className="mb-1 flex items-center gap-2">
@@ -342,7 +344,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                       ].map((day) => {
                         const hasClass =
                           selectedSection?.class_time_slots?.some(
-                            (slot) => slot.time_slot_day === day,
+                            (slot:any) => slot.time_slot_day === day,
                           );
 
                         return (
@@ -377,12 +379,12 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {selectedSection?.class_time_slots
                                 ?.find(
-                                  (slot) => slot.time_slot_day === selectedDay,
+                                  (slot:any) => slot.time_slot_day === selectedDay,
                                 )
                                 ?.time_slot_day.slice(0, 3) || ""}{" "}
                               {formatTimeToUserGMT(
                                 selectedSection?.class_time_slots?.find(
-                                  (slot) => slot.time_slot_day === selectedDay,
+                                  (slot:any) => slot.time_slot_day === selectedDay,
                                 )?.slot_start_time || "",
                               )}
                             </span>
@@ -394,10 +396,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {getTimeDifference(
                                 selectedSection?.class_time_slots?.find(
-                                  (slot) => slot.time_slot_day === selectedDay,
+                                  (slot:any) => slot.time_slot_day === selectedDay,
                                 )?.slot_start_time || "00:00",
                                 selectedSection?.class_time_slots?.find(
-                                  (slot) => slot.time_slot_day === selectedDay,
+                                  (slot:any) => slot.time_slot_day === selectedDay,
                                 )?.slot_end_time || "00:00",
                               ).toFixed(1)}{" "}
                               hrs
@@ -412,20 +414,20 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {selectedDay
                                 ? selectedSection?.class_time_slots?.find(
-                                    (slot) =>
+                                    (slot:any) =>
                                       slot.time_slot_day === selectedDay,
                                   )?.instructor
                                   ? typeof selectedSection?.class_time_slots?.find(
-                                      (slot) =>
+                                      (slot:any) =>
                                         slot.time_slot_day === selectedDay,
                                     )?.instructor === "string"
                                     ? selectedSection?.class_time_slots?.find(
-                                        (slot) =>
+                                        (slot:any) =>
                                           slot.time_slot_day === selectedDay,
                                       )?.instructor
                                     : (
                                         selectedSection?.class_time_slots?.find(
-                                          (slot) =>
+                                          (slot:any) =>
                                             slot.time_slot_day === selectedDay,
                                         )?.instructor as any
                                       )?.name
@@ -524,9 +526,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           pre_requisite={pre_requisite}
           student_courses={student_courses}
           sections={sections.filter(
-            (section) =>
+            (section:any) =>
               !student_courses?.some(
-                (course) =>
+                (course:any) =>
                   course.section?.id === section.id &&
                   course.student_course_status !== "expired_reservation",
               ),
