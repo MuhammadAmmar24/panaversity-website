@@ -9,7 +9,7 @@ import { revalidateTag } from "next/cache";
 
 
 
-export const enrollNewStudentInProgramAndCourse = async (
+export const course_interest = async (
   payload: any,
 ): Promise<Result<EnrollResponse>> => {
   const validationResult = EnrollNewStudentRequestSchema.safeParse(payload);
