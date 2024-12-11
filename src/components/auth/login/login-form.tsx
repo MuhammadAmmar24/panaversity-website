@@ -26,6 +26,8 @@ import {
 } from "react-icons/ai";
 import { toast } from "sonner";
 import * as z from "zod";
+import Captcha from "../../Captcha";
+import { SubmitHandler } from "@/src/types/captcha";
 
 export const LoginForm = () => {
   const [error, setError] = useState<string | undefined>("");
@@ -42,7 +44,22 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+  const onSubmit: SubmitHandler<z.infer<typeof LoginSchema>> = (values, e) => {
+    e?.preventDefault();
+
+    const formElement = e?.target as HTMLFormElement | undefined;
+    if (!formElement) {
+      setError("Unexpected error occurred. Please try again.");
+      return;
+    }
+    const formData = new FormData(formElement);
+    const turnstileRes = formData.get("cf-turnstile-response") as string;
+  
+    if (!turnstileRes) {
+      setError("Please verify before submitting.");
+      return;
+    }
+
     setError("");
     setSuccess("");
     startTransition(true);
@@ -76,7 +93,7 @@ export const LoginForm = () => {
         setError("Login failed. Please try again.");
       })
       .finally(() => {
-        startTransition(false); // Ensure isPending is set to false after completion
+        startTransition(false);
       });
   };
 
@@ -148,6 +165,8 @@ export const LoginForm = () => {
             </Link>
           </Button>
         </div>
+
+        <Captcha/>
 
         <FormError message={error} />
         <FormSuccess message={success} />

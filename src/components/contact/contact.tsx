@@ -12,11 +12,15 @@ import * as z from "zod";
 import { RiWhatsappLine } from "react-icons/ri";
 import Link from "next/link";
 import { FaLink } from "react-icons/fa6";
+import Captcha from "../Captcha";
+import { SubmitHandler } from "@/src/types/captcha";
+import { toast } from "sonner";
 
 type ContactFormValues = z.infer<typeof ContactSchema>;
 
 export default function ContactUs() {
   const [formStatus, setFormStatus] = useState<string | null>(null);
+  const [error, setError] = useState<string | undefined>("");
 
   const {
     register,
@@ -27,7 +31,21 @@ export default function ContactUs() {
     mode: "onChange",
   });
 
-  const onSubmit = (data: ContactFormValues) => {
+  const onSubmit: SubmitHandler<z.infer<typeof ContactSchema>> = (values, e) => {
+    const formElement = e?.target as HTMLFormElement | undefined;
+    if (!formElement) {
+      setError("Unexpected error occurred. Please try again.");
+      return;
+    }
+    const formData = new FormData(formElement);
+    const turnstileRes = formData.get("cf-turnstile-response") as string;
+  
+    if (!turnstileRes) {
+      setError("Please verify before submitting.");
+      toast.error("Please verify before submitting.");
+      return;
+    }
+    
     setFormStatus("Thank you for your message. We'll get back to you soon!");
   };
 
@@ -117,6 +135,8 @@ export default function ContactUs() {
                 )}
               </div>
 
+              <Captcha size="normal"/>
+
               <Button
                 type="submit"
                 className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
@@ -124,6 +144,7 @@ export default function ContactUs() {
               >
                 Send Message
               </Button>
+              
             </form>
             {formStatus && <p className="mt-4 text-green-600 text-xs xs:text-sm">{formStatus}</p>}
           </div>
