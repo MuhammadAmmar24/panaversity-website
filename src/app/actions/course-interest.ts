@@ -1,18 +1,18 @@
 "use server";
 
 import {
-  EnrollNewStudentRequestSchema,
-  EnrollResponse
-} from "@/src/lib/schemas/enrollment";
+  CourseInterestSchema,
+  CourseInterestResponse,
+  EnrollNewStudentRequest
+} from "@/src/lib/schemas/courseInterest";
 import { Result } from "@/src/types/types";
 import { revalidateTag } from "next/cache";
 
 
-
-export const enrollNewStudentInProgramAndCourse = async (
-  payload: any,
-): Promise<Result<EnrollResponse>> => {
-  const validationResult = EnrollNewStudentRequestSchema.safeParse(payload);
+export const courseInterest = async (
+  payload: EnrollNewStudentRequest,
+): Promise<Result<CourseInterestResponse>> => {
+  const validationResult = CourseInterestSchema.safeParse(payload);
 
   if (!validationResult.success) {
     return {
@@ -25,7 +25,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
   try {
     const response = await fetch(
-      `${process.env.ENROLLMENT_API_URL}/enrollment/new`,
+      `${process.env.ENROLLMENT_API_URL}/course_interest_tracker/course-interest/`,
       {
         method: "POST",
         cache: "no-store",
@@ -43,7 +43,7 @@ export const enrollNewStudentInProgramAndCourse = async (
       const errorResponse = await response.json();
 
       // Extract the backend error message (detail) if available
-      let errorMessage = `Failed to enroll student in program and course: ${response.statusText}`;
+      let errorMessage = `Error while handling course interest: ${response.statusText}`;
 
       // Check if the backend error has a 'detail' field and use it if present
       if (errorResponse && errorResponse.detail) {
@@ -56,17 +56,17 @@ export const enrollNewStudentInProgramAndCourse = async (
     // Successful response parsing
     const responseData = await response.json();
 
+    revalidateTag("fetchStudentCourseInterests")
 
-    revalidateTag("fetchStudentCourses")
 
     return {
       type: "success",
-      message: "Student enrolled in program and course successfully",
+      message: "Your interest has been successfully recorded.",
       data: responseData,
     };
   } catch (error: any) {
     // Log the error
-    console.error("Enrollment error:", error);
+    console.error("Course Interest Error:", error);
 
     // Return the backend error detail if available, or the generic error message
     return {

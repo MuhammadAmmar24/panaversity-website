@@ -21,6 +21,7 @@ export async function getCourseData(course_code: string) {
     const responseData = await response.json();
 
 
+
     return {
       type: "success",
       message: "Course data fetched successfully",
