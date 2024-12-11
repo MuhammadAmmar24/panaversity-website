@@ -7,34 +7,7 @@ import { AiOutlineClose, AiOutlineEdit, AiOutlineLoading3Quarters } from "react-
 import { ZodError } from "zod";
 import PasswordSettings from "./PasswordSettings";
 import { Input } from "@/src/components/ui/input";
-
-interface Profile {
-  phone?: string;
-  id?: string;
-  full_name?: string;
-  email?: string;
-  student?: {
-    address?: string;
-    city?: string;
-    country?: string;
-    postal_code?: string;
-    is_active?: boolean;
-  };
-}
-
-interface AddressInfo {
-  address: string;
-  city: string;
-  country: string;
-  postalCode: string;
-}
-
-interface Errors {
-  address: string;
-  city: string;
-  country: string;
-  postalCode: string;
-}
+import { AddressInfo, Errors, Profile } from "../../types/profile";
 
 const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   const [personalInfo] = useState({
