@@ -3,54 +3,50 @@
 import { Button } from "@/src/components/ui/button";
 import {
   Sheet,
-  SheetTrigger,
-  SheetContent,
   SheetClose,
-  SheetHeader,
+  SheetContent,
   SheetDescription,
+  SheetHeader,
+  SheetTrigger,
 } from "@/src/components/ui/sheet";
-import Link from "next/link";
 import { navItems } from "@/src/constants/nav";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import Image from "next/image";
-import logo from "../../../public/logos/logo.webp";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
-import { useEffect, useState } from "react";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { useAuthStore } from "@/src/lib/stores/authStore";
+import logo from "../../../public/logos/logo.webp";
 
 export function MobileMenu() {
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
+  useEffect(() => {
+    async function checkAuthStatus() {
+      try {
+        const response = await fetch("/api", {
+          method: "GET",
+          credentials: "include",
+        });
 
+        if (!response.ok) {
+          throw new Error("Auth check failed");
+        }
 
-  // useEffect(() => {
-  //   async function checkAuthStatus() {
-  //     try {
-  //       const response = await fetch("/api", {
-  //         method: "GET",
-  //         credentials: "include",
-  //       });
+        const data = await response.json();
+        setIsLoggedIn(data.isAuthenticated);
+      } catch (error) {
+        console.error("Auth check error:", error);
+        setIsLoggedIn(false);
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-  //       if (!response.ok) {
-  //         throw new Error("Auth check failed");
-  //       }
-
-  //       const data = await response.json();
-  //       setIsLoggedIn(data.isAuthenticated);
-  //     } catch (error) {
-  //       console.error("Auth check error:", error);
-  //       setIsLoggedIn(false);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   }
-
-  //   checkAuthStatus();
-  // }, []);
+    checkAuthStatus();
+  }, []);
 
   if (isLoading) {
     return (
