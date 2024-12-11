@@ -29,8 +29,6 @@ const CourseCard: React.FC<CourseCardProps> = ({
 }) => {
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
 
-
-
   const router = useRouter();
 
   const ReEnroll = () => {

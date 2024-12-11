@@ -1,13 +1,6 @@
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/src/components/ui/tooltip';
 import { cn } from '@/src/lib/utils';
-import { ReactNode } from 'react';
-
-interface CardButtonProps {
-  status: 'active' | 'reserved_seat' | 'expired_reservation';
-  tooltipContent?: string;
-  onClick?: () => void;
-  children: ReactNode;
-}
+import { CardButtonProps } from '../../types/types';
 
 export function CardButton({
   status,

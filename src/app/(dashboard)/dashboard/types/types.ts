@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 
 export interface CourseCardProps {
   title: string;
@@ -38,7 +39,6 @@ export interface CourseSectionProps {
   enrollmentStatus: string | null;
 }
 
-
 export interface Course {
   title: string;
   progress: number;
@@ -73,6 +73,17 @@ export interface Course {
   } | null;
 }
 
+export interface CardButtonProps {
+  status: 'active' | 'reserved_seat' | 'expired_reservation';
+  tooltipContent?: string;
+  onClick?: () => void;
+  children: ReactNode;
+}
+
+export interface ProfileIdProps {
+  profileId: string;
+}
+
 export interface ClientDropdownProps {
   userName: string | undefined;
   userEmail: string | undefined;
@@ -88,10 +99,6 @@ export interface DropdownProps {
   userName: string;
   userEmail: string;
   userImage: string;
-}
-
-export interface ProfileIdProps {
-  profileId: string;
 }
 
 export type PaymentDialogProps = {
