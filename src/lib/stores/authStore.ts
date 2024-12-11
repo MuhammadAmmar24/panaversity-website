@@ -1,27 +1,32 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { UserProfile } from "@/src/lib/schemas/user";
 
+
+interface ProfieError {
+    isVerified: boolean, 
+    redirectTo: string 
+}
 interface AuthState {
-  isAuthenticated: boolean;
-  token: string | null; // For storing an authentication token if available
-  login: (token: string) => void;
+
+  profile: UserProfile | ProfieError;
+  login: (user_profile: UserProfile) => void;
   logout: () => void;
+
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      isAuthenticated: false,
-      token: null,
-      login: (token) =>
+
+      profile: { isVerified: false, redirectTo: "/login" },
+      login: (user_profile: UserProfile) =>
         set({
-          isAuthenticated: true,
-          token,
+          profile: user_profile,
         }),
       logout: () =>
         set({
-          isAuthenticated: false,
-          token: null,
+          profile:{ isVerified: false, redirectTo: "/login" },
         }),
     }),
     { name: "auth-storage" } // Key in localStorage

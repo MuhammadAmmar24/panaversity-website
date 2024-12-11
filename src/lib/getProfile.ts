@@ -1,6 +1,7 @@
 import { auth } from "@/src/lib/auth";
+import { UserProfile } from "./schemas/user";
 
-export default async function fetchProfile() {
+export default async function fetchProfile()  {
   const session = await auth(); // Getting JWT From Cookies
 
   if (!session) {

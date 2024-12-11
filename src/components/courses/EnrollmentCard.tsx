@@ -23,11 +23,16 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
-import { FaChevronLeft, FaChevronRight, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaUsers,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 import { GrLanguage } from "react-icons/gr";
 import { SlCalender } from "react-icons/sl";
-import { IoLanguage  } from "react-icons/io5";
-
+import { IoLanguage } from "react-icons/io5";
+import { useCourseStore } from "@/src/lib/stores/courseStore";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
@@ -41,32 +46,30 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   student_courses,
   sections,
 }) => {
-
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
-  const [isPending, setIsPending] = useState(false); 
-
-
+  const [isPending, setIsPending] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-
-  
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
 
+  const zu_st_courses = useCourseStore((state) => state.courses);
+  console.log("Student Courses: ", zu_st_courses);
 
-    // Update sectionsPerPage based on screen width
-    useEffect(() => {
-      const handleResize = () => {
-        setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
-        
-        setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
-      };
-  
-      handleResize();
-  
-      window.addEventListener("resize", handleResize);
-  
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+
+  // Update sectionsPerPage based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
+
+      setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
@@ -157,10 +160,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       : "Enroll Now";
   };
 
-
   if (!sections || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0  sm:px-2 md:px-0 lg:px-2">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
         <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
@@ -189,14 +191,14 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   return (
     <Sheet
-    open={open}
-    onOpenChange={(isOpen) => {
-      if (!isPending) {
-        isOpen ? setOpen(true) : setOpen(false);
-      }
-    }}
-  >
-      <Card className="w-full items-end  ssm:max-w-[30em] sm:w-full px-0  sm:px-2 md:px-0 lg:px-0">
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isPending) {
+          isOpen ? setOpen(true) : setOpen(false);
+        }
+      }}
+    >
+      <Card className="w-full items-end px-0 ssm:max-w-[30em] sm:w-full sm:px-2 md:px-0 lg:px-0">
         <CardContent className="-mb-3 p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:mb-2 xl:px-4 xl:py-0 xl:pt-4">
           <p className="mb-1 text-xs font-semibold text-primary">
             Available Sections:
@@ -226,10 +228,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               <TabsList
                 className={`grid w-full overflow-auto ${
                   visibleSections.length === 1
-                  ? "grid-cols-1"
-                  : visibleSections.length === 2
-                    ? "grid-cols-2"
-                    : "grid-cols-2 sm:grid-cols-3"
+                    ? "grid-cols-1"
+                    : visibleSections.length === 2
+                      ? "grid-cols-2"
+                      : "grid-cols-2 sm:grid-cols-3"
                 }`}
               >
                 {visibleSections.map((section) => (
@@ -258,7 +260,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-sm font-semibold text-primary">
                       Section Classes Schedule:{" "}
-                    
                     </span>
                   </div>
 
@@ -283,7 +284,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             key={day}
                             className={`flex rounded-md px-2 py-1 text-sm transition-all duration-200 ${
                               hasClass
-                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent "
+                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent"
                                 : "text-gray-500"
                             } ${
                               selectedDay === day
@@ -369,7 +370,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
                           {/* Language */}
                           <div className="col-span-1 flex items-center gap-x-2">
-                            <IoLanguage   className="h-4 w-4 text-muted-foreground" />
+                            <IoLanguage className="h-4 w-4 text-muted-foreground" />
                             <span>
                               {typeof section.language === "string"
                                 ? section.language
@@ -381,31 +382,30 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                     )}
                   </div>
 
-                  <div className="flex flex-col mobileM:flex-row md:flex-col tablet_lg:flex-row lg:flex-row justify-between items-start mobileM:items-center tablet_lg:items-center md:items-start gap-y-2 pt-1">
+                  <div className="flex flex-col items-start justify-between gap-y-2 pt-1 mobileM:flex-row mobileM:items-center md:flex-col md:items-start tablet_lg:flex-row tablet_lg:items-center lg:flex-row">
                     {/* Deadline  */}
-                    <div className=" flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2">
                       <BsClock className="h-4 w-4 text-muted-foreground" />
                       <span>
                         Closes on:{" "}
-                        <span className="text-red-600 font-semibold">
-
-                        {new Date(
-                          section.registration_deadline!,
-                        ).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "2-digit",
-                        })}
+                        <span className="font-semibold text-red-600">
+                          {new Date(
+                            section.registration_deadline!,
+                          ).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "2-digit",
+                          })}
                         </span>
                       </span>
                     </div>
 
                     {/* Seats */}
-                    <div className=" flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2">
                       <FaUsers className="h-4 w-4 text-muted-foreground" />
                       <span>
                         Seats Left:{" "}
-                        <span className="text-red-600 font-semibold">
-                        {section.total_seats - section.booked_seats}
+                        <span className="font-semibold text-red-600">
+                          {section.total_seats - section.booked_seats}
                         </span>
                       </span>
                     </div>
@@ -470,8 +470,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
-          setPendingState={setIsPending} 
-
+          setPendingState={setIsPending}
         />
       </SheetContent>
     </Sheet>

@@ -1,9 +1,7 @@
 import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import fetchProfile from "@/src/lib/getProfile";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import {
-  CourseEnrollmentResponse
-} from "@/src/lib/schemas/courses";
+import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import {
   CourseDetailsProps,
   CourseInfoProps,
@@ -36,7 +34,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   courseData,
   coursePrice,
 }) => {
-
   const {
     course_code,
     course_name,
@@ -60,16 +57,13 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
 
   let student_courses: any = [];
   const profile: ProfileData = await fetchProfile();
+  console.log("Profile", profile);
 
   try {
     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
       profile.id,
     );
     student_courses = result.data;
-    
-
-    
-  
 
     const course = result?.data?.find(
       (course) => course.course_code === course_code,
@@ -77,7 +71,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
 
     isEnrolled =
       !!course && course.student_course_status != "expired_reservation";
-      
   } catch (error: any) {
     console.error("Error fetching student courses: ", error.message);
   }
@@ -88,11 +81,11 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
       <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
-          <div className="mx-auto  px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
+          <div className="mx-auto px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
             {/* Main content wrapper with fixed padding */}
             <div className="py-4 md:py-10">
               {/* Breadcrumbs */}
-              <div className="mb-6 ">
+              <div className="mb-6">
                 <Breadcrumbs
                   items={[
                     { label: "Home", href: "/" },
