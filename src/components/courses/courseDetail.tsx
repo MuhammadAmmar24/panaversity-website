@@ -53,30 +53,37 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const sections = await getCourseActiceSections(course_code);
+  let sections: any = [];
 
   let isEnrolled: boolean = false;
 
   let student_courses: any = [];
+
+  // Fetch Student Profile  
   const profile: ProfileData = await fetchProfile();
 
   // Fetch existing course interests
   const student_course_interests = await getCourseInterests(profile.email);
 
-  try {
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-      profile.id,
-    );
-    student_courses = result.data;
+  if (is_offered_now) {
+    try {
+      // fetch Sectons 
+      sections = await getCourseActiceSections(course_code);
 
-    const course = result?.data?.find(
-      (course) => course.course_code === course_code,
-    );
-
-    isEnrolled =
+      const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+        profile.id,
+      );
+      student_courses = result.data;
+      
+      const course = result?.data?.find(
+        (course) => course.course_code === course_code,
+      );
+      
+      isEnrolled =
       !!course && course.student_course_status != "expired_reservation";
-  } catch (error: any) {
-    console.error("Error fetching student courses: ", error.message);
+    } catch (error: any) {
+      console.error("Error fetching student courses: ", error.message);
+    }
   }
 
   return (
