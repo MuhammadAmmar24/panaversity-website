@@ -23,50 +23,58 @@ import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
-import { FaChevronLeft, FaChevronRight, FaUsers, FaChalkboardTeacher } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaUsers,
+  FaChalkboardTeacher,
+} from "react-icons/fa";
 import { GrLanguage } from "react-icons/gr";
 import { SlCalender } from "react-icons/sl";
-import { IoLanguage  } from "react-icons/io5";
-
+import { IoLanguage } from "react-icons/io5";
+import { courseInterest } from "@/src/app/actions/course-interest";
+import { toast } from "sonner";
+import EnrollButton from "../ui/enrollButton";
+import { getCourseInterests } from "@/src/lib/getCourseInterest";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
+  is_offered_now,
   program_id,
   profile_id,
+  profile_email,
   isEnrolled,
   coursePrice,
   courseName,
   courseCode,
   pre_requisite,
   student_courses,
+  student_course_interests,
   sections,
 }) => {
-
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
-  const [isPending, setIsPending] = useState(false); 
-
+  const [isPending, setIsPending] = useState(false);
+  const [isEnrollPending, setIsEnrollPending] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(0);
 
-  
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
 
+  // Update sectionsPerPage based on screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
 
-    // Update sectionsPerPage based on screen width
-    useEffect(() => {
-      const handleResize = () => {
-        setSectionsPerPage(window.innerWidth >= 640 ? 3 : 2);
-        
-        setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
-      };
-  
-      handleResize();
-  
-      window.addEventListener("resize", handleResize);
-  
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
+      setSheetSide(window.innerWidth >= 768 ? "right" : "bottom");
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
   const router = useRouter();
@@ -119,7 +127,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
 
-  const checkAuthStatus = async () => {
+  // Auth check function
+  const checkAuthStatus = async (): Promise<{
+    isAuthenticated: boolean;
+  } | null> => {
+    setIsEnrollPending(true);
     try {
       const response = await fetch("/api/", {
         method: "GET",
@@ -130,37 +142,97 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
         throw new Error("Auth check failed");
       }
 
-      const data = await response.json();
-      return data;
+      return await response.json(); // Returns { isAuthenticated: boolean }
     } catch (error) {
       console.error("Auth check error:", error);
       return null;
+    } finally {
+      setIsEnrollPending(false);
     }
   };
 
-  const handleClick = async () => {
-    const isLoggedIn = await checkAuthStatus();
-    if (!isLoggedIn.isAuthenticated) {
+  // Handler for "Enroll Now" button
+  const handleClickEnroll = async () => {
+    const authStatus = await checkAuthStatus();
+
+    if (!authStatus?.isAuthenticated) {
       localStorage.setItem("previousPath", window.location.pathname);
       router.push("/register");
-    } else if (isStudentEnrolledInSection(selectedSection?.id!)) {
+      return;
+    }
+
+    if (isStudentEnrolledInSection(selectedSection?.id!)) {
       router.push("/dashboard");
     } else {
       setOpen(true);
     }
   };
 
-  const getEnrollButtonText = (sectionId: number) => {
-    if (!is_active) return "Registration Closed";
-    return isStudentEnrolledInSection(sectionId)
-      ? "Already Enrolled"
-      : "Enroll Now";
+  const handleClickCourseInterest = async () => {
+    const authStatus = await checkAuthStatus();
+
+    if (!authStatus?.isAuthenticated) {
+      localStorage.setItem("previousPath", window.location.pathname);
+      router.push("/register");
+      return;
+    }
+
+    if (isStudentEnrolledInSection(selectedSection?.id!)) {
+      router.push("/dashboard");
+      return;
+    }
+
+    setIsEnrollPending(true);
+
+    try {
+      // Check if the user already has an interest for this course
+      const existingInterest = student_course_interests?.find(
+        (interest) => interest.course_code === courseCode,
+      );
+
+  
+
+      if (existingInterest) {
+        // Show a success toast if already interested
+        toast.success("You have already expressed interest in this course.");
+        setIsEnrollPending(false);
+        return;
+      }
+
+      // Determine interest type based on the course state
+      const interest: "wait_list" | "wish_list" | "info_request" =
+        !is_offered_now
+          ? "wish_list"
+          : sections.length === 0
+            ? "wait_list"
+            : "info_request";
+
+      const payload = {
+        user_id: profile_id,
+        user_email: profile_email,
+        course_code: courseCode,
+        interest_type: interest,
+      };
+
+      // Make the POST API call for course interest
+      const result = await courseInterest(payload);
+
+      if (result.type === "success") {
+        toast.success(result.message);
+      } else {
+        toast.error("Failed to record your interest. Please try again");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
+      toast.error("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsEnrollPending(false);
+    }
   };
 
-
-  if (!sections || sections.length === 0) {
+  if (!is_offered_now || sections.length === 0) {
     return (
-      <Card className="w-full items-end px-0  sm:px-2 md:px-0 lg:px-2">
+      <Card className="w-full items-end px-0 sm:px-2 md:px-0 lg:px-2">
         <CardContent className="p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:px-4 xl:py-0 xl:pt-4">
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
@@ -170,18 +242,14 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           </div>
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-4 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
-          <button
-            onClick={handleClick}
-            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
-              !(sections.length == 0)
-                ? "hover:bg-emerald-500"
-                : "cursor-not-allowed bg-gray-400"
-            }`}
-            disabled={sections.length == 0}
-          >
-            {!(sections.length == 0) ? "Enroll Now" : "Registration Closed"}
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </button>
+          <EnrollButton
+            isOfferedNow={is_offered_now}
+            isActive={is_active}
+            sections={sections}
+            handleClick={handleClickCourseInterest}
+            isStudentEnrolledInSection={isStudentEnrolledInSection}
+            isEnrollPending={isEnrollPending}
+          />
         </CardFooter>
       </Card>
     );
@@ -189,14 +257,14 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   return (
     <Sheet
-    open={open}
-    onOpenChange={(isOpen) => {
-      if (!isPending) {
-        isOpen ? setOpen(true) : setOpen(false);
-      }
-    }}
-  >
-      <Card className="w-full items-end  ssm:max-w-[30em] sm:w-full px-0  sm:px-2 md:px-0 lg:px-0">
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isPending) {
+          isOpen ? setOpen(true) : setOpen(false);
+        }
+      }}
+    >
+      <Card className="w-full items-end px-0 ssm:max-w-[30em] sm:w-full sm:px-2 md:px-0 lg:px-0">
         <CardContent className="-mb-3 p-4 mobileM:p-4 xs:p-6 sm:p-4 md:p-4 lg:p-4 xl:mb-2 xl:px-4 xl:py-0 xl:pt-4">
           <p className="mb-1 text-xs font-semibold text-primary">
             Available Sections:
@@ -226,10 +294,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               <TabsList
                 className={`grid w-full overflow-auto ${
                   visibleSections.length === 1
-                  ? "grid-cols-1"
-                  : visibleSections.length === 2
-                    ? "grid-cols-2"
-                    : "grid-cols-2 sm:grid-cols-3"
+                    ? "grid-cols-1"
+                    : visibleSections.length === 2
+                      ? "grid-cols-2"
+                      : "grid-cols-2 sm:grid-cols-3"
                 }`}
               >
                 {visibleSections.map((section) => (
@@ -258,7 +326,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-sm font-semibold text-primary">
                       Section Classes Schedule:{" "}
-                    
                     </span>
                   </div>
 
@@ -283,7 +350,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             key={day}
                             className={`flex rounded-md px-2 py-1 text-sm transition-all duration-200 ${
                               hasClass
-                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent "
+                                ? "cursor-pointer font-medium text-gray-900 hover:bg-accent"
                                 : "text-gray-500"
                             } ${
                               selectedDay === day
@@ -369,7 +436,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
                           {/* Language */}
                           <div className="col-span-1 flex items-center gap-x-2">
-                            <IoLanguage   className="h-4 w-4 text-muted-foreground" />
+                            <IoLanguage className="h-4 w-4 text-muted-foreground" />
                             <span>
                               {typeof section.language === "string"
                                 ? section.language
@@ -381,31 +448,30 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                     )}
                   </div>
 
-                  <div className="flex flex-col mobileM:flex-row md:flex-col tablet_lg:flex-row lg:flex-row justify-between items-start mobileM:items-center tablet_lg:items-center md:items-start gap-y-2 pt-1">
+                  <div className="flex flex-col items-start justify-between gap-y-2 pt-1 mobileM:flex-row mobileM:items-center md:flex-col md:items-start tablet_lg:flex-row tablet_lg:items-center lg:flex-row">
                     {/* Deadline  */}
-                    <div className=" flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2">
                       <BsClock className="h-4 w-4 text-muted-foreground" />
                       <span>
                         Closes on:{" "}
-                        <span className="text-red-600 font-semibold">
-
-                        {new Date(
-                          section.registration_deadline!,
-                        ).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "2-digit",
-                        })}
+                        <span className="font-semibold text-red-600">
+                          {new Date(
+                            section.registration_deadline!,
+                          ).toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "2-digit",
+                          })}
                         </span>
                       </span>
                     </div>
 
                     {/* Seats */}
-                    <div className=" flex items-center gap-x-2">
+                    <div className="flex items-center gap-x-2">
                       <FaUsers className="h-4 w-4 text-muted-foreground" />
                       <span>
                         Seats Left:{" "}
-                        <span className="text-red-600 font-semibold">
-                        {section.total_seats - section.booked_seats}
+                        <span className="font-semibold text-red-600">
+                          {section.total_seats - section.booked_seats}
                         </span>
                       </span>
                     </div>
@@ -423,18 +489,15 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           </Tabs>
         </CardContent>
         <CardFooter className="p-4 pt-0 mobileM:p-4 mobileM:pt-0 xs:p-6 xs:pt-0 sm:p-4 sm:pt-0 md:p-4 md:pt-0 lg:p-4 lg:pt-0 xl:p-4 xl:pt-0">
-          <button
-            onClick={handleClick}
-            className={`flex w-full items-center justify-center rounded-md bg-accent py-3 font-semibold text-white transition duration-300 ${
-              is_active
-                ? "hover:bg-emerald-500"
-                : "cursor-not-allowed bg-gray-400"
-            }`}
-            disabled={!is_active}
-          >
-            {getEnrollButtonText(selectedSection?.id!)}
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </button>
+          <EnrollButton
+            isOfferedNow={is_offered_now}
+            isActive={is_active}
+            sections={sections}
+            selectedSectionId={selectedSection?.id}
+            handleClick={handleClickEnroll}
+            isStudentEnrolledInSection={isStudentEnrolledInSection}
+            isEnrollPending={isEnrollPending}
+          />
         </CardFooter>
       </Card>
 
@@ -470,8 +533,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           )}
           selected_section_name={selectedSection}
           isEnrolled={isEnrolled}
-          setPendingState={setIsPending} 
-
+          setPendingState={setIsPending}
         />
       </SheetContent>
     </Sheet>

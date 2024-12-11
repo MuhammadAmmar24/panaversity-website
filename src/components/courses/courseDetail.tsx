@@ -1,9 +1,7 @@
 import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import fetchProfile from "@/src/lib/getProfile";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import {
-  CourseEnrollmentResponse
-} from "@/src/lib/schemas/courses";
+import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import {
   CourseDetailsProps,
   CourseInfoProps,
@@ -15,6 +13,7 @@ import Breadcrumbs from "../ui/Breadcrumbs";
 import EnrollmentCard from "./EnrollmentCard";
 import CoursePrerequisites from "./PreReqs";
 import RatingStars from "./Ratingstar";
+import { getCourseInterests } from "@/src/lib/getCourseInterest";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -36,7 +35,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   courseData,
   coursePrice,
 }) => {
-
   const {
     course_code,
     course_name,
@@ -44,6 +42,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
     course_outcomes,
     long_description,
     is_active,
+    is_offered_now,
     program_id,
     pre_requisite,
   } = courseData;
@@ -54,32 +53,37 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
-  const sections = await getCourseActiceSections(course_code);
+  let sections: any = [];
 
   let isEnrolled: boolean = false;
 
   let student_courses: any = [];
+
+  // Fetch Student Profile  
   const profile: ProfileData = await fetchProfile();
 
-  try {
-    const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-      profile.id,
-    );
-    student_courses = result.data;
-    
+  // Fetch existing course interests
+  const student_course_interests = await getCourseInterests(profile.email);
 
-    
-  
+  if (is_offered_now) {
+    try {
+      // fetch Sectons 
+      sections = await getCourseActiceSections(course_code);
 
-    const course = result?.data?.find(
-      (course) => course.course_code === course_code,
-    );
-
-    isEnrolled =
-      !!course && course.student_course_status != "expired_reservation";
+      const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+        profile.id,
+      );
+      student_courses = result.data;
       
-  } catch (error: any) {
-    console.error("Error fetching student courses: ", error.message);
+      const course = result?.data?.find(
+        (course) => course.course_code === course_code,
+      );
+      
+      isEnrolled =
+      !!course && course.student_course_status != "expired_reservation";
+    } catch (error: any) {
+      console.error("Error fetching student courses: ", error.message);
+    }
   }
 
   return (
@@ -88,11 +92,11 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
       <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
-          <div className="mx-auto  px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
+          <div className="mx-auto px-4 sm:px-6 lg:max-w-[990px] lg:px-8 xl:max-w-[1200px]">
             {/* Main content wrapper with fixed padding */}
             <div className="py-4 md:py-10">
               {/* Breadcrumbs */}
-              <div className="mb-6 ">
+              <div className="mb-6">
                 <Breadcrumbs
                   items={[
                     { label: "Home", href: "/" },
@@ -154,14 +158,17 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                 <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
                   <EnrollmentCard
                     is_active={is_active}
+                    is_offered_now={is_offered_now}
                     program_id={program_id}
                     profile_id={profile.id}
+                    profile_email={profile.email}
                     isEnrolled={isEnrolled}
                     coursePrice={coursePrice}
                     courseName={course_name}
                     courseCode={course_code}
                     pre_requisite={pre_requisite}
                     student_courses={student_courses}
+                    student_course_interests={student_course_interests.data || []}
                     sections={sections.data || []}
                   />
                 </div>
