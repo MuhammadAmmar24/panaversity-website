@@ -49,7 +49,6 @@ export type EnrollCourseResponse = z.infer<typeof EnrollCourseResponseSchema>;
 export const EnrollNewStudentRequestSchema = z.object({
   student_id: z.string(),
   program_id: z.number(),
-  batch_id: z.number().optional(),
   section_id: z.number(),
   vendor_type: z.string(),
   package_id: z.number(),

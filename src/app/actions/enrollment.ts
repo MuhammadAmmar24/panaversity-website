@@ -56,6 +56,7 @@ export const enrollNewStudentInProgramAndCourse = async (
     // Successful response parsing
     const responseData = await response.json();
 
+
     revalidateTag("fetchStudentCourses")
 
     return {

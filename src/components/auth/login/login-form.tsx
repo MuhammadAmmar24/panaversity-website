@@ -26,8 +26,10 @@ import {
 } from "react-icons/ai";
 import { toast } from "sonner";
 import * as z from "zod";
+import { useAuthStore } from "@/src/lib/stores/authStore";
 
 export const LoginForm = () => {
+  const isLogin = useAuthStore((state) => state.login);
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useState(false);
@@ -62,6 +64,8 @@ export const LoginForm = () => {
           form.reset();
           setSuccess(data.success);
           toast.success("Welcome back! You’re now logged in.");
+          console.log("Login:", data?.success);
+          isLogin(data?.success || "");
 
           const previousPath = localStorage.getItem("previousPath");
           if (previousPath) {
