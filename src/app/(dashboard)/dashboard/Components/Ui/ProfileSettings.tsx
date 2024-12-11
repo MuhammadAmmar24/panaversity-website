@@ -109,6 +109,17 @@ const ProfileSettings: React.FC<{ profile: Profile }> = ({ profile }) => {
   const submitChanges = async () => {
     if (!validateAddress()) return;
 
+    const noChanges =
+    addressInfo.address === profile?.student?.address &&
+    addressInfo.city === profile?.student?.city &&
+    addressInfo.country === profile?.student?.country &&
+    addressInfo.postalCode === profile?.student?.postal_code;
+
+    if (noChanges) {
+      setIsEditingAddress(false);
+      return;
+    }
+
     setIsSaving(true);
 
     const payload = {
