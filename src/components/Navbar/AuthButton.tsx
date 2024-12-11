@@ -1,37 +1,43 @@
 "use client";
 
+import { useAuthStore } from "@/src/lib/stores/authStore";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function AuthButton() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    async function checkAuthStatus() {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/`, {
-          method: "GET",
-          credentials: "include",
-        });
+  const isLoggedIn = useAuthStore((state) => state.isAuthenticated);
 
-        if (!response.ok) {
-          throw new Error("Auth check failed");
-        }
 
-        const data = await response.json();
-        setIsLoggedIn(data.isAuthenticated);
-      } catch (error) {
-        console.error("Auth check error:", error);
-        setIsLoggedIn(false);
-      } finally {
-        setIsLoading(false);
-      }
-    }
 
-    checkAuthStatus();
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   async function checkAuthStatus() {
+  //     setIsLoading(true);
+  //     try {
+  //       const response = await fetch(`/api/`, {
+  //         method: "GET",
+  //         credentials: "include",
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error("Auth check failed");
+  //       }
+
+  //       const data = await response.json();
+  //       setIsLoggedIn(data.isAuthenticated);
+  //     } catch (error) {
+  //       console.error("Auth check error:", error);
+  //       setIsLoggedIn(false);
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   }
+
+  //   checkAuthStatus();
+  // }, [isLoggedIn]);
 
   return (
     <div className="flex items-center gap-4">

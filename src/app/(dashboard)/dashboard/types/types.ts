@@ -1,14 +1,15 @@
+
 export interface CourseCardProps {
   title: string;
   progress: number;
   classes: number;
   status: string;
-  batch_id: number;
   student_course_id: number;
   profile: ProfileData;
   course_code: string;
   course_section?: {
     section_name: string;
+    id:number;
     language: string | { language_name: string; is_language_active: boolean };
     class_time_slots?: Array<{
       time_slot_day: string;
@@ -44,11 +45,11 @@ export interface Course {
   classes: number;
   status: string;
   is_paid: boolean;
-  batch_no: number;
   student_course_id: number;
   course_code: string;
   course_section?: {
     section_name: string;
+    id:number;
     language: string | { language_name: string; is_language_active: boolean };
     class_time_slots?: Array<{
       time_slot_day: string;
