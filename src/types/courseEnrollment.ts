@@ -6,6 +6,7 @@ import {
 import { CourseSectionSchema } from "@/src/lib/schemas/sections";
 import { z } from "zod";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
+import { CourseInterestResponse } from "../lib/schemas/courseInterest";
 
 export type CourseSections = z.infer<typeof CourseSectionSchema>;
 
@@ -60,12 +61,14 @@ export interface EnrollmentCardProps {
   is_offered_now: boolean;
   program_id: number;
   profile_id: string;
+  profile_email: string;
   isEnrolled: boolean;
   coursePrice: GetCoursePriceResponse;
   courseName: string;
   courseCode: string;
   pre_requisite: Pre_req_obj[];
   student_courses: CourseEnrollment[];
+  student_course_interests: CourseInterestResponse[];
   sections: CourseSections[];
 }
 

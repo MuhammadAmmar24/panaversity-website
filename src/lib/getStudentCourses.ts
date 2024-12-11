@@ -1,6 +1,5 @@
 import {
-  CourseEnrollmentResponse,
-  CourseEnrollmentResponseSchema,
+  CourseEnrollmentResponse
 } from "@/src/lib/schemas/courses";
 import { Result } from "@/src/types/types";
 
@@ -14,6 +13,7 @@ export const getStudentCourses = async (
 
     // Construct the API URL
     const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?${params}`;
+
 
     // Make the request to the API
     const response = await fetch(apiUrl, {
