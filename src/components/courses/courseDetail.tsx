@@ -1,33 +1,29 @@
 import { getCourseActiceSections } from "@/src/lib/getActiveSections";
+import { getCourseInterests } from "@/src/lib/getCourseInterest";
 import fetchProfile from "@/src/lib/getProfile";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import {
   CourseDetailsProps,
-  CourseInfoProps,
-  LearnPointProps,
+  CourseInfoProps
 } from "@/src/types/courseEnrollment";
 import { Result } from "@/src/types/types";
-import { Calendar, Check, Users } from "lucide-react";
+import { Calendar, Users } from "lucide-react";
+import { Suspense } from "react";
 import Breadcrumbs from "../ui/Breadcrumbs";
+import ScheduleCardSkeleton from "../ui/skeletons/EnrollmentCardSkeleton";
+import CourseDescription from "./CourseDescription";
 import EnrollmentCard from "./EnrollmentCard";
+import LearningOutcomes from "./LearningOutcomes";
 import CoursePrerequisites from "./PreReqs";
+import PrerequisitesSection from "./PreRequisites";
 import RatingStars from "./Ratingstar";
-import { getCourseInterests } from "@/src/lib/getCourseInterest";
+import CourseHeroSkeleton from "../ui/skeletons/CourseHeroSkeleton";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
     <Icon className="h-5 w-5" />
     <span>{text}</span>
-  </div>
-);
-
-const LearnPoint: React.FC<LearnPointProps> = ({ point }) => (
-  <div className="flex items-start gap-3">
-    <div className="rounded-full bg-green-500 p-1">
-      <Check className="h-4 w-4 text-white" />
-    </div>
-    <p className="text-sm font-normal text-textPrimary">{point}</p>
   </div>
 );
 
@@ -59,28 +55,29 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
 
   let student_courses: any = [];
 
-  // Fetch Student Profile  
+  // Fetch Student Profile
   const profile: ProfileData = await fetchProfile();
 
-  // Fetch existing course interests
   const student_course_interests = await getCourseInterests(profile.email);
+
+  // Fetch existing course interests
 
   if (is_offered_now) {
     try {
-      // fetch Sectons 
+      // fetch Sectons
       sections = await getCourseActiceSections(course_code);
 
       const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
         profile.id,
       );
       student_courses = result.data;
-      
+
       const course = result?.data?.find(
         (course) => course.course_code === course_code,
       );
-      
+
       isEnrolled =
-      !!course && course.student_course_status != "expired_reservation";
+        !!course && course.student_course_status != "expired_reservation";
     } catch (error: any) {
       console.error("Error fetching student courses: ", error.message);
     }
@@ -89,6 +86,8 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
+
+      <Suspense fallback={<CourseHeroSkeleton />}>
       <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
@@ -155,80 +154,44 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                 </div>
 
                 {/* Price and enrollment - takes up 1/3 of space */}
-                <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
-                  <EnrollmentCard
-                    is_active={is_active}
-                    is_offered_now={is_offered_now}
-                    program_id={program_id}
-                    profile_id={profile.id}
-                    profile_email={profile.email}
-                    isEnrolled={isEnrolled}
-                    coursePrice={coursePrice}
-                    courseName={course_name}
-                    courseCode={course_code}
-                    pre_requisite={pre_requisite}
-                    student_courses={student_courses}
-                    student_course_interests={student_course_interests.data || []}
-                    sections={sections.data || []}
-                  />
-                </div>
+                <Suspense fallback={<ScheduleCardSkeleton />}>
+                  <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
+                    <EnrollmentCard
+                      is_active={is_active}
+                      is_offered_now={is_offered_now}
+                      program_id={program_id}
+                      profile_id={profile.id}
+                      profile_email={profile.email}
+                      isEnrolled={isEnrolled}
+                      coursePrice={coursePrice}
+                      courseName={course_name}
+                      courseCode={course_code}
+                      pre_requisite={pre_requisite}
+                      student_courses={student_courses}
+                      student_course_interests={
+                        student_course_interests.data || []
+                      }
+                      sections={sections.data || []}
+                    />
+                  </div>
+                </Suspense>
               </div>
             </div>
           </div>
         </div>
       </section>
+      </Suspense>
 
       {/* Course Details Section */}
       <section className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:max-w-[990px] lg:px-8 lg:py-16 xl:max-w-[1200px]">
-        <div className="mx-auto flex flex-col items-start justify-start gap-4">
-          <h2 className="font-poppins text-3xl font-semibold text-textPrimary md:text-4xl">
-            Details
-          </h2>
-          <div className="w-full text-base font-normal leading-relaxed text-textPrimary/90">
-            {long_description.split("\n").map((line, index) => (
-              <p key={index}>{line}</p>
-            ))}
-          </div>
-        </div>
+        {/* Course Description */}
+        <CourseDescription long_description={long_description} />
 
         {/* What You Will Learn */}
-        <div className="mt-12 flex flex-col items-start justify-start gap-5 rounded-md bg-gray-300/40 p-6 sm:p-8 md:p-10">
-          <h3 className="text-xl font-semibold leading-loose text-textPrimary sm:text-2xl">
-            What you will learn in this course
-          </h3>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {course_outcomes.map((point: any, index: any) => (
-              <LearnPoint key={index} point={point} />
-            ))}
-          </div>
-        </div>
+        <LearningOutcomes course_outcomes={course_outcomes} />
 
         {/* Prerequisites */}
-        <div className="mt-12">
-          <h2 className="font-poppins mb-5 text-3xl font-semibold leading-tight text-textPrimary md:text-4xl">
-            Prerequisites
-          </h2>
-          <div>
-            {Array.isArray(pre_requisite) && pre_requisite.length > 0 ? (
-              <div className="pl-5">
-                <ul className="list-disc space-y-2 pl-5">
-                  {pre_requisite.map((pre_req, index) => (
-                    <li
-                      key={index}
-                      className="text-base font-normal leading-relaxed text-textPrimary/90"
-                    >
-                      {pre_req.course_code} - {pre_req.course_name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : (
-              <p className="pl-0 text-base font-normal leading-relaxed text-textPrimary/90">
-                There are no pre-requisites for this course.
-              </p>
-            )}
-          </div>
-        </div>
+        <PrerequisitesSection pre_requisite={pre_requisite} />
       </section>
     </main>
   );
