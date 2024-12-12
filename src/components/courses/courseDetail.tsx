@@ -58,30 +58,30 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   // Fetch Student Profile
   const profile: ProfileData = await fetchProfile();
 
-  const student_course_interests = await getCourseInterests(profile.email);
+  // const student_course_interests = await getCourseInterests(profile.email);
 
   // Fetch existing course interests
 
-  if (is_offered_now) {
-    try {
-      // fetch Sectons
-      sections = await getCourseActiceSections(course_code);
+  // if (is_offered_now) {
+  //   try {
+  //     // fetch Sectons
+  //     sections = await getCourseActiceSections(course_code);
 
-      const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
-        profile.id,
-      );
-      student_courses = result.data;
+  //     const result: Result<CourseEnrollmentResponse> = await getStudentCourses(
+  //       profile.id,
+  //     );
+  //     student_courses = result.data;
 
-      const course = result?.data?.find(
-        (course) => course.course_code === course_code,
-      );
+  //     const course = result?.data?.find(
+  //       (course) => course.course_code === course_code,
+  //     );
 
-      isEnrolled =
-        !!course && course.student_course_status != "expired_reservation";
-    } catch (error: any) {
-      console.error("Error fetching student courses: ", error.message);
-    }
-  }
+  //     isEnrolled =
+  //       !!course && course.student_course_status != "expired_reservation";
+  //   } catch (error: any) {
+  //     console.error("Error fetching student courses: ", error.message);
+  //   }
+  // }
 
   return (
     <main className="overflow-x-hidden">
@@ -169,7 +169,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                       pre_requisite={pre_requisite}
                       student_courses={student_courses}
                       student_course_interests={
-                        student_course_interests.data || []
+                       []
                       }
                       sections={sections.data || []}
                     />

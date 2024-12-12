@@ -142,13 +142,8 @@ export default function EnrollmentSheet({
   };
 
   useEffect(() => {
-
-  
-
-    const enrolled_section = findStudentCourse(courseCode)
-    setEnrolledSection(enrolled_section?.section?.section_name)
-
-
+    const enrolled_section = findStudentCourse(courseCode);
+    setEnrolledSection(enrolled_section?.section?.section_name);
 
     const notCompletedPreReqs = getNotCompletedPreReqs();
 
@@ -187,7 +182,7 @@ export default function EnrollmentSheet({
       setEnrollmentError("Please select a section and payment method.");
       return;
     }
-  
+
     const payload = {
       student_id: profile_id,
       program_id,
@@ -196,26 +191,32 @@ export default function EnrollmentSheet({
       package_id: coursePrice.package_id,
       course_id: selectedSection.course_id,
     };
-  
-    setIsPending(true)
+
+    setIsPending(true);
     setPendingState(true);
-  
+
     try {
       const result = await enrollNewStudentInProgramAndCourse(payload);
-      
+
       if (result.type === "success") {
         const url = result.data?.fee_voucher?.stripe?.stripe_url;
         if (url) {
-          toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
+          toast.success(
+            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+          );
           setTimeout(() => {
             router.push(url);
           }, 3000);
         } else {
-          toast.success("Your seat is reserved! Make your payment soon to confirm your enrollment.");
+          toast.success(
+            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+          );
           router.push("/dashboard");
         }
       } else {
-        setEnrollmentError(result.message || "An error occurred during enrollment.");
+        setEnrollmentError(
+          result.message || "An error occurred during enrollment.",
+        );
       }
     } catch (error) {
       console.error("Unexpected error during enrollment:", error);
