@@ -14,7 +14,6 @@ const TopBar: React.FC = async () => {
     console.error("Error fetching profile data:", error);
   }
 
-
   return (
     <header className="mb-4 mt-6 flex h-16 items-center justify-between sm:mt-10">
       <Link href="/" aria-label="Home">

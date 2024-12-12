@@ -1,8 +1,7 @@
 import CourseSection from "./CourseCardSection";
-import { Course } from "../../types/types";
+import { Course, ProfileIdProps } from "../../types/courses";
 import { Result } from "@/src/types/types";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
-import { ProfileIdProps } from "../../types/types";
 import Link from "next/link";
 import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";

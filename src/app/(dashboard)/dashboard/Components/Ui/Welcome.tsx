@@ -1,10 +1,5 @@
+import { WelcomeProps } from "../../types/types";
 import Error from "../Error/error_message";
-
-interface WelcomeProps {
-  profile: {
-    full_name: string;
-  } | null;
-}
 
 const Welcome: React.FC<WelcomeProps> = ({ profile }) => {
   if (!profile) {

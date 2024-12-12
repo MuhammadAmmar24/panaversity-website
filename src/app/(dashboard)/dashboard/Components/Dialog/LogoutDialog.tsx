@@ -2,12 +2,7 @@
 
 import * as Dialog from "@radix-ui/react-dialog";
 import { IoClose } from "react-icons/io5";
-
-interface LogoutDialogProps {
-  onConfirm: () => void;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}
+import { LogoutDialogProps } from "../../types/types";
 
 export default function LogoutDialog({
   onConfirm,
