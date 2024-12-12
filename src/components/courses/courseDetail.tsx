@@ -87,7 +87,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
     <main className="overflow-x-hidden">
       {/* Hero Section */}
 
-      <Suspense fallback={<CourseHeroSkeleton />}>
+      {/* <Suspense fallback={<CourseHeroSkeleton />}> */}
       <section className="bg-teamBg bg-cover bg-center text-white">
         <div className="bg-blur-[1px] backdrop-brightness-75 backdrop-opacity-100">
           {/* Replace the generic container with the same max-width constraints */}
@@ -154,7 +154,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                 </div>
 
                 {/* Price and enrollment - takes up 1/3 of space */}
-                <Suspense fallback={<ScheduleCardSkeleton />}>
+                {/* <Suspense fallback={<ScheduleCardSkeleton />}> */}
                   <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
                     <EnrollmentCard
                       is_active={is_active}
@@ -174,13 +174,13 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                       sections={sections.data || []}
                     />
                   </div>
-                </Suspense>
+                {/* </Suspense> */}
               </div>
             </div>
           </div>
         </div>
       </section>
-      </Suspense>
+      {/* </Suspense> */}
 
       {/* Course Details Section */}
       <section className="mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:max-w-[990px] lg:px-8 lg:py-16 xl:max-w-[1200px]">
