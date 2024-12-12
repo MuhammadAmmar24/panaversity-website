@@ -80,6 +80,13 @@ export interface CardButtonProps {
   children: ReactNode;
 }
 
+export interface CourseIconsProps {
+    status: string;
+    youtubeLink: string;
+    githubLink: string;
+    zoomLink: string;
+  }
+
 export interface ProfileIdProps {
   profileId: string;
 }
