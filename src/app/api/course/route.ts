@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       studentCourses: studentCoursesResult?.data || [],
     });
 
-  response.headers.set('Cache-Control', 'no-store');
+
 
   } catch (error) {
     console.error("Error in route handler:", error);
