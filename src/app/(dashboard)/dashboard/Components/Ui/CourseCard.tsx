@@ -2,7 +2,7 @@
 import { processPayment } from "@/src/app/actions/payment";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { CourseCardProps } from "../../types/types";
+import { CourseCardProps } from "../../types/courses";
 import PaymentDialog from "../Dialog/PaynowDialog";
 import { FaYoutube, FaGithub, FaBullhorn } from "react-icons/fa";
 import Link from "next/link";

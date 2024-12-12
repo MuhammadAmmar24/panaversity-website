@@ -1,6 +1,6 @@
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/src/components/ui/tooltip';
 import { cn } from '@/src/lib/utils';
-import { CardButtonProps } from '../../types/types';
+import { CardButtonProps } from '../../types/courses';
 
 export function CardButton({
   status,

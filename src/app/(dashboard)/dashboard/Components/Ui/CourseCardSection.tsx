@@ -1,14 +1,12 @@
 import fetchProfile from "@/src/lib/getProfile";
 import React from "react";
-import { Course, CourseSectionProps } from "../../types/types";
+import { Course, CourseSectionProps } from "../../types/courses";
 import CourseCard from "./CourseCard";
 
 const CourseSection: React.FC<CourseSectionProps> = async ({
   courses,
 }) => {
   const profile: ProfileData = await fetchProfile();
-
-
 
   return (
     <div className="my-10 sm:my-14">
