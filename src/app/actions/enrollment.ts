@@ -58,6 +58,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
 
     revalidateTag("fetchStudentCourses")
+    revalidateTag("fetchCourseSections")
 
     return {
       type: "success",

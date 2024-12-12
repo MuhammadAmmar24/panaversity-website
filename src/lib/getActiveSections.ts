@@ -14,7 +14,10 @@ export const getCourseActiceSections = async (
           Accept: "application/json",
           Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
         },
-        cache: "no-store",
+        next: { 
+          tags: ["fetchCourseSections"],
+          revalidate: 86400 // Revalidate every 24 hours (60 * 60 * 24 seconds)
+        },
       }
     );
 
