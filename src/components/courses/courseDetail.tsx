@@ -5,7 +5,7 @@ import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import {
   CourseDetailsProps,
-  CourseInfoProps
+  CourseInfoProps,
 } from "@/src/types/courseEnrollment";
 import { Result } from "@/src/types/types";
 import { Calendar, Users } from "lucide-react";
@@ -155,25 +155,23 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
 
                 {/* Price and enrollment - takes up 1/3 of space */}
                 {/* <Suspense fallback={<ScheduleCardSkeleton />}> */}
-                  <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
-                    <EnrollmentCard
-                      is_active={is_active}
-                      is_offered_now={is_offered_now}
-                      program_id={program_id}
-                      profile_id={profile.id}
-                      profile_email={profile.email}
-                      isEnrolled={isEnrolled}
-                      coursePrice={coursePrice}
-                      courseName={course_name}
-                      courseCode={course_code}
-                      pre_requisite={pre_requisite}
-                      student_courses={student_courses}
-                      student_course_interests={
-                       []
-                      }
-                      sections={sections.data || []}
-                    />
-                  </div>
+                <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
+                  <EnrollmentCard
+                    is_active={is_active}
+                    is_offered_now={is_offered_now}
+                    program_id={program_id}
+                    profile_id={profile.id}
+                    profile_email={profile.email}
+                    isEnrolled={isEnrolled}
+                    coursePrice={coursePrice}
+                    courseName={course_name}
+                    courseCode={course_code}
+                    pre_requisite={pre_requisite}
+                    student_courses={student_courses}
+                    student_course_interests={[]}
+                    sections={sections.data || []}
+                  />
+                </div>
                 {/* </Suspense> */}
               </div>
             </div>
