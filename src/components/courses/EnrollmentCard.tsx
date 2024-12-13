@@ -134,10 +134,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       setError(null);
       try {
         const queryParams = new URLSearchParams({
-          email: "mmrhaqyt@gmail.com",
-          profileId: "e1e88e2a-e9a6-4284-9eb5-efaf86dcbe31",
-          courseCode: "AI-101",
-          isOfferedNow: "true",
+          email: profile_email,
+          profileId: profile_id,
+          courseCode: courseCode,
+          isOfferedNow: is_offered_now.toString(),
         }).toString();
 
         const response = await fetch(`/api/course?${queryParams}`, {
@@ -169,7 +169,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       }
     };
     handleFetch();
-  }, []);
+  }, [is_offered_now, profile_email, profile_id, courseCode]);
 
   const course = studentCourses?.find(
     (course) => course.course_code === courseCode,
@@ -280,7 +280,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
         course_code: courseCode,
         interest_type: interest,
       };
-
+      console.log("Interest Call")
       // Make the POST API call for course interest
       const result = await courseInterest(payload);
 

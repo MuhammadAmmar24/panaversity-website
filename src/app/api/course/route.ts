@@ -17,7 +17,7 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
     }
 
-    console.log(courseCode, "courseCode");
+    console.log("API Call")
 
     // Parallel API calls
     const [courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
