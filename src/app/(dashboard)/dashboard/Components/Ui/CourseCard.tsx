@@ -33,7 +33,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleEnroll = async (paymentMethod: string) => {
     try {
       const payload: any = {
-        batch_no: course_section?.id,
+        section_no: course_section?.id,
         package_id: course_price?.package_id,
         student_course_id: student_course_id,
         student_id: profile?.id,

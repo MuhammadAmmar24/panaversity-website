@@ -14,10 +14,9 @@ export const KuickpaySchema = z.object({
 // Define the response type
 export type Kuickpay = z.infer<typeof KuickpaySchema>;
 
-
 // Define the schema for the payment request
 export const PaymentRequestSchema = z.object({
-  batch_no: z.number().min(1),
+  section_no: z.number().min(1),
   package_id: z.number().min(1),
   student_course_id: z.number().min(1),
   student_id: z.string(),

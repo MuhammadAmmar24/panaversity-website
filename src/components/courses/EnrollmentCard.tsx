@@ -1,5 +1,6 @@
 "use client";
 
+import { courseInterest } from "@/src/app/actions/course-interest";
 import EnrollmentSheet from "@/src/components/courses/EnrollmentSheet";
 import { Card, CardContent, CardFooter } from "@/src/components/ui/card";
 import {
@@ -16,26 +17,28 @@ import {
 } from "@/src/components/ui/tabs";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { getTimeDifference } from "@/src/lib/getDuration";
-import { EnrollmentCardProps } from "@/src/types/courseEnrollment";
+import {
+  CourseSections,
+  EnrollmentCardProps,
+} from "@/src/types/courseEnrollment";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
 import {
+  FaChalkboardTeacher,
   FaChevronLeft,
   FaChevronRight,
   FaUsers,
-  FaChalkboardTeacher,
 } from "react-icons/fa";
-import { GrLanguage } from "react-icons/gr";
-import { SlCalender } from "react-icons/sl";
 import { IoLanguage } from "react-icons/io5";
-import { courseInterest } from "@/src/app/actions/course-interest";
+import { SlCalender } from "react-icons/sl";
 import { toast } from "sonner";
 import EnrollButton from "../ui/enrollButton";
-import { getCourseInterests } from "@/src/lib/getCourseInterest";
+import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
+import { CourseInterestResponse } from "@/src/lib/schemas/courseInterest";
+import { CourseEnrollment } from "@/src/lib/schemas/courses";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
@@ -43,23 +46,37 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   program_id,
   profile_id,
   profile_email,
-  isEnrolled,
+  // isEnrolled,
   coursePrice,
   courseName,
   courseCode,
   pre_requisite,
-  student_courses,
-  student_course_interests,
-  sections,
+  // student_courses,
+  // student_course_interests,
+  // sections,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [isEnrollPending, setIsEnrollPending] = useState(false);
-
   const [currentPage, setCurrentPage] = useState(0);
-
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
+  const [useData, setUseData] = useState({
+    courseInterestsResult: {},
+    sectionsData: {},
+    studentCoursesResult: {},
+  });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [sections, setSections] = useState<CourseSections[]>([]);
+  const [studentCourseInterestes, setStudentCourseInterestes] = useState<
+    null | CourseInterestResponse[]
+  >([]);
+  const [studentCourses, setStudentCourses] = useState<
+    null | CourseEnrollment[]
+  >([]);
+
+  const router = useRouter();
 
   // Update sectionsPerPage based on screen width
   useEffect(() => {
@@ -77,11 +94,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   }, []);
 
   const totalPages = Math.ceil(sections.length / sectionsPerPage);
-  const router = useRouter();
 
   const isStudentEnrolledInSection = (sectionId: number) => {
-    return student_courses?.some(
-      (course:any) =>
+    if (!studentCourses) return false;
+    return studentCourses?.some(
+      (course: any) =>
         course.section?.id === sectionId &&
         course.student_course_status !== "expired_reservation",
     );
@@ -110,6 +127,58 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       selectedSection?.class_time_slots?.[0]?.time_slot_day || null;
     return firstAvailableDay;
   });
+
+  useEffect(() => {
+    const handleFetch = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const queryParams = new URLSearchParams({
+          email: "mmrhaqyt@gmail.com",
+          profileId: "e1e88e2a-e9a6-4284-9eb5-efaf86dcbe31",
+          courseCode: "AI-101",
+          isOfferedNow: "true",
+        }).toString();
+
+        const response = await fetch(`/api/course?${queryParams}`, {
+          method: "GET",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch course data");
+        }
+
+        const result = await response.json();
+        setUseData(result);
+        if (result.sectionsData?.data) {
+          setSections(result.sectionsData.data);
+        }
+        if (result.courseInterestsResult?.data) {
+          setStudentCourseInterestes(result.courseInterestsResult.data);
+        }
+        if (result.studentCoursesResult?.data) {
+          setStudentCourses(result.studentCoursesResult.data);
+        }
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "An unexpected error occurred",
+        );
+        console.error("An unexpected error occurred:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    handleFetch();
+  }, []);
+
+  const course = studentCourses?.find(
+    (course) => course.course_code === courseCode,
+  );
+
+  const isEnrolled =
+    !!course && course.student_course_status != "expired_reservation";
+
+  console.log("Very good result", useData);
 
   useEffect(() => {
     const firstAvailableDay =
@@ -186,13 +255,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
     try {
       // Check if the user already has an interest for this course
-      const existingInterest = student_course_interests?.find(
-        (interest:any) => interest.course_code === courseCode,
+      const existingInterest = studentCourseInterestes?.find(
+        (interest: any) => interest.course_code === courseCode,
       );
-
-
-      
-  
 
       if (existingInterest) {
         // Show a success toast if already interested
@@ -231,6 +296,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       setIsEnrollPending(false);
     }
   };
+
+  if (isLoading) {
+    return <SectionLoadingCard />;
+  }
 
   if (!is_offered_now || sections.length === 0) {
     return (
@@ -273,10 +342,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           </p>
           <Tabs
             defaultValue={visibleSections[0].id.toString()}
-            onValueChange={(value:any) =>
+            onValueChange={(value: any) =>
               setSelectedSection(
-                sections.find((section:any) => section.id.toString() === value) ||
-                  sections[0],
+                sections.find(
+                  (section: any) => section.id.toString() === value,
+                ) || sections[0],
               )
             }
           >
@@ -322,7 +392,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
               )}
             </div>
 
-            {sections.map((section:any) => (
+            {sections.map((section: any) => (
               <TabsContent key={section.id} value={section.id.toString()}>
                 <div className="space-y-2 text-sm">
                   <div className="mb-1 flex items-center gap-2">
@@ -344,7 +414,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                       ].map((day) => {
                         const hasClass =
                           selectedSection?.class_time_slots?.some(
-                            (slot:any) => slot.time_slot_day === day,
+                            (slot: any) => slot.time_slot_day === day,
                           );
 
                         return (
@@ -379,12 +449,14 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {selectedSection?.class_time_slots
                                 ?.find(
-                                  (slot:any) => slot.time_slot_day === selectedDay,
+                                  (slot: any) =>
+                                    slot.time_slot_day === selectedDay,
                                 )
                                 ?.time_slot_day.slice(0, 3) || ""}{" "}
                               {formatTimeToUserGMT(
                                 selectedSection?.class_time_slots?.find(
-                                  (slot:any) => slot.time_slot_day === selectedDay,
+                                  (slot: any) =>
+                                    slot.time_slot_day === selectedDay,
                                 )?.slot_start_time || "",
                               )}
                             </span>
@@ -396,10 +468,12 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {getTimeDifference(
                                 selectedSection?.class_time_slots?.find(
-                                  (slot:any) => slot.time_slot_day === selectedDay,
+                                  (slot: any) =>
+                                    slot.time_slot_day === selectedDay,
                                 )?.slot_start_time || "00:00",
                                 selectedSection?.class_time_slots?.find(
-                                  (slot:any) => slot.time_slot_day === selectedDay,
+                                  (slot: any) =>
+                                    slot.time_slot_day === selectedDay,
                                 )?.slot_end_time || "00:00",
                               ).toFixed(1)}{" "}
                               hrs
@@ -414,20 +488,20 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                             <span>
                               {selectedDay
                                 ? selectedSection?.class_time_slots?.find(
-                                    (slot:any) =>
+                                    (slot: any) =>
                                       slot.time_slot_day === selectedDay,
                                   )?.instructor
                                   ? typeof selectedSection?.class_time_slots?.find(
-                                      (slot:any) =>
+                                      (slot: any) =>
                                         slot.time_slot_day === selectedDay,
                                     )?.instructor === "string"
                                     ? selectedSection?.class_time_slots?.find(
-                                        (slot:any) =>
+                                        (slot: any) =>
                                           slot.time_slot_day === selectedDay,
                                       )?.instructor
                                     : (
                                         selectedSection?.class_time_slots?.find(
-                                          (slot:any) =>
+                                          (slot: any) =>
                                             slot.time_slot_day === selectedDay,
                                         )?.instructor as any
                                       )?.name
@@ -524,11 +598,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           coursePrice={coursePrice}
           courseCode={courseCode}
           pre_requisite={pre_requisite}
-          student_courses={student_courses}
+          student_courses={studentCourses}
           sections={sections.filter(
-            (section:any) =>
-              !student_courses?.some(
-                (course:any) =>
+            (section: any) =>
+              !studentCourses?.some(
+                (course: any) =>
                   course.section?.id === section.id &&
                   course.student_course_status !== "expired_reservation",
               ),

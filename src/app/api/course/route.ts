@@ -1,16 +1,23 @@
-// app/api/course-data/route.ts
 import { NextResponse } from "next/server";
 import { getCourseInterests } from "@/src/lib/getCourseInterest";
 import fetchProfile from "@/src/lib/getProfile";
 import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const body = await request.json();
-    const { email, profileId, courseCode, isOfferedNow } = body;
-    console.log(courseCode, "courseCode");
+    // Parse query parameters from the URL
+    const url = new URL(request.url);
+    const email = url.searchParams.get("email");
+    const profileId = url.searchParams.get("profileId");
+    const courseCode = url.searchParams.get("courseCode");
+    const isOfferedNow = url.searchParams.get("isOfferedNow") === "true"; // Convert to boolean
 
+    if (!email || !profileId || !courseCode) {
+      return NextResponse.json({ error: "Missing required parameters" }, { status: 400 });
+    }
+
+    console.log(courseCode, "courseCode");
 
     // Parallel API calls
     const [courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
@@ -19,24 +26,13 @@ export async function POST(request: Request) {
       isOfferedNow ? getStudentCourses(profileId) : Promise.resolve(null),
     ]);
 
-
-
-
-    
-
     return NextResponse.json({
-      courseInterests: courseInterestsResult?.data || [],
-      sections: sectionsData?.data || [],
-      studentCourses: studentCoursesResult?.data || [],
+      courseInterestsResult,
+      sectionsData,
+      studentCoursesResult,
     });
-
-
-
   } catch (error) {
-    console.error("Error in route handler:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch course data" },
-      { status: 500 }
-    );
+    console.error("Error in GET handler:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
