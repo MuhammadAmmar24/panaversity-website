@@ -21,13 +21,14 @@ export async function GET(request: Request) {
     // Fetch profile first
     const profile = await fetchProfile();
 
+    
 
     // Fetch other API data in parallel
     const [coursePriceResult,  courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
       getCoursePrice(courseCode),
-      getCourseInterests(profile.email),
+      profile.id ? getCourseInterests(profile.email) : Promise.resolve(null),
       isOfferedNow ? getCourseActiceSections(courseCode) : Promise.resolve(null),
-      isOfferedNow ? getStudentCourses(profile.id) : Promise.resolve(null),
+      isOfferedNow && profile.id ? getStudentCourses(profile.id) : Promise.resolve(null),
     ]);
 
 

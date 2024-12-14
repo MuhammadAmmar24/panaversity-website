@@ -13,7 +13,7 @@ const NavLinks = () => {
           key={nav.name}
           href={nav.link}
           aria-label={`${nav.name}`}
-          className={`text-base ${pathName === nav.link ? "nav nav-active" : "nav"}`}
+          className={`text-base ${pathName === nav.link ? "nav nav-active" : "nav"} ${nav.name === "StudentBot" ? "animate-pulse" : ""}`}
         >
           {nav.name}
         </Link>

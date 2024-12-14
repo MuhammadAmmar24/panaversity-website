@@ -108,6 +108,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           setStudentCourses(result.studentCourses.data);
         }
       } catch (err) {
+        toast.error("An unexpected error occurred");
         console.error("An unexpected error occurred:", err);
       } finally {
         setIsLoading(false);
@@ -117,13 +118,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   }, [is_offered_now, courseCode]);
 
 
-  useEffect(() => {
-    // When sections are loaded, automatically select the first available section
-    if (sections.length > 0) {
-      const firstVisibleSection = visibleSections[0] || sections[0];
-      setSelectedSection(firstVisibleSection);
-    }
-  }, [sections]);
+
 
   // Update sectionsPerPage based on screen width
   useEffect(() => {
@@ -174,6 +169,15 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       selectedSection?.class_time_slots?.[0]?.time_slot_day || null;
     return firstAvailableDay;
   });
+
+  useEffect(() => {
+    // When sections are loaded, automatically select the first available section
+    if (sections.length > 0) {
+      const firstVisibleSection = visibleSections[0] || sections[0];
+      setSelectedSection(firstVisibleSection);
+    }
+  }, [sections]);
+
 
 
   const course = studentCourses?.find(

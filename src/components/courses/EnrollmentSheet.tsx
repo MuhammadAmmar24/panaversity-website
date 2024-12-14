@@ -66,6 +66,7 @@ export default function EnrollmentSheet({
   );
   const [skipped, setSkipped] = useState(false);
   const [skippedMessage, setSkippedMessage] = useState("");
+  const [timeConflictMessage, setTimeConflictMessage] = useState<any>(null);
 
   const findStudentCourse = (courseCode: string) =>
     student_courses.find(
@@ -170,12 +171,67 @@ export default function EnrollmentSheet({
     }
   }, [pre_requisite, student_courses, skipped]);
 
+  let activeToastId: any = null;
+
   const handleSectionSelect = (sectionName: string) => {
     const section = sections.find(
       (sec: any) => sec.section_name === sectionName,
     );
-    setSelectedSection(section);
+
+    if (section) {
+      const conflicts = student_courses.filter((studentCourse: any) => {
+        if (studentCourse.student_course_status === "expired_reservation") {
+          return false; // Ignore expired reservations
+        }
+        if (!Array.isArray(studentCourse.section?.class_time_slots)) {
+          return false; // Ensure valid time slots
+        }
+        return studentCourse.section.class_time_slots.some((studentSlot: any) =>
+          section.class_time_slots.some(
+            (selectedSlot: any) =>
+              studentSlot.time_slot_day === selectedSlot.time_slot_day &&
+              ((selectedSlot.slot_start_time >= studentSlot.slot_start_time &&
+                selectedSlot.slot_start_time < studentSlot.slot_end_time) ||
+                (selectedSlot.slot_end_time > studentSlot.slot_start_time &&
+                  selectedSlot.slot_end_time <= studentSlot.slot_end_time)),
+          ),
+        );
+      });
+
+      if (conflicts.length > 0) {
+        const toastMessage = `You already have a class scheduled at this time`;
+
+        // Display the toast warning
+        if (activeToastId) {
+          toast.dismiss(activeToastId);
+        }
+        activeToastId = toast.warning(toastMessage, { duration: 2000 });
+
+        // Update state
+        setSelectedSection(section);
+        return;
+      }
+
+      // Clear toast if no conflicts
+      if (activeToastId) {
+        toast.dismiss(activeToastId);
+        activeToastId = null;
+      }
+
+      // Update selected section and clear conflict message
+      setSelectedSection(section);
+    }
   };
+
+  // Handle conflicts for the default section when the page loads
+  useEffect(() => {
+    if (!shouldDisableForm()) {
+      console.log("form disabled");
+      if (selectedSection?.section_name) {
+        handleSectionSelect(selectedSection.section_name);
+      }
+    }
+  }, [showReEnrollment]);
 
   const handleEnroll = async () => {
     if (!selectedSection || !paymentMethod) {
