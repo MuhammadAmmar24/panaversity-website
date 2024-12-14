@@ -1,6 +1,5 @@
 import CourseDetails from "@/src/components/courses/courseDetail";
 import { getCourseData } from "@/src/lib/courseData";
-import { getCoursePrice } from "@/src/lib/coursePrice";
 import { getProgramCoursesWithOpenRegistration } from "@/src/lib/programCourses";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation"; // Import the notFound helper
@@ -53,17 +52,6 @@ export async function generateStaticParams() {
 }
 
 
-async function fetchCoursePrice(course_code: string) {
-
-  const result = await getCoursePrice(course_code);
-
-  if (result.type === "success" && result.data) {
-    return result.data;
-  } else {
-    throw new Error(result.message);
-  }
-}
-
 export default async function CoursePage({
   params: { course_code },
 }: {
@@ -75,12 +63,9 @@ export default async function CoursePage({
     return notFound();
   }
 
-  const price = await fetchCoursePrice(course_code);
-
 
   return (
     <CourseDetails
-      coursePrice={price}
       courseData={data.data}
     />
   );

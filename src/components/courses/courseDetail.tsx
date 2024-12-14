@@ -29,7 +29,6 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
 
 const CourseDetails: React.FC<CourseDetailsProps> = async ({
   courseData,
-  coursePrice,
 }) => {
   const {
     course_code,
@@ -160,7 +159,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                     is_active={is_active}
                     is_offered_now={is_offered_now}
                     program_id={program_id}
-                    coursePrice={coursePrice}
                     courseName={course_name}
                     courseCode={course_code}
                     pre_requisite={pre_requisite}

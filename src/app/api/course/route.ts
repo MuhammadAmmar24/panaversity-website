@@ -3,6 +3,8 @@ import { getCourseInterests } from "@/src/lib/getCourseInterest";
 import fetchProfile from "@/src/lib/getProfile";
 import { getCourseActiceSections } from "@/src/lib/getActiveSections";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import { getCoursePrice } from "@/src/lib/coursePrice";
+
 
 export async function GET(request: Request) {
   try {
@@ -21,17 +23,20 @@ export async function GET(request: Request) {
 
 
     // Fetch other API data in parallel
-    const [courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
+    const [coursePriceResult,  courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
+      getCoursePrice(courseCode),
       getCourseInterests(profile.email),
       isOfferedNow ? getCourseActiceSections(courseCode) : Promise.resolve(null),
       isOfferedNow ? getStudentCourses(profile.id) : Promise.resolve(null),
     ]);
+
 
     return NextResponse.json({
       profile,
       courseInterests: courseInterestsResult,
       sections: sectionsData,
       studentCourses: studentCoursesResult,
+      coursePrice: coursePriceResult,
     });
   } catch (error) {
     console.error("Error in GET handler:", error);

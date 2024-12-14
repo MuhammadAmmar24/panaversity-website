@@ -38,13 +38,12 @@ import { toast } from "sonner";
 import EnrollButton from "../ui/enrollButton";
 import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
 import { CourseInterestResponse } from "@/src/lib/schemas/courseInterest";
-import { CourseEnrollment } from "@/src/lib/schemas/courses";
+import { CourseEnrollment, GetCoursePriceResponse } from "@/src/lib/schemas/courses";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
   is_offered_now,
   program_id,
-  coursePrice,
   courseName,
   courseCode,
   pre_requisite,
@@ -59,7 +58,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
     email: "",
     id: "",
   });
-  const [price, setPrice] = useState({});
+  const [coursePrice, setCoursePrice] = useState<GetCoursePriceResponse>();
   const [sections, setSections] = useState<CourseSections[]>([]);
   const [studentCourseInterestes, setStudentCourseInterestes] = useState<
     null | CourseInterestResponse[]
@@ -94,9 +93,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
         setProfile(result.profile);
 
         if (result.coursePrice?.data) {
-          setPrice(result.coursePrice.data);
-          console.log(result.coursePrice.data, "PRICE");
-            
+          setCoursePrice(result.coursePrice.data);
         }
 
         if (result.sections?.data) {
@@ -313,7 +310,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
             <span className="text-2xl font-bold">
-              {coursePrice.currency.toUpperCase()} {coursePrice.amount}
+              {coursePrice?.currency.toUpperCase()} {coursePrice?.amount}
             </span>
           </div>
         </CardContent>
@@ -561,7 +558,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
-                      {coursePrice.currency.toUpperCase()} {coursePrice.amount}
+                      {coursePrice?.currency.toUpperCase()} {coursePrice?.amount}
                     </span>
                   </div>
                 </div>
