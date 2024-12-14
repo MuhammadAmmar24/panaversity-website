@@ -4,9 +4,7 @@ import fetchProfile from "@/src/lib/getProfile";
 
 export async function GET() {
   try {
-    // Simulate fetching user profile (replace this with your database/service logic)
     const profile = await fetchProfile();
-
 
     if (!profile) {
       return NextResponse.json(

@@ -21,6 +21,8 @@ const EnrollButton: React.FC<EnrollButtonProps> = ({
   isEnrollPending = false,
 }) => {
   const getButtonText = () => {
+
+
     if (!isOfferedNow) {
       return "Notify Me";
     }
@@ -34,6 +36,7 @@ const EnrollButton: React.FC<EnrollButtonProps> = ({
       ? "Already Enrolled"
       : "Enroll Now";
   };
+
 
   const isDisabled =
     !isOfferedNow || (isActive && sections.length === 0) ? false : !isActive;

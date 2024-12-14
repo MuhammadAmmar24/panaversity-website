@@ -35,7 +35,6 @@ export interface CourseData {
 
 export interface CourseDetailsProps {
   courseData: CourseData;
-  coursePrice: GetCoursePriceResponse;
 }
 
 export interface LearnPointProps {
@@ -60,16 +59,9 @@ export interface EnrollmentCardProps {
   is_active: boolean;
   is_offered_now: boolean;
   program_id: number;
-  profile_id: string;
-  profile_email: string;
-  isEnrolled: boolean;
-  coursePrice: GetCoursePriceResponse;
   courseName: string;
   courseCode: string;
   pre_requisite: Pre_req_obj[];
-  student_courses: CourseEnrollment[];
-  student_course_interests: CourseInterestResponse[];
-  sections: CourseSections[];
 }
 
 export interface RatingStarsProps {
