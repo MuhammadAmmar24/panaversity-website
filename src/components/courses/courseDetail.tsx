@@ -56,7 +56,7 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   let student_courses: any = [];
 
   // Fetch Student Profile
-  const profile: ProfileData = await fetchProfile();
+  // const profile: ProfileData = await fetchProfile();
 
   // const student_course_interests = await getCourseInterests(profile.email);
 
@@ -160,16 +160,10 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                     is_active={is_active}
                     is_offered_now={is_offered_now}
                     program_id={program_id}
-                    profile_id={profile.id}
-                    profile_email={profile.email}
-                    isEnrolled={isEnrolled}
                     coursePrice={coursePrice}
                     courseName={course_name}
                     courseCode={course_code}
                     pre_requisite={pre_requisite}
-                    student_courses={student_courses}
-                    student_course_interests={[]}
-                    sections={sections.data || []}
                   />
                 </div>
                 {/* </Suspense> */}

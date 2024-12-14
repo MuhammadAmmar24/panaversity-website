@@ -44,16 +44,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
   is_offered_now,
   program_id,
-  profile_id,
-  profile_email,
-  // isEnrolled,
   coursePrice,
   courseName,
   courseCode,
   pre_requisite,
-  // student_courses,
-  // student_course_interests,
-  // sections,
 }) => {
   const [sheetSide, setSheetSide] = useState<"bottom" | "right">("bottom");
   const [open, setOpen] = useState(false);
@@ -61,13 +55,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const [isEnrollPending, setIsEnrollPending] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
-  const [useData, setUseData] = useState({
-    courseInterestsResult: {},
-    sectionsData: {},
-    studentCoursesResult: {},
+  const [profile, setProfile] = useState({
+    email: "",
+    id: "",
   });
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [price, setPrice] = useState({});
   const [sections, setSections] = useState<CourseSections[]>([]);
   const [studentCourseInterestes, setStudentCourseInterestes] = useState<
     null | CourseInterestResponse[]
@@ -75,8 +67,66 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const [studentCourses, setStudentCourses] = useState<
     null | CourseEnrollment[]
   >([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const handleFetch = async () => {
+      setIsLoading(true);
+      try {
+        const queryParams = new URLSearchParams({
+          courseCode: courseCode,
+          isOfferedNow: is_offered_now.toString(),
+        }).toString();
+
+
+        const response = await fetch(`/api/course?${queryParams}`, {
+          method: "GET",
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch course data");
+        }
+
+        const result = await response.json();
+
+        setProfile(result.profile);
+
+        if (result.coursePrice?.data) {
+          setPrice(result.coursePrice.data);
+          console.log(result.coursePrice.data, "PRICE");
+            
+        }
+
+        if (result.sections?.data) {
+          setSections(result.sections.data);
+         setSelectedSection(sections[0]);
+            
+        }
+        if (result.courseInterests?.data) {
+          setStudentCourseInterestes(result.courseInterests.data);
+        }
+        if (result.studentCourses?.data) {
+          setStudentCourses(result.studentCourses.data);
+        }
+      } catch (err) {
+        console.error("An unexpected error occurred:", err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    handleFetch();
+  }, [is_offered_now, courseCode]);
+
+
+  useEffect(() => {
+    // When sections are loaded, automatically select the first available section
+    if (sections.length > 0) {
+      const firstVisibleSection = visibleSections[0] || sections[0];
+      setSelectedSection(firstVisibleSection);
+    }
+  }, [sections]);
 
   // Update sectionsPerPage based on screen width
   useEffect(() => {
@@ -128,48 +178,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
     return firstAvailableDay;
   });
 
-  useEffect(() => {
-    const handleFetch = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const queryParams = new URLSearchParams({
-          email: profile_email,
-          profileId: profile_id,
-          courseCode: courseCode,
-          isOfferedNow: is_offered_now.toString(),
-        }).toString();
-
-        const response = await fetch(`/api/course?${queryParams}`, {
-          method: "GET",
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch course data");
-        }
-
-        const result = await response.json();
-        setUseData(result);
-        if (result.sectionsData?.data) {
-          setSections(result.sectionsData.data);
-        }
-        if (result.courseInterestsResult?.data) {
-          setStudentCourseInterestes(result.courseInterestsResult.data);
-        }
-        if (result.studentCoursesResult?.data) {
-          setStudentCourses(result.studentCoursesResult.data);
-        }
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "An unexpected error occurred",
-        );
-        console.error("An unexpected error occurred:", err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    handleFetch();
-  }, [is_offered_now, profile_email, profile_id, courseCode]);
 
   const course = studentCourses?.find(
     (course) => course.course_code === courseCode,
@@ -177,8 +185,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
   const isEnrolled =
     !!course && course.student_course_status != "expired_reservation";
-
-  console.log("Very good result", useData);
 
   useEffect(() => {
     const firstAvailableDay =
@@ -275,12 +281,11 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
             : "info_request";
 
       const payload = {
-        user_id: profile_id,
-        user_email: profile_email,
+        user_id: profile?.id,
+        user_email: profile?.email,
         course_code: courseCode,
         interest_type: interest,
       };
-      console.log("Interest Call")
       // Make the POST API call for course interest
       const result = await courseInterest(payload);
 
@@ -594,7 +599,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
         <EnrollmentSheet
           program_id={program_id}
-          profile_id={profile_id}
+          profile_id={profile?.id}
           coursePrice={coursePrice}
           courseCode={courseCode}
           pre_requisite={pre_requisite}
