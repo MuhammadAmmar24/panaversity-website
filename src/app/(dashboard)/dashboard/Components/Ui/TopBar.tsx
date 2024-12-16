@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Dropdown from "./TopbarDropdown";
+import ErrorLogout from "./ErrorLogout";
 
 const TopBar = async ({
   studentName,
@@ -22,11 +23,15 @@ const TopBar = async ({
         />
       </Link>
 
-      <Dropdown
-        userName={studentName}
-        userEmail={studentEmail}
-        userImage="/profile.webp"
-      />
+      {studentName && studentEmail ? (
+        <Dropdown
+          userName={studentName}
+          userEmail={studentEmail}
+          userImage="/profile.webp"
+        />
+      ) : (
+        <ErrorLogout />
+      )}
     </header>
   );
 };

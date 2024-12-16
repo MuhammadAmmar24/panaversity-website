@@ -1,4 +1,4 @@
-import { auth } from "@/src/lib/auth";
+import { auth, signOut } from "@/src/lib/auth";
 
 export default async function fetchProfile() {
   const session = await auth(); // Getting JWT From Cookies
@@ -22,12 +22,15 @@ export default async function fetchProfile() {
         next: { tags: ['fetchStudentProfileTag'] },
       }
     );
+
+    if (!response.ok) {
+      await signOut();
+    }
+
     const profile = await response.json();
-    console.log("Profile in API", profile)
-
-
     return profile;
   } catch (error: any) {
     console.error(error.message);
+    await signOut();
   }
 }

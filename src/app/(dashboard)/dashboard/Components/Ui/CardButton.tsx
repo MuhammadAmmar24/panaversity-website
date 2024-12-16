@@ -8,7 +8,7 @@ export function CardButton({
   onClick,
   children,
 }: CardButtonProps) {
-  const baseClasses = 'py-[2px] md:py-1 min-w-[93px] rounded-full shadow-lg md:min-w-[125px] transition duration-300';
+  const baseClasses = 'py-[2px] sm:py-1 min-w-[93px] sm:min-w-[125px] rounded-full shadow-lg transition duration-300';
   const statusClasses = {
     active: 'cursor-default border-2 border-accent bg-accent text-white',
     reserved_seat: 'border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white',
