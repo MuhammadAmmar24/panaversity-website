@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 export default async function Profile() {
   
   const user_data = await fetchProfile();
-  console.log("Profile route", user_data);
 
   return (
     <main className="flex-1 px-2 mobileM:px-4 xs:px-6 ssm:px-12 md:px-24">

@@ -82,7 +82,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </span>
             </h6>
 
-            <div className="ml-auto text-[10px] font-medium sm:text-xs sm:font-semibold tablet_lg:text-[10px] tablet_lg:font-medium lg:text-xs lg:font-semibold">
+            <div className="text-[10px] sm:text-xs lg:text-xs font-medium sm:font-semibold lg:font-semibold">
               {status === "active" ? (
                 <CardButton status="active">
                   Paid

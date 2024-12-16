@@ -4,8 +4,8 @@ const Error: React.FC<{ message: string | undefined }> = ({ message }) => {
   if (!message) return null;
 
   return (
-    <div className="my-4 inline-flex items-center gap-x-2 rounded-md px-4 py-2 text-sm text-red-600">
-      <GoAlert className="h-4 w-4 text-red-500" />
+    <div className="inline-flex items-center gap-1 sm:gap-2 rounded-md text-[8px] sm:text-xs text-red-600">
+      <GoAlert className="h-2 w-2 sm:h-3 sm:w-3 text-red-500" />
       <p>{message}</p>
     </div>
   );
