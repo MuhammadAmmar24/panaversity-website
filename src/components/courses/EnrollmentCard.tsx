@@ -115,7 +115,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       }
     };
     handleFetch();
-  }, [is_offered_now, courseCode]);
+  }, [is_offered_now, courseCode, sections]);
 
 
 
@@ -176,7 +176,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       const firstVisibleSection = visibleSections[0] || sections[0];
       setSelectedSection(firstVisibleSection);
     }
-  }, [sections]);
+  }, [sections, visibleSections]);
 
 
 

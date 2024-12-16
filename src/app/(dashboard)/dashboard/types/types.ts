@@ -27,8 +27,3 @@ export interface LogoutDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export interface WelcomeProps {
-  profile: {
-    full_name: string;
-  } | null;
-}
