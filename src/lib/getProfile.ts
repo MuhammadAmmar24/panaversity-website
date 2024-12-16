@@ -23,6 +23,7 @@ export default async function fetchProfile() {
       }
     );
     const profile = await response.json();
+    console.log("Profile in API", profile)
 
 
     return profile;
