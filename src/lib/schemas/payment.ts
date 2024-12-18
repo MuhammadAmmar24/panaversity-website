@@ -19,8 +19,10 @@ export const PaymentRequestSchema = z.object({
   section_no: z.number().min(1),
   package_id: z.number().min(1),
   student_course_id: z.number().min(1),
-  student_id: z.string(),
-  vendor_type: z.enum(["STRIPE"]), // Assuming "KUICKPAY" is the only valid type for now
+  student_id: z.string().min(1).max(50),
+  student_name: z.string(),
+  student_email: z.string(),
+  vendor_type: z.string().default("blinq"),
 });
 
 // Define the type for the payment request
