@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { FaHome, FaSignInAlt } from "react-icons/fa";
 import { FiMenu } from "react-icons/fi";
 import logo from "../../../public/logos/logo.webp";
+import { RiRobot2Line } from "react-icons/ri";
 
 export function MobileMenu() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -69,14 +70,14 @@ export function MobileMenu() {
           aria-label="Open Menu"
           variant="ghost"
           size="icon"
-          className="md:hidden"
+          className="tablet_lg:hidden"
         >
           <FiMenu size={24} />
         </Button>
       </SheetTrigger>
       <SheetContent
         side="left"
-        className="max-w-64 border-0 bg-white/80 backdrop-blur-lg md:hidden"
+        className="max-w-64 border-0 bg-white/80 backdrop-blur-lg tablet_lg:hidden"
       >
         <SheetHeader>
           <VisuallyHidden>
@@ -94,7 +95,7 @@ export function MobileMenu() {
                 priority
               />
             </Link>
-            {navItems.slice(1).map((nav) => (
+            {navItems.map((nav) => (
               <SheetClose asChild key={nav.name}>
                 <Link
                   href={nav.link}
@@ -106,6 +107,14 @@ export function MobileMenu() {
                 </Link>
               </SheetClose>
             ))}
+            <Link
+              href="/studentbot"
+              aria-label="StudentBot"
+              className="text-md flex items-center gap-3 font-medium text-green-800"
+            >
+              <RiRobot2Line/>
+              <span className="font-semibold">StudentBot</span>
+            </Link>
           </div>
           <div className="">
             <SheetClose asChild>

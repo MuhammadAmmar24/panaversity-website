@@ -57,6 +57,7 @@ export const LoginForm = () => {
   
     if (!turnstileRes) {
       setError("Please verify before submitting.");
+      toast.error("Please verify before submitting.");
       return;
     }
 

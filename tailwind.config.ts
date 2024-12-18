@@ -54,17 +54,17 @@ const config: Config = {
   			}
   		},
   		screens: {
-  			fold: '280px',
-  			mobileM: '375px',
-  			xs: '400px',
-			'ssm': '560px',
-  			sm: '768px',
-  			md: '769px',
-			'tablet_lg': '850px',
-  			lg: '1024px',
-  			xl: '1280px',
-  			'2xl': '1536px'
-  		},
+			fold: '280px',
+			mobileM: '375px',
+			xs: '400px',
+		  'ssm': '560px',
+			sm: '640px',
+			md: '768px',
+		  'tablet_lg': '850px',
+			lg: '1024px',
+			xl: '1280px',
+			'2xl': '1536px'
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
