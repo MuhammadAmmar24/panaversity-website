@@ -14,6 +14,7 @@ export async function POST(req: Request) {
 
     // Attempt to refresh the token
     const newTokens = await refreshAccessToken(refresh_token);
+    console.log("New Tokens", newTokens)
 
     if (newTokens.success) {
       const { access_token, refresh_token: new_refresh_token } = newTokens;
