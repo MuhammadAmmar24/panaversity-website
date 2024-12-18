@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     description: "Learn Agentic AI with AI-powered Panaversity.",
     images: [
       {
-        url: `${siteUrl}/logos/logo.png`,
+        url: `${siteUrl}/logos/logo.webp`,
       },
     ],
     site: "Panaversity: AI-Powered Online University",
