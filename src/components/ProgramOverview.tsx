@@ -36,7 +36,7 @@ export default function ProgramOverview() {
         </div>
 
         {/* Right Section: Features Grid */}
-        <div className="mt-[-3rem] grid grid-cols-1 gap-6 px-4 pt-0 sm:grid-cols-2 md:mt-[2rem] lg:-mt-[4rem] xl:w-1/2 xl:pt-0">
+        <div className="mt-[-3rem] grid grid-cols-1 gap-6 px-4 pt-0 sm:grid-cols-2 md:mt-[2rem] lg:-mt-[2rem] xl:w-1/2 xl:pt-0">
           {features.map((feature: any, index: any) => (
             <div
               key={index}
