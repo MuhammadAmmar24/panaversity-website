@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Component() {
   return (
     <div className="bg-white text-center">
-      <div className="container mx-auto mb-10 max-w-[25rem] px-4 py-14 sm:max-w-[930px] sm:px-6 md:px-0 md:py-24 lg:max-w-[930px] xl:max-w-6xl">
+      <div className="mb-10 py-14 md:py-24 px-4 sm:px-6 lg:px-[0rem] mx-auto lg:max-w-[950px] xl:max-w-6xl">
         <div className="flex max-w-6xl flex-col items-center justify-center gap-1 rounded-3xl border-2 bg-custom-bg1 bg-cover bg-center p-10 text-center md:max-w-[72em] md:p-[3rem] lg:p-[5rem]">
           <h2 className="font-poppins mb-4 text-[1.4rem] font-bold text-white md:text-[2.6rem]">
             {ctaData.heading}
