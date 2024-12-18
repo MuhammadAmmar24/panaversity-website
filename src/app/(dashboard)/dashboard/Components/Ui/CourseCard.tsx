@@ -10,6 +10,7 @@ import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
 import { CardButton } from "./CardButton";
 import { toast } from "sonner";
 import CourseIcons from "./CourseIcon";
+import { PaymentRequest } from "@/src/lib/schemas/payment";
 
 const CourseCard: React.FC<CourseCardProps> = ({
   title,
@@ -32,11 +33,13 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   const handleEnroll = async (paymentMethod: string) => {
     try {
-      const payload: any = {
-        section_no: course_section?.id,
-        package_id: course_price?.package_id,
+      const payload: PaymentRequest = {
         student_course_id: student_course_id,
+        section_no: course_section?.id as number,
+        package_id: course_price?.package_id as number,
         student_id: profile?.id,
+        student_name: profile?.full_name,
+        student_email: profile?.email,
         vendor_type: paymentMethod,
       };
 
