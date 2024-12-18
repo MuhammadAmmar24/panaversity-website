@@ -71,6 +71,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const router = useRouter();
 
   useEffect(() => {
+    
     const handleFetch = async () => {
       setIsLoading(true);
       try {
@@ -79,7 +80,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           isOfferedNow: is_offered_now.toString(),
         }).toString();
 
-
+        console.log("I am called")
         const response = await fetch(`/api/course?${queryParams}`, {
           method: "GET",
         });
@@ -115,7 +116,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       }
     };
     handleFetch();
-  }, [is_offered_now, courseCode, sections]);
+    
+  }, [is_offered_now, courseCode]);
 
 
 
@@ -176,7 +178,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       const firstVisibleSection = visibleSections[0] || sections[0];
       setSelectedSection(firstVisibleSection);
     }
-  }, [sections, visibleSections]);
+  }, [sections]);
 
 
 
