@@ -21,14 +21,17 @@ const NavLinks = () => {
         </Link>
       ))}
       <Link
-        href="/studentbot"
+        href="https://pana-agent.vercel.app/"
+        target="_blank"
         aria-label="StudentBot"
         className={`${
-          pathName === "/studentbot" ? "nav nav-active" : "nav"
+          pathName === "https://pana-agent.vercel.app/"
+            ? "nav nav-active"
+            : "nav"
         }`}
       >
         <div className="flex items-center gap-2 text-green-800">
-          <RiRobot2Line className="text-lg"/>
+          <RiRobot2Line className="text-lg" />
           <span className="font-semibold">StudentBot</span>
           <IoMdChatbubbles />
         </div>
