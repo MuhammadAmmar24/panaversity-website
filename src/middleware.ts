@@ -58,11 +58,25 @@ export async function middleware(req: NextRequest) {
       }
 
       // If token is expired, attempt to refresh it
+
       if (is_token_expired) {
-        const newTokens = await refreshAccessToken(old_refresh_token);
-        console.log("New Tokens", newTokens);
-        if (newTokens.success) {
-          const { access_token, refresh_token } = newTokens;
+      //   const newTokens = await refreshAccessToken(old_refresh_token);
+      //   console.log("New Tokens", newTokens);
+      //   if (newTokens.success) {
+      //     const { access_token, refresh_token } = newTokens;
+
+      const refreshResponse = await fetch(
+        new URL("/api/refresh-token", req.url),
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ refresh_token: old_refresh_token }),
+        }
+      );
+
+      const newTokens = await refreshResponse.json();
+      if (newTokens.success) {
+        const { access_token, refresh_token } = newTokens;
 
           // Set new cookies for access_token and refresh_token
           const response = NextResponse.redirect(
@@ -72,10 +86,8 @@ export async function middleware(req: NextRequest) {
             name: "user_data",
             value: JSON.stringify({ access_token, refresh_token }),
             httpOnly: true,
-            sameSite:"strict",
-            path: "/",
-            secure: true,
-            
+            secure: process.env.NODE_ENV === "production",
+            path: "/",       
           });
 
           return response;

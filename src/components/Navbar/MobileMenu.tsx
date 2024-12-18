@@ -108,11 +108,11 @@ export function MobileMenu() {
               </SheetClose>
             ))}
             <Link
-              href="/studentbot"
+              href="https://pana-agent.vercel.app/"
               aria-label="StudentBot"
               className="text-md flex items-center gap-3 font-medium text-green-800"
             >
-              <RiRobot2Line/>
+              <RiRobot2Line />
               <span className="font-semibold">StudentBot</span>
             </Link>
           </div>
