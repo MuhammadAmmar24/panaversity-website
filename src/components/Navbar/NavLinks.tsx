@@ -21,7 +21,8 @@ const NavLinks = () => {
         </Link>
       ))}
       <Link
-        href="/studentbot"
+        href="https://pana-agent.vercel.app/"
+        target="_blank"
         aria-label="StudentBot"
         className={`${
           pathName === "/studentbot" ? "nav nav-active" : "nav"
