@@ -11,8 +11,8 @@ type NavItem = {
 
 export const navItems: NavItem[] = [
   // { name: "Home", link: "/", icon: FaHome},
-  { name: "Our Team", link: "/team", icon: FaUsers },
   { name: "Programs", link: "/programs/flagship-program", icon: FaBookOpen },
+  { name: "Our Team", link: "/team", icon: FaUsers },
   { name: "Contact Us", link: "/contact", icon: MdEmail },
 ];
 
