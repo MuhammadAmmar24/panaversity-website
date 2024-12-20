@@ -30,10 +30,10 @@ const NavLinks = () => {
             : "nav"
         }`}
       >
-        <div className="flex items-center gap-2 text-green-800">
-          <RiRobot2Line className="text-lg" />
+        <div className="flex items-center gap-2 bg-gradient-to-r from-[#0d8f5b] to-accent bg-clip-text text-accent text-transparent">
+          <RiRobot2Line className="text-lg text-emerald-500" />
           <span className="font-semibold">StudentBot</span>
-          <IoMdChatbubbles />
+          <IoMdChatbubbles className="text-emerald-500" />
         </div>
       </Link>
     </nav>

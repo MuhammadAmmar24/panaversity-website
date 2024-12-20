@@ -23,7 +23,7 @@ import {
 } from "@/src/types/courseEnrollment";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
-import { useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
 import {
@@ -38,7 +38,10 @@ import { toast } from "sonner";
 import EnrollButton from "../ui/enrollButton";
 import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
 import { CourseInterestResponse } from "@/src/lib/schemas/courseInterest";
-import { CourseEnrollment, GetCoursePriceResponse } from "@/src/lib/schemas/courses";
+import {
+  CourseEnrollment,
+  GetCoursePriceResponse,
+} from "@/src/lib/schemas/courses";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
@@ -69,9 +72,10 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
-    
     const handleFetch = async () => {
       setIsLoading(true);
       try {
@@ -80,7 +84,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           isOfferedNow: is_offered_now.toString(),
         }).toString();
 
-        console.log("I am called")
+        console.log("I am called");
         const response = await fetch(`/api/course?${queryParams}`, {
           method: "GET",
         });
@@ -99,8 +103,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
         if (result.sections?.data) {
           setSections(result.sections.data);
-         setSelectedSection(sections[0]);
-            
+          setSelectedSection(sections[0]);
         }
         if (result.courseInterests?.data) {
           setStudentCourseInterestes(result.courseInterests.data);
@@ -116,11 +119,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       }
     };
     handleFetch();
-    
-  }, [is_offered_now, courseCode]);
-
-
-
+  }, [is_offered_now, courseCode, pathname, searchParams]);
 
   // Update sectionsPerPage based on screen width
   useEffect(() => {
@@ -179,8 +178,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
       setSelectedSection(firstVisibleSection);
     }
   }, [sections]);
-
-
 
   const course = studentCourses?.find(
     (course) => course.course_code === courseCode,
@@ -564,7 +561,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
-                      {coursePrice?.currency.toUpperCase()} {coursePrice?.amount}
+                      {coursePrice?.currency.toUpperCase()}{" "}
+                      {coursePrice?.amount}
                     </span>
                   </div>
                 </div>
