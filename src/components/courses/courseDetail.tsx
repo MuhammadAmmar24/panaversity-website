@@ -19,6 +19,7 @@ import CoursePrerequisites from "./PreReqs";
 import PrerequisitesSection from "./PreRequisites";
 import RatingStars from "./Ratingstar";
 import CourseHeroSkeleton from "../ui/skeletons/CourseHeroSkeleton";
+import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
@@ -27,9 +28,7 @@ const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   </div>
 );
 
-const CourseDetails: React.FC<CourseDetailsProps> = async ({
-  courseData,
-}) => {
+const CourseDetails: React.FC<CourseDetailsProps> = async ({ courseData }) => {
   const {
     course_code,
     course_name,
@@ -48,7 +47,6 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
   const rating = 4.8;
   const ratingCount = 1249;
 
- 
   return (
     <main className="overflow-x-hidden">
       {/* Hero Section */}
@@ -122,14 +120,16 @@ const CourseDetails: React.FC<CourseDetailsProps> = async ({
                 {/* Price and enrollment - takes up 1/3 of space */}
                 {/* <Suspense fallback={<ScheduleCardSkeleton />}> */}
                 <div className="w-full sm:col-span-2 md:col-span-2 md:place-self-center md:self-center lg:col-span-1">
-                  <EnrollmentCard
-                    is_active={is_active}
-                    is_offered_now={is_offered_now}
-                    program_id={program_id}
-                    courseName={course_name}
-                    courseCode={course_code}
-                    pre_requisite={pre_requisite}
-                  />
+                  <Suspense fallback={<SectionLoadingCard />}>
+                    <EnrollmentCard
+                      is_active={is_active}
+                      is_offered_now={is_offered_now}
+                      program_id={program_id}
+                      courseName={course_name}
+                      courseCode={course_code}
+                      pre_requisite={pre_requisite}
+                    />
+                  </Suspense>
                 </div>
                 {/* </Suspense> */}
               </div>
