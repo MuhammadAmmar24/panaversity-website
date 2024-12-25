@@ -43,14 +43,22 @@ const CourseCard: React.FC<CourseCardProps> = ({
         vendor_type: paymentMethod,
       };
 
+      console.log("Payment Method", paymentMethod)
       const result: any = await processPayment(payload);
 
       if (result.type === "success") {
-        const url = result?.data?.stripe?.stripe_url;
+        let url;
+        if (paymentMethod === 'stripe' && result.data.stripe?.stripe_url){
+          url = result.data.stripe?.stripe_url
+        } else if (paymentMethod === 'blinq' && result.data.blinq?.pay_url){
+          url = result.data.blinq?.pay_url          
+        }
+        
+        // const url = result?.data?.stripe?.stripe_url;
         if (url) {
           window.location.href = url;
         } else {
-          console.error("Stripe URL not found.");
+          console.error("Payment URL not found.");
           toast.error("Something went wrong, please try again.");
         }
       } else {
