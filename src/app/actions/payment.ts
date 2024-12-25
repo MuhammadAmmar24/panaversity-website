@@ -44,6 +44,7 @@ export const processPayment = async (
 
     // Parse the JSON response
     const responseData = await response.json();
+    // console.log("Response data:", responseData);
 
     revalidateTag("fetchStudentCourses")
 
