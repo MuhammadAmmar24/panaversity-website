@@ -281,6 +281,19 @@ const allTeamMembers = [
     ],
   },
   {
+    picture: "/team/Saqib_Imran.webp",
+    fullName: "Saqib Imran",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/saqib-imran-537759230/",
+      },
+      { icon: "github", href: "https://github.com/Ch-Saqib" },
+    ],
+  },
+  {
     picture: "/team/Girl_avatar.webp",
     fullName: "Mubarra Naz",
     designation: "Trainer Panaversity, Freelancer",
