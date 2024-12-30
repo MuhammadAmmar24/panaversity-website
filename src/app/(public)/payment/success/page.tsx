@@ -1,17 +1,13 @@
-import PaymentSuccess from "@/src/components/payment/payment-success";
-import type { Metadata } from "next";
+import PaymentStatusSkeleton from "@/src/components/payment/PaymentStatusSkeleton";
+import PaymentSuccess from "@/src/components/payment/PaymentSuccess";
 import { Suspense } from "react";
 
-export const metadata: Metadata = {
-  title: "Payment Success",
-  description: `Your payment was successful. Thank you for enrolling in Panaversity's Agentic AI courses. We look forward to helping you master AI-powered technologies and advance your skills.`,
-};
 
 const page = () => {
   return (
     <div className="mt-[-4rem] flex min-h-[85vh] items-center justify-center px-[1rem]">
       <div className="rounded-xl bg-white p-4 shadow-md sm:p-8">
-        <Suspense>
+        <Suspense fallback={<PaymentStatusSkeleton />}>
           <PaymentSuccess />
         </Suspense>
       </div>
