@@ -35,6 +35,7 @@ export const getStudentCourses = async (
 
     // Parse the JSON response
     const responseData = await response.json();
+    console.log("Student courses:", responseData);
 
     // Validate the response against the schema
     // const parsedResponse = CourseEnrollmentResponseSchema.safeParse(responseData);

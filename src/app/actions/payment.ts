@@ -1,4 +1,5 @@
 "use server";
+import revalidateDashboard from "@/src/lib/revalidateDashboard";
 import {
   PaymentRequest,
   PaymentRequestSchema,
@@ -44,9 +45,10 @@ export const processPayment = async (
 
     // Parse the JSON response
     const responseData = await response.json();
-    // console.log("Response data:", responseData);
+    console.log("Response data:", responseData);
 
     revalidateTag("fetchStudentCourses")
+    revalidateDashboard("fetchStudentCourses");
 
     // Assuming the response contains a transaction ID indicating a successful payment
     return {
