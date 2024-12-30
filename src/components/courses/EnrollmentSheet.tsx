@@ -253,22 +253,12 @@ export default function EnrollmentSheet({
 
     try {
       const result = await enrollNewStudentInProgramAndCourse(payload);
-
       if (result.type === "success") {
-        const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        if (url) {
-          toast.success(
-            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-          );
-          setTimeout(() => {
-            router.push(url);
-          }, 3000);
-        } else {
-          toast.success(
-            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-          );
-          router.push("/dashboard");
-        }
+        toast.success(
+          "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+        );
+        setTimeout(() => {}, 3000);
+        router.push("/dashboard");
       } else {
         setEnrollmentError(
           result.message || "An error occurred during enrollment.",

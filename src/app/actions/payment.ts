@@ -26,7 +26,7 @@ export const processPayment = async (
     }
 
     // Make the POST request to your payment backend
-    const apiUrl = `${process.env.PAYMENT_API_URL}/voucher/create_voucher`;
+    const apiUrl = `${process.env.VOUCHER_API_URL}/voucher/create_voucher`;
 
     const response = await fetch(apiUrl, {
       method: "POST",

@@ -55,7 +55,7 @@ export const enrollNewStudentInProgramAndCourse = async (
 
     // Successful response parsing
     const responseData = await response.json();
-
+    console.log("Resonse Data", responseData)
 
     revalidateTag("fetchStudentCourses")
     revalidateTag("fetchCourseSections")
