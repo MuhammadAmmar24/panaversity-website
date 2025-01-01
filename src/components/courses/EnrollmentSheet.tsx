@@ -70,6 +70,7 @@ export default function EnrollmentSheet({
   );
   const [skipped, setSkipped] = useState(false);
   const [skippedMessage, setSkippedMessage] = useState("");
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
   // Student enrolled courses helper function
   const findStudentCourse = (courseCode: string) =>
@@ -365,7 +366,33 @@ export default function EnrollmentSheet({
       className={`space-y-8 p-4 mobileM:p-4 xs:p-4 sm:p-5 md:p-4 lg:p-5 ${shouldDisableForm() ? "opacity-50" : "opacity-100"}`}
     >
       <div>
-        <label className="mb-2 block text-lg font-medium">Section</label>
+        <div className="flex items-center gap-x-1">
+          <label className="block text-lg font-medium">Section</label>
+          <TooltipProvider>
+            <Tooltip open={isTooltipOpen}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                  disabled={shouldDisableForm()}
+                  className={`hidden h-4 w-4 ${shouldDisableForm() ? "cursor-not-allowed" : "cursor-pointer"} text-gray-500 mobileM:block`}
+                >
+                  <Info
+                    className={`h-4 w-4 text-gray-500 ${shouldDisableForm() ? "" : "hover:text-accent"} `}
+                  />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent
+                side="right"
+                className="max-w-64 md:ml-0 md:max-w-80"
+              >
+                <p className="text-sm">
+                  Select a section with class timings that don't conflict with
+                  your other enrolled courses.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
 
         <Select
           value={selectedSection?.section_name}
