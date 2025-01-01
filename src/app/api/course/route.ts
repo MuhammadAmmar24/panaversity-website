@@ -20,9 +20,7 @@ export async function GET(request: Request) {
 
     // Fetch profile first
     const profile = await fetchProfile();
-
-    
-
+  
     // Fetch other API data in parallel
     const [coursePriceResult,  courseInterestsResult, sectionsData, studentCoursesResult] = await Promise.all([
       getCoursePrice(courseCode),
