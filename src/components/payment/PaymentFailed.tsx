@@ -1,11 +1,16 @@
 "use client";
+import revalidateDashboard from "@/src/lib/revalidateDashboard";
 import Link from "next/link";
+import { useEffect } from "react";
 import { ImCancelCircle } from "react-icons/im";
 
-const PaymentCancel = () => {
+const PaymentFailed = () => {
+  useEffect(() => {
+    revalidateDashboard("fetchStudentCourses");
+  }, []);
   return (
     <div className="w-full max-w-sm pb-5 text-center sm:pb-1">
-      <div className="mb-8   flex justify-center">
+      <div className="mb-8 flex justify-center">
         <div className="rounded-full bg-white p-4">
           <ImCancelCircle size={60} className="text-red-500" />
         </div>
@@ -13,7 +18,10 @@ const PaymentCancel = () => {
       <h2 className="mb-4 text-2xl font-semibold text-gray-800">
         Payment Failed
       </h2>
-      <p className="mb-8 text-gray-600">Your payment has Failed.</p>
+      <p className="mb-8 text-gray-600">
+        We're sorry, but your payment did not go through. Please try again or
+        use a different payment method.
+      </p>
       <Link
         href={"/dashboard"}
         aria-label="Go to dashboard"
@@ -25,4 +33,4 @@ const PaymentCancel = () => {
   );
 };
 
-export default PaymentCancel;
+export default PaymentFailed;

@@ -17,10 +17,11 @@ const PaymentSuccess = () => {
         </div>
       </div>
       <h2 className="mb-4 text-2xl font-semibold text-gray-800">
-        Payment Successfull
+        Payment Successful 🎉
       </h2>
       <p className="mb-8 text-gray-600">
-        Your payment is confirmed. You can now access your dashboard.
+        Payment Confirmed! Head to your dashboard to unlock your journey to{" "}
+        <strong>Agentic AI</strong>.
       </p>
       <Link
         href={"/dashboard"}

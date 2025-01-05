@@ -63,7 +63,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   });
   const [coursePrice, setCoursePrice] = useState<GetCoursePriceResponse>();
   const [sections, setSections] = useState<CourseSections[]>([]);
-  const [studentCourseInterestes, setStudentCourseInterestes] = useState<
+  const [studentCourseInterests, setStudentCourseInterests] = useState<
     null | CourseInterestResponse[]
   >([]);
   const [studentCourses, setStudentCourses] = useState<
@@ -106,7 +106,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           setSelectedSection(sections[0]);
         }
         if (result.courseInterests?.data) {
-          setStudentCourseInterestes(result.courseInterests.data);
+          setStudentCourseInterests(result.courseInterests.data);
         }
         if (result.studentCourses?.data) {
           setStudentCourses(result.studentCourses.data);
@@ -261,7 +261,7 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
 
     try {
       // Check if the user already has an interest for this course
-      const existingInterest = studentCourseInterestes?.find(
+      const existingInterest = studentCourseInterests?.find(
         (interest: any) => interest.course_code === courseCode,
       );
 

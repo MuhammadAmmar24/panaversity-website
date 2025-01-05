@@ -34,8 +34,9 @@ export function AuthButton() {
   }, [isLoggedIn]);
 
   return (
+
     <div className="flex items-center gap-4">
-      <div className="mt-6 hidden tablet_lg:flex">
+      <div className="mt-4 hidden tablet_lg:flex">
         <Link
           href={isLoggedIn ? "/dashboard" : "/register"}
           aria-label={
@@ -52,5 +53,5 @@ export function AuthButton() {
         </Link>
       </div>
     </div>
-  );
+  )
 }

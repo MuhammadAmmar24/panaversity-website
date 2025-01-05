@@ -1,4 +1,5 @@
 "use server";
+import revalidateDashboard from "@/src/lib/revalidateDashboard";
 import {
   PaymentRequest,
   PaymentRequestSchema,
@@ -26,7 +27,7 @@ export const processPayment = async (
     }
 
     // Make the POST request to your payment backend
-    const apiUrl = `${process.env.PAYMENT_API_URL}/voucher/create_voucher`;
+    const apiUrl = `${process.env.VOUCHER_API_URL}/voucher/create_voucher`;
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -44,9 +45,10 @@ export const processPayment = async (
 
     // Parse the JSON response
     const responseData = await response.json();
-    // console.log("Response data:", responseData);
+    console.log("Response data:", responseData);
 
     revalidateTag("fetchStudentCourses")
+    revalidateDashboard("fetchStudentCourses");
 
     // Assuming the response contains a transaction ID indicating a successful payment
     return {

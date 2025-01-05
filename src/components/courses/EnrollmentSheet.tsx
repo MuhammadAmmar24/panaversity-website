@@ -1,8 +1,12 @@
 "use client";
-import { toast } from "sonner";
-import { useEffect, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/components/ui/accordion";
+import { Alert, AlertDescription } from "@/src/components/ui/alert";
+import { Badge } from "@/src/components/ui/badge";
 import { Button } from "@/src/components/ui/button";
 import {
   Card,
@@ -18,27 +22,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/src/components/ui/select";
-import { Alert, AlertDescription } from "@/src/components/ui/alert";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/src/components/ui/accordion";
-import { Badge } from "@/src/components/ui/badge";
 import { Separator } from "@/src/components/ui/separator";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import {
   FaCalendarAlt,
   FaClock,
-  FaUsers,
   FaExclamationCircle,
-  FaCreditCard,
+  FaUsers,
 } from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { toast } from "sonner";
 
 import { enrollNewStudentInProgramAndCourse } from "@/src/app/actions/enrollment";
 import { formatTimeToUserGMT } from "@/src/lib/FormatTimeToGMT";
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import { Info } from "lucide-react";
 
 export default function EnrollmentSheet({
   program_id,
@@ -57,7 +62,6 @@ export default function EnrollmentSheet({
   const [selectedSection, setSelectedSection] = useState<any>(
     selected_section_name,
   );
-  const [paymentMethod, setPaymentMethod] = useState("STRIPE");
   const [enrollmentError, setEnrollmentError] = useState<string | null>(null);
   const [showReEnrollment, setShowReEnrollment] = useState(false);
   const [enrolledSection, setEnrolledSection] = useState();
@@ -66,13 +70,15 @@ export default function EnrollmentSheet({
   );
   const [skipped, setSkipped] = useState(false);
   const [skippedMessage, setSkippedMessage] = useState("");
-  const [timeConflictMessage, setTimeConflictMessage] = useState<any>(null);
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
+  // Student enrolled courses helper function
   const findStudentCourse = (courseCode: string) =>
     student_courses.find(
       (course: any) => course?.course_code?.trim() === courseCode.trim(),
     );
 
+  // Course pre-requisites status helper function
   const getCourseStatus = (studentCourse: any, courseCode: string) => {
     if (
       !studentCourse ||
@@ -100,6 +106,7 @@ export default function EnrollmentSheet({
     };
   };
 
+  // Helper function to disable the form based on enrollment status and prerequisites
   const shouldDisableForm = () => {
     // If not enrolled and there are prerequisites that haven't been skipped
     if (!isEnrolled && !skipped && pre_requisite.length > 0) {
@@ -129,6 +136,7 @@ export default function EnrollmentSheet({
     return false;
   };
 
+  // Get the list of prerequisites that haven't been completed
   const getNotCompletedPreReqs = () => {
     return (
       pre_requisite?.filter((pre_req: any) => {
@@ -142,6 +150,7 @@ export default function EnrollmentSheet({
     );
   };
 
+  // Already enrolled in other section of the same course
   useEffect(() => {
     const enrolled_section = findStudentCourse(courseCode);
     setEnrolledSection(enrolled_section?.section?.section_name);
@@ -173,6 +182,7 @@ export default function EnrollmentSheet({
 
   let activeToastId: any = null;
 
+  // Handle section selection and show section timing conflicts
   const handleSectionSelect = (sectionName: string) => {
     const section = sections.find(
       (sec: any) => sec.section_name === sectionName,
@@ -199,13 +209,13 @@ export default function EnrollmentSheet({
       });
 
       if (conflicts.length > 0) {
-        const toastMessage = `You already have a class scheduled at this time`;
+        const toastMessage = `Selected section class timings conflict with other course/section timings.`;
 
         // Display the toast warning
         if (activeToastId) {
           toast.dismiss(activeToastId);
         }
-        activeToastId = toast.warning(toastMessage, { duration: 2000 });
+        activeToastId = toast.warning(toastMessage, { duration: 5000 });
 
         // Update state
         setSelectedSection(section);
@@ -226,16 +236,16 @@ export default function EnrollmentSheet({
   // Handle conflicts for the default section when the page loads
   useEffect(() => {
     if (!shouldDisableForm()) {
-      console.log("form disabled");
       if (selectedSection?.section_name) {
         handleSectionSelect(selectedSection.section_name);
       }
     }
   }, [showReEnrollment]);
 
+  // Handle enrollment submission
   const handleEnroll = async () => {
-    if (!selectedSection || !paymentMethod) {
-      setEnrollmentError("Please select a section and payment method.");
+    if (!selectedSection) {
+      setEnrollmentError("Please select a desired section of this course.");
       return;
     }
 
@@ -243,7 +253,6 @@ export default function EnrollmentSheet({
       student_id: profile_id,
       program_id,
       section_id: selectedSection.id,
-      vendor_type: paymentMethod,
       package_id: coursePrice.package_id,
       course_id: selectedSection.course_id,
     };
@@ -253,22 +262,11 @@ export default function EnrollmentSheet({
 
     try {
       const result = await enrollNewStudentInProgramAndCourse(payload);
-
       if (result.type === "success") {
-        const url = result.data?.fee_voucher?.stripe?.stripe_url;
-        if (url) {
-          toast.success(
-            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-          );
-          setTimeout(() => {
-            router.push(url);
-          }, 3000);
-        } else {
-          toast.success(
-            "Your seat is reserved! Make your payment soon to confirm your enrollment.",
-          );
-          router.push("/dashboard");
-        }
+        toast.success(
+          "Your seat is reserved! Make your payment soon to confirm your enrollment.",
+        );
+        router.push("/dashboard");
       } else {
         setEnrollmentError(
           result.message || "An error occurred during enrollment.",
@@ -368,7 +366,34 @@ export default function EnrollmentSheet({
       className={`space-y-8 p-4 mobileM:p-4 xs:p-4 sm:p-5 md:p-4 lg:p-5 ${shouldDisableForm() ? "opacity-50" : "opacity-100"}`}
     >
       <div>
-        <label className="mb-2 block text-lg font-medium">Section</label>
+        <div className="flex items-center gap-x-1">
+          <label className="block text-lg font-medium">Section</label>
+          <TooltipProvider>
+            <Tooltip open={isTooltipOpen}>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+                  disabled={shouldDisableForm()}
+                  className={`hidden h-4 w-4 ${shouldDisableForm() ? "cursor-not-allowed" : "cursor-pointer"} text-gray-500 mobileM:block`}
+                >
+                  <Info
+                    className={`h-4 w-4 text-gray-500 ${shouldDisableForm() ? "" : "hover:text-accent"} `}
+                  />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent
+                side="right"
+                className="max-w-64 md:ml-0 md:max-w-80"
+              >
+                <p className="text-sm">
+                  Select a section with class timings that don't conflict with
+                  your other enrolled courses.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+
         <Select
           value={selectedSection?.section_name}
           onValueChange={handleSectionSelect}
@@ -457,32 +482,6 @@ export default function EnrollmentSheet({
           </div>
         </div>
       )}
-
-      <div>
-        <label className="mb-2 block text-lg font-medium">Payment Method</label>
-        <Select
-          value={paymentMethod}
-          onValueChange={setPaymentMethod}
-          disabled={shouldDisableForm() || isPending}
-        >
-          <SelectTrigger>
-            <SelectValue>
-              <div className="flex items-center gap-2">
-                <FaCreditCard className="h-4 w-4" />
-                Stripe
-              </div>
-            </SelectValue>
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="STRIPE">
-              <div className="flex items-center gap-2">
-                <FaCreditCard className="h-4 w-4" />
-                Stripe
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
 
       {enrollmentError && (
         <Alert
