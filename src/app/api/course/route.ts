@@ -29,7 +29,6 @@ export async function GET(request: Request) {
       isOfferedNow && profile.id ? getStudentCourses(profile.id) : Promise.resolve(null),
     ]);
 
-
     return NextResponse.json({
       profile,
       courseInterests: courseInterestsResult,
