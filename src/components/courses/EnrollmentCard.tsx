@@ -313,7 +313,13 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           <div className="-mb-2 flex items-center justify-between xl:mb-2">
             <span className="text-lg font-medium">Price:</span>
             <span className="text-2xl font-bold">
-              {coursePrice?.currency.toUpperCase()} {coursePrice?.amount}
+              {coursePrice?.currency?.toUpperCase() && coursePrice?.amount ? (
+                <>
+                  {coursePrice.currency.toUpperCase()} {coursePrice.amount}
+                </>
+              ) : (
+                "..."
+              )}
             </span>
           </div>
         </CardContent>
@@ -561,8 +567,15 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-medium">Price:</span>
                     <span className="text-2xl font-bold">
-                      {coursePrice?.currency.toUpperCase()}{" "}
-                      {coursePrice?.amount}
+                      {coursePrice?.currency?.toUpperCase() &&
+                      coursePrice?.amount ? (
+                        <>
+                          {coursePrice.currency.toUpperCase()}{" "}
+                          {coursePrice.amount}
+                        </>
+                      ) : (
+                        "..."
+                      )}
                     </span>
                   </div>
                 </div>
