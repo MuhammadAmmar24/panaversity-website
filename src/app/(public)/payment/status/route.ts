@@ -63,9 +63,12 @@ export async function POST(req: NextRequest) {
   try {
     const text = await req.text();
     const params = new URLSearchParams(text);
+    console.log("Params", params)
     const status = params.get("status");
+    console.log("Status from blinq", status)
     const { searchParams } = new URL(req.url);
     const vendor = searchParams.get("vendor");
+
     if (vendor === "blinq") {
       const token = await createPaymentStatusToken();
       let redirectPath = "/access-denied";
