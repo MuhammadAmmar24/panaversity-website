@@ -76,7 +76,7 @@ export async function POST(req: NextRequest) {
       if (status === "Success") {
         redirectPath = "/payment/success";
         console.log("Success Block")
-      } else if (status === "Failure") {
+      } else if (status === "Failed") {
         redirectPath = "/payment/failure";
         console.log("Failure Block")
       }
