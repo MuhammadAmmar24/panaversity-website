@@ -5,27 +5,28 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { jwtVerify } from "jose";
 
-const SECRET_KEY = new TextEncoder ().encode(process.env.PAYMENT_STATUS_SECRET);
+const SECRET_KEY = new TextEncoder().encode(process.env.PAYMENT_STATUS_SECRET);
 
 const page = async () => {
-  const cookieStore = cookies();
-    const token = cookieStore.get("paymentStatusToken");
-  
-    // If there's no token, user didn't come from the route handler
-    if (!token) {
-      console.log("Not Token")
-      redirect("/access-denied");
-    }
-  
-    try {
-      // Verify the token
-      await jwtVerify(token.value, SECRET_KEY);
-  
-    } catch (error) {
-      console.log("Error catched")
-      // Invalid or expired token -> redirect
-      redirect("/access-denied");
-    }
+  // const cookieStore = cookies();
+  // const token = cookieStore.get("paymentStatusToken");
+  const token = cookies().get("paymentStatusToken")?.value;
+  console.log("Token", token);
+
+  // If there's no token, user didn't come from the route handler
+  if (!token) {
+    console.log("Not Token");
+    redirect("/access-denied");
+  }
+
+  try {
+    // Verify the token
+    await jwtVerify(token, SECRET_KEY);
+  } catch (error) {
+    console.log("Error catched");
+    // Invalid or expired token -> redirect
+    redirect("/access-denied");
+  }
   return (
     <div className="mt-[-4rem] flex min-h-[85vh] items-center justify-center px-[1rem]">
       <div className="rounded-xl bg-white p-4 shadow-md sm:p-8">
