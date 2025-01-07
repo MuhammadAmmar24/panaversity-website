@@ -13,6 +13,7 @@ const page = async () => {
   
     // If there's no token, user didn't come from the route handler
     if (!token) {
+      console.log("Not Token")
       redirect("/access-denied");
     }
   
@@ -21,6 +22,7 @@ const page = async () => {
       await jwtVerify(token.value, SECRET_KEY);
   
     } catch (error) {
+      console.log("Error catched")
       // Invalid or expired token -> redirect
       redirect("/access-denied");
     }
