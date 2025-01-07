@@ -68,14 +68,17 @@ export async function POST(req: NextRequest) {
     console.log("Status from blinq", status)
     const { searchParams } = new URL(req.url);
     const vendor = searchParams.get("vendor");
+    console.log("Vendor", vendor)
 
     if (vendor === "blinq") {
       const token = await createPaymentStatusToken();
       let redirectPath = "/access-denied";
       if (status === "Success") {
         redirectPath = "/payment/success";
+        console.log("Success Block")
       } else if (status === "Failure") {
         redirectPath = "/payment/failure";
+        console.log("Failure Block")
       }
       const redirectUrl = new URL(redirectPath, process.env.NEXT_PUBLIC_SITE_URL);
       const response = NextResponse.redirect(redirectUrl);
@@ -86,11 +89,13 @@ export async function POST(req: NextRequest) {
         sameSite: "strict",
         maxAge: 60,
       });
+      console.log("Response", response)
       return response;
     } else if (vendor === "stripe") {
       // To be implemented later when stripe is integrated
       return NextResponse.redirect(new URL("/access-denied", req.url));
     }
+    console.log("Before access denied")
     return NextResponse.redirect(new URL("/access-denied", req.url));
   } catch (error) {
     console.error("Payment status error:", error);
