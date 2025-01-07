@@ -1,6 +1,5 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { refreshAccessToken } from "./app/actions/refresh_token";
 import { auth } from "./lib/auth";
 import { check_token_expiry } from "./lib/verify_token";
 
@@ -23,10 +22,10 @@ export async function middleware(req: NextRequest) {
 
   // Check if the current route matches any defined routes
   const isProtectedRoute = protectedRoutes.some((route) =>
-    req.nextUrl.pathname.startsWith(route)
+    req.nextUrl.pathname.startsWith(route),
   );
   const isAuthRoute = authRoutes.some((route) =>
-    req.nextUrl.pathname.startsWith(route)
+    req.nextUrl.pathname.startsWith(route),
   );
 
   if (isProtectedRoute || isAuthRoute) {
@@ -60,34 +59,29 @@ export async function middleware(req: NextRequest) {
       // If token is expired, attempt to refresh it
 
       if (is_token_expired) {
-      //   const newTokens = await refreshAccessToken(old_refresh_token);
-      //   console.log("New Tokens", newTokens);
-      //   if (newTokens.success) {
-      //     const { access_token, refresh_token } = newTokens;
+        const refreshResponse = await fetch(
+          new URL("/api/refresh-token", req.url),
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh_token: old_refresh_token }),
+          },
+        );
 
-      const refreshResponse = await fetch(
-        new URL("/api/refresh-token", req.url),
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ refresh_token: old_refresh_token }),
-        }
-      );
-
-      const newTokens = await refreshResponse.json();
-      if (newTokens.success) {
-        const { access_token, refresh_token } = newTokens;
+        const newTokens = await refreshResponse.json();
+        if (newTokens.success) {
+          const { access_token, refresh_token } = newTokens;
 
           // Set new cookies for access_token and refresh_token
           const response = NextResponse.redirect(
-            new URL("/dashboard", req.url)
+            new URL("/dashboard", req.url),
           );
           response.cookies.set({
             name: "user_data",
             value: JSON.stringify({ access_token, refresh_token }),
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
-            path: "/",       
+            path: "/",
           });
 
           return response;

@@ -8,13 +8,12 @@ export async function POST(req: Request) {
     if (!refresh_token) {
       return NextResponse.json(
         { success: false, message: "Refresh token missing" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     // Attempt to refresh the token
     const newTokens = await refreshAccessToken(refresh_token);
-    console.log("New Tokens", newTokens)
 
     if (newTokens.success) {
       const { access_token, refresh_token: new_refresh_token } = newTokens;
@@ -26,19 +25,19 @@ export async function POST(req: Request) {
           access_token,
           refresh_token: new_refresh_token,
         },
-        { status: 200 }
+        { status: 200 },
       );
     }
 
     return NextResponse.json(
       { success: false, message: "Token refresh failed" },
-      { status: 401 }
+      { status: 401 },
     );
   } catch (error) {
     console.error("Error in refresh-token route:", error);
     return NextResponse.json(
       { success: false, message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

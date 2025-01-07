@@ -21,7 +21,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   profile,
   course_code,
   course_section,
-  course_price
+  course_price,
 }) => {
   const [isPaymentDialogOpen, setPaymentDialogOpen] = useState(false);
 
@@ -43,17 +43,16 @@ const CourseCard: React.FC<CourseCardProps> = ({
         vendor_type: paymentMethod,
       };
 
-      console.log("Payment Method", paymentMethod)
       const result: any = await processPayment(payload);
 
       if (result.type === "success") {
         let url;
-        if (paymentMethod === 'stripe' && result.data.stripe?.stripe_url){
-          url = result.data.stripe?.stripe_url
-        } else if (paymentMethod === 'blinq' && result.data.blinq?.pay_url){
-          url = result.data.blinq?.pay_url          
+        if (paymentMethod === "stripe" && result.data.stripe?.stripe_url) {
+          url = result.data.stripe?.stripe_url;
+        } else if (paymentMethod === "blinq" && result.data.blinq?.pay_url) {
+          url = result.data.blinq?.pay_url;
         }
-        
+
         // const url = result?.data?.stripe?.stripe_url;
         if (url) {
           window.location.href = url;
@@ -73,19 +72,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
   const zoomLink = course_section?.class_time_slots?.[0]?.zoom_link || "/";
   const githubLink = course_section?.class_time_slots?.[0]?.github_link || "/";
-  const youtubeLink = course_section?.class_time_slots?.[0]?.lectures_playlist || "/";
+  const youtubeLink =
+    course_section?.class_time_slots?.[0]?.lectures_playlist || "/";
 
   const progressPercentage = (progress / classes) * 100;
 
   return (
     <section className="relative">
-      <div className="flex flex-col gap-4 md:gap-6 shadow-lg rounded-2xl border overflow-hidden">
-
-        <div className="px-4 py-4 sm:px-6 md:py-6 lg:px-8 flex flex-col justify-center gap-4 border-b bg-gray-100">
+      <div className="flex flex-col gap-4 overflow-hidden rounded-2xl border shadow-lg md:gap-6">
+        <div className="flex flex-col justify-center gap-4 border-b bg-gray-100 px-4 py-4 sm:px-6 md:py-6 lg:px-8">
           <div className="flex items-center justify-between">
             <h6
-              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${status === "active" ? "text-gray-500" : "opacity-30"
-                }`}
+              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${
+                status === "active" ? "text-gray-500" : "opacity-30"
+              }`}
             >
               Course Code:{" "}
               <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
@@ -93,11 +93,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </span>
             </h6>
 
-            <div className="text-[10px] sm:text-xs lg:text-xs font-medium sm:font-semibold lg:font-semibold">
+            <div className="text-[10px] font-medium sm:text-xs sm:font-semibold lg:text-xs lg:font-semibold">
               {status === "active" ? (
-                <CardButton status="active">
-                  Paid
-                </CardButton>
+                <CardButton status="active">Paid</CardButton>
               ) : status === "reserved_seat" ? (
                 <CardButton
                   status="reserved_seat"
@@ -119,18 +117,20 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
 
           <h2
-            className={`font-poppins truncate font-medium md:text-xl ${status === "active" ? "text-textPrimary/90" : "opacity-30"
-              } `}
+            className={`font-poppins truncate font-medium md:text-xl ${
+              status === "active" ? "text-textPrimary/90" : "opacity-30"
+            } `}
           >
             {title}
           </h2>
         </div>
 
-        <div className="px-4 sm:px-6 lg:px-8 flex flex-col justify-center gap-4">
-          <div className="flex justify-between items-center">
+        <div className="flex flex-col justify-center gap-4 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
             <div
-              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${status === "active" ? "text-gray-500" : "opacity-30"
-                }`}
+              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${
+                status === "active" ? "text-gray-500" : "opacity-30"
+              }`}
             >
               Section:{" "}
               <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
@@ -138,8 +138,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
               </span>
             </div>
             <div
-              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${status === "active" ? "text-gray-500" : "opacity-30"
-                }`}
+              className={`text-[10px] font-medium text-gray-700 sm:text-sm ${
+                status === "active" ? "text-gray-500" : "opacity-30"
+              }`}
             >
               Language:{" "}
               <span className="font-bold text-black underline decoration-accent decoration-1 underline-offset-2">
@@ -172,25 +173,28 @@ const CourseCard: React.FC<CourseCardProps> = ({
             </div>
           )}
 
-          <div className={`flex flex-col gap-2 px-4 max-h-[3rem] overflow-y-auto ${status === "active" ? "text-gray-500" : "opacity-30"}`}>
+          <div
+            className={`flex max-h-[3rem] flex-col gap-2 overflow-y-auto px-4 ${status === "active" ? "text-gray-500" : "opacity-30"}`}
+          >
             {course_section?.class_time_slots?.map((slot, index) => (
-              <div key={index} className="flex justify-between text-xs sm:text-sm">
+              <div
+                key={index}
+                className="flex justify-between text-xs sm:text-sm"
+              >
                 <div className="flex items-center gap-2">
                   <HiMiniCalendar className="text-sm md:text-base" />
                   <span>{slot.time_slot_day.slice(0, 3)}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <TbClockHour3 className="text-sm md:text-base" />
-                  <span>
-                    {formatTimeToUserGMT(slot.slot_start_time)}
-                  </span>
+                  <span>{formatTimeToUserGMT(slot.slot_start_time)}</span>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="px-4 sm:px-6 lg:px-8 flex items-center justify-between border-t bg-gray-100">
+        <div className="flex items-center justify-between border-t bg-gray-100 px-4 sm:px-6 lg:px-8">
           <CourseIcons
             status={status || ""}
             youtubeLink={youtubeLink}
