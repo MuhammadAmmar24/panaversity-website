@@ -2,11 +2,13 @@ import fetchProfile from "@/src/lib/getProfile";
 import React from "react";
 import { Course, CourseSectionProps } from "../../types/courses";
 import CourseCard from "./CourseCard";
+import { getCookie } from "@/src/lib/getCookies";
 
 const CourseSection: React.FC<CourseSectionProps> = async ({
   courses,
 }) => {
-  const profile: ProfileData = await fetchProfile();
+  // const profile: ProfileData = await fetchProfile();
+  const profile = await getCookie()
 
   return (
     <div className="my-10 sm:my-14">
