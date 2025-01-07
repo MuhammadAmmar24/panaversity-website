@@ -58,8 +58,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const [currentPage, setCurrentPage] = useState(0);
   const [sectionsPerPage, setSectionsPerPage] = useState(3);
   const [profile, setProfile] = useState({
-    email: "",
+    full_name: "",
     id: "",
+    email: "",
   });
   const [coursePrice, setCoursePrice] = useState<GetCoursePriceResponse>();
   const [sections, setSections] = useState<CourseSections[]>([]);
@@ -84,7 +85,6 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
           isOfferedNow: is_offered_now.toString(),
         }).toString();
 
-        console.log("I am called");
         const response = await fetch(`/api/course?${queryParams}`, {
           method: "GET",
         });

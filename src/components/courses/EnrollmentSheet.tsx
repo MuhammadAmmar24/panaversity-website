@@ -72,6 +72,8 @@ export default function EnrollmentSheet({
   const [skippedMessage, setSkippedMessage] = useState("");
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
+  
+
   // Student enrolled courses helper function
   const findStudentCourse = (courseCode: string) =>
     student_courses.find(

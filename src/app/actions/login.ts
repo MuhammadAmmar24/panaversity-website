@@ -51,11 +51,8 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
     const userData = await response.json();
 
-    const expiresInMilliseconds = userData.expires_in * 1000;
-
     const updatedUserData = {
-      ...userData,
-      accessTokenExpires: Date.now() + expiresInMilliseconds,
+      ...userData
     };
 
     cookies().set({

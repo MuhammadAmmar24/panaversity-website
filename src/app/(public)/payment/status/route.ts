@@ -6,12 +6,12 @@ export async function POST(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const vendor = searchParams.get("vendor");
-    console.log(req)
+    console.log(req);
 
     if (vendor === "blinq") {
       const text = await req.text();
       const params = new URLSearchParams(text);
-      console.log(params)
+      console.log(params);
       let paymentData = Object.fromEntries(params);
       paymentData.vendor = "blinq";
       // const status = params.get("status");
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
           verificationResponse.data.payment_status === "success"
             ? "/payment/success"
             : "/payment/failure";
-            console.log("Success Response received")
+        console.log("Success Response received");
         const redirectUrl = new URL(
           redirectPath,
           process.env.NEXT_PUBLIC_SITE_URL,

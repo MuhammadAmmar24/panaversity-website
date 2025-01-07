@@ -42,7 +42,6 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     }
 
     const responseData = await response.json();
-    console.log("Payment notification response data:", responseData);
 
     // validate sutdent course payment status
     revalidateTag("fetchPaymentStatus");

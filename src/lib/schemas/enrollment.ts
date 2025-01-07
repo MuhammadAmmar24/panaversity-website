@@ -50,7 +50,6 @@ export const EnrollNewStudentRequestSchema = z.object({
   student_id: z.string(),
   program_id: z.number(),
   section_id: z.number(),
-  vendor_type: z.string().optional(),
   package_id: z.number(),
   course_id: z.number(),
 });
