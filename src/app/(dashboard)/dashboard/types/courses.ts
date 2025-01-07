@@ -6,7 +6,7 @@ export interface CourseCardProps {
   classes: number;
   status: string;
   student_course_id: number;
-  profile: ProfileData;
+  profile: ProfileData | null;
   course_code: string;
   course_section?: {
     section_name: string;

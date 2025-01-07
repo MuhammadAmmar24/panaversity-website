@@ -13,11 +13,7 @@ interface UserData {
   }
 
   interface ProfileData {
-    "full_name": "string",
-    "email": "string",
-    "phone": "string",
-    "affiliation": "string",
-    "user_type": "visitor",
-    "id": "string",
-    "is_verified": boolean
+    full_name: string,
+    email: string,
+    id: string,
   }

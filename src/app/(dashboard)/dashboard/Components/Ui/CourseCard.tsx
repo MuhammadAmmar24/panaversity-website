@@ -37,9 +37,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
         student_course_id: student_course_id,
         section_no: course_section?.id as number,
         package_id: course_price?.package_id as number,
-        student_id: profile?.id,
-        student_name: profile?.full_name,
-        student_email: profile?.email,
+        student_id: profile!.id,
+        student_name: profile!.full_name,
+        student_email: profile!.email,
         vendor_type: paymentMethod,
       };
 
