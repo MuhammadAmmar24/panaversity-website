@@ -50,14 +50,24 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
 
     const userData = await response.json();
-
-    const updatedUserData = {
-      ...userData
+    console.log("response", userData)
+    const profile = userData.profile
+    const tokens = {
+      access_token : userData.access_token,
+      refresh_token : userData.refresh_token
     };
-
+    console.log("Profile", profile)
+    console.log("Tokens", tokens)
+    
     cookies().set({
       name: "user_data",
-      value: JSON.stringify(updatedUserData),
+      value: JSON.stringify(profile),
+      httpOnly: true,
+    });
+
+    cookies().set({
+      name: "tokens",
+      value: JSON.stringify(tokens),
       httpOnly: true,
     });
 

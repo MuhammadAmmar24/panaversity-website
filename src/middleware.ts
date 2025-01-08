@@ -30,7 +30,7 @@ export async function middleware(req: NextRequest) {
 
   if (isProtectedRoute || isAuthRoute) {
     // Retrieve tokens from cookies
-    const token = req.cookies.get("user_data")?.value || "";
+    const token = req.cookies.get("tokens")?.value || "";
     const parsedToken = token ? JSON.parse(decodeURIComponent(token)) : {};
     const access_token = parsedToken?.access_token;
     const old_refresh_token = parsedToken?.refresh_token;
@@ -77,7 +77,7 @@ export async function middleware(req: NextRequest) {
             new URL("/dashboard", req.url),
           );
           response.cookies.set({
-            name: "user_data",
+            name: "tokens",
             value: JSON.stringify({ access_token, refresh_token }),
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",

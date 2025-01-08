@@ -9,7 +9,7 @@ interface UserData {
 export async function getCookie() {
   const get_cookies = cookies().get("user_data")?.value;
   if (get_cookies) {
-    const userData: UserData = JSON.parse(get_cookies).profile;
+    const userData: UserData = JSON.parse(get_cookies);
     return userData;
   } else {
     return null;
