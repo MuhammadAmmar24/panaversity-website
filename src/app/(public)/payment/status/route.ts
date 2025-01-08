@@ -86,8 +86,8 @@ export async function POST(req: NextRequest) {
         httpOnly: true,
         secure: true,
         path: "/payment",
-        sameSite: "strict",
-        // maxAge: 60,
+        // sameSite: "none",
+        maxAge: 60,
       });
       console.log("Response", response)
       return response;

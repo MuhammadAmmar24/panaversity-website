@@ -4,12 +4,12 @@ import { redirect } from "next/navigation";
 
 export async function auth() {
   // Check if cookies exist
-  const isCookies = cookies().has("user_data");
+  const isCookies = cookies().has("tokens");
 
   if (!isCookies) {
     return null;
   }
-  const cookies_user_data = cookies().get("user_data")?.value;
+  const cookies_user_data = cookies().get("tokens")?.value;
 
   if (!cookies_user_data) {
     return null;
@@ -26,7 +26,7 @@ export async function auth() {
 
 // Sign Out functionality
 export async function signOut() {
-  cookies().delete("user_data"); // Deleting the cookie
+  cookies().delete("toekns"); // Deleting the cookie
 
   // Redirect to login or home page
   redirect("/login"); // You can replace "/login" with the correct path
