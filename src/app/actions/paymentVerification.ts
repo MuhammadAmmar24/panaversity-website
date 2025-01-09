@@ -17,7 +17,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
 
   try {
     const response = await fetch(
-      `${process.env.ENROLLMENT_API_URL}/payment/verification`,
+      `${process.env.VOUCHER_API_URL}/payment/verification`,
       {
         method: "POST",
         cache: "no-store",
