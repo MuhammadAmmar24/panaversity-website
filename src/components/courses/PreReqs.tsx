@@ -17,7 +17,7 @@ export default function CoursePrerequisites({
 
   return (
     <div className={`flex items-center space-x-2 ${className}`}>
-      <span className="text-xl font-bold text-white dark:text-gray-300">
+      <span className="text-xl font-bold text-white">
         Prerequisites:
       </span>
       <div

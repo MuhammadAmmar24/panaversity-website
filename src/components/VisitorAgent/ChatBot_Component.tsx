@@ -158,7 +158,7 @@ export const ChatContent = memo(
                     : "bg-gray-100 text-gray-800"
                 }`}
               >
-                <div className="prose prose-sm dark:prose-invert max-w-none">
+                <div className="prose prose-sm max-w-none">
                   <MessageContent message={message} />
                 </div>
               </div>

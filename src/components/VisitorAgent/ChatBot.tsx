@@ -369,7 +369,7 @@ export function VisitorAgent() {
               onClick={() => setIsOpen(false)}
               variant="ghost"
               size="icon"
-              className="text-white hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              className="text-white hover:text-gray-700"
               aria-label="Close chat"
             >
               <svg
