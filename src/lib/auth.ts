@@ -26,7 +26,8 @@ export async function auth() {
 
 // Sign Out functionality
 export async function signOut() {
-  cookies().delete("toekns"); // Deleting the cookie
+  cookies().delete("tokens"); // Deleting the cookie
+  cookies().delete("user_data")
 
   // Redirect to login or home page
   redirect("/login"); // You can replace "/login" with the correct path
