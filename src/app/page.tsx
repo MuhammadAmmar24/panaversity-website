@@ -28,7 +28,7 @@ export default function Home() {
       <Faq />
       <CTAsection />
       {/* <ScrollToTopButton /> */}
-      <WhatsAppIcon />
+      {/* <WhatsAppIcon /> */}
       <VisitorAgent />
       <Footer />
     </>

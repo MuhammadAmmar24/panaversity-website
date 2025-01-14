@@ -1,20 +1,13 @@
 // components/VisitorAgent.tsx
 "use client";
 
-import React, { useEffect, useReducer, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Client } from "@langchain/langgraph-sdk";
-import { Bot } from "lucide-react";
+import { Bot, Maximize2, Minimize2, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 import { Button } from "@/src/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/src/components/ui/drawer";
 import { useOnClickOutside } from "@/src/hooks/use-on-click-outside";
 import { getThreadId, setThreadId } from "@/src/lib/threadCookie";
 import { userAgentTokenValidity } from "@/src/lib/userAgentTokenValidity";
@@ -24,6 +17,12 @@ import {
   messagesReducer,
   starterPrompts,
 } from "./ChatBot_Component";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 
 const INITIAL_MESSAGE_LIMIT = 5;
 const LOGGED_IN_MESSAGE_LIMIT = 20;
@@ -41,7 +40,11 @@ export function VisitorAgent() {
   const router = useRouter();
   const [inputDisabled, setInputDisabled] = useState(false);
   const threadRef = useRef<string | null>(null);
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
+  const [isFullScreen, setIsFullScreen] = useState(false);
+
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+  };
 
   // Initialize the LangChain client using useRef to prevent re-instantiation
   const client = useRef(
@@ -67,7 +70,7 @@ export function VisitorAgent() {
       <div className="w-11/12 max-w-md rounded-lg bg-white p-6 shadow-xl">
         <h2 className="mb-4 text-center text-xl font-bold">Login Required</h2>
         <p className="mb-4 text-center">
-          You have reached the daily message limit. Please login to continue.
+          Free messages limit reached. Please login to continue.
         </p>
         <div className="flex justify-center gap-4">
           <Button
@@ -91,7 +94,7 @@ export function VisitorAgent() {
         </div>
         {isLoggedIn && (
           <p className="mt-4 text-center text-sm text-green-600">
-            You are currently logged in and can send more messages.
+            Thank you for login! Your message limit updated.
           </p>
         )}
       </div>
@@ -300,93 +303,87 @@ export function VisitorAgent() {
     }
   };
 
-  // Render for mobile devices
-  if (isMobile) {
-    return (
-      
-      <>
-        {showLoginPrompt && <LoginPrompt />}
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="hover:animate-in fixed bottom-4 right-4  rounded-full bg-accent text-white shadow-lg"
-          aria-label="Open visitor support chat"
-        >
-          <Bot size={16}  />
-        </Button>
-        <Drawer open={isOpen} onOpenChange={setIsOpen}>
-          <DrawerContent className="h-[90vh]">
-            <DrawerHeader className="border-b border-accent bg-accent ">
-              <DrawerTitle className="text-white">Panaversity Visitor Assistant</DrawerTitle>
-              <DrawerClose />
-            </DrawerHeader>
-            <div className="flex h-[calc(90vh-65px)] flex-col overflow-hidden">
-              <ChatContent
-                messages={messages}
-                sendMessage={sendMessage}
-                starterPrompts={starterPrompts}
-                handleSubmit={handleSubmit}
-                input={input}
-                setInput={setInput}
-                isLoading={isLoading}
-                scrollAreaRef={scrollAreaRef}
-                scrollToBottom={scrollToBottom}
-                userMessageCount={userMessageCount}
-                userMessageLimit={userMessageLimit}
-                inputDisabled={inputDisabled} // Pass the new prop
-              />
-            </div>
-          </DrawerContent>
-        </Drawer>
-      </>
-    );
-  }
-
-  // Render for desktop and larger devices
   return (
     <div
       ref={chatRef}
-      className={`fixed bottom-4 right-4 z-50 transition-all duration-300 ease-in-out ${
-        isOpen ? "w-96" : "w-auto"
+      className={`fixed z-50 transition-all duration-300 ease-in-out ${
+        isOpen
+          ? isFullScreen
+            ? "bottom-0 left-0 right-0 top-0 h-[full] w-full px-2  pt-2 ssm:px-8 ssm:pt-8"
+            : "bottom-0 left-0 right-0 mx-2 ssm:left-auto ssm:right-2 h-[80vh] max-h-[600px] ssm:h-[500px] ssm:w-96"
+          : "bottom-4 right-4 w-auto"
       }`}
     >
       {showLoginPrompt && <LoginPrompt />}
       {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="hover:animate-in  h-16 w-16 rounded-full bg-accent text-white shadow-lg"
-          aria-label="Open visitor chat"
-        >
-          <Bot size={48} />
-        </Button>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                onClick={() => setIsOpen(true)}
+                className="h-14 w-14 rounded-full bg-accent text-white shadow-lg hover:bg-accent/70 hover:animate-in ssm:h-16 ssm:w-16"
+                aria-label="Open visitor chat"
+              >
+                <Bot size={28} className="ssm:h-8 ssm:w-8" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-green-600">Open chat</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       )}
       {isOpen && (
-        <div className="flex flex-col h-[500px] overflow-hidden rounded-2xl border border-gray-200 bg-white/50 backdrop-blur-md shadow-2xl ">
-          <div className="flex items-center justify-between border-b border-gray-200 bg-accent p-1 ">
-            <h2 className="px-2 text-lg font-semibold text-white text-center ">
-            Panaversity Visitor Assistant
-            </h2>
-            <Button
-              onClick={() => setIsOpen(false)}
-              variant="ghost"
-              size="icon"
-              className="text-white hover:text-gray-700"
-              aria-label="Close chat"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width={24}
-                height={24}
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </Button>
+        <div className="flex h-full w-full flex-col overflow-hidden rounded-t-lg bg-white/50 shadow-2xl backdrop-blur-md sm:rounded-t-2xl">
+          <div className="flex items-center justify-between bg-accent px-2 py-1 ssm:px-3">
+            <h2 className="text-lg font-semibold text-white">PanaChat</h2>
+            <div className="flex items-center space-x-2">
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      onClick={toggleFullScreen}
+                      variant="ghost"
+                      size="icon"
+                      className="text-white hover:text-gray-700"
+                      aria-label={
+                        isFullScreen ? "Exit full screen" : "Enter full screen"
+                      }
+                    >
+                      {isFullScreen ? (
+                        <Minimize2 size={20} />
+                      ) : (
+                        <Maximize2 size={20} />
+                      )}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">
+                    <p className="text-green-600">
+                      {isFullScreen ? "Shrink" : "Expand"}
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      onClick={() => setIsOpen(false)}
+                      variant="ghost"
+                      size="icon"
+                      className="text-white hover:text-gray-700"
+                      aria-label="Close chat"
+                    >
+                      <X size={20} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">
+                    <p className="text-green-600 mr-2">Close</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
           </div>
           <ChatContent
             messages={messages}
@@ -400,7 +397,7 @@ export function VisitorAgent() {
             scrollToBottom={scrollToBottom}
             userMessageCount={userMessageCount}
             userMessageLimit={userMessageLimit}
-            inputDisabled={inputDisabled} // Pass the new prop
+            inputDisabled={inputDisabled}
           />
         </div>
       )}
