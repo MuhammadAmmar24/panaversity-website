@@ -8,10 +8,7 @@ import { Suspense } from "react";
 const SECRET_KEY = new TextEncoder().encode(process.env.PAYMENT_STATUS_SECRET);
 
 const page = async () => {
-  // const cookieStore = cookies();
-  // const token = cookieStore.get("paymentStatusToken");
   const token = cookies().get("paymentStatusToken")?.value;
-  console.log("Token", token);
 
   // If there's no token, user didn't come from the route handler
   if (!token) {

@@ -36,7 +36,7 @@ export default function CookieConsent() {
   if (!isVisible) return null;
 
   return (
-    <aside className="fixed bottom-2 left-2 z-50 flex w-full flex-col items-center justify-between gap-y-6 rounded-lg border border-gray-400/50 bg-white/40 p-4 backdrop-blur-md sm:right-2 sm:max-w-[350px]">
+    <aside className="fixed bottom-2 mx-2 z-50 flex flex-col items-center justify-between gap-y-6 rounded-lg border border-gray-400/50 bg-white/40 p-4 backdrop-blur-md ssm:mx-0 ssm:left-2 ssm:max-w-[350px]">
       <p className="mb-4 text-gray-900 md:mb-0 md:text-left">
         We use cookies to ensure user get the best experience on our website.
         Checkout our{" "}

@@ -2,7 +2,7 @@
 "use client";
 
 import React, { memo } from "react";
-import { Send } from "lucide-react";
+import { MessagesSquare, Send } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -23,7 +23,7 @@ export type Message = {
 // Starter prompts for the chat
 export const starterPrompts = [
   "What is Panaversity?",
-  "What courses do you offer?",
+  "What courses Panaversity offers?",
   "What is the fee structure?",
 ];
 
@@ -141,94 +141,110 @@ export const ChatContent = memo(
     userMessageLimit: number;
     inputDisabled: boolean;
   }) => (
-    <>
-      {messages.length !== 0 && (
-        <ScrollArea className="flex-grow px-4" ref={scrollAreaRef}>
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`mb-4 ${
-                message.role === "user" ? "text-right" : "text-left"
-              }`}
-            >
-              <div
-                className={`inline-block max-w-[85%] rounded-2xl px-3 py-2 ${
-                  message.role === "user"
-                    ? "mt-2 bg-gray-700 text-white text-sm font-thin"
-                    : "bg-gray-100 text-gray-800"
-                }`}
-              >
-                <div className="prose prose-sm max-w-none">
-                  <MessageContent message={message} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </ScrollArea>
-      )}
-
-      <div className="flex flex-col justify-between border-t border-gray-200 p-4">
-        {messages.length === 0 && (
-          <div className="flex flex-col justify-between gap-y-2">
-            <div className="flex items-center gap-x-2 border-b">
-              <Image
-                src={logo}
-                alt="Panaversity Logo"
-                className="w-16 h-16 "
-              />
-              <h5 className="font-sans text-3xl font-bold">Greetings! 👋</h5>
-            </div>
-            <p className="pb-4 text-base font-semibold text-gray-800">
-              Ready to dive in? Choose a question to get started!
-            </p>
-            <div className="space-y-3">
-              {starterPrompts.map((prompt, index) => (
-                <Button
-                  key={index}
-                  type="button"
-                  variant="outline"
-                  className="h-auto w-full justify-start whitespace-normal rounded-md bg-white text-left text-sm font-normal text-gray-900 shadow-lg"
-                  onClick={() => sendMessage(prompt)}
+    <div className="relative flex h-full flex-col">
+      {/* Messages Area - Scrollable */}
+      <div className="absolute inset-0 bottom-[80px] overflow-hidden">
+        <ScrollArea className="h-full px-4" ref={scrollAreaRef}>
+          {messages.length !== 0 ? (
+            <div className="py-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`mb-4 flex ${
+                    message.role === "user"
+                      ? "justify-end text-left"
+                      : "justify-start text-left"
+                  }`}
                 >
-                  {prompt}
-                </Button>
+                  {message.role !== "user" && (
+                    <Image
+                      src={logo}
+                      alt="Panaversity Logo"
+                      className="h-8 w-8"
+                    />
+                  )}
+
+                  <div
+                    className={`inline-block max-w-[85%] rounded-2xl px-3 py-2 shadow-md ${
+                      message.role === "user"
+                        ? "mt-2 bg-gray-200 text-sm font-light text-gray-900"
+                        : "bg-gray-100 text-gray-800"
+                    }`}
+                  >
+                    <div className="prose prose-sm max-w-none">
+                      <MessageContent message={message} />
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
+          ) : (
+            <div className="flex flex-col justify-between gap-y-2 py-4">
+              <div className="flex items-center gap-x-2 border-b">
+                <Image
+                  src={logo}
+                  alt="Panaversity Logo"
+                  className="h-16 w-16"
+                />
+                <h5 className="font-sans text-3xl font-bold">Greetings! 👋</h5>
+              </div>
+              <p className="pb-4 text-base font-semibold text-gray-800">
+                Ready to dive in? Choose a question to get started!
+              </p>
+              <div className="space-y-3">
+                {starterPrompts.map((prompt, index) => (
+                  <Button
+                    key={index}
+                    type="button"
+                    variant="outline"
+                    className="h-auto w-full justify-start whitespace-normal rounded-md bg-white text-left text-sm font-normal text-gray-900 shadow-lg"
+                    onClick={() => sendMessage(prompt)}
+                  >
+                    {prompt}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          )}
+        </ScrollArea>
+      </div>
+
+      {/* Input Area - Fixed at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 bg-white px-4 py-2">
+        {messages.length !== 0 && (
+          <div className="mb-2 flex items-center gap-x-2 rounded-md px-2 text-sm text-gray-700">
+            <MessagesSquare />
+            <p>
+              {userMessageCount} / {userMessageLimit}
+            </p>
           </div>
         )}
-
-        <div className={`flex flex-col justify-between gap-y-1 ${messages.length === 0 ? "mt-24" : ""}`}>
-          {/* Rate Limit Status */}
-          {messages.length !== 0 && (<div className="rounded-md bg-gray-900 px-2 py-1 text-sm text-white">
-            Messages: {userMessageCount} / {userMessageLimit}
-          </div>)}
-          <form onSubmit={handleSubmit} className="flex items-center gap-2">
-            <Input
-              type="text"
-              placeholder="Type your message..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onFocus={() => setTimeout(scrollToBottom, 0)}
-              className="flex-grow border bg-gray-100 text-gray-800 focus-visible:ring-1 focus-visible:ring-gray-300"
-              autoFocus
-              disabled={inputDisabled} // Disable input when rate limit is reached
-            />
-            <Button
-              type="submit"
-              disabled={isLoading || !input.trim() || inputDisabled} // Disable send button when rate limit is reached
-              className="rounded-md bg-green-500 text-white hover:bg-green-600"
-              aria-label="Send message"
-            >
-              {isLoading ? (
-                <div className="h-5 w-5 animate-spin rounded-md border-2 border-white border-t-transparent" />
-              ) : (
-                <Send size={18} />
-              )}
-            </Button>
-          </form>
-        </div>
+        <form onSubmit={handleSubmit} className="flex items-center gap-2">
+          <Input
+            type="text"
+            placeholder="Type your message..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onFocus={() => setTimeout(scrollToBottom, 0)}
+            className="flex-grow border bg-gray-100 text-gray-800 focus-visible:ring-[0.5px] focus-visible:ring-accent"
+            autoFocus
+            disabled={inputDisabled || isLoading}
+          />
+          <Button
+            type="submit"
+            disabled={isLoading || !input.trim() || inputDisabled}
+            className="rounded-md bg-green-500 text-white hover:bg-green-600"
+            aria-label="Send message"
+          >
+            {isLoading ? (
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+            ) : (
+              <Send size={18} />
+            )}
+          </Button>
+        </form>
       </div>
-    </>
+    </div>
   ),
 );
 

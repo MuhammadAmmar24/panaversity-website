@@ -50,14 +50,11 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
 
     const userData = await response.json();
-    console.log("response", userData)
     const profile = userData.profile
     const tokens = {
       access_token : userData.access_token,
       refresh_token : userData.refresh_token
     };
-    console.log("Profile", profile)
-    console.log("Tokens", tokens)
     
     cookies().set({
       name: "user_data",

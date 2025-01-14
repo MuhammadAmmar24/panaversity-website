@@ -1,7 +1,6 @@
 "use server";
 
 import { PaymentStatusSchema } from "@/src/lib/schemas/paymentStatus";
-import { revalidateTag } from "next/cache";
 
 export const verifyPaymentStatus = async (payload: any): Promise<any> => {
   const validationResult = PaymentStatusSchema.safeParse(payload);
@@ -17,14 +16,14 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
 
   try {
     const response = await fetch(
-      `${process.env.VOUCHER_API_URL}/payment/verification`,
+      `${process.env.VOUCHER_API_URL}/voucher/payment/verification`,
       {
         method: "POST",
         cache: "no-store",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+          Authorization: `Bearer ${process.env.VOUCHER_JWT_KEY}`,
         },
         body: JSON.stringify(validationResult.data),
       },
@@ -42,9 +41,6 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     }
 
     const responseData = await response.json();
-
-    // validate sutdent course payment status
-    revalidateTag("fetchPaymentStatus");
 
     return {
       type: "success",
