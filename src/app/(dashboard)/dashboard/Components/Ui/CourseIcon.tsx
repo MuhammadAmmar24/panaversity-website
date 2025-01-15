@@ -12,7 +12,7 @@ const CourseIcons: React.FC<CourseIconsProps> = ({ status, youtubeLink, githubLi
   const icons = [
     {
       component: <RiRobot2Line />,
-      link: process.env.NEXT_PUBLIC_PANA_URL,
+      link: process.env.NEXT_PUBLIC_PANA_URL!,
       name: "Student Bot",
       className: `text-black text-base mobileM:text-xl sm:text-2xl md:text-[2.1rem]`,
     },
