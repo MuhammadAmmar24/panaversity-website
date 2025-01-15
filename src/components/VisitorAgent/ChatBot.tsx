@@ -328,7 +328,7 @@ export function VisitorAgent() {
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p className="text-green-600">Open chat</p>
+              <p className="text-accent">Open chat</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
