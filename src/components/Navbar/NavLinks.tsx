@@ -21,11 +21,11 @@ const NavLinks = () => {
         </Link>
       ))}
       <Link
-        href="https://pana-agent.vercel.app/"
+        href={`${process.env.NEXT_PUBLIC_PANA_URL}`}
         target="_blank"
         aria-label="StudentBot"
         className={`${
-          pathName === "https://pana-agent.vercel.app/"
+          pathName === process.env.NEXT_PUBLIC_PANA_URL
             ? "nav nav-active"
             : "nav"
         }`}

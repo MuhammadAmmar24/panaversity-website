@@ -108,7 +108,8 @@ export function MobileMenu() {
               </SheetClose>
             ))}
             <Link
-              href="https://pana-agent.vercel.app/"
+              href={`${process.env.NEXT_PUBLIC_PANA_URL}`}
+              target="_blank"
               aria-label="StudentBot"
               className="text-md flex items-center gap-3 font-medium text-green-800"
             >
