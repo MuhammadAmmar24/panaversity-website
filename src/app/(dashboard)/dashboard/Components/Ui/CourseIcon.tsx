@@ -11,6 +11,12 @@ import { CourseIconsProps } from "../../types/courses";
 const CourseIcons: React.FC<CourseIconsProps> = ({ status, youtubeLink, githubLink, zoomLink }) => {
   const icons = [
     {
+      component: <RiRobot2Line />,
+      link: process.env.NEXT_PUBLIC_PANA_URL!,
+      name: "Student Bot",
+      className: `text-black text-base mobileM:text-xl sm:text-2xl md:text-[2.1rem]`,
+    },
+    {
       component: <FaYoutube />,
       link: youtubeLink,
       name: "YouTube",
@@ -33,13 +39,8 @@ const CourseIcons: React.FC<CourseIconsProps> = ({ status, youtubeLink, githubLi
       link: "/",
       name: "Announcements",
       className: `text-gray-800 text-base mobileM:text-xl sm:text-2xl md:text-3xl hover:scale-105 transition-all duration-300 ease-in-out ${status === "active" ? "" : "opacity-30 pointer-events-none cursor-not-allowed"}`,
-    },
-    {
-      component: <RiRobot2Line />,
-      link: "/",
-      name: "Student Bot",
-      className: `text-gray-300 text-base mobileM:text-xl sm:text-2xl md:text-3xl pointer-events-none cursor-not-allowed`,
-    },
+    }
+
   ];
 
   return (

@@ -1,28 +1,27 @@
-// components/VisitorAgent.tsx
 "use client";
 
-import { Client } from "@langchain/langgraph-sdk";
-import { Bot, Maximize2, Minimize2, X } from "lucide-react";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
+import { useRouter } from "next/navigation";
 import { Button } from "@/src/components/ui/button";
 import { useOnClickOutside } from "@/src/hooks/use-on-click-outside";
 import { getThreadId, setThreadId } from "@/src/lib/threadCookie";
 import { userAgentTokenValidity } from "@/src/lib/userAgentTokenValidity";
-import {
-  ChatContent,
-  Message,
-  messagesReducer,
-  starterPrompts,
-} from "./ChatBot_Component";
+import { Client } from "@langchain/langgraph-sdk";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
+import { Bot, Maximize2, Minimize2, X } from "lucide-react";
+import { v4 as uuidv4 } from "uuid";
+
+import {
+  ChatContent,
+  Message,
+  messagesReducer,
+  starterPrompts,
+} from "./ChatBot_Component";
 
 const INITIAL_MESSAGE_LIMIT = 5;
 const LOGGED_IN_MESSAGE_LIMIT = 20;
@@ -57,7 +56,8 @@ export function VisitorAgent() {
     }),
   ).current;
 
-  const assistantID = "visitor_agent";
+  const assistantID: string =
+    process.env.NEXT_PUBLIC_LANGGRAPH_VISITOR_ID || "default_assistant_id";
 
   // Determine the current message limit based on login status
   const userMessageLimit = isLoggedIn
@@ -101,12 +101,18 @@ export function VisitorAgent() {
     </div>
   );
 
-  // Initialize or retrieve the thread ID and load messages
   useEffect(() => {
     const initializeThreadAndMessages = async () => {
       // Check if the user is logged in
       const loggedIn = await userAgentTokenValidity();
       setIsLoggedIn(loggedIn);
+
+      if (loggedIn) {
+        setInputDisabled(false);
+        setShowLoginPrompt(false);
+      } else {
+        setIsLoggedIn(false);
+      }
 
       let existingThreadId = getThreadId();
       if (!existingThreadId) {
@@ -114,7 +120,9 @@ export function VisitorAgent() {
           const thread = await client.threads.create();
           existingThreadId = thread.thread_id;
           setThreadId(existingThreadId);
-        } catch (error) {}
+        } catch (error) {
+          // Handle error (if necessary)
+        }
       }
       threadRef.current = existingThreadId || null;
 
@@ -139,43 +147,15 @@ export function VisitorAgent() {
               setShowLoginPrompt(true);
               setInputDisabled(true);
             }
-          } catch (e) {}
+          } catch (e) {
+            // Handle parsing error (if necessary)
+          }
         }
       }
     };
 
     initializeThreadAndMessages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [client]);
-
-  // Listen for login status changes (e.g., after login)
-  useEffect(() => {
-    const verifyToken = async () => {
-      const valid = await userAgentTokenValidity();
-      setIsLoggedIn(valid);
-      if (valid) {
-        // Allow additional messages up to LOGGED_IN_MESSAGE_LIMIT
-        setUserMessageCount((prevCount) => {
-          // If already above initial limit, keep the current count
-          // Otherwise, keep as is to allow additional messages
-          return prevCount < INITIAL_MESSAGE_LIMIT ? prevCount : prevCount;
-        });
-        setInputDisabled(false);
-        setShowLoginPrompt(false);
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
-
-    verifyToken();
-
-    // Optional: Polling or event listeners for real-time updates
-    const interval = setInterval(() => {
-      verifyToken();
-    }, 60000); // Check every 60 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   // Close chat when clicking outside
   useOnClickOutside(chatRef, () => setIsOpen(false));
@@ -281,6 +261,7 @@ export function VisitorAgent() {
         payload: { id: assistantMessageId, isStreaming: false },
       });
     } catch (error) {
+      setIsLoading(false);
       dispatch({
         type: "ADD_MESSAGE",
         payload: {
@@ -309,8 +290,8 @@ export function VisitorAgent() {
       className={`fixed z-50 transition-all duration-300 ease-in-out ${
         isOpen
           ? isFullScreen
-            ? "bottom-0 left-0 right-0 top-0 h-[full] w-full px-2  pt-2 ssm:px-8 ssm:pt-8"
-            : "bottom-0 left-0 right-0 mx-2 ssm:left-auto ssm:right-2 h-[80vh] max-h-[600px] ssm:h-[500px] ssm:w-96"
+            ? "bottom-0 left-0 right-0 top-0 h-[full] w-full px-2 pt-2 ssm:px-8 ssm:pt-8"
+            : "bottom-0 left-0 right-0 mx-2 h-[80vh] max-h-[600px] ssm:left-auto ssm:right-2 ssm:h-[500px] ssm:w-96"
           : "bottom-4 right-4 w-auto"
       }`}
     >
@@ -327,8 +308,8 @@ export function VisitorAgent() {
                 <Bot size={28} className="ssm:h-8 ssm:w-8" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>
-              <p className="text-accent">Open chat</p>
+            <TooltipContent side="left">
+              <p className="pr-2 text-accent">Open chat</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -379,7 +360,7 @@ export function VisitorAgent() {
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent side="bottom">
-                    <p className="text-green-600 mr-2">Close</p>
+                    <p className="mr-2 text-green-600">Close</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

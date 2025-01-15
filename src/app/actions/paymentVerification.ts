@@ -40,6 +40,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     }
 
     const responseData = await response.json();
+    
     console.log("API Resonse", responseData);
 
     return {
