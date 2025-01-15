@@ -10,9 +10,11 @@ export async function POST(req: NextRequest) {
     if (vendor === "blinq") {
       const text = await req.text();
       const params = new URLSearchParams(text);
+      console.log("Blinq Post Req Data", params)
       let paymentData = Object.fromEntries(params);
       paymentData.vendor = "blinq";
       const verificationResponse = await verifyPaymentStatus(paymentData);
+      console.log("Route handler", verificationResponse)
       if (verificationResponse.type === "success") {
         const token = await createPaymentStatusToken();
         let redirectPath = "/access-denied";
@@ -21,6 +23,7 @@ export async function POST(req: NextRequest) {
             ? "/payment/success"
             : "/payment/failure";
 
+        console.log("Redirect", redirectPath)
         const redirectUrl = new URL(
           redirectPath,
           process.env.NEXT_PUBLIC_SITE_URL,

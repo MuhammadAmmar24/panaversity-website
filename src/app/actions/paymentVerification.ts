@@ -28,7 +28,6 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
         body: JSON.stringify(validationResult.data),
       },
     );
-
     if (!response.ok) {
       // Capture any error from backend
       const errorResponse = await response.json();
@@ -41,6 +40,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     }
 
     const responseData = await response.json();
+    console.log("API Resonse", responseData);
 
     return {
       type: "success",
