@@ -112,6 +112,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             </li>
           </Link>
 
+          <Link href="/contact" aria-label="Contact Support">
           <li
             className="flex cursor-pointer items-center space-x-2 rounded-lg p-2 hover:bg-gray-100"
             role="menuitem"
@@ -121,6 +122,7 @@ const Dropdown: React.FC<DropdownProps> = ({
               Help
             </span>
           </li>
+          </Link>
 
           <hr className="border-gray-200" />
 
