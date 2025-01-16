@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import IsSidebarOpen from "./Components/Ui/Sidebar_open";
 import { getCookie } from "@/src/lib/getCookies";
 import TopBar from "./Components/Ui/TopBar";
+import { UserData } from "./types/userData";
 
 export const metadata: Metadata = {
   title: "Dashboard - Panaversity",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
-  const userData = await getCookie()
+  const userData: UserData | null = await getCookie()
+
   return (
     <>
       <div className="relative flex ">
