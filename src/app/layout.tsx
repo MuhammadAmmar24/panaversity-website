@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     images: [
       {
-        url: `${siteUrl}/logos/logo.png`,
+        url: `${siteUrl}/logos/logo.webp`,
         alt: "Panaversity Logo",
       },
     ],
