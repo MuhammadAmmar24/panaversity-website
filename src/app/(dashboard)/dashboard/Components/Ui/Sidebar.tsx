@@ -72,15 +72,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
     { icon: IoLibraryOutline, label: "Lessons", href: "#" },
   ];
 
-  const menuItemsBottom = [
-    { icon: IoIosHelpCircleOutline, label: "Help", href: "#" },
-    {
-      icon: CiLogout,
-      label: "Logout",
-      onClick: () => setIsLogoutDialogOpen(true),
-    },
-  ];
-
   return (
     <aside ref={sidebarRef} className="relative flex h-screen">
       <div
@@ -129,10 +120,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                     <item.icon className="min-w-[2rem] text-2xl" />
                     <span
                       className={cn(
-                        "ml-4 text-base transition-all duration-300 ease-in-out",
+                        "ml-4  min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
                         isOpen
                           ? "visible opacity-100 delay-100"
-                          : "invisible opacity-0",
+                          : "invisible opacity-0 ",
                       )}
                     >
                       {item.label}
@@ -152,34 +143,60 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
 
         <div className="mb-4 mt-auto">
           <TooltipProvider>
-            {menuItemsBottom.map((item) => (
-              <Tooltip key={item.label}>
-                <TooltipTrigger asChild>
-                  <button
-                    onClick={item.onClick}
-                    className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
-                  >
-                    <item.icon className="min-w-[2rem] text-2xl" />
-                    <span
-                      className={cn(
-                        "ml-4 text-base transition-all duration-300 ease-in-out",
-                        isOpen
-                          ? "visible opacity-100 delay-100"
-                          : "invisible opacity-0",
-                      )}
-                    >
-                      {item.label}
-                    </span>
-                  </button>
-                </TooltipTrigger>
-                <TooltipContent
-                  className={cn("font-medium", !isOpen ? "" : "hidden")}
-                  side="right"
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Link
+                  href="/contact"
+                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
                 >
-                  {item.label}
-                </TooltipContent>
-              </Tooltip>
-            ))}
+                  <IoIosHelpCircleOutline className="min-w-[2rem] text-2xl" />
+                  <span
+                    className={cn(
+                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
+                      isOpen
+                        ? "visible opacity-100 delay-100"
+                        : "invisible opacity-0",
+                    )}
+                  >
+                    Contact Support
+                  </span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent
+                className={cn("font-medium", !isOpen ? "" : "hidden")}
+                side="right"
+              >
+                Contact Support
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setIsLogoutDialogOpen(true)}
+                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
+                >
+                  <CiLogout className="min-w-[2rem] text-2xl" />
+                  <span
+                    className={cn(
+                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
+                      isOpen
+                        ? "visible opacity-100 delay-100"
+                        : "invisible opacity-0",
+                    )}
+                  >
+                    Logout
+                  </span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent
+                className={cn("font-medium", !isOpen ? "" : "hidden")}
+                side="right"
+              >
+                Logout
+              </TooltipContent>
+            </Tooltip>
           </TooltipProvider>
         </div>
       </div>
