@@ -1,4 +1,11 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/src/components/ui/tooltip";
 import { signOut } from "@/src/lib/auth";
+import { cn } from "@/src/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -10,12 +17,10 @@ import {
   IoIosArrowRoundForward,
   IoIosHelpCircleOutline,
 } from "react-icons/io";
-import { IoLibraryOutline } from "react-icons/io5";
+import { IoLibraryOutline, IoWalletOutline } from "react-icons/io5";
 import { SlBookOpen } from "react-icons/sl";
 import { SidebarProps } from "../../types/types";
 import LogoutDialog from "../Dialog/LogoutDialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/src/components/ui/tooltip";
-import { cn } from "@/src/lib/utils";
 
 const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +64,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   const menuItems = [
     { icon: GoHome, label: "Dashboard", href: "/dashboard" },
     { icon: SlBookOpen, label: "Courses", href: "/programs/flagship-program" },
+    {
+      icon: IoWalletOutline,
+      label: "Payment History",
+      href: "/dashboard/payment-history",
+    },
     { icon: IoLibraryOutline, label: "Lessons", href: "#" },
   ];
 
@@ -74,8 +84,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
   return (
     <aside ref={sidebarRef} className="relative flex h-screen">
       <div
-        className={`fixed z-40 flex h-full flex-col bg-white text-black shadow-2xl transition-all duration-500 ${isOpen ? "w-48" : "w-12"
-          }`}
+        className={`fixed z-40 flex h-full flex-col bg-white text-black shadow-2xl transition-all duration-500 ${
+          isOpen ? "w-48 xs:w-52 md:w-64" : "w-12"
+        }`}
         onClick={(e) => {
           const target = e.target as Element;
           if (!target.closest("svg")) {
@@ -85,8 +96,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
       >
         <div className="flex items-center justify-between p-4">
           <div
-            className={`transition-all duration-300 ease-in-out ${isOpen ? "visible opacity-100 delay-200" : "invisible opacity-0"
-              }`}
+            className={`transition-all duration-300 ease-in-out ${
+              isOpen ? "visible opacity-100 delay-200" : "invisible opacity-0"
+            }`}
           >
             <Image
               src="/logos/logo.webp"
@@ -118,7 +130,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                     <span
                       className={cn(
                         "ml-4 text-base transition-all duration-300 ease-in-out",
-                        isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                        isOpen
+                          ? "visible opacity-100 delay-100"
+                          : "invisible opacity-0",
                       )}
                     >
                       {item.label}
@@ -149,7 +163,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                     <span
                       className={cn(
                         "ml-4 text-base transition-all duration-300 ease-in-out",
-                        isOpen ? "visible opacity-100 delay-100" : "invisible opacity-0"
+                        isOpen
+                          ? "visible opacity-100 delay-100"
+                          : "invisible opacity-0",
                       )}
                     >
                       {item.label}
@@ -166,11 +182,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
             ))}
           </TooltipProvider>
         </div>
-
       </div>
 
-      <main className="flex-1 p-6 transition-all duration-300">
-      </main>
+      <main className="flex-1 p-6 transition-all duration-300"></main>
 
       <LogoutDialog
         onConfirm={handleSignOut}

@@ -16,10 +16,11 @@ export default async function Home() {
   const userData = await getCookie()
 
   return (
-    <main className="mx-3 flex-1 overflow-hidden transition-all duration-300 mobileM:mx-4 xs:mx-6 sm:ml-20 sm:mr-20 lg:mx-10 xl:mx-20 px-0 ssm:px-8 sm:px-0 tablet_lg:mx-10">
-      <TopBar studentName={userData!.full_name} studentEmail={userData!.email} />
-      <Welcome studentName={userData!.full_name} />
-      <Dashboard profileId={userData!.id} />
+    // <main className="mx-3 flex-1 overflow-hidden transition-all duration-300 mobileM:mx-4 xs:mx-6 sm:ml-20 sm:mr-20 lg:mx-10 xl:mx-20 px-0 ssm:px-8 sm:px-0 tablet_lg:mx-10">
+    <main className="">
+      {/* <TopBar studentName={userData!.full_name || ""} studentEmail={userData!.email} /> */}
+      <Welcome studentName={userData!.full_name || ""} />
+      <Dashboard profileId={userData!.id || ""} />
     </main>
   );
 }
