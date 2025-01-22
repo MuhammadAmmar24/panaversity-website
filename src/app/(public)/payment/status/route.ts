@@ -38,7 +38,6 @@ export async function POST(req: NextRequest) {
       paymentData.vendor = "blinq";
 
       const verificationResponse = await verifyPaymentStatus(paymentData);
-      console.log("Verification Response", verificationResponse);
 
       if (verificationResponse.type === "success") {
         const { data } = verificationResponse; // "success" or "failed"
@@ -56,17 +55,13 @@ export async function POST(req: NextRequest) {
 
         return response;
       } else if (verificationResponse.type === "error") {
-        console.log("Error Case");
+
         const redirectUrl = new URL('/payment/processing-error', process.env.NEXT_PUBLIC_SITE_URL);
         const token = await createPaymentStatusToken();
         const response = NextResponse.redirect(redirectUrl);
         setPaymentCookie(response, token);
 
-        return response
-        // return redirectToPath(
-        //   process.env.NEXT_PUBLIC_SITE_URL!,
-        //   "/payment/processing-error",
-        // );
+        return response;
       }
     }
     if (vendor === "stripe") {
