@@ -44,12 +44,13 @@ export async function POST(req: NextRequest) {
         console.log("Error in payment verification", verificationResponse);
         return NextResponse.redirect(new URL("/access-denied", req.url));
       } else {
-        console.log("Unknown ")
+        console.log("else block", verificationResponse)
         return NextResponse.redirect(new URL("/access-denied", req.url));
       }
     } else if (vendor === "stripe") {
       //  Yet to be updated
     } else {
+    
       return NextResponse.redirect(new URL("/access-denied", req.url));
     }
 
