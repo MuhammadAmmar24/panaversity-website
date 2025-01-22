@@ -1,6 +1,7 @@
 "use server";
 
 import { PaymentStatusSchema } from "@/src/lib/schemas/paymentStatus";
+import { revalidateTag } from "next/cache";
 
 export const verifyPaymentStatus = async (payload: any): Promise<any> => {
   const validationResult = PaymentStatusSchema.safeParse(payload);
@@ -40,6 +41,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     }
 
     const responseData = await response.json();
+    revalidateTag("fetchStudentCourses")
     
     console.log("API Resonse", responseData);
 
