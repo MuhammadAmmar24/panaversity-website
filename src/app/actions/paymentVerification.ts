@@ -43,8 +43,6 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     const responseData = await response.json();
     revalidateTag("fetchStudentCourses")
     
-    console.log("API Resonse", responseData);
-
     return {
       type: "success",
       message: "Payment status verified successfully",

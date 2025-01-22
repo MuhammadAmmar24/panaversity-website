@@ -9,7 +9,6 @@ const SECRET_KEY = new TextEncoder().encode(process.env.PAYMENT_STATUS_SECRET);
 
 const page = async () => {
   const token = cookies().get("paymentStatusToken")?.value;
-  console.log("Token")
 
   // If there's no token, user didn't come from the route handler
   if (!token) {
