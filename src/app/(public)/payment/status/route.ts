@@ -36,10 +36,12 @@ export async function POST(req: NextRequest) {
       paymentData.vendor = "blinq"; 
 
       const verificationResponse = await verifyPaymentStatus(paymentData);
+      console.log("Verification Response", verificationResponse);
 
       if (verificationResponse.type === "success") {
    
         const { data } = verificationResponse; // "success" or "failed"
+        
 
         // Decide which route to send the user to
         const nextPath = data === "success" ? "/payment/success" : "/payment/failure";
@@ -53,6 +55,7 @@ export async function POST(req: NextRequest) {
 
         return response;
       } else if (verificationResponse.type === "error") {
+        console.log("Eroor Case");
         return redirectToPath(process.env.NEXT_PUBLIC_SITE_URL ?? req.url, '/payment/processing-error');
       }
     }
