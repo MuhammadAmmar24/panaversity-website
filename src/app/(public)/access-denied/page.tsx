@@ -11,7 +11,7 @@ export default function AccessDenied() {
         <p className="mt-2 text-base text-gray-500 text-center">Sorry, you don't have permission to access this page.</p>
         <div className="mt-6 flex justify-center">
           <Link href="/">
-            <Button className='bg-accent text-white'>
+            <Button className='bg-accent text-white hover:bg-emerald-500'>
               Go back home
             </Button>
           </Link>
