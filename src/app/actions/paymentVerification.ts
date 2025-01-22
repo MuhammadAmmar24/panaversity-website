@@ -17,7 +17,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
 
   try {
     const response = await fetch(
-      `${process.env.VOUCHER_API_URL}/vouch/payment/verification`,
+      `${process.env.VOUCHER_API_URL}/voucher/payment/verification`,
       {
         method: "POST",
         cache: "no-store",
@@ -43,6 +43,7 @@ export const verifyPaymentStatus = async (payload: any): Promise<any> => {
     const responseData = await response.json();
     revalidateTag("fetchStudentCourses")
     
+
     return {
       type: "success",
       message: "Payment status verified successfully",
