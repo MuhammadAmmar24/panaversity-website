@@ -48,7 +48,7 @@ const PaymentHistory: React.FC = async () => {
   ];
 
   return (
-    <div className="px-0 py-2 sm:px-8 sm:py-4 md:px-4 lg:px-8">
+    <div className="py-2 sm:py-4 md:py-6 lg:py-8">
       <div className="mb-8 rounded-lg bg-white p-4 shadow-lg sm:p-6">
         <h1 className="text-2xl font-bold sm:text-3xl">Payment History</h1>
         <p className="pt-2">Stay updated with your transaction records.</p>
