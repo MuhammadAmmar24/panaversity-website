@@ -27,7 +27,7 @@ const page = async () => {
     <div className="mt-[-4rem] flex min-h-[85vh] items-center justify-center px-[1rem]">
       <div className="rounded-xl bg-white p-4 shadow-md sm:p-8">
         <Suspense fallback={<PaymentStatusSkeleton />}>
-          <PaymentPro, cessingError />
+          <PaymentProcessingError />
         </Suspense>
       </div>
     </div>
