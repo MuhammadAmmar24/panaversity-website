@@ -9,6 +9,7 @@ const SECRET_KEY = new TextEncoder().encode(process.env.PAYMENT_STATUS_SECRET);
 
 const page = async () => {
   const token = cookies().get("paymentStatusToken")?.value;
+  console.log("Token")
 
   // If there's no token, user didn't come from the route handler
   if (!token) {
@@ -26,7 +27,7 @@ const page = async () => {
     <div className="mt-[-4rem] flex min-h-[85vh] items-center justify-center px-[1rem]">
       <div className="rounded-xl bg-white p-4 shadow-md sm:p-8">
         <Suspense fallback={<PaymentStatusSkeleton />}>
-          <PaymentProcessingError />
+          <PaymentPro, cessingError />
         </Suspense>
       </div>
     </div>
