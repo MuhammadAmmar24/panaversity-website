@@ -49,10 +49,10 @@ const getCurrencySymbol = (currencyCode: number) => {
 const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
   return (
     <Card className="w-full max-w-[37rem] overflow-hidden transition-all duration-300 md:hover:scale-105 md:hover:shadow-lg">
-      <CardHeader className="bg-gradient-to-r from-primary to-primary-foreground pb-8 text-primary-foreground">
+      <CardHeader className="bg-gradient-to-br from-teal-900 via-teal-600 to-teal-900 pb-8 text-primary-foreground">
         <div className="">
           <div className="flex items-start justify-between">
-            <CardTitle className="text-lg font-semibold">
+            <CardTitle className="text-lg font-semibold text-white">
               {payment.course_code}
             </CardTitle>
             <Badge
@@ -62,7 +62,7 @@ const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
               {payment.is_paid ? "Paid" : "Unpaid"}
             </Badge>
           </div>
-          <p className="truncate text-sm text-accent md:text-base">
+          <p className="truncate text-sm text-white md:text-base">
             {payment.course_name}
           </p>
         </div>

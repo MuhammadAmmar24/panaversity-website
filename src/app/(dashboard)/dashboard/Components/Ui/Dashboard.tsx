@@ -7,6 +7,7 @@ import DashboardSkeleton from "../Skeleton/DashboardSkeleton";
 import { Suspense } from "react";
 import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { getCoursePrice } from "@/src/lib/coursePrice";
+import ServerError from "../Error/ServerError";
 
 const Dashboard = async ({ profileId }: ProfileIdProps) => {
   let recentCourses: Course[] = [];
@@ -17,11 +18,7 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
       await getStudentCourses(profileId);
 
     if (result.type === "error") {
-      if (result.message.includes("Not Found")) {
-        enrollmentStatus = "not_enrolled";
-      } else {
-        throw new Error(result.message);
-      }
+      throw new Error(result.message);
     } else if (result.type === "success" && result.data) {
       if (result.data.length === 0) {
         enrollmentStatus = "not_enrolled";
@@ -53,8 +50,13 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
       }
     }
   } catch (error: any) {
-    return <div>Error: {error.message}</div>;
+    return (
+      <div className="flex justify-center items-center mt-24">
+        <ServerError/>
+      </div>
+    );
   }
+
   if (!recentCourses.length && enrollmentStatus === "not_enrolled") {
     return (
       <div className="flex flex-col justify-center">

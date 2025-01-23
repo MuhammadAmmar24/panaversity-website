@@ -3,7 +3,7 @@ import { signOut } from "@/src/lib/auth";
 import { useState } from "react";
 import LogoutDialog from "../Dialog/LogoutDialog";
 import { CiLogout } from "react-icons/ci";
-import ErrorMessage from "../Error/error_message";
+import ErrorMessage from "./error_message";
 
 const ErrorLogout = () => {
 
