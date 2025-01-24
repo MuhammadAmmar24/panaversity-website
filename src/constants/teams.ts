@@ -138,7 +138,7 @@ const allTeamMembers = [
     ],
   },
   {
-    picture: "/team/husnain.webp",
+    picture: "/team/Husnain.webp",
     fullName: "Syed Husnain Khalid",
     designation: "Full Stack Agentic AI Engineer",
     bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
