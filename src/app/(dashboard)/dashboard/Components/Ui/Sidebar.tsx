@@ -115,15 +115,15 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
                   <Link
                     href={item.href}
                     aria-label={`Go to ${item.label}`}
-                    className="flex items-center px-2 py-4 transition-all duration-300 hover:text-accent"
+                    className="flex items-center px-2 py-4 transition-all duration-300 hover:text-accent group"
                   >
                     <item.icon className="min-w-[2rem] text-2xl" />
                     <span
                       className={cn(
-                        "ml-4  min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
+                        "ml-4  min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out group-hover:text-accent",
                         isOpen
                           ? "visible opacity-100 delay-100"
-                          : "invisible opacity-0 ",
+                          : "invisible opacity-0 "
                       )}
                     >
                       {item.label}
@@ -147,12 +147,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
               <TooltipTrigger asChild>
                 <Link
                   href="/contact"
-                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
+                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent group"
                 >
                   <IoIosHelpCircleOutline className="min-w-[2rem] text-2xl" />
                   <span
                     className={cn(
-                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
+                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out group-hover:text-accent",
                       isOpen
                         ? "visible opacity-100 delay-100"
                         : "invisible opacity-0",
@@ -175,12 +175,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setIsSidebarOpen }) => {
               <TooltipTrigger asChild>
                 <button
                   onClick={() => setIsLogoutDialogOpen(true)}
-                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent"
+                  className="flex w-full items-center px-2 py-4 text-left transition-all duration-300 hover:text-accent group"
                 >
                   <CiLogout className="min-w-[2rem] text-2xl" />
                   <span
                     className={cn(
-                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out",
+                      "ml-4 min-h-[2rem] flex items-center whitespace-nowrap text-base transition-all duration-300 ease-in-out group-hover:text-accent",
                       isOpen
                         ? "visible opacity-100 delay-100"
                         : "invisible opacity-0",

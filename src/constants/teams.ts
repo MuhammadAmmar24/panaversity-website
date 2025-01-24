@@ -138,6 +138,19 @@ const allTeamMembers = [
     ],
   },
   {
+    picture: "/team/Husnain.webp",
+    fullName: "Syed Husnain Khalid",
+    designation: "Full Stack Agentic AI Engineer",
+    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
+    socialLinks: [
+      {
+        icon: "linkedin",
+        href: "https://www.linkedin.com/in/syed-hussnain/",
+      },
+      { icon: "github", href: "https://github.com/DevHusnainAi" },
+    ],
+  },
+  {
     picture: "/team/Khubaib.webp",
     fullName: "Muhammad Khubaib",
     designation: "Agentic AI Trainer Panaversity, Freelancer",
@@ -252,19 +265,6 @@ const allTeamMembers = [
         href: "https://www.linkedin.com/in/shayanxkhan/",
       },
       { icon: "github", href: "https://github.com/devv-shayan" },
-    ],
-  },
-  {
-    picture: "/team/Hasnain.webp",
-    fullName: "Syed Husnain Khalid",
-    designation: "Full Stack Agentic AI Engineer",
-    bio: "Builds AI-driven systems integrating front-end and back-end seamlessly.",
-    socialLinks: [
-      {
-        icon: "linkedin",
-        href: "https://www.linkedin.com/in/syed-hussnain/",
-      },
-      { icon: "github", href: "https://github.com/DevHusnainAi" },
     ],
   },
   {

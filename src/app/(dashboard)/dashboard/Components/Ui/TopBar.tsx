@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Dropdown from "./TopbarDropdown";
-import ErrorLogout from "./ErrorLogout";
+import ErrorLogout from "../Error/ErrorLogout";
 
 const TopBar = async ({
   studentName,
