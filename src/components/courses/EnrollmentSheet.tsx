@@ -44,6 +44,7 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { Info } from "lucide-react";
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 export default function EnrollmentSheet({
   program_id,
@@ -71,8 +72,7 @@ export default function EnrollmentSheet({
   const [skipped, setSkipped] = useState(false);
   const [skippedMessage, setSkippedMessage] = useState("");
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-
-  
+  const [hasTimeConflict, setHasTimeConflict] = useState(false);
 
   // Student enrolled courses helper function
   const findStudentCourse = (courseCode: string) =>
@@ -182,7 +182,29 @@ export default function EnrollmentSheet({
     }
   }, [pre_requisite, student_courses, skipped]);
 
-  let activeToastId: any = null;
+  const checkTimeConflicts = (section: any) => {
+    const conflicts = student_courses.filter((studentCourse: any) => {
+      if (studentCourse.student_course_status === "expired_reservation") {
+        return false; // Ignore expired reservations
+      }
+      if (!Array.isArray(studentCourse.section?.class_time_slots)) {
+        return false; // Ensure valid time slots
+      }
+      return studentCourse.section.class_time_slots.some((studentSlot: any) =>
+        section.class_time_slots.some(
+          (selectedSlot: any) =>
+            studentSlot.time_slot_day === selectedSlot.time_slot_day &&
+            ((selectedSlot.slot_start_time >= studentSlot.slot_start_time &&
+              selectedSlot.slot_start_time < studentSlot.slot_end_time) ||
+              (selectedSlot.slot_end_time > studentSlot.slot_start_time &&
+                selectedSlot.slot_end_time <= studentSlot.slot_end_time)),
+        ),
+      );
+    });
+
+    // Update conflict status
+    setHasTimeConflict(conflicts.length > 0);
+  }
 
   // Handle section selection and show section timing conflicts
   const handleSectionSelect = (sectionName: string) => {
@@ -191,49 +213,28 @@ export default function EnrollmentSheet({
     );
 
     if (section) {
-      const conflicts = student_courses.filter((studentCourse: any) => {
-        if (studentCourse.student_course_status === "expired_reservation") {
-          return false; // Ignore expired reservations
-        }
-        if (!Array.isArray(studentCourse.section?.class_time_slots)) {
-          return false; // Ensure valid time slots
-        }
-        return studentCourse.section.class_time_slots.some((studentSlot: any) =>
-          section.class_time_slots.some(
-            (selectedSlot: any) =>
-              studentSlot.time_slot_day === selectedSlot.time_slot_day &&
-              ((selectedSlot.slot_start_time >= studentSlot.slot_start_time &&
-                selectedSlot.slot_start_time < studentSlot.slot_end_time) ||
-                (selectedSlot.slot_end_time > studentSlot.slot_start_time &&
-                  selectedSlot.slot_end_time <= studentSlot.slot_end_time)),
-          ),
-        );
-      });
+      // Check for time conflicts
+      checkTimeConflicts(section);
 
-      if (conflicts.length > 0) {
-        const toastMessage = `Selected section class timings conflict with other course/section timings.`;
-
-        // Display the toast warning
-        if (activeToastId) {
-          toast.dismiss(activeToastId);
-        }
-        activeToastId = toast.warning(toastMessage, { duration: 5000 });
-
-        // Update state
-        setSelectedSection(section);
-        return;
-      }
-
-      // Clear toast if no conflicts
-      if (activeToastId) {
-        toast.dismiss(activeToastId);
-        activeToastId = null;
-      }
-
-      // Update selected section and clear conflict message
+      // Update selected section
       setSelectedSection(section);
     }
   };
+
+  useEffect(() => {
+    const section = sections.find(
+      (sec: any) => sec.section_name === selectedSection.section_name,
+    );
+
+    console.log("section", section);
+
+    if (section) {
+      // Check for time conflicts
+      checkTimeConflicts(section);
+    }
+  }, [])
+  
+
 
   // Handle conflicts for the default section when the page loads
   useEffect(() => {
@@ -406,7 +407,7 @@ export default function EnrollmentSheet({
           </SelectTrigger>
           <SelectContent>
             {sections.map((sec: any) => (
-              <SelectItem key={sec.section_name} value={sec.section_name}>
+              <SelectItem key={sec.section_name} value={sec.section_name} className="cursor-pointer">
                 {sec.section_name}
               </SelectItem>
             ))}
@@ -461,6 +462,14 @@ export default function EnrollmentSheet({
 
           <Separator />
           <div className="space-y-2">
+            {/* Class Timing Conflict */}
+            {hasTimeConflict && (
+              <p className="mb-3 flex items-start gap-1 text-xs text-red-500 sm:items-center">
+                <IoInformationCircleOutline className="h-4 w-4 text-red-500" />{" "}
+                Selected section class timings conflict with other
+                course/section timings.
+              </p>
+            )}
             <h4 className="mb-3 text-base font-medium">Class Schedule</h4>
             <div className="grid gap-0">
               {selectedSection?.class_time_slots?.map(
