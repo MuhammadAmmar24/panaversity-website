@@ -4,14 +4,14 @@ const CourseCardSkeleton: React.FC = () => {
   const icons = Array(5).fill(null);
 
   return (
-    <section className="relative">
+    <section className="relative animate-pulse">
       <div className="flex flex-col gap-4 md:gap-6 shadow-lg rounded-2xl border overflow-hidden">
         <div className="px-4 py-4 sm:px-6 md:py-6 lg:px-8 flex flex-col justify-center gap-4 border-b bg-gray-100">
           <div className="flex items-center justify-between">
             <div className="h-[18px] w-32 rounded-full bg-gray-200 sm:h-5 sm:w-40"></div>
             <div className="min-h-6 min-w-[93px] rounded-full bg-gray-200 md:min-h-8 md:min-w-[125px]"></div>
           </div>
-          <div className="h-6 w-3/4 rounded-full bg-gray-200 md:h-7"></div>
+          <div className="h-6 w-3/4 rounded-full bg-gray-200 md:h-7 animate-pulse"></div>
         </div>
 
         <div className="px-4 sm:px-6 lg:px-8 flex flex-col justify-center gap-4">
