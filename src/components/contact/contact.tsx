@@ -68,7 +68,7 @@ export default function ContactUs() {
     if (formStatus && watchedValuesString !== defaultValuesString) {
       setFormStatus(null);
     }
-  }, [watchedValuesString, defaultValuesString, formStatus]);
+  }, [watchedValuesString, defaultValuesString]);
 
   const categoryValue = watch("category");
 
@@ -98,14 +98,16 @@ export default function ContactUs() {
         setFormStatus(
           "Thank you for your message. We'll get back to you soon!",
         );
+        console.log("Form Success", formStatus)
         toast.success(result.message);
         // Reset the form to the defined default values
         reset(defaultValues);
       } else {
-        toast.error("Failed to submit form. Please try again!");
+        setFormStatus(result.message);
+        console.log("Form Error", formStatus)
+        toast.error(result.message || "Failed to submit form. Please try again!");
       }
     } catch (error) {
-      console.error("Submission error:", error);
       toast.error(
         "An error occurred while sending your message. Please try again.",
       );
@@ -267,7 +269,13 @@ export default function ContactUs() {
               </Button>
             </form>
             {formStatus && (
-              <p className="mt-4 text-xs text-green-600 xs:text-sm">
+              <p
+                className={`mt-4 text-sm ${
+                  formStatus.toLowerCase().includes("thank") 
+                    ? "text-green-600" 
+                    : "text-red-500"
+                }`}
+              >
                 {formStatus}
               </p>
             )}
