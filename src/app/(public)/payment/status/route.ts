@@ -29,9 +29,7 @@ export async function POST(req: NextRequest) {
         process.env.NEXT_PUBLIC_SITE_URL ?? req.url,
         "/access-denied",
       );
-    }
-
-    if (vendor === "blinq") {
+    } else if (vendor === "blinq") {
       const text = await req.text();
       const params = new URLSearchParams(text);
       const paymentData = Object.fromEntries(params);
@@ -55,30 +53,29 @@ export async function POST(req: NextRequest) {
 
         return response;
       } else if (verificationResponse.type === "error") {
-
-        const redirectUrl = new URL('/payment/processing-error', process.env.NEXT_PUBLIC_SITE_URL);
+        const redirectUrl = new URL(
+          "/payment/processing-error",
+          process.env.NEXT_PUBLIC_SITE_URL,
+        );
         const token = await createPaymentStatusToken();
         const response = NextResponse.redirect(redirectUrl);
         setPaymentCookie(response, token);
 
         return response;
       }
-    }
-    if (vendor === "stripe") {
-      // TODO: Implement your Stripe verification logic here
+    } else if (vendor === "stripe") {
+      // TODO: Implement Stripe verification logic here
+      return redirectToPath(
+        process.env.NEXT_PUBLIC_SITE_URL ?? req.url,
+        "/access-denied",
+      );
+    } else {
       return redirectToPath(
         process.env.NEXT_PUBLIC_SITE_URL ?? req.url,
         "/access-denied",
       );
     }
-
-    // If none of the above conditions match, fall back to /access-denied
-    return redirectToPath(
-      process.env.NEXT_PUBLIC_SITE_URL ?? req.url,
-      "/access-denied",
-    );
   } catch (error) {
-    // Catch any unexpected errors (e.g., network issues to third-party, code exceptions, etc.)
     console.error("Payment status error:", error);
     // Redirect to /payment/processing so the user sees an intermediate state if verification failed unexpectedly.
     return redirectToPath(

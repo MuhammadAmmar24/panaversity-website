@@ -14,10 +14,10 @@ export const paymentMethods: PaymentMethod[] = [
     description: "For Pakistani Students",
     info: "Pay from Internet/Mobile Banking, Credit/Debit Cards, Mobile Wallets",
   },
-  {
-    id: "stripe",
-    name: "Stripe",
-    description: "For International Students",
-    info: "Stripe offers global payment processing with support for multiple currencies",
-  },
+  // {
+  //   id: "stripe",
+  //   name: "Stripe",
+  //   description: "For International Students",
+  //   info: "Stripe offers global payment processing with support for multiple currencies",
+  // },
 ];
