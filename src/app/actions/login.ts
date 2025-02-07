@@ -68,7 +68,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       name: "tokens",
       value: JSON.stringify(tokens),
       httpOnly: true,
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now in milli seconds
       maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
     });
 
