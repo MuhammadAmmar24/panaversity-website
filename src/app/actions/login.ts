@@ -60,12 +60,16 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
       name: "user_data",
       value: JSON.stringify(profile),
       httpOnly: true,
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+      maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
     });
 
     cookies().set({
       name: "tokens",
       value: JSON.stringify(tokens),
       httpOnly: true,
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now in milli seconds
+      maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
     });
 
     return {

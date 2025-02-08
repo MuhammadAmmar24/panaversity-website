@@ -1,53 +1,124 @@
 "use client";
+
+import { submitContactForm } from "@/src/app/actions/contactform";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { Label } from "@/src/components/ui/label";
 import { Textarea } from "@/src/components/ui/textarea";
-import { ContactSchema } from "@/src/lib/schemas/userschema";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/src/components/ui/select";
+import { ContactSchema } from "@/src/lib/schemas/contactSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import * as z from "zod";
 import { RiWhatsappLine } from "react-icons/ri";
 import Link from "next/link";
 import { FaLink } from "react-icons/fa6";
 import Captcha from "../Captcha";
-import { SubmitHandler } from "@/src/types/captcha";
 import { toast } from "sonner";
 
 type ContactFormValues = z.infer<typeof ContactSchema>;
 
+const categories = [
+  { value: "technical", label: "Technical Issue" },
+  { value: "payment", label: "Payment Issue" },
+  { value: "general", label: "General Query" },
+  { value: "other", label: "Others" },
+];
+
 export default function ContactUs() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formStatus, setFormStatus] = useState<string | null>(null);
-  const [error, setError] = useState<string | undefined>("");
+
+  // Define default values for the form fields
+  const defaultValues = {
+    name: "",
+    email: "",
+    category: "",
+    subject: "",
+    message: "",
+  };
 
   const {
     register,
+    control,
     handleSubmit,
-    formState: { errors, isValid },
+    reset,
+    watch,
+    formState: { errors, isValid, touchedFields },
   } = useForm<ContactFormValues>({
     resolver: zodResolver(ContactSchema),
     mode: "onChange",
+    defaultValues,
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof ContactSchema>> = (values, e) => {
-    const formElement = e?.target as HTMLFormElement | undefined;
-    if (!formElement) {
-      setError("Unexpected error occurred. Please try again.");
-      return;
+  // Watch all form fields
+  const watchedValues = watch();
+  const watchedValuesString = JSON.stringify(watchedValues);
+  const defaultValuesString = JSON.stringify(defaultValues);
+
+  useEffect(() => {
+    if (formStatus && watchedValuesString !== defaultValuesString) {
+      setFormStatus(null);
     }
-    const formData = new FormData(formElement);
-    const turnstileRes = formData.get("cf-turnstile-response") as string;
-  
-    if (!turnstileRes) {
-      setError("Please verify before submitting.");
-      toast.error("Please verify before submitting.");
-      return;
+  }, [watchedValuesString, defaultValuesString]);
+
+  const categoryValue = watch("category");
+
+  const onSubmit: SubmitHandler<ContactFormValues> = async (values, e) => {
+    setIsSubmitting(true);
+    try {
+      const formElement = e?.target as HTMLFormElement | undefined;
+      if (!formElement) {
+        toast.error("Form submission failed. Please try again.");
+        return;
+      }
+
+      const formData = new FormData(formElement);
+      const turnstileRes = formData.get("cf-turnstile-response") as string;
+
+      if (!turnstileRes) {
+        toast.error("Please verify before submitting.");
+        return;
+      }
+
+      // Include the captcha token along with form values
+      const payload = { ...values, captcha: turnstileRes };
+
+      const result = await submitContactForm(payload);
+
+      if (result.type === "success") {
+        setFormStatus(
+          "Thank you for your message. We'll get back to you soon!",
+        );
+        console.log("Form Success", formStatus)
+        toast.success(result.message);
+        // Reset the form to the defined default values
+        reset(defaultValues);
+      } else {
+        setFormStatus(result.message);
+        console.log("Form Error", formStatus)
+        toast.error(result.message || "Failed to submit form. Please try again!");
+      }
+    } catch (error) {
+      toast.error(
+        "An error occurred while sending your message. Please try again.",
+      );
+      setFormStatus(null);
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    setFormStatus("Thank you for your message. We'll get back to you soon!");
   };
+
+  // Helper to determine if we should show the helper text for category
+  const shouldShowHelper = !categoryValue && !touchedFields.category;
 
   return (
     <div className="min-h-screen bg-background">
@@ -58,7 +129,9 @@ export default function ContactUs() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name">
+                    Name <span className="text-red-500">*</span>
+                  </Label>
                   <Input
                     id="name"
                     {...register("name")}
@@ -77,7 +150,9 @@ export default function ContactUs() {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">
+                    Email <span className="text-red-500">*</span>
+                  </Label>
                   <Input
                     id="email"
                     type="email"
@@ -98,7 +173,53 @@ export default function ContactUs() {
               </div>
 
               <div>
-                <Label htmlFor="subject">Subject</Label>
+                <Label htmlFor="category">
+                  Category <span className="text-red-500">*</span>
+                </Label>
+                <Controller
+                  name="category"
+                  control={control}
+                  defaultValue=""
+                  render={({ field }) => (
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger
+                        className={`${
+                          errors.category
+                            ? "border-red-500 focus:border-red-500"
+                            : "transition duration-150 ease-in-out focus:border-transparent focus:outline-none focus:ring-1 focus:ring-gray-200"
+                        }`}
+                      >
+                        <SelectValue placeholder="-- Select a category --" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem
+                            key={category.value}
+                            value={category.value}
+                          >
+                            {category.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
+                {errors.category && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.category.message}
+                  </p>
+                )}
+                {shouldShowHelper && (
+                  <p className="mt-1 text-sm text-red-500">
+                    Please select a category to proceed
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="subject">
+                  Subject <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   id="subject"
                   {...register("subject")}
@@ -117,7 +238,9 @@ export default function ContactUs() {
               </div>
 
               <div>
-                <Label htmlFor="message">Message</Label>
+                <Label htmlFor="message">
+                  Message <span className="text-red-500">*</span>
+                </Label>
                 <Textarea
                   id="message"
                   {...register("message")}
@@ -135,22 +258,33 @@ export default function ContactUs() {
                 )}
               </div>
 
-              <Captcha size="normal"/>
+              <Captcha size="normal" />
 
               <Button
                 type="submit"
                 className="w-full rounded-md bg-accent py-2 text-center font-medium text-white hover:bg-[#18c781]"
-                disabled={!isValid}
+                disabled={!isValid || isSubmitting}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
-              
             </form>
-            {formStatus && <p className="mt-4 text-green-600 text-xs xs:text-sm">{formStatus}</p>}
+            {formStatus && (
+              <p
+                className={`mt-4 text-sm ${
+                  formStatus.toLowerCase().includes("thank") 
+                    ? "text-green-600" 
+                    : "text-red-500"
+                }`}
+              >
+                {formStatus}
+              </p>
+            )}
           </div>
 
           <div className="bg-muted p-4 sm:p-10">
-            <h2 className="mb-6 text-xl sm:text-2xl font-semibold">Contact Information</h2>
+            <h2 className="mb-6 text-xl font-semibold sm:text-2xl">
+              Contact Information
+            </h2>
             <div className="space-y-4 text-sm sm:text-base">
               <div className="flex items-center">
                 <Mail className="mr-4 h-5 w-5 text-primary" />
@@ -169,10 +303,10 @@ export default function ContactUs() {
                   href="https://whatsapp.com/channel/0029VanobNVHbFV2oZLXX125"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 transition cursor-pointer"
+                  className="flex cursor-pointer items-center space-x-4 transition"
                 >
                   <RiWhatsappLine className="h-5 w-5 text-primary" />
-                  <span className="nav font-medium flex items-center gap-2">
+                  <span className="nav flex items-center gap-2 font-medium">
                     Subscribe For Latest AI News <FaLink />
                   </span>
                 </Link>

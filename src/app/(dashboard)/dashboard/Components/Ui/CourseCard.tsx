@@ -57,15 +57,12 @@ const CourseCard: React.FC<CourseCardProps> = ({
         if (url) {
           window.location.href = url;
         } else {
-          console.error("Payment URL not found.");
           toast.error("Something went wrong, please try again.");
         }
       } else {
-        console.error("API Error:", result.message);
         toast.error("Something went wrong, please try again.");
       }
     } catch (error) {
-      console.error("Enrollment failed:", error);
       toast.error("Something went wrong, please try again.");
     }
   };
