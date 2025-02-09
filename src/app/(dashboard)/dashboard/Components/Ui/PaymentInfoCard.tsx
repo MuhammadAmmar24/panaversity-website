@@ -6,27 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
+import { PaymentHistoryCard } from "@/src/lib/schemas/payment";
 import {
   BookOpenIcon,
   CalendarIcon,
   CreditCardIcon,
   DollarSignIcon,
 } from "lucide-react";
-
-interface PaymentInfo {
-  course_code: string;
-  voucher_id: string;
-  paid_through: number;
-  payment_date: string;
-  payment_provider: string;
-  payment_amount: number;
-  student_course_id: number;
-  payment_currency: number;
-  course_name: string;
-  created_at: string;
-  paid_on: string;
-  is_paid: boolean;
-}
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleString("en-US", {
@@ -46,7 +32,8 @@ const getCurrencySymbol = (currencyCode: number) => {
   return currencyMap[currencyCode] || "$";
 };
 
-const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
+const PaymentInfoCard: React.FC<{ payment: PaymentHistoryCard }> = ({ payment }) => {
+
   return (
     <Card className="w-full max-w-[37rem] overflow-hidden transition-all duration-300 md:hover:scale-105 md:hover:shadow-lg">
       <CardHeader className="bg-gradient-to-br from-teal-900 via-teal-600 to-teal-900 pb-8 text-primary-foreground">
@@ -62,9 +49,6 @@ const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
               {payment.is_paid ? "Paid" : "Unpaid"}
             </Badge>
           </div>
-          <p className="truncate text-sm text-white md:text-base">
-            {payment.course_name}
-          </p>
         </div>
       </CardHeader>
       <CardContent className="p-2 pt-0 mobileM:p-4">
@@ -75,8 +59,8 @@ const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
               <p className="text-sm font-medium">Amount</p>
             </div>
             <p className="text-lg font-bold">
-              {getCurrencySymbol(payment.payment_currency)}{" "}
-              {payment.payment_amount.toFixed(2)}
+              {getCurrencySymbol(payment.payment_currency!)}{" "}
+              {payment.payment_amount!.toFixed(2)}
             </p>
           </div>
           <div className="flex items-center justify-between">
@@ -84,21 +68,14 @@ const PaymentInfoCard: React.FC<{ payment: PaymentInfo }> = ({ payment }) => {
               <CreditCardIcon className="h-5 w-5 text-primary" />
               <p className="text-sm font-medium">Payment Method</p>
             </div>
-            <p className="text-sm">{payment.payment_provider}</p>
+            <p className="text-sm">{payment.vendor_name}</p>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <CalendarIcon className="h-5 w-5 text-primary" />
               <span className="text-sm font-medium">Payment Date</span>
             </div>
-            <span className="text-sm">{formatDate(payment.payment_date)}</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <BookOpenIcon className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium">Student Course ID</span>
-            </div>
-            <span className="text-sm">{payment.student_course_id}</span>
+            <span className="text-sm">{payment.payment_date ? formatDate(payment.payment_date) : "--"}</span>
           </div>
         </div>
       </CardContent>

@@ -34,6 +34,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
   const handleEnroll = async (paymentMethod: string) => {
     try {
       const payload: PaymentRequest = {
+        course_code: course_code,
         student_course_id: student_course_id,
         section_no: course_section?.id as number,
         package_id: course_price?.package_id as number,
@@ -63,6 +64,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
         toast.error("Something went wrong, please try again.");
       }
     } catch (error) {
+      console.error(error)
       toast.error("Something went wrong, please try again.");
     }
   };

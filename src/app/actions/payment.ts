@@ -47,7 +47,7 @@ export const processPayment = async (
     const responseData = await response.json();
     console.log("REsponse of payment", responseData);
 
-    revalidateTag("fetchStudentCourses")
+    // revalidateTag("fetchStudentCourses")
     // revalidateDashboard("fetchStudentCourses");
 
     // Assuming the response contains a transaction ID indicating a successful payment

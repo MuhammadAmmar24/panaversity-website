@@ -1,25 +1,17 @@
-import { getCourseActiceSections } from "@/src/lib/getActiveSections";
-import { getCourseInterests } from "@/src/lib/getCourseInterest";
-import fetchProfile from "@/src/lib/getProfile";
-import { getStudentCourses } from "@/src/lib/getStudentCourses";
-import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import {
   CourseDetailsProps,
   CourseInfoProps,
 } from "@/src/types/courseEnrollment";
-import { Result } from "@/src/types/types";
 import { Calendar, Users } from "lucide-react";
 import { Suspense } from "react";
 import Breadcrumbs from "../ui/Breadcrumbs";
-import ScheduleCardSkeleton from "../ui/skeletons/EnrollmentCardSkeleton";
+import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
 import CourseDescription from "./CourseDescription";
 import EnrollmentCard from "./EnrollmentCard";
 import LearningOutcomes from "./LearningOutcomes";
 import CoursePrerequisites from "./PreReqs";
 import PrerequisitesSection from "./PreRequisites";
 import RatingStars from "./Ratingstar";
-import CourseHeroSkeleton from "../ui/skeletons/CourseHeroSkeleton";
-import SectionLoadingCard from "../ui/skeletons/LoadingEnrollmentCard";
 
 const CourseInfo: React.FC<CourseInfoProps> = ({ icon: Icon, text }) => (
   <div className="flex items-center space-x-2">
