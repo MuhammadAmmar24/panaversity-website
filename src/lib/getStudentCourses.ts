@@ -4,23 +4,38 @@ import {
 import { Result } from "@/src/types/types";
 
 export const getStudentCourses = async (
-  studentId: string | undefined,
+  profileId: string,
 ): Promise<Result<CourseEnrollmentResponse>> => {
   try {
-    // Construct the query parameters correctly
-    const params = new URLSearchParams();
-    params.append("student_id", String(studentId));
 
-    // Construct the API URL
-    const apiUrl = `${process.env.ENROLLMENT_API_URL}/status/status/student-active-courses?${params}`;
+    // Validate profileId
+    if (!profileId) {
+      return {
+        type: "error",
+        message: "Profile Id is required.",
+      };
+    }
 
+    // Vaidate environment variables
+    const apiUrl = process.env.ENROLLMENT_API_URL;
+    const authToken = process.env.ENROLLMENT_SECRET;
+
+    if (!apiUrl || !authToken) {
+      console.error("Missing required environment variables.");
+      return {
+        type: "error",
+        message: "Internal server error: Missing configuration.",
+      };
+    }
+    // Construct the query parameters
+    const params = new URLSearchParams({ student_id: profileId });
 
     // Make the request to the API
-    const response = await fetch(apiUrl, {
+    const response = await fetch(`${apiUrl}/status/status/student-active-courses?${params}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${process.env.ENROLLMENT_SECRET}`,
+        Authorization: `Bearer ${authToken}`,
       },
       cache: "force-cache",
       next: { tags: ["fetchStudentCourses"] },
@@ -28,35 +43,23 @@ export const getStudentCourses = async (
 
     // Check if the response is successful
     if (!response.ok) {
-      throw new Error(
-        `Failed to fetch enrolled courses: ${response.statusText}`,
-      );
+      const errorText = await response.text();
+      throw new Error(`API Error ${response.status}: ${errorText}`);
     }
 
     // Parse the JSON response
     const responseData = await response.json();
-
-    // Validate the response against the schema
-    // const parsedResponse = CourseEnrollmentResponseSchema.safeParse(responseData);
-
-    // if (!parsedResponse.success) {
-
-    //     return {
-    //         type: "error",
-    //         message: parsedResponse.error.errors.map((err) => err.message).join(", "),
-    //     };
-    // }
 
     return {
       type: "success",
       message: "Enrolled courses fetched successfully",
       data: responseData,
     };
-  } catch (error: any) {
-    console.error("Error fetching enrolled courses:", error.message);
+  } catch (error: unknown) {
+    console.error("Error fetching enrolled courses:", error);
     return {
       type: "error",
-      message: error.message,
+      message: error instanceof Error ? error.message : "Unknown error occurred",
     };
   }
 };

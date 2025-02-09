@@ -16,6 +16,7 @@ export type Kuickpay = z.infer<typeof KuickpaySchema>;
 
 // Define the schema for the payment request
 export const PaymentRequestSchema = z.object({
+  course_code: z.string(),
   section_no: z.number().min(1),
   package_id: z.number().min(1),
   student_course_id: z.number().min(1),
@@ -25,5 +26,22 @@ export const PaymentRequestSchema = z.object({
   vendor_type: z.string().default("blinq"),
 });
 
+// Define the schema for payment history response
+export const PaymentHistoryScehma = z.object({
+  voucher_id: z.string().nullable(),
+  vendor_name: z.string().nullable(),
+  payment_amount: z.number().nullable(),
+  payment_date: z.string().nullable(),
+  payment_currency: z.number().int().nullable(),
+  is_paid: z.boolean(),
+  course_code: z.string().nullable(),
+})
+
+
 // Define the type for the payment request
 export type PaymentRequest = z.infer<typeof PaymentRequestSchema>;
+
+// Define the type for payment history response
+export const PaymentHistoryArray = z.array(PaymentHistoryScehma)
+export type PaymentHistoryCard = z.infer<typeof PaymentHistoryScehma>;
+export type PaymentHistoryResponse = z.infer<typeof PaymentHistoryArray>;

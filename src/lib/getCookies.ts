@@ -1,17 +1,21 @@
 import { cookies } from "next/headers";
 
 interface UserData {
-  full_name: "string";
-  id: "string";
-  email: "user@example.com";
+  full_name: string;
+  id: string;
+  email: string;
 }
 
-export async function getCookie() {
-  const get_cookies = cookies().get("user_data")?.value;
-  if (get_cookies) {
-    const userData: UserData = JSON.parse(get_cookies);
-    return userData;
-  } else {
-    return null;
+export function getCookie(): UserData | null {
+  const cookieValue = cookies().get("user_data")?.value;
+  if (!cookieValue) {
+      return null;
+  }
+try {
+      const userData: UserData = JSON.parse(cookieValue);
+      return userData;
+  } catch (error) {
+      console.error("Error parsing user_data cookie:", error);
+      return null;
   }
 }
