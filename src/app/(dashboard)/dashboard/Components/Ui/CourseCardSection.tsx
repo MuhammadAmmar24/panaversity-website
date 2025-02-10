@@ -4,11 +4,11 @@ import { Course, CourseSectionProps } from "../../types/courses";
 import CourseCard from "./CourseCard";
 import { getCookie } from "@/src/lib/getCookies";
 
-const CourseSection: React.FC<CourseSectionProps> = async ({
-  courses,
+const CourseCardSection: React.FC<CourseSectionProps> = async ({
+  courses, profileData
 }) => {
   // const profile: ProfileData = await fetchProfile();
-  const profile = await getCookie()
+  // const profile = await getCookie()
 
   return (
     <div className="my-10 sm:my-14">
@@ -27,11 +27,10 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
               classes={course.classes}
               status={course.status}
               student_course_id={course.student_course_id}
-              profile={profile}
+              profile={profileData}
               course_code={course.course_code}
               course_section={course.course_section}
               course_price={course.course_price}
-       
             />
           ))}
       </div>
@@ -39,4 +38,4 @@ const CourseSection: React.FC<CourseSectionProps> = async ({
   );
 };
 
-export default CourseSection;
+export default CourseCardSection;

@@ -41,7 +41,7 @@ function UpdatePassword({ token }: VerifyEmailProps) {
     defaultValues: {
       token: token,
       new_password: "",
-      confirm_password: "",
+      confirm_password: "", 
     },
   });
 

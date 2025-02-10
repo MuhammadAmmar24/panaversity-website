@@ -193,7 +193,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center justify-between border-t bg-gray-100 px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8 pb-6">
           <CourseIcons
             status={status || ""}
             youtubeLink={youtubeLink}
