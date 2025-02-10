@@ -36,7 +36,8 @@ export interface CourseCardProps {
 
 export interface CourseSectionProps {
   courses: Course[] | undefined;
-  enrollmentStatus: string | null;
+  // enrollmentStatus: string | null;
+  profileData: ProfileData | null;
 }
 
 export interface Course {
@@ -85,8 +86,8 @@ export interface CourseIconsProps {
     youtubeLink: string;
     githubLink: string;
     zoomLink: string;
-  }
+}
 
-export interface ProfileIdProps {
-  profileId: string;
+export interface ProfileDataProps {
+  profileData: ProfileData | null;
 }

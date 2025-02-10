@@ -1,5 +1,5 @@
-import CourseSection from "./CourseCardSection";
-import { Course, ProfileIdProps } from "../../types/courses";
+import CourseCardSection from "./CourseCardSection";
+import { Course, ProfileDataProps } from "../../types/courses";
 import { Result } from "@/src/types/types";
 import { CourseEnrollmentResponse } from "@/src/lib/schemas/courses";
 import Link from "next/link";
@@ -9,13 +9,13 @@ import { getStudentCourses } from "@/src/lib/getStudentCourses";
 import { getCoursePrice } from "@/src/lib/coursePrice";
 import ServerError from "../Error/ServerError";
 
-const Dashboard = async ({ profileId }: ProfileIdProps) => {
+const Dashboard = async ({ profileData }: ProfileDataProps) => {
   let recentCourses: Course[] = [];
   let enrollmentStatus: string | null = null;
 
   try {
     const result: Result<CourseEnrollmentResponse> =
-      await getStudentCourses(profileId);
+      await getStudentCourses(profileData?.id);
 
     if (result.type === "error") {
       throw new Error(result.message);
@@ -82,17 +82,18 @@ const Dashboard = async ({ profileId }: ProfileIdProps) => {
 
   return (
     <div className="min-h-screen">
-      <CourseSection
+      <CourseCardSection
         courses={recentCourses}
-        enrollmentStatus={enrollmentStatus}
+        // enrollmentStatus={enrollmentStatus}
+        profileData={profileData}
       />
     </div>
   );
 };
 
-const DashboardWithSuspense = ({ profileId }: ProfileIdProps) => (
+const DashboardWithSuspense = ({ profileData }: ProfileDataProps) => (
   <Suspense fallback={<DashboardSkeleton />}>
-    <Dashboard profileId={profileId} />
+    <Dashboard profileData={profileData} />
   </Suspense>
 );
 
