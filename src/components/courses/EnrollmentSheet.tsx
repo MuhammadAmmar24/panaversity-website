@@ -226,7 +226,6 @@ export default function EnrollmentSheet({
       (sec: any) => sec.section_name === selectedSection.section_name,
     );
 
-    console.log("section", section);
 
     if (section) {
       // Check for time conflicts

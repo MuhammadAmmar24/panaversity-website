@@ -42,6 +42,7 @@ import {
   CourseEnrollment,
   GetCoursePriceResponse,
 } from "@/src/lib/schemas/courses";
+import { signOut } from "@/src/lib/auth";
 
 const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   is_active,
@@ -96,6 +97,8 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
         const result = await response.json();
 
         setProfile(result.profile);
+
+        console.log(profile, "profile");
 
         if (result.coursePrice?.data) {
           setCoursePrice(result.coursePrice.data);
@@ -230,8 +233,9 @@ const EnrollmentCard: React.FC<EnrollmentCardProps> = ({
   const handleClickEnroll = async () => {
     const authStatus = await checkAuthStatus();
 
-    if (!authStatus?.isAuthenticated) {
+    if (!authStatus?.isAuthenticated || !profile) {
       localStorage.setItem("previousPath", window.location.pathname);
+      await signOut();
       router.push("/register");
       return;
     }
