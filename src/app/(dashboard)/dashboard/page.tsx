@@ -1,6 +1,5 @@
 import { getCookie } from "@/src/lib/getCookies";
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import Dashboard from "./Components/Ui/Dashboard";
 import Welcome from "./Components/Ui/Welcome";
 import { redirect } from "next/navigation";
