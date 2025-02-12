@@ -15,7 +15,7 @@ const redis = new Redis({
 
 export const rateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(5, "12 h"), // 5 requests per 24 hours per IP
+  limiter: Ratelimit.slidingWindow(5, "12 h"), // 5 requests per 12 hours per IP
   analytics: true,
   prefix: "@upstash/ratelimit",
   timeout: 10000,
