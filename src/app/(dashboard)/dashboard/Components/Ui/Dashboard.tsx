@@ -13,9 +13,17 @@ const Dashboard = async ({ profileData }: ProfileDataProps) => {
   let recentCourses: Course[] = [];
   let enrollmentStatus: string | null = null;
 
+  if (!profileData?.id) {
+    return (
+      <div className="flex justify-center items-center mt-24">
+        <ServerError />
+      </div>
+    );
+  }
+
   try {
     const result: Result<CourseEnrollmentResponse> =
-      await getStudentCourses(profileData?.id);
+      await getStudentCourses(profileData.id);
 
     if (result.type === "error") {
       throw new Error(result.message);
