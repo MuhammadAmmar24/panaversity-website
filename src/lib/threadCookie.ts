@@ -6,7 +6,7 @@ export const getThreadId = () => {
 
 export const setThreadId = (threadId: string) => {
   setCookie("visitor_agent_thread_id", threadId, {
-    maxAge: 30 * 24 * 60 * 60,
+    maxAge: 24 * 60 * 60,
     path: "/",
   });
 };
